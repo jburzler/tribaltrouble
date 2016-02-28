@@ -13,14 +13,14 @@ import java.util.Map;
 public final strictfp class NetworkSelector {
 	private final static long PING_TIMEOUT = 4*60*1000;
 	private final static long PING_DELAY = PING_TIMEOUT/2;
-	
+
 	private final MonotoneTimeManager time_manager;
 	private int current_handler_id;
-	private final Map handler_map = new HashMap();
+	private final Map<Object,Handler> handler_map = new HashMap<>();
 	private TaskThread task_thread;
 	private Selector selector;
-	private final List ping_connections = new LinkedList();
-	private final List ping_timeouts = new LinkedList();
+	private final List<TimedConnection> ping_connections = new LinkedList<>();
+	private final List<TimedConnection> ping_timeouts = new LinkedList<>();
 
 	private final Deterministic deterministic;
 
@@ -73,26 +73,26 @@ public final strictfp class NetworkSelector {
 		ping_timeouts.remove(unregister_key);
 		ping_connections.remove(unregister_key);
 	}
-	
+
 	void registerForPingTimeout(Connection conn) {
 		long ping_timeout = time_manager.getMillis() + PING_TIMEOUT;
 		ping_timeouts.add(new TimedConnection(ping_timeout, conn));
 	}
-	
+
 	void registerForPing(Connection conn) {
 		long ping_time = time_manager.getMillis() + PING_DELAY;
 		ping_connections.add(new TimedConnection(ping_time, conn));
 	}
-	
+
 	private void processTasks() {
 		if (task_thread != null)
 			task_thread.poll();
 	}
-	
+
 	private long processPings(long millis) {
 		long next_select_timeout = PING_DELAY;
 		while (ping_timeouts.size() > 0) {
-			TimedConnection first_conn = (TimedConnection)ping_timeouts.get(0);
+			TimedConnection first_conn = ping_timeouts.get(0);
 			long first = first_conn.getTimeout();
 			if (first <= millis) {
 				ping_timeouts.remove(0);
@@ -103,7 +103,7 @@ public final strictfp class NetworkSelector {
 			}
 		}
 		while (ping_connections.size() > 0) {
-			TimedConnection first_conn = (TimedConnection)ping_connections.get(0);
+			TimedConnection first_conn = ping_connections.get(0);
 			long first = first_conn.getTimeout();
 			if (first <= millis) {
 				ping_connections.remove(0);
@@ -119,7 +119,7 @@ public final strictfp class NetworkSelector {
 		}
 		return next_select_timeout;
 	}
-	
+
 	public void tickBlocking(long timeout) throws IOException {
 		processTasks();
 		long millis = time_manager.getMillis();
@@ -175,13 +175,13 @@ public final strictfp class NetworkSelector {
 	}
 
 	private void doTick() throws IOException {
-		Iterator selected_keys = null;
+		Iterator<SelectionKey> selected_keys = null;
 		if (!deterministic.isPlayback())
 			selected_keys = selector.selectedKeys().iterator();
 		while (deterministic.log(deterministic.isPlayback() || selected_keys.hasNext())) {
 			SelectionKey key;
 			if (!deterministic.isPlayback()) {
-				key = (SelectionKey)selected_keys.next();
+				key = selected_keys.next();
 				selected_keys.remove();
 			} else
 				key = null;
@@ -191,7 +191,7 @@ public final strictfp class NetworkSelector {
 			if (!deterministic.isPlayback())
 				handler_key = key.attachment();
 			handler_key = deterministic.log(handler_key);
-			Handler handler = (Handler)handler_map.get(handler_key);
+			Handler handler = handler_map.get(handler_key);
 			try {
 				handler.handle();
 			} catch (IOException e) {

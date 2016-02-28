@@ -351,6 +351,7 @@ System.out.println("last_event_log_path = " + last_event_log_path);
 		new LocalInput();
 
 		NetworkSelector network = new NetworkSelector(LocalEventQueue.getQueue().getDeterministic(), LocalEventQueue.getQueue()::getMillis);
+                initNetwork(network);
 		LocalInput.settings( game_dir, event_log_dir, settings);
 		try {
 			initNative(crashed, network);
