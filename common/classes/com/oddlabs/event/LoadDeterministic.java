@@ -44,7 +44,7 @@ public final strictfp class LoadDeterministic extends Deterministic {
 			throw new RuntimeException(e);
 		}
 	}
-	
+
 	private final boolean isDefault(int num_bytes) {
 		if (num_defaults > MIN_DEFAULTS) {
 			num_defaults--;
@@ -86,7 +86,7 @@ public final strictfp class LoadDeterministic extends Deterministic {
 			throw new RuntimeException(e);
 		}
 	}
-	
+
 	private final boolean isEndOfLog() {
 		if (!buffer.hasRemaining() && num_defaults == MIN_DEFAULTS)
 			return tryFillBuffer();
@@ -155,19 +155,15 @@ public final strictfp class LoadDeterministic extends Deterministic {
 			return f;
 		}
 	}
-	
+
         @Override
 	protected final Object logObject(Object o) {
-		try {
-			ObjectInputStream object_input_stream = new ObjectInputStream(byte_buffer_input_stream);
+		try (ObjectInputStream object_input_stream = new ObjectInputStream(byte_buffer_input_stream)) {
 			o = object_input_stream.readObject();
-			object_input_stream.close();
-			return o;
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		} catch (ClassNotFoundException e) {
+		} catch (IOException | ClassNotFoundException e) {
 			throw new RuntimeException(e);
 		}
+                return o;
 	}
 
         @Override

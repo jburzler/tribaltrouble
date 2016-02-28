@@ -29,9 +29,9 @@ public final strictfp class SupplyGatheredTrigger extends IntervalTrigger {
             for (Selectable[] selectable : selectables) {
                 Selectable s = selectable[0];
                 if (s.getPrimaryController() instanceof NullController) {
-                    for (Selectable selectable : selectable) {
-                        if (selectable.getAbilities().hasAbilities(Abilities.BUILD_ARMIES)) {
-                            count += ((Building) selectable).getSupplyContainer(type).getNumSupplies();
+                    for (Selectable building : selectable) {
+                        if (building.getAbilities().hasAbilities(Abilities.BUILD_ARMIES)) {
+                            count += ((Building) building).getSupplyContainer(type).getNumSupplies();
                         }
                     }
                 }

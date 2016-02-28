@@ -261,7 +261,7 @@ if (getIdleWarriors() == null)
 else
 	System.out.println(" | " + getIdleWarriors().length + " idling warriors");
 */
-		if (getIdleWarriors() != null && getIdleWarriors().length >= num_warriors 
+		if (getIdleWarriors() != null && getIdleWarriors().length >= num_warriors
 				&& (!use_chieftain || getOwner().hasActiveChieftain())) {
 			boolean idle_chieftain = getIdleChieftains() != null && getIdleChieftains().length >= 1;
 			Selectable[] warriors;
@@ -447,8 +447,8 @@ else
 		Selectable[][] peon_types = new Selectable[][]{getGatherIronPeons(), getGatherRockPeons(), getGatherTreePeons(), getGatherRubberPeons()};
             for (Selectable[] peon_type : peon_types) {
                 if (builders.size() < min_num_peons && peon_type != null) {
-                    for (Selectable peon_type : peon_type) {
-                        builders.add(peon_type);
+                    for (Selectable apeon : peon_type) {
+                        builders.add(apeon);
                         if (builders.size() == min_num_peons) {
                             break;
                         }

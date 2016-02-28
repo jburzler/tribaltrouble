@@ -118,11 +118,7 @@ public final strictfp class Skin {
 			builder.setErrorHandler(error_handler);
 			Document document = builder.parse(url.openStream());
 			return document.getDocumentElement();
-		} catch (ParserConfigurationException e) {
-			throw new RuntimeException(e);
-		} catch (SAXException e) {
-			throw new RuntimeException(e);
-		} catch (IOException e) {
+		} catch (ParserConfigurationException | SAXException | IOException e) {
 			throw new RuntimeException(e);
 		}
 	}

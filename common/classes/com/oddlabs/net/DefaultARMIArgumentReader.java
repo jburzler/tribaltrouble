@@ -29,11 +29,8 @@ public strictfp class DefaultARMIArgumentReader implements ARMIArgumentReader {
 			short event_size = in.buffer().getShort();
 			return ARMIEvent.read(in.buffer(), event_size);
 		} else {
-			ObjectInputStream input_stream = new ObjectInputStream(in);
-			try {
+			try (ObjectInputStream input_stream = new ObjectInputStream(in)) {
 				return input_stream.readObject();
-			} finally {
-				input_stream.close();
 			}
 		}
 	}

@@ -26,7 +26,7 @@ import java.util.Random;
 public abstract strictfp class AI implements Animated {
 	private final static float SLEEP_SECONDS = 2f;
 	private final static float MIN_SLEEP_SECONDS = 5f;
-	
+
 	private final Player owner;
 	private int INDEX_IDLE_PEONS;
 	private int INDEX_IDLE_CHIEFTAINS;
@@ -319,10 +319,10 @@ public abstract strictfp class AI implements Animated {
             for (Selectable[] list : lists) {
                 Selectable s = list[0];
                 if (s instanceof Unit && !(s.getPrimaryController() instanceof WalkController && ((WalkController)s.getPrimaryController()).isAgressive())) {
-                    for (Selectable list : list) {
+                    for (Selectable thrower : list) {
                         Unit unit = (Unit)s;
                         if (unit.getAbilities().hasAbilities(Abilities.THROW)) {
-                            owner.setLandscapeTarget(new Selectable[]{list}, target.getGridX(), target.getGridY(), Target.ACTION_ATTACK, true);
+                            owner.setLandscapeTarget(new Selectable[]{thrower}, target.getGridX(), target.getGridY(), Target.ACTION_ATTACK, true);
                             ordered++;
                             if (ordered == num_warriors) {
                                 return ordered;

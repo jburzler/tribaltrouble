@@ -136,18 +136,18 @@ public final class DXTImage {
 	}
 
 	public void write(File file) throws IOException {
-		WritableByteChannel out = new FileOutputStream(file).getChannel();
-		ByteBuffer header = ByteBuffer.allocate(2 + 2 + 4);
-		header.putShort(width).putShort(height).putInt(internal_format);
-		header.flip();
-		writeContents(out, header);
-		int old_position = mipmaps.position();
-		int old_limit = mipmaps.limit();
-		mipmaps.clear();
-		writeContents(out, mipmaps);
-		mipmaps.position(old_position);
-		mipmaps.limit(old_limit);
-		out.close();
+            try (WritableByteChannel out = new FileOutputStream(file).getChannel()) {
+                ByteBuffer header = ByteBuffer.allocate(2 + 2 + 4);
+                header.putShort(width).putShort(height).putInt(internal_format);
+                header.flip();
+                writeContents(out, header);
+                int old_position = mipmaps.position();
+                int old_limit = mipmaps.limit();
+                mipmaps.clear();
+                writeContents(out, mipmaps);
+                mipmaps.position(old_position);
+                mipmaps.limit(old_limit);
+            }
 	}
 
 	private static void writeContents(WritableByteChannel out, ByteBuffer data) throws IOException {

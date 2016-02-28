@@ -279,9 +279,7 @@ public final strictfp class Connection extends AbstractConnection implements Han
 					try {
 						event.execute(interface_methods, this);
 					} catch (IllegalARMIEventException e) {
-						IOException ioe = new IOException();
-						ioe.initCause(e);
-						throw ioe;
+						throw new IOException(e);
 					}
 					bytes_read = true;
 				}

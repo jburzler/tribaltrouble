@@ -17,20 +17,20 @@ public final strictfp class Wave {
 	private final int sample_rate;
 	
 	public Wave(URL file) throws UnsupportedAudioFileException, IOException {
-		AudioInputStream ais = AudioSystem.getAudioInputStream(file.openStream());
-		AudioFormat audio_format = ais.getFormat();
-		format = getFormat(audio_format.getChannels(), audio_format.getSampleSizeInBits());
-
-		byte[] temp_buffer = new byte[audio_format.getChannels()*(int)ais.getFrameLength()*audio_format.getSampleSizeInBits()/8];
-		int read = 0;
-		int total = 0;
-		while ((total < temp_buffer.length) && (read = ais.read(temp_buffer, total, temp_buffer.length - total)) != -1) {
-			total += read;
-		}
-
-		data = directWaveOrder(temp_buffer, audio_format.getSampleSizeInBits());
-		sample_rate = (int)audio_format.getSampleRate();
-		ais.close();
+            try (AudioInputStream ais = AudioSystem.getAudioInputStream(file.openStream())) {
+                AudioFormat audio_format = ais.getFormat();
+                format = getFormat(audio_format.getChannels(), audio_format.getSampleSizeInBits());
+                
+                byte[] temp_buffer = new byte[audio_format.getChannels()*(int)ais.getFrameLength()*audio_format.getSampleSizeInBits()/8];
+                int read = 0;
+                int total = 0;
+                while ((total < temp_buffer.length) && (read = ais.read(temp_buffer, total, temp_buffer.length - total)) != -1) {
+                    total += read;
+                }
+                
+                data = directWaveOrder(temp_buffer, audio_format.getSampleSizeInBits());
+                sample_rate = (int)audio_format.getSampleRate();
+            }
 	}
 
 	public Wave(ByteBuffer data, int channels, int bitrate, int sample_rate) {

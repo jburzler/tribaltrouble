@@ -33,12 +33,10 @@ public final strictfp class ARMIInterfaceMethods {
 	final void invoke(Object instance, Method method, Object[] args) throws IllegalARMIEventException {
 		try {
 			method.invoke(instance, args);
-		} catch (IllegalAccessException e) {
+		} catch (IllegalAccessException | IllegalArgumentException e) {
 			throw new IllegalARMIEventException(e);
 		} catch (InvocationTargetException e) {
 			throw new RuntimeException(e);
-		} catch (IllegalArgumentException e) {
-			throw new IllegalARMIEventException(e);
 		}
 	}
 

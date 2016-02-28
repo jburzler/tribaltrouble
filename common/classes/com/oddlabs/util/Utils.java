@@ -75,9 +75,7 @@ System.out.println("loopback address = " + best_address);
 	public final static Object loadObject(URL url, boolean zipped) {
 		try {
 			return tryLoadObject(url, zipped);
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		} catch (ClassNotFoundException e) {
+		} catch (IOException | ClassNotFoundException e) {
 			throw new RuntimeException(e);
 		}
 	}

@@ -40,11 +40,8 @@ public strictfp class DefaultARMIArgumentWriter implements ARMIArgumentWriter {
 			out.buffer().putShort(event.getEventSize());
 			event.write(out.buffer());
 		} else {
-			ObjectOutputStream obj_output_stream = new ObjectOutputStream(out);
-			try {
+			try (ObjectOutputStream obj_output_stream = new ObjectOutputStream(out)) {
 				obj_output_stream.writeObject(arg);
-			} finally {
-				obj_output_stream.close();
 			}
 		}
 	}

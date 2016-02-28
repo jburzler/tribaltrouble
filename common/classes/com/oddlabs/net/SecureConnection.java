@@ -62,9 +62,7 @@ public final strictfp class SecureConnection extends AbstractConnection implemen
 	private final SealedObject encrypt(ARMIEvent event) {
 		try {
 			return new SealedObject(event, encrypt_cipher);
-		} catch (IllegalBlockSizeException e) {
-			throw new RuntimeException(e);
-		} catch (IOException e) {
+		} catch (IllegalBlockSizeException | IOException e) {
 			throw new RuntimeException(e);
 		}
 	}
@@ -102,11 +100,7 @@ public final strictfp class SecureConnection extends AbstractConnection implemen
 				throw new IOException("Illegal stream state, event received before key agreement");
 			ARMIEvent event = (ARMIEvent)sealed_event.getObject(decrypt_cipher);
 			receiveEvent(event);
-		} catch (BadPaddingException e) {
-			notifyError(new IOException(e.getMessage()));
-		} catch (IllegalBlockSizeException e) {
-			notifyError(new IOException(e.getMessage()));
-		} catch (ClassNotFoundException e) {
+		} catch (BadPaddingException | IllegalBlockSizeException | ClassNotFoundException e) {
 			notifyError(new IOException(e.getMessage()));
 		} catch (IOException e) {
 			notifyError(e);

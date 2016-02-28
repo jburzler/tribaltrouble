@@ -109,10 +109,8 @@ public final strictfp class Layer {
 	
 	public final void saveAsPNG(File file) {
 		BufferedImage image = convertToImage();
-		try {
-			FileOutputStream fos = new FileOutputStream(file);
+		try (FileOutputStream fos = new FileOutputStream(file)) {
 			ImageIO.write(image, "PNG", fos);
-			fos.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

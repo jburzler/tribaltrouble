@@ -56,11 +56,7 @@ public final strictfp class MacOSXUtil extends OSUtil {
 			}
 			transformer.transform(source, result);
 			tmp_file.renameTo(info_plist_file);
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		} catch (TransformerException e) {
-			throw new RuntimeException(e);
-		} catch (ParserConfigurationException e) {
+		} catch (IOException | TransformerException | ParserConfigurationException e) {
 			throw new RuntimeException(e);
 		}
 	}

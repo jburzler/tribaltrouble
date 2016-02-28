@@ -117,9 +117,7 @@ public strictfp class RegistrationClient {
 	public final String getRegKey() {
 		try {
 			return ((RegistrationInfo)signed_registration_key.getObject()).getRegKey();
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		} catch (ClassNotFoundException e) {
+		} catch (IOException | ClassNotFoundException e) {
 			throw new RuntimeException(e);
 		}
 	}

@@ -129,11 +129,9 @@ public final strictfp class Utils {
 		}
 		buffer.rewind();
 		File image_file = new File(filename);
-		try {
-			FileOutputStream fout = new FileOutputStream(image_file);
+		try (FileOutputStream fout = new FileOutputStream(image_file)) {
 			fout.write(buffer.array());
 			fout.flush();
-			fout.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -143,8 +141,7 @@ public final strictfp class Utils {
 
 	public final static void saveAsTGA(String filename, ByteBuffer pixel_data, int width, int height) {
 		long before = System.currentTimeMillis();
-		try {
-			FileOutputStream fout = new FileOutputStream(filename + ".tga");
+		try (FileOutputStream fout = new FileOutputStream(filename + ".tga")) {
 
 			//write TGA header
 			fout.write(0); //ID length, 0 because no image id field
@@ -173,7 +170,6 @@ public final strictfp class Utils {
 			fout.getChannel().write(pixel_data);
 
 			fout.flush();
-			fout.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

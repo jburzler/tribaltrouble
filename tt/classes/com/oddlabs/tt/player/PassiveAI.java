@@ -22,11 +22,11 @@ public final strictfp class PassiveAI extends AI {
                     for (Selectable[] list : lists) {
                         Selectable s = list[0];
                         if (s.getPrimaryController() instanceof IdleController) {
-                            for (Selectable list : list) {
+                            for (Selectable thrower : list) {
                                 float r = getOwner().getWorld().getRandom().nextFloat();
                                 if (r < .2) {
                                     Target walkable_target = getTarget(getOwner().getWorld().getRandom());
-                                    getOwner().setTarget(new Selectable[]{list}, walkable_target, Target.ACTION_ATTACK, true);
+                                    getOwner().setTarget(new Selectable[]{thrower}, walkable_target, Target.ACTION_ATTACK, true);
                                 }
                             }
                         }

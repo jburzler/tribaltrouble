@@ -107,14 +107,12 @@ public final strictfp class SaveDeterministic extends Deterministic {
 	
         @Override
 	protected final Object logObject(Object o) {
-		try {
-			ObjectOutputStream object_output_stream = new ObjectOutputStream(byte_buffer_output_stream);
+		try (ObjectOutputStream object_output_stream = new ObjectOutputStream(byte_buffer_output_stream)) {
 			object_output_stream.writeObject(o);
-			object_output_stream.close();
-			return o;
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
+                return o;
 	}
 	
         @Override

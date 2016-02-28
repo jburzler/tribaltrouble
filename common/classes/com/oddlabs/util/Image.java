@@ -31,19 +31,17 @@ public final strictfp class Image implements Serializable {
 	public final static Image read(URL url) {
 		try {
 			return (Image)(new ObjectInputStream(new BufferedInputStream(url.openStream()))).readObject();
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException(e);
-		} catch (IOException e) {
+		} catch (ClassNotFoundException | IOException e) {
 			throw new RuntimeException(e);
 		}
 	}
 	
 	private static void write(Image image, OutputStream os) throws IOException {
-		ObjectOutputStream oos = new ObjectOutputStream(os);
-		oos.writeObject(image);
-		oos.close();
-	//	oos.flush();
-	//	oos.reset();
+            try (ObjectOutputStream oos = new ObjectOutputStream(os)) {
+                oos.writeObject(image);
+                //	oos.flush();
+                //	oos.reset();
+            }
 		
 	}
 

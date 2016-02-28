@@ -60,9 +60,7 @@ public final strictfp class KeyManager {
 			Cipher cipher = Cipher.getInstance("DESede/ECB/PKCS5Padding");
 			cipher.init(cipher_mode, secret_key);
 			return cipher;
-		} catch (NoSuchPaddingException e) {
-			throw new RuntimeException(e);
-		} catch (NoSuchAlgorithmException e) {
+		} catch (NoSuchPaddingException | NoSuchAlgorithmException e) {
 			throw new RuntimeException(e);
 		}
 	}

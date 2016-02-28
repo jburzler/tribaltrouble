@@ -59,7 +59,7 @@ public final strictfp class PulldownItem extends ButtonObject {
 
         @Override
 	protected final void mouseClicked(int button, int x, int y, int clicks) {
-		// Prevent super.mouseClicked from being called to avoid infinite loop.
-		return;
+            // Prevent super.mouseClicked from being called to avoid infinite loop.
+
 	}
 }

@@ -75,11 +75,10 @@ public final strictfp class HttpRequest {
 		conn.setRequestMethod("POST");
 		conn.setDoOutput(true);
 		ByteArrayOutputStream byte_os = new ByteArrayOutputStream();
-		OutputStreamWriter out = new OutputStreamWriter(byte_os, "UTF-8");
-
-		String query_string = parameters.createQueryString();
-		out.write(query_string, 0, query_string.length());
-		out.close();
+            try (OutputStreamWriter out = new OutputStreamWriter(byte_os, "UTF-8")) {
+                String query_string = parameters.createQueryString();
+                out.write(query_string, 0, query_string.length());
+            }
 
 		conn.setRequestProperty("Content-Length", String.valueOf(byte_os.size())); 
 		conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded"); 
@@ -106,23 +105,17 @@ public final strictfp class HttpRequest {
 
 	private static HttpResponse readResponse(URLConnection conn, HttpResponseParser parser) throws IOException {
 		try {
-			InputStream is = conn.getInputStream();
-			try {
+			try (InputStream is = conn.getInputStream()) {
 				HttpResponse response = new OkResponse(parser.parse(is));
 				copy(is, null); // Make sure the entire stream is read
 				return response;
-			} finally {
-				is.close();
 			}
 		} catch (IOException e) {
 			int response_code = ((HttpURLConnection)conn).getResponseCode();
 			String response_message = ((HttpURLConnection)conn).getResponseMessage();
 			ByteArrayOutputStream byte_os = new ByteArrayOutputStream();
-			InputStream es = ((HttpURLConnection)conn).getErrorStream();
-			try {
+			try (InputStream es = ((HttpURLConnection)conn).getErrorStream()) {
 				copy(es, byte_os);
-			} finally {
-				es.close();
 			}
 			return new ErrorResponse(response_code, response_message);
 		}

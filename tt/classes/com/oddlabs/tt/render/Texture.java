@@ -84,7 +84,6 @@ public final strictfp class Texture extends NativeResource {
 			this.width = dxt_image.getWidth();
 			this.height =  dxt_image.getHeight();
 			uploadDXTTexture(dxt_image, texture_file);
-			return;
 		} else {
 			GLImage img = texture_file.getImage();
 			this.width = img.getWidth();
