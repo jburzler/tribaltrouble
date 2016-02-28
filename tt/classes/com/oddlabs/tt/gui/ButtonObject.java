@@ -15,19 +15,23 @@ public abstract strictfp class ButtonObject extends GUIObject {
 		return pressed;
 	}
 
+        @Override
 	protected final void mouseReleased(int button, int x, int y) {
 		pressed = false;
 	}
 
+        @Override
 	protected final void mousePressed(int button, int x, int y) {
 		pressed = true;
 	}
 
+        @Override
 	protected void mouseHeld(int button, int x, int y) {
 		if (pressed)
 			mousePressedAll(button, x, y);
 	}
 
+        @Override
 	public void setDisabled(boolean disabled) {
 		if (disabled)
 			pressed = false;

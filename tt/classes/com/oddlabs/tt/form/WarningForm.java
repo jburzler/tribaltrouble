@@ -44,6 +44,7 @@ public final strictfp class WarningForm extends Form {
 	}
 
 	private final strictfp class OKListener implements MouseClickListener {
+                @Override
 		public final void mouseClicked(int button, int x, int y, int clicks) {
 			Settings.getSettings().warning_no_sound = !show_next_time.isMarked();
 			remove();

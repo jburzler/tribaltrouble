@@ -8,11 +8,13 @@ public final strictfp class FontFile extends File {
 		super(file_name);
 	}
 
+        @Override
 	public final Object newInstance() {
 		FontInfo font_info = FontInfo.loadFromFile(getURL());
 		return new Font(font_info);
 	}
 
+        @Override
 	public final boolean equals(Object o) {
 		if (!(o instanceof FontFile))
 			return false;

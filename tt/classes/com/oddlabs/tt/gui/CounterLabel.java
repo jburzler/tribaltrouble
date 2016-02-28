@@ -56,10 +56,12 @@ public final strictfp class CounterLabel extends Label implements Animated {
 		}
 	}
 
+        @Override
 	public final void animate(float t) {
 		setTime(seconds - t);
 	}
 
+        @Override
 	public final void updateChecksum(StateChecksum check_sum) {
 	}
 }

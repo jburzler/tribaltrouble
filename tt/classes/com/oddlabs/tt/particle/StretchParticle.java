@@ -10,6 +10,7 @@ public final strictfp class StretchParticle extends Particle {
 	private float src_width = 0f;
 	private float dst_width = 0f;
 
+        @Override
 	public final void update(float t) {
 		super.update(t);
 	}

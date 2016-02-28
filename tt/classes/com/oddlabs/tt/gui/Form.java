@@ -21,6 +21,7 @@ public strictfp class Form extends Group {
 		this(null);
 	}
 
+        @Override
 	public final void compileCanvas() {
 		int spacing = Skin.getSkin().getFormData().getObjectSpacing();
 		Box form;
@@ -57,6 +58,7 @@ public strictfp class Form extends Group {
 		setPos((LocalInput.getViewWidth() - getWidth())/2, (LocalInput.getViewHeight() - getHeight())/2);
 	}
 
+        @Override
 	protected final void renderGeometry() {
 		if (isDisabled()) {
 			if (caption != null)
@@ -77,43 +79,54 @@ public strictfp class Form extends Group {
 		
 	}
 
+        @Override
 	protected final void mousePressed(int button, int x, int y) {;
 		if (caption != null && y >= getHeight() - Skin.getSkin().getFormData().getForm().getTopOffset())
 			drag = true;
 	}
 
+        @Override
 	protected final void mouseReleased(int button, int x, int y) {
 		drag = false;
 	}
 
+        @Override
 	public final void mouseDragged(int button, int x, int y, int rel_x, int rel_y, int abs_x, int abs_y) {
 		if (drag)
 			setPos(getX() + rel_x, getY() + rel_y);
 	}
 
+        @Override
 	protected final void mouseScrolled(int amount) {
 	}
 
+        @Override
 	protected void mouseMoved(int x, int y) {
 	}
 
+        @Override
 	protected final void mouseExited() {
 	}
 
+        @Override
 	protected final void mouseEntered() {
 	}
 
+        @Override
 	protected final void mouseClicked(int button, int x, int y, int clicks) {
 	}
 
+        @Override
 	protected final void keyPressed(KeyboardEvent event) {
 		if (event.getKeyCode() == Keyboard.KEY_H && event.isControlDown())
 			super.keyPressed(event);
 	}
 
+        @Override
 	protected final void keyReleased(KeyboardEvent event) {
 	}
 
+        @Override
 	protected void keyRepeat(KeyboardEvent event) {
 		switch (event.getKeyCode()) {
 			case Keyboard.KEY_TAB:
@@ -127,6 +140,7 @@ public strictfp class Form extends Group {
 		}
 	}
 
+        @Override
 	protected final void mouseHeld(int button, int x, int y) {
 	}
 
@@ -158,6 +172,7 @@ public strictfp class Form extends Group {
 	protected void doCancel() {
 	}
 
+        @Override
 	public final void remove() {
 		if (getParent() != null)
 			closedAll();
@@ -170,12 +185,16 @@ public strictfp class Form extends Group {
 			this.owner = owner;
 		}
 
+                @Override
 		public final void mouseDragged(int button, int x, int y, int rel_x, int rel_y, int abs_x, int abs_y) {
 			owner.mouseDragged(button, x, y, rel_x, rel_y, abs_x, abs_y);
 		}
 
+                @Override
 		public final void mouseMoved(int x, int y) {}
+                @Override
 		public final void mouseEntered() {}
+                @Override
 		public final void mouseExited() {}
 	}
 }

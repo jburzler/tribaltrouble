@@ -31,6 +31,7 @@ public final strictfp class TunnelledConnectionListener extends AbstractConnecti
 		return (TunnelledConnection)incoming_connections.remove(0);
 	}
 
+        @Override
 	protected final AbstractConnection doAcceptConnection(ConnectionInterface connection_interface) {
 		TunnelledConnection conn = getNextTunnel();
 		conn.setConnectionInterface(connection_interface);
@@ -38,6 +39,7 @@ public final strictfp class TunnelledConnectionListener extends AbstractConnecti
 		return conn;
 	}
 	
+        @Override
 	public final void rejectConnection() {
 		getNextTunnel().close();
 	}
@@ -47,6 +49,7 @@ public final strictfp class TunnelledConnectionListener extends AbstractConnecti
 		notifyError(new ClosedChannelException());
 	}
 
+        @Override
 	public final void close() {
 		if (open) {
 			Network.getMatchmakingClient().unregisterTunnelledListener(this);

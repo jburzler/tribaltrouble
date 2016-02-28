@@ -17,6 +17,7 @@ public final strictfp class TimedConnection {
 		return conn;
 	}
 
+        @Override
 	public final boolean equals(Object other) {
 		if (!(other instanceof TimedConnection))
 			return false;
@@ -24,6 +25,7 @@ public final strictfp class TimedConnection {
 		return other_timed.conn.equals(this.conn);
 	}
 
+        @Override
 	public final int hashCode() {
 		return conn.hashCode();
 	}

@@ -32,6 +32,7 @@ public final strictfp class TaskThread {
 			this.result = e;
 		}
 
+                @Override
 		public final void deliverResult(TaskExecutorLoopbackInterface callback) {
 			callback.taskFailed(result);
 		}
@@ -44,6 +45,7 @@ public final strictfp class TaskThread {
 			this.result = result;
 		}
 
+                @Override
 		public final void deliverResult(TaskExecutorLoopbackInterface callback) {
 			callback.taskCompleted(result);
 		}
@@ -96,6 +98,7 @@ public final strictfp class TaskThread {
 		}
 		if (!deterministic.isPlayback() && thread == null) {
 			this.thread = new Thread(new Runnable() {
+                                @Override
 				public final void run() {
 					processTasks();
 				}

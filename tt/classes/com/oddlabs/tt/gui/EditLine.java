@@ -40,10 +40,12 @@ public strictfp class EditLine extends TextField {
 		clear();
 	}
 
+        @Override
 	protected final int getCursorIndex() {
 		return GUIRoot.CURSOR_TEXT;
 	}
 
+        @Override
 	protected void renderGeometry(float clip_left, float clip_right, float clip_bottom, float clip_top) {
 		Box edit_box = Skin.getSkin().getEditBox();
 		if (isDisabled())
@@ -60,6 +62,7 @@ public strictfp class EditLine extends TextField {
 		text_renderer.render(x, y, offset_x, clip_left, clip_right, clip_bottom, clip_top, getText(), render_index);
 	}
 
+        @Override
 	protected void keyReleased(KeyboardEvent event) {
 		switch (event.getKeyCode()) {
 			case Keyboard.KEY_RETURN:
@@ -71,6 +74,7 @@ public strictfp class EditLine extends TextField {
 		}
 	}
 
+        @Override
 	protected void keyRepeat(KeyboardEvent event) {
 		switch (event.getKeyCode()) {
 			case Keyboard.KEY_BACK:
@@ -126,6 +130,7 @@ public strictfp class EditLine extends TextField {
 		correctOffsetX();
 	}
 
+        @Override
 	public final boolean isAllowed(char ch) {
 		return super.isAllowed(ch) && getFont().getQuad(ch) != null && (allowed_chars == null || allowed_chars.indexOf(ch) != -1);
 	}
@@ -159,6 +164,7 @@ public strictfp class EditLine extends TextField {
 		this.index = index;
 	}
 
+        @Override
 	public final void clear() {
 		super.clear();
 		index = 0;
@@ -170,6 +176,7 @@ public strictfp class EditLine extends TextField {
 		}
 	}
 
+        @Override
 	protected final void appendNotify(CharSequence str) {
 		if (alignment == RIGHT_ALIGNED) {
 			for (int i = 0; i < str.length(); i++) {
@@ -179,17 +186,21 @@ public strictfp class EditLine extends TextField {
 		}
 	}
 
+        @Override
 	protected void focusNotify(boolean focus) {
 		if (focus)
 			index = getText().length();
 	}
 
+        @Override
 	protected final void mouseEntered() {
 	}
 
+        @Override
 	protected final void mouseExited() {
 	}
 
+        @Override
 	protected final void mousePressed(int button, int x, int y) {
 		if (button == LocalInput.LEFT_BUTTON) {
 			Box edit_box = Skin.getSkin().getEditBox();

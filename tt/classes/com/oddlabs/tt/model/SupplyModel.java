@@ -43,6 +43,7 @@ public abstract strictfp class SupplyModel extends Model implements Supply, Targ
 			world.getSupplyManager(getClass()).newSupply();
 	}
 
+        @Override
 	public final void visit(ToolTipVisitor visitor) {
 		visitor.visitSupply(this);
 	}
@@ -51,18 +52,22 @@ public abstract strictfp class SupplyModel extends Model implements Supply, Targ
 		return rotation;
 	}
 
+        @Override
 	public void animateSpawn(float t, float progress) {
 		offset_z = SPAWN_OFFSET_Z*(1 - progress);
 		reinsert();
 	} 
 
+        @Override
 	public void spawnComplete() {
 	}
 
+        @Override
 	public final boolean isEmpty() {
 		return num_supplies == 0;
 	}
 
+        @Override
 	public boolean hit() {
 		hit_counter++;
 		if (hit_counter == Supply.HITS_PER_HARVEST) {
@@ -73,6 +78,7 @@ public abstract strictfp class SupplyModel extends Model implements Supply, Targ
 			return false;
 	}
 
+        @Override
 	public final boolean isDead() {
 		return isEmpty();
 	}
@@ -90,18 +96,22 @@ public abstract strictfp class SupplyModel extends Model implements Supply, Targ
 		}
 	}
 
+        @Override
 	public final float getNoDetailSize() {
 		throw new RuntimeException();
 	}
 
+        @Override
 	public final float getSize() {
 		return size;
 	}
 
+        @Override
 	public final int getGridX() {
 		return grid_x;
 	}
 
+        @Override
 	public final int getGridY() {
 		return grid_y;
 	}
@@ -112,30 +122,37 @@ public abstract strictfp class SupplyModel extends Model implements Supply, Targ
 		this.grid_y = grid_y;
 	}
 
+        @Override
 	public float getOffsetZ() {
 		return offset_z;
 	}
 
+        @Override
 	public int getAnimation() {
 		return 0;
 	}
 
+        @Override
 	public float getAnimationTicks() {
 		return 0;
 	}
 
+        @Override
 	public final SpriteKey getSpriteRenderer() {
 		return sprite_renderer;
 	}
 
+        @Override
 	public void visit(ElementVisitor visitor) {
 		visitor.visitSupplyModel(this);
 	}
 
+        @Override
 	public float getShadowDiameter() {
 		return 0f;
 	}
 
+        @Override
 	public int getPenalty() {
 		return Occupant.STATIC;
 	}

@@ -20,6 +20,7 @@ public final strictfp class LandscapeTargetRespond extends Element implements An
 		register();
 	}
 
+        @Override
 	public final void animate(float t) {
 		if (time > 0) {
 			time = StrictMath.max(0, time - t);
@@ -32,19 +33,23 @@ public final strictfp class LandscapeTargetRespond extends Element implements An
 		return time/SECOND_PER_PICK_RESPOND;
 	}
 
+        @Override
 	public final void updateChecksum(StateChecksum checksum) {
 	}
 
+        @Override
 	protected void register() {
 		super.register();
 		time = SECOND_PER_PICK_RESPOND;
 		LocalEventQueue.getQueue().getManager().registerAnimation(this);
 	}
 
+        @Override
 	public final void visit(ElementVisitor visitor) {
 		visitor.visitRespond(this);
 	}
 
+        @Override
 	protected final void remove() {
 		super.remove();
 		LocalEventQueue.getQueue().getManager().removeAnimation(this);

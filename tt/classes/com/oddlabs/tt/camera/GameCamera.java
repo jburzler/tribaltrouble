@@ -286,6 +286,7 @@ public final strictfp class GameCamera extends Camera {
 		return x > 0 && x < getHeightMap().getMetersPerWorld() && y > 0 && y < getHeightMap().getMetersPerWorld();
 	}
 
+        @Override
 	public final void doAnimate(float t) {
 		doZoom(t);
 		doScroll(t);
@@ -294,6 +295,7 @@ public final strictfp class GameCamera extends Camera {
 		updateDirection();
 	}
 
+        @Override
 	public final void mouseScrolled(int amount) {
 		zoom_time += amount*.05f;
 		if (zoom_time > .15f)
@@ -318,6 +320,7 @@ public final strictfp class GameCamera extends Camera {
 		return point;
 	}
 
+        @Override
 	public final void mouseMoved(int x, int y) {
 		if ((owner == null || !owner.isSelecting()) && (x < SCROLL_BUFFER || y < SCROLL_BUFFER ||
 				x > LocalInput.getViewWidth() - 1 - SCROLL_BUFFER || y > LocalInput.getViewHeight() - 1 - SCROLL_BUFFER)) {
@@ -363,6 +366,7 @@ public final strictfp class GameCamera extends Camera {
 		return viewer.getWorld();
 	}
 
+        @Override
 	public final void keyPressed(KeyboardEvent event) {
 		switch (event.getKeyCode()) {
 			case Keyboard.KEY_HOME:
@@ -444,6 +448,7 @@ public final strictfp class GameCamera extends Camera {
 			rotate_left = false;
 	}
 
+        @Override
 	public final void enable() {
 		super.enable();
 		mouseMoved(LocalInput.getMouseX(), LocalInput.getMouseY());

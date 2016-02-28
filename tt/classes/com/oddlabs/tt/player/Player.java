@@ -102,12 +102,14 @@ public final strictfp class Player implements PlayerInterface {
 //		this.team_tip = Utils.getBundleString(bundle, "team", new Object[]{Integer.toString(player_info.getTeam() + 1)});
 	}
 
+        @Override
 	public final void changePreferredGamespeed(int delta) {
 		int old_speed = getGamespeed();
 		int new_speed = Math.max(Game.GAMESPEED_PAUSE, Math.min(old_speed + delta, Game.GAMESPEED_LUDICROUS));
 		setPreferredGamespeed(new_speed);
 	}
 
+        @Override
 	public final void setPreferredGamespeed(int speed) {
 		if (!World.isValidPreferredGamespeed(speed))
 			return;
@@ -247,6 +249,7 @@ public final strictfp class Player implements PlayerInterface {
 		return can_build_chieftains;
 	}
 
+        @Override
 	public final String toString() {
 		return player_info.toString();
 	}
@@ -396,46 +399,55 @@ public final strictfp class Player implements PlayerInterface {
 		return color;
 	}
 
+        @Override
 	public final void deployUnits(Building building, int type, int num_units) {
 		if (isValid(building))
 			building.deployUnits(type, num_units);
 	}
 
+        @Override
 	public final void createHarvesters(Building building, int num_tree, int num_rock, int num_iron, int num_rubber) {
 		if (isValid(building))
 			building.createHarvesters(num_tree, num_rock, num_iron, num_rubber);
 	}
 
+        @Override
 	public final void buildRockWeapons(Building building, int num_weapons, boolean infinite) {
 		if (isValid(building))
 			building.buildWeapons(RockAxeWeapon.class, num_weapons, infinite);
 	}
 
+        @Override
 	public final void buildIronWeapons(Building building, int num_weapons, boolean infinite) {
 		if (isValid(building))
 			building.buildWeapons(IronAxeWeapon.class, num_weapons, infinite);
 	}
 
+        @Override
 	public final void buildRubberWeapons(Building building, int num_weapons, boolean infinite) {
 		if (isValid(building))
 			building.buildWeapons(RubberAxeWeapon.class, num_weapons, infinite);
 	}
 
+        @Override
 	public final void doMagic(Unit chieftain, int magic) {
 		if (isValid(chieftain))
 			chieftain.doMagic(magic, true);
 	}
 
+        @Override
 	public final void exitTower(Building building) {
 		if (isValid(building))
 			building.exitTower();
 	}
 
+        @Override
 	public final void trainChieftain(Building building, boolean start) {
 		if (isValid(building))
 			building.trainChieftain(start);
 	}
 
+        @Override
 	public final void placeBuilding(Selectable[] selection, int template_id, int placing_grid_x, int placing_grid_y) {
 		Building building = new Building(this, getRace().getBuildingTemplate(template_id), placing_grid_x, placing_grid_y);
 		for (int i = 0; i < selection.length; i++) {
@@ -444,15 +456,18 @@ public final strictfp class Player implements PlayerInterface {
 		}
 	}
 
+        @Override
 	public final void setRallyPoint(Building building, Target target) {
 		if (isValid(building) && target != null)
 			building.setRallyPoint(target);
 	}
 
+        @Override
 	public final void setRallyPoint(Building building, int grid_x, int grid_y) {
 		setRallyPoint(building, new LandscapeTarget(grid_x, grid_y));
 	}
 
+        @Override
 	public final void setTarget(Selectable[] selection, Target target, int action, boolean aggressive) {
 		for (int i = 0; i < selection.length; i++) {
 			if (isValid(selection[i]))
@@ -467,6 +482,7 @@ public final strictfp class Player implements PlayerInterface {
 		}
 	}
 
+        @Override
 	public final void setLandscapeTarget(Selectable[] selection, int grid_x, int grid_y, int action, boolean aggressive) {
 		if (selection.length == 0)
 			return;

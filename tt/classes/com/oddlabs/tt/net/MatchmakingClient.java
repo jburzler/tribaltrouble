@@ -83,9 +83,11 @@ public final strictfp class MatchmakingClient implements MatchmakingClientInterf
 		in_game_chat_history.clear();
 	}
 
+        @Override
 	public final void writeBufferDrained(AbstractConnection conn) {
 	}
 
+        @Override
 	public final void loginOK(String username, TunnelAddress address) {
 		if (state == STATE_AWAITING_OK) {
 			this.update_allowed = true;
@@ -127,6 +129,7 @@ public final strictfp class MatchmakingClient implements MatchmakingClientInterf
 		matchmaking_interface.setProfile(nick);
 	}
 
+        @Override
 	public final void updateProfile(Profile profile) {
 		active_profile = profile;
 	}
@@ -135,6 +138,7 @@ public final strictfp class MatchmakingClient implements MatchmakingClientInterf
 		create_profile_listener = listener;
 	}
 
+        @Override
 	public final void createProfileSuccess() {
 		if (create_profile_listener != null) {
 			create_profile_listener.success();
@@ -142,6 +146,7 @@ public final strictfp class MatchmakingClient implements MatchmakingClientInterf
 		}
 	}
 
+        @Override
 	public final void createProfileError(int error_code) {
 		if (create_profile_listener != null) {
 			create_profile_listener.error(error_code);
@@ -161,10 +166,12 @@ public final strictfp class MatchmakingClient implements MatchmakingClientInterf
 		matchmaking_interface.logPriority(nick, priority);
 	}
 
+        @Override
 	public final void gameWonAck() {
 		PeerHub.receivedAck();
 	}
 
+        @Override
 	public final void updateStart(int type) {
 		MatchmakingListener listener = Network.getMatchmakingListener();
 		if (listener != null) {
@@ -172,12 +179,14 @@ public final strictfp class MatchmakingClient implements MatchmakingClientInterf
 		}
 	}
 
+        @Override
 	public final void updateList(int type, /*GameHost[]*/Object[] names) {
 		MatchmakingListener listener = Network.getMatchmakingListener();
 		if (listener != null)
 			listener.receivedList(type, names);
 	}
 	
+        @Override
 	public final void updateComplete(int next_update_key) {
 		this.update_key = next_update_key;
 		update_allowed = true;
@@ -189,12 +198,14 @@ public final strictfp class MatchmakingClient implements MatchmakingClientInterf
 		}
 	}
 
+        @Override
 	public final void updateProfileList(Profile[] profiles, String last_profile_nick) {
 		MatchmakingListener listener = Network.getMatchmakingListener();
 		if (listener != null)
 			listener.receivedProfiles(profiles, last_profile_nick);
 	}
 	
+        @Override
 	public final void joiningChatRoom(String room_name) {
 		assert chat_room_info == null;
 		chat_room_info = new ChatRoomInfo(room_name);
@@ -205,6 +216,7 @@ public final strictfp class MatchmakingClient implements MatchmakingClientInterf
 			listener.joinedChat(chat_room_info);
 	}
 
+        @Override
 	public final void receiveChatRoomUsers(ChatRoomUser[] users) {
 		if (chat_room_info != null) {
 			chat_room_info.setUsers(users);
@@ -216,10 +228,12 @@ public final strictfp class MatchmakingClient implements MatchmakingClientInterf
 		}
 	}
 
+        @Override
 	public final void receiveChatRoomMessage(String owner, String msg) {
 		Network.getChatHub().chat(new ChatMessage(owner, msg, ChatMessage.CHAT_CHATROOM));
 	}
 
+        @Override
 	public final void receivePrivateMessage(String nick, String msg) {
 		Network.getChatHub().chat(new ChatMessage(nick, msg, ChatMessage.CHAT_PRIVATE));
 	}
@@ -239,6 +253,7 @@ public final strictfp class MatchmakingClient implements MatchmakingClientInterf
 		getInterface().requestInfo(nick);
 	}
 
+        @Override
 	public final void receiveInfo(Profile profile) {
 		if (chat_gui_root != null) {
 			chat_gui_root.addModalForm(new InfoForm(profile));
@@ -256,6 +271,7 @@ public final strictfp class MatchmakingClient implements MatchmakingClientInterf
 		return chat_room_info;
 	}
 
+        @Override
 	public final void error(int error_code) {
 		if (chat_gui_root != null) {
 			chat_gui_root.addModalForm(new ChatErrorForm(error_code));
@@ -280,6 +296,7 @@ public final strictfp class MatchmakingClient implements MatchmakingClientInterf
 		state = STATE_AWAITING_OK;
 	}
 
+        @Override
 	public final void loginError(int error_code) {
 		close();
 		MatchmakingListener listener = Network.getMatchmakingListener();
@@ -347,12 +364,14 @@ public final strictfp class MatchmakingClient implements MatchmakingClientInterf
 		return (TunnelledConnection)tunnels.get(from);
 	}
 	
+        @Override
 	public final void tunnelClosed(HostSequenceID from) {
 		TunnelledConnection tunnel = removeTunnel(from);
 		if (tunnel != null)
 			tunnel.tunnelClosed();
 	}
 	
+        @Override
 	public final void tunnelAccepted(HostSequenceID from) {
 		TunnelledConnection tunnel = getTunnel(from);
 		if (tunnel != null)
@@ -361,6 +380,7 @@ public final strictfp class MatchmakingClient implements MatchmakingClientInterf
 			closeTunnel(from);
 	}
 
+        @Override
 	public final void tunnelOpened(HostSequenceID from, InetAddress inet_from, InetAddress local_inet_from, Profile other) {
 		if (tunnelled_listener != null) {
 			tunnelled_listener.requestTunnelledConnection(from, inet_from, local_inet_from, other);
@@ -368,6 +388,7 @@ public final strictfp class MatchmakingClient implements MatchmakingClientInterf
 			closeTunnel(from);
 	}
 
+        @Override
 	public final void receiveRoutedEvent(HostSequenceID from, ARMIEvent event) {
 		TunnelledConnection tunnel = getTunnel(from);
 		if (tunnel != null)
@@ -376,6 +397,7 @@ public final strictfp class MatchmakingClient implements MatchmakingClientInterf
 			closeTunnel(from);
 	}
 
+        @Override
 	public final void handle(Object sender, ARMIEvent event) {
 		try {
 			event.execute(interface_methods, this);
@@ -391,6 +413,7 @@ public final strictfp class MatchmakingClient implements MatchmakingClientInterf
 			listener.connectionLost();
 	}
 	
+        @Override
 	public final void connected(AbstractConnection connection) {
 		SignedObject signed_key = Renderer.getRegistrationClient().getSignedRegistrationKey();
 		Connection wrapped_connection = (Connection)conn.getWrappedConnection();
@@ -405,6 +428,7 @@ System.out.println("wrapped_connection.getLocalAddress()	 = " + wrapped_connecti
 			matchmaking_login_interface.login(login, signed_key, revision);
 	}
 
+        @Override
 	public final void error(AbstractConnection conn, IOException e) {
 		handleError(e);
 	}

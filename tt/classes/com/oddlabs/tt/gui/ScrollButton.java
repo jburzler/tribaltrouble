@@ -13,9 +13,11 @@ public final strictfp class ScrollButton extends GUIObject {
 		setDim(Skin.getSkin().getScrollBarData().getScrollButton().getWidth(), owner.getButtonHeight());
 	}
 
+        @Override
 	public final void keyPressed(KeyboardEvent event) {
 	}
 
+        @Override
 	public final void keyRepeat(KeyboardEvent event) {
 		switch (event.getKeyCode()) {
 			case Keyboard.KEY_TAB:
@@ -24,9 +26,11 @@ public final strictfp class ScrollButton extends GUIObject {
 		}
 	}
 
+        @Override
 	public final void keyReleased(KeyboardEvent event) {
 	}
 
+        @Override
 	protected final void renderGeometry() {
 		Vertical button = Skin.getSkin().getScrollBarData().getScrollButton();
 		if (isDisabled()) {
@@ -38,6 +42,7 @@ public final strictfp class ScrollButton extends GUIObject {
 		}
 	}
 
+        @Override
 	public final void mouseClicked(int button, int x, int y, int clicks) {
 	}
 }

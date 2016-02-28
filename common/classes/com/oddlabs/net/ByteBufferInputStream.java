@@ -14,10 +14,12 @@ public final strictfp class ByteBufferInputStream extends InputStream {
 		return buffer;
 	}
 
+        @Override
 	public final int available() {
 		return buffer.remaining();
 	}
 
+        @Override
 	public final int read(byte[] bytes, int offset, int length) {
 		if (available() == 0)
 			return -1;
@@ -26,6 +28,7 @@ public final strictfp class ByteBufferInputStream extends InputStream {
 		return length;
 	}
 	
+        @Override
 	public final int read() {
 		if (available() > 0) {
 			int b = buffer.get();

@@ -15,6 +15,7 @@ public final strictfp class WalkController extends Controller {
 		this.scan_attack = scan_attack;
 	}
 
+        @Override
 	public final void decide() {
 		if (shouldGiveUp(0))
 			unit.popController();

@@ -18,6 +18,7 @@ public abstract strictfp class IntervalTrigger {
 		this.after_done_time = after_done_time;
 		this.animation_manager = animation_manager;
 		this.timer = new TimerAnimation(animation_manager, new Updatable() {
+                        @Override
 			public final void update(Object anim) {
 				check();
 			}
@@ -28,6 +29,7 @@ public abstract strictfp class IntervalTrigger {
 	protected void triggered() {
 		timer.stop();
 		timer = new TimerAnimation(animation_manager, new Updatable() {
+                        @Override
 			public final void update(Object anim) {
 				((TimerAnimation)anim).stop();
 				done();

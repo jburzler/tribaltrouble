@@ -26,6 +26,7 @@ final strictfp class ElementRenderer implements ElementNodeVisitor {
 		render_state.setup(picking, camera);
 	}
 
+        @Override
 	public final void visitNode(ElementNode node) {
 		int frustum_state = RenderTools.NOT_IN_FRUSTUM;
 		if (visible_override || (frustum_state = RenderTools.inFrustum(node, camera.getFrustum())) >= RenderTools.IN_FRUSTUM) {
@@ -37,6 +38,7 @@ final strictfp class ElementRenderer implements ElementNodeVisitor {
 		}
 	}
 
+        @Override
 	public final void visitLeaf(ElementLeaf leaf) {
 		int frustum_state = RenderTools.NOT_IN_FRUSTUM;
 		if (visible_override || (frustum_state = RenderTools.inFrustum(leaf, camera.getFrustum())) >= RenderTools.IN_FRUSTUM) {
@@ -47,6 +49,7 @@ final strictfp class ElementRenderer implements ElementNodeVisitor {
 		}
 	}
 
+        @Override
 	public final void visit(Element element) {
 		int frustum_state = RenderTools.NOT_IN_FRUSTUM;
 		if (visible_override || (frustum_state = RenderTools.inFrustum(element, camera.getFrustum())) >= RenderTools.IN_FRUSTUM) {

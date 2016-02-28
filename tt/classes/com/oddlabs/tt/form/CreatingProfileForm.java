@@ -42,12 +42,14 @@ public final strictfp class CreatingProfileForm extends Form implements ProfileL
 		Network.getMatchmakingClient().createProfile(nick);
 	}
 
+        @Override
 	public final void success() {
 		remove();
 		main_menu.setMenuCentered(profiles_form);
 		Network.getMatchmakingClient().requestProfiles();
 	}
 	
+        @Override
 	public final void error(int error_code) {
 		remove();
 		String error_message;
@@ -76,6 +78,7 @@ public final strictfp class CreatingProfileForm extends Form implements ProfileL
 		gui_root.addModalForm(new MessageForm(error_message));
 	}
 	
+        @Override
 	protected final void doCancel() {
 	}
 }

@@ -29,6 +29,7 @@ public final strictfp class DefeatTrigger extends IntervalTrigger {
 		this.runnable = runnable;
 	}
 
+        @Override
 	protected final void check() {
 		Player current = viewer.getLocalPlayer();
 		if (chieftain != current.getChieftain()) {
@@ -42,6 +43,7 @@ public final strictfp class DefeatTrigger extends IntervalTrigger {
 		}
 	}
 
+        @Override
 	protected final void done() {
 		if (runnable == null) {
 			GUIRoot gui_root = viewer.getGUIRoot();

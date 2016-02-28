@@ -26,6 +26,7 @@ public final strictfp class GameOverTrigger implements Animated {
 			dead_tribes[i] = false;
 	}
 
+        @Override
 	public final void animate(float t) {
 		Player[] players = viewer.getWorld().getPlayers();
 		Player local_player = viewer.getLocalPlayer();
@@ -76,6 +77,7 @@ public final strictfp class GameOverTrigger implements Animated {
 		return team_count;
 	}
 
+        @Override
 	public final void updateChecksum(StateChecksum checksum) {
 	}
 

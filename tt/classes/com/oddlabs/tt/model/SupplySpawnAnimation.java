@@ -17,6 +17,7 @@ public strictfp class SupplySpawnAnimation implements Animated {
 		supply.animateSpawn(0, 0);
 	}
 
+        @Override
 	public final void animate(float t) {
 		time = StrictMath.min(time + t, limit);
 		supply.animateSpawn(t, time/limit);
@@ -26,6 +27,7 @@ public strictfp class SupplySpawnAnimation implements Animated {
 		}
 	}
 
+        @Override
 	public void updateChecksum(StateChecksum checksum) {
 	}
 }

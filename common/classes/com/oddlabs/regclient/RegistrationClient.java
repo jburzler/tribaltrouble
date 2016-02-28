@@ -58,11 +58,13 @@ public strictfp class RegistrationClient {
 
 	private final void loadRegistrationFileDeterministic() {
 		DeterministicSerializer.load(getDeterministic(), registration_file, new DeterministicSerializerLoopbackInterface() {
+                        @Override
 			public final void failed(Exception e) {
 				if (registration_listener != null)
 					registration_listener.registrationFailed(LOAD_FAILED_EXCEPTION, e);
 			}
 
+                        @Override
 			public final void loadSucceeded(Object obj) {
 				try {
 					SignedObject signed_obj = (SignedObject)obj;
@@ -78,6 +80,7 @@ public strictfp class RegistrationClient {
 				}
 			}
 
+                        @Override
 			public final void saveSucceeded() {
 				//NOP
 			}

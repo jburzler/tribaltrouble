@@ -30,6 +30,7 @@ public strictfp class Notification implements Updatable {
 		timer.stop();
 	}
 
+        @Override
 	public void update(Object anim) {
 		remove();
 		manager.removeNotification(this);

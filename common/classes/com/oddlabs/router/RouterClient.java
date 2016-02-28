@@ -28,6 +28,7 @@ final strictfp class RouterClient implements ConnectionInterface {
 		this.logger = logger;
 		this.client_interface = (RouterClientInterface)ARMIEvent.createProxy(conn, RouterClientInterface.class);
 		this.current_interface = new Interface(RouterInterface.class, new RouterInterface() {
+                        @Override
 			public final void login(SessionID session_id, SessionInfo session_info, int client_id) {
 				Session session = session_manager.get(session_id, session_info, client_id);
 				doLogin(session, session_info, client_id);
@@ -59,6 +60,7 @@ final strictfp class RouterClient implements ConnectionInterface {
 		return client_interface;
 	}
 
+        @Override
 	public final void writeBufferDrained(AbstractConnection conn) {
 		if (session != null && session.isComplete())
 			session.startTimeout(this);
@@ -72,15 +74,19 @@ final strictfp class RouterClient implements ConnectionInterface {
 		this.session = session;
 		this.client_id = client_id;
 		this.current_interface = new Interface(GameInterface.class, new GameInterface() {
+                        @Override
 			public final void checksum(int checksum) {
 				doChecksum(checksum);
 			}
+                        @Override
 			public final void relayEventTo(int client_id, ARMIEvent event) {
 				doRelayEventTo(client_id, event);
 			}
+                        @Override
 			public final void relayGameStateEvent(ARMIEvent event) {
 				doRelayGameStateEvent(event);
 			}
+                        @Override
 			public final void relayEvent(ARMIEvent event) {
 				doRelayEvent(event);
 			}
@@ -100,6 +106,7 @@ final strictfp class RouterClient implements ConnectionInterface {
 	private void doRelayGameStateEvent(final ARMIEvent event) {
 		final int next_tick = session.getNextTick();
 		session.visit(new SessionVisitor() {
+                        @Override
 			public final void visit(RouterClient client) {
 				client.client_interface.receiveGameStateEvent(client_id, next_tick, event);
 			}
@@ -108,6 +115,7 @@ final strictfp class RouterClient implements ConnectionInterface {
 
 	private void doRelayEvent(final ARMIEvent event) {
 		session.visit(new SessionVisitor() {
+                        @Override
 			public final void visit(RouterClient client) {
 				client.client_interface.receiveEvent(client_id, event);
 			}
@@ -116,6 +124,7 @@ final strictfp class RouterClient implements ConnectionInterface {
 
 	private void doRelayEventTo(final int receiver_client_id, final ARMIEvent event) {
 		session.visit(new SessionVisitor() {
+                        @Override
 			public final void visit(RouterClient client) {
 				if (client.client_id == receiver_client_id)
 					client.client_interface.receiveEvent(client_id, event);
@@ -123,6 +132,7 @@ final strictfp class RouterClient implements ConnectionInterface {
 		});
 	}
 
+        @Override
 	public final void handle(Object sender, ARMIEvent event) {
 		try {
 			event.execute(current_interface.methods, current_interface.instance);
@@ -131,9 +141,11 @@ final strictfp class RouterClient implements ConnectionInterface {
 		}
 	}
 
+        @Override
 	public final void connected(AbstractConnection conn) {
 	}
 
+        @Override
 	public final void error(AbstractConnection conn, IOException e) {
 		doError(false, e);
 	}
@@ -144,6 +156,7 @@ final strictfp class RouterClient implements ConnectionInterface {
 			logger.info("Removing client: " + this);
 			session.removePlayer(this);
 			session.visit(new SessionVisitor() {
+                                @Override
 				public final void visit(RouterClient client) {
 					client.client_interface.playerDisconnected(client_id, checksum_error);
 				}

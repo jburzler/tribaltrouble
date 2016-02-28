@@ -15,14 +15,17 @@ final strictfp class TreeRenderState implements LODObject {
 		this.tree_supply = tree_supply;
 	}
 
+        @Override
 	public final void markDetailPoint() {
 		tree_renderer.addToLowDetailRenderList(tree_supply);
 	}
 
+        @Override
 	public final void markDetailPolygon(int level) {
 		tree_renderer.markDetailPolygon(tree_supply, level);
 	}
 
+        @Override
 	public final int getTriangleCount(int index) {
 		Tree tree = tree_renderer.getTrees()[tree_supply.getTreeTypeIndex()];
 		if (index == SpriteRenderer.HIGH_POLY) 
@@ -33,6 +36,7 @@ final strictfp class TreeRenderState implements LODObject {
 			throw new RuntimeException();
 	}
 
+        @Override
 	public final float getEyeDistanceSquared() {
 		CameraState camera = tree_renderer.getCamera();
 		return RenderTools.getEyeDistanceSquared(tree_supply, camera.getCurrentX(), camera.getCurrentY(), camera.getCurrentZ());

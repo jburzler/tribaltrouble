@@ -16,6 +16,7 @@ public final strictfp class GeneratorOcean extends TextureGenerator {
 		this.terrain_type = terrain_type;
 	}
 	
+        @Override
 	public final Texture[] generate() {
 		int seed = Globals.LANDSCAPE_SEED + 1;
 		
@@ -70,10 +71,12 @@ public final strictfp class GeneratorOcean extends TextureGenerator {
 		return textures;
 	}
 	
+        @Override
 	public final int hashCode() {
 		return TEXTURE_SIZE;
 	}
 
+        @Override
 	public boolean equals(Object o) {
 		return super.equals(o) && ((GeneratorOcean)o).terrain_type == terrain_type;
 	}

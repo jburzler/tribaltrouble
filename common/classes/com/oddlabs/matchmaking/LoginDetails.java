@@ -14,6 +14,7 @@ public final strictfp class LoginDetails implements Serializable {
 		this.email = email;
 	}
 
+        @Override
 	public final boolean equals(Object other) {
 		if (!(other instanceof LoginDetails))
 			return false;
@@ -21,6 +22,7 @@ public final strictfp class LoginDetails implements Serializable {
 		return other_login.getEmail().equals(email);
 	}
 
+        @Override
 	public final int hashCode() {
 		return email.hashCode();
 	}

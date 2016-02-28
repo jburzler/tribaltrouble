@@ -19,6 +19,7 @@ public final strictfp class FirstPersonCamera extends Camera {
 		this.last_y = LocalInput.getMouseY();
 	}
 
+        @Override
 	public final void doAnimate(float t) {
 		float dir_x = (float)StrictMath.cos(getState().getTargetHorizAngle());
 		float dir_y = (float)StrictMath.sin(getState().getTargetHorizAngle());
@@ -48,6 +49,7 @@ public final strictfp class FirstPersonCamera extends Camera {
 		}
 	}
 
+        @Override
 	public final void mouseMoved(int x, int y) {
 		int dx = x - last_x;
 		int dy = y - last_y;

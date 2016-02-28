@@ -70,6 +70,7 @@ public final strictfp class TreeSupply extends AbstractTreeGroup implements Supp
 		world.getSupplyManager(getClass()).newSupply();
 	}
 	
+        @Override
 	public final World getWorld() {
 		return world;
 	}
@@ -78,6 +79,7 @@ public final strictfp class TreeSupply extends AbstractTreeGroup implements Supp
 		return low_detail_start_vertex_index;
 	}
 
+        @Override
 	public final void visit(ToolTipVisitor visitor) {
 		visitor.visitSupply(this);
 	}
@@ -94,6 +96,7 @@ public final strictfp class TreeSupply extends AbstractTreeGroup implements Supp
 		return animation_time/SECOND_PER_TREEFALL;
 	}
 
+        @Override
 	public final Supply respawn() {
 		occupyTree();
 		hide = false;
@@ -101,6 +104,7 @@ public final strictfp class TreeSupply extends AbstractTreeGroup implements Supp
 		return this;
 	}
 
+        @Override
 	public final void animateSpawn(float t, float progress) {
 		float inv = 1 - progress;
 		scale = 1 - inv*inv*inv*inv*inv*inv;
@@ -110,9 +114,11 @@ public final strictfp class TreeSupply extends AbstractTreeGroup implements Supp
 		world.getNotificationListener().updateTreeLowDetail(low_detail_matrix, this);
 	}
 
+        @Override
 	public final void spawnComplete() {
 	}
 
+        @Override
 	public final String toString() {
 		return "Tree at " + grid_x + " " + grid_y + " isEmpty() " + isEmpty();
 	}
@@ -142,34 +148,42 @@ public final strictfp class TreeSupply extends AbstractTreeGroup implements Supp
 		grid.freeGrid(grid_x, grid_y, this);
 	}
 
+        @Override
 	public final float getSize() {
 		return size;
 	}
 
+        @Override
 	public final float getPositionX() {
 		return x;
 	}
 
+        @Override
 	public final float getPositionY() {
 		return y;
 	}
 
+        @Override
 	public final int getGridX() {
 		return grid_x;
 	}
 
+        @Override
 	public final int getGridY() {
 		return grid_y;
 	}
 
+        @Override
 	public final int getPenalty() {
 		return Occupant.STATIC;
 	}
 
+        @Override
 	public final boolean isEmpty() {
 		return num_supplies == 0;
 	}
 
+        @Override
 	public final boolean hit() {
 		hit_counter++;
 		if (hit_counter == Supply.HITS_PER_HARVEST) {
@@ -180,6 +194,7 @@ public final strictfp class TreeSupply extends AbstractTreeGroup implements Supp
 		return false;
 	}
 	
+        @Override
 	public final boolean isDead() {
 		return isEmpty();
 	}
@@ -199,11 +214,13 @@ public final strictfp class TreeSupply extends AbstractTreeGroup implements Supp
 		return tree_type_index;
 	}
 
+        @Override
 	protected final boolean initBounds() {
 		super.initBounds();
 		return true;
 	}
 
+        @Override
 	public final void animate(float t) {
 		animation_time += t;
 		float time = getTreeFallProgress();
@@ -227,8 +244,10 @@ public final strictfp class TreeSupply extends AbstractTreeGroup implements Supp
 		return hide;
 	}
 
+        @Override
 	public void updateChecksum(StateChecksum checksum) {}
 
+        @Override
 	public final void visit(TreeNodeVisitor visitor) {
 		visitor.visitTree(this);
 	}

@@ -60,10 +60,12 @@ public final strictfp class LoadCampaignBox extends GUIObject implements Determi
 			return file;
 	}
 
+        @Override
 	public final void setFocus() {
 		list_box.setFocus();
 	}
 
+        @Override
 	protected final void renderGeometry() {
 	}
 
@@ -113,14 +115,17 @@ public final strictfp class LoadCampaignBox extends GUIObject implements Determi
 		}
 	}
 
+        @Override
 	public final void loadSucceeded(Object object) {
 		CampaignState[] campaign_states = (CampaignState[])object;
 		fillSlots(campaign_states);
 	}
 
+        @Override
 	public final void saveSucceeded() {
 	}
 
+        @Override
 	public final void failed(Exception e) {
 		if (e instanceof FileNotFoundException) {
 		} else if (e instanceof InvalidClassException) {

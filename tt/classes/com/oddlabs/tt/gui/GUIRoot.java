@@ -98,6 +98,7 @@ public final strictfp class GUIRoot extends GUIObject implements Updatable {
 		tool_tip_timer.setTimerInterval(Settings.getSettings().tooltip_delay*ToolTipBox.MAX_DELAY_SECONDS);
 	}
 
+        @Override
 	public void update(Object anim) {
 		render_tool_tip = true;
 		tool_tip_timer.stop();
@@ -188,6 +189,7 @@ public final strictfp class GUIRoot extends GUIObject implements Updatable {
 			this.delegate = delegate;
 		}
 
+                @Override
 		public final void closed() {
 			popModalDelegate(delegate);
 		}
@@ -206,6 +208,7 @@ public final strictfp class GUIRoot extends GUIObject implements Updatable {
 		displayChanged(Settings.getSettings().view_width, Settings.getSettings().view_height);
 	}
 
+        @Override
 	protected final void displayChangedNotify(int width, int height) {
 		//Reset The Current Viewport And Perspective Transformation
 		setDim(width, height);
@@ -231,6 +234,7 @@ public final strictfp class GUIRoot extends GUIObject implements Updatable {
 		}
 	}
 
+        @Override
 	protected final void keyPressed(KeyboardEvent event) {
 		switch (event.getKeyCode()) {
 			case Keyboard.KEY_S:
@@ -507,6 +511,7 @@ System.out.println("GC Forced");
 		GL11.glEnable(GL11.GL_BLEND);
 	}
 
+        @Override
 	public final void addChild(Renderable child) {
 		super.addChild(child);
 		ModalDelegate modal_delegate = getModalDelegate();
@@ -516,6 +521,7 @@ System.out.println("GC Forced");
 		}
 	}
 
+        @Override
 	protected final void renderGeometry() {
 		getDelegate().render2D();
 

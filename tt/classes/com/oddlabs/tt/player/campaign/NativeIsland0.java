@@ -38,6 +38,7 @@ public final strictfp class NativeIsland0 extends Island {
 		super(campaign);
 	}
 
+        @Override
 	public final void init(NetworkSelector network, GUIRoot gui_root) {
 		String[] ai_names = new String[]{Utils.getBundleString(bundle, "name0"),
 			Utils.getBundleString(bundle, "name1"),
@@ -88,6 +89,7 @@ public final strictfp class NativeIsland0 extends Island {
 		game_network.getClient().getServerInterface().startServer();
 	}
 
+        @Override
 	protected final void start() {
 		final Player local_player = getViewer().getLocalPlayer();
 		final Player reinforcements = getViewer().getWorld().getPlayers()[1];
@@ -104,6 +106,7 @@ public final strictfp class NativeIsland0 extends Island {
 
 		// Introduction
 		final Runnable dialog1 = new Runnable() {
+                @Override
 			public final void run() {
 				CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header1"),
 						Utils.getBundleString(bundle, "dialog1"),
@@ -113,11 +116,13 @@ public final strictfp class NativeIsland0 extends Island {
 			}
 		};
 		final Runnable camera_jump0 = new Runnable() {
+                @Override
 			public final void run() {
 				getViewer().getGUIRoot().pushDelegate(new JumpDelegate(getViewer(), getViewer().getCamera(), chief_start_x + 7, chief_start_y + 7, 200f, 3f, dialog1));
 			}
 		};
 		final Runnable dialog0 = new Runnable() {
+                @Override
 			public final void run() {
 				CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header0"),
 						Utils.getBundleString(bundle, "dialog0"),
@@ -198,6 +203,7 @@ public final strictfp class NativeIsland0 extends Island {
 
 		// Winner prize
 		final Runnable end_game = new Runnable() {
+                @Override
 			public final void run() {
 				getCampaign().getState().setIslandState(0, CampaignState.ISLAND_COMPLETED);
 				getCampaign().getState().setIslandState(1, CampaignState.ISLAND_AVAILABLE);
@@ -207,6 +213,7 @@ public final strictfp class NativeIsland0 extends Island {
 
 		// Winning condition
 		final Runnable dialog7 = new Runnable() {
+                @Override
 			public final void run() {
 				CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header7"),
 						Utils.getBundleString(bundle, "dialog7"),
@@ -217,6 +224,7 @@ public final strictfp class NativeIsland0 extends Island {
 			}
 		};
 		final Runnable dialog6 = new Runnable() {
+                @Override
 			public final void run() {
 				CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header6"),
 						Utils.getBundleString(bundle, "dialog6"),
@@ -227,6 +235,7 @@ public final strictfp class NativeIsland0 extends Island {
 			}
 		};
 		final Runnable dialog5 = new Runnable() {
+                @Override
 			public final void run() {
 				CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header5"),
 						Utils.getBundleString(bundle, "dialog5"),
@@ -262,6 +271,7 @@ public final strictfp class NativeIsland0 extends Island {
 		scenery_models[13] = new SceneryModel(getViewer().getWorld(), 416*2 + offset, 156*2 + offset, 0, -1, getViewer().getWorld().getRacesResources().getTreasures()[5], shadow_diameter, true, Utils.getBundleString(bundle, "statue"));
 
 		final Runnable dialog4 = new Runnable() {
+                @Override
 			public final void run() {
 				CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header4"),
 						Utils.getBundleString(bundle, "dialog4"),
@@ -275,6 +285,7 @@ public final strictfp class NativeIsland0 extends Island {
 			}
 		};
 		final Runnable dialog3 = new Runnable() {
+                @Override
 			public final void run() {
 				changeObjective(1);
 				// Remove statues
@@ -323,6 +334,7 @@ public final strictfp class NativeIsland0 extends Island {
 			}
 		};
 		final Runnable dialog2 = new Runnable() {
+                @Override
 			public final void run() {
 				CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header2"),
 						Utils.getBundleString(bundle, "dialog2"),
@@ -333,6 +345,7 @@ public final strictfp class NativeIsland0 extends Island {
 			}
 		};
 		final Runnable camera_jump1 = new Runnable() {
+                @Override
 			public final void run() {
 				int x = 230*2;
 				int y = 108*2;
@@ -353,14 +366,17 @@ public final strictfp class NativeIsland0 extends Island {
 		new NearArmyTrigger(reinforcement_peons, 10f, local_player, camera_jump1);
 	}
 
+        @Override
 	public final CharSequence getHeader() {
 		return Utils.getBundleString(bundle, "header");
 	}
 
+        @Override
 	public final CharSequence getDescription() {
 		return Utils.getBundleString(bundle, "description");
 	}
 
+        @Override
 	public final CharSequence getCurrentObjective() {
 		return Utils.getBundleString(bundle, "objective" + objective);
 	}

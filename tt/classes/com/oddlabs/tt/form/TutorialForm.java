@@ -116,6 +116,7 @@ public final strictfp class TutorialForm extends Form {
 			this.ingame_info = ingame_info;
 		}
 
+                @Override
 		public final void run(WorldViewer viewer) {
 			new Tutorial(viewer, ingame_info, factory.create(viewer));
 		}
@@ -140,6 +141,7 @@ public final strictfp class TutorialForm extends Form {
 		int seed = 2;
 		String ai_string = Utils.getBundleString(bundle, "ai");
 		WorldInitAction compound_action = new WorldInitAction() {
+                        @Override
 			public final void run(WorldViewer world_viewer) {
 				if (initial_action != null)
 					initial_action.run(world_viewer);
@@ -159,6 +161,7 @@ public final strictfp class TutorialForm extends Form {
 		switch (tutorial_number) {
 			case TUTORIAL_CAMERA:
 				startNewGame(network, gui_root, new TriggerFactory() {
+                                        @Override
 					public final TutorialTrigger create(WorldViewer viewer) {
 						return new ScrollTrigger(viewer.getLocalPlayer());
 					}
@@ -166,6 +169,7 @@ public final strictfp class TutorialForm extends Form {
 				break;
 			case TUTORIAL_QUARTERS:
 				startNewGame(network, gui_root, new TriggerFactory() {
+                                        @Override
 					public final TutorialTrigger create(WorldViewer viewer) {
 						return new PlacingDelegateTrigger(viewer.getLocalPlayer());
 					}
@@ -173,6 +177,7 @@ public final strictfp class TutorialForm extends Form {
 				break;
 			case TUTORIAL_ARMORY:
 				startNewGame(network, gui_root, new TriggerFactory() {
+                                        @Override
 					public final TutorialTrigger create(WorldViewer viewer) {
 						return new SelectArmoryTrigger(viewer.getLocalPlayer());
 					}
@@ -181,6 +186,7 @@ public final strictfp class TutorialForm extends Form {
 			case TUTORIAL_TOWER:
 				ingame_info = new TutorialInGameInfo();
 				WorldInitAction action = new WorldInitAction() {
+                                        @Override
 					public final void run(WorldViewer viewer) {
 						Player player = viewer.getLocalPlayer();
 						new Unit(player, player.getStartX(), player.getStartY(), null, player.getRace().getUnitTemplate(Race.UNIT_WARRIOR_ROCK));
@@ -197,6 +203,7 @@ public final strictfp class TutorialForm extends Form {
 			case TUTORIAL_CHIEFTAIN:
 				ingame_info = new TutorialInGameInfo();
 				game_network = doStartNewGame(network, gui_root, ingame_info, new TutorialAction(new TriggerFactory() {
+                                        @Override
 					public final TutorialTrigger create(WorldViewer viewer) {
 						return new BuildingChieftainTrigger(viewer.getLocalPlayer());
 					}
@@ -209,6 +216,7 @@ public final strictfp class TutorialForm extends Form {
 			case TUTORIAL_BATTLE:
 				ingame_info = new TutorialInGameInfo();
 				game_network = doStartNewGame(network, gui_root, ingame_info, new TutorialAction(new TriggerFactory() {
+                                        @Override
 					public final TutorialTrigger create(WorldViewer viewer) {
 						return new TutorialOverTrigger();
 					}
@@ -230,6 +238,7 @@ public final strictfp class TutorialForm extends Form {
 			this.number = number;
 		}
 
+                @Override
 		public final void mouseClicked(int button, int x, int y, int clicks) {
 			if (checkTutorial(gui_root, number)) {
 				startTutorial(network, gui_root, number);

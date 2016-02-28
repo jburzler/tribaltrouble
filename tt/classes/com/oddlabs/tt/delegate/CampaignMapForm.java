@@ -47,11 +47,13 @@ public final strictfp class CampaignMapForm extends CameraDelegate {
 
 			if (campaign.getState().getCurrentIsland() == 14) {
 				final Runnable runnable_menu = new Runnable() {
+                                        @Override
 					public final void run() {
 						closeCampaign(network, gui_root.getGUI());
 					}
 				};
 				final Runnable runnable_next = new Runnable() {
+                                        @Override
 					public final void run() {
 						CampaignDialogForm dialog = new CampaignDialogForm(Utils.getBundleString(bundle, "native_campaign_opened_header"),
 								Utils.getBundleString(bundle, "native_campaign_opened"),
@@ -77,6 +79,7 @@ public final strictfp class CampaignMapForm extends CameraDelegate {
 
 			if (campaign.getState().getCurrentIsland() == 7) {
 				Runnable runnable = new Runnable() {
+                                        @Override
 					public final void run() {
 						closeCampaign(network, gui_root.getGUI());
 					}
@@ -129,6 +132,7 @@ public final strictfp class CampaignMapForm extends CameraDelegate {
 		}
 	}
 
+        @Override
 	protected final void keyPressed(KeyboardEvent event) {
 		switch (event.getKeyCode()) {
 			case Keyboard.KEY_ESCAPE:
@@ -144,10 +148,12 @@ public final strictfp class CampaignMapForm extends CameraDelegate {
 		Renderer.startMenu(network, gui);
 	}
 
+        @Override
 	public final boolean forceRender() {
 		return true;
 	}
 
+        @Override
 	protected final void renderGeometry() {
 		campaign.getIcons().getMap().render(0, 0);
 //		campaign.extraRender();
@@ -168,6 +174,7 @@ public final strictfp class CampaignMapForm extends CameraDelegate {
 			this.number = number;
 		}
 		
+                @Override
 		public final void mouseClicked(int button, int x, int y, int clicks) {
 			campaign.islandChosen(network, getGUIRoot(), number);
 		}

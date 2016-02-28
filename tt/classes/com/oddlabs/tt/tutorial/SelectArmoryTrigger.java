@@ -20,6 +20,7 @@ public final strictfp class SelectArmoryTrigger extends TutorialTrigger {
 		player.enableChieftains(false);
 	}
 
+        @Override
 	protected final void run(Tutorial tutorial) {
 		Building building = tutorial.getViewer().getSelection().getCurrentSelection().getBuilding();
 		if (building != null && building.getAbilities().hasAbilities(Abilities.BUILD_ARMIES))

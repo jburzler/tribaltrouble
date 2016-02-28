@@ -15,6 +15,7 @@ public strictfp class LabelBox extends TextField implements Comparable {
 		setDim(width, text_renderer.getTextHeight(text));
 	}
 
+        @Override
 	public final void setDim(int width, int height) {
 		super.setDim(width, height);
 		text_renderer.setDim(width, height);
@@ -24,6 +25,7 @@ public strictfp class LabelBox extends TextField implements Comparable {
 		this.color = color;
 	}
 
+        @Override
 	protected void renderGeometry() {
 		// Radeon 9200 problem
 		GL11.glEnd();
@@ -39,6 +41,7 @@ public strictfp class LabelBox extends TextField implements Comparable {
 		GL11.glBegin(GL11.GL_QUADS);
 	}
 
+        @Override
 	public int compareTo(Object o) {
 		return getText().toString().compareToIgnoreCase(((LabelBox)o).getText().toString());
 	}

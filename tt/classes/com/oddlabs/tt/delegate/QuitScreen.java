@@ -61,11 +61,13 @@ public final strictfp class QuitScreen extends CameraDelegate implements Updatab
 		quit_root.pushDelegate(this);
 	}
 
+        @Override
 	public final void displayChangedNotify(int width, int height) {
 		setDim(width, height);
 		overlay.setDim(width, height);
 	}
 
+        @Override
 	public final void update(Object anim) {
 		delay_timer.stop();
 		time_out = true;
@@ -77,17 +79,20 @@ public final strictfp class QuitScreen extends CameraDelegate implements Updatab
 			Renderer.shutdown();
 	}
 
+        @Override
 	protected final void keyPressed(KeyboardEvent event) {
 		key_pressed = true;
 		quit();
 	}
 
+        @Override
 	protected void mouseClicked(int button, int x, int y, int clicks) {
 		key_pressed = true;
 		quit();
 	}
 
 	private final strictfp class ResetListener implements MouseClickListener {
+                @Override
 		public final void mouseClicked(int button, int x, int y, int clicks) {
 			key_pressed = false;
 		}

@@ -20,6 +20,7 @@ public final strictfp class InGameCampaignDialogForm extends CampaignDialogForm 
 		viewer.setPaused(true);
 	}
 
+        @Override
 	protected final void run() {
 		viewer.setPaused(false);
 		super.run();

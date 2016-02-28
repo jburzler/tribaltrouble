@@ -38,6 +38,7 @@ public final strictfp class AudioSource extends NativeResource {
 		this.audio_player = audio_player;
 	}
 
+        @Override
 	protected final void doDelete() {
 		if (source != null && AL.isCreated()) {
 			assert AL10.alGetSourcei(getSource(), AL10.AL_SOURCE_STATE) != AL10.AL_PLAYING;

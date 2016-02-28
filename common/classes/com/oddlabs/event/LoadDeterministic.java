@@ -30,10 +30,12 @@ public final strictfp class LoadDeterministic extends Deterministic {
 		getDefaults();
 	}
 
+        @Override
 	public final boolean isPlayback() {
 		return true;
 	}
 
+        @Override
 	public final void endLog() {
 //		assert isEndOfLog();
 		try {
@@ -99,6 +101,7 @@ public final strictfp class LoadDeterministic extends Deterministic {
 			System.out.println("***** End of log *****");
 	}
 
+        @Override
 	protected final byte log(byte b, byte def) {
 		if (isDefault(1))
 			return def;
@@ -109,6 +112,7 @@ public final strictfp class LoadDeterministic extends Deterministic {
 		}
 	}
 
+        @Override
 	protected final char log(char c, char def) {
 		if (isDefault(2))
 			return def;
@@ -119,6 +123,7 @@ public final strictfp class LoadDeterministic extends Deterministic {
 		}
 	}
 
+        @Override
 	protected final int log(int i, int def) {
 		if (isDefault(4))
 			return def;
@@ -129,6 +134,7 @@ public final strictfp class LoadDeterministic extends Deterministic {
 		}
 	}
 
+        @Override
 	protected final long log(long l, long def) {
 		if (isDefault(8))
 			return def;
@@ -139,6 +145,7 @@ public final strictfp class LoadDeterministic extends Deterministic {
 		}
 	}
 
+        @Override
 	protected final float log(float f, float def) {
 		if (isDefault(4))
 			return def;
@@ -149,6 +156,7 @@ public final strictfp class LoadDeterministic extends Deterministic {
 		}
 	}
 	
+        @Override
 	protected final Object logObject(Object o) {
 		try {
 			ObjectInputStream object_input_stream = new ObjectInputStream(byte_buffer_input_stream);
@@ -162,6 +170,7 @@ public final strictfp class LoadDeterministic extends Deterministic {
 		}
 	}
 
+        @Override
 	protected final void logBuffer(ByteBuffer b) {
 		boolean isdefault = isDefault(0);
 		assert !isdefault;
@@ -178,6 +187,7 @@ public final strictfp class LoadDeterministic extends Deterministic {
 	}
 
 	public final strictfp class ByteBufferInputStream extends InputStream {
+                @Override
 		public final int read() throws IOException {
 			byte b = log((byte)0);
 			return ((int)b) & 0xFF;

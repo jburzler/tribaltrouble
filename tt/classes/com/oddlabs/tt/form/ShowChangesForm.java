@@ -38,15 +38,18 @@ public final strictfp class ShowChangesForm extends Form {
 		centerPos();
 	}
 
+        @Override
 	public final void setFocus() {
 		ok_button.setFocus();
 	}
 
+        @Override
 	public final void doCancel() {
 		gui_root.addModalForm(new QuestionForm(Utils.getBundleString(bundle, "restart"), new QuitListener()));
 	}
 
 	private final class QuitListener implements MouseClickListener {
+                @Override
 		public final void mouseClicked(int button, int x, int y, int clicks) {
 			Renderer.shutdown();
 		}

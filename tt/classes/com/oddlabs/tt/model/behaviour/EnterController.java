@@ -15,6 +15,7 @@ public final strictfp class EnterController extends Controller {
 		this.building = building;
 	}
 
+        @Override
 	public final void decide() {
 		if (building.isDead()) {
 			unit.popController();

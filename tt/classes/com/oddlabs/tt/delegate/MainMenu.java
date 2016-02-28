@@ -33,6 +33,7 @@ public final strictfp class MainMenu extends Menu {
 		}
 	}
 
+        @Override
 	protected void addButtons() {
 		addGameTypeButtons();
 
@@ -46,6 +47,7 @@ public final strictfp class MainMenu extends Menu {
 	}
 
 	private final strictfp class MultiPlayerListener implements MouseClickListener {
+                @Override
 		public final void mouseClicked(int button, int x, int y, int clicks) {
 			if (Network.getMatchmakingClient().isConnected()) {
 				new SelectGameMenu(getNetwork(), getGUIRoot(), MainMenu.this);
@@ -57,18 +59,21 @@ public final strictfp class MainMenu extends Menu {
 	}
 
 	private final strictfp class TutorialListener implements MouseClickListener {
+                @Override
 		public final void mouseClicked(int button, int x, int y, int clicks) {
 			setMenu(new TutorialForm(getNetwork(), getGUIRoot()));
 		}
 	}
 
 	private final strictfp class CampaignListener implements MouseClickListener {
+                @Override
 		public final void mouseClicked(int button, int x, int y, int clicks) {
 			setMenu(new CampaignForm(getNetwork(), getGUIRoot(), MainMenu.this));
 		}
 	}
 
 	private final strictfp class SinglePlayerListener implements MouseClickListener {
+                @Override
 		public final void mouseClicked(int button, int x, int y, int clicks) {
 			setMenu(new TerrainMenuForm(getNetwork(), getGUIRoot(), MainMenu.this));
 		}

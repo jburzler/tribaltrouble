@@ -13,10 +13,12 @@ public strictfp abstract class Delegate extends GUIObject {
 		setDim(LocalInput.getViewWidth(), LocalInput.getViewHeight());
 	}
 
+        @Override
 	public void displayChangedNotify(int width, int height) {
 		setDim(width, height);
 	}
 
+        @Override
 	protected void doAdd() {
 		super.doAdd();
 		setFocus();
@@ -28,6 +30,7 @@ public strictfp abstract class Delegate extends GUIObject {
 	public void render2D() {
 	}
 
+        @Override
 	protected void renderGeometry() {
 	}
 

@@ -11,6 +11,7 @@ public final strictfp class MountUnitContainer extends UnitContainer {
 		this.building = building;
 	}
 
+        @Override
 	public final void enter(Unit unit) {
 		this.unit = unit;
 		unit.mount(building);
@@ -19,6 +20,7 @@ public final strictfp class MountUnitContainer extends UnitContainer {
 		building.getAbilities().addAbilities(Abilities.TARGET);
 	}
 
+        @Override
 	public final Unit exit() {
 		assert unit != null;
 		unit.unmount();
@@ -30,10 +32,12 @@ public final strictfp class MountUnitContainer extends UnitContainer {
 		return result;
 	}
 
+        @Override
 	public final boolean canEnter(Unit unit) {
 		return !isSupplyFull() && unit.getAbilities().hasAbilities(Abilities.THROW);
 	}
 
+        @Override
 	public final void animate(float t) {
 	}
 

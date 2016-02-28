@@ -6,6 +6,7 @@ public final strictfp class NullCamera extends Camera {
 		super(null, new CameraState());
 	}
 
+        @Override
 	public final void doAnimate(float t) {
 	}
 }

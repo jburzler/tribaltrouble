@@ -12,6 +12,7 @@ strictfp class SelectableVisitor extends ModelVisitor {
 	private final static float[] COLOR_BLUE = {0f, 0f, 1f};
 	private final static float[] COLOR_BLUE_HOVER = {0f, 0f, .7f};
 
+        @Override
 	public final void transform(ElementRenderState render_state) {
 		Model model = render_state.model;
 		RenderTools.translateAndRotate(model.getPositionX(), model.getPositionY(), render_state.f, model.getDirectionX(), model.getDirectionY());
@@ -21,10 +22,12 @@ strictfp class SelectableVisitor extends ModelVisitor {
 		return model.getOwner().getColor();
 	}
 
+        @Override
 	public final float[] getTeamColor(ElementRenderState render_state) {
 		return getTeamColor((Selectable)render_state.getModel());
 	}
 
+        @Override
 	public final float[] getSelectionColor(ElementRenderState render_state) {
 		Player local_player = render_state.render_state.getLocalPlayer();
 		Selectable model = (Selectable)render_state.getModel();
@@ -46,6 +49,7 @@ strictfp class SelectableVisitor extends ModelVisitor {
 			return model.getOwner().getColor();
 	}
 
+        @Override
 	public final void markDetailPoint(ElementRenderState render_state) {
 		Selectable selectable = (Selectable)render_state.model;
 		if (!selectable.isDead())

@@ -10,6 +10,7 @@ public final strictfp class DisplayModeComparator implements Comparator {
 		this.target_mode = target_mode;
 	}
 
+        @Override
 	public final int compare(Object o1, Object o2) {
 		DisplayMode d1 = (DisplayMode)o1;
 		DisplayMode d2 = (DisplayMode)o2;
@@ -45,6 +46,7 @@ public final strictfp class DisplayModeComparator implements Comparator {
 		return dx + dy;
 	}
 
+        @Override
 	public final boolean equals(Object obj) {
 		return this == obj;
 	}

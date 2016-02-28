@@ -16,6 +16,7 @@ public final strictfp class SupplyTrigger extends TutorialTrigger {
 		player.enableHarvesting(true);
 	}
 
+        @Override
 	protected final void run(Tutorial tutorial) {
 		Set set = tutorial.getViewer().getSelection().getCurrentSelection().getSet(); 
 		Iterator it = set.iterator();

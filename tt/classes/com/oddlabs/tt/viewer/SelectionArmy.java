@@ -58,16 +58,19 @@ public final strictfp class SelectionArmy extends Army {
 		}
 	}
 
+        @Override
 	public final void clear() {
 		super.clear();
 		update();
 	}
 
+        @Override
 	public final void remove(Selectable selectable) {
 		super.remove(selectable);
 		update();
 	}
 
+        @Override
 	public final void add(Selectable selectable) {
 		super.add(selectable);
 		update();

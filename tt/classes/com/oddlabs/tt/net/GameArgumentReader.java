@@ -12,6 +12,7 @@ final strictfp class GameArgumentReader extends DefaultARMIArgumentReader {
 		this.distributable_table = table;
 	}
 
+        @Override
 	public final Object readArgument(Class type, ByteBufferInputStream in) throws IOException, ClassNotFoundException {
 		if (Distributable.class.isAssignableFrom(type)) {
 			int name = in.buffer().getInt();

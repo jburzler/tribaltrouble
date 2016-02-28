@@ -195,6 +195,7 @@ public abstract strictfp class GUIObject extends Renderable {
 		return this == getGlobalFocus();
 	}
 
+        @Override
 	public final boolean isFocusable() {
 		return can_focus;
 	}
@@ -234,6 +235,7 @@ public abstract strictfp class GUIObject extends Renderable {
 		focused_child = gui_object;
 	}
 
+        @Override
 	public void addChild(Renderable child) {
 		super.addChild(child);
 		GUIObject current;
@@ -250,6 +252,7 @@ public abstract strictfp class GUIObject extends Renderable {
 		return tab_order;
 	}
 
+        @Override
 	public final void removeChild(Renderable child) {
 		GUIObject current;
 		if (child == focused_child) {

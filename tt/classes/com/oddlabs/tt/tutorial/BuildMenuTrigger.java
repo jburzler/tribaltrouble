@@ -8,6 +8,7 @@ public final strictfp class BuildMenuTrigger extends TutorialTrigger {
 		local_player.enableWeapons(true);
 	}
 
+        @Override
 	protected final void run(Tutorial tutorial) {
 		if (tutorial.getViewer().getPanel().inBuildMenu())
 			tutorial.next(new WeaponTrigger(tutorial.getViewer().getLocalPlayer()));

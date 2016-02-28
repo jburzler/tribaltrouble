@@ -12,6 +12,7 @@ public final strictfp class IdleBehaviour implements Behaviour {
 		this.unit = unit;
 	}
 
+        @Override
 	public final int animate(float t) {
 		unit.switchToIdleAnimation();
 		if (!controller.shouldSleep(t))
@@ -20,10 +21,12 @@ public final strictfp class IdleBehaviour implements Behaviour {
 			return Selectable.INTERRUPTIBLE;
 	}
 
+        @Override
 	public final boolean isBlocking() {
 		return true;
 	}
 
+        @Override
 	public final void forceInterrupted() {
 	}
 }

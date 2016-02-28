@@ -25,14 +25,17 @@ public final strictfp class HttpRequest {
 
 	private static Task spawnPostRequest(TaskThread task_thread, final URL url, final HttpRequestParameters parameters, final HttpResponseParser parser, final HttpCallback callback) {
 		return task_thread.addTask(new Callable() {
+                        @Override
 			public Object call() throws IOException {
 				return runPostRequest(url, parameters, parser);
 			}
 
+                        @Override
 			public void taskCompleted(Object result) {
 				((HttpResponse)result).notify(callback);
 			}
 
+                        @Override
 			public void taskFailed(Exception e) {
 				callback.error((IOException)e);
 			}
@@ -41,14 +44,17 @@ public final strictfp class HttpRequest {
 
 	private static Task spawnGetRequest(TaskThread task_thread, final URL url, final HttpResponseParser parser, final HttpCallback callback) {
 		return task_thread.addTask(new Callable() {
+                        @Override
 			public Object call() throws IOException {
 				return runGetRequest(url, parser);
 			}
 
+                        @Override
 			public void taskCompleted(Object result) {
 				((HttpResponse)result).notify(callback);
 			}
 
+                        @Override
 			public void taskFailed(Exception e) {
 				callback.error((IOException)e);
 			}

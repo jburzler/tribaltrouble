@@ -11,10 +11,12 @@ public final strictfp class GameStartedTrigger extends IntervalTrigger {
 		this.runnable = runnable;
 	}
 
+        @Override
 	protected final void check() {
 		triggered();
 	}
 
+        @Override
 	protected final void done() {
 		runnable.run();
 	}

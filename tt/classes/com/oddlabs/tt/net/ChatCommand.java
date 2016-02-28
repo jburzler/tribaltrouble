@@ -14,6 +14,7 @@ public final strictfp class ChatCommand {
 	static {
 		try {
 			ChatMethod send_message = new ChatMethod() {
+                                @Override
 				public final void execute(InfoPrinter info_printer, String text) {
 					sendMessage(info_printer, text);
 				}
@@ -23,6 +24,7 @@ public final strictfp class ChatCommand {
 			commands.put("tell", send_message);
 			commands.put("whisper", send_message);
 			ChatMethod get_info = new ChatMethod() {
+                                @Override
 				public final void execute(InfoPrinter info_printer, String text) {
 					getInfo(info_printer, text);
 				}
@@ -30,18 +32,21 @@ public final strictfp class ChatCommand {
 			commands.put("info", get_info);
 			commands.put("finger", get_info);
 			ChatMethod ignore_nick = new ChatMethod() {
+                                @Override
 				public final void execute(InfoPrinter info_printer, String text) {
 					ignore(info_printer, text);
 				}
 			};
 			commands.put("ignore", ignore_nick);
 			ChatMethod unignore_nick = new ChatMethod() {
+                                @Override
 				public final void execute(InfoPrinter info_printer, String text) {
 					unignore(info_printer, text);
 				}
 			};
 			commands.put("unignore", unignore_nick);
 			ChatMethod ignore_list = new ChatMethod() {
+                                @Override
 				public final void execute(InfoPrinter info_printer, String text) {
 					ignoreList(info_printer, text);
 				}

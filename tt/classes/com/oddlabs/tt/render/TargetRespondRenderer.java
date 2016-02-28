@@ -23,6 +23,7 @@ public final strictfp class TargetRespondRenderer extends ShadowListRenderer {
 			target_list.add(target);
 	}
 
+        @Override
 	public final void renderShadows(LandscapeRenderer renderer) {
 		setupShadows();
 		GL11.glColor3f(0f, 1f, 0f);

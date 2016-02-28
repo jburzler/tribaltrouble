@@ -13,14 +13,17 @@ public strictfp class SessionInfo implements Serializable {
 		this.milliseconds_per_heartbeat = milliseconds_per_heartbeat;
 	}
 
+        @Override
 	public final boolean equals(Object other) {
 		return ((SessionInfo)other).num_participants == num_participants;
 	}
 
+        @Override
 	public final int hashCode() {
 		return num_participants;
 	}
 
+        @Override
 	public final String toString() {
 		return "(SessionInfo: num_participants = " + num_participants + ")";
 	}

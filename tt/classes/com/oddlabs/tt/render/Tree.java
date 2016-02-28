@@ -17,6 +17,7 @@ final strictfp class Tree {
 		return crown;
 	}
 
+        @Override
 	public final boolean equals(Object other) {
 		if (!(other instanceof Tree))
 			return false;

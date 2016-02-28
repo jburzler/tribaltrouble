@@ -38,11 +38,13 @@ public strictfp class StatusIcon extends GUIObject implements ToolTip {
 		}
 	}
 
+        @Override
 	public final void appendToolTip(ToolTipBox tool_tip_box) {
 		String tooltip_str = Utils.getBundleString(ResourceBundle.getBundle(StatusIcon.class.getName()), "max", new Object[]{tooltip, new Integer(counter.getMaxSupplies())});
 		tool_tip_box.append(tooltip_str);
 	}
 
+        @Override
 	protected void renderGeometry() {
 		int x = getWidth() - icon_quad.getWidth();
 		int y = (getHeight() - icon_quad.getHeight())/2;

@@ -20,6 +20,7 @@ public abstract strictfp class RadioButtonGroupElement extends GUIObject {
 		this.marked = marked;
 	}
 
+        @Override
 	protected void mouseClicked(int button, int x, int y, int clicks) {
 		group.mark(this);
 	}

@@ -45,6 +45,7 @@ public strictfp class SceneryModel extends Model implements Occupant, ModelToolT
 		return name;
 	}
 
+        @Override
 	public final float getShadowDiameter() {
 		return shadow_diameter;
 	}
@@ -57,6 +58,7 @@ public strictfp class SceneryModel extends Model implements Occupant, ModelToolT
 			getWorld().getAnimationManagerGameTime().registerAnimation(this);
 	}
 
+        @Override
 	public final void remove() {
 		if (occupy) {
 			getWorld().getUnitGrid().freeGrid(getGridX(), getGridY(), this);
@@ -67,14 +69,17 @@ public strictfp class SceneryModel extends Model implements Occupant, ModelToolT
 			getWorld().getAnimationManagerGameTime().removeAnimation(this);
 	}
 
+        @Override
 	public final void visit(ToolTipVisitor visitor) {
 		visitor.visitSceneryModel(this);
 	}
 
+        @Override
 	public final float getOffsetZ() {
 		return 0;
 	}
 
+        @Override
 	public final void animate(float t) {
 		anim_time += t/2.5f;
 		if (seconds_per_animation_cycle > -1 && anim_time > seconds_per_animation_cycle)
@@ -82,6 +87,7 @@ public strictfp class SceneryModel extends Model implements Occupant, ModelToolT
 		reinsert();
 	}
 		
+        @Override
 	public final int getAnimation() {
 		if (animation > -1)
 			return animation;
@@ -89,6 +95,7 @@ public strictfp class SceneryModel extends Model implements Occupant, ModelToolT
 			return 0;
 	}
 	
+        @Override
 	public final float getAnimationTicks() {
 		if (animation > -1) {
 			return anim_time;
@@ -97,29 +104,36 @@ public strictfp class SceneryModel extends Model implements Occupant, ModelToolT
 		}
 	}
 
+        @Override
 	public final void updateChecksum(StateChecksum checksum) {
 	}
 
+        @Override
 	public final float getNoDetailSize() {
 		return 0f;
 	}
 
+        @Override
 	public int getPenalty() {
 		return Occupant.STATIC;
 	}
 
+        @Override
 	public final int getGridX() {
 		return UnitGrid.toGridCoordinate(getPositionX());
 	}
 
+        @Override
 	public final int getGridY() {
 		return UnitGrid.toGridCoordinate(getPositionY());
 	}
 
+        @Override
 	public final float getSize() {
 		throw new RuntimeException();
 	}
 
+        @Override
 	public final boolean isDead() {
 		return false;
 	}
@@ -128,10 +142,12 @@ public strictfp class SceneryModel extends Model implements Occupant, ModelToolT
 		return occupy;
 	}
 
+        @Override
 	public final SpriteKey getSpriteRenderer() {
 		return sprite_renderer;
 	}
 
+        @Override
 	public void visit(ElementVisitor visitor) {
 		visitor.visitSceneryModel(this);
 	}

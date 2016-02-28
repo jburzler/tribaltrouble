@@ -28,11 +28,13 @@ public final strictfp class InGameMainMenu extends Menu {
 		reload();
 	}
 
+        @Override
 	protected final void doAdd() {
 		super.doAdd();
 		viewer.setPaused(true);
 	}
 
+        @Override
 	protected final void doRemove() {
 		super.doRemove();
 		viewer.setPaused(false);
@@ -44,10 +46,12 @@ public final strictfp class InGameMainMenu extends Menu {
 		abort.addMouseClickListener(new AbortListener());
 	}
 
+        @Override
 	protected final void addButtons() {
 		addResumeButton();
 
 		addOptionsButton(new FormFactory() {
+                @Override
 			public final Form create() {
 				return new InGameOptionsMenu(getGUIRoot(), viewer);
 			}
@@ -60,12 +64,14 @@ public final strictfp class InGameMainMenu extends Menu {
 		addExitButton();
 	}
 
+        @Override
 	public final void displayChangedNotify(int width, int height) {
 		super.displayChangedNotify(width, height);
 		if (game_infos != null)
 			game_infos.setPos((width - game_infos.getWidth())/2, (height - game_infos.getHeight())/2);
 	}
 
+        @Override
 	protected final void keyPressed(KeyboardEvent event) {
 		switch(event.getKeyCode()) {
 			case Keyboard.KEY_ESCAPE:
@@ -77,18 +83,21 @@ public final strictfp class InGameMainMenu extends Menu {
 		}
 	}
 
+        @Override
 	protected final void renderGeometry() {
 		super.renderGeometry();
 		renderBackgroundAlpha();
 	}
 
 	private final strictfp class AbortListener implements MouseClickListener {
+                @Override
 		public final void mouseClicked(int button, int x, int y, int clicks) {
 			setMenuCentered(new QuestionForm(Utils.getBundleString(bundle, "end_game_confirm"), new ActionAbortListener()));
 		}
 	}
 
 	private final strictfp class ActionAbortListener implements MouseClickListener {
+                @Override
 		public final void mouseClicked(int button, int x, int y, int clicks) {
 			viewer.abort();
 		}

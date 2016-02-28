@@ -24,12 +24,14 @@ public final strictfp class ReproduceUnitContainer extends UnitContainer {
 		unit_reproduction = 0f;
 	}
 
+        @Override
 	public final void enter(Unit unit) {
 		assert canEnter(unit);
 		unit.removeNow();
 		increaseSupply(1);
 	}
 
+        @Override
 	public final boolean canEnter(Unit unit) {
 		return !unit.getAbilities().hasAbilities(Abilities.THROW) && getTotalSupplies() != getMaxSupplyCount();
 	}
@@ -39,18 +41,21 @@ public final strictfp class ReproduceUnitContainer extends UnitContainer {
 		return getNumSupplies() + getNumPreparing();
 	}
 
+        @Override
 	public final Unit exit() {
 		assert getNumSupplies() > 0;
 		increaseSupply(-1);
 		return null;
 	}
 
+        @Override
 	public int increaseSupply(int amount) {
 		int result = building.getOwner().getUnitCountContainer().increaseSupply(amount);
 		assert result == amount: "result = " + result + " | amount = " + amount;
 		return super.increaseSupply(amount);
 	}
 
+        @Override
 	public final void animate(float t) {
 		ChieftainContainer chieftain_container = building.getChieftainContainer();
 		

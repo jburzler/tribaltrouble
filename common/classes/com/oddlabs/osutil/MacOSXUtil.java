@@ -30,6 +30,7 @@ public final strictfp class MacOSXUtil extends OSUtil {
 			DocumentBuilder document_builder = factory.newDocumentBuilder();
 			// Hack to avoid lookup of the DTD
 			document_builder.setEntityResolver(new EntityResolver() {
+                                @Override
 				public InputSource resolveEntity(String publicId, String systemId) throws SAXException, IOException {
 					if (publicId.equals("-//Apple Computer//DTD PLIST 1.0//EN"))
 						return new InputSource(new ByteArrayInputStream("<?xml version='1.0' encoding='UTF-8'?>".getBytes()));
@@ -64,6 +65,7 @@ public final strictfp class MacOSXUtil extends OSUtil {
 		}
 	}
 
+        @Override
 	public final void registerURLScheme(String gamename, URLAssociation association) {
 		Map script_parameters = new HashMap();
 		script_parameters.put("description", association.description);
@@ -72,6 +74,7 @@ public final strictfp class MacOSXUtil extends OSUtil {
 		convertPlist(gamename, "scripts/urlschemeplist.xml", script_parameters);
 	}
 
+        @Override
 	public final void registerAssociation(String gamename, Association association) {
 		Map script_parameters = new HashMap();
 		script_parameters.put("mimetype", association.mime_type);

@@ -65,6 +65,7 @@ public final strictfp class Stun implements Magic {
 				1f));
 	}
 
+        @Override
 	public final void animate(float t) {
 		for (int i = 0; i < target_list.size(); i++) {
 			Unit unit = null;
@@ -103,9 +104,11 @@ public final strictfp class Stun implements Magic {
 		return result;
 	}
 
+        @Override
 	public void updateChecksum(StateChecksum checksum) {
 	}
 
+        @Override
 	public final void interrupt() {
 		if (emitter != null) {
 			emitter.done();

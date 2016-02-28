@@ -27,6 +27,7 @@ public final strictfp class DeploySpinner extends IconSpinner {
 			num_orders = current_building.getDeployContainer(deploy_type).getNumOrders();
 	}
 
+        @Override
 	public final int computeCount() {
 		if (current_building != null && !current_building.isDead()) {
 			DeployContainer deploy_container = current_building.getDeployContainer(deploy_type);
@@ -36,6 +37,7 @@ public final strictfp class DeploySpinner extends IconSpinner {
 			return 0;
 	}
 
+        @Override
 	public final boolean renderInfinite() {
 		return false;
 	}
@@ -53,6 +55,7 @@ public final strictfp class DeploySpinner extends IconSpinner {
 			player_interface.deployUnits(current_building, deploy_type, num);
 	}
 
+        @Override
 	protected final void increase(int amount) {
 		if (!current_building.isDead()) {
 			int num_units = current_building.getUnitContainer().getNumSupplies();
@@ -74,6 +77,7 @@ public final strictfp class DeploySpinner extends IconSpinner {
 		}
 	}
 
+        @Override
 	protected final void decrease(int amount) {
 		if (!current_building.isDead() && computeCount() > 0) {
 			int num_units = current_building.getDeployContainer(deploy_type).getNumSupplies();
@@ -93,15 +97,18 @@ public final strictfp class DeploySpinner extends IconSpinner {
 		}
 	}
 
+        @Override
 	protected final void release() {
 		order(order_size);
 		order_size = 0;
 	}
 
+        @Override
 	protected final int getOrderSize() {
 		return order_size;
 	}
 
+        @Override
 	protected final float getProgress() {
 		if (!current_building.isDead())
 			return current_building.getDeployContainer(deploy_type).getBuildProgress();

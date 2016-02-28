@@ -20,6 +20,7 @@ public final strictfp class GeneratorHalos extends TextureGenerator {
 		this.ring_parms = ring_parms;
 	}
 
+        @Override
 	public final Texture[] generate() {
 		Channel channel_shadow = new Ring(size, size, shadow_parms, Ring.SMOOTH).toChannel();
 		Channel channel_ring = new Ring(size, size, ring_parms, Ring.LINEAR).toChannel();
@@ -37,10 +38,12 @@ public final strictfp class GeneratorHalos extends TextureGenerator {
 		return textures;
 	}
 	
+        @Override
 	public final int hashCode() {
 		return size*shadow_parms.hashCode()*ring_parms.hashCode();
 	}
 
+        @Override
 	public final boolean equals(Object o) {
 		if (!super.equals(o))
 			return false;

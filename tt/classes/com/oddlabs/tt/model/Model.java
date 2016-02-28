@@ -42,6 +42,7 @@ public abstract strictfp class Model extends Element implements ListElement {
 		return world;
 	}
 
+        @Override
 	public final void setPosition(float x, float y) {
 		super.setPosition(x, y);
 		reinsert();

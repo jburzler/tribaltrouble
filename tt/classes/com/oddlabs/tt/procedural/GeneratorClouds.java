@@ -19,6 +19,7 @@ public final strictfp class GeneratorClouds extends TextureGenerator {
 		this.terrain_type = terrain_type;
 	}
 
+        @Override
 	public final Texture[] generate() {
 		int seed = Globals.LANDSCAPE_SEED;
 		Channel clouds1 = new Midpoint(TEXTURE_SIZE, 3, 0.55f, seed).toChannel();
@@ -48,10 +49,12 @@ public final strictfp class GeneratorClouds extends TextureGenerator {
 		return textures;
 	}
 	
+        @Override
 	public final int hashCode() {
 		return TEXTURE_SIZE;
 	}
 
+        @Override
 	public boolean equals(Object o) {
 		return super.equals(o) && ((GeneratorClouds)o).terrain_type == terrain_type;
 	}

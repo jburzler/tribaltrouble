@@ -66,6 +66,7 @@ public abstract strictfp class ThrowingWeapon extends Accessories implements Ani
 		src.getOwner().weaponThrown();
 	}
 
+        @Override
 	public String toString() {
 		return "ThrowingWeapon: start_x = " + start_x + " | start_y = " + start_y + " | end_x = " + end_x + " | end_y = " + end_y + " | target = " + target + "  "  + super.toString();
 	}
@@ -108,22 +109,27 @@ public abstract strictfp class ThrowingWeapon extends Accessories implements Ani
 		setDirection(dir_x, dir_y);
 	}
 
+        @Override
 	public final void updateChecksum(StateChecksum checksum) {
 		checksum.update(time);
 	}
 
+        @Override
 	public final float getOffsetZ() {
 		return deterministic_z;
 	}
 
+        @Override
 	public final float getAnimationTicks() {
 		return 0;
 	}
 
+        @Override
 	public final int getAnimation() {
 		return 0;
 	}
 
+        @Override
 	public void animate(float t) {
 		if (time >= time_limit) {
 			hitTarget(hit, owner, target);
@@ -178,6 +184,7 @@ public abstract strictfp class ThrowingWeapon extends Accessories implements Ani
 		return z_speed;
 	}
 
+        @Override
 	public final float getNoDetailSize() {
 		return NO_DETAIL_SIZE;
 	}

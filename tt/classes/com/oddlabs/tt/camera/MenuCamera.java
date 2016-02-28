@@ -37,6 +37,7 @@ public final strictfp class MenuCamera extends Camera {
 		getState().setCurrentZ(LANDSCAPE_OFFSET);
 	}
 	
+        @Override
 	public final void doAnimate(float t) {
 		updatePos(t);
 		world.tick(t);

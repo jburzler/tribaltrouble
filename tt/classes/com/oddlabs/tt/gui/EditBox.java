@@ -11,6 +11,7 @@ public final strictfp class EditBox extends TextBox {
 		index = 0;
 	}
 
+        @Override
 	protected final void renderGeometry() {
 		Box edit_box = Skin.getSkin().getEditBox();
 		TextBoxRenderer text_renderer = getTextRenderer();
@@ -24,6 +25,7 @@ public final strictfp class EditBox extends TextBox {
 			text_renderer.render(edit_box.getLeftOffset(), edit_box.getBottomOffset(), getOffsetY(), getText());
 	}
 
+        @Override
 	protected final void keyRepeat(KeyboardEvent event) {
 		//char ch = event.getKeyChar();
 		Box edit_box = Skin.getSkin().getEditBox();
@@ -117,10 +119,12 @@ public final strictfp class EditBox extends TextBox {
 		setOffsetY(offset_y);
 	}
 
+        @Override
 	protected final int getCursorIndex() {
 		return GUIRoot.CURSOR_TEXT;
 	}
 
+        @Override
 	protected final void mouseClicked(int button, int x, int y, int clicks) {
 		if (button == LocalInput.LEFT_BUTTON) {
 			Box edit_box = Skin.getSkin().getEditBox();

@@ -84,6 +84,7 @@ public final strictfp class DefaultRenderer implements UIRenderer {
 		this.sky = new Sky(landscape_renderer, generator.getTerrainType());
 	}
 
+        @Override
 	public final void renderGUI(GUIRoot gui_root) {
 		if (cheat.isEnabled())
 			Icons.getIcons().getCheatIcon().render(gui_root.getWidth() - Icons.getIcons().getCheatIcon().getWidth() - 10, 5);
@@ -128,6 +129,7 @@ public final strictfp class DefaultRenderer implements UIRenderer {
 		rally_point_renderer.getSpriteList().reset(0, false, false);
 	}
 
+        @Override
 	public final void pickHover(boolean can_hover_behind, CameraState camera, int x, int y) {
 		if (can_hover_behind) {
 			picker.pickHover(camera, LocalInput.getMouseX(), LocalInput.getMouseY());
@@ -136,6 +138,7 @@ public final strictfp class DefaultRenderer implements UIRenderer {
 		}
 	}
 
+        @Override
 	public final ToolTip getToolTip() {
 		return picker.getCurrentToolTip();
 	}
@@ -144,10 +147,12 @@ public final strictfp class DefaultRenderer implements UIRenderer {
 		return tree_renderer;
 	}
 
+        @Override
 	public final boolean clearColorBuffer() {
 		return Globals.clear_frame_buffer || cheat.line_mode;
 	}
 
+        @Override
 	public void render(AmbientAudio ambient, CameraState frustum_state, GUIRoot gui_root) {
 		ambient.updateSoundListener(frustum_state, world.getHeightMap());
 		if (Globals.line_mode || cheat.line_mode) {

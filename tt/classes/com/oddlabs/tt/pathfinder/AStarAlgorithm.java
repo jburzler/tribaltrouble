@@ -23,6 +23,7 @@ abstract strictfp class AStarAlgorithm implements PathFinderAlgorithm {
 		return unit_grid;
 	}
 
+        @Override
 	public final int computeEstimatedCost(Node node) {
 		return node.estimateCost(dst_x, dst_y);
 	}
@@ -42,6 +43,7 @@ abstract strictfp class AStarAlgorithm implements PathFinderAlgorithm {
 			return null;
 	}
 
+        @Override
 	public final NodeResult touchNode(Node node) {
 		int dx = node.getGridX() - dst_x;
 		int dy = node.getGridY() - dst_y;
@@ -58,6 +60,7 @@ abstract strictfp class AStarAlgorithm implements PathFinderAlgorithm {
 		return defaultTouchNode();
 	}
 
+        @Override
 	public final NodeResult getBestNode() {
 		return null;
 	}

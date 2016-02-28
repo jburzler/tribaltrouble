@@ -13,6 +13,7 @@ public final strictfp class RegionNode implements PathNode {
 		return region;
 	}
 
+        @Override
 	public final PathNode getParent() {
 		return parent;
 	}

@@ -18,6 +18,7 @@ public final strictfp class InstantHitFactory extends WeaponFactory {
 		this.sounds = sounds;
 	}
 
+        @Override
 	protected final void doAttack(boolean hit, Unit src, Selectable target) {
 		int damage = 1;
 		if (target instanceof Building && target.getTemplate().getAbilities().hasAbilities(Abilities.ATTACK))
@@ -39,6 +40,7 @@ public final strictfp class InstantHitFactory extends WeaponFactory {
 		target.hit(damage, dx*dir_len_inv, dy*dir_len_inv, src.getOwner());
 	}
 
+        @Override
 	public final Class getType() {
 		return null;
 	}

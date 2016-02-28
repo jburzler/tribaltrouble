@@ -31,6 +31,7 @@ final strictfp class PbufferRenderer extends OffscreenRenderer {
 		}
 	}
 
+        @Override
 	public final boolean isLost() {
 		boolean is_lost = pbuffer.isBufferLost();
 		if (is_lost)
@@ -38,6 +39,7 @@ final strictfp class PbufferRenderer extends OffscreenRenderer {
 		return is_lost;
 	}
 
+        @Override
 	protected final void finish() {
 		pbuffer.destroy();
 		Renderer.makeCurrent();

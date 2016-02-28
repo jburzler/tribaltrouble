@@ -15,6 +15,7 @@ public final strictfp class ArrowButton extends ButtonObject {
 		this.arrow = arrow;
 	}
 
+        @Override
 	public final void keyPressed(KeyboardEvent event) {
 		switch (event.getKeyCode()) {
 			case Keyboard.KEY_SPACE:
@@ -24,6 +25,7 @@ public final strictfp class ArrowButton extends ButtonObject {
 		}
 	}
 
+        @Override
 	public final void keyRepeat(KeyboardEvent event) {
 		switch (event.getKeyCode()) {
 			case Keyboard.KEY_TAB:
@@ -32,6 +34,7 @@ public final strictfp class ArrowButton extends ButtonObject {
 		}
 	}
 
+        @Override
 	public final void keyReleased(KeyboardEvent event) {
 		switch (event.getKeyCode()) {
 			case Keyboard.KEY_SPACE:
@@ -41,6 +44,7 @@ public final strictfp class ArrowButton extends ButtonObject {
 		}
 	}
 
+        @Override
 	protected final void renderGeometry() {
 		if (isDisabled()) {
 			unpressed[Skin.DISABLED].render(0, 0);
@@ -57,6 +61,7 @@ public final strictfp class ArrowButton extends ButtonObject {
 		}
 	}
 
+        @Override
 	protected final void mouseClicked(int button, int x, int y, int clicks) {
 		// Steal click from scrollbar
 	}

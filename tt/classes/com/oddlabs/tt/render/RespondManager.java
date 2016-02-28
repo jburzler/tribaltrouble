@@ -22,6 +22,7 @@ public final strictfp class RespondManager implements Animated {
 		manager.registerAnimation(this);
 	}
 
+        @Override
 	public final void animate(float t) {
 		time += t;
 		timeout();
@@ -73,6 +74,7 @@ public final strictfp class RespondManager implements Animated {
 		return time_diff > 0 && (time_diff >= SECONDS_PER_PICK_RESPOND - blink || time_diff <= blink);
 	}
 
+        @Override
 	public final void updateChecksum(StateChecksum checksum) {
 	}
 
@@ -89,11 +91,13 @@ public final strictfp class RespondManager implements Animated {
 			this.stop_action = stop_action;
 		}
 
+                @Override
 		public final boolean equals(Object other) {
 			Timeout timeout_obj = (Timeout)other;
 			return timeout_obj.timeout == timeout && timeout_obj.id == id;
 		}
 
+                @Override
 		public final int compareTo(Object other) {
 			Timeout timeout_obj = (Timeout)other;
 			float diff = timeout - timeout_obj.timeout;

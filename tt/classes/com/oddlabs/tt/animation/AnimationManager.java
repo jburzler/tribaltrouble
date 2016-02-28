@@ -83,6 +83,7 @@ public final strictfp class AnimationManager {
 */
 	static {
 		time_source = new MonotoneTimeManager(new TimeManager() {
+                        @Override
 			public final long getMillis() {
 				return System.currentTimeMillis();
 			}

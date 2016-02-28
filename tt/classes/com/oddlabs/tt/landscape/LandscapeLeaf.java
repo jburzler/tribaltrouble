@@ -48,6 +48,7 @@ public final strictfp class LandscapeLeaf extends AbstractPatchGroup {
 		return patch_y;
 	}
 
+        @Override
 	public final void visit(PatchGroupVisitor visitor) {
 		visitor.visitLeaf(this);
 	}

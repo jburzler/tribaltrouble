@@ -13,6 +13,7 @@ public final strictfp class FileLister implements FileListerInterface {
 		newFiles((File[])LocalEventQueue.getQueue().getDeterministic().log(dir.listFiles(new PatternFilenameFilter(pattern))));
 	}
 
+        @Override
 	public final void newFiles(File[] new_files) {
 		listener.newFiles(new_files);
 	}
@@ -24,6 +25,7 @@ public final strictfp class FileLister implements FileListerInterface {
 			this.pattern = pattern;
 		}
 
+                @Override
 		public final boolean accept(File dir, String name) {
 			return Pattern.matches(pattern, name);
 		}

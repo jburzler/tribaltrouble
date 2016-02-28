@@ -90,18 +90,22 @@ public final strictfp class VikingCampaignIcons implements CampaignIcons {
 		return gui_icon;
 	}
 
+        @Override
 	public final GUIIcon[] getHiddenRoutes() {
 		return hidden;
 	}
 
+        @Override
 	public final IconQuad[] getFaces() {
 		return faces;
 	}
 
+        @Override
 	public final IconQuad getMap() {
 		return map;
 	}
 
+        @Override
 	public final int getNumIslands() {
 		return islands.length;
 	}
@@ -122,6 +126,7 @@ public final strictfp class VikingCampaignIcons implements CampaignIcons {
 		return height;
 	}
 
+        @Override
 	public final MapIslandData getMapIslandData(int i) {
 		return islands[i];
 	}

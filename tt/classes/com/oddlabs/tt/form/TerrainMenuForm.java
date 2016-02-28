@@ -14,14 +14,17 @@ public final strictfp class TerrainMenuForm extends Form implements TerrainMenuL
 		compileCanvas();
 	}
 
+        @Override
 	public final void setFocus() {
 		terrain.getButtonOK().setFocus();
 	}
 
+        @Override
 	public void terrainMenuCancel() {
 		cancel();
 	}
 	
+        @Override
 	public void terrainMenuOK() {
 		
 	}

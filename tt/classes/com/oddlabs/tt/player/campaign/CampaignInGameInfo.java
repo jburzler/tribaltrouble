@@ -17,18 +17,22 @@ final strictfp class CampaignInGameInfo implements InGameInfo {
 		this.campaign = campaign;
 	}
 
+        @Override
 	public final boolean isRated() {
 		return false;
 	}
 
+        @Override
 	public final boolean isMultiplayer() {
 		return false;
 	}
 
+        @Override
 	public final float getRandomStartPosition() {
 		return 0f;
 	}
 
+        @Override
 	public final void addGUI(WorldViewer viewer, InGameMainMenu menu, Group game_infos) {
 		menu.addAbortButton(Utils.getBundleString(Menu.bundle, "end_game"));
 		LabelBox label_objective = new LabelBox(Utils.getBundleString(Menu.bundle, "objective"), Skin.getSkin().getEditFont(), LocalInput.getViewWidth()/2);
@@ -40,9 +44,11 @@ final strictfp class CampaignInGameInfo implements InGameInfo {
 		game_infos.compileCanvas();
 	}
 
+        @Override
 	public final void addGameOverGUI(WorldViewer viewer, final GameStatsDelegate delegate, int header_y, Group group) {
 		HorizButton button_ok = new OKButton(150);
 		button_ok.addMouseClickListener(new MouseClickListener() {
+                @Override
 			public final void mouseClicked(int button, int x, int y, int clicks) {
 				delegate.startMenu();
 			}
@@ -52,6 +58,7 @@ final strictfp class CampaignInGameInfo implements InGameInfo {
 		button_ok.place();
 	}
 
+        @Override
 	public final void close(WorldViewer viewer) {
 		if (campaign.getState().getIslandState(0) != CampaignState.ISLAND_COMPLETED) {
 			Renderer.startMenu(viewer.getNetwork(), viewer.getGUIRoot().getGUI());
@@ -61,6 +68,7 @@ final strictfp class CampaignInGameInfo implements InGameInfo {
 
 	}
 
+        @Override
 	public final void abort(WorldViewer viewer) {
 		viewer.getGUIRoot().pushDelegate(new GameStatsDelegate(viewer, viewer.getGUIRoot().getDelegate().getCamera(), Utils.getBundleString(Menu.bundle, "game_aborted")));
 		campaign.doDefeated();

@@ -21,6 +21,7 @@ public final strictfp class GLState implements Cloneable {
 	private boolean texcoord1_array;
 	private boolean color_array;
 
+        @Override
 	public final Object clone() throws CloneNotSupportedException {
 		return super.clone();
 	}

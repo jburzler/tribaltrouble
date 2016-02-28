@@ -17,6 +17,7 @@ public final strictfp class PlayerInfo implements Serializable {
 		this.name = name;
 	}
 
+        @Override
 	public final boolean equals(Object other) {
 		if (!(other instanceof PlayerInfo))
 			return false;
@@ -36,6 +37,7 @@ public final strictfp class PlayerInfo implements Serializable {
 		return team;
 	}
 
+        @Override
 	public final String toString() {
 		return name;
 	}

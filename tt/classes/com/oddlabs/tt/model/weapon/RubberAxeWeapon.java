@@ -20,10 +20,12 @@ public final strictfp class RubberAxeWeapon extends RotatingThrowingWeapon {
 		super(hit, src, target, sprite_renderer, throw_sound, hit_sounds);
 	}
 
+        @Override
 	protected final float getAngleVelocity() {
 		return ANGLE_DELTA;
 	}
 
+        @Override
 	protected final void hitTarget(boolean hit, Player owner, Selectable target) {
 		if (hit)
 			damageTarget(target);
@@ -37,6 +39,7 @@ public final strictfp class RubberAxeWeapon extends RotatingThrowingWeapon {
 			super.hitTarget(hit, owner, target);
 	}
 
+        @Override
 	protected final float getMetersPerSecond() {
 		if (bouncing)
 			return BOUNCING_METERS_PER_SECOND;
@@ -44,6 +47,7 @@ public final strictfp class RubberAxeWeapon extends RotatingThrowingWeapon {
 			return METERS_PER_SECOND;
 	}
 
+        @Override
 	protected final int getDamage() {
 		return 2;
 	}

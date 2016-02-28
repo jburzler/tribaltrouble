@@ -204,15 +204,18 @@ public final strictfp class LandscapeRenderer implements Animated {
 	}
 
 	private final PatchGroupVisitor level_updater = new PatchGroupVisitor() {
+                @Override
 		public final void visitGroup(PatchGroup group) {
 			group.visitChildren(this);
 		}
+                @Override
 		public final void visitLeaf(LandscapeLeaf leaf) {
 			int wanted_level = calculateLevel(leaf);
 			PatchLevel patch_level = getPatchLevel(leaf);
 			patch_lists[wanted_level].add(patch_level);
 		}
 	};
+        @Override
 	public final void animate(float t) {
 		world.getPatchRoot().visit(level_updater);
 		for (int i = patch_lists.length - 1; i >= 0; i--) {
@@ -227,6 +230,7 @@ public final strictfp class LandscapeRenderer implements Animated {
 		}
 	}
 
+        @Override
 	public final void updateChecksum(StateChecksum sum) {
 	}
 
@@ -299,6 +303,7 @@ public final strictfp class LandscapeRenderer implements Animated {
 			this.result = result;
 		}
 
+                @Override
 		public final void visitGroup(PatchGroup group) {
 			int frustum_state = RenderTools.NOT_IN_FRUSTUM;
 			if (visible_override || (frustum_state = RenderTools.inFrustum(group, camera.getFrustum())) >= RenderTools.IN_FRUSTUM) {
@@ -309,6 +314,7 @@ public final strictfp class LandscapeRenderer implements Animated {
 			}
 		}
 
+                @Override
 		public final void visitLeaf(LandscapeLeaf leaf) {
 			if (visible_override || RenderTools.inFrustum(leaf, camera.getFrustum()) >= RenderTools.IN_FRUSTUM) {
 				result.add(leaf);

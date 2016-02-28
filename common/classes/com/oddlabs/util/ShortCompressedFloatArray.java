@@ -57,6 +57,7 @@ public final strictfp class ShortCompressedFloatArray implements Serializable {
 		return result;
 	}
 
+        @Override
 	public final String toString() {
 		float[] array = getFloatArray();
 		String result = "";

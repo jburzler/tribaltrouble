@@ -11,6 +11,7 @@ public final strictfp class RepairTowerTrigger extends TutorialTrigger {
 		tower.getOwner().enableRepairing(true);
 	}
 
+        @Override
 	protected final void run(Tutorial tutorial) {
 		if (!tower.isDamaged()) {
 			tutorial.next(new EmptyTowerTrigger(tower));

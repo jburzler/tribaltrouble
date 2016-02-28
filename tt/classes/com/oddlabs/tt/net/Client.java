@@ -83,11 +83,13 @@ public final strictfp class Client implements ARMIEventBroker, GameClientInterfa
 		return gameserver_interface;
 	}
 
+        @Override
 	public final void chat(int player_slot, String chat) {
 		if (chat != null && player_slot >= 0 && player_slot < player_slots.length)
 			Network.getChatHub().chat(new ChatMessage(player_slots[player_slot].getInfo().getName(), chat, ChatMessage.CHAT_GAME_MENU));
 	}
 	
+        @Override
 	public final void setWorldGeneratorAndPlayerSlot(Game game, WorldGenerator generator, short player_slot) {
 		if (state != CONNECTING)
 			return;
@@ -97,6 +99,7 @@ public final strictfp class Client implements ARMIEventBroker, GameClientInterfa
 		getConfigurationListener().connected(this, game, generator, player_slot);
 	}
 
+        @Override
 	public final void writeBufferDrained(AbstractConnection conn) {
 	}
 
@@ -111,6 +114,7 @@ public final strictfp class Client implements ARMIEventBroker, GameClientInterfa
 		return player_slots;
 	}
 
+        @Override
 	public final void startGame(int session_id) {
 		if (state != NEGOTIATING)
 			return;
@@ -120,6 +124,7 @@ public final strictfp class Client implements ARMIEventBroker, GameClientInterfa
 		ProgressForm.setProgressForm(network, gui, new WorldStarter(network, session_id, generator, world_params, player_slots, unit_infos, player_slot, ingame_info, initial_action));
 	}
 
+        @Override
 	public final void setPlayers(PlayerSlot[] player_slots) {
 		this.player_slots = player_slots;
 		for (short i = 0; i < player_slots.length; i++) {
@@ -131,6 +136,7 @@ public final strictfp class Client implements ARMIEventBroker, GameClientInterfa
 		getConfigurationListener().setPlayers(player_slots);
 	}
 
+        @Override
 	public final void handle(Object sender, ARMIEvent armi_event) {
 		try {
 			armi_event.execute(interface_methods, this);
@@ -139,9 +145,11 @@ public final strictfp class Client implements ARMIEventBroker, GameClientInterfa
 		}
 	}
 
+        @Override
 	public final void connected(AbstractConnection conn) {
 	}
 
+        @Override
 	public final void error(AbstractConnection conn, IOException e) {
 		error();
 	}

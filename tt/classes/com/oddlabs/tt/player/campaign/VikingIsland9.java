@@ -29,6 +29,7 @@ public final strictfp class VikingIsland9 extends Island {
 		super(campaign);
 	}
 
+        @Override
 	public final void init(NetworkSelector network, GUIRoot gui_root) {
 		String[] ai_names = new String[]{Utils.getBundleString(bundle, "name0"),
 			Utils.getBundleString(bundle, "name1"),
@@ -67,6 +68,7 @@ public final strictfp class VikingIsland9 extends Island {
 		game_network.getClient().getServerInterface().startServer();
 	}
 
+        @Override
 	protected final void start() {
 		Runnable runnable;
 		final Player enemy = getViewer().getWorld().getPlayers()[1];
@@ -74,6 +76,7 @@ public final strictfp class VikingIsland9 extends Island {
 
 		// Introduction
 		runnable = new Runnable() {
+                @Override
 			public final void run() {
 				CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header0"),
 						Utils.getBundleString(bundle, "dialog0"),
@@ -89,6 +92,7 @@ public final strictfp class VikingIsland9 extends Island {
 
 		// Defeat if netrauls eleminated
 		runnable = new Runnable() {
+                @Override
 			public final void run() {
 				getCampaign().defeated(getViewer(), Utils.getBundleString(bundle, "game_over"));
 			}
@@ -118,6 +122,7 @@ public final strictfp class VikingIsland9 extends Island {
 
 		// Winner prize
 		final Runnable prize = new Runnable() {
+                @Override
 			public final void run() {
 				getCampaign().getState().setIslandState(9, CampaignState.ISLAND_COMPLETED);
 				getCampaign().getState().setIslandState(10, CampaignState.ISLAND_AVAILABLE);
@@ -125,6 +130,7 @@ public final strictfp class VikingIsland9 extends Island {
 			}
 		};
 		runnable = new Runnable() {
+                @Override
 			public final void run() {
 				CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header1"),
 						Utils.getBundleString(bundle, "dialog1"),
@@ -139,14 +145,17 @@ public final strictfp class VikingIsland9 extends Island {
 		new VictoryTrigger(getViewer(), runnable);
 	}
 
+        @Override
 	public final CharSequence getHeader() {
 		return Utils.getBundleString(bundle, "header");
 	}
 
+        @Override
 	public final CharSequence getDescription() {
 		return Utils.getBundleString(bundle, "description");
 	}
 
+        @Override
 	public final CharSequence getCurrentObjective() {
 		return Utils.getBundleString(bundle, "objective");
 	}

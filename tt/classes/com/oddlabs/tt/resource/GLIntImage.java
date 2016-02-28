@@ -9,6 +9,7 @@ import org.lwjgl.opengl.GL11;
 public final strictfp class GLIntImage extends GLImage {
 	private final IntBuffer pixels;
 
+        @Override
 	public final int getPixelSize() {
 		return 4;
 	}
@@ -71,14 +72,17 @@ public final strictfp class GLIntImage extends GLImage {
 			}
 	}
 
+        @Override
 	public final GLImage createImage(int width, int height, int format) {
 		return new GLIntImage(width, height, format);
 	}
 
+        @Override
 	public final int getPixel(int x, int y) {
 		return pixels.get(y*getWidth() + x);
 	}
 
+        @Override
 	public final void putPixel(int x, int y, int pixel) {
 		pixels.put(y*getWidth() + x, pixel);
 	}

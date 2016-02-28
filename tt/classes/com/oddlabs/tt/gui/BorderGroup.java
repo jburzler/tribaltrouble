@@ -12,6 +12,7 @@ public final strictfp class BorderGroup extends Group {
 		label = new Label(caption, data.getCaptionFont());
 	}
 
+        @Override
 	public final void compileCanvas() {
 		GroupData data = Skin.getSkin().getGroupData();
 		Box group = data.getGroup();
@@ -28,6 +29,7 @@ public final strictfp class BorderGroup extends Group {
 		setCanFocus(true);
 	}
 
+        @Override
 	protected final void renderGeometry() {
 		Skin.getSkin().getGroupData().getGroup().render(0, 0, getWidth(), getHeight(), Skin.NORMAL);
 	}

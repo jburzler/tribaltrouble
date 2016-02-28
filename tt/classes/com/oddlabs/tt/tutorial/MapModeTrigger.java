@@ -7,6 +7,7 @@ public final strictfp class MapModeTrigger extends TutorialTrigger {
 		super(.1f, 1f, "map_mode");
 	}
 
+        @Override
 	protected final void run(Tutorial tutorial) {
 		if (tutorial.getViewer().getDelegate().getCamera() instanceof MapCamera)
 			tutorial.next(new FromMapModeTrigger());

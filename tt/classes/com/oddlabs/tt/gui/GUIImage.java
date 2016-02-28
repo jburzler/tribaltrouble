@@ -29,6 +29,7 @@ public final strictfp class GUIImage extends GUIObject {
 		setCanFocus(false);
 	}
 
+        @Override
 	protected final void renderGeometry() {
 		int width = getWidth();
 		int height = getHeight();

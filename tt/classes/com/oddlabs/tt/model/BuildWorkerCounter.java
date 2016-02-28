@@ -6,6 +6,7 @@ public final strictfp class BuildWorkerCounter extends SupplyCounter {
 		setDelta(building.getBuildSupplyContainer(supply_type).getNumOrders());
 	}
 
+        @Override
 	public final int getNumSupplies() {
 		if (!getBuilding().isDead())
 			return getBuilding().getSupplyContainer(getSupplyType()).getNumSupplies() - (getDelta() - getBuilding().getBuildSupplyContainer(getSupplyType()).getNumOrders());

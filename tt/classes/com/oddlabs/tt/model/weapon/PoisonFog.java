@@ -63,6 +63,7 @@ public final strictfp class PoisonFog implements Magic {
 				1f, true, false));
 	}
 
+        @Override
 	public final void animate(float t) {
 		time += t;
 		if (time >= total_time) {
@@ -129,9 +130,11 @@ public final strictfp class PoisonFog implements Magic {
 		}
 	}
 
+        @Override
 	public void updateChecksum(StateChecksum checksum) {
 	}
 
+        @Override
 	public final void interrupt() {
 		if (bubbling_sound != null)
 			bubbling_sound.stop(.2f, Settings.getSettings().sound_gain);

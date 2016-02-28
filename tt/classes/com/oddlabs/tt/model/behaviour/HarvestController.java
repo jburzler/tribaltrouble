@@ -31,6 +31,7 @@ public final strictfp class HarvestController extends Controller {
 		}
 	}
 
+        @Override
 	public final void decide() {
 		if (unit.getSupplyContainer().getSupplyType() == supply_class && unit.getSupplyContainer().isSupplyFull()) {
 			unit.popController();

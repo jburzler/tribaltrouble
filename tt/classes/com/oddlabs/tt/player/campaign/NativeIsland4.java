@@ -33,6 +33,7 @@ public final strictfp class NativeIsland4 extends Island {
 		super(campaign);
 	}
 
+        @Override
 	public final void init(NetworkSelector network, GUIRoot gui_root) {
 		String[] ai_names = new String[]{Utils.getBundleString(bundle, "name0"),
 			Utils.getBundleString(bundle, "name1"),
@@ -71,6 +72,7 @@ public final strictfp class NativeIsland4 extends Island {
 		game_network.getClient().getServerInterface().startServer();
 	}
 
+        @Override
 	protected final void start() {
 		alive = true;
 		counter.start(getViewer().getWorld().getAnimationManagerGameTime());
@@ -84,6 +86,7 @@ public final strictfp class NativeIsland4 extends Island {
 
 		// Introduction
 		final Runnable dialog1 = new Runnable() {
+                @Override
 			public final void run() {
 				CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header1"),
 						Utils.getBundleString(bundle, "dialog1"),
@@ -93,6 +96,7 @@ public final strictfp class NativeIsland4 extends Island {
 			}
 		};
 		final Runnable dialog0 = new Runnable() {
+                @Override
 			public final void run() {
 				CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header0"),
 						Utils.getBundleString(bundle, "dialog0"),
@@ -130,6 +134,7 @@ public final strictfp class NativeIsland4 extends Island {
 
 		// Winner prize
 		runnable = new Runnable() {
+                @Override
 			public final void run() {
 				getCampaign().getState().setIslandState(4, CampaignState.ISLAND_COMPLETED);
 				getCampaign().getState().setNumPeons(getCampaign().getState().getNumPeons() + captives.getUnitCountContainer().getNumSupplies());
@@ -211,6 +216,7 @@ public final strictfp class NativeIsland4 extends Island {
 
 		// Attack1
 		runnable = new Runnable() {
+                @Override
 			public final void run() {
 				Building armory = local_player.getArmory();
 				Unit chieftain = local_player.getChieftain();
@@ -228,6 +234,7 @@ public final strictfp class NativeIsland4 extends Island {
 
 		// Attack2
 		runnable = new Runnable() {
+                @Override
 			public final void run() {
 				Building armory = local_player.getArmory();
 				Unit chieftain = local_player.getChieftain();
@@ -244,6 +251,7 @@ public final strictfp class NativeIsland4 extends Island {
 
 		// Attack3
 		runnable = new Runnable() {
+                @Override
 			public final void run() {
 				Building armory = local_player.getArmory();
 				Unit chieftain = local_player.getChieftain();
@@ -260,6 +268,7 @@ public final strictfp class NativeIsland4 extends Island {
 
 		// Attack4
 		runnable = new Runnable() {
+                @Override
 			public final void run() {
 				Building armory = local_player.getArmory();
 				Unit chieftain = local_player.getChieftain();
@@ -276,6 +285,7 @@ public final strictfp class NativeIsland4 extends Island {
 
 		// Attack5
 		runnable = new Runnable() {
+                @Override
 			public final void run() {
 				Building armory = local_player.getArmory();
 				Unit chieftain = local_player.getChieftain();
@@ -292,6 +302,7 @@ public final strictfp class NativeIsland4 extends Island {
 
 		// Attack6
 		runnable = new Runnable() {
+                @Override
 			public final void run() {
 				Building armory = local_player.getArmory();
 				Unit chieftain = local_player.getChieftain();
@@ -307,6 +318,7 @@ public final strictfp class NativeIsland4 extends Island {
 
 		// Defeat if netrauls eleminated
 		runnable = new Runnable() {
+                @Override
 			public final void run() {
 				getCampaign().defeated(getViewer(), Utils.getBundleString(bundle, "game_over"));
 			}
@@ -324,14 +336,17 @@ public final strictfp class NativeIsland4 extends Island {
 		getViewer().getWorld().getAnimationManagerGameTime().removeAnimation(counter);
 	}
 
+        @Override
 	public final CharSequence getHeader() {
 		return Utils.getBundleString(bundle, "header");
 	}
 
+        @Override
 	public final CharSequence getDescription() {
 		return Utils.getBundleString(bundle, "description");
 	}
 
+        @Override
 	public final CharSequence getCurrentObjective() {
 		return Utils.getBundleString(bundle, "objective", new Object[]{new Integer(minutes)});
 	}

@@ -103,10 +103,12 @@ public abstract strictfp class AbstractTreeGroup extends BoundingBox {
 				private int x;
 				private int y;
 
+                                @Override
 				public final void visitLeaf(TreeLeaf tree_leaf) {
 					TreeSupply tree = new TreeSupply(world, tree_leaf, tree_x, tree_y, center_grid_x, center_grid_y, grid_size, radius, matrix, tree_type_index, tree_low_vertices);
 					tree_leaf.insertTree(tree);
 				}
+                                @Override
 				public final void visitNode(TreeGroup tree_group) {
 					int old_x = x;
 					int old_y = y;
@@ -133,6 +135,7 @@ public abstract strictfp class AbstractTreeGroup extends BoundingBox {
 					y = old_y;
 					child_size = old_size;
 				}
+                                @Override
 				public final void visitTree(TreeSupply tree_supply) {
 					throw new RuntimeException();
 				}

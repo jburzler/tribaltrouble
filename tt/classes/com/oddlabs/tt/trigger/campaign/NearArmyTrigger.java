@@ -21,6 +21,7 @@ public final strictfp class NearArmyTrigger extends IntervalTrigger {
 		this.runnable = runnable;
 	}
 
+        @Override
 	protected final void check() {
 		for (int i = 0; i < src.length; i++) {
 			if (src[i].isDead())
@@ -38,6 +39,7 @@ public final strictfp class NearArmyTrigger extends IntervalTrigger {
 		}
 	}
 
+        @Override
 	protected final void done() {
 		runnable.run();
 	}

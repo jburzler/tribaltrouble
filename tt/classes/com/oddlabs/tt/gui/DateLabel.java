@@ -24,6 +24,7 @@ public final strictfp class DateLabel extends Label {
 			return DateFormat.getDateTimeInstance().format(new Date(date));
 	}
 
+        @Override
 	public final int compareTo(Object o) {
 		if (o instanceof DateLabel) {
 			DateLabel other = (DateLabel)o;

@@ -214,10 +214,12 @@ public final strictfp class GameMenu extends Panel implements ConfigurationListe
 		}
 	}
 
+        @Override
 	public final void connected(Client client, Game game, WorldGenerator generator, int player_slot) {
 		assert false;
 	}
 
+        @Override
 	public final void setFocus() {
 		chat_line.setFocus();
 	}
@@ -230,6 +232,7 @@ public final strictfp class GameMenu extends Panel implements ConfigurationListe
 		return result;
 	}
 
+        @Override
 	public final void setPlayers(PlayerSlot[] players) {
 		int num_humans = countHumans(players);
 		int[] player_slots = new int[num_humans];
@@ -402,22 +405,26 @@ public final strictfp class GameMenu extends Panel implements ConfigurationListe
 		return pulldown_button;
 	}
 
+        @Override
 	protected final void doAdd() {
 		super.doAdd();
 		Network.getChatHub().addListener(this);
 	}
 
+        @Override
 	protected final void doRemove() {
 		super.doRemove();
 		Network.getChatHub().removeListener(this);
 	}
 
+        @Override
 	public final void connectionLost() {
 		remove();
 		owner.removeGameMenu();
 		gui_root.addModalForm(new MessageForm(Utils.getBundleString(bundle, "connection_lost")));
 	}
 
+        @Override
 	public final void gameStarted() {
 //		owner.removeGameMenu();
 		setDisabled(true);
@@ -428,6 +435,7 @@ public final strictfp class GameMenu extends Panel implements ConfigurationListe
 		getTab().updateNotify();
 	}
 
+        @Override
 	public final void chat(ChatMessage message) {
 		if (message.type != ChatMessage.CHAT_GAME_MENU)
 			return;
@@ -478,18 +486,21 @@ public final strictfp class GameMenu extends Panel implements ConfigurationListe
 	}
 
 	private final strictfp class InfoButtonListener implements MouseClickListener {
+                @Override
 		public final void mouseClicked(int button, int x, int y, int clicks) {
 			gui_root.addModalForm(new GameInfoForm(game));
 		}
 	}
 
 	private final strictfp class CancelButtonListener implements MouseClickListener {
+                @Override
 		public final void mouseClicked(int button, int x, int y, int clicks) {
 			cancel();
 		}
 	}
 
 	private final strictfp class ReadyListener implements MouseClickListener {
+                @Override
 		public final void mouseClicked(int button, int x, int y, int clicks) {
 			setReady(true);
 		}
@@ -506,6 +517,7 @@ public final strictfp class GameMenu extends Panel implements ConfigurationListe
 	}
 
 	private final strictfp class StartListener implements MouseClickListener {
+                @Override
 		public final void mouseClicked(int button, int x, int y, int clicks) {
 			final int MIN_TEAMS = 2;
 			int num_teams = getNumTeams(game_network.getClient().getPlayers());
@@ -525,6 +537,7 @@ public final strictfp class GameMenu extends Panel implements ConfigurationListe
 			this.player_slot = player_slot;
 		}
 
+                @Override
 		public final void itemChosen(PulldownMenu menu, int item_index) {
 			setReady(false);
 			adjustPlayerSlot(player_slot);
@@ -532,6 +545,7 @@ public final strictfp class GameMenu extends Panel implements ConfigurationListe
 	}
 
 	private final strictfp class ChatListener implements EnterListener {
+                @Override
 		public final void enterPressed(CharSequence text) {
 			String chat = text.toString();
 			if (!chat.equals("")) {
@@ -543,6 +557,7 @@ public final strictfp class GameMenu extends Panel implements ConfigurationListe
 	}
 
 	private strictfp final class SendListener implements MouseClickListener {
+                @Override
 		public final void mouseClicked(int button, int x, int y, int clicks) {
 			chat_line.enterPressedAll();
 		}

@@ -23,14 +23,17 @@ public final strictfp class BuildingSiteScanFilter implements ScanFilter {
 		result = new ArrayList();
 	}
 
+        @Override
 	public final int getMinRadius() {
 		return 0;
 	}
 
+        @Override
 	public final int getMaxRadius() {
 		return range;
 	}
 
+        @Override
 	public final boolean filter(int grid_x, int grid_y, Occupant occ) {
 		if (unit_grid.getHeightMap().canBuild(grid_x, grid_y, template.getPlacingSize()) && Building.isPlacingLegal(unit_grid, template, grid_x, grid_y)) {
 			result.add(new LandscapeTarget(grid_x, grid_y));

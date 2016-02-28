@@ -30,6 +30,7 @@ final strictfp class Session {
 	boolean hasClient(final int client_id) {
 		final boolean[] result = new boolean[1];
 		visit(new SessionVisitor() {
+                        @Override
 			public final void visit(RouterClient client) {
 				if (client.getClientID() == client_id)
 					result[0] = true;
@@ -52,6 +53,7 @@ final strictfp class Session {
 		visit(new SessionVisitor() {
 			private int best_checksum_count = 0;
 
+                        @Override
 			public final void visit(RouterClient client) {
 				if (client.getChecksums().size() == 0) {
 					missing_checksum[0] = true;
@@ -75,6 +77,7 @@ final strictfp class Session {
 			return;
 		final List clients_to_be_kicked = new ArrayList();
 		visit(new SessionVisitor() {
+                        @Override
 			public final void visit(RouterClient client) {
 				Integer client_checksum;
 				if (missing_checksum[0]) {
@@ -112,6 +115,7 @@ final strictfp class Session {
 	private void start() {
 		this.started = true;
 		visit(new SessionVisitor() {
+                        @Override
 			public final void visit(RouterClient client) {
 				client.getInterface().start();
 			}
@@ -139,6 +143,7 @@ final strictfp class Session {
 		return players.size();
 	}
 	
+        @Override
 	public final String toString() {
 		String result = "(Session: info = " + info + " players : (";
 		Iterator it = players.iterator();

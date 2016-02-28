@@ -17,6 +17,7 @@ public final strictfp class GeneratorRing extends TextureGenerator {
 		this.ring_parms = ring_parms;
 	}
 
+        @Override
 	public final Texture[] generate() {
 		Channel channel_ring = new Ring(size, size, ring_parms, Ring.LINEAR).toChannel();
 		Channel channel_white = new Channel(size, size).fill(1f);
@@ -26,6 +27,7 @@ public final strictfp class GeneratorRing extends TextureGenerator {
 		return textures;
 	}
 	
+        @Override
 	public final int hashCode() {
 		return size*ring_parms.hashCode();
 	}
@@ -39,6 +41,7 @@ public final strictfp class GeneratorRing extends TextureGenerator {
 		return true;
 	}
 
+        @Override
 	public final boolean equals(Object o) {
 		if (!super.equals(o))
 			return false;

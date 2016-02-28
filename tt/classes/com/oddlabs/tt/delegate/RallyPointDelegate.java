@@ -13,6 +13,7 @@ public final strictfp class RallyPointDelegate extends TargetDelegate {
 		this.building = building;
 	}
 
+        @Override
 	public final void mousePressed(int button, int x, int y) {
 		if (building.isDead()) {
 			pop();

@@ -70,6 +70,7 @@ public final strictfp class AudioManager implements AudioImplementation {
 		return doNewAudio(source, params);
 	}
 
+        @Override
 	public final AbstractAudioPlayer newAudio(AudioParameters params) {
 		AudioSource source = getSource(params);
 		return doNewAudio(source, params);

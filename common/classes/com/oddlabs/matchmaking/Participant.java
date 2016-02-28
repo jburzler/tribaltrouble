@@ -37,10 +37,12 @@ public final strictfp class Participant implements Serializable {
 		return race;
 	}
 
+        @Override
 	public final int hashCode() {
 		return match_id ^ team;
 	}
 
+        @Override
 	public final boolean equals(Object other) {
 		if (!(other instanceof Participant))
 			return false;

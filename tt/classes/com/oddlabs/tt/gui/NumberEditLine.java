@@ -29,6 +29,7 @@ public strictfp class NumberEditLine extends EditLine {
 		value_listeners.remove(listener);
 	}
 
+        @Override
 	protected final void enterPressed(CharSequence text) {
 		validate();
 	}
@@ -81,6 +82,7 @@ public strictfp class NumberEditLine extends EditLine {
 		return value;
 	}
 	
+        @Override
 	protected void focusNotify(boolean focus) {
 		validate();
 		super.focusNotify(focus);

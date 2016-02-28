@@ -14,14 +14,17 @@ public final strictfp class RockAxeWeapon extends RotatingThrowingWeapon {
 		super(hit, src, target, sprite_renderer, throw_sound, hit_sounds);
 	}
 
+        @Override
 	protected final float getAngleVelocity() {
 		return ANGLE_DELTA;
 	}
 
+        @Override
 	protected final float getMetersPerSecond() {
 		return METERS_PER_SECOND;
 	}
 
+        @Override
 	protected final int getDamage() {
 		return 1;
 	}

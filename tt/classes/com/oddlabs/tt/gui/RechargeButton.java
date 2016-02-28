@@ -21,11 +21,13 @@ public strictfp class RechargeButton extends NonFocusIconButton implements ToolT
 		this.unit = unit;
 	}
 
+        @Override
 	public final void mouseClicked(int button, int x, int y, int clicks) {
 		if (unit.canDoMagic(magic_index))
 			player_interface.doMagic(unit, magic_index);
 	}
 
+        @Override
 	protected final void postRender() {
 		IconQuad[] watch = Icons.getIcons().getWatch();
 		float progress = unit.getMagicProgress(magic_index);

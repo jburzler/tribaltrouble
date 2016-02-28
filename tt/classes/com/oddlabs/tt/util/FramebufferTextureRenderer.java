@@ -40,6 +40,7 @@ public final strictfp class FramebufferTextureRenderer extends OffscreenRenderer
 		init();
 	}
 
+        @Override
 	public final boolean isLost() {
 		return false;
 	}
@@ -52,6 +53,7 @@ public final strictfp class FramebufferTextureRenderer extends OffscreenRenderer
 		GL11.glDeleteTextures(tmp);
 	}
 
+        @Override
 	protected final void finish() {
 		deleteBuffers();
 		popGLState();

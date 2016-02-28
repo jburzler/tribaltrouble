@@ -21,6 +21,7 @@ public final strictfp class PlaceBuildingController extends Controller {
 		return unit.isCloseEnough(building.getSize(), building);
 	}
 
+        @Override
 	public final void decide() {
 		if (building.isDead()) {
 			unit.popController();

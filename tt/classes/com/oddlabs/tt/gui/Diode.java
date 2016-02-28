@@ -12,6 +12,7 @@ public final strictfp class Diode extends GUIObject {
 		this.lit = lit;
 	}
 
+        @Override
 	protected final void renderGeometry() {
 		if (isDisabled()) {
 			Skin.getSkin().getDiode()[Skin.DISABLED].render(0, 0);

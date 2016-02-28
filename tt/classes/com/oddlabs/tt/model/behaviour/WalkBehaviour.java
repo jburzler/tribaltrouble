@@ -41,6 +41,7 @@ public final strictfp class WalkBehaviour implements Behaviour {
 		this(unit, new TargetTrackerAlgorithm(unit.getUnitGrid(), range, t), scan_attack);
 	}
 
+        @Override
 	public final boolean isBlocking() {
 		return state == PathTracker.BLOCKED;
 	}
@@ -76,6 +77,7 @@ public final strictfp class WalkBehaviour implements Behaviour {
 		unit.switchAnimation(unit.getMetersPerSecond(), Unit.ANIMATION_MOVING);
 	}
 
+        @Override
 	public final int animate(float t) {
 		retry_delay_counter -= t;
 		boolean blocker_moved = blocking_movable != null && (blocking_movable.getGridX() != blocker_x || blocking_movable.getGridY() != blocker_y);
@@ -143,6 +145,7 @@ public final strictfp class WalkBehaviour implements Behaviour {
 		unit.getTracker().setTarget(tracker_algorithm);
 	}
 
+        @Override
 	public final void forceInterrupted() {
 	}
 }

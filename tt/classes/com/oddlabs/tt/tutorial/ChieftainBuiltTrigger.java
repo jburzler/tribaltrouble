@@ -13,6 +13,7 @@ public final strictfp class ChieftainBuiltTrigger extends TutorialTrigger {
 		super(.1f, 0f, "chieftain_built");
 	}
 
+        @Override
 	protected final void run(Tutorial tutorial) {
 		Set set = tutorial.getViewer().getLocalPlayer().getUnits().getSet();
 		Iterator it = set.iterator();

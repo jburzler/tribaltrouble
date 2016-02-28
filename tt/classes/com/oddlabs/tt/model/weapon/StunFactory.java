@@ -25,22 +25,27 @@ public final strictfp class StunFactory implements MagicFactory {
 		this.release_ratio = release_ratio;
 	}
 
+        @Override
 	public final float getHitRadius() {
 		return hit_radius;
 	}
 
+        @Override
 	public final float getSecondsPerAnim() {
 		return seconds_per_anim;
 	}
 
+        @Override
 	public final float getSecondsPerRelease() {
 		return release_ratio*seconds_per_anim;
 	}
 
+        @Override
 	public final float getSecondsPerInit() {
 		return init_ratio*seconds_per_anim;
 	}
 
+        @Override
 	public final Magic execute(Unit src) {
 		return new Stun(offset_x, offset_y, offset_z, hit_radius, stun_time_closest, stun_time_farthest, src);
 	}

@@ -46,6 +46,7 @@ public final strictfp class Tutorial {
 	final void next(final TutorialTrigger trigger) {
 		timer.stop();
 		TimerAnimation delay_timer = new TimerAnimation(viewer.getAnimationManagerLocal(), new Updatable() {
+                        @Override
 			public final void update(Object anim) {
 				((TimerAnimation)anim).stop();
 				next0(trigger);
@@ -58,6 +59,7 @@ public final strictfp class Tutorial {
 	private void next0(final TutorialTrigger trigger) {
 		removeInfo();
 		TimerAnimation delay_timer = new TimerAnimation(viewer.getAnimationManagerLocal(), new Updatable() {
+                        @Override
 			public final void update(Object anim) {
 				((TimerAnimation)anim).stop();
 				next1(trigger);
@@ -73,6 +75,7 @@ public final strictfp class Tutorial {
 		viewer.getGUIRoot().addChild(info);
 		viewer.getWorld().getAudio().newAudio(new AudioParameters(viewer.getLocalPlayer().getRace().getBuildingNotificationAudio(), 0f, 0f, 0f, AudioPlayer.AUDIO_RANK_NOTIFICATION, AudioPlayer.AUDIO_DISTANCE_NOTIFICATION, .25f, 1f, 1f, false, true));
 		timer = new TimerAnimation(viewer.getAnimationManagerLocal(), new Updatable() {
+                        @Override
 			public final void update(Object anim) {
 				trigger.run(Tutorial.this);
 			}

@@ -35,6 +35,7 @@ public final strictfp class TunnelledConnection extends AbstractConnection {
 		Network.getMatchmakingClient().getInterface().acceptTunnel(address);
 	}
 
+        @Override
 	public final void handle(ARMIEvent event) {
 		Network.getMatchmakingClient().getInterface().routeEvent(address, event);
 		writeBufferDrained();
@@ -44,6 +45,7 @@ public final strictfp class TunnelledConnection extends AbstractConnection {
 		return address;
 	}
 
+        @Override
 	protected final void doClose() {
 		if (open) {
 			Network.getMatchmakingClient().unregisterTunnel(address, this);

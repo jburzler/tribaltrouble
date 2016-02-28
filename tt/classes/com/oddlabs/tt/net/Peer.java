@@ -30,6 +30,7 @@ public final strictfp class Peer implements PeerHubInterface {
 		return peer_index;
 	}
 
+        @Override
 	public final String toString() {
 		return "player: " + player.toString();
 	}
@@ -48,10 +49,12 @@ public final strictfp class Peer implements PeerHubInterface {
 		}
 	}
 	
+        @Override
 	public final void chat(String text, boolean team) {
 		peer_hub.receiveChat(player.getPlayerInfo().getName(), text, team);
 	}
 
+        @Override
 	public final void beacon(float x, float y) {
 		peer_hub.receiveBeacon(x, y, player.getPlayerInfo().getName());
 	}

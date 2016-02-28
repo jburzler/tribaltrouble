@@ -23,6 +23,7 @@ public final strictfp class NativeIsland6 extends Island {
 		super(campaign);
 	}
 
+        @Override
 	public final void init(NetworkSelector network, GUIRoot gui_root) {
 		String[] ai_names = new String[]{Utils.getBundleString(bundle, "name0"),
 			Utils.getBundleString(bundle, "name1"),
@@ -83,10 +84,12 @@ public final strictfp class NativeIsland6 extends Island {
 		game_network.getClient().getServerInterface().startServer();
 	}
 
+        @Override
 	protected final void start() {
 		Runnable runnable;
 		// Introduction
 		final Runnable dialog3 = new Runnable() {
+                @Override
 			public final void run() {
 				CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header3"),
 						Utils.getBundleString(bundle, "dialog3"),
@@ -96,6 +99,7 @@ public final strictfp class NativeIsland6 extends Island {
 			}
 		};
 		final Runnable dialog2 = new Runnable() {
+                @Override
 			public final void run() {
 				CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header2"),
 						Utils.getBundleString(bundle, "dialog2"),
@@ -106,6 +110,7 @@ public final strictfp class NativeIsland6 extends Island {
 			}
 		};
 		final Runnable dialog1 = new Runnable() {
+                @Override
 			public final void run() {
 				CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header1"),
 						Utils.getBundleString(bundle, "dialog1"),
@@ -116,6 +121,7 @@ public final strictfp class NativeIsland6 extends Island {
 			}
 		};
 		final Runnable dialog0 = new Runnable() {
+                @Override
 			public final void run() {
 				CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header0"),
 						Utils.getBundleString(bundle, "dialog0"),
@@ -129,6 +135,7 @@ public final strictfp class NativeIsland6 extends Island {
 
 		// Winner prize
 		final Runnable prize = new Runnable() {
+                @Override
 			public final void run() {
 				getCampaign().getState().setIslandState(6, CampaignState.ISLAND_COMPLETED);
 				getCampaign().getState().setIslandState(7, CampaignState.ISLAND_AVAILABLE);
@@ -138,6 +145,7 @@ public final strictfp class NativeIsland6 extends Island {
 
 		// Winning condition
 		runnable = new Runnable() {
+                @Override
 			public final void run() {
 				CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header4"),
 						Utils.getBundleString(bundle, "dialog4"),
@@ -160,6 +168,7 @@ public final strictfp class NativeIsland6 extends Island {
 
 		// Defeat if friends eleminated
 		runnable = new Runnable() {
+                @Override
 			public final void run() {
 				getCampaign().defeated(getViewer(), Utils.getBundleString(bundle, "game_over"));
 			}
@@ -167,14 +176,17 @@ public final strictfp class NativeIsland6 extends Island {
 		new PlayerEleminatedTrigger(runnable, friend);
 	}
 
+        @Override
 	public final CharSequence getHeader() {
 		return Utils.getBundleString(bundle, "header");
 	}
 
+        @Override
 	public final CharSequence getDescription() {
 		return Utils.getBundleString(bundle, "description");
 	}
 
+        @Override
 	public final CharSequence getCurrentObjective() {
 		return Utils.getBundleString(bundle, "objective");
 	}

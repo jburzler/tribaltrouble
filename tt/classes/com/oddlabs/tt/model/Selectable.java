@@ -36,6 +36,7 @@ public abstract class Selectable extends Model implements Target, Animated, Mode
 		this.template = template;
 	}
 
+        @Override
 	public final float getShadowDiameter() {
 		return template.getShadowDiameter();
 	}
@@ -48,6 +49,7 @@ public abstract class Selectable extends Model implements Target, Animated, Mode
 		return template.getDefenseChance();
 	}
 
+        @Override
 	public final float getNoDetailSize() {
 		return template.getNoDetailSize();
 	}
@@ -62,6 +64,7 @@ public abstract class Selectable extends Model implements Target, Animated, Mode
 		return (Controller)controller_stack.get(controller_stack.size() - 1);
 	}
 
+        @Override
 	public final void animate(float t) {
 		last_behaviour_state = current_behaviour.animate(t);
 		switch (last_behaviour_state) {
@@ -135,6 +138,7 @@ public abstract class Selectable extends Model implements Target, Animated, Mode
 		}
 	}
 
+        @Override
 	protected final void register() {
 		super.register();
 		owner.getWorld().getAnimationManagerGameTime().registerAnimation(this);
@@ -222,10 +226,12 @@ public abstract class Selectable extends Model implements Target, Animated, Mode
 		return abilities;
 	}
 
+        @Override
 	public final int getGridX() {
 		return grid_x;
 	}
 
+        @Override
 	public final int getGridY() {
 		return grid_y;
 	}
@@ -245,11 +251,13 @@ public abstract class Selectable extends Model implements Target, Animated, Mode
 		return getOwnerNoCheck();
 	}
 
+        @Override
 	public void remove() {
 		super.remove();
 		owner.getWorld().getAnimationManagerGameTime().removeAnimation(this);
 	}
 
+        @Override
 	public final void updateChecksum(StateChecksum checksum) {
 /*		checksum.update(getGridX());
 		checksum.update(getGridY());
@@ -273,6 +281,7 @@ public abstract class Selectable extends Model implements Target, Animated, Mode
 		dead = true;
 	}
 
+        @Override
 	public final boolean isDead() {
 		return dead;
 	}

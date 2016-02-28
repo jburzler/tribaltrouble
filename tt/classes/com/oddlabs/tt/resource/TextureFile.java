@@ -161,10 +161,12 @@ public final strictfp class TextureFile extends File {
 		return img;
 	}
 	
+        @Override
 	public final Object newInstance() {
 		return new Texture(this);
 	}
 
+        @Override
 	public final boolean equals(Object o) {
 		if (!(o instanceof TextureFile))
 			return false;

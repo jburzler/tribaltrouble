@@ -22,6 +22,7 @@ public final strictfp class StructureBlend extends BlendInfo {
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, structure_map.getHandle());
 	}
 
+        @Override
 	public final void setup() {
 		GLState.activeTexture(GL13.GL_TEXTURE1);
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
@@ -32,6 +33,7 @@ public final strictfp class StructureBlend extends BlendInfo {
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 	}
 
+        @Override
 	public final void reset() {
 		GLState.activeTexture(GL13.GL_TEXTURE1);
 		GL11.glDisable(GL11.GL_TEXTURE_2D);

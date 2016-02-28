@@ -23,6 +23,7 @@ public final strictfp class VikingIsland11 extends Island {
 		super(campaign);
 	}
 
+        @Override
 	public final void init(NetworkSelector network, GUIRoot gui_root) {
 		String[] ai_names = new String[]{Utils.getBundleString(bundle, "name0"),
 			Utils.getBundleString(bundle, "name1"),
@@ -68,12 +69,14 @@ public final strictfp class VikingIsland11 extends Island {
 		game_network.getClient().getServerInterface().startServer();
 	}
 
+        @Override
 	protected final void start() {
 		Runnable runnable;
 		final Player enemy = getViewer().getWorld().getPlayers()[1];
 
 		// Introduction
 		final Runnable dialog8 = new Runnable() {
+                @Override
 			public final void run() {
 				CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header8"),
 						Utils.getBundleString(bundle, "dialog8"),
@@ -83,6 +86,7 @@ public final strictfp class VikingIsland11 extends Island {
 			}
 		};
 		final Runnable dialog7 = new Runnable() {
+                @Override
 			public final void run() {
 				CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header7"),
 						Utils.getBundleString(bundle, "dialog7"),
@@ -93,6 +97,7 @@ public final strictfp class VikingIsland11 extends Island {
 			}
 		};
 		final Runnable dialog6 = new Runnable() {
+                @Override
 			public final void run() {
 				CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header6"),
 						Utils.getBundleString(bundle, "dialog6"),
@@ -103,6 +108,7 @@ public final strictfp class VikingIsland11 extends Island {
 			}
 		};
 		final Runnable dialog5 = new Runnable() {
+                @Override
 			public final void run() {
 				CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header5"),
 						Utils.getBundleString(bundle, "dialog5"),
@@ -113,6 +119,7 @@ public final strictfp class VikingIsland11 extends Island {
 			}
 		};
 		final Runnable dialog4 = new Runnable() {
+                @Override
 			public final void run() {
 				CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header4"),
 						Utils.getBundleString(bundle, "dialog4"),
@@ -123,6 +130,7 @@ public final strictfp class VikingIsland11 extends Island {
 			}
 		};
 		final Runnable dialog3 = new Runnable() {
+                @Override
 			public final void run() {
 				CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header3"),
 						Utils.getBundleString(bundle, "dialog3"),
@@ -133,6 +141,7 @@ public final strictfp class VikingIsland11 extends Island {
 			}
 		};
 		final Runnable dialog2 = new Runnable() {
+                @Override
 			public final void run() {
 				CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header2"),
 						Utils.getBundleString(bundle, "dialog2"),
@@ -143,6 +152,7 @@ public final strictfp class VikingIsland11 extends Island {
 			}
 		};
 		final Runnable dialog1 = new Runnable() {
+                @Override
 			public final void run() {
 				CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header1"),
 						Utils.getBundleString(bundle, "dialog1"),
@@ -153,6 +163,7 @@ public final strictfp class VikingIsland11 extends Island {
 			}
 		};
 		runnable = new Runnable() {
+                @Override
 			public final void run() {
 				CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header0"),
 						Utils.getBundleString(bundle, "dialog0"),
@@ -166,6 +177,7 @@ public final strictfp class VikingIsland11 extends Island {
 
 		// Winner prize
 		runnable = new Runnable() {
+                @Override
 			public final void run() {
 				getCampaign().getState().setIslandState(11, CampaignState.ISLAND_COMPLETED);
 				getCampaign().getState().setIslandState(12, CampaignState.ISLAND_AVAILABLE);
@@ -184,14 +196,17 @@ public final strictfp class VikingIsland11 extends Island {
 		insertGuardTower(enemy, Race.UNIT_WARRIOR_RUBBER, 94, 30);
 	}
 
+        @Override
 	public final CharSequence getHeader() {
 		return Utils.getBundleString(bundle, "header");
 	}
 
+        @Override
 	public final CharSequence getDescription() {
 		return Utils.getBundleString(bundle, "description");
 	}
 
+        @Override
 	public final CharSequence getCurrentObjective() {
 		return Utils.getBundleString(bundle, "objective");
 	}

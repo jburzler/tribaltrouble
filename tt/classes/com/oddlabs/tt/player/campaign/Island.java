@@ -48,6 +48,7 @@ public abstract class Island {
 	protected final GameNetwork startNewGame(NetworkSelector network, GUIRoot gui_root, int meters_per_world, int terrain_type, float hills, float vegetation_amount, float supplies_amount, int seed, int campaign_num, int initial_units, String[] ai_names) {
 		InGameInfo ingame_info = new CampaignInGameInfo(campaign);
 		WorldInitAction init_action = new WorldInitAction() {
+                        @Override
 			public final void run(WorldViewer viewer) {
 				world_viewer = viewer;
 				Menu.completeGameSetupHack(world_viewer);

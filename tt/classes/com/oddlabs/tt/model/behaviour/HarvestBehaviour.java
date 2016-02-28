@@ -20,10 +20,12 @@ public final strictfp class HarvestBehaviour implements Behaviour {
 		restartAnimation();
 	}
 
+        @Override
 	public final boolean isBlocking() {
 		return true;
 	}
 
+        @Override
 	public final int animate(float t) {
 		anim_time += t;
 		if (anim_time > unit.getWeaponFactory().getSecondsPerRelease(1f/SECONDS_PER_ANIMATION_CYCLE) && !sound) {
@@ -55,6 +57,7 @@ public final strictfp class HarvestBehaviour implements Behaviour {
 		sound = false;
 	}
 
+        @Override
 	public final void forceInterrupted() {
 	}
 }

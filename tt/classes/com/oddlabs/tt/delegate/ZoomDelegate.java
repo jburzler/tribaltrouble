@@ -27,6 +27,7 @@ public strictfp class ZoomDelegate extends InGameDelegate {
 		done = true;
 	}
 
+        @Override
 	public final void doRemove() {
 		super.doRemove();
 		if (!done) {
@@ -34,9 +35,11 @@ public strictfp class ZoomDelegate extends InGameDelegate {
 		}
 	}
 
+        @Override
 	public void keyPressed(KeyboardEvent event) {
 	}
 
+        @Override
 	public void keyReleased(KeyboardEvent event) {
 		if (!done) {
 			switch (event.getKeyCode()) {
@@ -47,9 +50,11 @@ public strictfp class ZoomDelegate extends InGameDelegate {
 		}
 	}
 
+        @Override
 	public void mouseScrolled(int amount) {
 	}
 
+        @Override
 	public void mouseMoved(int x, int y) {
 		if (!done) {
 			int dy = y - start_y;
@@ -60,15 +65,19 @@ public strictfp class ZoomDelegate extends InGameDelegate {
 		}
 	}
 
+        @Override
 	public void mouseDragged(int button, int x, int y, int relative_x, int relative_y, int absolute_x, int absolute_y) {
 	}
 
+        @Override
 	public void mousePressed(int button, int x, int y) {
 	}
 
+        @Override
 	public void mouseReleased(int button, int x, int y) {
 	}
 
+        @Override
 	protected int getCursorIndex() {
 		return GUIRoot.CURSOR_NULL;
 	}

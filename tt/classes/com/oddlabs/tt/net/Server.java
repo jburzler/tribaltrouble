@@ -110,6 +110,7 @@ public final strictfp class Server implements ConnectionListenerInterface {
 		return count;
 	}
 
+        @Override
 	public final void error(AbstractConnectionListener listener, IOException e) {
 		System.out.println("Listener failed: " + e);
 		close();
@@ -249,6 +250,7 @@ public final strictfp class Server implements ConnectionListenerInterface {
 		return (short)-1;
 	}
 
+        @Override
 	public final void incomingConnection(AbstractConnectionListener connection_listener, Object remote_address) {
 System.out.println("Incoming host connection from " + remote_address);
 		short available_slot = locateAvailableSlot();

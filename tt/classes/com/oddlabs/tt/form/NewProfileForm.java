@@ -67,10 +67,12 @@ public final strictfp class NewProfileForm extends Form {
 		compileCanvas();
 	}
 	
+        @Override
 	public final void setFocus() {
 		editline_nick.setFocus();
 	}
 
+        @Override
 	public final void doCancel() {
 		done();
 	}
@@ -89,10 +91,12 @@ public final strictfp class NewProfileForm extends Form {
 	}
 
 	private final strictfp class CreateProfileListener implements MouseClickListener, EnterListener {
+                @Override
 		public final void mouseClicked(int button, int x, int y, int clicks) {
 			createProfile();
 		}
 
+                @Override
 		public final void enterPressed(CharSequence text) {
 			createProfile();
 		}

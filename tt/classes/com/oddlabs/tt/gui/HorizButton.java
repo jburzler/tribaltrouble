@@ -11,6 +11,7 @@ public strictfp class HorizButton extends ButtonObject {
 		addChild(label);
 	}
 
+        @Override
 	protected final void renderGeometry() {
 		if (isDisabled())
 			Skin.getSkin().getHorizButtonUnpressed().render(0, 0, getWidth(), Skin.DISABLED);

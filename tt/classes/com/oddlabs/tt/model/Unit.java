@@ -134,10 +134,12 @@ public strictfp class Unit extends Selectable implements Occupant, Movable {
 		}
 	}
 
+        @Override
 	protected final float getZError() {
 		return getLandscapeError();
 	}
 
+        @Override
 	public final void visit(ElementVisitor visitor) {
 		visitor.visitUnit(this);
 	}
@@ -150,6 +152,7 @@ public strictfp class Unit extends Selectable implements Occupant, Movable {
 		return supply_container;
 	}
 
+        @Override
 	public final String toString() {
 		if (!isDead())
 			return "Unit: " + hashCode() + " | getOwner() = " + getOwner() + " | mounted = " + mounted + " | getGridX() = " + getGridX() + " | getGridY() = " + getGridY();
@@ -166,6 +169,7 @@ public strictfp class Unit extends Selectable implements Occupant, Movable {
 		reinsert();
 	}
 
+        @Override
 	public final int getStatusValue() {
 		int tower_factor = 1;
 		if (mounted)
@@ -178,6 +182,7 @@ public strictfp class Unit extends Selectable implements Occupant, Movable {
 		range_bonus += amount;
 	}
 
+        @Override
 	public final int getAttackPriority() {
 		assert !isDead();
 		if (getAbilities().hasAbilities(Abilities.BUILD))
@@ -186,6 +191,7 @@ public strictfp class Unit extends Selectable implements Occupant, Movable {
 			return AttackScanFilter.PRIORITY_WARRIOR;
 	}
 
+        @Override
 	public final void visit(ToolTipVisitor visitor) {
 		visitor.visitUnit(this);
 	}
@@ -224,6 +230,7 @@ public strictfp class Unit extends Selectable implements Occupant, Movable {
 		return mounted;
 	}
 
+        @Override
 	public final boolean isEnabled() {
 		return !isDead() && !mounted;
 	}
@@ -261,15 +268,18 @@ public strictfp class Unit extends Selectable implements Occupant, Movable {
 		return getWeaponFactory().getRange() + range_bonus + target.getSize();
 	}
 
+        @Override
 	public final float getSize() {
 		assert !isDead();
 		return 1.9f;
 	}
 
+        @Override
 	public final SpriteKey getSpriteRenderer() {
 		return getUnitTemplate().getSpriteRenderer();
 	}
 
+        @Override
 	public final void doAnimate(float t) {
 		anim_time += anim_speed*t;
 		if (isDead() || mounted)
@@ -290,16 +300,19 @@ public strictfp class Unit extends Selectable implements Occupant, Movable {
 		}
 	}
 
+        @Override
 	public final PathTracker getTracker() {
 		assert !isDead();
 		return path_tracker;
 	}
 
+        @Override
 	public final void markBlocking() {
 		assert !isDead();
 		path_penalty = StrictMath.min(path_penalty + PENALTY_INCREMENT, STATIC - 1); // never gets STATIC
 	}
 
+        @Override
 	public final int getPenalty() {
 		assert !isDead();
 		if (isBlocking())
@@ -308,6 +321,7 @@ public strictfp class Unit extends Selectable implements Occupant, Movable {
 			return path_penalty;
 	}
 
+        @Override
 	protected final void removeDying() {
 		if (getAbilities().hasAbilities(Abilities.MAGIC)) {
 			getOwner().setActiveChieftain(null);
@@ -330,6 +344,7 @@ public strictfp class Unit extends Selectable implements Occupant, Movable {
 		remove();
 	}
 
+        @Override
 	public final void free() {
 		assert !isDead();
 		UnitGrid unit_grid = getUnitGrid();
@@ -337,6 +352,7 @@ public strictfp class Unit extends Selectable implements Occupant, Movable {
 		path_penalty = INITIAL_PATH_PENALTY;
 	}
 
+        @Override
 	public final void occupy() {
 		assert !isDead();
 		UnitGrid unit_grid = getUnitGrid();
@@ -346,6 +362,7 @@ public strictfp class Unit extends Selectable implements Occupant, Movable {
 		getOwner().unitMoved();
 	}
 
+        @Override
 	public final boolean isMoving() {
 		return (getCurrentBehaviour() instanceof WalkBehaviour);
 	}
@@ -355,6 +372,7 @@ public strictfp class Unit extends Selectable implements Occupant, Movable {
 		behaviour.moveNextAnimate();
 	}
 */
+        @Override
 	public final void hit(int damage, float direction_x, float direction_y, Player owner) {
 		super.hit(damage, direction_x, direction_y, owner);
 		if (mounted) {
@@ -450,6 +468,7 @@ public strictfp class Unit extends Selectable implements Occupant, Movable {
 		return building.getUnitContainer() != null && getOwner() == building.getOwner() && building.getUnitContainer().canEnter(this);
 	}
 
+        @Override
 	public final float getDefenseChance() {
 		if (getCurrentController() instanceof StunController)
 			return 0;
@@ -462,6 +481,7 @@ public strictfp class Unit extends Selectable implements Occupant, Movable {
 		pushController(new WalkController(this, walkable_target, scan_attack));
 	}
 
+        @Override
 	public final void setTarget(Target target, int action, boolean aggressive) {
 		if (target == this)
 			return;
@@ -561,11 +581,13 @@ public strictfp class Unit extends Selectable implements Occupant, Movable {
 		}
 	}
 
+        @Override
 	public final int getAnimation() {
 		assert animation != -1;
 		return animation;
 	}
 
+        @Override
 	public final float getAnimationTicks() {
 		return anim_time;
 	}
@@ -575,6 +597,7 @@ public strictfp class Unit extends Selectable implements Occupant, Movable {
 		return mount_offset;
 	}
 
+        @Override
 	public final float getOffsetZ() {
 		if (mounted)
 			return mounted_building.getOffsetZ() + mount_offset;

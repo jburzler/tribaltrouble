@@ -200,6 +200,7 @@ public final strictfp class LandscapeTileTriangle {
 		return heightmap.planeHeight(x, y, current_plane);
 	}
 
+        @Override
 	public final String toString() {
 		return "i0_x = " + i0_x + " | i0_y = " + i0_y + " | i1_x = " + i1_x + " | i1_y = " + i1_y + " | i2_x = " + i2_x + " | i2_y = " + i2_y;
 	}

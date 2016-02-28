@@ -44,6 +44,7 @@ public final strictfp class GUI implements Animated {
 		return languages;
 	}
 
+        @Override
 	public final void animate(float t) {
 		fade.animate(this, t);
 	}
@@ -53,6 +54,7 @@ public final strictfp class GUI implements Animated {
 		LocalEventQueue.getQueue().getManager().removeAnimation(this);
 	}
 
+        @Override
 	public final void updateChecksum(StateChecksum checksum) {
 	}
 

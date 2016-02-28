@@ -18,6 +18,7 @@ public final strictfp class SupplyFinder implements FinderFilter {
 		this.supply_class = supply_class;
 	}
 
+        @Override
 	public final Occupant getOccupantFromRegion(Region region, boolean one_region) {
 		List supplies = region.getObjects(supply_class);
 		if (one_region) {
@@ -48,6 +49,7 @@ public final strictfp class SupplyFinder implements FinderFilter {
 		return null;
 	}
 
+        @Override
 	public final Occupant getBest() {
 		return findClosest();
 	}
@@ -88,6 +90,7 @@ public final strictfp class SupplyFinder implements FinderFilter {
 		return closest;
 	}
 	
+        @Override
 	public final boolean acceptOccupant(Occupant occ) {
 		if (supply_class.isInstance(occ)) {
 			Supply supply = (Supply)occ;

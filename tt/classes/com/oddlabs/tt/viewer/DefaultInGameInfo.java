@@ -22,14 +22,17 @@ public strictfp class DefaultInGameInfo implements InGameInfo {
 		menu.addAbortButton(abort_text);
 	}
 
+        @Override
 	public float getRandomStartPosition() {
 		return 0f;
 	}
 
+        @Override
 	public boolean isRated() {
 		return false;
 	}
 
+        @Override
 	public void addGameOverGUI(WorldViewer viewer, GameStatsDelegate delegate, int header_y, Group group) {
 		addGameOverGUI(viewer, delegate, header_y, group, true);
 	}
@@ -42,6 +45,7 @@ public strictfp class DefaultInGameInfo implements InGameInfo {
 
 		HorizButton button_replay = new HorizButton(Utils.getBundleString(GameStatsDelegate.bundle, "replay_island"), 150);
 		button_replay.addMouseClickListener(new MouseClickListener() {
+                        @Override
 			public final void mouseClicked(int button, int x, int y, int clicks) {
 				replay_island_flag = true;
 				delegate.startMenu();
@@ -49,6 +53,7 @@ public strictfp class DefaultInGameInfo implements InGameInfo {
 		});
 		HorizButton button_observer = new HorizButton(Utils.getBundleString(GameStatsDelegate.bundle, "observer_mode"), 150);
 		button_observer.addMouseClickListener(new MouseClickListener() {
+                        @Override
 			public final void mouseClicked(int button, int x, int y, int clicks) {
 			delegate.getViewer().getDelegate().setObserverMode();
 				delegate.pop();
@@ -57,6 +62,7 @@ public strictfp class DefaultInGameInfo implements InGameInfo {
 
 		HorizButton button_end = new HorizButton(Utils.getBundleString(GameStatsDelegate.bundle, "main_menu"), 150);
 		button_end.addMouseClickListener(new MouseClickListener() {
+                        @Override
 			public final void mouseClicked(int button, int x, int y, int clicks) {
 				delegate.startMenu();
 			}
@@ -128,11 +134,13 @@ public strictfp class DefaultInGameInfo implements InGameInfo {
 		game_infos.compileCanvas();
 	}
 
+        @Override
 	public void addGUI(WorldViewer viewer, InGameMainMenu menu, Group game_infos) {
 		addAbortButton(menu);
 		addGameInfos(viewer, menu, game_infos);
 	}
 
+        @Override
 	public final void close(WorldViewer viewer) {
 		if (replay_island_flag) {
 			TerrainMenu menu = new TerrainMenu(viewer.getNetwork(), viewer.getGUIRoot(), null, false, null);
@@ -142,10 +150,12 @@ public strictfp class DefaultInGameInfo implements InGameInfo {
 			Renderer.startMenu(viewer.getNetwork(), viewer.getGUIRoot().getGUI());
 	}
 
+        @Override
 	public final void abort(WorldViewer viewer) {
 		viewer.getGUIRoot().pushDelegate(new GameStatsDelegate(viewer, viewer.getGUIRoot().getDelegate().getCamera(), Utils.getBundleString(Menu.bundle, "game_aborted")));
 	}
 
+        @Override
 	public boolean isMultiplayer() {
 		return false;
 	}

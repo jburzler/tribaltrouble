@@ -12,6 +12,7 @@ public abstract strictfp class NativeResource {
 		count++;
 	}
 
+        @Override
 	protected final void finalize() {
 		synchronized (list_lock) {
 			finalized_resources.add(this);

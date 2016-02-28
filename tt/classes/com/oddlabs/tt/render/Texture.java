@@ -203,6 +203,7 @@ GLUtils.saveTexture(i, new java.io.File(texture_file.getURL().getFile() + dxt_im
 		return texture_handle;
 	}
 
+        @Override
 	public final void doDelete() {
 		global_size -= size;
 		handle_buffer.put(0, texture_handle);

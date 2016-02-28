@@ -29,6 +29,7 @@ public final strictfp class IdleController extends Controller {
 		return redecide_time > 0;
 	}
 
+        @Override
 	public final void decide() {
 		unit.setBehaviour(idle_behaviour);
 		if (shouldSleep(0f))
@@ -45,6 +46,7 @@ public final strictfp class IdleController extends Controller {
 			}
 	}
 
+        @Override
 	public String getKey() {
 		return super.getKey() + unit.getAbilities().hasAbilities(Abilities.BUILD) + unit.getAbilities().hasAbilities(Abilities.MAGIC);
 	}

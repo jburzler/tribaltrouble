@@ -20,6 +20,7 @@ public final strictfp class ChatLine extends EditLine {
 		tab_complete_list = list;
 	}
 
+        @Override
 	protected final void keyRepeat(KeyboardEvent e) {
 		if (catch_tab && e.getKeyChar() == '\t')
 			tabComplete(getText());

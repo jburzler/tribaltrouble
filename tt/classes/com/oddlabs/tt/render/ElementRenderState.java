@@ -12,18 +12,22 @@ final strictfp class ElementRenderState implements ModelState {
 		this.render_state = render_state;
 	}
 
+        @Override
 	public final Model getModel() {
 		return model;
 	}
 
+        @Override
 	public final void transform() {
 		visitor.transform(this);
 	}
 
+        @Override
 	public final float[] getTeamColor() {
 		return visitor.getTeamColor(this);
 	}
 
+        @Override
 	public final float[] getSelectionColor() {
 		return visitor.getSelectionColor(this);
 	}
@@ -39,18 +43,22 @@ final strictfp class ElementRenderState implements ModelState {
 		this.model = model;
 	}
 
+        @Override
 	public void markDetailPoint() {
 		visitor.markDetailPoint(this);
 	}
 
+        @Override
 	public void markDetailPolygon(int index) {
 		visitor.markDetailPolygon(this, index);
 	}
 
+        @Override
 	public final int getTriangleCount(int index) {
 		return visitor.getTriangleCount(this, index);
 	}
 
+        @Override
 	public final float getEyeDistanceSquared() {
 		return visitor.getEyeDistanceSquared(this);
 	}

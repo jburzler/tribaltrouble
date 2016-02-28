@@ -160,6 +160,7 @@ public final strictfp class Image implements Serializable {
 		return height;
 	}
 
+        @Override
 	public final String toString() {
 		return "Image: width = " + width + " | height = " + height;
 	}

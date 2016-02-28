@@ -36,10 +36,12 @@ public final strictfp class GameSession implements Serializable {
 		return team_count >= MatchmakingServerInterface.MIN_PLAYERS;
 	}
 	
+        @Override
 	public final int hashCode() {
 		return session_id;
 	}
 	
+        @Override
 	public final boolean equals(Object other) {
 		if (!(other instanceof GameSession))
 			return false;

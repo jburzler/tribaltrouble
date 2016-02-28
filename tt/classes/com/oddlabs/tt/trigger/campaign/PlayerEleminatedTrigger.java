@@ -13,6 +13,7 @@ public final strictfp class PlayerEleminatedTrigger extends IntervalTrigger {
 		this.player = player;
 	}
 
+        @Override
 	protected final void check() {
 		int units = player.getUnitCountContainer().getNumSupplies();
 		if (units == 0 && !player.hasActiveChieftain()) {
@@ -20,6 +21,7 @@ public final strictfp class PlayerEleminatedTrigger extends IntervalTrigger {
 		}
 	}
 
+        @Override
 	protected final void done() {
 		runnable.run();
 	}

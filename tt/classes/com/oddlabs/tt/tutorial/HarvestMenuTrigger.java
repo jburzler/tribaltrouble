@@ -8,6 +8,7 @@ public final strictfp class HarvestMenuTrigger extends TutorialTrigger {
 		local_player.enableHarvesting(true);
 	}
 
+        @Override
 	protected final void run(Tutorial tutorial) {
 		if (tutorial.getViewer().getPanel().inHarvestMenu())
 			tutorial.next(new SupplyTrigger(tutorial.getViewer().getLocalPlayer()));

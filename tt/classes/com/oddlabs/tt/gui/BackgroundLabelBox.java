@@ -7,6 +7,7 @@ public strictfp class BackgroundLabelBox extends LabelBox {
 		super(text, font, width);
 	}
 
+        @Override
 	protected final void renderGeometry() {
 		Box background_box = Skin.getSkin().getBackgroundBox();
 		background_box.render(0, 1, getWidth(), getHeight() - 2, Skin.NORMAL);

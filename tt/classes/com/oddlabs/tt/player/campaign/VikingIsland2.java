@@ -25,6 +25,7 @@ public final strictfp class VikingIsland2 extends Island {
 		super(campaign);
 	}
 
+        @Override
 	public final void init(NetworkSelector network, GUIRoot gui_root) {
 		String[] ai_names = new String[]{Utils.getBundleString(bundle, "name0"),
 			Utils.getBundleString(bundle, "name1"),
@@ -69,6 +70,7 @@ public final strictfp class VikingIsland2 extends Island {
 		game_network.getClient().getServerInterface().startServer();
 	}
 
+        @Override
 	protected final void start() {
 		Runnable runnable;
 		final Player local_player = getViewer().getLocalPlayer();
@@ -76,6 +78,7 @@ public final strictfp class VikingIsland2 extends Island {
 
 		// Introduction
 		runnable = new Runnable() {
+                @Override
 			public final void run() {
 				CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header0"),
 						Utils.getBundleString(bundle, "dialog0"),
@@ -88,6 +91,7 @@ public final strictfp class VikingIsland2 extends Island {
 
 		// Winner prize
 		final Runnable prize = new Runnable() {
+                @Override
 			public final void run() {
 				getCampaign().getState().setIslandState(2, CampaignState.ISLAND_COMPLETED);
 				getCampaign().getState().setIslandState(1, CampaignState.ISLAND_AVAILABLE);
@@ -99,6 +103,7 @@ public final strictfp class VikingIsland2 extends Island {
 
 		// Winning condition
 		runnable = new Runnable() {
+                @Override
 			public final void run() {
 				CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header1"),
 						Utils.getBundleString(bundle, "dialog1"),
@@ -135,6 +140,7 @@ public final strictfp class VikingIsland2 extends Island {
 
 		// Attack1
 		Runnable attack1_runnable = new Runnable() {
+                @Override
 			public final void run() {
 				Building armory = local_player.getArmory();
 				Unit chieftain = local_player.getChieftain();
@@ -150,6 +156,7 @@ public final strictfp class VikingIsland2 extends Island {
 
 		// Attack2
 		Runnable attack2_runnable = new Runnable() {
+                @Override
 			public final void run() {
 				Building armory = local_player.getArmory();
 				Unit chieftain = local_player.getChieftain();
@@ -180,14 +187,17 @@ public final strictfp class VikingIsland2 extends Island {
 		}
 	}
 
+        @Override
 	public final CharSequence getHeader() {
 		return Utils.getBundleString(bundle, "header");
 	}
 
+        @Override
 	public final CharSequence getDescription() {
 		return Utils.getBundleString(bundle, "description");
 	}
 
+        @Override
 	public final CharSequence getCurrentObjective() {
 		return Utils.getBundleString(bundle, "objective");
 	}

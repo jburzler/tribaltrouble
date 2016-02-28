@@ -16,6 +16,7 @@ final strictfp class LinearParticle extends Particle {
 		super(angle);
 	}
 
+        @Override
 	public final void update(float t) {
 		super.update(t);
 		velocity_x += acceleration_x*t;

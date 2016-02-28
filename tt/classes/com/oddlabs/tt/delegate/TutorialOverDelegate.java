@@ -37,6 +37,7 @@ public final strictfp class TutorialOverDelegate extends CameraDelegate implemen
 		button_restart.addMouseClickListener(new StartTutorialListener(tutorial_number));
 		HorizButton button_end = new HorizButton(Utils.getBundleString(bundle, "main_menu"), 170);
 		button_end.addMouseClickListener(new MouseClickListener() {
+                        @Override
 			public final void mouseClicked(int button, int x, int y, int clicks) {
 				viewer.close();
 				TutorialOverDelegate.this.setDisabled(true);
@@ -59,10 +60,12 @@ public final strictfp class TutorialOverDelegate extends CameraDelegate implemen
 		delay_timer.start();
 	}
 
+        @Override
 	protected final void renderGeometry() {
 		renderBackgroundAlpha();
 	}
 
+        @Override
 	public final void update(Object anim) {
 		addChild(group_buttons);
 		delay_timer.stop();
@@ -75,6 +78,7 @@ public final strictfp class TutorialOverDelegate extends CameraDelegate implemen
 			this.tutorial_number = tutorial_number;
 		}
 		
+                @Override
 		public final void mouseClicked(int button, int x, int y, int clicks) {
 			if (tutorial_info.setNextTutorial(viewer.getGUIRoot(), tutorial_number))
 				viewer.close();

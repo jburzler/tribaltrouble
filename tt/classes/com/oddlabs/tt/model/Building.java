@@ -122,10 +122,12 @@ public final strictfp class Building extends Selectable implements Occupant {
 		production_emitter.stop();
 	}
 	
+        @Override
 	public final float getOffsetZ() {
 		return 0;
 	}
 	
+        @Override
 	public final void visit(ElementVisitor visitor) {
 		visitor.visitBuilding(this);
 	}
@@ -142,6 +144,7 @@ public final strictfp class Building extends Selectable implements Occupant {
 		return rally_point;
 	}
 
+        @Override
 	protected final void doAnimate(float t) {
 		if (!isDead()) {
 			UnitContainer unit_container = getUnitContainer();
@@ -212,6 +215,7 @@ public final strictfp class Building extends Selectable implements Occupant {
 		return chieftain_container;
 	}
 
+        @Override
 	public final boolean isEnabled() {
 		return !isDead();
 	}
@@ -495,6 +499,7 @@ public final strictfp class Building extends Selectable implements Occupant {
 		return build_points == getBuildingTemplate().getMaxHitPoints();
 	}
 
+        @Override
 	public final float getHitOffsetZ() {
 		return getTemplate().getHitOffsetZ(getRenderLevel());
 	}
@@ -514,6 +519,7 @@ public final strictfp class Building extends Selectable implements Occupant {
 		 return true;
 	}
 	
+        @Override
 	public final int getAttackPriority() {
 		if (getAbilities().hasAbilities(Abilities.ATTACK))
 			return AttackScanFilter.PRIORITY_TOWER;
@@ -523,6 +529,7 @@ public final strictfp class Building extends Selectable implements Occupant {
 			return AttackScanFilter.PRIORITY_QUARTERS;
 	}
 
+        @Override
 	protected final void setTarget(Target target, int action, boolean aggressive) {
 		if (getAbilities().hasAbilities(Abilities.ATTACK)) {
 			if (target != this) {
@@ -550,17 +557,20 @@ public final strictfp class Building extends Selectable implements Occupant {
 		reinsert();
 	}
 
+        @Override
 	public final float getSize() {
 		assert !isDead();
 		float radius = (getBuildingTemplate().getPlacingSize() - 1);
 		return (float)StrictMath.sqrt(2)*radius + .1f;
 	}
 
+        @Override
 	public final int getPenalty() {
 		assert !isDead();
 		return Occupant.STATIC;
 	}
 
+        @Override
 	protected final void removeDying() {
 		
 		new RandomVelocityEmitter(getOwner().getWorld(), new Vector3f(getPositionX(), getPositionY(), getPositionZ()), 0f, 0f,
@@ -626,6 +636,7 @@ public final strictfp class Building extends Selectable implements Occupant {
 			return RENDER_HALFBUILT;
 	}
 
+        @Override
 	public final SpriteKey getSpriteRenderer() {
 		int render_level = getRenderLevel();
 		switch (render_level) {
@@ -640,6 +651,7 @@ public final strictfp class Building extends Selectable implements Occupant {
 		}
 	}
 
+        @Override
 	public final void visit(ToolTipVisitor visitor) {
 		visitor.visitBuilding(this);
 	}
@@ -694,6 +706,7 @@ public final strictfp class Building extends Selectable implements Occupant {
 			}
 	}
 
+        @Override
 	public final void hit(int damage, float dir_x, float dir_y, Player owner) {
 		super.hit(damage, dir_x, dir_y, owner);
 		if (!isDead()) {
@@ -711,14 +724,17 @@ public final strictfp class Building extends Selectable implements Occupant {
 		}
 	}
 
+        @Override
 	public final String toString() {
 		return "Building: isDead() = " + isDead();
 	}
 
+        @Override
 	public final float getAnimationTicks() {
 		return 0;
 	}
 
+        @Override
 	public final int getAnimation() {
 		return 0;
 	}
@@ -737,6 +753,7 @@ public final strictfp class Building extends Selectable implements Occupant {
 		}
 	}
 
+        @Override
 	public final int getStatusValue() {
 		if (getAbilities().hasAbilities(Abilities.REPRODUCE)) {
 			return getUnitContainer().getNumSupplies();

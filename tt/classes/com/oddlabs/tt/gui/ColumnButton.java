@@ -27,14 +27,17 @@ public final strictfp class ColumnButton extends RadioButtonGroupElement {
 		setCanFocus(true);
 	}
 
+        @Override
 	protected final void mouseReleased(int button, int x, int y) {
 		pressed = false;
 	}
 
+        @Override
 	protected final void mousePressed(int button, int x, int y) {
 		pressed = true;
 	}
 
+        @Override
 	protected void mouseClicked(int button, int x, int y, int clicks) {
 		if (isMarked())
 			sorted_descending = !sorted_descending;
@@ -48,6 +51,7 @@ public final strictfp class ColumnButton extends RadioButtonGroupElement {
 		return column_index;
 	}
 
+        @Override
 	protected final void renderGeometry() {
 		if (isDisabled()) {
 			Skin.getSkin().getMultiColumnComboBoxData().getButtonUnpressed().render(0, 0, getWidth(), Skin.DISABLED);

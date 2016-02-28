@@ -16,6 +16,7 @@ public final strictfp class ArmyTrigger extends TutorialTrigger {
 		local_player.enableMoving(true);
 	}
 
+        @Override
 	protected final void run(Tutorial tutorial) {
 		Set set = tutorial.getViewer().getLocalPlayer().getUnits().getSet();
 		Iterator it = set.iterator();

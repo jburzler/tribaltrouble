@@ -252,6 +252,7 @@ public final strictfp class SelectGameMenu extends Form implements MatchmakingLi
 		game_network.getClient().setConfigurationListener(game_panel);
 	}
 
+        @Override
 	public final void setFocus() {
 		game_list_panel.setFocus();
 	}
@@ -260,6 +261,7 @@ public final strictfp class SelectGameMenu extends Form implements MatchmakingLi
 		Network.getMatchmakingClient().requestList(type);
 	}
 
+        @Override
 	public final void connectionLost() {
 		leaveChatRoom();
 		remove();
@@ -268,18 +270,22 @@ public final strictfp class SelectGameMenu extends Form implements MatchmakingLi
 		gui_root.addModalForm(new MessageForm(Utils.getBundleString(bundle, "connection_lost")));
 	}
 
+        @Override
 	public final void loggedIn() {
 		assert false;
 	}
 
+        @Override
 	public final void loginError(int error_code) {
 		assert false;
 	}
 
+        @Override
 	public void terrainMenuCancel() {
 		setPanel(PANEL_INDEX_GAME, game_list_panel);
 	}
 
+        @Override
 	public void terrainMenuOK() {
 
 	}
@@ -293,6 +299,7 @@ public final strictfp class SelectGameMenu extends Form implements MatchmakingLi
 		setPanel(PANEL_INDEX_GAME, game_list_panel);
 	}
 
+        @Override
 	public final void joinedChat(ChatRoomInfo info) {
 		if (chat_panel != null) {
 			chat_panel.connectionLost();
@@ -302,19 +309,23 @@ public final strictfp class SelectGameMenu extends Form implements MatchmakingLi
 		setPanel(PANEL_INDEX_CHAT, chat_panel);
 	}
 
+        @Override
 	protected final void doRemove() {
 		super.doRemove();
 		Network.getChatHub().removeListener(chat_panel);
 	}
 
+        @Override
 	public final void receivedProfiles(Profile[] profiles, String last_nick) {
 		profiles_form.receivedProfiles(profiles, last_nick);
 	}
 
+        @Override
 	public final void updateChatRoom(ChatRoomInfo info) {
 		chat_panel.update(info);
 	}
 
+        @Override
 	public final void receivedList(int type, Object[] names) {
 		switch (type) {
 			case MatchmakingServerInterface.TYPE_GAME:
@@ -336,6 +347,7 @@ public final strictfp class SelectGameMenu extends Form implements MatchmakingLi
 		}
 	}
 
+        @Override
 	public final void clearList(int type) {
 		switch (type) {
 			case MatchmakingServerInterface.TYPE_GAME:
@@ -395,6 +407,7 @@ public final strictfp class SelectGameMenu extends Form implements MatchmakingLi
 		}
 	}
 
+        @Override
 	protected final void doCancel() {
 		leaveChatRoom();
 		if (game_panel != null)
@@ -433,16 +446,19 @@ public final strictfp class SelectGameMenu extends Form implements MatchmakingLi
 	}
 
 	private final strictfp class RoomDoubleClickedListener implements RowListener {
+                @Override
 		public final void rowDoubleClicked(Object context) {
 			ChatRoomEntry chat_room_info = (ChatRoomEntry)context;
 			joinRoom(chat_room_info);
 		}
 
+                @Override
 		public final void rowChosen(Object context) {
 		}
 	}
 
 	private final strictfp class GameListPanelListener implements FocusListener {
+                @Override
 		public final void activated(boolean activated) {
 			if (activated)
 				updateList(MatchmakingServerInterface.TYPE_GAME);
@@ -450,16 +466,19 @@ public final strictfp class SelectGameMenu extends Form implements MatchmakingLi
 	}
 
 	private final strictfp class GameDoubleClickedListener implements RowListener {
+                @Override
 		public final void rowDoubleClicked(Object context) {
 			GameHost selected_game = (GameHost)context;
 			joinGame(selected_game);
 		}
 
+                @Override
 		public final void rowChosen(Object context) {
 		}
 	}
 
 	private final strictfp class JoinGameListener implements MouseClickListener {
+                @Override
 		public final void mouseClicked(int button, int x, int y, int clicks) {
 			GameHost selected_game = (GameHost)game_list_box.getSelected();
 			joinGame(selected_game);
@@ -467,18 +486,21 @@ public final strictfp class SelectGameMenu extends Form implements MatchmakingLi
 	}
 
 	private final strictfp class UpdateScoresListener implements MouseClickListener {
+                @Override
 		public final void mouseClicked(int button, int x, int y, int clicks) {
 			updateList(MatchmakingServerInterface.TYPE_RANKING_LIST);
 		}
 	}
 
 	private final strictfp class UpdateGameListListener implements MouseClickListener {
+                @Override
 		public final void mouseClicked(int button, int x, int y, int clicks) {
 			updateList(MatchmakingServerInterface.TYPE_GAME);
 		}
 	}
 
 	private final strictfp class CreateGameListener implements MouseClickListener {
+                @Override
 		public final void mouseClicked(int button, int x, int y, int clicks) {
 			if (Network.getMatchmakingClient().getProfile() != null) {
 				Panel panel = new Panel(Utils.getBundleString(bundle, "game"));
@@ -492,6 +514,7 @@ public final strictfp class SelectGameMenu extends Form implements MatchmakingLi
 	}
 
 	private final strictfp class JoinRoomListener implements MouseClickListener {
+                @Override
 		public final void mouseClicked(int button, int x, int y, int clicks) {
 			ChatRoomEntry chat_room_info = (ChatRoomEntry)chat_room_list_box.getSelected();
 			joinRoom(chat_room_info);
@@ -499,12 +522,14 @@ public final strictfp class SelectGameMenu extends Form implements MatchmakingLi
 	}
 
 	private final strictfp class UpdateRoomListListener implements MouseClickListener {
+                @Override
 		public final void mouseClicked(int button, int x, int y, int clicks) {
 			updateList(MatchmakingServerInterface.TYPE_CHAT_ROOM_LIST);
 		}
 	}
 
 	private final strictfp class CreateRoomListener implements MouseClickListener {
+                @Override
 		public final void mouseClicked(int button, int x, int y, int clicks) {
 			if (Network.getMatchmakingClient().getProfile() != null) {
 				main_menu.setMenuCentered(new CreateChatRoomForm(gui_root, main_menu, SelectGameMenu.this));
@@ -513,6 +538,7 @@ public final strictfp class SelectGameMenu extends Form implements MatchmakingLi
 	}
 
 	private strictfp final class SendChatListener implements EnterListener {
+                @Override
 		public final void enterPressed(CharSequence text) {
 			String chat = text.toString();
 			if (!chat.equals("")) {
@@ -524,6 +550,7 @@ public final strictfp class SelectGameMenu extends Form implements MatchmakingLi
 	}
 
 	private strictfp final class LeaveListener implements MouseClickListener {
+                @Override
 		public final void mouseClicked(int button, int x, int y, int clicks) {
 			leaveChatRoom();
 		}
@@ -536,6 +563,7 @@ public final strictfp class SelectGameMenu extends Form implements MatchmakingLi
 			this.box = box;
 		}
 
+                @Override
 		public final void itemChosen(PulldownMenu menu, int item_index) {
 			GameHost host = (GameHost)box.getRightClickedRowData();
 			switch (item_index) {

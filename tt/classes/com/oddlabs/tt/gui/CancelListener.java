@@ -9,6 +9,7 @@ public final strictfp class CancelListener implements MouseClickListener {
 		this.form = form;
 	}
 	
+        @Override
 	public final void mouseClicked(int button, int x, int y, int clicks) {
 		form.cancel();
 	}

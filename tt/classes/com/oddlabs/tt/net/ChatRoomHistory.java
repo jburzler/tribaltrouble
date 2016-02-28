@@ -35,6 +35,7 @@ public final strictfp class ChatRoomHistory extends ChatHistory {
 		}
 	}
 
+        @Override
 	public final void chat(ChatMessage message) {
 		if (message.type != ChatMessage.CHAT_PRIVATE && message.type != ChatMessage.CHAT_CHATROOM)
 			return;

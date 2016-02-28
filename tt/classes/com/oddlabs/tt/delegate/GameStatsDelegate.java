@@ -132,15 +132,18 @@ public final strictfp class GameStatsDelegate extends CameraDelegate implements 
 		delay_timer.start();
 	}
 
+        @Override
 	public final void update(Object anim) {
 		addChild(group_buttons);
 		delay_timer.stop();
 	}
 
+        @Override
 	protected final void renderGeometry() {
 		renderBackgroundAlpha();
 	}
 
+        @Override
 	protected void keyRepeat(KeyboardEvent event) {
 		switch (event.getKeyCode()) {
 			case Keyboard.KEY_TAB:

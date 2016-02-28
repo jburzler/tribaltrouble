@@ -353,6 +353,7 @@ public abstract strictfp class AI implements Animated {
 
 	}
 
+        @Override
 	public final void updateChecksum(StateChecksum checksum) {
 	}
 }

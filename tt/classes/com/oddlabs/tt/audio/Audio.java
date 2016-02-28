@@ -57,6 +57,7 @@ public final strictfp class Audio extends NativeResource {
 		return al_buffers.get(0);
 	}
 
+        @Override
 	protected final void doDelete() {
 		if (AL.isCreated()) {
 			al_buffers.clear();

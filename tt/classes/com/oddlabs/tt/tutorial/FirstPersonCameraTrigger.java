@@ -8,6 +8,7 @@ public final strictfp class FirstPersonCameraTrigger extends TutorialTrigger {
 		super(.1f, 2f, "fpc");
 	}
 
+        @Override
 	protected final void run(Tutorial tutorial) {
 		Delegate delegate = tutorial.getViewer().getGUIRoot().getDelegate();
 		if (delegate instanceof FirstPersonDelegate)

@@ -12,14 +12,17 @@ public final strictfp class RadioButton extends RadioButtonGroupElement {
 		setCanFocus(true);
 	}
 
+        @Override
 	protected final void mouseReleased(int button, int x, int y) {
 		pressed = false;
 	}
 
+        @Override
 	protected final void mousePressed(int button, int x, int y) {
 		pressed = true;
 	}
 
+        @Override
 	protected final void renderGeometry() {
 		if (isDisabled()) {
 			if (isMarked())

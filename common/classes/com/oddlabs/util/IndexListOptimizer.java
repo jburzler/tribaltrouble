@@ -153,6 +153,7 @@ dumpBuffer(buffer);*/
 			assert success;
 		}
 
+                @Override
 		public final String toString() {
 			return "[index = " + index + " score = " + score + " round = " + round_added + " num_triangles = " + triangle_list.size() + "]";
 		}
@@ -193,6 +194,7 @@ dumpBuffer(buffer);*/
 				buffer.put(indices[i].index);
 		}
 
+                @Override
 		public final String toString() {
 			String result = "Triangle score = " + getScore();
 			for (int i = 0; i < indices.length; i++)

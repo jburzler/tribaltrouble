@@ -101,6 +101,7 @@ public final strictfp class RowCollection extends GUIObject {
 			this.row = row;
 		}
 
+                @Override
 		public final void mouseClicked(int button, int x, int y, int clicks) {
 			selectRow(row);
 			if (button == LocalInput.RIGHT_BUTTON) {

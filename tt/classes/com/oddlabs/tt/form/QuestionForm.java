@@ -31,6 +31,7 @@ public strictfp class QuestionForm extends Form {
 		centerPos();
 	}
 
+        @Override
 	public final void setFocus() {
 		yes_button.setFocus();
 	}

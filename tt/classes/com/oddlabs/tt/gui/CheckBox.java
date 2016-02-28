@@ -38,6 +38,7 @@ public final strictfp class CheckBox extends GUIObject implements ToolTip {
 		}
 	}
 	
+        @Override
 	public final void appendToolTip(ToolTipBox tool_tip_box) {
 		tool_tip_box.append(tool_tip);
 	}
@@ -47,18 +48,22 @@ public final strictfp class CheckBox extends GUIObject implements ToolTip {
 		checkedAll(marked);
 	}
 
+        @Override
 	protected final void mouseClicked(int button, int x, int y, int clicks) {
 		toggleMarked();
 	}
 
+        @Override
 	protected final void mouseReleased(int button, int x, int y) {
 		pressed = false;
 	}
 
+        @Override
 	protected final void mousePressed(int button, int x, int y) {
 		pressed = true;
 	}
 
+        @Override
 	protected final void renderGeometry() {
 		if (isDisabled()) {
 			if (marked)

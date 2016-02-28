@@ -94,6 +94,7 @@ public final strictfp class TreeRenderer extends TreePicker {
 		render_list.clear();
 	}
 
+        @Override
 	final boolean isPicking() {
 		return false;
 	}

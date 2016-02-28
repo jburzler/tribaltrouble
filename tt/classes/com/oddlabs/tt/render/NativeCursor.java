@@ -53,6 +53,7 @@ public final strictfp class NativeCursor extends NativeResource {
 		}
 	}
 
+        @Override
 	public final void doDelete() {
 		if (cursor != null) {
 			PointerInput.deletingCursor(cursor);

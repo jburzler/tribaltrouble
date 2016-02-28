@@ -21,6 +21,7 @@ public final strictfp class SupplyGatheredTrigger extends IntervalTrigger {
 		this.goal = goal;
 	}
 
+        @Override
 	protected final void check() {
 		int count = 0;
 		Selectable[][] selectables = local_player.classifyUnits();
@@ -40,6 +41,7 @@ public final strictfp class SupplyGatheredTrigger extends IntervalTrigger {
 			triggered();
 	}
 
+        @Override
 	protected final void done() {
 		runnable.run();
 	}

@@ -44,6 +44,7 @@ public final strictfp class RenderState implements ElementVisitor {
 		this.default_shadow_renderer = (SelectableShadowRenderer)render_queues.getShadowRenderer(
 				render_queues.registerSelectableShadowList(RacesResources.DEFAULT_SHADOW_DESC));
 		this.render_state_cache = new RenderStateCache(new RenderStateFactory() {
+                        @Override
 			public final Object create() {
 				return new ElementRenderState(RenderState.this);
 			}
@@ -85,6 +86,7 @@ public final strictfp class RenderState implements ElementVisitor {
 	}
 
 	private final static ModelVisitor unit_visitor = new SelectableVisitor() {
+                @Override
 		public final void markDetailPolygon(ElementRenderState render_state, int level) {
 			Unit unit = (Unit)render_state.model;
 			super.markDetailPolygon(render_state, level);
@@ -97,6 +99,7 @@ public final strictfp class RenderState implements ElementVisitor {
 			}
 		}
 	};
+        @Override
 	public final void visitUnit(final Unit unit) {
 		float z_offset = getVisuallyCorrectHeight(unit.getPositionX(), unit.getPositionY()) + unit.getOffsetZ();
 		visitSelectable(unit_visitor, unit, z_offset, unit.getUnitTemplate().getSelectionRadius(), unit.getUnitTemplate().getSelectionHeight());
@@ -184,6 +187,7 @@ public final strictfp class RenderState implements ElementVisitor {
 	}
 
 	private final static ModelVisitor building_visitor = new SelectableVisitor();
+        @Override
 	public final void visitBuilding(final Building building) {
 		visitSelectable(building_visitor, building, building.getPositionZ(), getBuildingSelectionRadius(building), getBuildingSelectionHeight(building));
 	}
@@ -196,38 +200,45 @@ public final strictfp class RenderState implements ElementVisitor {
 		return sprite_sorter.add(model, camera, point_on_map);
 	}
 
+        @Override
 	public final void visitEmitter(final Emitter emitter) {
 		if (!picking)
 			emitter_queue.add(emitter);
 	}
 
+        @Override
 	public final void visitLightning(final Lightning lightning) {
 		if (!picking)
 			lightning_queue.add(lightning);
 	}
 
+        @Override
 	public final void visitRespond(final LandscapeTargetRespond respond) {
 		if (!picking)
 			target_respond_renderer.addToTargetList(respond);
 	}
 
 	private final static ModelVisitor supply_model_visitor = new SupplyModelVisitor() {
+                @Override
 		public final void transform(ElementRenderState render_state) {
 			SupplyModel model = (SupplyModel)render_state.getModel();
 			GL11.glTranslatef(model.getPositionX(), model.getPositionY(), model.getPositionZ());
 			GL11.glRotatef(model.getRotation(), 0f, 0f, 1f);
 		}
 	};
+        @Override
 	public final void visitSupplyModel(final SupplyModel model) {
 		addToRenderList(getCachedState(supply_model_visitor, model));
 	}
 
 	private final static ModelVisitor rubber_model_visitor = new SupplyModelVisitor() {
+                @Override
 		public final void transform(ElementRenderState render_state) {
 			Model model = render_state.model;
 			RenderTools.translateAndRotate(model.getPositionX(), model.getPositionY(), render_state.f, model.getDirectionX(), model.getDirectionY());
 		}
 	};
+        @Override
 	public final void visitRubberSupply(final RubberSupply model) {
 		float z_offset = getVisuallyCorrectHeight(model.getPositionX(), model.getPositionY()) + model.getOffsetZ();
 		ModelState state = getCachedState(rubber_model_visitor, model, z_offset);
@@ -237,11 +248,13 @@ public final strictfp class RenderState implements ElementVisitor {
 	}
 
 	private final static ModelVisitor scenery_model_visitor = new WhiteModelVisitor() {
+                @Override
 		public void transform(ElementRenderState render_state) {
 			RenderTools.translateAndRotate(render_state.getModel());
 			GL11.glColor4f(1f, 1f, 1f, 1f);
 		}
 	};
+        @Override
 	public final void visitSceneryModel(final SceneryModel model) {
 		ModelState state = getCachedState(scenery_model_visitor, model);
 		addToRenderList(state);
@@ -255,6 +268,7 @@ public final strictfp class RenderState implements ElementVisitor {
 	private final static ModelVisitor plants_model_visitor = new WhiteModelVisitor() {
 		private final static float START_FADE_DIST = 100;
 
+                @Override
 		public final void transform(ElementRenderState render_state) {
 			Plants plants = (Plants)render_state.getModel();
 			RenderTools.translateAndRotate(plants);
@@ -266,6 +280,7 @@ public final strictfp class RenderState implements ElementVisitor {
 			}
 		}
 	};
+        @Override
 	public final void visitPlants(final Plants plants) {
 		if (!picking && Globals.draw_plants) {
 			float camera_dist_sqr = RenderTools.getEyeDistanceSquared(plants, camera.getCurrentX(), camera.getCurrentY(), camera.getCurrentZ());
@@ -275,12 +290,14 @@ public final strictfp class RenderState implements ElementVisitor {
 	}
 
 	private final static ModelVisitor directed_weapon_model_visitor = new WhiteModelVisitor() {
+                @Override
 		public final void transform(ElementRenderState render_state) {
 			DirectedThrowingWeapon model = (DirectedThrowingWeapon)render_state.getModel();
 			RenderTools.translateAndRotate(render_state.getModel());
 			GL11.glRotatef(-model.getZSpeed(), 0f, 1f, 0f);
 		}
 	};
+        @Override
 	public final void visitDirectedThrowingWeapon(final DirectedThrowingWeapon model) {
 		if (!picking) {
 			addToRenderList(getCachedState(directed_weapon_model_visitor, model));
@@ -288,12 +305,14 @@ public final strictfp class RenderState implements ElementVisitor {
 	}
 
 	private final static ModelVisitor rotating_weapon_model_visitor = new WhiteModelVisitor() {
+                @Override
 		public final void transform(ElementRenderState render_state) {
 			RotatingThrowingWeapon model = (RotatingThrowingWeapon)render_state.getModel();
 			RenderTools.translateAndRotate(render_state.getModel());
 			GL11.glRotatef(model.getAngle(), 0f, 1f, 0f);
 		}
 	};
+        @Override
 	public final void visitRotatingThrowingWeapon(final RotatingThrowingWeapon model) {
 		if (!picking) {
 			addToRenderList(getCachedState(rotating_weapon_model_visitor, model));

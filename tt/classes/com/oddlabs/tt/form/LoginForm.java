@@ -125,13 +125,16 @@ public final strictfp class LoginForm extends Form implements RegisterProgressFo
 		}
 	}
 
+        @Override
 	public final void registrationFailed() {
 	}
 	
+        @Override
 	public final void registrationCompleted() {
 		main_menu.setMenu(this);
 	}
 	
+        @Override
 	public final void setFocus() {
 		editline_username.setFocus();
 	}
@@ -157,6 +160,7 @@ public final strictfp class LoginForm extends Form implements RegisterProgressFo
 	}
 
 	private final strictfp class NewUserListener implements MouseClickListener {
+                @Override
 		public final void mouseClicked(int button, int x, int y, int clicks) {
 			remove();
 			main_menu.setMenu(new NewUserForm(network, gui_root, main_menu));
@@ -164,10 +168,12 @@ public final strictfp class LoginForm extends Form implements RegisterProgressFo
 	}
 
 	private final strictfp class LoginListener implements MouseClickListener, EnterListener {
+                @Override
 		public final void mouseClicked(int button, int x, int y, int clicks) {
 			login();
 		}
 
+                @Override
 		public final void enterPressed(CharSequence text) {
 			login();
 		}

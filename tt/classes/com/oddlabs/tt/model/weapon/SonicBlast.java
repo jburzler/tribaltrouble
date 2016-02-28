@@ -72,6 +72,7 @@ public final strictfp class SonicBlast implements Magic {
 				1f));
 	}
 
+        @Override
 	public final void animate(float t) {
 		time = StrictMath.min(time + t, seconds);
 		if (time >= seconds) {
@@ -151,9 +152,11 @@ public final strictfp class SonicBlast implements Magic {
 		return result;
 	}
 
+        @Override
 	public void updateChecksum(StateChecksum checksum) {
 	}
 
+        @Override
 	public final void interrupt() {
 		if (lur != null) {
 			lur.stop(.2f, Settings.getSettings().sound_gain);

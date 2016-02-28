@@ -22,10 +22,12 @@ public final strictfp class RepairController extends Controller {
 		return building;
 	}
 
+        @Override
 	public final String getKey() {
 		return super.getKey() + building.hashCode();
 	}
 
+        @Override
 	public final void decide() {
 		if (building.isDead()) {
 			unit.popController();

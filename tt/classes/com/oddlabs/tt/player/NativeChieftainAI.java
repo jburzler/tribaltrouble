@@ -10,6 +10,7 @@ public final strictfp class NativeChieftainAI extends ChieftainAI {
 	private final static int NUM_UNITS_FOR_LIGHTNING = 2;
 	private final static int NUM_UNITS_FOR_POISON = 5;
 
+        @Override
 	public final void decide(Unit chieftain) {
 		nodeLightningCloud(chieftain);
 		nodePoisonFog(chieftain);

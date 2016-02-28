@@ -31,16 +31,19 @@ public final strictfp class WaitingForPlayersForm extends Form {
 		centerPos();
 	}
 
+        @Override
 	protected final void keyRepeat(KeyboardEvent event) {
 		if (event.getKeyCode() != Keyboard.KEY_ESCAPE) // KEY_ESCAPE should not close this form
 			super.keyRepeat(event);
 	}
 
+        @Override
 	protected final void doCancel() {
 		viewer.close();
 	}
 
 	private final strictfp class AbortListener implements MouseClickListener {
+                @Override
 		public final void mouseClicked(int button, int x, int y, int clicks) {
 			viewer.getGUIRoot().addModalForm(new QuestionForm(Utils.getBundleString(bundle, "confirm_abort"), new CancelListener(WaitingForPlayersForm.this)));
 		}

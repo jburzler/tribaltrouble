@@ -13,6 +13,7 @@ public final strictfp class DefendController extends Controller {
 		this.target = t;
 	}
 
+        @Override
 	public final void decide() {
 		if (shouldGiveUp(0))
 			unit.popController();

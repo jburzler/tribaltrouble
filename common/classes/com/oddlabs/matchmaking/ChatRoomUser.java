@@ -21,10 +21,12 @@ public final strictfp class ChatRoomUser implements Serializable {
 		return playing;
 	}
 
+        @Override
 	public final int hashCode() {
 		return nick.hashCode();
 	}
 
+        @Override
 	public final boolean equals(Object other) {
 		if (!(other instanceof ChatRoomUser))
 			return false;

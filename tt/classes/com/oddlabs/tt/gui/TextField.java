@@ -33,10 +33,12 @@ public abstract strictfp class TextField extends GUIObject implements CharSequen
 		return text;
 	}
 
+        @Override
 	public final char charAt(int i) {
 		return text.charAt(i);
 	}
 
+        @Override
 	public final int length() {
 		return text.length();
 	}
@@ -45,10 +47,12 @@ public abstract strictfp class TextField extends GUIObject implements CharSequen
 		return font.getWidth(text);
 	}
 
+        @Override
 	public final CharSequence subSequence(int start, int end) {
 		return text.subSequence(start, end);
 	}
 
+        @Override
 	public final String toString() {
 		return text.toString();
 	}
@@ -121,11 +125,13 @@ public abstract strictfp class TextField extends GUIObject implements CharSequen
 	protected void appendNotify(CharSequence str) {
 	}
 
+        @Override
 	protected final void keyPressed(KeyboardEvent event) {
 		if (event.getKeyCode() != Keyboard.KEY_SPACE && event.getKeyCode() != Keyboard.KEY_RETURN)
 			super.keyPressed(event);
 	}
 
+        @Override
 	protected void keyReleased(KeyboardEvent event) {
 		if (event.getKeyCode() != Keyboard.KEY_SPACE && event.getKeyCode() != Keyboard.KEY_RETURN)
 			super.keyReleased(event);

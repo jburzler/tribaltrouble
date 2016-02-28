@@ -42,12 +42,14 @@ public final strictfp class RegisterProgressForm extends Form implements Registr
 		//reg_client = RegistrationHttpClient.register(reg_key, this);
 	}
 
+        @Override
 	public final void doRemove() {
 		super.doRemove();
 		Renderer.getRegistrationClient().cancelRegistration();
 		//reg_client.close();
 	}
 
+        @Override
 	public final void registrationFailed(int reason_id, Exception e) { //interface RegistrationListener
 		remove();
 		parent_form.registrationFailed();
@@ -70,11 +72,13 @@ public final strictfp class RegisterProgressForm extends Form implements Registr
 		gui_root.addModalForm(new MessageForm(Utils.getBundleString(bundle, "failed_caption"), failed_message));
 	}
 
+        @Override
 	public final void registrationCompleted() { //interface RegistrationListener
 		remove();
 		parent_form.registrationCompleted();
 	}
 
+        @Override
 	protected final void doCancel() {
 		Renderer.getRegistrationClient().cancelRegistration();
 		//reg_client.close();

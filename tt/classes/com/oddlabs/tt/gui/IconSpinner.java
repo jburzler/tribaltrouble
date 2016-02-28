@@ -47,6 +47,7 @@ public abstract strictfp class IconSpinner extends GUIObject implements ToolTip 
 		label.setPos(0, (getHeight() - label.getHeight())/2);
 	}
 
+        @Override
 	public final void setFocus() {
 		viewer.getGUIRoot().getDelegate().setFocus();
 	}
@@ -81,6 +82,7 @@ public abstract strictfp class IconSpinner extends GUIObject implements ToolTip 
 		}
 	}
 
+        @Override
 	public void appendToolTip(ToolTipBox tool_tip_box) {
 		tool_tip_box.append(tool_tip);
 		tool_tip_box.append(tool_tip_icons);
@@ -107,6 +109,7 @@ public abstract strictfp class IconSpinner extends GUIObject implements ToolTip 
 		}
 	}
 
+        @Override
 	protected final void renderGeometry() {
 		int x = (getWidth() - icon_quad[Skin.NORMAL].getWidth())/2;
 		int y = (getHeight() - icon_quad[Skin.NORMAL].getHeight())/2;
@@ -124,26 +127,33 @@ public abstract strictfp class IconSpinner extends GUIObject implements ToolTip 
 		}
 	}
 
+        @Override
 	protected final void mouseReleased(int button, int x, int y) {
 	}
 
+        @Override
 	protected final void mousePressed(int button, int x, int y) {
 	}
 
+        @Override
 	protected final void mouseClicked(int button, int x, int y, int clicks) {
 	}
 
+        @Override
 	protected final void mouseHeld(int button, int x, int y) {
 	}
 
 	private final strictfp class IncreaseListener implements MouseButtonListener {
+                @Override
 		public final void mouseClicked(int button, int x, int y, int clicks) {
 		}
 
+                @Override
 		public final void mouseHeld(int button, int x, int y) {
 			mousePressed(button, x, y);
 		}
 
+                @Override
 		public final void mousePressed(int button, int x, int y) {
 			if (button == LocalInput.RIGHT_BUTTON)
 					increase(10);
@@ -151,19 +161,23 @@ public abstract strictfp class IconSpinner extends GUIObject implements ToolTip 
 					increase(1);
 		}
 
+                @Override
 		public final void mouseReleased(int button, int x, int y) {
 			release();
 		}
 	}
 
 	private final strictfp class DecreaseListener implements MouseButtonListener {
+                @Override
 		public final void mouseClicked(int button, int x, int y, int clicks) {
 		}
 
+                @Override
 		public final void mouseHeld(int button, int x, int y) {
 			mousePressed(button, x, y);
 		}
 
+                @Override
 		public final void mousePressed(int button, int x, int y) {
 			if (button == LocalInput.RIGHT_BUTTON)
 					decrease(10);
@@ -171,6 +185,7 @@ public abstract strictfp class IconSpinner extends GUIObject implements ToolTip 
 					decrease(1);
 		}
 
+                @Override
 		public final void mouseReleased(int button, int x, int y) {
 			release();
 		}

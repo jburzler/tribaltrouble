@@ -13,11 +13,13 @@ public final strictfp class DeathTrigger extends IntervalTrigger {
 		this.runnable = runnable;
 	}
 
+        @Override
 	protected final void check() {
 		if (selectable.isDead())
 			triggered();
 	}
 
+        @Override
 	protected final void done() {
 		runnable.run();
 	}

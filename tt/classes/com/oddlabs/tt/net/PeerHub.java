@@ -91,6 +91,7 @@ public final strictfp class PeerHub implements Animated, RouterHandler {
 		int local_peer_index = -1;
 		if (!is_multiplayer) {
 			this.router = new Router(network, com.oddlabs.util.Utils.getLoopbackAddress(), 0, Logger.getAnonymousLogger(), new RouterListener() {
+                                @Override
 				public final void routerFailed(IOException e) {
 //					PeerHub.this.routerFailed(e);
 					throw new RuntimeException(e);
@@ -110,6 +111,7 @@ public final strictfp class PeerHub implements Animated, RouterHandler {
 			System.out.println("index " + i + " contains player " + player);
 			final int peer_index = peer_index_to_peer_list.size();
 			ARMIEventWriter router_handler = new ARMIEventWriter() {
+                                @Override
 				public final void handle(ARMIEvent event) {
 					router_client.getInterface().relayEventTo(peer_index, event);
 				}
@@ -128,12 +130,14 @@ public final strictfp class PeerHub implements Animated, RouterHandler {
 		peer_index_to_peer_list.toArray(peer_index_to_peer);
 		this.num_participants = peer_index_to_peer.length;
 		ARMIEventWriter game_router_handler = new ARMIEventWriter() {
+                        @Override
 			public final void handle(ARMIEvent event) {
 				router_client.getInterface().relayGameStateEvent(event);
 			}
 		};
 		this.player_interface = (PlayerInterface)ARMIEvent.createProxy(game_router_handler, new GameArgumentWriter(distributable_table), PlayerInterface.class);
 		ARMIEventWriter hub_router_handler = new ARMIEventWriter() {
+                        @Override
 			public final void handle(ARMIEvent event) {
 				router_client.getInterface().relayEvent(event);
 			}
@@ -143,12 +147,14 @@ public final strictfp class PeerHub implements Animated, RouterHandler {
 		router_client.connect(session_id, new SessionInfo(num_participants, MILLISECONDS_PER_HEARTBEAT), local_peer_index);
 	}
 
+        @Override
 	public final void routerFailed(Exception e) {
 		System.out.println("Router failed with exception: " + e);
 		closeNetwork();
 		stall_handler.peerhubFailed();
 	}
 
+        @Override
 	public final void heartbeat(int millis) {
 		if (millis < server_millis) {
 			routerFailed(new IOException("Invalid time received: " + millis + " (tick currently at " + getTick() + ")"));
@@ -157,6 +163,7 @@ public final strictfp class PeerHub implements Animated, RouterHandler {
 		server_millis = millis;
 	}
 
+        @Override
 	public final void receiveEvent(int client_id, ARMIEvent event) {
 		Peer peer = getPeerFromClientID(client_id);
 		if (peer == null) {
@@ -170,6 +177,7 @@ public final strictfp class PeerHub implements Animated, RouterHandler {
 		}
 	}
 
+        @Override
 	public final void receiveGameStateEvent(int client_id, int millis, ARMIEvent event) {
 		if (millis < server_millis) {
 			routerFailed(new IOException("Invalid time received for event: " + millis + " (tick currently at " + getTick() + ")"));
@@ -184,6 +192,7 @@ public final strictfp class PeerHub implements Animated, RouterHandler {
 		peer.addEvent(millisToTickCeil(millis), event);
 	}
 
+        @Override
 	public final void playerDisconnected(int client_id, boolean checksum_error) {
 		Peer peer = getPeerFromClientID(client_id);
 		if (checksum_error)
@@ -209,6 +218,7 @@ public final strictfp class PeerHub implements Animated, RouterHandler {
 		return peer_index_to_peer[client_id];
 	}
 
+        @Override
 	public final void start() {
 		is_synchronized = true;
 	}
@@ -241,6 +251,7 @@ public final strictfp class PeerHub implements Animated, RouterHandler {
 		return millis/AnimationManager.ANIMATION_MILLISECONDS_PER_TICK - pause_ticks;
 	}
 
+        @Override
 	public final void animate(float t) {
 		if (router != null)
 			router.process();
@@ -335,6 +346,7 @@ public final strictfp class PeerHub implements Animated, RouterHandler {
 		peer.getPlayer().setPreferredGamespeed(World.GAMESPEED_DONTCARE);
 	}
 
+        @Override
 	public final void updateChecksum(StateChecksum sum) {
 		sum.update(getTick());
 		sum.update(checksum.getValue());

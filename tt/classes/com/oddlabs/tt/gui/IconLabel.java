@@ -16,6 +16,7 @@ public final strictfp class IconLabel extends GUIObject implements Comparable {
 		setDim(width, height);
 	}
 
+        @Override
 	protected void renderGeometry() {
 		icon.render(0, 0);
 	}
@@ -24,6 +25,7 @@ public final strictfp class IconLabel extends GUIObject implements Comparable {
 		return label;
 	}
 
+        @Override
 	public int compareTo(Object o) {
 		return label.compareTo(((IconLabel)o).getLabel());
 	}

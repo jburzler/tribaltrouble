@@ -12,6 +12,7 @@ public abstract strictfp class ChatHistory implements ChatListener {
 		messages.clear();
 	}
 
+        @Override
 	public abstract void chat(ChatMessage message);
 
 	protected final void addMessage(String msg) {

@@ -51,6 +51,7 @@ public final strictfp class RegistrationInfo implements Serializable {
 		return key;
 	}
 
+        @Override
 	public final String toString() {
 		return key + " " + reg_key + " " + name + " " + address1 + " " + address2 + " " + zip + " " + city + " " + state + " " + country;
 	}

@@ -62,18 +62,22 @@ public final strictfp class CryptUtils {
 	public final static void  setupHttpsConnection(HttpsURLConnection https_connection) throws Exception {
 		SSLContext ssl_context = SSLContext.getInstance("SSL");
 		ssl_context.init(null, new TrustManager[]{new X509TrustManager() {
+                        @Override
 			public final void checkClientTrusted(X509Certificate[] chain, String authType) throws CertificateException {
 			}
 
+                        @Override
 			public final void checkServerTrusted(X509Certificate[] chain, String authType) throws CertificateException {
 			}
 
+                        @Override
 			public final X509Certificate[] getAcceptedIssuers() {
 				return new X509Certificate[]{};
 			}
 		}}, null);
 		https_connection.setSSLSocketFactory(ssl_context.getSocketFactory());
 		https_connection.setHostnameVerifier(new HostnameVerifier() { 
+                        @Override
 			public final boolean verify(String hostname, SSLSession session) {
 				return true;
 			}

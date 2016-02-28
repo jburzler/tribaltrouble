@@ -15,6 +15,7 @@ public final strictfp class WatchStatusIcon extends StatusIcon {
 		this.building = building;
 	}
 
+        @Override
 	protected final void renderGeometry() {
 		super.renderGeometry();
 		if (!building.isDead() && !building.getChieftainContainer().isTraining() && building.getOwner().getUnitCountContainer().getNumSupplies() < building.getOwner().getWorld().getMaxUnitCount()) {

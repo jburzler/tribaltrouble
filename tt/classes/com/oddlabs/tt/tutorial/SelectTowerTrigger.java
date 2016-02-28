@@ -24,6 +24,7 @@ public final strictfp class SelectTowerTrigger extends TutorialTrigger {
 		player.enableTowerExits(false);
 	}
 
+        @Override
 	protected final void run(Tutorial tutorial) {
 		Building building = tutorial.getViewer().getSelection().getCurrentSelection().getBuilding();
 		if (building != null && building.getAbilities().hasAbilities(Abilities.ATTACK)) {

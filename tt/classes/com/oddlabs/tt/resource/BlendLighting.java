@@ -17,6 +17,7 @@ public final strictfp class BlendLighting extends BlendInfo {
 		this.b = b;
 	}
 
+        @Override
 	public final void setup() {
 		GLState.activeTexture(GL13.GL_TEXTURE1);
 		GL11.glColor3f(r, b, g);
@@ -28,6 +29,7 @@ public final strictfp class BlendLighting extends BlendInfo {
 		GL11.glBlendFunc(GL11.GL_DST_COLOR, GL11.GL_ONE);
 	}
 
+        @Override
 	public final void reset() {
 		GLState.activeTexture(GL13.GL_TEXTURE1);
 		GL11.glTexEnvf(GL11.GL_TEXTURE_ENV, GL11.GL_TEXTURE_ENV_MODE, GL11.GL_REPLACE);

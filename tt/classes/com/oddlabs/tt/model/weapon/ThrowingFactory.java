@@ -20,6 +20,7 @@ public final strictfp class ThrowingFactory extends WeaponFactory {
 		this.hit_sounds = hit_sounds;
 	}
 
+        @Override
 	protected final void doAttack(boolean hit, Unit src, Selectable target) {
 		Object[] args = new Object[]{new Boolean(hit), src, target, weapon_sprite, throw_sound, hit_sounds};
 		try {
@@ -29,6 +30,7 @@ public final strictfp class ThrowingFactory extends WeaponFactory {
 		}
 	}
 
+        @Override
 	public final Class getType() {
 		return weapon_type;
 	}

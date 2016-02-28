@@ -20,16 +20,19 @@ public final strictfp class FreeQuitLabel extends Label implements Animated {
 		this.manager = manager;
 	}
 	
+        @Override
 	protected final void doAdd() {
 		super.doAdd();
 		manager.registerAnimation(this);
 	}
 
+        @Override
 	protected final void doRemove() {
 		super.doRemove();
 		manager.removeAnimation(this);
 	}
 
+        @Override
 	public final void animate(float t) {
 		int time_left = (int)PeerHub.getFreeQuitTimeLeft(world);
 		if (time_left > 0) {
@@ -38,6 +41,7 @@ public final strictfp class FreeQuitLabel extends Label implements Animated {
 		}
 	}
 
+        @Override
 	public final void updateChecksum(StateChecksum check_sum) {
 	}
 }

@@ -28,6 +28,7 @@ public strictfp class CampaignDialogForm extends Form {
 		this.cancel = cancel;
 		buildForm(header, text, image, align, cancel);
 		ok_button.addMouseClickListener(new MouseClickListener() {
+                        @Override
 			public final void mouseClicked(int button, int x, int y, int clicks) {
 				remove();
 				run();
@@ -40,6 +41,7 @@ public strictfp class CampaignDialogForm extends Form {
 			runnable.run();
 	}
 
+        @Override
 	protected final void doCancel() {
 		if (!cancel)
 			run();
@@ -81,6 +83,7 @@ public strictfp class CampaignDialogForm extends Form {
 		centerPos();
 	}
 
+        @Override
 	public final void setFocus() {
 		ok_button.setFocus();
 	}

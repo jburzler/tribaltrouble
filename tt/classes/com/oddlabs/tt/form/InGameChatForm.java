@@ -74,12 +74,14 @@ public final strictfp class InGameChatForm extends Form implements ChatListener 
 		Network.getMatchmakingClient().clearInGameChatHistory();
 	}
 
+        @Override
 	protected final void doAdd() {
 		super.doAdd();
 		Network.getChatHub().addListener(this);
 		refreshMessages();
 	}
 
+        @Override
 	protected final void doRemove() {
 		super.doRemove();
 		Network.getChatHub().removeListener(this);
@@ -92,10 +94,12 @@ public final strictfp class InGameChatForm extends Form implements ChatListener 
 			radio_button_group.mark(radio_team);
 	}
 
+        @Override
 	public final void setFocus() {
 		chat_line.setFocus();
 	}
 
+        @Override
 	public final void chat(ChatMessage message) {
 		refreshMessages();
 	}
@@ -111,17 +115,20 @@ public final strictfp class InGameChatForm extends Form implements ChatListener 
 		chat_box.setOffsetY(Integer.MAX_VALUE);
 	}
 
+        @Override
 	public void mouseMoved(int x, int y) {
 		((SelectionDelegate)getParent()).mouseMoved(x, y);
 	}
 
 	private strictfp final class ChatListener implements EnterListener {
+                @Override
 		public final void enterPressed(CharSequence text) {
 			String chat = text.toString();
 			if (!chat.equals("")) {
 				chat_line.clear();
 				Map commands = new HashMap();
 				ChatMethod cheat = new ChatMethod() {
+                            @Override
 					public final void execute(InfoPrinter info_printer, String text) {
 						viewer.getCheat().enable();
 					}
@@ -137,6 +144,7 @@ public final strictfp class InGameChatForm extends Form implements ChatListener 
 	}
 
 	private strictfp final class SendListener implements MouseClickListener {
+                @Override
 		public final void mouseClicked(int button, int x, int y, int clicks) {
 			chat_line.enterPressedAll();
 		}

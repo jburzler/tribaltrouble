@@ -100,6 +100,7 @@ public final strictfp class Lightning extends Element implements Animated {
 		particle.setEnergy(energy);
 	}
 
+        @Override
 	public final void animate(float t) {
 		float x_min = Float.POSITIVE_INFINITY;
 		float x_max = Float.NEGATIVE_INFINITY;
@@ -135,20 +136,24 @@ public final strictfp class Lightning extends Element implements Animated {
 		}
 	}
 
+        @Override
 	protected void register() {
 		super.register();
 		manager.registerAnimation(this);
 	}
 
+        @Override
 	public final void visit(ElementVisitor visitor) {
 		visitor.visitLightning(this);
 	}
 
+        @Override
 	protected final void remove() {
 		super.remove();
 		manager.removeAnimation(this);
 	}
 
+        @Override
 	public final void updateChecksum(StateChecksum checksum) {
 	}
 }

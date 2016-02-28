@@ -385,6 +385,7 @@ public final strictfp class Sky {
 			this.theta = (float)StrictMath.atan2(y - half_world_size, x - half_world_size);
 		}
 
+                @Override
 		public final int compareTo(Object o) {
 			SkyStitchVertex other = (SkyStitchVertex)o;
 			if (equals(o))
@@ -392,11 +393,13 @@ public final strictfp class Sky {
 			return theta < other.theta ? 1 : -1;
 		}
 
+                @Override
 		public final boolean equals(Object o) {
 			SkyStitchVertex other = (SkyStitchVertex)o;
 			return other == this || other.theta == theta;
 		}
 
+                @Override
 		public final String toString() {
 			float half_world_size = heightmap.getMetersPerWorld()*.5f;
 			float x0 = x - half_world_size;

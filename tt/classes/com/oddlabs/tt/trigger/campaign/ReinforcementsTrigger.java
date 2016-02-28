@@ -15,6 +15,7 @@ public final strictfp class ReinforcementsTrigger extends IntervalTrigger {
 		this.type = type;
 	}
 
+        @Override
 	protected final void check() {
 		if (player.getArmory() == null) {
 			triggered();
@@ -30,6 +31,7 @@ public final strictfp class ReinforcementsTrigger extends IntervalTrigger {
 		}
 	}
 
+        @Override
 	protected final void done() {
 	}
 }

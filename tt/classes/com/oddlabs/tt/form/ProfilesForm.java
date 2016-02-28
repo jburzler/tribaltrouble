@@ -76,10 +76,12 @@ public final strictfp class ProfilesForm extends Form {
 		compileCanvas();
 	}
 	
+        @Override
 	public final void setFocus() {
 		join_button.setFocus();
 	}
 
+        @Override
 	protected void doCancel() {
 		Network.getMatchmakingClient().close(); 
 	}
@@ -109,6 +111,7 @@ public final strictfp class ProfilesForm extends Form {
 	}
 
 	private final strictfp class CreateProfileListener implements MouseClickListener {
+                @Override
 		public final void mouseClicked(int button, int x, int y, int clicks) {
 			new_profile_form = new NewProfileForm(gui_root, main_menu, ProfilesForm.this);
 			main_menu.setMenu(new_profile_form);
@@ -116,6 +119,7 @@ public final strictfp class ProfilesForm extends Form {
 	}
 
 	private final strictfp class DeleteProfileListener implements MouseClickListener {
+                @Override
 		public final void mouseClicked(int button, int x, int y, int clicks) {
 			String nick = (String)profile_list_box.getSelected();
 			if (nick == null) {
@@ -143,6 +147,7 @@ public final strictfp class ProfilesForm extends Form {
 			this.nick = nick;
 		}
 
+                @Override
 		public final void mouseClicked(int button, int x, int y, int clicks) {
 			Network.getMatchmakingClient().deleteProfile(nick);
 			Network.getMatchmakingClient().requestProfiles();
@@ -150,6 +155,7 @@ public final strictfp class ProfilesForm extends Form {
 	}
 
 	private final strictfp class JoinListener implements MouseClickListener, RowListener {
+                @Override
 		public final void mouseClicked(int button, int x, int y, int clicks) {
 			String nick = (String)profile_list_box.getSelected();
 			if (nick == null) {
@@ -159,12 +165,14 @@ public final strictfp class ProfilesForm extends Form {
 			}
 		}
 
+                @Override
 		public final void rowDoubleClicked(Object row_context) {
 			String nick = (String)row_context;
 			if (nick != null)
 				join(nick);
 		}
 		
+                @Override
 		public final void rowChosen(Object row_context) {
 		}
 	}

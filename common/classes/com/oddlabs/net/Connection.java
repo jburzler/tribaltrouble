@@ -37,6 +37,7 @@ public final strictfp class Connection extends AbstractConnection implements Han
 		network.registerForPingTimeout(this);
 		this.ping_reply = ping_reply;
 		ARMIEventWriter event_writer = new ARMIEventWriter() {
+                        @Override
 			public final void handle(ARMIEvent event) {
 				if (back_log_list.size() > 0 || !writeEvent(event))
 					back_log_list.add(event);
@@ -71,6 +72,7 @@ public final strictfp class Connection extends AbstractConnection implements Han
 			peer_interface.ping();
 	}
 
+        @Override
 	public final void ping() {
 		if (ping_reply)
 			peer_interface.ping();
@@ -176,6 +178,7 @@ public final strictfp class Connection extends AbstractConnection implements Han
 		writing = true;
 	}
 
+        @Override
 	public final void handle(ARMIEvent event) {
 		peer_interface.receiveEvent(event);
 	}
@@ -287,6 +290,7 @@ public final strictfp class Connection extends AbstractConnection implements Han
 		} while (bytes_read && network.getDeterministic().log(network.getDeterministic().isPlayback() || channel.isOpen()));
 	}
 
+        @Override
 	public final void handle() throws IOException {
 		SocketChannel channel;
 		if (!network.getDeterministic().isPlayback())
@@ -331,6 +335,7 @@ public final strictfp class Connection extends AbstractConnection implements Han
 		return !network.getDeterministic().log(network.getDeterministic().isPlayback() || !(key != null && key.isValid()));
 	}
 
+        @Override
 	protected final void doClose() {
 		if (isKeyValid()) {
 			network.cancelKey(key, this);
@@ -356,6 +361,7 @@ public final strictfp class Connection extends AbstractConnection implements Han
 		network.unregisterForPinging(this);
 	}
 	
+        @Override
 	public void handleError(IOException e) {
 		error(e);
 	}

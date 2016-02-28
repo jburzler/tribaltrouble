@@ -24,6 +24,7 @@ public final strictfp class VikingIsland3 extends Island {
 		super(campaign);
 	}
 
+        @Override
 	public final void init(NetworkSelector network, GUIRoot gui_root) {
 		String[] ai_names = new String[]{Utils.getBundleString(bundle, "name0"),
 			Utils.getBundleString(bundle, "name1"),
@@ -73,12 +74,14 @@ public final strictfp class VikingIsland3 extends Island {
 		game_network.getClient().getServerInterface().startServer();
 	}
 
+        @Override
 	protected final void start() {
 		Runnable runnable;
 		final Player enemy = getViewer().getWorld().getPlayers()[1];
 
 		// Introduction
 		runnable = new Runnable() {
+                @Override
 			public final void run() {
 				CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header0"),
 						Utils.getBundleString(bundle, "dialog0"),
@@ -91,6 +94,7 @@ public final strictfp class VikingIsland3 extends Island {
 
 		// Winner prize
 		runnable = new Runnable() {
+                @Override
 			public final void run() {
 				getCampaign().getState().setIslandState(3, CampaignState.ISLAND_COMPLETED);
 				getCampaign().getState().setIslandState(2, CampaignState.ISLAND_AVAILABLE);
@@ -120,14 +124,17 @@ public final strictfp class VikingIsland3 extends Island {
 		new SceneryModel(getViewer().getWorld(), 139*2 + offset, 33*2 + offset, 1, 0, getViewer().getWorld().getRacesResources().getTreasures()[1], shadow_diameter, true, Utils.getBundleString(bundle, "statue"));
 	}
 
+        @Override
 	public final CharSequence getHeader() {
 		return Utils.getBundleString(bundle, "header");
 	}
 
+        @Override
 	public final CharSequence getDescription() {
 		return Utils.getBundleString(bundle, "description");
 	}
 
+        @Override
 	public final CharSequence getCurrentObjective() {
 		return Utils.getBundleString(bundle, "objective");
 	}

@@ -89,6 +89,7 @@ final strictfp class SessionManager {
 		remove(session);
 		final long initial_time = time_manager.getMillis();
 		session.visit(new SessionVisitor() {
+                        @Override
 			public final void visit(RouterClient client) {
 				Timeout timeout = createTimeout(client, initial_time);
 				client.setTimeout(timeout);
@@ -111,6 +112,7 @@ final strictfp class SessionManager {
 	final int getNextTick(Session session) {
 		final long millis = time_manager.getMillis();
 		session.visit(new SessionVisitor() {
+                        @Override
 			public final void visit(RouterClient client) {
 				unregister(client.getTimeout());
 			}
@@ -140,6 +142,7 @@ final strictfp class SessionManager {
 			this.next_timeout = millis + client.getSession().info.milliseconds_per_heartbeat;
 		}
 
+                @Override
 		public final int compareTo(Object other) {
 			Timeout other_session = (Timeout)other;
 			int diff = (int)(next_timeout - other_session.next_timeout);
@@ -149,15 +152,18 @@ final strictfp class SessionManager {
 				return id - other_session.id;
 		}
 
+                @Override
 		public final boolean equals(Object other) {
 			Timeout other_session = (Timeout)other;
 			return compareTo(other_session) == 0;
 		}
 
+                @Override
 		public final int hashCode() {
 			return (int)(id + next_timeout);
 		}
 
+                @Override
 		public final String toString() {
 			return "Timout: id = " + id + " timeout " + next_timeout;
 		}

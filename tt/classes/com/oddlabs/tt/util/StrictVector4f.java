@@ -267,6 +267,7 @@ public strictfp class StrictVector4f {
 		return this;
 	}
 
+        @Override
 	public String toString() {
 		return "StrictVector4f: " + x + " " + y + " " + z + " " + w;
 	}

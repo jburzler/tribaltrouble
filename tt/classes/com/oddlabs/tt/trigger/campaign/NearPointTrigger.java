@@ -19,6 +19,7 @@ public final strictfp class NearPointTrigger extends IntervalTrigger {
 		this.runnable = runnable;
 	}
 
+        @Override
 	protected final void check() {
 		if (!unit.isDead()) {
 			int dx = unit.getGridX() - grid_x;
@@ -29,6 +30,7 @@ public final strictfp class NearPointTrigger extends IntervalTrigger {
 		}
 	}
 
+        @Override
 	protected final void done() {
 		runnable.run();
 	}

@@ -30,14 +30,18 @@ public final strictfp class SecureConnection extends AbstractConnection implemen
 		setConnectionInterface(wrapped_conn.getConnectionInterface());
 		this.wrapped_connection = wrapped_conn;
 		wrapped_connection.setConnectionInterface(new ConnectionInterface() {
+                        @Override
 			public void error(AbstractConnection conn, IOException e) {
 				notifyError(e);
 			}
+                        @Override
 			public void connected(AbstractConnection conn) {
 			}
+                        @Override
 			public final void handle(Object sender, ARMIEvent event) {
 				processEvent(event);
 			}
+                        @Override
 			public final void writeBufferDrained(AbstractConnection conn) {
 				SecureConnection.this.writeBufferDrained();
 			}
@@ -65,6 +69,7 @@ public final strictfp class SecureConnection extends AbstractConnection implemen
 		}
 	}
 
+        @Override
 	public final void initAgreement(byte[] public_key_encoded) {
 		if (isConnected())
 			return;
@@ -90,6 +95,7 @@ public final strictfp class SecureConnection extends AbstractConnection implemen
 		}
 	}
 
+        @Override
 	public final void tunnelEvent(SealedObject sealed_event) {
 		try {
 			if (decrypt_cipher == null)
@@ -112,6 +118,7 @@ public final strictfp class SecureConnection extends AbstractConnection implemen
 		return wrapped_connection;
 	}
 	
+        @Override
 	protected final void doClose() {
 		wrapped_connection.close();
 	}
@@ -128,6 +135,7 @@ public final strictfp class SecureConnection extends AbstractConnection implemen
 		}
 	}
 	
+        @Override
 	public final void handle(ARMIEvent event) {
 		if (encrypt_cipher == null)
 			event_backlog.add(event);

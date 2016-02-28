@@ -10,6 +10,7 @@ public final strictfp class Plants extends SceneryModel {
 		super(world, x, y, dir_x, dir_y, sprite_renderer);
 	}
 
+        @Override
 	protected final void doRegister() {
 		if (Globals.INSERT_PLANTS[Settings.getSettings().graphic_detail]) {
 			register();
@@ -17,6 +18,7 @@ public final strictfp class Plants extends SceneryModel {
 		}
 	}
 	
+        @Override
 	public final void visit(ElementVisitor visitor) {
 		visitor.visitPlants(this);
 	}

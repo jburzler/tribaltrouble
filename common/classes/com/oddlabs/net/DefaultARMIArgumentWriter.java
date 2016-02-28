@@ -4,6 +4,7 @@ import com.oddlabs.util.ByteBufferOutputStream;
 import java.io.*;
 
 public strictfp class DefaultARMIArgumentWriter implements ARMIArgumentWriter {
+        @Override
 	public void writeArgument(Class type, Object arg, ByteBufferOutputStream out) throws IOException {
 		if (type.equals(char.class)) {
 			char c = ((Character)arg).charValue();

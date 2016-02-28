@@ -19,6 +19,7 @@ public strictfp class IconButton extends ButtonObject {
 		setDisabled(icon_disabler != null && icon_disabler.isDisabled());
 	}
 
+        @Override
 	protected final void renderGeometry() {
 //		setDisabled(icon_disabler != null && icon_disabler.isDisabled()); FUCK DET
 		if (isDisabled())

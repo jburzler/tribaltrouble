@@ -9,6 +9,7 @@ public final strictfp class PitchTrigger extends TutorialTrigger {
 		super(.1f, 2f, "pitch");
 	}
 
+        @Override
 	protected final void run(Tutorial tutorial) {
 		GameCamera camera = tutorial.getViewer().getCamera();
 		if (camera.pitchUp()) {

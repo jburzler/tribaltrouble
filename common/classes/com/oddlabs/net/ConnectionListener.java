@@ -50,6 +50,7 @@ public final strictfp class ConnectionListener extends AbstractConnectionListene
 		return network.getDeterministic().log(key != null ? ((ServerSocketChannel)key.channel()).socket().getLocalPort() : -1);
 	}
 
+        @Override
 	public final void handle() throws IOException {
 		IOException exception = null;
 		SocketChannel channel = null;
@@ -112,6 +113,7 @@ public final strictfp class ConnectionListener extends AbstractConnectionListene
 		}
 	}
 
+        @Override
 	protected final AbstractConnection doAcceptConnection(ConnectionInterface conn_interface) {
 		SelectionKey socket_key;
 		if (!network.getDeterministic().isPlayback())
@@ -121,6 +123,7 @@ public final strictfp class ConnectionListener extends AbstractConnectionListene
 		return new Connection(network, socket_key, conn_interface);
 	}
 
+        @Override
 	public final void rejectConnection() {
 		try {
 			SocketChannel channel = getNextConnection();
@@ -131,6 +134,7 @@ public final strictfp class ConnectionListener extends AbstractConnectionListene
 		}
 	}
 
+        @Override
 	public final void close() {
 		if (key != null && key.isValid()) {
 			try {
@@ -145,6 +149,7 @@ public final strictfp class ConnectionListener extends AbstractConnectionListene
 			network.cancelKey(key, this);
 	}
 	
+        @Override
 	public final void handleError(IOException e) throws IOException {
 		error(e);
 	}

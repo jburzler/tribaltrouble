@@ -21,14 +21,17 @@ public final strictfp class HostSequenceID implements Serializable {
 		return seq_id;
 	}
 
+        @Override
 	public final int hashCode() {
 		return host_id ^ seq_id;
 	}
 
+        @Override
 	public final String toString() {
 		return host_id + " " + seq_id;
 	}
 
+        @Override
 	public final boolean equals(Object other) {
 		if (!(other instanceof HostSequenceID))
 			return false;

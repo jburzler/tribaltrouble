@@ -12,6 +12,7 @@ public strictfp class ImageButton extends ButtonObject {
 		this.disabled = disabled;
 	}
 
+        @Override
 	public final void setPos(int x, int y) {
 		super.setPos(x, y);
 		normal.setPos(x, y);
@@ -19,6 +20,7 @@ public strictfp class ImageButton extends ButtonObject {
 		disabled.setPos(x, y);
 	}
 
+        @Override
 	protected final void renderGeometry() {
 		if (isDisabled())
 			disabled.renderGeometry();
@@ -28,6 +30,7 @@ public strictfp class ImageButton extends ButtonObject {
 			normal.renderGeometry();
 	}
 
+        @Override
 	protected void mouseClicked(int button, int x, int y, int clicks) {
 	}
 }

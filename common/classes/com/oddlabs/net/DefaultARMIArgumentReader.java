@@ -3,6 +3,7 @@ package com.oddlabs.net;
 import java.io.*;
 
 public strictfp class DefaultARMIArgumentReader implements ARMIArgumentReader {
+        @Override
 	public Object readArgument(Class type, ByteBufferInputStream in) throws IOException, ClassNotFoundException {
 		if (type.equals(char.class)) {
 			return new Character(in.buffer().getChar());

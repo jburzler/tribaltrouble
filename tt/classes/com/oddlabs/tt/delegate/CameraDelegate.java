@@ -25,11 +25,13 @@ public strictfp abstract class CameraDelegate extends Delegate {
 		return camera;
 	}
 
+        @Override
 	protected void doAdd() {
 		super.doAdd();
 		getCamera().enable();
 	}
 
+        @Override
 	protected void doRemove() {
 		super.doRemove();
 		getCamera().disable();

@@ -38,6 +38,7 @@ public final strictfp class FramebufferRenderer extends OffscreenRenderer {
 		init();
 	}
 
+        @Override
 	public final boolean isLost() {
 		return false;
 	}
@@ -50,6 +51,7 @@ public final strictfp class FramebufferRenderer extends OffscreenRenderer {
 		EXTFramebufferObject.glDeleteRenderbuffersEXT(tmp);
 	}
 
+        @Override
 	protected final void finish() {
 		deleteBuffers();
 		popGLState();

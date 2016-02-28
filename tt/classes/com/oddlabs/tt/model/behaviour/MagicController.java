@@ -19,6 +19,7 @@ public final strictfp class MagicController extends Controller {
 		should_pop = true;
 	}
 
+        @Override
 	public final void decide() {
 		if (should_pop) {
 			unit.popController();

@@ -12,6 +12,7 @@ public final strictfp class EmptyTowerTrigger extends TutorialTrigger {
 		tower.getOwner().enableTowerExits(true);
 	}
 
+        @Override
 	protected final void run(Tutorial tutorial) {
 		if (tower.getUnitContainer().getNumSupplies() == 0) {
 			tutorial.done(TutorialForm.TUTORIAL_TOWER);

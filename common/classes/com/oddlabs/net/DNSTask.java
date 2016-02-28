@@ -14,15 +14,18 @@ public final strictfp class DNSTask implements Callable {
 		this.connection = conn;
 	}
 
+        @Override
 	public void taskCompleted(Object result) {
 		connection.connect((InetSocketAddress)result);
 	}
 	
+        @Override
 	public void taskFailed(Exception e) {
 		connection.dnsError((IOException)e);
 	}
 
 	/* WARNING: Potentially threaded and not deterministic. See Callable.java for details */
+        @Override
 	public final Object call() throws Exception {
 		InetAddress inet_address = InetAddress.getByName(dns_name);
 		InetSocketAddress address = new InetSocketAddress(inet_address, port);

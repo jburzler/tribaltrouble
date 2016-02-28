@@ -20,14 +20,17 @@ public abstract strictfp class File implements ResourceDescriptor {
 		return url;
 	}
 
+        @Override
 	public String toString() {
 		return url.toString();
 	}
 
+        @Override
 	public final int hashCode() {
 		return url.hashCode();
 	}
 
+        @Override
 	public boolean equals(Object o) {
 		if (!(o instanceof File))
 			return false;

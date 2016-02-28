@@ -29,22 +29,27 @@ public final strictfp class PoisonFogFactory implements MagicFactory {
 		this.release_ratio = release_ratio;
 	}
 
+        @Override
 	public final float getHitRadius() {
 		return hit_radius;
 	}
 
+        @Override
 	public final float getSecondsPerAnim() {
 		return seconds_per_anim;
 	}
 
+        @Override
 	public final float getSecondsPerInit() {
 		return init_ratio*seconds_per_anim;
 	}
 
+        @Override
 	public final float getSecondsPerRelease() {
 		return release_ratio*seconds_per_anim;
 	}
 
+        @Override
 	public final Magic execute(Unit src) {
 		return new PoisonFog(offset_x, offset_y, offset_z, hit_radius, hit_chance, interval, time, damage, src);
 	}

@@ -83,6 +83,7 @@ public final strictfp class InputState {
 		if (mouse_timer != null)
 			mouse_timer.stop();
 		mouse_timer = new TimerAnimation(new Updatable() {
+                        @Override
 			public final void update(Object anim) {
 				TimerAnimation timer = (TimerAnimation)anim;
 				timer.setTimerInterval(MOUSE_REPEAT_RATE);
@@ -189,12 +190,14 @@ public final strictfp class InputState {
 	}
 
 	private final strictfp class DoubleClickTimer implements Updatable {
+                @Override
 		public final void update(Object anim) {
 			stopDoubleClickTimer();
 		}
 	}
 
 	private final strictfp class DoubleKeyTimer implements Updatable {
+                @Override
 		public final void update(Object anim) {
 			stopDoubleKeyTimer();
 		}

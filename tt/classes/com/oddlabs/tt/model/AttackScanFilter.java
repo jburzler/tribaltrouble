@@ -33,14 +33,17 @@ public final strictfp class AttackScanFilter implements ScanFilter {
 		return result;
 	}
 
+        @Override
 	public final int getMinRadius() {
 		return 1;
 	}
 
+        @Override
 	public final int getMaxRadius() {
 		return max_range;
 	}
 
+        @Override
 	public final boolean filter(int grid_x, int grid_y, Occupant occ) {
 		if (occ instanceof Selectable) {
 			Selectable s = (Selectable)occ;

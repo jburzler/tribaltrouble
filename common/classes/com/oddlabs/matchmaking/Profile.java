@@ -21,6 +21,7 @@ public final strictfp class Profile implements Serializable {
 		this.revision = revision;
 	}
 
+        @Override
 	public final String toString() {
 		return nick;
 	}

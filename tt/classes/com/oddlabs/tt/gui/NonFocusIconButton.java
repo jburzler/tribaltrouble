@@ -11,10 +11,12 @@ public strictfp class NonFocusIconButton extends IconButton implements ToolTip {
 		this.tool_tip = tool_tip;
 	}
 
+        @Override
 	public void appendToolTip(ToolTipBox tool_tip_box) {
 		tool_tip_box.append(tool_tip);
 	}
 
+        @Override
 	public final void setFocus() {
 	}
 }

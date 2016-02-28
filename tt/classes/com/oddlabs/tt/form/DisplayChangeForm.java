@@ -35,17 +35,20 @@ public final strictfp class DisplayChangeForm extends Form {
 		centerPos();
 	}
 
+        @Override
 	public final void setFocus() {
 		later_button.setFocus();
 	}
 
 	private final strictfp class NowListener implements MouseClickListener {
+                @Override
 		public final void mouseClicked(int button, int x, int y, int clicks) {
 			remove();
 			donow_listener.doChange(true);
 		}
 	}
 
+        @Override
 	protected final void doCancel() {
 		donow_listener.doChange(false);
 	}

@@ -17,6 +17,7 @@ public final strictfp class ClientInfo implements GameServerInterface, Connectio
 		this.server = server;
 	}
 
+        @Override
 	public final void handle(Object sender, ARMIEvent armi_event) {
 		try {
 			armi_event.execute(interface_methods, this);
@@ -25,13 +26,16 @@ public final strictfp class ClientInfo implements GameServerInterface, Connectio
 		}
 	}
 
+        @Override
 	public final void writeBufferDrained(AbstractConnection conn) {
 	}
 
+        @Override
 	public final void error(AbstractConnection conn, IOException e) {
 		server.handleError(conn, e);
 	}
 
+        @Override
 	public final void connected(AbstractConnection conn) { 
 	}
 
@@ -39,18 +43,22 @@ public final strictfp class ClientInfo implements GameServerInterface, Connectio
 		return player_slot;
 	}
 
+        @Override
 	public final void resetSlotState(int slot, boolean open) {
 		server.resetSlotState(player_slot, slot, open);
 	}
 
+        @Override
 	public final void setPlayerSlot(int slot, int type, int race, int team, boolean ready, int ai_difficulty) {
 		server.setPlayerSlot(player_slot, slot, type, race, team, ready, ai_difficulty);
 	}
 
+        @Override
 	public final void startServer() {
 		server.startServer(player_slot);
 	}
 
+        @Override
 	public final void chat(String chat) {
 		server.chat(player_slot, chat);
 	}

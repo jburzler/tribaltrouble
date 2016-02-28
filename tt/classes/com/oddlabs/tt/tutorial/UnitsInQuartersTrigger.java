@@ -10,6 +10,7 @@ public final strictfp class UnitsInQuartersTrigger extends TutorialTrigger {
 		super(1f, 0f, "units_in_quarters");
 	}
 
+        @Override
 	protected final void run(Tutorial tutorial) {
 		Set set = tutorial.getViewer().getLocalPlayer().getUnits().getSet();
 		Iterator it = set.iterator();

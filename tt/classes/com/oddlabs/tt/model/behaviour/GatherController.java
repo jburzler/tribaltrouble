@@ -28,6 +28,7 @@ public final strictfp class GatherController extends Controller {
 		return supply_type;
 	}
 
+        @Override
 	public final String getKey() {
 		return super.getKey() + supply_type;
 	}
@@ -73,6 +74,7 @@ public final strictfp class GatherController extends Controller {
 		}
 	}
 
+        @Override
 	public final void decide() {
 		if (unit.getSupplyContainer().getNumSupplies() > 0 && unit.getSupplyContainer().getSupplyType() == supply_type) {
 			dropoff();

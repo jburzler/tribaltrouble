@@ -52,6 +52,7 @@ public final strictfp class MapcodeForm extends Form {
 		centerPos();
 	}
 	
+        @Override
 	public final void setFocus() {
 		editline_seed.setFocus();
 	}
@@ -63,12 +64,14 @@ public final strictfp class MapcodeForm extends Form {
 	}
 	
 	private final strictfp class OKListener implements MouseClickListener {
+                @Override
 		public final void mouseClicked(int button, int x, int y, int clicks) {
 			done();
 		}
 	}
 
 	private final strictfp class RandButtonListener implements MouseClickListener {
+                @Override
 		public final void mouseClicked(int button, int x, int y, int clicks) {
 			Random random = new Random(LocalEventQueue.getQueue().getHighPrecisionManager().getTick()*LocalEventQueue.getQueue().getHighPrecisionManager().getTick());
 			random.nextInt();
@@ -80,6 +83,7 @@ public final strictfp class MapcodeForm extends Form {
 	}
 	
 	public final strictfp class CodeEnterListener implements EnterListener {
+                @Override
 		public final void enterPressed(CharSequence text) {
 			done();
 		}

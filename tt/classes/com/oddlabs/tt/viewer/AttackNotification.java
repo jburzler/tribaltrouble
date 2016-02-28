@@ -28,6 +28,7 @@ final strictfp class AttackNotification extends Notification {
 			getTimer().resetTime();
 	}
 
+        @Override
 	public void update(Object anim) {
 		if (active) {
 			active = false;

@@ -123,20 +123,24 @@ public abstract strictfp class Emitter extends Element implements Animated {
 		return types;
 	}
 
+        @Override
 	protected void register() {
 		super.register();
 		manager.registerAnimation(this);
 	}
 
+        @Override
 	public final void visit(ElementVisitor visitor) {
 		visitor.visitEmitter(this);
 	}
 
+        @Override
 	protected final void remove() {
 		super.remove();
 		manager.removeAnimation(this);
 	}
 
+        @Override
 	public final void updateChecksum(StateChecksum checksum) {
 	}
 }

@@ -38,6 +38,7 @@ strictfp class TreePicker implements TreeNodeVisitor {
 
 		this.sprite_sorter = sprite_sorter;
 		render_state_cache = new RenderStateCache(new RenderStateFactory() {
+                        @Override
 			public final Object create() {
 				return new TreeRenderState(TreePicker.this);
 			}
@@ -126,6 +127,7 @@ strictfp class TreePicker implements TreeNodeVisitor {
 		render_state_cache.clear();
 	}
 
+        @Override
 	public final void visitLeaf(TreeLeaf tree_leaf) {
 		int frustum_state = RenderTools.NOT_IN_FRUSTUM;
 		if (tree_leaf.hasTrees() && (visible_override || (frustum_state = RenderTools.inFrustum(tree_leaf, camera.getFrustum())) >= RenderTools.IN_FRUSTUM)) {
@@ -140,6 +142,7 @@ strictfp class TreePicker implements TreeNodeVisitor {
 		}
 	}
 
+        @Override
 	public final void visitNode(TreeGroup tree_group) {
 		int frustum_state = RenderTools.NOT_IN_FRUSTUM;
 		if (tree_group.hasTrees() && (visible_override || (frustum_state = RenderTools.inFrustum(tree_group, camera.getFrustum())) >= RenderTools.IN_FRUSTUM)) {
@@ -186,6 +189,7 @@ strictfp class TreePicker implements TreeNodeVisitor {
 		return render_state;
 	}
 
+        @Override
 	public final void visitTree(TreeSupply tree_supply) {
 		if (tree_supply.isHidden())
 			return;

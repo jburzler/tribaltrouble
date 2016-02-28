@@ -124,6 +124,7 @@ public strictfp class ChatPanel extends Panel implements ChatListener {
 		refreshMessages();
 	}
 
+        @Override
 	public final void chat(ChatMessage message) {
 		if (message.type != ChatMessage.CHAT_PRIVATE && message.type != ChatMessage.CHAT_CHATROOM)
 			return;
@@ -144,6 +145,7 @@ public strictfp class ChatPanel extends Panel implements ChatListener {
 		chat_box.setOffsetY(Integer.MAX_VALUE);
 	}
 
+        @Override
 	public final void setFocus() {
 		chat_line.setFocus();
 	}
@@ -154,12 +156,14 @@ public strictfp class ChatPanel extends Panel implements ChatListener {
 	}
 
 	private strictfp final class SendListener implements MouseClickListener {
+                @Override
 		public final void mouseClicked(int button, int x, int y, int clicks) {
 			chat_line.enterPressedAll();
 		}
 	}
 
 	private strictfp final class ClearListener implements EnterListener {
+                @Override
 		public final void enterPressed(CharSequence text) {
 			chat_line.clear();
 		}
@@ -172,6 +176,7 @@ public strictfp class ChatPanel extends Panel implements ChatListener {
 			this.box = box;
 		}
 		
+                @Override
 		public final void itemChosen(PulldownMenu menu, int item_index) {
 			ChatRoomUser user = (ChatRoomUser)box.getRightClickedRowData();
 			String nick = user.getNick();
@@ -202,12 +207,14 @@ public strictfp class ChatPanel extends Panel implements ChatListener {
 			this.menu = menu;
 		}
 		
+                @Override
 		public final void rowDoubleClicked(Object context) {
 			ChatRoomUser user = (ChatRoomUser)context;
 			private_message_form = new PrivateMessageForm(gui_root, user.getNick());
 			gui_root.addModalForm(private_message_form);
 		}
 
+                @Override
 		public final void rowChosen(Object context) {
 			ChatRoomUser user = (ChatRoomUser)context;
 			String item_text;

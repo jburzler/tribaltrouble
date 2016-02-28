@@ -91,6 +91,7 @@ public strictfp class Group extends GUIObject {
 		current = null;
 	}
 
+        @Override
 	protected void keyRepeat(KeyboardEvent event) {
 		switch (event.getKeyCode()) {
 			case Keyboard.KEY_TAB:
@@ -107,6 +108,7 @@ public strictfp class Group extends GUIObject {
 		switchFocus(dir);
 	}
 
+        @Override
 	protected void renderGeometry() {}
 
 /*

@@ -115,10 +115,12 @@ public final strictfp class NewCampaignForm extends Form implements Deterministi
 		LoadCampaignBox.loadSavegames(this);
 	}
 
+        @Override
 	protected void doCancel() {
 		main_menu.setMenu(campaign_form);
 	}
 	
+        @Override
 	public final void setFocus() {
 		editline_name.setFocus();
 	}
@@ -181,13 +183,16 @@ public final strictfp class NewCampaignForm extends Form implements Deterministi
 		remove();
 	}
 
+        @Override
 	public final void saveSucceeded() {
 	}
 
+        @Override
 	public final void loadSucceeded(Object object) {
 		campaign_states = (CampaignState[])object;
 	}
 
+        @Override
 	public final void failed(Exception e) {
 		if (e instanceof FileNotFoundException) {
 		} else if (e instanceof InvalidClassException) {
@@ -198,16 +203,19 @@ public final strictfp class NewCampaignForm extends Form implements Deterministi
 	}
 
 	private final strictfp class NameListener implements MouseClickListener, EnterListener {
+                @Override
 		public final void mouseClicked(int button, int x, int y, int clicks) {
 			save();
 		}
 
+                @Override
 		public final void enterPressed(CharSequence text) {
 			save();
 		}
 	}
 
 	private final strictfp class RaceListener implements ItemChosenListener {
+                @Override
 		public final void itemChosen(PulldownMenu menu, int item_index) {
 			if (item_index == INDEX_NATIVES && (!Settings.getSettings().has_native_campaign || !Renderer.isRegistered())) {
 				menu.chooseItem(INDEX_VIKINGS);

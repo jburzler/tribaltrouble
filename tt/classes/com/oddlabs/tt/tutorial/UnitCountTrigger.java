@@ -14,6 +14,7 @@ public final strictfp class UnitCountTrigger extends TutorialTrigger {
 		this.target_count = target_count;
 	}
 
+        @Override
 	protected final void run(Tutorial tutorial) {
 		Set set = tutorial.getViewer().getLocalPlayer().getUnits().getSet();
 		Iterator it = set.iterator();

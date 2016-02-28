@@ -123,6 +123,7 @@ public final strictfp class Picker implements Updatable {
 			if (supply != null) {
 			//	Target target = (Target)supply;
 				respond_manager.addResponder(supply, new Runnable() {
+                                        @Override
 					public final void run() {
 						supply.changeRespondingTrees(-1);
 					}
@@ -442,6 +443,7 @@ com.oddlabs.tt.landscape.LandscapeTileIndices.debug = false;*/
 		}
 	}
 
+        @Override
 	public void update(Object anim) {
 		render_tool_tip = true;
 		tool_tip_timer.stop();
@@ -537,6 +539,7 @@ com.oddlabs.tt.landscape.LandscapeTileIndices.debug = false;*/
 			}
 		}
 
+                @Override
 		public final int compare(Object o1, Object o2) {
 			LandscapeLeaf l1 = (LandscapeLeaf)o1;
 			LandscapeLeaf l2 = (LandscapeLeaf)o2;

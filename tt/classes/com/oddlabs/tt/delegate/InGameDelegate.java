@@ -110,6 +110,7 @@ public abstract strictfp class InGameDelegate extends CameraDelegate {
 		return false;
 	}
 
+        @Override
 	protected void keyPressed(KeyboardEvent event) {
 		switch (event.getKeyCode()) {
 			case Keyboard.KEY_ESCAPE:

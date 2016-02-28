@@ -542,6 +542,7 @@ public final strictfp class TerrainMenu extends Group {
 		this.seed = seed;
 	}
 
+        @Override
 	public final void setFocus() {
 		button_ok.setFocus();
 	}
@@ -551,6 +552,7 @@ public final strictfp class TerrainMenu extends Group {
 	}
 
 	private final strictfp class CancelButtonListener implements MouseClickListener {
+                @Override
 		public final void mouseClicked(int button, int x, int y, int clicks) {
 			owner.terrainMenuCancel();
 		}
@@ -641,12 +643,14 @@ System.out.println("Start server");
 	}
 
 	private final strictfp class MapcodeListener implements MouseClickListener {
+                @Override
 		public final void mouseClicked(int button, int x, int y, int clicks) {
 			gui_root.addModalForm(new MapcodeForm(TerrainMenu.this));
 		}
 	}
 
 	private final strictfp class OKListener implements MouseClickListener {
+                @Override
 		public final void mouseClicked(int button, int x, int y, int clicks) {
 			boolean started = startGame();
 			if (started)
@@ -661,6 +665,7 @@ System.out.println("Start server");
 			this.i = i;
 		}
 
+                @Override
 		public final void itemChosen(PulldownMenu menu, int item_index) {
 			if (item_index == 0) {
 				labels_players[i].setDisabled(true);
@@ -675,12 +680,14 @@ System.out.println("Start server");
 	}
 
 	private final strictfp class PulldownUpdateMapcodeListener implements ItemChosenListener {
+                @Override
 		public final void itemChosen(PulldownMenu menu, int item_index) {
 			setMapcode();
 		}
 	}
 
 	private final strictfp class PulldownUpdateSizeListener implements ItemChosenListener {
+                @Override
 		public final void itemChosen(PulldownMenu menu, int item_index) {
 			if (item_index == LARGE && !Renderer.isRegistered()) {
 				menu.chooseItem(MEDIUM);
@@ -689,6 +696,7 @@ System.out.println("Start server");
 	}
 
 	private final strictfp class PulldownUpdateHardListener implements ItemChosenListener {
+                @Override
 		public final void itemChosen(PulldownMenu menu, int item_index) {
 			if (item_index == HARD && !Renderer.isRegistered()) {
 				menu.chooseItem(NORMAL);
@@ -697,6 +705,7 @@ System.out.println("Start server");
 	}
 
 	private final strictfp class PulldownUpdateTerrainListener implements ItemChosenListener {
+                @Override
 		public final void itemChosen(PulldownMenu menu, int item_index) {
 			if (item_index == Game.TERRAIN_TYPE_VIKING && !Renderer.isRegistered()) {
 				menu.chooseItem(Game.TERRAIN_TYPE_NATIVE);
@@ -705,6 +714,7 @@ System.out.println("Start server");
 	}
 
 	private final strictfp class SliderUpdateMapcodeListener implements ValueListener {
+                @Override
 		public final void valueSet(int value) {
 			setMapcode();
 		}

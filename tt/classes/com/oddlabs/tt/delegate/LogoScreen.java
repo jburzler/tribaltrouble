@@ -47,12 +47,14 @@ public final strictfp class LogoScreen extends CameraDelegate implements Updatab
 		gui_root.pushDelegate(this);
 	}
 
+        @Override
 	public final void displayChangedNotify(int width, int height) {
 		setDim(width, height);
 		if (overlay != null)
 			overlay.setDim(width, height);
 	}
 
+        @Override
 	public final void update(Object anim) {
 		delay_timer.stop();
 		fade();
@@ -72,10 +74,12 @@ public final strictfp class LogoScreen extends CameraDelegate implements Updatab
 	public final void fadingDone(GUIRoot gui_root) {
 	}
 	
+        @Override
 	protected final void keyPressed(KeyboardEvent event) {
 		fade();
 	}
 
+        @Override
 	protected void mouseClicked(int button, int x, int y, int clicks) {
 		fade();
 	}

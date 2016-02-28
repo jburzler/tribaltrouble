@@ -8,6 +8,7 @@ public final strictfp class ArmyMenuTrigger extends TutorialTrigger {
 		local_player.enableArmies(true);
 	}
 
+        @Override
 	protected final void run(Tutorial tutorial) {
 		if (tutorial.getViewer().getPanel().inArmyMenu())
 			tutorial.next(new ArmyTrigger(tutorial.getViewer().getLocalPlayer()));

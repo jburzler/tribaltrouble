@@ -118,6 +118,7 @@ public final strictfp class NewUserForm extends Form {
 		compileCanvas();
 	}
 	
+        @Override
 	public final void setFocus() {
 		editline_username.setFocus();
 	}
@@ -152,10 +153,12 @@ public final strictfp class NewUserForm extends Form {
 	}
 
 	private final strictfp class CreateUserListener implements MouseClickListener, EnterListener {
+                @Override
 		public final void mouseClicked(int button, int x, int y, int clicks) {
 			createUser();
 		}
 
+                @Override
 		public final void enterPressed(CharSequence text) {
 			createUser();
 		}

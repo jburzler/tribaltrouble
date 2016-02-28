@@ -31,6 +31,7 @@ public final strictfp class TreeGroup extends AbstractTreeGroup {
 		}
 	}
 
+        @Override
 	public final void visit(TreeNodeVisitor visitor) {
 		visitor.visitNode(this);
 	}
@@ -58,6 +59,7 @@ public final strictfp class TreeGroup extends AbstractTreeGroup {
 		child3.visit(visitor);
 	}
 
+        @Override
 	protected final boolean initBounds() {
 		boolean child0_bounds = child0.initBounds();
 		boolean child1_bounds = child1.initBounds();

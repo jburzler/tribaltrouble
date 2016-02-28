@@ -10,6 +10,7 @@ import org.lwjgl.opengl.*;
 public final strictfp class GeneratorRock extends TextureGenerator {
 	private static final int TEXTURE_SIZE = 128;
 
+        @Override
 	public final Texture[] generate() {
 		int seed = Globals.LANDSCAPE_SEED;
 		Channel voronoi4 = new Voronoi(TEXTURE_SIZE, 4, 4, 1, 1f, seed).getDistance(0f, -1f, 1f);
@@ -36,6 +37,7 @@ public final strictfp class GeneratorRock extends TextureGenerator {
 		return textures;
 	}
 	
+        @Override
 	public final int hashCode() {
 		return TEXTURE_SIZE;
 	}

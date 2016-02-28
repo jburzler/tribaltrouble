@@ -24,10 +24,12 @@ public final strictfp class SpriteFile extends File {
 		this.max_alpha = max_alpha;
 	}
 
+        @Override
 	public final Object newInstance() {
 		return new SpriteList(this);
 	}
 
+        @Override
 	public final boolean equals(Object o) {
 		if (!(o instanceof SpriteFile))
 			return false;

@@ -20,6 +20,7 @@ public final strictfp class StunController extends Controller {
 		return time > 0;
 	}
 
+        @Override
 	public final void decide() {
 		unit.setBehaviour(stun_behaviour);
 		if (!shouldSleep(0f)) {

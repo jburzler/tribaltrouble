@@ -31,6 +31,7 @@ public final strictfp class VikingIsland13 extends Island {
 		super(campaign);
 	}
 
+        @Override
 	public final void init(NetworkSelector network, GUIRoot gui_root) {
 		String[] ai_names = new String[]{Utils.getBundleString(bundle, "name0"),
 			Utils.getBundleString(bundle, "name1"),
@@ -62,6 +63,7 @@ public final strictfp class VikingIsland13 extends Island {
 		game_network.getClient().getServerInterface().startServer();
 	}
 
+        @Override
 	protected final void start() {
 		alive = true;
 		counter.start(getViewer().getWorld().getAnimationManagerGameTime());
@@ -74,6 +76,7 @@ public final strictfp class VikingIsland13 extends Island {
 
 		// Introduction
 		runnable = new Runnable() {
+                @Override
 			public final void run() {
 				String stay_alive_dialog = Utils.getBundleString(bundle, "dialog0", new Object[]{new Integer(minutes)});
 				CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header0"),
@@ -87,6 +90,7 @@ public final strictfp class VikingIsland13 extends Island {
 		new GameStartedTrigger(getViewer().getWorld(), runnable);
 		// Winner prize
 		runnable = new Runnable() {
+                @Override
 			public final void run() {
 				getCampaign().getState().setIslandState(13, CampaignState.ISLAND_COMPLETED);
 				getCampaign().getState().setIslandState(12, CampaignState.ISLAND_AVAILABLE);
@@ -169,6 +173,7 @@ public final strictfp class VikingIsland13 extends Island {
 
 		// Attack1
 		runnable = new Runnable() {
+                @Override
 			public final void run() {
 				Building armory = local_player.getArmory();
 				Unit chieftain = local_player.getChieftain();
@@ -185,6 +190,7 @@ public final strictfp class VikingIsland13 extends Island {
 
 		// Attack2
 		runnable = new Runnable() {
+                @Override
 			public final void run() {
 				Building armory = local_player.getArmory();
 				Unit chieftain = local_player.getChieftain();
@@ -201,6 +207,7 @@ public final strictfp class VikingIsland13 extends Island {
 
 		// Attack3
 		runnable = new Runnable() {
+                @Override
 			public final void run() {
 				Building armory = local_player.getArmory();
 				Unit chieftain = local_player.getChieftain();
@@ -217,6 +224,7 @@ public final strictfp class VikingIsland13 extends Island {
 
 		// Attack4
 		runnable = new Runnable() {
+                @Override
 			public final void run() {
 				Building armory = local_player.getArmory();
 				Unit chieftain = local_player.getChieftain();
@@ -233,6 +241,7 @@ public final strictfp class VikingIsland13 extends Island {
 
 		// Attack5
 		runnable = new Runnable() {
+                @Override
 			public final void run() {
 				Building armory = local_player.getArmory();
 				Unit chieftain = local_player.getChieftain();
@@ -249,6 +258,7 @@ public final strictfp class VikingIsland13 extends Island {
 
 		// Attack6
 		runnable = new Runnable() {
+                @Override
 			public final void run() {
 				Building armory = local_player.getArmory();
 				Unit chieftain = local_player.getChieftain();
@@ -273,14 +283,17 @@ public final strictfp class VikingIsland13 extends Island {
 		counter.remove();
 	}
 
+        @Override
 	public final CharSequence getHeader() {
 		return Utils.getBundleString(bundle, "header");
 	}
 
+        @Override
 	public final CharSequence getDescription() {
 		return Utils.getBundleString(bundle, "description");
 	}
 
+        @Override
 	public final CharSequence getCurrentObjective() {
 		return Utils.getBundleString(bundle, "objective", new Object[]{new Integer(minutes)});
 	}

@@ -10,6 +10,7 @@ public final strictfp class IronSupply extends SupplyModel {
 		super(world, sprite_renderer, size, grid_x, grid_y, x, y, rotation, INITIAL_SUPPLIES, increase);
 	}
 
+        @Override
 	public final Supply respawn() {
 		return new IronSupply(getWorld(), getSpriteRenderer(), getSize(), getGridX(), getGridY(), getPositionX(), getPositionY(), 0, false);
 	}

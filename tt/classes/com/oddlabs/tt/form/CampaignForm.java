@@ -73,6 +73,7 @@ public final strictfp class CampaignForm extends Form implements DeterministicSe
 		centerPos();
 	}
 
+        @Override
 	public final void setFocus() {
 		button_vikings.setFocus();
 	}
@@ -90,10 +91,12 @@ public final strictfp class CampaignForm extends Form implements DeterministicSe
 			campaign.startIsland(network, gui_root, 0);
 	}
 
+        @Override
 	public final void saveSucceeded() {
 		load_campaign_box.refresh();
 	}
 
+        @Override
 	public final void loadSucceeded(Object object) {
 		CampaignState[] campaign_states = (CampaignState[])object;
 		CampaignState selected = (CampaignState)load_campaign_box.getSelected();
@@ -111,6 +114,7 @@ public final strictfp class CampaignForm extends Form implements DeterministicSe
 		}
 	}
 
+        @Override
 	public final void failed(Exception e) {
 		if (e instanceof FileNotFoundException) {
 		} else if (e instanceof InvalidClassException) {
@@ -121,6 +125,7 @@ public final strictfp class CampaignForm extends Form implements DeterministicSe
 	}
 
 	private final strictfp class DeleteListener implements MouseClickListener {
+                @Override
 		public final void mouseClicked(int button, int x, int y, int clicks) {
 			CampaignState state = (CampaignState)load_campaign_box.getSelected();
 			if (state != null) {
@@ -131,28 +136,33 @@ public final strictfp class CampaignForm extends Form implements DeterministicSe
 	}
 
 	private final strictfp class ActionDeleteListener implements MouseClickListener {
+                @Override
 		public final void mouseClicked(int button, int x, int y, int clicks) {
 			LoadCampaignBox.loadSavegames(CampaignForm.this);
 		}
 	}
 
 	private final strictfp class VikingsListener implements MouseClickListener {
+                @Override
 		public final void mouseClicked(int button, int x, int y, int clicks) {
 			main_menu.setMenu(new NewCampaignForm(network, gui_root, main_menu, CampaignForm.this));
 		}
 	}
 
 	private final strictfp class LoadListener implements MouseClickListener, RowListener {
+                @Override
 		public final void mouseClicked(int button, int x, int y, int clicks) {
 			Object selected = load_campaign_box.getSelected();
 			if (selected != null)
 				load((CampaignState)selected);
 		}
 
+                @Override
 		public final void rowDoubleClicked(Object object) {
 			load((CampaignState)object);
 		}
 		
+                @Override
 		public final void rowChosen(Object object) {
 		}
 	}

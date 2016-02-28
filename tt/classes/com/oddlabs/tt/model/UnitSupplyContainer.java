@@ -13,6 +13,7 @@ public final strictfp class UnitSupplyContainer extends SupplyContainer {
 		this.supply_sprite_renderers = supply_sprite_renderers;
 	}
 
+        @Override
 	public final int increaseSupply(int amount) {
 		throw new RuntimeException();
 	}

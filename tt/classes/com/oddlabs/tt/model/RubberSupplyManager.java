@@ -12,14 +12,17 @@ public final strictfp class RubberSupplyManager extends SupplyManager {
 		super(world);
 	}
 
+        @Override
 	protected float getSleepTime() {
 		return SLEEP_TICKS;
 	}
 
+        @Override
 	protected final boolean shouldSpawn() {
 		return current_groups < MAX_NUM_GROUPS;
 	}
 
+        @Override
 	protected final void insertSupply() {
 		new RubberGroup(getWorld());
 	}

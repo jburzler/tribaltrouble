@@ -107,6 +107,7 @@ public final strictfp class FloatVBO extends VBO {
 		}
 	}
 
+        @Override
 	public final int capacity() {
 		return getSize()>>2;
 	}

@@ -65,6 +65,7 @@ public final strictfp class PlacingDelegate extends ControllableCameraDelegate {
 		GL11.glVertex3f(x, y, z);
 	}
 	*/
+        @Override
 	public final void keyPressed(KeyboardEvent event) {
 		getCamera().keyPressed(event);
 		switch (event.getKeyCode()) {
@@ -78,10 +79,12 @@ public final strictfp class PlacingDelegate extends ControllableCameraDelegate {
 		}
 	}
 
+        @Override
 	public void keyReleased(KeyboardEvent event) {
 		getCamera().keyReleased(event);
 	}
 
+        @Override
 	public final void mousePressed(int button, int x, int y) {
 		if (button == LocalInput.LEFT_BUTTON) {
 			placeObject();
@@ -92,10 +95,12 @@ public final strictfp class PlacingDelegate extends ControllableCameraDelegate {
 		}						
 	}
 
+        @Override
 	public boolean renderCursor() {
 		return true;
 	}
 
+        @Override
 	public final void render3D(LandscapeRenderer renderer, RenderQueues queues) {
 		getViewer().getPicker().pickLocation(getCamera().getState(), landscape_hit);
 		UnitGrid unit_grid = getViewer().getWorld().getUnitGrid();

@@ -35,21 +35,25 @@ public final strictfp class InfoPrinter extends GUIObject implements Animated, C
 		return gui_root;
 	}
 
+        @Override
 	protected final void doAdd() {
 		super.doAdd();
 		Network.getChatHub().addListener(this);
 	}
 
+        @Override
 	protected final void doRemove() {
 		super.doRemove();
 		Network.getChatHub().removeListener(this);
 		LocalEventQueue.getQueue().getManager().removeAnimation(this);
 	}
 
+        @Override
 	protected final void displayChangedNotify(int width, int height) {
 		setDim(width, height);
 	}
 
+        @Override
 	public final void chat(ChatMessage message) {
 		chat(message.formatShort(), message.type);
 	}
@@ -97,6 +101,7 @@ public final strictfp class InfoPrinter extends GUIObject implements Animated, C
 		setLabelsPos();
 	}
 
+        @Override
 	public final void animate(float t) {
 		time += t;
 		for (int i = timers.size() - 1; i >= 0; i--) {
@@ -107,9 +112,11 @@ public final strictfp class InfoPrinter extends GUIObject implements Animated, C
 		}
 	}
 
+        @Override
 	public final void updateChecksum(StateChecksum checksum) {
 	}
 
+        @Override
 	protected final void renderGeometry() {
 	}
 

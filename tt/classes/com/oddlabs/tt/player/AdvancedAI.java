@@ -54,6 +54,7 @@ public final strictfp class AdvancedAI extends AI {
 		this.difficulty = difficulty;
 	}
 
+        @Override
 	public final void animate(float t) {
 		if (!shouldDoAction(t))
 			return;

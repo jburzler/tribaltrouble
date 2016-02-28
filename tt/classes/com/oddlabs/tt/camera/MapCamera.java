@@ -47,6 +47,7 @@ public final strictfp class MapCamera extends Camera {
 		setSmoothnessFactor(SMOOTHNESS_FACTOR);
 	}
 
+        @Override
 	public final void doAnimate(float t) {
 		float factor = t*1000f/StrictMath.max(t*1000f, Settings.getSettings().mapmode_delay*MAP_TIME_FACTOR);
 		float dx;
@@ -133,6 +134,7 @@ public final strictfp class MapCamera extends Camera {
 		}
 	}
 
+        @Override
 	public final void keyPressed(KeyboardEvent event) {
 		switch (event.getKeyCode()) {
 			case Keyboard.KEY_SPACE:

@@ -20,10 +20,12 @@ public final strictfp class AttackBehaviour implements Behaviour {
 		init();
 	}
 
+        @Override
 	public final boolean isBlocking() {
 		return true;
 	}
 
+        @Override
 	public final int animate(float t) {
 		switch (state) {
 			case THROWING:
@@ -60,6 +62,7 @@ public final strictfp class AttackBehaviour implements Behaviour {
 		unit.switchAnimation(1f/SECONDS_PER_ATTACK, Unit.ANIMATION_THROWING);
 	}
 
+        @Override
 	public final void forceInterrupted() {
 	}
 }

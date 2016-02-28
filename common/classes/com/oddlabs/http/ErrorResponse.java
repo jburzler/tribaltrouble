@@ -9,10 +9,12 @@ strictfp final class ErrorResponse implements HttpResponse {
 		this.error_message = error_message;
 	}
 
+        @Override
 	public final String toString() {
 		return error_code + " " + error_message;
 	}
 
+        @Override
 	public final void notify(HttpCallback callback) {
 		callback.error(error_code, error_message);
 	}

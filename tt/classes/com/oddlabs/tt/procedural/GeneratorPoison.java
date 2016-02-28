@@ -10,6 +10,7 @@ import org.lwjgl.opengl.*;
 public final strictfp class GeneratorPoison extends TextureGenerator {
 	private static final int TEXTURE_SIZE = 128;
 
+        @Override
 	public final Texture[] generate() {
 		int seed = Globals.LANDSCAPE_SEED;
 		
@@ -33,6 +34,7 @@ public final strictfp class GeneratorPoison extends TextureGenerator {
 		return textures;
 	}
 
+        @Override
 	public final int hashCode() {
 		return TEXTURE_SIZE + 398;
 	}

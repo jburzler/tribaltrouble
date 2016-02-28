@@ -79,6 +79,7 @@ public final strictfp class ProgressBar extends GUIObject {
 		text_renderer.renderCropped(0, 0, clip_left, clip_right, clip_bottom, clip_top, new StringBuffer(string));
 	}
 
+        @Override
 	protected final void renderGeometry(float clip_left, float clip_right, float clip_bottom, float clip_top) {
 		if (text_only)
 			renderText(clip_left, clip_right, clip_bottom, clip_top);

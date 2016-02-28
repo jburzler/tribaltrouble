@@ -6,6 +6,7 @@ import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
 
 public final strictfp class GLByteImage extends GLImage {
+        @Override
 	public final int getPixelSize() {
 		return 1;
 	}
@@ -34,14 +35,17 @@ public final strictfp class GLByteImage extends GLImage {
 		}
 	}
 
+        @Override
 	public final GLImage createImage(int width, int height, int format) {
 		return new GLByteImage(width, height, format);
 	}
 
+        @Override
 	public final int getPixel(int x, int y) {
 		return getPixels().get(y*getWidth() + x) & 0xff;
 	}
 
+        @Override
 	public final void putPixel(int x, int y, int pixel) {
 		getPixels().put(y*getWidth() + x, (byte)pixel);
 	}

@@ -14,10 +14,12 @@ public final strictfp class Region extends Node {
 	private int center_x;
 	private int center_y;
 
+        @Override
 	public final int getGridX() {
 		return center_x;
 	}
 
+        @Override
 	public final int getGridY() {
 		return center_y;
 	}
@@ -27,9 +29,11 @@ public final strictfp class Region extends Node {
 		this.center_y = center_y;
 	}
 	
+        @Override
 	public String toString() {
 		return "Region: " + center_x + " " + center_y;
 	}
+        @Override
 	public final PathNode newPath() {
 		Node graph_node = this;
 		assert graph_node != null;
@@ -70,6 +74,7 @@ public final strictfp class Region extends Node {
 		neighbours.add(n);
 	}
 
+        @Override
 	public final boolean addNeighbours(PathFinderAlgorithm finder, UnitGrid unit_grid) {
 		for (int i = 0; i < neighbours.size(); i++) {
 			Region neighbour = (Region)neighbours.get(i);

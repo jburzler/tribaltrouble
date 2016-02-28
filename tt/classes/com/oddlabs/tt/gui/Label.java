@@ -35,6 +35,7 @@ public strictfp class Label extends TextField implements Comparable {
 		this.color = color;
 	}
 
+        @Override
 	protected final void renderGeometry(float clip_left, float clip_right, float clip_bottom, float clip_top) {
 		// Radeon 9200 doesn't like glColor between Begin/End if not followed by a glVertex
 		GL11.glEnd();
@@ -56,6 +57,7 @@ public strictfp class Label extends TextField implements Comparable {
 		GL11.glBegin(GL11.GL_QUADS);
 	}
 
+        @Override
 	public int compareTo(Object o) {
 		return getText().toString().compareToIgnoreCase(((Label)o).getText().toString());
 	}

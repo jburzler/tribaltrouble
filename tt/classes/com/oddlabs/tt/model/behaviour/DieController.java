@@ -10,6 +10,7 @@ public final strictfp class DieController extends Controller {
 		this.unit = unit;
 	}
 
+        @Override
 	public final void decide() {
 		unit.setBehaviour(new DieBehaviour(unit));
 	}

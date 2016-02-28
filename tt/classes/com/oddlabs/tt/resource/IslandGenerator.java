@@ -57,10 +57,12 @@ public final strictfp class IslandGenerator implements WorldGenerator {
 		return texels_per_grid_unit;
 	}
 
+        @Override
 	public final int getTerrainType() {
 		return terrain_type;
 	}
 	
+        @Override
 	public final int getMetersPerWorld() {
 		return meters_per_world;
 	}
@@ -69,6 +71,7 @@ public final strictfp class IslandGenerator implements WorldGenerator {
 		return Landscape.getFogInfo(terrain_type, meters_per_world);
 	}
 
+        @Override
 	public final WorldInfo generate(int num_players, int initial_unit_count, float random_start_pos) {
 		int colormap_size = grid_units*getTexelsPerGridUnit();
 		int chunks_per_colormap = colormap_size/TEXELS_PER_CHUNK;

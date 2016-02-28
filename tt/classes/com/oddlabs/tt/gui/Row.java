@@ -42,6 +42,7 @@ public final strictfp class Row extends GUIObject implements Comparable {
 		this.sort_index = sort_index;
 	}
 
+        @Override
 	public final int compareTo(Object o) {
 		Comparable local_object = (Comparable)getColumn(sort_index);
 		Comparable compared_object = (Comparable)((Row)o).getColumn(sort_index);
@@ -52,6 +53,7 @@ public final strictfp class Row extends GUIObject implements Comparable {
 		this.color = color;
 	}
 
+        @Override
 	protected final void renderGeometry(float clip_left, float clip_right, float clip_bottom ,float clip_top) {
 		GL11.glEnd();
 		if (marked) {

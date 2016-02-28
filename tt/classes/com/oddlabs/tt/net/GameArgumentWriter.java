@@ -11,6 +11,7 @@ final strictfp class GameArgumentWriter extends DefaultARMIArgumentWriter {
 		this.distributable_table = table;
 	}
 
+        @Override
 	public final void writeArgument(Class type, Object arg, ByteBufferOutputStream out) throws IOException {
 		if (Distributable.class.isAssignableFrom(type)) {
 			int name = distributable_table.getName((Distributable)arg);

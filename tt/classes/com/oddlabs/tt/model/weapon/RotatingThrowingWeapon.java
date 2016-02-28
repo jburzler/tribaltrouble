@@ -19,6 +19,7 @@ public abstract strictfp class RotatingThrowingWeapon extends ThrowingWeapon {
 		return angle;
 	}
 
+        @Override
 	public final void animate(float t) {
 		super.animate(t);
 		setAngle(getAngle() + getAngleVelocity()*t);
@@ -26,6 +27,7 @@ public abstract strictfp class RotatingThrowingWeapon extends ThrowingWeapon {
 
 	protected abstract float getAngleVelocity();
 
+        @Override
 	public final void visit(ElementVisitor visitor) {
 		visitor.visitRotatingThrowingWeapon(this);
 	}

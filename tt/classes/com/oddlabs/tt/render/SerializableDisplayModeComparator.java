@@ -9,6 +9,7 @@ public final strictfp class SerializableDisplayModeComparator implements Compara
 		this.target_mode = target_mode;
 	}
 
+        @Override
 	public final int compare(Object o1, Object o2) {
 		SerializableDisplayMode d1 = (SerializableDisplayMode)o1;
 		SerializableDisplayMode d2 = (SerializableDisplayMode)o2;
@@ -44,6 +45,7 @@ public final strictfp class SerializableDisplayModeComparator implements Compara
 		return dx + dy;
 	}
 
+        @Override
 	public final boolean equals(Object obj) {
 		return this == obj;
 	}

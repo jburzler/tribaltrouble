@@ -9,6 +9,7 @@ public final strictfp class RotateTrigger extends TutorialTrigger {
 		super(.1f, 2f, "rotate");
 	}
 
+        @Override
 	protected final void run(Tutorial tutorial) {
 		GameCamera camera = tutorial.getViewer().getCamera();
 		if (camera.rotateRight()) {

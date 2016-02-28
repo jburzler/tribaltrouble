@@ -48,36 +48,44 @@ public final strictfp class MatchmakingConnectingForm extends Form implements Ma
 		Network.getMatchmakingClient().login(network, login, login_details);
 	}
 
+        @Override
 	public final void clearList(int type) {
 		assert false;
 	}
 
+        @Override
 	public final void receivedList(int type, Object[] names) {
 		assert false;
 	}
 
+        @Override
 	public final void joinedChat(ChatRoomInfo info) {
 		assert false;
 	}
 	
+        @Override
 	public final void updateChatRoom(ChatRoomInfo info) {
 		assert false;
 	}
 
+        @Override
 	public final void receivedProfiles(Profile[] profiles, String last_nick) {
 		assert false;
 	}
 
+        @Override
 	public final void doRemove() {
 		super.doRemove();
 		Network.setMatchmakingListener(null);
 	}
 
+        @Override
 	public final void connectionLost() {
 		remove();
 		gui_root.addModalForm(new MessageForm(Utils.getBundleString(bundle, "connection_failed")));
 	}
 
+        @Override
 	public final void loginError(int error_code) {
 		remove();
 		String error_message;
@@ -112,6 +120,7 @@ public final strictfp class MatchmakingConnectingForm extends Form implements Ma
 		gui_root.addModalForm(new MessageForm(error_message));
 	}
 	
+        @Override
 	public final void loggedIn() {
 		remove();
 		if (parent_form != null)
@@ -119,6 +128,7 @@ public final strictfp class MatchmakingConnectingForm extends Form implements Ma
 		new SelectGameMenu(network, gui_root, main_menu);
 	}
 
+        @Override
 	protected final void doCancel() {
 		Network.getMatchmakingClient().close();
 	}

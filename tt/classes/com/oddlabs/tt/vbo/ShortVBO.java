@@ -122,6 +122,7 @@ public final strictfp class ShortVBO extends VBO {
 		}
 	}
 
+        @Override
 	public final int capacity() {
 		return getSize()>>1;
 	}

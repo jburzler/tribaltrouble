@@ -31,6 +31,7 @@ public final strictfp class Arrow extends GUIObject {
 		displayChangedNotify(LocalInput.getViewWidth(), LocalInput.getViewHeight());
 	}
 
+        @Override
 	protected final void displayChangedNotify(int width, int height) {
 		setDim(width, height);
 	}
@@ -46,6 +47,7 @@ public final strictfp class Arrow extends GUIObject {
 		return point;
 	}
 
+        @Override
 	protected final void renderGeometry() {
 		StrictVector4f result = project3DTo2D(target_x, target_y, target_z);
 		float x = result.x;

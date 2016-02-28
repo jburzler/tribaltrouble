@@ -347,6 +347,7 @@ System.out.println("last_event_log_path = " + last_event_log_path);
 		new LocalInput();
 
 		NetworkSelector network = new NetworkSelector(LocalEventQueue.getQueue().getDeterministic(), new TimeManager() {
+                        @Override
 			public final long getMillis() {
 				return LocalEventQueue.getQueue().getMillis();
 			}
@@ -523,6 +524,7 @@ e.printStackTrace();
 	private static void setupMainMenu(final NetworkSelector network, GUI gui, final boolean first_progress) {
 		final WorldGenerator generator = new IslandGenerator(256, Landscape.NATIVE, Globals.LANDSCAPE_HILLS, Globals.LANDSCAPE_VEGETATION, Globals.LANDSCAPE_RESOURCES, Globals.LANDSCAPE_SEED);
 		ProgressForm.setProgressForm(network, gui, new LoadCallback() {
+                        @Override
 			public final UIRenderer load(GUIRoot gui_root) {
 				return finishMainMenu(network, gui_root, first_progress, generator);
 			}
@@ -538,20 +540,28 @@ e.printStackTrace();
 		PlayerInfo[] players = new PlayerInfo[]{player_info};
 		WorldInfo world_info = generator.generate(players.length, world_params.getInitialUnitCount(), 0f);
 		World world = World.newWorld(AudioManager.getManager(), landscape_resources, null, LandscapeResources.loadTreeLowDetails(), new NotificationListener() {
+                        @Override
 			public final void gamespeedChanged(int speed) {
 			}
+                        @Override
 			public final void playerGamespeedChanged() {
 			}
+                        @Override
 			public final void newAttackNotification(Selectable target) {
 			}
+                        @Override
 			public final void newSelectableNotification(Selectable target) {
 			}
+                        @Override
 			public final void registerTarget(Target target) {
 			}
+                        @Override
 			public final void unregisterTarget(Target target) {
 			}
+                        @Override
 			public final void updateTreeLowDetail(StrictMatrix4f matrix, TreeSupply tree) {
 			}
+                        @Override
 			public final void patchesEdited(int patch_x0, int patch_y0, int patch_x1, int patch_y1) {
 			}
 		}, world_params, world_info, generator.getTerrainType(), players, new float[][]{Player.COLORS[0]});
@@ -584,6 +594,7 @@ e.printStackTrace();
 						Utils.getBundleString(bundle, "network_not_available_message"),
 						Utils.getBundleString(bundle, "quit"),
 						new MouseClickListener() {
+                                                        @Override
 							public final void mouseClicked(int button, int x, int y, int clicks) {
 								shutdown();
 							}
@@ -781,6 +792,7 @@ System.out.println("use_texture_compression = " + Settings.getSettings().useText
 	}
 
 	private final static class MusicTimer implements Updatable {
+                @Override
 		public final void update(Object anim) {
 			if (music_timer != null)
 				music_timer.stop();

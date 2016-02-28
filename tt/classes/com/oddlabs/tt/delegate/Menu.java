@@ -79,6 +79,7 @@ public abstract strictfp class Menu extends CameraDelegate {
 
 	protected final void addDefaultOptionsButton() {
 		addOptionsButton(new FormFactory() {
+                        @Override
 			public final Form create() {
 				return new OptionsMenu(getGUIRoot());
 			}
@@ -106,6 +107,7 @@ public abstract strictfp class Menu extends CameraDelegate {
 		displayChangedNotify(LocalInput.getViewWidth(), LocalInput.getViewHeight());
 	}
 
+        @Override
 	protected void keyPressed(KeyboardEvent event) {
 		switch(event.getKeyCode()) {
 			case Keyboard.KEY_ESCAPE:
@@ -116,6 +118,7 @@ public abstract strictfp class Menu extends CameraDelegate {
 		}
 	}
 
+        @Override
 	public void displayChangedNotify(int width, int height) {
 		setDim(width, height);
 
@@ -153,6 +156,7 @@ public abstract strictfp class Menu extends CameraDelegate {
 		}
 	}
 
+        @Override
 	public final void setFocus() {
 		if (current_menu != null) {
 			current_menu.setFocus();
@@ -171,6 +175,7 @@ public abstract strictfp class Menu extends CameraDelegate {
 		}
 	}
 
+        @Override
 	protected final void keyRepeat(KeyboardEvent event) {
 		switch (event.getKeyCode()) {
 			case Keyboard.KEY_TAB:
@@ -187,9 +192,11 @@ public abstract strictfp class Menu extends CameraDelegate {
 		}
 	}
 
+        @Override
 	public void mouseScrolled(int amount) {
 	}
 
+        @Override
 	protected void renderGeometry() {
 	}
 
@@ -219,6 +226,7 @@ public abstract strictfp class Menu extends CameraDelegate {
 		MenuButton resume = new MenuButton(Utils.getBundleString(bundle, "resume"), COLOR_NORMAL, COLOR_ACTIVE);
 		addChild(resume);
 		resume.addMouseClickListener(new MouseClickListener() {
+                        @Override
 			public final void mouseClicked(int button, int x, int y, int clicks) {
 				pop();
 			}
@@ -231,6 +239,7 @@ public abstract strictfp class Menu extends CameraDelegate {
 	}
 
 	public final static strictfp class DefaultWorldInitAction implements WorldInitAction {
+                @Override
 		public final void run(WorldViewer viewer) {
 			new GameOverTrigger(viewer);
 			completeGameSetupHack(viewer);
@@ -256,6 +265,7 @@ public abstract strictfp class Menu extends CameraDelegate {
 		InetAddress address = multiplayer ? null : com.oddlabs.util.Utils.getLoopbackAddress();
 		final Server server = new Server(network, game, address, generator, multiplayer, ai_names);
 		Client client = new Client(new Runnable() {
+                        @Override
 			public final void run() {
 				server.close();
 			}
@@ -274,18 +284,21 @@ public abstract strictfp class Menu extends CameraDelegate {
 			this.factory = factory;
 		}
 
+                @Override
 		public final void mouseClicked(int button, int x, int y, int clicks) {
 			setMenu(factory.create());
 		}
 	}
 
 	private final strictfp class ExitListener implements MouseClickListener {
+                @Override
 		public final void mouseClicked(int button, int x, int y, int clicks) {
 			setMenuCentered(new QuitForm(getGUIRoot()));
 		}
 	}
 
 	private final strictfp class EscapedListener implements CloseListener {
+                @Override
 		public final void closed() {
 			disableButtons(false);
 			current_menu = null;

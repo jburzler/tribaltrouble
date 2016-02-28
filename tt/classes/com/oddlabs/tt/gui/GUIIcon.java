@@ -11,6 +11,7 @@ public strictfp class GUIIcon extends GUIObject {
 		this.icon_quad = icon;
 	}
 
+        @Override
 	public void renderGeometry() {
 		icon_quad.render(0, 0);
 	}

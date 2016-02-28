@@ -18,6 +18,7 @@ public final strictfp class ScrollTrigger extends TutorialTrigger {
 		player.enableChieftains(false);
 	}
 
+        @Override
 	protected final void run(Tutorial tutorial) {
 		GameCamera camera = tutorial.getViewer().getCamera();
 		if (camera.getScrollX() > 0) {

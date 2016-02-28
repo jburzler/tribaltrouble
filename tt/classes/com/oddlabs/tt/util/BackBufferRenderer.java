@@ -19,10 +19,12 @@ public final strictfp class BackBufferRenderer extends OffscreenRenderer {
 		init();
 	}
 
+        @Override
 	public final boolean isLost() {
 		return Display.isDirty();
 	}
 
+        @Override
 	protected final void finish() {
 		popGLState();
 	}

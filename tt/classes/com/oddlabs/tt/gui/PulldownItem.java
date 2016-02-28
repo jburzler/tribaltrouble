@@ -30,6 +30,7 @@ public final strictfp class PulldownItem extends ButtonObject {
 		return label.getTextWidth();
 	}
 
+        @Override
 	public final void setDim(int width, int height) {
 		super.setDim(width, height);
 		Box item = Skin.getSkin().getPulldownData().getPulldownItem();
@@ -37,6 +38,7 @@ public final strictfp class PulldownItem extends ButtonObject {
 		label.setPos(item.getLeftOffset(), (getHeight() - label.getHeight())/2);
 	}
 
+        @Override
 	protected final void renderGeometry() {
 		Box item = Skin.getSkin().getPulldownData().getPulldownItem();
 		if (isDisabled())
@@ -55,6 +57,7 @@ public final strictfp class PulldownItem extends ButtonObject {
 		return label;
 	}
 
+        @Override
 	protected final void mouseClicked(int button, int x, int y, int clicks) {
 		// Prevent super.mouseClicked from being called to avoid infinite loop.
 		return;

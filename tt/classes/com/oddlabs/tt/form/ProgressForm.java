@@ -84,6 +84,7 @@ public final strictfp class ProgressForm {
 		}
 
 		Fadable load_fadable = new Fadable() {
+                        @Override
 			public final void fadingDone() {
 				callback(gui, callback, first_progress);
 			}
@@ -145,6 +146,7 @@ public final strictfp class ProgressForm {
 		logo_file = logo_file.replaceAll("(.*).image", "$1");
 
 		Fadable start_sources_fadable = new Fadable() {
+                        @Override
 			public final void fadingDone() {
 				if (AL.isCreated())
 					AudioManager.getManager().startSources();

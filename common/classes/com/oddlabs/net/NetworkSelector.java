@@ -26,6 +26,7 @@ public final strictfp class NetworkSelector {
 
 	public NetworkSelector(final Deterministic deterministic) {
 		this(deterministic, new TimeManager() {
+                        @Override
 			public final long getMillis() {
 				return deterministic.log(System.currentTimeMillis());
 			}
@@ -54,6 +55,7 @@ public final strictfp class NetworkSelector {
 	public final TaskThread getTaskThread() {
 		if (task_thread == null) {
 			task_thread = new TaskThread(deterministic, new Runnable() {
+                                @Override
 				public final void run() {
 					selector.wakeup();
 				}

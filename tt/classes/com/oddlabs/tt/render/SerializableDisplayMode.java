@@ -130,6 +130,7 @@ System.out.println("setting mode = " + mode);
 		throw new LWJGLException("Could not find mode matching: " + target_mode);
 	}
 
+        @Override
 	public final String toString() {
 		return width + "x" + height + " " + bpp + "bit " + freq + "Hz";
 	}
@@ -150,6 +151,7 @@ System.out.println("setting mode = " + mode);
 		return bpp;
 	}
 
+        @Override
 	public final boolean equals(Object other) {
 		if (!(other instanceof SerializableDisplayMode))
 			return false;
@@ -161,6 +163,7 @@ System.out.println("setting mode = " + mode);
 		return getWidth() == other_mode.getWidth() && getHeight() == other_mode.getHeight();
 	}
 
+        @Override
 	public final int hashCode() {
 		return width ^ height ^ freq ^ bpp;
 	}

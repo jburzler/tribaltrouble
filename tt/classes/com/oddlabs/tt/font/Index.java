@@ -48,6 +48,7 @@ public final strictfp class Index implements Updatable {
 		}
 	}
 
+        @Override
 	public final void update(Object anim) {
 		blink_on = !blink_on;
 	}

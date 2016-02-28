@@ -35,6 +35,7 @@ public final strictfp class ElementNode extends AbstractElementNode {
 			return new ElementLeaf(this, /*level + 1, */size, x, y);
 	}
 
+        @Override
 	protected final AbstractElementNode doInsertElement(Element model) {
 		incElementCount();
 		if (model.bmin_x >= getCX()) {
@@ -51,6 +52,7 @@ public final strictfp class ElementNode extends AbstractElementNode {
 		return addElement(model);
 	}
 
+        @Override
 	public final void visit(ElementNodeVisitor visitor) {
 		visitor.visitNode(this);
 	}

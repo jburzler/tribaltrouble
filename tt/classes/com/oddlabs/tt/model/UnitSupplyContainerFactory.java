@@ -10,6 +10,7 @@ public final strictfp class UnitSupplyContainerFactory extends SupplyContainerFa
 		this.supply_sprite_lists = supply_sprite_lists;
 	}
 
+        @Override
 	public SupplyContainer createContainer(Selectable selectable) {
 		return new UnitSupplyContainer(getMaxResourceCount(), supply_sprite_lists);
 	}

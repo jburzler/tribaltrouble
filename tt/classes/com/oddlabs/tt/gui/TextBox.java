@@ -25,16 +25,19 @@ public strictfp class TextBox extends TextField implements Scrollable {
 		addChild(scroll_bar);
 	}
 
+        @Override
 	public final void append(String str) {
 		super.append(str);
 		scroll_bar.update();
 	}
 
+        @Override
 	public final void append(StringBuffer str) {
 		super.append(str);
 		scroll_bar.update();
 	}
 
+        @Override
 	public final void append(CharSequence str) {
 		super.append(str);
 		scroll_bar.update();
@@ -49,12 +52,14 @@ public strictfp class TextBox extends TextField implements Scrollable {
 		edit_box.render(0, 0, getWidth() - scroll_bar.getWidth(), getHeight(), mode);
 	}
 
+        @Override
 	protected void renderGeometry() {
 		Box edit_box = Skin.getSkin().getEditBox();
 		renderBox(Skin.NORMAL);
 		text_renderer.render(edit_box.getLeftOffset(), edit_box.getBottomOffset(), offset_y, getText());
 	}
 
+        @Override
 	protected final void mouseScrolled(int amount) {
 		if (amount > 0)
 			setOffsetY(offset_y - 3*getFont().getHeight());
@@ -62,6 +67,7 @@ public strictfp class TextBox extends TextField implements Scrollable {
 			setOffsetY(offset_y + 3*getFont().getHeight());
 	}
 
+        @Override
 	public final void setOffsetY(int new_offset) {
 		offset_y = new_offset;
 
@@ -76,14 +82,17 @@ public strictfp class TextBox extends TextField implements Scrollable {
 		scroll_bar.update();
 	}
 
+        @Override
 	public final int getOffsetY() {
 		return offset_y;
 	}
 
+        @Override
 	public final int getStepHeight() {
 		return getFont().getHeight();
 	}
 
+        @Override
 	public final void jumpPage(boolean up) {
 		Box edit_box = Skin.getSkin().getEditBox();
 		int inner_height = getHeight() - edit_box.getBottomOffset() - edit_box.getTopOffset();
@@ -93,6 +102,7 @@ public strictfp class TextBox extends TextField implements Scrollable {
 			setOffsetY(offset_y + inner_height);
 	}
 
+        @Override
 	public final float getScrollBarRatio() {
 		int text_height = text_renderer.getTotalTextHeight(getText());
 		Box edit_box = Skin.getSkin().getEditBox();
@@ -101,6 +111,7 @@ public strictfp class TextBox extends TextField implements Scrollable {
 		return inner_height/(float)StrictMath.max(text_height, offset_height);
 	}
 
+        @Override
 	public final float getScrollBarOffset() {
 		int text_height = text_renderer.getTotalTextHeight(getText());
 		Box edit_box = Skin.getSkin().getEditBox();
@@ -110,6 +121,7 @@ public strictfp class TextBox extends TextField implements Scrollable {
 		return offset_y/(float)(length - inner_height);
 	}
 
+        @Override
 	public final void setScrollBarOffset(float offset) {
 		int text_height = text_renderer.getTotalTextHeight(getText());
 		Box edit_box = Skin.getSkin().getEditBox();

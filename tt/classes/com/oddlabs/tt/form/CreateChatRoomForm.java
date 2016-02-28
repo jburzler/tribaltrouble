@@ -63,10 +63,12 @@ public final strictfp class CreateChatRoomForm extends Form {
 		compileCanvas();
 	}
 	
+        @Override
 	public final void setFocus() {
 		editline_name.setFocus();
 	}
 
+        @Override
 	protected final void doCancel() {
 		main_menu.setMenuCentered(menu);
 	}
@@ -83,10 +85,12 @@ public final strictfp class CreateChatRoomForm extends Form {
 	}
 
 	private final strictfp class OKListener implements MouseClickListener, EnterListener {
+                @Override
 		public final void mouseClicked(int button, int x, int y, int clicks) {
 			create();
 		}
 
+                @Override
 		public final void enterPressed(CharSequence text) {
 			create();
 		}

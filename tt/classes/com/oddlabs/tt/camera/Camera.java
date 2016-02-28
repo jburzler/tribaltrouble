@@ -37,11 +37,13 @@ public abstract strictfp class Camera implements Animated {
 		smoothness_factor = f;
 	}
 
+        @Override
 	public final void updateChecksum(StateChecksum checksum) {
 //System.out.println("camera_x = " + camera_x + " | camera_y = " + camera_y + " | camera_z = " + camera_z + " | dir_x = " + dir_x + " | dir_y = " + dir_y + " | dir_z = " + dir_z);
 		state.updateChecksum(checksum);
 	}
 
+        @Override
 	public final void animate(float delta_t) {
 		doAnimate(delta_t);
 		state.animate(delta_t, smoothness_factor);

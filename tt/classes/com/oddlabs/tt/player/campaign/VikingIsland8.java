@@ -34,6 +34,7 @@ public final strictfp class VikingIsland8 extends Island {
 		super(campaign);
 	}
 
+        @Override
 	public final void init(NetworkSelector network, GUIRoot gui_root) {
 		String[] ai_names = new String[]{Utils.getBundleString(bundle, "name0"),
 			Utils.getBundleString(bundle, "name1"),
@@ -67,6 +68,7 @@ public final strictfp class VikingIsland8 extends Island {
 		game_network.getClient().getServerInterface().startServer();
 	}
 
+        @Override
 	protected final void start() {
 		Runnable runnable;
 		final Player local_player = getViewer().getLocalPlayer();
@@ -79,11 +81,13 @@ public final strictfp class VikingIsland8 extends Island {
 
 		// Introduction
 		final Runnable camera_jump = new Runnable() {
+                @Override
 			public final void run() {
 				getViewer().getGUIRoot().pushDelegate(new JumpDelegate(getViewer(), getViewer().getCamera(), 170*2, 160*2, 200f, 3f));
 			}
 		};
 		runnable = new Runnable() {
+                @Override
 			public final void run() {
 				CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header0"),
 						Utils.getBundleString(bundle, "dialog0"),
@@ -114,6 +118,7 @@ public final strictfp class VikingIsland8 extends Island {
 
 		// Give blast when arrived
 		runnable = new Runnable() {
+                @Override
 			public final void run() {
 				CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header1"),
 						Utils.getBundleString(bundle, "dialog1"),
@@ -183,6 +188,7 @@ public final strictfp class VikingIsland8 extends Island {
 		army[23] = new Unit(enemy, 289*2, 141*2, null, enemy.getRace().getUnitTemplate(Race.UNIT_WARRIOR_IRON));
 		army[24] = new Unit(enemy, 289*2, 141*2, null, enemy.getRace().getUnitTemplate(Race.UNIT_WARRIOR_IRON));
 		runnable = new Runnable() {
+                @Override
 			public final void run() {
 				enemy.setLandscapeTarget(army, 238, 136, Target.ACTION_ATTACK, true);
 			}
@@ -232,6 +238,7 @@ public final strictfp class VikingIsland8 extends Island {
 			army2[19] = new Unit(enemy, 366*2, 419*2, null, enemy.getRace().getUnitTemplate(Race.UNIT_WARRIOR_RUBBER));
 		}
 		runnable = new Runnable() {
+                @Override
 			public final void run() {
 				enemy.setLandscapeTarget(army2, 352, 480, Target.ACTION_ATTACK, true);
 			}
@@ -327,6 +334,7 @@ public final strictfp class VikingIsland8 extends Island {
 			neutrals[14] = new Unit(lost, 272*2, 323*2, null, lost.getRace().getUnitTemplate(Race.UNIT_WARRIOR_RUBBER));
 		}
 		runnable = new Runnable() {
+                @Override
 			public final void run() {
 				CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header2"),
 						Utils.getBundleString(bundle, "dialog2"),
@@ -344,6 +352,7 @@ public final strictfp class VikingIsland8 extends Island {
 
 	private final void setMagicUsedTrigger() {
 		Runnable runnable = new Runnable() {
+                        @Override
 			public final void run() {
 				getCampaign().getState().setIslandState(8, CampaignState.ISLAND_COMPLETED);
 				getCampaign().getState().setIslandState(7, CampaignState.ISLAND_AVAILABLE);
@@ -356,14 +365,17 @@ public final strictfp class VikingIsland8 extends Island {
 		new MagicUsedTrigger(getViewer().getLocalPlayer().getChieftain(), 354*2, 478*2, 15, 0, runnable);
 	}
 
+        @Override
 	public final CharSequence getHeader() {
 		return Utils.getBundleString(bundle, "header");
 	}
 
+        @Override
 	public final CharSequence getDescription() {
 		return Utils.getBundleString(bundle, "description");
 	}
 
+        @Override
 	public final CharSequence getCurrentObjective() {
 		return Utils.getBundleString(bundle, "objective" + objective);
 	}

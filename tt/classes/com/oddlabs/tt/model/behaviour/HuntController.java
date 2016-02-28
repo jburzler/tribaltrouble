@@ -17,6 +17,7 @@ public final strictfp class HuntController extends Controller {
 		return unit.isCloseEnough(unit.getRange(target), target);
 	}
 
+        @Override
 	public final void decide() {
 		if (target.isDead()) {
 			unit.popController();

@@ -28,6 +28,7 @@ final strictfp class SelectableShadowRenderer extends ShadowListRenderer {
 			shadowed_list.add(model);
 	}
 
+        @Override
 	protected final void renderShadows(LandscapeRenderer renderer) {
 		setupShadows();
 		GL11.glColor3f(1f, 1f, 1f);
