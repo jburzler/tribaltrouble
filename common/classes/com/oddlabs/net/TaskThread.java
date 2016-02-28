@@ -97,12 +97,7 @@ public final strictfp class TaskThread {
 			lock.notify();
 		}
 		if (!deterministic.isPlayback() && thread == null) {
-			this.thread = new Thread(new Runnable() {
-                                @Override
-				public final void run() {
-					processTasks();
-				}
-			});
+			this.thread = new Thread(this::processTasks);
 			this.thread.setName("Task executor thread");
 			this.thread.setDaemon(true);
 			this.thread.start();

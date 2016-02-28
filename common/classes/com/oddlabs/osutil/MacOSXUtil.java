@@ -29,15 +29,12 @@ public final strictfp class MacOSXUtil extends OSUtil {
 			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder document_builder = factory.newDocumentBuilder();
 			// Hack to avoid lookup of the DTD
-			document_builder.setEntityResolver(new EntityResolver() {
-                                @Override
-				public InputSource resolveEntity(String publicId, String systemId) throws SAXException, IOException {
-					if (publicId.equals("-//Apple Computer//DTD PLIST 1.0//EN"))
-						return new InputSource(new ByteArrayInputStream("<?xml version='1.0' encoding='UTF-8'?>".getBytes()));
-					else
-						return null;
-				}
-			});
+			document_builder.setEntityResolver((String publicId, String systemId) -> {
+                            if (publicId.equals("-//Apple Computer//DTD PLIST 1.0//EN"))
+                                return new InputSource(new ByteArrayInputStream("<?xml version='1.0' encoding='UTF-8'?>".getBytes()));
+                            else
+                                return null;
+                        });
 
 			URL xslt_url = Thread.currentThread().getContextClassLoader().getResource(script_url);
 			Source xsltSource = new StreamSource(xslt_url.toString());

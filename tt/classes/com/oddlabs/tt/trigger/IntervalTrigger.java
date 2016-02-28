@@ -17,24 +17,18 @@ public abstract strictfp class IntervalTrigger {
 	public IntervalTrigger(float check_interval, float after_done_time, AnimationManager animation_manager) {
 		this.after_done_time = after_done_time;
 		this.animation_manager = animation_manager;
-		this.timer = new TimerAnimation(animation_manager, new Updatable() {
-                        @Override
-			public final void update(Object anim) {
-				check();
-			}
-		}, check_interval);
+		this.timer = new TimerAnimation(animation_manager, (Object anim) -> {
+                    check();
+                }, check_interval);
 		timer.start();
 	}
 
 	protected void triggered() {
 		timer.stop();
-		timer = new TimerAnimation(animation_manager, new Updatable() {
-                        @Override
-			public final void update(Object anim) {
-				((TimerAnimation)anim).stop();
-				done();
-			}
-		}, after_done_time);
+		timer = new TimerAnimation(animation_manager, (Object anim) -> {
+                    ((TimerAnimation)anim).stop();
+                    done();
+                }, after_done_time);
 		timer.start();
 	}
 

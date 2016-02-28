@@ -80,43 +80,34 @@ public final strictfp class VikingIsland0 extends Island {
 		final Player enemy = getViewer().getWorld().getPlayers()[2];
 
 		// Introduction
-		runnable = new Runnable() {
-                @Override
-			public final void run() {
-				CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header0"),
-						Utils.getBundleString(bundle, "dialog0"),
-						getCampaign().getIcons().getFaces()[1],
-						CampaignDialogForm.ALIGN_IMAGE_LEFT);
-				addModalForm(dialog);
-			}
-		};
+		runnable = () -> {
+                    CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header0"),
+                            Utils.getBundleString(bundle, "dialog0"),
+                            getCampaign().getIcons().getFaces()[1],
+                            CampaignDialogForm.ALIGN_IMAGE_LEFT);
+                    addModalForm(dialog);
+                };
 		new GameStartedTrigger(getViewer().getWorld(), runnable);
 
 		// Disable Chieftain
 		getViewer().getLocalPlayer().enableChieftains(false);
 
 		// Winner prize
-		final Runnable prize = new Runnable() {
-                @Override
-			public final void run() {
-				getCampaign().getState().setIslandState(0, CampaignState.ISLAND_COMPLETED);
-				getCampaign().getState().setIslandState(1, CampaignState.ISLAND_AVAILABLE);
-				getCampaign().getState().setIslandState(3, CampaignState.ISLAND_AVAILABLE);
-				getCampaign().victory(getViewer());
-			}
-		};
+		final Runnable prize = () -> {
+                    getCampaign().getState().setIslandState(0, CampaignState.ISLAND_COMPLETED);
+                    getCampaign().getState().setIslandState(1, CampaignState.ISLAND_AVAILABLE);
+                    getCampaign().getState().setIslandState(3, CampaignState.ISLAND_AVAILABLE);
+                    getCampaign().victory(getViewer());
+                };
 		// Winning condition
-		runnable = new Runnable() {
-                @Override
-			public final void run() {
-				CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header1"),
-						Utils.getBundleString(bundle, "dialog1"),
-						getCampaign().getIcons().getFaces()[0],
-						CampaignDialogForm.ALIGN_IMAGE_LEFT,
-						prize);
-				addModalForm(dialog);
-			}
-		};
+		runnable = () -> {
+                    CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header1"),
+                            Utils.getBundleString(bundle, "dialog1"),
+                            getCampaign().getIcons().getFaces()[0],
+                            CampaignDialogForm.ALIGN_IMAGE_LEFT,
+                            prize);
+                    addModalForm(dialog);
+                };
 		new VictoryTrigger(getViewer(), runnable);
 
 		// Place prisoners
@@ -130,18 +121,15 @@ public final strictfp class VikingIsland0 extends Island {
 			enemy.getArmory().getUnitContainer().increaseSupply(num_units*3);
 
 		// Deploy and attack mid-game
-		runnable = new Runnable() {
-                @Override
-			public final void run() {
-				Building armory = local_player.getArmory();
-				if (armory != null && !armory.isDead()) {
-					if (enemy.getArmory() != null && !enemy.getArmory().isDead()) {
-						enemy.deployUnits(enemy.getArmory(), Building.KEY_DEPLOY_IRON_WARRIOR, num_units);
-						AI.attackLandscape(enemy, armory, num_units);
-					}
-				}
-			}
-		};
+		runnable = () -> {
+                    Building armory = local_player.getArmory();
+                    if (armory != null && !armory.isDead()) {
+                        if (enemy.getArmory() != null && !enemy.getArmory().isDead()) {
+                            enemy.deployUnits(enemy.getArmory(), Building.KEY_DEPLOY_IRON_WARRIOR, num_units);
+                            AI.attackLandscape(enemy, armory, num_units);
+                        }
+                    }
+                };
 		if (getCampaign().getState().getDifficulty() == CampaignState.DIFFICULTY_NORMAL) {
 			new SupplyGatheredTrigger(getViewer().getLocalPlayer(), runnable, TreeSupply.class, 30);
 			new SupplyGatheredTrigger(getViewer().getLocalPlayer(), runnable, RockSupply.class, 30);
@@ -153,12 +141,9 @@ public final strictfp class VikingIsland0 extends Island {
 		}
 
 		// Defeat if netrauls eleminated
-		runnable = new Runnable() {
-                @Override
-			public final void run() {
-				getCampaign().defeated(getViewer(), Utils.getBundleString(bundle, "game_over"));
-			}
-		};
+		runnable = () -> {
+                    getCampaign().defeated(getViewer(), Utils.getBundleString(bundle, "game_over"));
+                };
 		new PlayerEleminatedTrigger(runnable, chieftain);
 	}
 

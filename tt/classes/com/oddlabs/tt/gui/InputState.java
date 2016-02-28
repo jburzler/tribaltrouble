@@ -82,19 +82,16 @@ public final strictfp class InputState {
 		press_obj.mousePressedAll(button, local_x, local_y);
 		if (mouse_timer != null)
 			mouse_timer.stop();
-		mouse_timer = new TimerAnimation(new Updatable() {
-                        @Override
-			public final void update(Object anim) {
-				TimerAnimation timer = (TimerAnimation)anim;
-				timer.setTimerInterval(MOUSE_REPEAT_RATE);
-				timer.resetTime();
-				if (press_obj == gui_root.getCurrentGUIObject()) {
-					int local_x = press_obj.translateXToLocal(LocalInput.getMouseX());
-					int local_y = press_obj.translateYToLocal(LocalInput.getMouseY());
-					press_obj.mouseHeldAll(held_button, local_x, local_y);
-				}
-			}
-		}, MOUSE_REPEAT_DELAY);
+		mouse_timer = new TimerAnimation((Object anim) -> {
+                    TimerAnimation timer = (TimerAnimation)anim;
+                    timer.setTimerInterval(MOUSE_REPEAT_RATE);
+                    timer.resetTime();
+                    if (press_obj == gui_root.getCurrentGUIObject()) {
+                        int local_x1 = press_obj.translateXToLocal(LocalInput.getMouseX());
+                        int local_y1 = press_obj.translateYToLocal(LocalInput.getMouseY());
+                        press_obj.mouseHeldAll(held_button, local_x1, local_y1);
+                    }
+                }, MOUSE_REPEAT_DELAY);
 
 		mouse_timer.start();
 	}

@@ -76,12 +76,7 @@ public final strictfp class CryptUtils {
 			}
 		}}, null);
 		https_connection.setSSLSocketFactory(ssl_context.getSocketFactory());
-		https_connection.setHostnameVerifier(new HostnameVerifier() { 
-                        @Override
-			public final boolean verify(String hostname, SSLSession session) {
-				return true;
-			}
-		});
+		https_connection.setHostnameVerifier((String hostname, SSLSession session) -> true);
 	}
 /*
 	public final static void main(String[] args) {

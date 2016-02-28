@@ -147,21 +147,11 @@ public final strictfp class ActionButtonPanel extends GUIObject implements Anima
 		transport_group = new NonFocusGroup();
 
 		move_button = new NonFocusIconButton(race_icons.getMoveIcon(), formatTip("move_tip", "M"));
-		move_button.setIconDisabler(new IconDisabler() {
-                        @Override
-			public final boolean isDisabled() {
-				return !viewer.getLocalPlayer().canMove();
-			}
-		});
+		move_button.setIconDisabler(() -> !viewer.getLocalPlayer().canMove());
 		unit_group.addChild(move_button);
 		move_button.addMouseClickListener(new TargetListener(Target.ACTION_MOVE));
 		attack_button = new NonFocusIconButton(race_icons.getAttackIcon(), formatTip("attack_tip", "A"));
-		attack_button.setIconDisabler(new IconDisabler() {
-                        @Override
-			public final boolean isDisabled() {
-				return !viewer.getLocalPlayer().canAttack();
-			}
-		});
+		attack_button.setIconDisabler(() -> !viewer.getLocalPlayer().canAttack());
 		unit_group.addChild(attack_button);
 		attack_button.addMouseClickListener(new TargetListener(Target.ACTION_ATTACK));
 		move_button.place();
@@ -171,12 +161,7 @@ public final strictfp class ActionButtonPanel extends GUIObject implements Anima
 		gather_repair_button = new NonFocusIconButton(race_icons.getGatherRepairIcon(), formatTip("gather_repair_tip", "G"));
 		peon_group.addChild(gather_repair_button);
 		gather_repair_button.addMouseClickListener(new TargetListener(Target.ACTION_GATHER_REPAIR));
-		gather_repair_button.setIconDisabler(new IconDisabler() {
-                        @Override
-			public final boolean isDisabled() {
-				return !viewer.getLocalPlayer().canRepair();
-			}
-		});
+		gather_repair_button.setIconDisabler(() -> !viewer.getLocalPlayer().canRepair());
 		quarters_button = new NonFocusIconButton(race_icons.getQuartersIcon(), formatTip("quarters_tip", "Q"));
 		peon_group.addChild(quarters_button);
 		quarters_button.addMouseClickListener(new PlaceListener(Race.BUILDING_QUARTERS));
@@ -267,42 +252,22 @@ public final strictfp class ActionButtonPanel extends GUIObject implements Anima
 		quarters_group.compileCanvas(GROUP_LEFT_OFFSET, GROUP_BOTTOM_OFFSET, GROUP_RIGHT_OFFSET, GROUP_TOP_OFFSET);
 
 		harvest_button = new NonFocusIconButton(icons.getHarvestIcon(), formatTip("gather_resources_tip", "G"));
-		harvest_button.setIconDisabler(new IconDisabler() {
-                        @Override
-			public final boolean isDisabled() {
-				return !viewer.getLocalPlayer().canHarvest();
-			}
-		});
+		harvest_button.setIconDisabler(() -> !viewer.getLocalPlayer().canHarvest());
 		armory_group.addChild(harvest_button);
 		harvest_button.addMouseClickListener(new GroupListener(armory_group, harvest_group));
 		build_button = new NonFocusIconButton(race_icons.getBuildWeaponsIcon(), formatTip("produce_weapons_tip", "W"));
-		build_button.setIconDisabler(new IconDisabler() {
-                        @Override
-			public final boolean isDisabled() {
-				return !viewer.getLocalPlayer().canBuildWeapons();
-			}
-		});
+		build_button.setIconDisabler(() -> !viewer.getLocalPlayer().canBuildWeapons());
 		armory_group.addChild(build_button);
 		build_button.addMouseClickListener(new GroupListener(armory_group, build_group));
 		army_button = new NonFocusIconButton(race_icons.getArmyIcon(), formatTip("deploy_army_tip", "A"));
-		army_button.setIconDisabler(new IconDisabler() {
-                        @Override
-			public final boolean isDisabled() {
-				return !viewer.getLocalPlayer().canBuildArmies();
-			}
-		});
+		army_button.setIconDisabler(() -> !viewer.getLocalPlayer().canBuildArmies());
 		armory_group.addChild(army_button);
 		army_button.addMouseClickListener(new GroupListener(armory_group, army_group));
 		transport_button = new NonFocusIconButton(race_icons.getTransportIcon(), formatTip("transport_resources_tip", "T"));
 		armory_group.addChild(transport_button);
 		transport_button.addMouseClickListener(new GroupListener(armory_group, transport_group));
 		rally_point_button = new NonFocusIconButton(race_icons.getRallyPointIcon(), formatTip("rally_point_tip", "R"));
-		rally_point_button.setIconDisabler(new IconDisabler() {
-                        @Override
-			public final boolean isDisabled() {
-				return !viewer.getLocalPlayer().canSetRallyPoints();
-			}
-		});
+		rally_point_button.setIconDisabler(() -> !viewer.getLocalPlayer().canSetRallyPoints());
 		armory_group.addChild(rally_point_button);
 		rally_point_button.addMouseClickListener(new RallyPointListener());
 		harvest_button.place();

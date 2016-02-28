@@ -105,33 +105,24 @@ public final strictfp class NativeIsland0 extends Island {
 		getViewer().getCamera().reset(viking_start_x, viking_start_y);
 
 		// Introduction
-		final Runnable dialog1 = new Runnable() {
-                @Override
-			public final void run() {
-				CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header1"),
-						Utils.getBundleString(bundle, "dialog1"),
-						getCampaign().getIcons().getFaces()[0],
-						CampaignDialogForm.ALIGN_IMAGE_LEFT);
-				addModalForm(dialog);
-			}
-		};
-		final Runnable camera_jump0 = new Runnable() {
-                @Override
-			public final void run() {
-				getViewer().getGUIRoot().pushDelegate(new JumpDelegate(getViewer(), getViewer().getCamera(), chief_start_x + 7, chief_start_y + 7, 200f, 3f, dialog1));
-			}
-		};
-		final Runnable dialog0 = new Runnable() {
-                @Override
-			public final void run() {
-				CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header0"),
-						Utils.getBundleString(bundle, "dialog0"),
-						getCampaign().getIcons().getFaces()[0],
-						CampaignDialogForm.ALIGN_IMAGE_LEFT,
-						camera_jump0);
-				addModalForm(dialog);
-			}
-		};
+		final Runnable dialog1 = () -> {
+                    CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header1"),
+                            Utils.getBundleString(bundle, "dialog1"),
+                            getCampaign().getIcons().getFaces()[0],
+                            CampaignDialogForm.ALIGN_IMAGE_LEFT);
+                    addModalForm(dialog);
+                };
+		final Runnable camera_jump0 = () -> {
+                    getViewer().getGUIRoot().pushDelegate(new JumpDelegate(getViewer(), getViewer().getCamera(), chief_start_x + 7, chief_start_y + 7, 200f, 3f, dialog1));
+                };
+		final Runnable dialog0 = () -> {
+                    CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header0"),
+                            Utils.getBundleString(bundle, "dialog0"),
+                            getCampaign().getIcons().getFaces()[0],
+                            CampaignDialogForm.ALIGN_IMAGE_LEFT,
+                            camera_jump0);
+                    addModalForm(dialog);
+                };
 		new GameStartedTrigger(getViewer().getWorld(), dialog0);
 
 		// Insert initial natives
@@ -202,49 +193,37 @@ public final strictfp class NativeIsland0 extends Island {
 		attack(enemy, armory, num_iron + num_rubber + 1);
 
 		// Winner prize
-		final Runnable end_game = new Runnable() {
-                @Override
-			public final void run() {
-				getCampaign().getState().setIslandState(0, CampaignState.ISLAND_COMPLETED);
-				getCampaign().getState().setIslandState(1, CampaignState.ISLAND_AVAILABLE);
-				getCampaign().victory(getViewer());
-			}
-		};
+		final Runnable end_game = () -> {
+                    getCampaign().getState().setIslandState(0, CampaignState.ISLAND_COMPLETED);
+                    getCampaign().getState().setIslandState(1, CampaignState.ISLAND_AVAILABLE);
+                    getCampaign().victory(getViewer());
+                };
 
 		// Winning condition
-		final Runnable dialog7 = new Runnable() {
-                @Override
-			public final void run() {
-				CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header7"),
-						Utils.getBundleString(bundle, "dialog7"),
-						getCampaign().getIcons().getFaces()[6],
-						CampaignDialogForm.ALIGN_IMAGE_RIGHT,
-						end_game);
-				addModalForm(dialog);
-			}
-		};
-		final Runnable dialog6 = new Runnable() {
-                @Override
-			public final void run() {
-				CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header6"),
-						Utils.getBundleString(bundle, "dialog6"),
-						getCampaign().getIcons().getFaces()[0],
-						CampaignDialogForm.ALIGN_IMAGE_LEFT,
-						dialog7);
-				addModalForm(dialog);
-			}
-		};
-		final Runnable dialog5 = new Runnable() {
-                @Override
-			public final void run() {
-				CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header5"),
-						Utils.getBundleString(bundle, "dialog5"),
-						getCampaign().getIcons().getFaces()[6],
-						CampaignDialogForm.ALIGN_IMAGE_RIGHT,
-						dialog6);
-				addModalForm(dialog);
-			}
-		};
+		final Runnable dialog7 = () -> {
+                    CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header7"),
+                            Utils.getBundleString(bundle, "dialog7"),
+                            getCampaign().getIcons().getFaces()[6],
+                            CampaignDialogForm.ALIGN_IMAGE_RIGHT,
+                            end_game);
+                    addModalForm(dialog);
+                };
+		final Runnable dialog6 = () -> {
+                    CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header6"),
+                            Utils.getBundleString(bundle, "dialog6"),
+                            getCampaign().getIcons().getFaces()[0],
+                            CampaignDialogForm.ALIGN_IMAGE_LEFT,
+                            dialog7);
+                    addModalForm(dialog);
+                };
+		final Runnable dialog5 = () -> {
+                    CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header5"),
+                            Utils.getBundleString(bundle, "dialog5"),
+                            getCampaign().getIcons().getFaces()[6],
+                            CampaignDialogForm.ALIGN_IMAGE_RIGHT,
+                            dialog6);
+                    addModalForm(dialog);
+                };
 		new VictoryTrigger(getViewer(), dialog5);
 
 		// Insert treasures
@@ -270,102 +249,90 @@ public final strictfp class NativeIsland0 extends Island {
 		scenery_models[12] = new SceneryModel(getViewer().getWorld(), 419*2 + offset, 170*2 + offset, -dir, dir, getViewer().getWorld().getRacesResources().getTreasures()[4], shadow_diameter, true, Utils.getBundleString(bundle, "statue"));
 		scenery_models[13] = new SceneryModel(getViewer().getWorld(), 416*2 + offset, 156*2 + offset, 0, -1, getViewer().getWorld().getRacesResources().getTreasures()[5], shadow_diameter, true, Utils.getBundleString(bundle, "statue"));
 
-		final Runnable dialog4 = new Runnable() {
-                @Override
-			public final void run() {
-				CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header4"),
-						Utils.getBundleString(bundle, "dialog4"),
-						getCampaign().getIcons().getFaces()[0],
-						CampaignDialogForm.ALIGN_IMAGE_LEFT);
-				addModalForm(dialog);
+		final Runnable dialog4 = () -> {
+                    CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header4"),
+                            Utils.getBundleString(bundle, "dialog4"),
+                            getCampaign().getIcons().getFaces()[0],
+                            CampaignDialogForm.ALIGN_IMAGE_LEFT);
+                    addModalForm(dialog);
                     for (Unit reinforcement_peon : reinforcement_peons) {
                         if (!reinforcement_peon.isDead()) {
                             changeOwner(reinforcement_peon, local_player);
                         }
                     }
-			}
-		};
-		final Runnable dialog3 = new Runnable() {
-                @Override
-			public final void run() {
-				changeObjective(1);
+                };
+		final Runnable dialog3 = () -> {
+                    changeObjective(1);
                     // Remove statues
                     for (SceneryModel scenery_model : scenery_models) {
                         scenery_model.remove();
                     }
-				// Remove Vikings
-				Unit[] viking_units = new Unit[enemy.getUnits().getSet().size()];
-				enemy.getUnits().getSet().toArray(viking_units);
+                    // Remove Vikings
+                    Unit[] viking_units = new Unit[enemy.getUnits().getSet().size()];
+                    enemy.getUnits().getSet().toArray(viking_units);
                     for (Unit viking_unit : viking_units) {
                         if (!viking_unit.isDead()) {
                             viking_unit.removeNow();
                         }
                     }
-				// Insert new Vikings
-				int new_viking_start_x = 437*2;
-				int new_viking_start_y = 140*2;
-				int num_peons;
-				switch (getCampaign().getState().getDifficulty()) {
-					case CampaignState.DIFFICULTY_EASY:
-						num_peons = 5;
-						break;
-					case CampaignState.DIFFICULTY_NORMAL:
-						num_peons = 10;
-						break;
-					case CampaignState.DIFFICULTY_HARD:
-						num_peons = 15;
-						break;
-					default:
-						throw new RuntimeException();
-				}
-				for (int i = 0; i < num_peons; i++)
-					new Unit(enemy, new_viking_start_x, new_viking_start_y, null, enemy.getRace().getUnitTemplate(Race.UNIT_PEON));
-				// Remove natives
-				Selectable[] native_selectables = new Selectable[natives.getUnits().getSet().size()];
-				natives.getUnits().getSet().toArray(native_selectables);
+                    // Insert new Vikings
+                    int new_viking_start_x = 437*2;
+                    int new_viking_start_y = 140*2;
+                    int num_peons;
+                    switch (getCampaign().getState().getDifficulty()) {
+                        case CampaignState.DIFFICULTY_EASY:
+                            num_peons = 5;
+                            break;
+                        case CampaignState.DIFFICULTY_NORMAL:
+                            num_peons = 10;
+                            break;
+                        case CampaignState.DIFFICULTY_HARD:
+                            num_peons = 15;
+                            break;
+                        default:
+                            throw new RuntimeException();
+                    }
+                    for (int i = 0; i < num_peons; i++)
+                        new Unit(enemy, new_viking_start_x, new_viking_start_y, null, enemy.getRace().getUnitTemplate(Race.UNIT_PEON));
+                    // Remove natives
+                    Selectable[] native_selectables = new Selectable[natives.getUnits().getSet().size()];
+                    natives.getUnits().getSet().toArray(native_selectables);
                     for (Selectable native_selectable : native_selectables) {
                         if (!native_selectable.isDead()) {
                             native_selectable.hit(10000, 0, 1, enemy);
                         }
                     }
-			CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header3"),
-						Utils.getBundleString(bundle, "dialog3"),
-						getCampaign().getIcons().getFaces()[2],
-						CampaignDialogForm.ALIGN_IMAGE_RIGHT,
-						dialog4);
-				addModalForm(dialog);
-			}
-		};
-		final Runnable dialog2 = new Runnable() {
-                @Override
-			public final void run() {
-				CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header2"),
-						Utils.getBundleString(bundle, "dialog2"),
-						getCampaign().getIcons().getFaces()[0],
-						CampaignDialogForm.ALIGN_IMAGE_LEFT,
-						dialog3);
-				addModalForm(dialog);
-			}
-		};
-		final Runnable camera_jump1 = new Runnable() {
-                @Override
-			public final void run() {
-				int x = 230*2;
-				int y = 108*2;
-				Camera camera = getViewer().getGUIRoot().getDelegate().getCamera();
-				if (camera instanceof GameCamera) {
-					getViewer().getGUIRoot().pushDelegate(new JumpDelegate(getViewer(), (GameCamera)camera, x, y, 200f, 3f, dialog2));
-				} else if (camera instanceof MapCamera) {
-					((MapCamera)camera).mapGoto(x, y, true);
-					dialog2.run();
-				} else if (camera instanceof JumpCamera || camera instanceof FirstPersonCamera) {
-					getViewer().getGUIRoot().getDelegate().pop();
-					getViewer().getGUIRoot().pushDelegate(new JumpDelegate(getViewer(), getViewer().getCamera(), x, y, 200f, 3f, dialog2));
-				} else {
-					throw new RuntimeException("Camera = " + camera);
-				}
-			}
-		};
+                    CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header3"),
+                            Utils.getBundleString(bundle, "dialog3"),
+                            getCampaign().getIcons().getFaces()[2],
+                            CampaignDialogForm.ALIGN_IMAGE_RIGHT,
+                            dialog4);
+                    addModalForm(dialog);
+                };
+		final Runnable dialog2 = () -> {
+                    CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header2"),
+                            Utils.getBundleString(bundle, "dialog2"),
+                            getCampaign().getIcons().getFaces()[0],
+                            CampaignDialogForm.ALIGN_IMAGE_LEFT,
+                            dialog3);
+                    addModalForm(dialog);
+                };
+		final Runnable camera_jump1 = () -> {
+                    int x = 230*2;
+                    int y = 108*2;
+                    Camera camera = getViewer().getGUIRoot().getDelegate().getCamera();
+                    if (camera instanceof GameCamera) {
+                        getViewer().getGUIRoot().pushDelegate(new JumpDelegate(getViewer(), (GameCamera)camera, x, y, 200f, 3f, dialog2));
+                    } else if (camera instanceof MapCamera) {
+                        ((MapCamera)camera).mapGoto(x, y, true);
+                        dialog2.run();
+                    } else if (camera instanceof JumpCamera || camera instanceof FirstPersonCamera) {
+                        getViewer().getGUIRoot().getDelegate().pop();
+                        getViewer().getGUIRoot().pushDelegate(new JumpDelegate(getViewer(), getViewer().getCamera(), x, y, 200f, 3f, dialog2));
+                    } else {
+                        throw new RuntimeException("Camera = " + camera);
+                    }
+                };
 		new NearArmyTrigger(reinforcement_peons, 10f, local_player, camera_jump1);
 	}
 

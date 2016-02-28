@@ -105,7 +105,7 @@ public final strictfp class InfoPrinter extends GUIObject implements Animated, C
 	public final void animate(float t) {
 		time += t;
 		for (int i = timers.size() - 1; i >= 0; i--) {
-			float remove_time = ((Float)timers.get(i)).floatValue();
+			float remove_time = ((Float)timers.get(i));
 			if (time > remove_time) {
 				removeLine(i);
 			}

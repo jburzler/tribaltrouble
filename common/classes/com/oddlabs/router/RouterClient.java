@@ -27,13 +27,10 @@ final strictfp class RouterClient implements ConnectionInterface {
 		this.connection = conn;
 		this.logger = logger;
 		this.client_interface = (RouterClientInterface)ARMIEvent.createProxy(conn, RouterClientInterface.class);
-		this.current_interface = new Interface(RouterInterface.class, new RouterInterface() {
-                        @Override
-			public final void login(SessionID session_id, SessionInfo session_info, int client_id) {
-				Session session = session_manager.get(session_id, session_info, client_id);
-				doLogin(session, session_info, client_id);
-			}
-		});
+		this.current_interface = new Interface(RouterInterface.class, (RouterInterface) (SessionID session_id, SessionInfo session_info, int client_id1) -> {
+                    Session session1 = session_manager.get(session_id, session_info, client_id1);
+                    doLogin(session1, session_info, client_id1);
+                });
 	}
 
 	final List getChecksums() {
@@ -105,31 +102,22 @@ final strictfp class RouterClient implements ConnectionInterface {
 
 	private void doRelayGameStateEvent(final ARMIEvent event) {
 		final int next_tick = session.getNextTick();
-		session.visit(new SessionVisitor() {
-                        @Override
-			public final void visit(RouterClient client) {
-				client.client_interface.receiveGameStateEvent(client_id, next_tick, event);
-			}
-		});
+		session.visit((RouterClient client) -> {
+                    client.client_interface.receiveGameStateEvent(client_id, next_tick, event);
+                });
 	}
 
 	private void doRelayEvent(final ARMIEvent event) {
-		session.visit(new SessionVisitor() {
-                        @Override
-			public final void visit(RouterClient client) {
-				client.client_interface.receiveEvent(client_id, event);
-			}
-		});
+		session.visit((RouterClient client) -> {
+                    client.client_interface.receiveEvent(client_id, event);
+                });
 	}
 
 	private void doRelayEventTo(final int receiver_client_id, final ARMIEvent event) {
-		session.visit(new SessionVisitor() {
-                        @Override
-			public final void visit(RouterClient client) {
-				if (client.client_id == receiver_client_id)
-					client.client_interface.receiveEvent(client_id, event);
-			}
-		});
+		session.visit((RouterClient client) -> {
+                    if (client.client_id == receiver_client_id)
+                        client.client_interface.receiveEvent(client_id, event);
+                });
 	}
 
         @Override
@@ -155,12 +143,9 @@ final strictfp class RouterClient implements ConnectionInterface {
 		if (session != null) {
 			logger.info("Removing client: " + this);
 			session.removePlayer(this);
-			session.visit(new SessionVisitor() {
-                                @Override
-				public final void visit(RouterClient client) {
-					client.client_interface.playerDisconnected(client_id, checksum_error);
-				}
-			});
+			session.visit((RouterClient client) -> {
+                            client.client_interface.playerDisconnected(client_id, checksum_error);
+                        });
 		}
 	}
 

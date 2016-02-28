@@ -45,26 +45,20 @@ public final strictfp class Tutorial {
 
 	final void next(final TutorialTrigger trigger) {
 		timer.stop();
-		TimerAnimation delay_timer = new TimerAnimation(viewer.getAnimationManagerLocal(), new Updatable() {
-                        @Override
-			public final void update(Object anim) {
-				((TimerAnimation)anim).stop();
-				next0(trigger);
-			}
-		}, old_after_done_time);
+		TimerAnimation delay_timer = new TimerAnimation(viewer.getAnimationManagerLocal(), (Object anim) -> {
+                    ((TimerAnimation)anim).stop();
+                    next0(trigger);
+                }, old_after_done_time);
 		delay_timer.start();
 		old_after_done_time = trigger.getAfterDoneTime();
 	}
 
 	private void next0(final TutorialTrigger trigger) {
 		removeInfo();
-		TimerAnimation delay_timer = new TimerAnimation(viewer.getAnimationManagerLocal(), new Updatable() {
-                        @Override
-			public final void update(Object anim) {
-				((TimerAnimation)anim).stop();
-				next1(trigger);
-			}
-		}, .5f);
+		TimerAnimation delay_timer = new TimerAnimation(viewer.getAnimationManagerLocal(), (Object anim) -> {
+                    ((TimerAnimation)anim).stop();
+                    next1(trigger);
+                }, .5f);
 		delay_timer.start();
 	}
 
@@ -74,12 +68,9 @@ public final strictfp class Tutorial {
 		info.setPos(BORDER_OFFSET, viewer.getGUIRoot().getHeight() - BORDER_OFFSET - info.getHeight());	
 		viewer.getGUIRoot().addChild(info);
 		viewer.getWorld().getAudio().newAudio(new AudioParameters(viewer.getLocalPlayer().getRace().getBuildingNotificationAudio(), 0f, 0f, 0f, AudioPlayer.AUDIO_RANK_NOTIFICATION, AudioPlayer.AUDIO_DISTANCE_NOTIFICATION, .25f, 1f, 1f, false, true));
-		timer = new TimerAnimation(viewer.getAnimationManagerLocal(), new Updatable() {
-                        @Override
-			public final void update(Object anim) {
-				trigger.run(Tutorial.this);
-			}
-		}, trigger.getCheckInterval());
+		timer = new TimerAnimation(viewer.getAnimationManagerLocal(), (Object anim) -> {
+                    trigger.run(Tutorial.this);
+                }, trigger.getCheckInterval());
 		timer.start();
 	}
 }

@@ -89,30 +89,24 @@ public final strictfp class VikingIsland7 extends Island {
 		final Player enemy1 = getViewer().getWorld().getPlayers()[2];
 
 		// Introduction
-		runnable = new Runnable() {
-                @Override
-			public final void run() {
-				CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header0"),
-						Utils.getBundleString(bundle, "dialog0"),
-						getCampaign().getIcons().getFaces()[0],
-						CampaignDialogForm.ALIGN_IMAGE_LEFT);
-				addModalForm(dialog);
-			}
-		};
+		runnable = () -> {
+                    CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header0"),
+                            Utils.getBundleString(bundle, "dialog0"),
+                            getCampaign().getIcons().getFaces()[0],
+                            CampaignDialogForm.ALIGN_IMAGE_LEFT);
+                    addModalForm(dialog);
+                };
 		new GameStartedTrigger(getViewer().getWorld(), runnable);
 
 		// Winner prize
-		runnable = new Runnable() {
-                @Override
-			public final void run() {
-				getCampaign().getState().setIslandState(7, CampaignState.ISLAND_COMPLETED);
-				getCampaign().getState().setIslandState(6, CampaignState.ISLAND_AVAILABLE);
-				getCampaign().getState().setIslandState(8, CampaignState.ISLAND_AVAILABLE);
-				getCampaign().getState().setIslandState(9, CampaignState.ISLAND_SEMI_AVAILABLE);
-				getCampaign().getState().setIslandState(11, CampaignState.ISLAND_SEMI_AVAILABLE);
-				getCampaign().victory(getViewer());
-			}
-		};
+		runnable = () -> {
+                    getCampaign().getState().setIslandState(7, CampaignState.ISLAND_COMPLETED);
+                    getCampaign().getState().setIslandState(6, CampaignState.ISLAND_AVAILABLE);
+                    getCampaign().getState().setIslandState(8, CampaignState.ISLAND_AVAILABLE);
+                    getCampaign().getState().setIslandState(9, CampaignState.ISLAND_SEMI_AVAILABLE);
+                    getCampaign().getState().setIslandState(11, CampaignState.ISLAND_SEMI_AVAILABLE);
+                    getCampaign().victory(getViewer());
+                };
 
 		// Winning condition
 		new VictoryTrigger(getViewer(), runnable);

@@ -75,28 +75,22 @@ public final strictfp class VikingIsland9 extends Island {
 		final Player chief_tribe = getViewer().getWorld().getPlayers()[2];
 
 		// Introduction
-		runnable = new Runnable() {
-                @Override
-			public final void run() {
-				CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header0"),
-						Utils.getBundleString(bundle, "dialog0"),
-						getCampaign().getIcons().getFaces()[0],
-						CampaignDialogForm.ALIGN_IMAGE_LEFT);
-				addModalForm(dialog);
-			}
-		};
+		runnable = () -> {
+                    CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header0"),
+                            Utils.getBundleString(bundle, "dialog0"),
+                            getCampaign().getIcons().getFaces()[0],
+                            CampaignDialogForm.ALIGN_IMAGE_LEFT);
+                    addModalForm(dialog);
+                };
 		new GameStartedTrigger(getViewer().getWorld(), runnable);
 
 		// Insert native chieftain
 		chief_tribe.setActiveChieftain(new Unit(chief_tribe, 56*2, 110*2, null, chief_tribe.getRace().getUnitTemplate(Race.UNIT_CHIEFTAIN)));
 
 		// Defeat if netrauls eleminated
-		runnable = new Runnable() {
-                @Override
-			public final void run() {
-				getCampaign().defeated(getViewer(), Utils.getBundleString(bundle, "game_over"));
-			}
-		};
+		runnable = () -> {
+                    getCampaign().defeated(getViewer(), Utils.getBundleString(bundle, "game_over"));
+                };
 		new PlayerEleminatedTrigger(runnable, chief_tribe);
 
 		// Towers
@@ -121,25 +115,19 @@ public final strictfp class VikingIsland9 extends Island {
 		new ReinforcementsTrigger(enemy, Building.KEY_DEPLOY_IRON_WARRIOR);
 
 		// Winner prize
-		final Runnable prize = new Runnable() {
-                @Override
-			public final void run() {
-				getCampaign().getState().setIslandState(9, CampaignState.ISLAND_COMPLETED);
-				getCampaign().getState().setIslandState(10, CampaignState.ISLAND_AVAILABLE);
-				getCampaign().victory(getViewer());
-			}
-		};
-		runnable = new Runnable() {
-                @Override
-			public final void run() {
-				CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header1"),
-						Utils.getBundleString(bundle, "dialog1"),
-						getCampaign().getIcons().getFaces()[7],
-						CampaignDialogForm.ALIGN_IMAGE_RIGHT,
-						prize);
-				addModalForm(dialog);
-			}
-		};
+		final Runnable prize = () -> {
+                    getCampaign().getState().setIslandState(9, CampaignState.ISLAND_COMPLETED);
+                    getCampaign().getState().setIslandState(10, CampaignState.ISLAND_AVAILABLE);
+                    getCampaign().victory(getViewer());
+                };
+		runnable = () -> {
+                    CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header1"),
+                            Utils.getBundleString(bundle, "dialog1"),
+                            getCampaign().getIcons().getFaces()[7],
+                            CampaignDialogForm.ALIGN_IMAGE_RIGHT,
+                            prize);
+                    addModalForm(dialog);
+                };
 
 		// Winning condition
 		new VictoryTrigger(getViewer(), runnable);

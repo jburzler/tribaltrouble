@@ -88,14 +88,11 @@ final strictfp class SessionManager {
 	final long start(Session session) {
 		remove(session);
 		final long initial_time = time_manager.getMillis();
-		session.visit(new SessionVisitor() {
-                        @Override
-			public final void visit(RouterClient client) {
-				Timeout timeout = createTimeout(client, initial_time);
-				client.setTimeout(timeout);
-				timeouts.put(timeout, client);
-			}
-		});
+		session.visit((RouterClient client) -> {
+                    Timeout timeout = createTimeout(client, initial_time);
+                    client.setTimeout(timeout);
+                    timeouts.put(timeout, client);
+                });
 		logger.info("Started session: " + session);
 		return initial_time;
 	}
@@ -111,12 +108,9 @@ final strictfp class SessionManager {
 
 	final int getNextTick(Session session) {
 		final long millis = time_manager.getMillis();
-		session.visit(new SessionVisitor() {
-                        @Override
-			public final void visit(RouterClient client) {
-				unregister(client.getTimeout());
-			}
-		});
+		session.visit((RouterClient client) -> {
+                    unregister(client.getTimeout());
+                });
 		return doComputeNextTick(session, millis);
 	}
 

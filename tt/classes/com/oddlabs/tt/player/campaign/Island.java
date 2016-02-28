@@ -47,46 +47,43 @@ public abstract class Island {
 
 	protected final GameNetwork startNewGame(NetworkSelector network, GUIRoot gui_root, int meters_per_world, int terrain_type, float hills, float vegetation_amount, float supplies_amount, int seed, int campaign_num, int initial_units, String[] ai_names) {
 		InGameInfo ingame_info = new CampaignInGameInfo(campaign);
-		WorldInitAction init_action = new WorldInitAction() {
-                        @Override
-			public final void run(WorldViewer viewer) {
-				world_viewer = viewer;
-				Menu.completeGameSetupHack(world_viewer);
-				if (!campaign.getState().hasRubberWeapons()) {
-					viewer.getLocalPlayer().enableRubber(false);
-				}
-				if (!campaign.getState().hasMagic0()) {
-					viewer.getLocalPlayer().enableMagic(0, false);
-				}
-				if (!campaign.getState().hasMagic1()) {
-					viewer.getLocalPlayer().enableMagic(1, false);
-				}
-				Player[] players = viewer.getWorld().getPlayers();
-				switch (campaign.getState().getDifficulty()) {
-					case CampaignState.DIFFICULTY_EASY:
-                                for (Player player : players) {
-                                    if (player.isEnemy(viewer.getLocalPlayer())) {
-                                        viewer.getLocalPlayer().setHitBonus(CAMPAIGN_DIFFICULTY_BONUS);
-                                    }
+		WorldInitAction init_action = (WorldViewer viewer) -> {
+                    world_viewer = viewer;
+                    Menu.completeGameSetupHack(world_viewer);
+                    if (!campaign.getState().hasRubberWeapons()) {
+                        viewer.getLocalPlayer().enableRubber(false);
+                    }
+                    if (!campaign.getState().hasMagic0()) {
+                        viewer.getLocalPlayer().enableMagic(0, false);
+                    }
+                    if (!campaign.getState().hasMagic1()) {
+                        viewer.getLocalPlayer().enableMagic(1, false);
+                    }
+                    Player[] players = viewer.getWorld().getPlayers();
+                    switch (campaign.getState().getDifficulty()) {
+                        case CampaignState.DIFFICULTY_EASY:
+                            for (Player player : players) {
+                                if (player.isEnemy(viewer.getLocalPlayer())) {
+                                    viewer.getLocalPlayer().setHitBonus(CAMPAIGN_DIFFICULTY_BONUS);
                                 }
-						break;
-					case CampaignState.DIFFICULTY_NORMAL:
-						break;
-					case CampaignState.DIFFICULTY_HARD:
-						players = viewer.getWorld().getPlayers();
-                                for (Player player : players) {
-                                    if (player.isEnemy(viewer.getLocalPlayer())) {
-                                        player.setHitBonus(CAMPAIGN_DIFFICULTY_BONUS);
-                                    }
+                            }
+                            break;
+                        case CampaignState.DIFFICULTY_NORMAL:
+                            break;
+                        case CampaignState.DIFFICULTY_HARD:
+                            players = viewer.getWorld().getPlayers();
+                            for (Player player : players) {
+                                if (player.isEnemy(viewer.getLocalPlayer())) {
+                                    player.setHitBonus(CAMPAIGN_DIFFICULTY_BONUS);
                                 }
-						break;
-					default:  
-						throw new RuntimeException();
-				}
-				start();
-				new DefeatTrigger(world_viewer, campaign, viewer.getLocalPlayer().getChieftain());
-			}
-		};
+                            }
+                            break;
+                        default:
+                            throw new RuntimeException();
+                    }
+                    start();
+                    new DefeatTrigger(world_viewer, campaign, viewer.getLocalPlayer().getChieftain());
+                };
 		return Menu.startNewGame(network, gui_root, null, new WorldParameters(Game.GAMESPEED_NORMAL,
 					"Campaign" + campaign_num, initial_units,
 					Player.DEFAULT_MAX_UNIT_COUNT),

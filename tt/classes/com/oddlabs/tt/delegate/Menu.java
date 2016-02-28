@@ -78,12 +78,7 @@ public abstract strictfp class Menu extends CameraDelegate {
 	}
 
 	protected final void addDefaultOptionsButton() {
-		addOptionsButton(new FormFactory() {
-                        @Override
-			public final Form create() {
-				return new OptionsMenu(getGUIRoot());
-			}
-		});
+		addOptionsButton(() -> new OptionsMenu(getGUIRoot()));
 	}
 
 	protected final void addOptionsButton(FormFactory factory) {
@@ -225,12 +220,9 @@ public abstract strictfp class Menu extends CameraDelegate {
 	protected final void addResumeButton() {
 		MenuButton resume = new MenuButton(Utils.getBundleString(bundle, "resume"), COLOR_NORMAL, COLOR_ACTIVE);
 		addChild(resume);
-		resume.addMouseClickListener(new MouseClickListener() {
-                        @Override
-			public final void mouseClicked(int button, int x, int y, int clicks) {
-				pop();
-			}
-		});
+		resume.addMouseClickListener((int button, int x1, int y1, int clicks) -> {
+                    pop();
+                });
 	}
 
 	public static void completeGameSetupHack(WorldViewer world_viewer) {
@@ -264,12 +256,7 @@ public abstract strictfp class Menu extends CameraDelegate {
 		WorldGenerator generator = new IslandGenerator(meters_per_world, terrain_type, hills, vegetation_amount, supplies_amount, seed);
 		InetAddress address = multiplayer ? null : com.oddlabs.util.Utils.getLoopbackAddress();
 		final Server server = new Server(network, game, address, generator, multiplayer, ai_names);
-		Client client = new Client(new Runnable() {
-                        @Override
-			public final void run() {
-				server.close();
-			}
-		}, network, gui_root.getGUI(), -1, world_params, ingame_info, init_action);
+		Client client = new Client(server::close, network, gui_root.getGUI(), -1, world_params, ingame_info, init_action);
 		GameNetwork game_network = new GameNetwork(server, client);
 		ConnectingForm connecting_form = new ConnectingForm(game_network, gui_root, owner, multiplayer);
 		client.setConfigurationListener(connecting_form);

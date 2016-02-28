@@ -83,12 +83,9 @@ public final strictfp class ProgressForm {
 			show_tip = true;
 		}
 
-		Fadable load_fadable = new Fadable() {
-                        @Override
-			public final void fadingDone() {
-				callback(gui, callback, first_progress);
-			}
-		};
+		Fadable load_fadable = () -> {
+                    callback(gui, callback, first_progress);
+                };
 		current_progress = new ProgressForm(network, gui, load_fadable, first_progress, new ProgressBarInfo[]{new ProgressBarInfo(""/*"Loading lanscape resources"*/, 10),
 			new ProgressBarInfo(""/*"Loading races resources"*/, 30),
 			new ProgressBarInfo(""/*"Generating textures"*/, 5),
@@ -145,13 +142,10 @@ public final strictfp class ProgressForm {
 		// For backwards compatibility with old affiliate installers
 		logo_file = logo_file.replaceAll("(.*).image", "$1");
 
-		Fadable start_sources_fadable = new Fadable() {
-                        @Override
-			public final void fadingDone() {
-				if (AL.isCreated())
-					AudioManager.getManager().startSources();
-			}
-		};
+		Fadable start_sources_fadable = () -> {
+                    if (AL.isCreated())
+                        AudioManager.getManager().startSources();
+                };
 
 		boolean show_logo = logo_file != null && !logo_file.equals("") && first_progress;
 		GUIRoot client_root = gui.createRoot();

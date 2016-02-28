@@ -82,12 +82,7 @@ public final strictfp class AnimationManager {
 	};
 */
 	static {
-		time_source = new MonotoneTimeManager(new TimeManager() {
-                        @Override
-			public final long getMillis() {
-				return System.currentTimeMillis();
-			}
-		});
+		time_source = new MonotoneTimeManager(System::currentTimeMillis);
 		current_time = getSystemTime();
 		last_frame_time = current_time;
 		freezeTime();

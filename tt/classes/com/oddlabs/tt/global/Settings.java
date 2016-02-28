@@ -203,13 +203,13 @@ public final strictfp class Settings implements Serializable {
                 Class field_type = field.getType();
                 try {
                     if (field_type.equals(boolean.class)) {
-                        boolean field_value = (new Boolean(value)).booleanValue();
+                        boolean field_value = (new Boolean(value));
                         field.setBoolean(this, field_value);
                     } else if (field_type.equals(int.class)) {
-                        int field_value = (new Integer(value)).intValue();
+                        int field_value = (new Integer(value));
                         field.setInt(this, field_value);
                     } else if (field_type.equals(float.class)) {
-                        float field_value = (new Float(value)).floatValue();
+                        float field_value = (new Float(value));
                         field.setFloat(this, field_value);
                     } else if (field_type.equals(String.class)) {
                         field.set(this, value);

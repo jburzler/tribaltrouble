@@ -46,23 +46,17 @@ public final strictfp class CampaignMapForm extends CameraDelegate {
 			}
 
 			if (campaign.getState().getCurrentIsland() == 14) {
-				final Runnable runnable_menu = new Runnable() {
-                                        @Override
-					public final void run() {
-						closeCampaign(network, gui_root.getGUI());
-					}
-				};
-				final Runnable runnable_next = new Runnable() {
-                                        @Override
-					public final void run() {
-						CampaignDialogForm dialog = new CampaignDialogForm(Utils.getBundleString(bundle, "native_campaign_opened_header"),
-								Utils.getBundleString(bundle, "native_campaign_opened"),
-								null,
-								CampaignDialogForm.ALIGN_IMAGE_LEFT,
-								runnable_menu);
-						gui_root.addModalForm(dialog);
-					}
-				};
+				final Runnable runnable_menu = () -> {
+                                    closeCampaign(network, gui_root.getGUI());
+                                };
+				final Runnable runnable_next = () -> {
+                                    CampaignDialogForm dialog = new CampaignDialogForm(Utils.getBundleString(bundle, "native_campaign_opened_header"),
+                                            Utils.getBundleString(bundle, "native_campaign_opened"),
+                                            null,
+                                            CampaignDialogForm.ALIGN_IMAGE_LEFT,
+                                            runnable_menu);
+                                    gui_root.addModalForm(dialog);
+                                };
 				CampaignDialogForm dialog = new CampaignDialogForm(Utils.getBundleString(bundle, "viking_header"),
 						Utils.getBundleString(bundle, "viking_campaign_completed"),
 						campaign.getIcons().getFaces()[0],
@@ -78,12 +72,9 @@ public final strictfp class CampaignMapForm extends CameraDelegate {
 			}
 
 			if (campaign.getState().getCurrentIsland() == 7) {
-				Runnable runnable = new Runnable() {
-                                        @Override
-					public final void run() {
-						closeCampaign(network, gui_root.getGUI());
-					}
-				};
+				Runnable runnable = () -> {
+                                    closeCampaign(network, gui_root.getGUI());
+                                };
 				CampaignDialogForm dialog = new CampaignDialogForm(Utils.getBundleString(bundle, "native_header"),
 						Utils.getBundleString(bundle, "native_campaign_completed"),
 						campaign.getIcons().getFaces()[0],

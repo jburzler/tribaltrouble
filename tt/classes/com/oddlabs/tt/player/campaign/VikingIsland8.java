@@ -80,23 +80,17 @@ public final strictfp class VikingIsland8 extends Island {
 		getViewer().getCamera().setPos(358*2, 484*2);
 
 		// Introduction
-		final Runnable camera_jump = new Runnable() {
-                @Override
-			public final void run() {
-				getViewer().getGUIRoot().pushDelegate(new JumpDelegate(getViewer(), getViewer().getCamera(), 170*2, 160*2, 200f, 3f));
-			}
-		};
-		runnable = new Runnable() {
-                @Override
-			public final void run() {
-				CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header0"),
-						Utils.getBundleString(bundle, "dialog0"),
-						getCampaign().getIcons().getFaces()[0],
-						CampaignDialogForm.ALIGN_IMAGE_LEFT,
-						camera_jump);
-				addModalForm(dialog);
-			}
-		};
+		final Runnable camera_jump = () -> {
+                    getViewer().getGUIRoot().pushDelegate(new JumpDelegate(getViewer(), getViewer().getCamera(), 170*2, 160*2, 200f, 3f));
+                };
+		runnable = () -> {
+                    CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header0"),
+                            Utils.getBundleString(bundle, "dialog0"),
+                            getCampaign().getIcons().getFaces()[0],
+                            CampaignDialogForm.ALIGN_IMAGE_LEFT,
+                            camera_jump);
+                    addModalForm(dialog);
+                };
 		new GameStartedTrigger(getViewer().getWorld(), runnable);
 
 		// Insert viking men
@@ -117,21 +111,18 @@ public final strictfp class VikingIsland8 extends Island {
 		// See setMagicUsedTrigger()
 
 		// Give blast when arrived
-		runnable = new Runnable() {
-                @Override
-			public final void run() {
-				CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header1"),
-						Utils.getBundleString(bundle, "dialog1"),
-						getCampaign().getIcons().getFaces()[0],
-						CampaignDialogForm.ALIGN_IMAGE_LEFT);
-				addModalForm(dialog);
-				getViewer().getLocalPlayer().enableMagic(0, true);
-				local_player.getChieftain().increaseMagicEnergy(0, 1000);
-				local_player.getChieftain().increaseMagicEnergy(1, 1000);
-				setMagicUsedTrigger();
-				changeObjective(1);
-			}
-		};
+		runnable = () -> {
+                    CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header1"),
+                            Utils.getBundleString(bundle, "dialog1"),
+                            getCampaign().getIcons().getFaces()[0],
+                            CampaignDialogForm.ALIGN_IMAGE_LEFT);
+                    addModalForm(dialog);
+                    getViewer().getLocalPlayer().enableMagic(0, true);
+                    local_player.getChieftain().increaseMagicEnergy(0, 1000);
+                    local_player.getChieftain().increaseMagicEnergy(1, 1000);
+                    setMagicUsedTrigger();
+                    changeObjective(1);
+                };
 		new NearPointTrigger(354, 478, 4, local_player.getChieftain(), runnable);
 
 		// Insert rally point
@@ -187,12 +178,9 @@ public final strictfp class VikingIsland8 extends Island {
 		army[22] = new Unit(enemy, 289*2, 141*2, null, enemy.getRace().getUnitTemplate(Race.UNIT_WARRIOR_IRON));
 		army[23] = new Unit(enemy, 289*2, 141*2, null, enemy.getRace().getUnitTemplate(Race.UNIT_WARRIOR_IRON));
 		army[24] = new Unit(enemy, 289*2, 141*2, null, enemy.getRace().getUnitTemplate(Race.UNIT_WARRIOR_IRON));
-		runnable = new Runnable() {
-                @Override
-			public final void run() {
-				enemy.setLandscapeTarget(army, 238, 136, Target.ACTION_ATTACK, true);
-			}
-		};
+		runnable = () -> {
+                    enemy.setLandscapeTarget(army, 238, 136, Target.ACTION_ATTACK, true);
+                };
 		new DeathTrigger(bait, runnable);
 
 		// Insert second blocking army
@@ -237,12 +225,9 @@ public final strictfp class VikingIsland8 extends Island {
 			army2[18] = new Unit(enemy, 366*2, 419*2, null, enemy.getRace().getUnitTemplate(Race.UNIT_WARRIOR_RUBBER));
 			army2[19] = new Unit(enemy, 366*2, 419*2, null, enemy.getRace().getUnitTemplate(Race.UNIT_WARRIOR_RUBBER));
 		}
-		runnable = new Runnable() {
-                @Override
-			public final void run() {
-				enemy.setLandscapeTarget(army2, 352, 480, Target.ACTION_ATTACK, true);
-			}
-		};
+		runnable = () -> {
+                    enemy.setLandscapeTarget(army2, 352, 480, Target.ACTION_ATTACK, true);
+                };
 		new DeathTrigger(bait2, runnable);
 
 		// Insert scattered resistance
@@ -333,35 +318,29 @@ public final strictfp class VikingIsland8 extends Island {
 			neutrals[13] = new Unit(lost, 269*2, 330*2, null, lost.getRace().getUnitTemplate(Race.UNIT_WARRIOR_IRON));
 			neutrals[14] = new Unit(lost, 272*2, 323*2, null, lost.getRace().getUnitTemplate(Race.UNIT_WARRIOR_RUBBER));
 		}
-		runnable = new Runnable() {
-                @Override
-			public final void run() {
-				CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header2"),
-						Utils.getBundleString(bundle, "dialog2"),
-						getCampaign().getIcons().getFaces()[4],
-						CampaignDialogForm.ALIGN_IMAGE_RIGHT);
-				addModalForm(dialog);
+		runnable = () -> {
+                    CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header2"),
+                            Utils.getBundleString(bundle, "dialog2"),
+                            getCampaign().getIcons().getFaces()[4],
+                            CampaignDialogForm.ALIGN_IMAGE_RIGHT);
+                    addModalForm(dialog);
                     for (Unit neutral : neutrals) {
                         if (!neutral.isDead()) {
                             changeOwner(neutral, local_player);
                         }
                     }
-			}
-		};
+                };
 		new NearArmyTrigger(neutrals, 10f, local_player, runnable);
 	}
 
 	private final void setMagicUsedTrigger() {
-		Runnable runnable = new Runnable() {
-                        @Override
-			public final void run() {
-				getCampaign().getState().setIslandState(8, CampaignState.ISLAND_COMPLETED);
-				getCampaign().getState().setIslandState(7, CampaignState.ISLAND_AVAILABLE);
-				getCampaign().getState().setIslandState(9, CampaignState.ISLAND_SEMI_AVAILABLE);
-				getCampaign().getState().setIslandState(11, CampaignState.ISLAND_SEMI_AVAILABLE);
-				getCampaign().victory(getViewer());
-			}
-		};
+		Runnable runnable = () -> {
+                    getCampaign().getState().setIslandState(8, CampaignState.ISLAND_COMPLETED);
+                    getCampaign().getState().setIslandState(7, CampaignState.ISLAND_AVAILABLE);
+                    getCampaign().getState().setIslandState(9, CampaignState.ISLAND_SEMI_AVAILABLE);
+                    getCampaign().getState().setIslandState(11, CampaignState.ISLAND_SEMI_AVAILABLE);
+                    getCampaign().victory(getViewer());
+                };
 
 		new MagicUsedTrigger(getViewer().getLocalPlayer().getChieftain(), 354*2, 478*2, 15, 0, runnable);
 	}

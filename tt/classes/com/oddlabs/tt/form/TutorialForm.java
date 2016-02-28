@@ -140,14 +140,11 @@ public final strictfp class TutorialForm extends Form {
 		float resources = 1f;
 		int seed = 2;
 		String ai_string = Utils.getBundleString(bundle, "ai");
-		WorldInitAction compound_action = new WorldInitAction() {
-                        @Override
-			public final void run(WorldViewer world_viewer) {
-				if (initial_action != null)
-					initial_action.run(world_viewer);
-				MainMenu.completeGameSetupHack(world_viewer);
-			}
-		};
+		WorldInitAction compound_action = (WorldViewer world_viewer) -> {
+                    if (initial_action != null)
+                        initial_action.run(world_viewer);
+                    MainMenu.completeGameSetupHack(world_viewer);
+                };
 		return MainMenu.startNewGame(network, gui_root, null, new WorldParameters(Game.GAMESPEED_NORMAL, "Tutorial" + tutorial_num, initial_unit_count, Player.DEFAULT_MAX_UNIT_COUNT), ingame_info, compound_action, null, size, Landscape.NATIVE, hills, trees, 0f, seed, new String[]{ai_string + "0", ai_string + "1", ai_string + "2", ai_string + "3", ai_string + "4", ai_string + "5"});
 	}
 
@@ -160,39 +157,21 @@ public final strictfp class TutorialForm extends Form {
 		GameNetwork game_network;
 		switch (tutorial_number) {
 			case TUTORIAL_CAMERA:
-				startNewGame(network, gui_root, new TriggerFactory() {
-                                        @Override
-					public final TutorialTrigger create(WorldViewer viewer) {
-						return new ScrollTrigger(viewer.getLocalPlayer());
-					}
-				}, 1);
+				startNewGame(network, gui_root, (WorldViewer viewer) -> new ScrollTrigger(viewer.getLocalPlayer()), 1);
 				break;
 			case TUTORIAL_QUARTERS:
-				startNewGame(network, gui_root, new TriggerFactory() {
-                                        @Override
-					public final TutorialTrigger create(WorldViewer viewer) {
-						return new PlacingDelegateTrigger(viewer.getLocalPlayer());
-					}
-				}, 2);
+				startNewGame(network, gui_root, (WorldViewer viewer) -> new PlacingDelegateTrigger(viewer.getLocalPlayer()), 2);
 				break;
 			case TUTORIAL_ARMORY:
-				startNewGame(network, gui_root, new TriggerFactory() {
-                                        @Override
-					public final TutorialTrigger create(WorldViewer viewer) {
-						return new SelectArmoryTrigger(viewer.getLocalPlayer());
-					}
-				}, 3);
+				startNewGame(network, gui_root, (WorldViewer viewer) -> new SelectArmoryTrigger(viewer.getLocalPlayer()), 3);
 				break;
 			case TUTORIAL_TOWER:
 				ingame_info = new TutorialInGameInfo();
-				WorldInitAction action = new WorldInitAction() {
-                                        @Override
-					public final void run(WorldViewer viewer) {
-						Player player = viewer.getLocalPlayer();
-						new Unit(player, player.getStartX(), player.getStartY(), null, player.getRace().getUnitTemplate(Race.UNIT_WARRIOR_ROCK));
-						new Tutorial(viewer, ingame_info, new SelectTowerTrigger(viewer.getLocalPlayer()));
-					}
-				};
+				WorldInitAction action = (WorldViewer viewer) -> {
+                                    Player player = viewer.getLocalPlayer();
+                                    new Unit(player, player.getStartX(), player.getStartY(), null, player.getRace().getUnitTemplate(Race.UNIT_WARRIOR_ROCK));
+                                    new Tutorial(viewer, ingame_info, new SelectTowerTrigger(viewer.getLocalPlayer()));
+                };
 				game_network = doStartNewGame(network, gui_root, ingame_info, action, 10, 4);
 				game_network.getClient().getServerInterface().setPlayerSlot(0, PlayerSlot.HUMAN, RacesResources.RACE_NATIVES, 0, true, PlayerSlot.AI_TOWER_TUTORIAL);
 				game_network.getClient().setUnitInfo(0, new UnitInfo(false, false, 0, false, 10, 0, 0, 0));
@@ -202,12 +181,7 @@ public final strictfp class TutorialForm extends Form {
 				break;
 			case TUTORIAL_CHIEFTAIN:
 				ingame_info = new TutorialInGameInfo();
-				game_network = doStartNewGame(network, gui_root, ingame_info, new TutorialAction(new TriggerFactory() {
-                                        @Override
-					public final TutorialTrigger create(WorldViewer viewer) {
-						return new BuildingChieftainTrigger(viewer.getLocalPlayer());
-					}
-				}, ingame_info), Player.INITIAL_UNIT_COUNT, 5);
+				game_network = doStartNewGame(network, gui_root, ingame_info, new TutorialAction((WorldViewer viewer) -> new BuildingChieftainTrigger(viewer.getLocalPlayer()), ingame_info), Player.INITIAL_UNIT_COUNT, 5);
 				game_network.getClient().getServerInterface().setPlayerSlot(0, PlayerSlot.HUMAN, RacesResources.RACE_NATIVES, 0, true, PlayerSlot.AI_NONE);
 				game_network.getClient().getServerInterface().setPlayerSlot(1, PlayerSlot.AI, RacesResources.RACE_VIKINGS, 1, true, PlayerSlot.AI_CHIEFTAIN_TUTORIAL);
 				game_network.getClient().setUnitInfo(1, new UnitInfo(false, false, 0, false, 0, 0, 0, 0));
@@ -215,12 +189,7 @@ public final strictfp class TutorialForm extends Form {
 				break;
 			case TUTORIAL_BATTLE:
 				ingame_info = new TutorialInGameInfo();
-				game_network = doStartNewGame(network, gui_root, ingame_info, new TutorialAction(new TriggerFactory() {
-                                        @Override
-					public final TutorialTrigger create(WorldViewer viewer) {
-						return new TutorialOverTrigger();
-					}
-				}, ingame_info), Player.INITIAL_UNIT_COUNT, 6);
+				game_network = doStartNewGame(network, gui_root, ingame_info, new TutorialAction((WorldViewer viewer) -> new TutorialOverTrigger(), ingame_info), Player.INITIAL_UNIT_COUNT, 6);
 				game_network.getClient().getServerInterface().setPlayerSlot(0, PlayerSlot.HUMAN, RacesResources.RACE_NATIVES, 0, true, PlayerSlot.AI_NONE);
 				game_network.getClient().getServerInterface().setPlayerSlot(1, PlayerSlot.AI, RacesResources.RACE_VIKINGS, 1, true, PlayerSlot.AI_BATTLE_TUTORIAL);
 				game_network.getClient().setUnitInfo(1, new UnitInfo(true, true, 0, false, 0, 15, 0, 0));

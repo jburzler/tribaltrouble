@@ -85,39 +85,30 @@ public final strictfp class VikingIsland6 extends Island {
 		final Player enemy = getViewer().getWorld().getPlayers()[2];
 
 		// Introduction
-		final Runnable answer = new Runnable() {
-                @Override
-			public final void run() {
-				CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header0"),
-						Utils.getBundleString(bundle, "dialog0"),
-						getCampaign().getIcons().getFaces()[0],
-						CampaignDialogForm.ALIGN_IMAGE_LEFT);
-				addModalForm(dialog);
-			}
-		};
-		runnable = new Runnable() {
-                @Override
-			public final void run() {
-				CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header1"),
-						Utils.getBundleString(bundle, "dialog1"),
-						getCampaign().getIcons().getFaces()[2],
-						CampaignDialogForm.ALIGN_IMAGE_RIGHT,
-						answer);
-				addModalForm(dialog);
-			}
-		};
+		final Runnable answer = () -> {
+                    CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header0"),
+                            Utils.getBundleString(bundle, "dialog0"),
+                            getCampaign().getIcons().getFaces()[0],
+                            CampaignDialogForm.ALIGN_IMAGE_LEFT);
+                    addModalForm(dialog);
+                };
+		runnable = () -> {
+                    CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header1"),
+                            Utils.getBundleString(bundle, "dialog1"),
+                            getCampaign().getIcons().getFaces()[2],
+                            CampaignDialogForm.ALIGN_IMAGE_RIGHT,
+                            answer);
+                    addModalForm(dialog);
+                };
 		new GameStartedTrigger(getViewer().getWorld(), runnable);
 
 		// Place prisoners
 		placePrisoners(stranded, local_player, 10, 0, 0, 0, false);
 
 		// Defeat if netrauls eleminated
-		runnable = new Runnable() {
-                @Override
-			public final void run() {
-				getCampaign().defeated(getViewer(), Utils.getBundleString(bundle, "game_over"));
-			}
-		};
+		runnable = () -> {
+                    getCampaign().defeated(getViewer(), Utils.getBundleString(bundle, "game_over"));
+                };
 		new PlayerEleminatedTrigger(runnable, stranded);
 
 		// Put warrior in tower
@@ -125,29 +116,23 @@ public final strictfp class VikingIsland6 extends Island {
 		insertGuardTower(enemy, Race.UNIT_WARRIOR_IRON, 35, 53);
 
 		// Winner prize
-		final Runnable prize = new Runnable() {
-                @Override
-			public final void run() {
-				getCampaign().getState().setIslandState(6, CampaignState.ISLAND_COMPLETED);
-				getCampaign().getState().setIslandState(5, CampaignState.ISLAND_AVAILABLE);
-				getCampaign().getState().setIslandState(7, CampaignState.ISLAND_AVAILABLE);
-				getCampaign().getState().setNumPeons(getCampaign().getState().getNumPeons() + stranded.getUnitCountContainer().getNumSupplies());
-				getCampaign().victory(getViewer());
-			}
-		};
-		runnable = new Runnable() {
-                @Override
-			public final void run() {
-				String new_units_message = Utils.getBundleString(bundle, "new_units", new Object[]{stranded.getUnitCountContainer().getNumSupplies()});
-				String new_units_header = Utils.getBundleString(bundle, "new_units_header");
-				CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), new_units_header,
-						new_units_message,
-						getCampaign().getIcons().getFaces()[0],
-						CampaignDialogForm.ALIGN_IMAGE_LEFT,
-						prize);
-				addModalForm(dialog);
-			}
-		};
+		final Runnable prize = () -> {
+                    getCampaign().getState().setIslandState(6, CampaignState.ISLAND_COMPLETED);
+                    getCampaign().getState().setIslandState(5, CampaignState.ISLAND_AVAILABLE);
+                    getCampaign().getState().setIslandState(7, CampaignState.ISLAND_AVAILABLE);
+                    getCampaign().getState().setNumPeons(getCampaign().getState().getNumPeons() + stranded.getUnitCountContainer().getNumSupplies());
+                    getCampaign().victory(getViewer());
+                };
+		runnable = () -> {
+                    String new_units_message = Utils.getBundleString(bundle, "new_units", new Object[]{stranded.getUnitCountContainer().getNumSupplies()});
+                    String new_units_header = Utils.getBundleString(bundle, "new_units_header");
+                    CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), new_units_header,
+                            new_units_message,
+                            getCampaign().getIcons().getFaces()[0],
+                            CampaignDialogForm.ALIGN_IMAGE_LEFT,
+                            prize);
+                    addModalForm(dialog);
+                };
 
 		// Winning condition
 		new VictoryTrigger(getViewer(), runnable);

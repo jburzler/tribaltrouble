@@ -91,53 +91,41 @@ public final strictfp class VikingIsland5 extends Island {
 		final Player enemy1 = getViewer().getWorld().getPlayers()[3];
 
 		// Introduction
-		final Runnable answer = new Runnable() {
-                @Override
-			public final void run() {
-				CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header0"),
-						Utils.getBundleString(bundle, "dialog0"),
-						getCampaign().getIcons().getFaces()[0],
-						CampaignDialogForm.ALIGN_IMAGE_LEFT);
-				addModalForm(dialog);
-			}
-		};
-		runnable = new Runnable() {
-                @Override
-			public final void run() {
-				CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header1"),
-						Utils.getBundleString(bundle, "dialog1"),
-						getCampaign().getIcons().getFaces()[5],
-						CampaignDialogForm.ALIGN_IMAGE_RIGHT,
-						answer);
-				addModalForm(dialog);
-			}
-		};
+		final Runnable answer = () -> {
+                    CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header0"),
+                            Utils.getBundleString(bundle, "dialog0"),
+                            getCampaign().getIcons().getFaces()[0],
+                            CampaignDialogForm.ALIGN_IMAGE_LEFT);
+                    addModalForm(dialog);
+                };
+		runnable = () -> {
+                    CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header1"),
+                            Utils.getBundleString(bundle, "dialog1"),
+                            getCampaign().getIcons().getFaces()[5],
+                            CampaignDialogForm.ALIGN_IMAGE_RIGHT,
+                            answer);
+                    addModalForm(dialog);
+                };
 		new GameStartedTrigger(getViewer().getWorld(), runnable);
 
 		// Winner prize
-		final Runnable prize = new Runnable() {
-                @Override
-			public final void run() {
-				getCampaign().getState().setIslandState(5, CampaignState.ISLAND_COMPLETED);
-				getCampaign().getState().setIslandState(4, CampaignState.ISLAND_AVAILABLE);
-				getCampaign().getState().setIslandState(6, CampaignState.ISLAND_AVAILABLE);
-				getCampaign().getState().setNumRockWarriors(getCampaign().getState().getNumRockWarriors() + 5);
-				getCampaign().victory(getViewer());
-			}
-		};
+		final Runnable prize = () -> {
+                    getCampaign().getState().setIslandState(5, CampaignState.ISLAND_COMPLETED);
+                    getCampaign().getState().setIslandState(4, CampaignState.ISLAND_AVAILABLE);
+                    getCampaign().getState().setIslandState(6, CampaignState.ISLAND_AVAILABLE);
+                    getCampaign().getState().setNumRockWarriors(getCampaign().getState().getNumRockWarriors() + 5);
+                    getCampaign().victory(getViewer());
+                };
 
 		// Winning condition
-		runnable = new Runnable() {
-                @Override
-			public final void run() {
-				CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header2"),
-						Utils.getBundleString(bundle, "dialog2"),
-						getCampaign().getIcons().getFaces()[5],
-						CampaignDialogForm.ALIGN_IMAGE_RIGHT,
-						prize);
-				addModalForm(dialog);
-			}
-		};
+		runnable = () -> {
+                    CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header2"),
+                            Utils.getBundleString(bundle, "dialog2"),
+                            getCampaign().getIcons().getFaces()[5],
+                            CampaignDialogForm.ALIGN_IMAGE_RIGHT,
+                            prize);
+                    addModalForm(dialog);
+                };
 		new VictoryTrigger(getViewer(), runnable);
 
 		// Put warrior in tower
@@ -145,12 +133,9 @@ public final strictfp class VikingIsland5 extends Island {
 		enemy1.getAI().manTowers(1); // TODO: replace with insertGuardTower()
 
 		// Defeat if friends eleminated
-		runnable = new Runnable() {
-                @Override
-			public final void run() {
-				getCampaign().defeated(getViewer(), Utils.getBundleString(bundle, "game_over"));
-			}
-		};
+		runnable = () -> {
+                    getCampaign().defeated(getViewer(), Utils.getBundleString(bundle, "game_over"));
+                };
 		new PlayerEleminatedTrigger(runnable, getViewer().getWorld().getPlayers()[1]);
 	}
 

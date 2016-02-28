@@ -122,12 +122,9 @@ public final strictfp class Picker implements Updatable {
 			final TreeSupply supply = (TreeSupply)getNearestPick(tree_pick_list, Target.class);
 			if (supply != null) {
 			//	Target target = (Target)supply;
-				respond_manager.addResponder(supply, new Runnable() {
-                                        @Override
-					public final void run() {
-						supply.changeRespondingTrees(-1);
-					}
-				});
+				respond_manager.addResponder(supply, () -> {
+                                    supply.changeRespondingTrees(-1);
+                                });
 				supply.changeRespondingTrees(1);
 				if (isNewSetTarget(selection, supply, action, Settings.getSettings().aggressive_units))
 					player_interface.setTarget(selection, supply, action, Settings.getSettings().aggressive_units);

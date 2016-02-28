@@ -83,16 +83,13 @@ public final strictfp class VikingIsland14 extends Island {
 		Runnable runnable;
 		final Player local_player = getViewer().getLocalPlayer();
 		// Introduction
-		runnable = new Runnable() {
-                @Override
-			public final void run() {
-				CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header0"),
-						Utils.getBundleString(bundle, "dialog0"),
-						getCampaign().getIcons().getFaces()[0],
-						CampaignDialogForm.ALIGN_IMAGE_LEFT);
-				addModalForm(dialog);
-			}
-		};
+		runnable = () -> {
+                    CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header0"),
+                            Utils.getBundleString(bundle, "dialog0"),
+                            getCampaign().getIcons().getFaces()[0],
+                            CampaignDialogForm.ALIGN_IMAGE_LEFT);
+                    addModalForm(dialog);
+                };
 		new GameStartedTrigger(getViewer().getWorld(), runnable);
 
 		// Insert viking men
@@ -120,13 +117,10 @@ public final strictfp class VikingIsland14 extends Island {
 		getViewer().getCamera().reset(start_x, start_y);
 
 		// Winner prize
-		runnable = new Runnable() {
-                @Override
-			public final void run() {
-				getCampaign().getState().setIslandState(14, CampaignState.ISLAND_COMPLETED);
-				getCampaign().victory(getViewer());
-			}
-		};
+		runnable = () -> {
+                    getCampaign().getState().setIslandState(14, CampaignState.ISLAND_COMPLETED);
+                    getCampaign().victory(getViewer());
+                };
 
 		// Winning condition
 		new VictoryTrigger(getViewer(), runnable);

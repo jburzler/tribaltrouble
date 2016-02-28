@@ -50,12 +50,7 @@ public final strictfp class InGameMainMenu extends Menu {
 	protected final void addButtons() {
 		addResumeButton();
 
-		addOptionsButton(new FormFactory() {
-                @Override
-			public final Form create() {
-				return new InGameOptionsMenu(getGUIRoot(), viewer);
-			}
-		});
+		addOptionsButton(() -> new InGameOptionsMenu(getGUIRoot(), viewer));
 
 		game_infos = new Group(false);
 		viewer.addGUI(this, game_infos);

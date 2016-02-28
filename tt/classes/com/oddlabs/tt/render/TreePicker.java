@@ -37,12 +37,7 @@ strictfp class TreePicker implements TreeNodeVisitor {
 		this.tree_low_details = LandscapeResources.loadTreeLowDetails();
 
 		this.sprite_sorter = sprite_sorter;
-		render_state_cache = new RenderStateCache(new RenderStateFactory() {
-                        @Override
-			public final Object create() {
-				return new TreeRenderState(TreePicker.this);
-			}
-		});
+		render_state_cache = new RenderStateCache(() -> new TreeRenderState(TreePicker.this));
 	}
 
 	private static Tree[] loadTrees() {

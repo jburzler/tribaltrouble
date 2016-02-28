@@ -43,12 +43,7 @@ public final strictfp class RenderState implements ElementVisitor {
 		this.target_respond_renderer = (TargetRespondRenderer)render_queues.getShadowRenderer(key);
 		this.default_shadow_renderer = (SelectableShadowRenderer)render_queues.getShadowRenderer(
 				render_queues.registerSelectableShadowList(RacesResources.DEFAULT_SHADOW_DESC));
-		this.render_state_cache = new RenderStateCache(new RenderStateFactory() {
-                        @Override
-			public final Object create() {
-				return new ElementRenderState(RenderState.this);
-			}
-		});
+		this.render_state_cache = new RenderStateCache(() -> new ElementRenderState(RenderState.this));
 	}
 
 	final Player getLocalPlayer() {

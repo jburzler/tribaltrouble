@@ -74,40 +74,31 @@ public final strictfp class NativeIsland2 extends Island {
 		final Player enemy = getViewer().getWorld().getPlayers()[2];
 
 		// Introduction
-		runnable = new Runnable() {
-                @Override
-			public final void run() {
-				CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header0"),
-						Utils.getBundleString(bundle, "dialog0"),
-						getCampaign().getIcons().getFaces()[0],
-						CampaignDialogForm.ALIGN_IMAGE_LEFT);
-				addModalForm(dialog);
-			}
-		};
+		runnable = () -> {
+                    CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header0"),
+                            Utils.getBundleString(bundle, "dialog0"),
+                            getCampaign().getIcons().getFaces()[0],
+                            CampaignDialogForm.ALIGN_IMAGE_LEFT);
+                    addModalForm(dialog);
+                };
 		new GameStartedTrigger(getViewer().getWorld(), runnable);
 
 		// Winner prize
-		final Runnable prize = new Runnable() {
-                @Override
-			public final void run() {
-				getCampaign().getState().setIslandState(2, CampaignState.ISLAND_COMPLETED);
-				getCampaign().getState().setIslandState(3, CampaignState.ISLAND_AVAILABLE);
-				getCampaign().getState().setNumPeons(getCampaign().getState().getNumPeons() + captives.getUnitCountContainer().getNumSupplies());
-				getCampaign().victory(getViewer());
-			}
-		};
-		runnable = new Runnable() {
-                @Override
-			public final void run() {
-				String message = Utils.getBundleString(bundle, "dialog1", new Object[]{captives.getUnitCountContainer().getNumSupplies()});
-				CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header1"),
-						message,
-						getCampaign().getIcons().getFaces()[0],
-						CampaignDialogForm.ALIGN_IMAGE_LEFT,
-						prize);
-				addModalForm(dialog);
-			}
-		};
+		final Runnable prize = () -> {
+                    getCampaign().getState().setIslandState(2, CampaignState.ISLAND_COMPLETED);
+                    getCampaign().getState().setIslandState(3, CampaignState.ISLAND_AVAILABLE);
+                    getCampaign().getState().setNumPeons(getCampaign().getState().getNumPeons() + captives.getUnitCountContainer().getNumSupplies());
+                    getCampaign().victory(getViewer());
+                };
+		runnable = () -> {
+                    String message = Utils.getBundleString(bundle, "dialog1", new Object[]{captives.getUnitCountContainer().getNumSupplies()});
+                    CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header1"),
+                            message,
+                            getCampaign().getIcons().getFaces()[0],
+                            CampaignDialogForm.ALIGN_IMAGE_LEFT,
+                            prize);
+                    addModalForm(dialog);
+                };
 
 		// Winning condition
 		new VictoryTrigger(getViewer(), runnable);
@@ -139,36 +130,30 @@ public final strictfp class NativeIsland2 extends Island {
 		final int defense = 10;
 
 		// Attack1
-		Runnable attack1_runnable = new Runnable() {
-                @Override
-			public final void run() {
-				Building armory = local_player.getArmory();
-				Unit chieftain = local_player.getChieftain();
-				if (armory != null && !armory.isDead()) {
-					attack(enemy, armory, attack1);
-				} else if (chieftain != null && !chieftain.isDead()) {
-					attack(enemy, chieftain, attack1);
-				}
-				refillArmory(enemy);
-				deploy(enemy, attack2);
-			}
-		};
+		Runnable attack1_runnable = () -> {
+                    Building armory = local_player.getArmory();
+                    Unit chieftain = local_player.getChieftain();
+                    if (armory != null && !armory.isDead()) {
+                        attack(enemy, armory, attack1);
+                    } else if (chieftain != null && !chieftain.isDead()) {
+                        attack(enemy, chieftain, attack1);
+                    }
+                    refillArmory(enemy);
+                    deploy(enemy, attack2);
+                };
 
 		// Attack2
-		Runnable attack2_runnable = new Runnable() {
-                @Override
-			public final void run() {
-				Building armory = local_player.getArmory();
-				Unit chieftain = local_player.getChieftain();
-				if (armory != null && !armory.isDead()) {
-					attack(enemy, armory, attack2);
-				} else if (chieftain != null && !chieftain.isDead()) {
-					attack(enemy, chieftain, attack1);
-				}
-				refillArmory(enemy);
-				deploy(enemy, defense);
-			}
-		};
+		Runnable attack2_runnable = () -> {
+                    Building armory = local_player.getArmory();
+                    Unit chieftain = local_player.getChieftain();
+                    if (armory != null && !armory.isDead()) {
+                        attack(enemy, armory, attack2);
+                    } else if (chieftain != null && !chieftain.isDead()) {
+                        attack(enemy, chieftain, attack1);
+                    }
+                    refillArmory(enemy);
+                    deploy(enemy, defense);
+                };
 		switch (getCampaign().getState().getDifficulty()) {
 			case CampaignState.DIFFICULTY_EASY:
 				new TimeTrigger(getViewer().getWorld(), 7f*60f, attack1_runnable);
@@ -209,12 +194,9 @@ public final strictfp class NativeIsland2 extends Island {
 		}
 
 		// Defeat if netrauls eleminated
-		runnable = new Runnable() {
-                @Override
-			public final void run() {
-				getCampaign().defeated(getViewer(), Utils.getBundleString(bundle, "game_over"));
-			}
-		};
+		runnable = () -> {
+                    getCampaign().defeated(getViewer(), Utils.getBundleString(bundle, "game_over"));
+                };
 		new PlayerEleminatedTrigger(runnable, captives);
 
 		// Insert towers

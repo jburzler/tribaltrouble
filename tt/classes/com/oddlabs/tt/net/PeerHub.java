@@ -90,13 +90,10 @@ public final strictfp class PeerHub implements Animated, RouterHandler {
 		Player[] players = local_player.getWorld().getPlayers();
 		int local_peer_index = -1;
 		if (!is_multiplayer) {
-			this.router = new Router(network, com.oddlabs.util.Utils.getLoopbackAddress(), 0, Logger.getAnonymousLogger(), new RouterListener() {
-                                @Override
-				public final void routerFailed(IOException e) {
-//					PeerHub.this.routerFailed(e);
-					throw new RuntimeException(e);
-				}
-			});
+			this.router = new Router(network, com.oddlabs.util.Utils.getLoopbackAddress(), 0, Logger.getAnonymousLogger(), (IOException e) -> {
+                            //					PeerHub.this.routerFailed(e);
+                            throw new RuntimeException(e);
+                        });
 			this.router_client = new RouterClient(network, this, router.getPort());
 		} else {
 			this.router = null;
@@ -110,12 +107,9 @@ public final strictfp class PeerHub implements Animated, RouterHandler {
 			}
 			System.out.println("index " + i + " contains player " + player);
 			final int peer_index = peer_index_to_peer_list.size();
-			ARMIEventWriter router_handler = new ARMIEventWriter() {
-                                @Override
-				public final void handle(ARMIEvent event) {
-					router_client.getInterface().relayEventTo(peer_index, event);
-				}
-			};
+			ARMIEventWriter router_handler = (ARMIEvent event) -> {
+                            router_client.getInterface().relayEventTo(peer_index, event);
+                        };
 			PeerHubInterface peer_interface = (PeerHubInterface)ARMIEvent.createProxy(router_handler, PeerHubInterface.class);
 			Peer peer = new Peer(this, peer_index, player, argument_reader, peer_interface);
 			ARMIEventWriter peer_broker;
@@ -129,19 +123,9 @@ public final strictfp class PeerHub implements Animated, RouterHandler {
 		this.peer_index_to_peer = new Peer[peer_index_to_peer_list.size()];
 		peer_index_to_peer_list.toArray(peer_index_to_peer);
 		this.num_participants = peer_index_to_peer.length;
-		ARMIEventWriter game_router_handler = new ARMIEventWriter() {
-                        @Override
-			public final void handle(ARMIEvent event) {
-				router_client.getInterface().relayGameStateEvent(event);
-			}
-		};
+		ARMIEventWriter game_router_handler = router_client.getInterface()::relayGameStateEvent;
 		this.player_interface = (PlayerInterface)ARMIEvent.createProxy(game_router_handler, new GameArgumentWriter(distributable_table), PlayerInterface.class);
-		ARMIEventWriter hub_router_handler = new ARMIEventWriter() {
-                        @Override
-			public final void handle(ARMIEvent event) {
-				router_client.getInterface().relayEvent(event);
-			}
-		};
+		ARMIEventWriter hub_router_handler = router_client.getInterface()::relayEvent;
 		this.peerhubs_interface = (PeerHubInterface)ARMIEvent.createProxy(hub_router_handler, PeerHubInterface.class);
 		manager.registerAnimation(this);
 		router_client.connect(session_id, new SessionInfo(num_participants, MILLISECONDS_PER_HEARTBEAT), local_peer_index);

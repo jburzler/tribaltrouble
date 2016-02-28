@@ -88,73 +88,55 @@ public final strictfp class NativeIsland6 extends Island {
 	protected final void start() {
 		Runnable runnable;
 		// Introduction
-		final Runnable dialog3 = new Runnable() {
-                @Override
-			public final void run() {
-				CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header3"),
-						Utils.getBundleString(bundle, "dialog3"),
-						getCampaign().getIcons().getFaces()[1],
-						CampaignDialogForm.ALIGN_IMAGE_RIGHT);
-				addModalForm(dialog);
-			}
-		};
-		final Runnable dialog2 = new Runnable() {
-                @Override
-			public final void run() {
-				CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header2"),
-						Utils.getBundleString(bundle, "dialog2"),
-						getCampaign().getIcons().getFaces()[0],
-						CampaignDialogForm.ALIGN_IMAGE_LEFT,
-						dialog3);
-				addModalForm(dialog);
-			}
-		};
-		final Runnable dialog1 = new Runnable() {
-                @Override
-			public final void run() {
-				CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header1"),
-						Utils.getBundleString(bundle, "dialog1"),
-						getCampaign().getIcons().getFaces()[1],
-						CampaignDialogForm.ALIGN_IMAGE_RIGHT,
-						dialog2);
-				addModalForm(dialog);
-			}
-		};
-		final Runnable dialog0 = new Runnable() {
-                @Override
-			public final void run() {
-				CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header0"),
-						Utils.getBundleString(bundle, "dialog0"),
-						getCampaign().getIcons().getFaces()[0],
-						CampaignDialogForm.ALIGN_IMAGE_LEFT,
-						dialog1);
-				addModalForm(dialog);
-			}
-		};
+		final Runnable dialog3 = () -> {
+                    CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header3"),
+                            Utils.getBundleString(bundle, "dialog3"),
+                            getCampaign().getIcons().getFaces()[1],
+                            CampaignDialogForm.ALIGN_IMAGE_RIGHT);
+                    addModalForm(dialog);
+                };
+		final Runnable dialog2 = () -> {
+                    CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header2"),
+                            Utils.getBundleString(bundle, "dialog2"),
+                            getCampaign().getIcons().getFaces()[0],
+                            CampaignDialogForm.ALIGN_IMAGE_LEFT,
+                            dialog3);
+                    addModalForm(dialog);
+                };
+		final Runnable dialog1 = () -> {
+                    CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header1"),
+                            Utils.getBundleString(bundle, "dialog1"),
+                            getCampaign().getIcons().getFaces()[1],
+                            CampaignDialogForm.ALIGN_IMAGE_RIGHT,
+                            dialog2);
+                    addModalForm(dialog);
+                };
+		final Runnable dialog0 = () -> {
+                    CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header0"),
+                            Utils.getBundleString(bundle, "dialog0"),
+                            getCampaign().getIcons().getFaces()[0],
+                            CampaignDialogForm.ALIGN_IMAGE_LEFT,
+                            dialog1);
+                    addModalForm(dialog);
+                };
 		new GameStartedTrigger(getViewer().getWorld(), dialog0);
 
 		// Winner prize
-		final Runnable prize = new Runnable() {
-                @Override
-			public final void run() {
-				getCampaign().getState().setIslandState(6, CampaignState.ISLAND_COMPLETED);
-				getCampaign().getState().setIslandState(7, CampaignState.ISLAND_AVAILABLE);
-				getCampaign().victory(getViewer());
-			}
-		};
+		final Runnable prize = () -> {
+                    getCampaign().getState().setIslandState(6, CampaignState.ISLAND_COMPLETED);
+                    getCampaign().getState().setIslandState(7, CampaignState.ISLAND_AVAILABLE);
+                    getCampaign().victory(getViewer());
+                };
 
 		// Winning condition
-		runnable = new Runnable() {
-                @Override
-			public final void run() {
-				CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header4"),
-						Utils.getBundleString(bundle, "dialog4"),
-						getCampaign().getIcons().getFaces()[4],
-						CampaignDialogForm.ALIGN_IMAGE_RIGHT,
-						prize);
-				addModalForm(dialog);
-			}
-		};
+		runnable = () -> {
+                    CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header4"),
+                            Utils.getBundleString(bundle, "dialog4"),
+                            getCampaign().getIcons().getFaces()[4],
+                            CampaignDialogForm.ALIGN_IMAGE_RIGHT,
+                            prize);
+                    addModalForm(dialog);
+                };
 		new VictoryTrigger(getViewer(), runnable);
 
 		// Put warrior in tower
@@ -167,12 +149,9 @@ public final strictfp class NativeIsland6 extends Island {
 		enemy1.getAI().manTowers(1); // TODO: replace with insertGuardTower()
 
 		// Defeat if friends eleminated
-		runnable = new Runnable() {
-                @Override
-			public final void run() {
-				getCampaign().defeated(getViewer(), Utils.getBundleString(bundle, "game_over"));
-			}
-		};
+		runnable = () -> {
+                    getCampaign().defeated(getViewer(), Utils.getBundleString(bundle, "game_over"));
+                };
 		new PlayerEleminatedTrigger(runnable, friend);
 	}
 

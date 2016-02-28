@@ -192,7 +192,7 @@ public final strictfp class MatchmakingClient implements MatchmakingClientInterf
 		update_allowed = true;
 		if (!update_requested_types.isEmpty()) {
 			Iterator it = update_requested_types.iterator();
-			int type = ((Integer)it.next()).intValue();
+			int type = ((Integer)it.next());
 			it.remove();
 			requestList(type);
 		}

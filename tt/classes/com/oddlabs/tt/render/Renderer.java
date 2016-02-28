@@ -261,21 +261,29 @@ public final strictfp class Renderer {
 		Settings settings = new Settings();
 		if (args != null) {
 			for (int i = 0; i < args.length; i++) {
-				if (args[i].equals("--grabframes")) {
-					grab_frames = true;
-				} else if (args[i].equals("--eventload")) {
-					eventload = true;
-					i++;
-					if (args[i].equals("zipped")) {
-						zipped = true;
-					} else if (args[i].equals("normal")) {
-					} else
-						throw new RuntimeException("Unknown event load mode: " + args[i]);
-				} else if (args[i].equals("--silent")) {
-					silent = true;
-				} else {
-					throw new RuntimeException("Unknown command line flag: " + args[i]);
-				}
+                            switch (args[i]) {
+                                case "--grabframes":
+                                    grab_frames = true;
+                                    break;
+                                case "--eventload":
+                                    eventload = true;
+                                    i++;
+                                    switch (args[i]) {
+                                        case "zipped":
+                                            zipped = true;
+                                            break;
+                                        case "normal":
+                                            break;
+                                        default:
+                                            throw new RuntimeException("Unknown event load mode: " + args[i]);
+                                    }
+                                    break;
+                                case "--silent":
+                                    silent = true;
+                                    break;
+                                default:
+                                    throw new RuntimeException("Unknown command line flag: " + args[i]);
+                            }
 			}
 		}
 		game_dir.mkdirs();
@@ -345,12 +353,7 @@ System.out.println("last_event_log_path = " + last_event_log_path);
 		}
 		new LocalInput();
 
-		NetworkSelector network = new NetworkSelector(LocalEventQueue.getQueue().getDeterministic(), new TimeManager() {
-                        @Override
-			public final long getMillis() {
-				return LocalEventQueue.getQueue().getMillis();
-			}
-		});
+		NetworkSelector network = new NetworkSelector(LocalEventQueue.getQueue().getDeterministic(), LocalEventQueue.getQueue()::getMillis);
 		LocalInput.settings( game_dir, event_log_dir, settings);
 		try {
 			initNative(crashed, network);
@@ -488,7 +491,7 @@ e.printStackTrace();
 
 	private static boolean readOrSetPreference(String key, boolean value) {
 		String result_string = readOrSetPreference(key, ""+value);
-		return Boolean.valueOf(result_string).booleanValue();
+		return Boolean.valueOf(result_string);
 	}
 
 	private static int readOrSetPreference(String key, int value) {
@@ -522,12 +525,7 @@ e.printStackTrace();
 
 	private static void setupMainMenu(final NetworkSelector network, GUI gui, final boolean first_progress) {
 		final WorldGenerator generator = new IslandGenerator(256, Landscape.NATIVE, Globals.LANDSCAPE_HILLS, Globals.LANDSCAPE_VEGETATION, Globals.LANDSCAPE_RESOURCES, Globals.LANDSCAPE_SEED);
-		ProgressForm.setProgressForm(network, gui, new LoadCallback() {
-                        @Override
-			public final UIRenderer load(GUIRoot gui_root) {
-				return finishMainMenu(network, gui_root, first_progress, generator);
-			}
-		}, first_progress);
+		ProgressForm.setProgressForm(network, gui, (GUIRoot gui_root) -> finishMainMenu(network, gui_root, first_progress, generator), first_progress);
 	}
 
 	private static UIRenderer finishMainMenu(NetworkSelector network, GUIRoot gui_root, boolean first_progress, WorldGenerator generator) {
@@ -591,13 +589,9 @@ e.printStackTrace();
 			ResourceBundle bundle = ResourceBundle.getBundle(Renderer.class.getName());
 			gui_root.addModalForm(new MessageForm(Utils.getBundleString(bundle, "network_not_available_caption"),
 						Utils.getBundleString(bundle, "network_not_available_message"),
-						Utils.getBundleString(bundle, "quit"),
-						new MouseClickListener() {
-                                                        @Override
-							public final void mouseClicked(int button, int x, int y, int clicks) {
-								shutdown();
-							}
-						}));
+						Utils.getBundleString(bundle, "quit"), (int button, int x, int y, int clicks) -> {
+                                                    shutdown();
+                        }));
 		}
 		// We'll leave out the reporting, since checksum errors can happen when a peer is disconnected halway through it's EOT
 		// broadcast

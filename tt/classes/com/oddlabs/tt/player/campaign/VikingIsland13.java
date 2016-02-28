@@ -75,32 +75,26 @@ public final strictfp class VikingIsland13 extends Island {
 		final Player enemy = getViewer().getWorld().getPlayers()[1];
 
 		// Introduction
-		runnable = new Runnable() {
-                @Override
-			public final void run() {
-				String stay_alive_dialog = Utils.getBundleString(bundle, "dialog0", new Object[]{minutes});
-				CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header0"),
-						stay_alive_dialog,
-						getCampaign().getIcons().getFaces()[0],
-						CampaignDialogForm.ALIGN_IMAGE_LEFT);
-				addModalForm(dialog);
-			}
-		};
+		runnable = () -> {
+                    String stay_alive_dialog = Utils.getBundleString(bundle, "dialog0", new Object[]{minutes});
+                    CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header0"),
+                            stay_alive_dialog,
+                            getCampaign().getIcons().getFaces()[0],
+                            CampaignDialogForm.ALIGN_IMAGE_LEFT);
+                    addModalForm(dialog);
+                };
 
 		new GameStartedTrigger(getViewer().getWorld(), runnable);
 		// Winner prize
-		runnable = new Runnable() {
-                @Override
-			public final void run() {
-				getCampaign().getState().setIslandState(13, CampaignState.ISLAND_COMPLETED);
-				getCampaign().getState().setIslandState(12, CampaignState.ISLAND_AVAILABLE);
-				getCampaign().getState().setIslandState(14, CampaignState.ISLAND_AVAILABLE);
-				if (isAlive()) {
-					removeCounter();
-				}
-				getCampaign().victory(getViewer());
-			}
-		};
+		runnable = () -> {
+                    getCampaign().getState().setIslandState(13, CampaignState.ISLAND_COMPLETED);
+                    getCampaign().getState().setIslandState(12, CampaignState.ISLAND_AVAILABLE);
+                    getCampaign().getState().setIslandState(14, CampaignState.ISLAND_AVAILABLE);
+                    if (isAlive()) {
+                        removeCounter();
+                    }
+                    getCampaign().victory(getViewer());
+                };
 		// Winning condition
 		new TimeTrigger(getViewer().getWorld(), minutes*60f, runnable);
 /*
@@ -172,104 +166,86 @@ public final strictfp class VikingIsland13 extends Island {
 		refillArmory(enemy);
 
 		// Attack1
-		runnable = new Runnable() {
-                @Override
-			public final void run() {
-				Building armory = local_player.getArmory();
-				Unit chieftain = local_player.getChieftain();
-				if (armory != null && !armory.isDead()) {
-					attack(enemy, armory, attack1);
-				} else if (chieftain != null && !chieftain.isDead()) {
-					attack(enemy, chieftain, attack1);
-				}
-				refillArmory(enemy);
-				deploy(enemy, attack2);
-			}
-		};
+		runnable = () -> {
+                    Building armory = local_player.getArmory();
+                    Unit chieftain = local_player.getChieftain();
+                    if (armory != null && !armory.isDead()) {
+                        attack(enemy, armory, attack1);
+                    } else if (chieftain != null && !chieftain.isDead()) {
+                        attack(enemy, chieftain, attack1);
+                    }
+                    refillArmory(enemy);
+                    deploy(enemy, attack2);
+                };
 		new TimeTrigger(getViewer().getWorld(), 3.5f*60f, runnable);
 
 		// Attack2
-		runnable = new Runnable() {
-                @Override
-			public final void run() {
-				Building armory = local_player.getArmory();
-				Unit chieftain = local_player.getChieftain();
-				if (armory != null && !armory.isDead()) {
-					attack(enemy, armory, attack2);
-				} else if (chieftain != null && !chieftain.isDead()) {
-					attack(enemy, chieftain, attack2);
-				}
-				refillArmory(enemy);
-				deploy(enemy, attack3);
-			}
-		};
+		runnable = () -> {
+                    Building armory = local_player.getArmory();
+                    Unit chieftain = local_player.getChieftain();
+                    if (armory != null && !armory.isDead()) {
+                        attack(enemy, armory, attack2);
+                    } else if (chieftain != null && !chieftain.isDead()) {
+                        attack(enemy, chieftain, attack2);
+                    }
+                    refillArmory(enemy);
+                    deploy(enemy, attack3);
+                };
 		new TimeTrigger(getViewer().getWorld(), 4.5f*60f, runnable);
 
 		// Attack3
-		runnable = new Runnable() {
-                @Override
-			public final void run() {
-				Building armory = local_player.getArmory();
-				Unit chieftain = local_player.getChieftain();
-				if (armory != null && !armory.isDead()) {
-					attack(enemy, armory, attack3);
-				} else if (chieftain != null && !chieftain.isDead()) {
-					attack(enemy, chieftain, attack3);
-				}
-				refillArmory(enemy);
-				deploy(enemy, attack4);
-			}
-		};
+		runnable = () -> {
+                    Building armory = local_player.getArmory();
+                    Unit chieftain = local_player.getChieftain();
+                    if (armory != null && !armory.isDead()) {
+                        attack(enemy, armory, attack3);
+                    } else if (chieftain != null && !chieftain.isDead()) {
+                        attack(enemy, chieftain, attack3);
+                    }
+                    refillArmory(enemy);
+                    deploy(enemy, attack4);
+                };
 		new TimeTrigger(getViewer().getWorld(), 6*60f, runnable);
 
 		// Attack4
-		runnable = new Runnable() {
-                @Override
-			public final void run() {
-				Building armory = local_player.getArmory();
-				Unit chieftain = local_player.getChieftain();
-				if (armory != null && !armory.isDead()) {
-					attack(enemy, armory, attack4);
-				} else if (chieftain != null && !chieftain.isDead()) {
-					attack(enemy, chieftain, attack4);
-				}
-				refillArmory(enemy);
-				deploy(enemy, attack5);
-			}
-		};
+		runnable = () -> {
+                    Building armory = local_player.getArmory();
+                    Unit chieftain = local_player.getChieftain();
+                    if (armory != null && !armory.isDead()) {
+                        attack(enemy, armory, attack4);
+                    } else if (chieftain != null && !chieftain.isDead()) {
+                        attack(enemy, chieftain, attack4);
+                    }
+                    refillArmory(enemy);
+                    deploy(enemy, attack5);
+                };
 		new TimeTrigger(getViewer().getWorld(), 9*60f, runnable);
 
 		// Attack5
-		runnable = new Runnable() {
-                @Override
-			public final void run() {
-				Building armory = local_player.getArmory();
-				Unit chieftain = local_player.getChieftain();
-				if (armory != null && !armory.isDead()) {
-					attack(enemy, armory, attack5);
-				} else if (chieftain != null && !chieftain.isDead()) {
-					attack(enemy, chieftain, attack5);
-				}
-				refillArmory(enemy);
-				deploy(enemy, attack6);
-			}
-		};
+		runnable = () -> {
+                    Building armory = local_player.getArmory();
+                    Unit chieftain = local_player.getChieftain();
+                    if (armory != null && !armory.isDead()) {
+                        attack(enemy, armory, attack5);
+                    } else if (chieftain != null && !chieftain.isDead()) {
+                        attack(enemy, chieftain, attack5);
+                    }
+                    refillArmory(enemy);
+                    deploy(enemy, attack6);
+                };
 		new TimeTrigger(getViewer().getWorld(), 11*60f, runnable);
 
 		// Attack6
-		runnable = new Runnable() {
-                @Override
-			public final void run() {
-				Building armory = local_player.getArmory();
-				Unit chieftain = local_player.getChieftain();
-				if (armory != null && !armory.isDead()) {
-					attack(enemy, armory, attack6);
-				} else if (chieftain != null && !chieftain.isDead()) {
-					attack(enemy, chieftain, attack6);
-				}
-				refillArmory(enemy);
-			}
-		};
+		runnable = () -> {
+                    Building armory = local_player.getArmory();
+                    Unit chieftain = local_player.getChieftain();
+                    if (armory != null && !armory.isDead()) {
+                        attack(enemy, armory, attack6);
+                    } else if (chieftain != null && !chieftain.isDead()) {
+                        attack(enemy, chieftain, attack6);
+                    }
+                    refillArmory(enemy);
+                };
 		new TimeTrigger(getViewer().getWorld(), 12.5f*60f, runnable);
 	}
 

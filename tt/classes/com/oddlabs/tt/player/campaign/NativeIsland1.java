@@ -81,34 +81,25 @@ public final strictfp class NativeIsland1 extends Island {
 		// Introduction
 		final int start_x = 24*2;
 		final int start_y = 86*2;
-		final Runnable camera_jump0 = new Runnable() {
-                @Override
-			public final void run() {
-				getViewer().getGUIRoot().pushDelegate(new JumpDelegate(getViewer(), getViewer().getCamera(), start_x, start_y, 200f, 3f));
-			}
-		};
-		final Runnable dialog1 = new Runnable() {
-                @Override
-			public final void run() {
-				CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header1"),
-						Utils.getBundleString(bundle, "dialog1"),
-						getCampaign().getIcons().getFaces()[0],
-						CampaignDialogForm.ALIGN_IMAGE_LEFT,
-						camera_jump0);
-				addModalForm(dialog);
-			}
-		};
-		final Runnable dialog0 = new Runnable() {
-                @Override
-			public final void run() {
-				CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header0"),
-						Utils.getBundleString(bundle, "dialog0"),
-						getCampaign().getIcons().getFaces()[4],
-						CampaignDialogForm.ALIGN_IMAGE_RIGHT,
-						dialog1);
-				addModalForm(dialog);
-			}
-		};
+		final Runnable camera_jump0 = () -> {
+                    getViewer().getGUIRoot().pushDelegate(new JumpDelegate(getViewer(), getViewer().getCamera(), start_x, start_y, 200f, 3f));
+                };
+		final Runnable dialog1 = () -> {
+                    CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header1"),
+                            Utils.getBundleString(bundle, "dialog1"),
+                            getCampaign().getIcons().getFaces()[0],
+                            CampaignDialogForm.ALIGN_IMAGE_LEFT,
+                            camera_jump0);
+                    addModalForm(dialog);
+                };
+		final Runnable dialog0 = () -> {
+                    CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header0"),
+                            Utils.getBundleString(bundle, "dialog0"),
+                            getCampaign().getIcons().getFaces()[4],
+                            CampaignDialogForm.ALIGN_IMAGE_RIGHT,
+                            dialog1);
+                    addModalForm(dialog);
+                };
 		new GameStartedTrigger(getViewer().getWorld(), dialog0);
 
 		// insert local_player
@@ -150,92 +141,74 @@ public final strictfp class NativeIsland1 extends Island {
 		getViewer().getCamera().setPos(captive_start_x - 6, captive_start_y);
 
 		// free slaves
-		final Runnable free_captives = new Runnable() {
-                @Override
-			public final void run() {
-				changeObjective(1);
+		final Runnable free_captives = () -> {
+                    changeObjective(1);
                     for (SceneryModel scenery_model : scenery_models) {
                         scenery_model.remove();
                     }
-				if (!local_player.getUnitCountContainer().isSupplyFull())
-					new Unit(local_player, 48*2 + offset, 96*2 + offset, null, local_player.getRace().getUnitTemplate(Race.UNIT_PEON));
-				if (!local_player.getUnitCountContainer().isSupplyFull())
-					new Unit(local_player, 48*2 + offset, 95*2 + offset, null, local_player.getRace().getUnitTemplate(Race.UNIT_PEON));
-				if (!local_player.getUnitCountContainer().isSupplyFull())
-					new Unit(local_player, 48*2 + offset, 98*2 + offset, null, local_player.getRace().getUnitTemplate(Race.UNIT_PEON));
-				if (!local_player.getUnitCountContainer().isSupplyFull())
-					new Unit(local_player, 49*2 + offset, 98*2 + offset, null, local_player.getRace().getUnitTemplate(Race.UNIT_PEON));
-				if (!local_player.getUnitCountContainer().isSupplyFull())
-					new Unit(local_player, 50*2 + offset, 97*2 + offset, null, local_player.getRace().getUnitTemplate(Race.UNIT_PEON));
-				if (!local_player.getUnitCountContainer().isSupplyFull())
-					new Unit(local_player, 51*2 + offset, 96*2 + offset, null, local_player.getRace().getUnitTemplate(Race.UNIT_PEON));
-				if (!local_player.getUnitCountContainer().isSupplyFull())
-					new Unit(local_player, 51*2 + offset, 94*2 + offset, null, local_player.getRace().getUnitTemplate(Race.UNIT_PEON));
-				if (!local_player.getUnitCountContainer().isSupplyFull())
-					new Unit(local_player, 52*2 + offset, 96*2 + offset, null, local_player.getRace().getUnitTemplate(Race.UNIT_PEON));
-				if (!local_player.getUnitCountContainer().isSupplyFull())
-					new Unit(local_player, 52*2 + offset, 94*2 + offset, null, local_player.getRace().getUnitTemplate(Race.UNIT_PEON));
-				if (!local_player.getUnitCountContainer().isSupplyFull())
-					new Unit(local_player, 50*2 + offset, 95*2 + offset, null, local_player.getRace().getUnitTemplate(Race.UNIT_PEON));
-			}
-		};
-		final Runnable dialog5 = new Runnable() {
-                @Override
-			public final void run() {
-				CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header5"),
-						Utils.getBundleString(bundle, "dialog5"),
-						getCampaign().getIcons().getFaces()[3],
-						CampaignDialogForm.ALIGN_IMAGE_RIGHT,
-						free_captives);
-				addModalForm(dialog);
-			}
-		};
-		final Runnable dialog4 = new Runnable() {
-                @Override
-			public final void run() {
-				CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header4"),
-						Utils.getBundleString(bundle, "dialog4"),
-						getCampaign().getIcons().getFaces()[0],
-						CampaignDialogForm.ALIGN_IMAGE_LEFT,
-						dialog5);
-				addModalForm(dialog);
-			}
-		};
-		final Runnable dialog3 = new Runnable() {
-                @Override
-			public final void run() {
-				CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header3"),
-						Utils.getBundleString(bundle, "dialog3"),
-						getCampaign().getIcons().getFaces()[3],
-						CampaignDialogForm.ALIGN_IMAGE_RIGHT,
-						dialog4);
-				addModalForm(dialog);
-			}
-		};
-		final Runnable dialog2 = new Runnable() {
-                @Override
-			public final void run() {
-				CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header2"),
-						Utils.getBundleString(bundle, "dialog2"),
-						getCampaign().getIcons().getFaces()[0],
-						CampaignDialogForm.ALIGN_IMAGE_LEFT,
-						dialog3);
-				addModalForm(dialog);
-			}
-		};
+                    if (!local_player.getUnitCountContainer().isSupplyFull())
+                        new Unit(local_player, 48*2 + offset, 96*2 + offset, null, local_player.getRace().getUnitTemplate(Race.UNIT_PEON));
+                    if (!local_player.getUnitCountContainer().isSupplyFull())
+                        new Unit(local_player, 48*2 + offset, 95*2 + offset, null, local_player.getRace().getUnitTemplate(Race.UNIT_PEON));
+                    if (!local_player.getUnitCountContainer().isSupplyFull())
+                        new Unit(local_player, 48*2 + offset, 98*2 + offset, null, local_player.getRace().getUnitTemplate(Race.UNIT_PEON));
+                    if (!local_player.getUnitCountContainer().isSupplyFull())
+                        new Unit(local_player, 49*2 + offset, 98*2 + offset, null, local_player.getRace().getUnitTemplate(Race.UNIT_PEON));
+                    if (!local_player.getUnitCountContainer().isSupplyFull())
+                        new Unit(local_player, 50*2 + offset, 97*2 + offset, null, local_player.getRace().getUnitTemplate(Race.UNIT_PEON));
+                    if (!local_player.getUnitCountContainer().isSupplyFull())
+                        new Unit(local_player, 51*2 + offset, 96*2 + offset, null, local_player.getRace().getUnitTemplate(Race.UNIT_PEON));
+                    if (!local_player.getUnitCountContainer().isSupplyFull())
+                        new Unit(local_player, 51*2 + offset, 94*2 + offset, null, local_player.getRace().getUnitTemplate(Race.UNIT_PEON));
+                    if (!local_player.getUnitCountContainer().isSupplyFull())
+                        new Unit(local_player, 52*2 + offset, 96*2 + offset, null, local_player.getRace().getUnitTemplate(Race.UNIT_PEON));
+                    if (!local_player.getUnitCountContainer().isSupplyFull())
+                        new Unit(local_player, 52*2 + offset, 94*2 + offset, null, local_player.getRace().getUnitTemplate(Race.UNIT_PEON));
+                    if (!local_player.getUnitCountContainer().isSupplyFull())
+                        new Unit(local_player, 50*2 + offset, 95*2 + offset, null, local_player.getRace().getUnitTemplate(Race.UNIT_PEON));
+                };
+		final Runnable dialog5 = () -> {
+                    CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header5"),
+                            Utils.getBundleString(bundle, "dialog5"),
+                            getCampaign().getIcons().getFaces()[3],
+                            CampaignDialogForm.ALIGN_IMAGE_RIGHT,
+                            free_captives);
+                    addModalForm(dialog);
+                };
+		final Runnable dialog4 = () -> {
+                    CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header4"),
+                            Utils.getBundleString(bundle, "dialog4"),
+                            getCampaign().getIcons().getFaces()[0],
+                            CampaignDialogForm.ALIGN_IMAGE_LEFT,
+                            dialog5);
+                    addModalForm(dialog);
+                };
+		final Runnable dialog3 = () -> {
+                    CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header3"),
+                            Utils.getBundleString(bundle, "dialog3"),
+                            getCampaign().getIcons().getFaces()[3],
+                            CampaignDialogForm.ALIGN_IMAGE_RIGHT,
+                            dialog4);
+                    addModalForm(dialog);
+                };
+		final Runnable dialog2 = () -> {
+                    CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header2"),
+                            Utils.getBundleString(bundle, "dialog2"),
+                            getCampaign().getIcons().getFaces()[0],
+                            CampaignDialogForm.ALIGN_IMAGE_LEFT,
+                            dialog3);
+                    addModalForm(dialog);
+                };
 		new DeathTrigger(trigger, dialog2);
 
 		// Winner prize
-		final Runnable prize = new Runnable() {
-                @Override
-			public final void run() {
-				getCampaign().getState().setIslandState(1, CampaignState.ISLAND_COMPLETED);
-				getCampaign().getState().setIslandState(2, CampaignState.ISLAND_AVAILABLE);
-				getCampaign().getState().setIslandState(5, CampaignState.ISLAND_AVAILABLE);
-				getCampaign().getState().setNumPeons(getCampaign().getState().getNumPeons() + NUM_CAPTIVES);
-				getCampaign().victory(getViewer());
-			}
-		};
+		final Runnable prize = () -> {
+                    getCampaign().getState().setIslandState(1, CampaignState.ISLAND_COMPLETED);
+                    getCampaign().getState().setIslandState(2, CampaignState.ISLAND_AVAILABLE);
+                    getCampaign().getState().setIslandState(5, CampaignState.ISLAND_AVAILABLE);
+                    getCampaign().getState().setNumPeons(getCampaign().getState().getNumPeons() + NUM_CAPTIVES);
+                    getCampaign().victory(getViewer());
+                };
 		// Winning condition
 		new VictoryTrigger(getViewer(), prize);
 
@@ -244,36 +217,30 @@ public final strictfp class NativeIsland1 extends Island {
 		final int defense = 20;
 
 		// Attack1
-		Runnable attack1_runnable = new Runnable() {
-                @Override
-			public final void run() {
-				Building armory = local_player.getArmory();
-				Unit chieftain = local_player.getChieftain();
-				if (armory != null && !armory.isDead()) {
-					attack(enemy, armory, attack1);
-				} else if (chieftain != null && !chieftain.isDead()) {
-					attack(enemy, chieftain, attack1);
-				}
-				refillArmory(enemy);
-				deploy(enemy, attack2);
-			}
-		};
+		Runnable attack1_runnable = () -> {
+                    Building armory = local_player.getArmory();
+                    Unit chieftain = local_player.getChieftain();
+                    if (armory != null && !armory.isDead()) {
+                        attack(enemy, armory, attack1);
+                    } else if (chieftain != null && !chieftain.isDead()) {
+                        attack(enemy, chieftain, attack1);
+                    }
+                    refillArmory(enemy);
+                    deploy(enemy, attack2);
+                };
 
 		// Attack2...
-		Runnable attack2_runnable = new Runnable() {
-                @Override
-			public final void run() {
-				Building armory = local_player.getArmory();
-				Unit chieftain = local_player.getChieftain();
-				if (armory != null && !armory.isDead()) {
-					attack(enemy, armory, attack2);
-				} else if (chieftain != null && !chieftain.isDead()) {
-					attack(enemy, chieftain, attack1);
-				}
-				refillArmory(enemy);
-				deploy(enemy, defense);
-			}
-		};
+		Runnable attack2_runnable = () -> {
+                    Building armory = local_player.getArmory();
+                    Unit chieftain = local_player.getChieftain();
+                    if (armory != null && !armory.isDead()) {
+                        attack(enemy, armory, attack2);
+                    } else if (chieftain != null && !chieftain.isDead()) {
+                        attack(enemy, chieftain, attack1);
+                    }
+                    refillArmory(enemy);
+                    deploy(enemy, defense);
+                };
 		switch (getCampaign().getState().getDifficulty()) {
 			case CampaignState.DIFFICULTY_EASY:
 				new TimeTrigger(getViewer().getWorld(), 7f*60f, attack1_runnable);

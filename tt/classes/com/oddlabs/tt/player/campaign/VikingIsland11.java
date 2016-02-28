@@ -75,115 +75,85 @@ public final strictfp class VikingIsland11 extends Island {
 		final Player enemy = getViewer().getWorld().getPlayers()[1];
 
 		// Introduction
-		final Runnable dialog8 = new Runnable() {
-                @Override
-			public final void run() {
-				CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header8"),
-						Utils.getBundleString(bundle, "dialog8"),
-						getCampaign().getIcons().getFaces()[0],
-						CampaignDialogForm.ALIGN_IMAGE_LEFT);
-				addModalForm(dialog);
-			}
-		};
-		final Runnable dialog7 = new Runnable() {
-                @Override
-			public final void run() {
-				CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header7"),
-						Utils.getBundleString(bundle, "dialog7"),
-						getCampaign().getIcons().getFaces()[3],
-						CampaignDialogForm.ALIGN_IMAGE_RIGHT,
-						dialog8);
-				addModalForm(dialog);
-			}
-		};
-		final Runnable dialog6 = new Runnable() {
-                @Override
-			public final void run() {
-				CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header6"),
-						Utils.getBundleString(bundle, "dialog6"),
-						getCampaign().getIcons().getFaces()[0],
-						CampaignDialogForm.ALIGN_IMAGE_LEFT,
-						dialog7);
-				addModalForm(dialog);
-			}
-		};
-		final Runnable dialog5 = new Runnable() {
-                @Override
-			public final void run() {
-				CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header5"),
-						Utils.getBundleString(bundle, "dialog5"),
-						getCampaign().getIcons().getFaces()[6],
-						CampaignDialogForm.ALIGN_IMAGE_RIGHT,
-						dialog6);
-				addModalForm(dialog);
-			}
-		};
-		final Runnable dialog4 = new Runnable() {
-                @Override
-			public final void run() {
-				CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header4"),
-						Utils.getBundleString(bundle, "dialog4"),
-						getCampaign().getIcons().getFaces()[0],
-						CampaignDialogForm.ALIGN_IMAGE_LEFT,
-						dialog5);
-				addModalForm(dialog);
-			}
-		};
-		final Runnable dialog3 = new Runnable() {
-                @Override
-			public final void run() {
-				CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header3"),
-						Utils.getBundleString(bundle, "dialog3"),
-						getCampaign().getIcons().getFaces()[6],
-						CampaignDialogForm.ALIGN_IMAGE_RIGHT,
-						dialog4);
-				addModalForm(dialog);
-			}
-		};
-		final Runnable dialog2 = new Runnable() {
-                @Override
-			public final void run() {
-				CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header2"),
-						Utils.getBundleString(bundle, "dialog2"),
-						getCampaign().getIcons().getFaces()[0],
-						CampaignDialogForm.ALIGN_IMAGE_LEFT,
-						dialog3);
-				addModalForm(dialog);
-			}
-		};
-		final Runnable dialog1 = new Runnable() {
-                @Override
-			public final void run() {
-				CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header1"),
-						Utils.getBundleString(bundle, "dialog1"),
-						getCampaign().getIcons().getFaces()[6],
-						CampaignDialogForm.ALIGN_IMAGE_RIGHT,
-						dialog2);
-				addModalForm(dialog);
-			}
-		};
-		runnable = new Runnable() {
-                @Override
-			public final void run() {
-				CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header0"),
-						Utils.getBundleString(bundle, "dialog0"),
-						getCampaign().getIcons().getFaces()[0],
-						CampaignDialogForm.ALIGN_IMAGE_LEFT,
-						dialog1);
-				addModalForm(dialog);
-			}
-		};
+		final Runnable dialog8 = () -> {
+                    CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header8"),
+                            Utils.getBundleString(bundle, "dialog8"),
+                            getCampaign().getIcons().getFaces()[0],
+                            CampaignDialogForm.ALIGN_IMAGE_LEFT);
+                    addModalForm(dialog);
+                };
+		final Runnable dialog7 = () -> {
+                    CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header7"),
+                            Utils.getBundleString(bundle, "dialog7"),
+                            getCampaign().getIcons().getFaces()[3],
+                            CampaignDialogForm.ALIGN_IMAGE_RIGHT,
+                            dialog8);
+                    addModalForm(dialog);
+                };
+		final Runnable dialog6 = () -> {
+                    CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header6"),
+                            Utils.getBundleString(bundle, "dialog6"),
+                            getCampaign().getIcons().getFaces()[0],
+                            CampaignDialogForm.ALIGN_IMAGE_LEFT,
+                            dialog7);
+                    addModalForm(dialog);
+                };
+		final Runnable dialog5 = () -> {
+                    CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header5"),
+                            Utils.getBundleString(bundle, "dialog5"),
+                            getCampaign().getIcons().getFaces()[6],
+                            CampaignDialogForm.ALIGN_IMAGE_RIGHT,
+                            dialog6);
+                    addModalForm(dialog);
+                };
+		final Runnable dialog4 = () -> {
+                    CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header4"),
+                            Utils.getBundleString(bundle, "dialog4"),
+                            getCampaign().getIcons().getFaces()[0],
+                            CampaignDialogForm.ALIGN_IMAGE_LEFT,
+                            dialog5);
+                    addModalForm(dialog);
+                };
+		final Runnable dialog3 = () -> {
+                    CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header3"),
+                            Utils.getBundleString(bundle, "dialog3"),
+                            getCampaign().getIcons().getFaces()[6],
+                            CampaignDialogForm.ALIGN_IMAGE_RIGHT,
+                            dialog4);
+                    addModalForm(dialog);
+                };
+		final Runnable dialog2 = () -> {
+                    CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header2"),
+                            Utils.getBundleString(bundle, "dialog2"),
+                            getCampaign().getIcons().getFaces()[0],
+                            CampaignDialogForm.ALIGN_IMAGE_LEFT,
+                            dialog3);
+                    addModalForm(dialog);
+                };
+		final Runnable dialog1 = () -> {
+                    CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header1"),
+                            Utils.getBundleString(bundle, "dialog1"),
+                            getCampaign().getIcons().getFaces()[6],
+                            CampaignDialogForm.ALIGN_IMAGE_RIGHT,
+                            dialog2);
+                    addModalForm(dialog);
+                };
+		runnable = () -> {
+                    CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header0"),
+                            Utils.getBundleString(bundle, "dialog0"),
+                            getCampaign().getIcons().getFaces()[0],
+                            CampaignDialogForm.ALIGN_IMAGE_LEFT,
+                            dialog1);
+                    addModalForm(dialog);
+                };
 		new GameStartedTrigger(getViewer().getWorld(), runnable);
 
 		// Winner prize
-		runnable = new Runnable() {
-                @Override
-			public final void run() {
-				getCampaign().getState().setIslandState(11, CampaignState.ISLAND_COMPLETED);
-				getCampaign().getState().setIslandState(12, CampaignState.ISLAND_AVAILABLE);
-				getCampaign().victory(getViewer());
-			}
-		};
+		runnable = () -> {
+                    getCampaign().getState().setIslandState(11, CampaignState.ISLAND_COMPLETED);
+                    getCampaign().getState().setIslandState(12, CampaignState.ISLAND_AVAILABLE);
+                    getCampaign().victory(getViewer());
+                };
 
 		// Winning condition
 		new VictoryTrigger(getViewer(), runnable);

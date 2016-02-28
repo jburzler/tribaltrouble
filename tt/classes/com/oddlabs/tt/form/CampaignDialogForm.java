@@ -27,13 +27,10 @@ public strictfp class CampaignDialogForm extends Form {
 		this.runnable = runnable;
 		this.cancel = cancel;
 		buildForm(header, text, image, align, cancel);
-		ok_button.addMouseClickListener(new MouseClickListener() {
-                        @Override
-			public final void mouseClicked(int button, int x, int y, int clicks) {
-				remove();
-				run();
-			}
-		});
+		ok_button.addMouseClickListener((int button, int x1, int y1, int clicks) -> {
+                    remove();
+                    run();
+                });
 	}
 
 	protected void run() {

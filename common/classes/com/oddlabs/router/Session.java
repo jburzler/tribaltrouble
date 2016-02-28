@@ -29,13 +29,10 @@ final strictfp class Session {
 
 	boolean hasClient(final int client_id) {
 		final boolean[] result = new boolean[1];
-		visit(new SessionVisitor() {
-                        @Override
-			public final void visit(RouterClient client) {
-				if (client.getClientID() == client_id)
-					result[0] = true;
-			}
-		});
+		visit((RouterClient client) -> {
+                    if (client.getClientID() == client_id)
+                        result[0] = true;
+                });
 		return result[0];
 	}
 
@@ -64,34 +61,31 @@ final strictfp class Session {
 				if (count == null) {
 					count = 1;
 				} else {
-					count = count.intValue() + 1;
+					count = count + 1;
 				}
 				checksum_to_count.put(client_checksum, count);
-				if (best_checksum_count < count.intValue()) {
-					best_checksum[0] = client_checksum.intValue();
-					best_checksum_count = count.intValue();
+				if (best_checksum_count < count) {
+					best_checksum[0] = client_checksum;
+					best_checksum_count = count;
 				}
 			}
 		});
 		if (checksum_to_count.size() == 1)
 			return;
 		final List clients_to_be_kicked = new ArrayList();
-		visit(new SessionVisitor() {
-                        @Override
-			public final void visit(RouterClient client) {
-				Integer client_checksum;
-				if (missing_checksum[0]) {
-					if (client.getChecksums().size() == 0)
-						return;
-					client_checksum = (Integer)client.getChecksums().get(0);
-				} else
-					client_checksum = (Integer)client.getChecksums().remove(0);
-				if (client_checksum.intValue() != best_checksum[0]) {
-					logger.warning("Kicking client because of checksum error: " + client_checksum.intValue() + " != " + best_checksum[0]);
-					clients_to_be_kicked.add(client);
-				}
-			}
-		});
+		visit((RouterClient client) -> {
+                    Integer client_checksum;
+                    if (missing_checksum[0]) {
+                        if (client.getChecksums().size() == 0)
+                            return;
+                        client_checksum = (Integer)client.getChecksums().get(0);
+                    } else
+                        client_checksum = (Integer)client.getChecksums().remove(0);
+                    if (client_checksum != best_checksum[0]) {
+                        logger.warning("Kicking client because of checksum error: " + client_checksum + " != " + best_checksum[0]);
+                        clients_to_be_kicked.add(client);
+                    }
+                });
 		for (int i = 0; i < clients_to_be_kicked.size(); i++) {
 			RouterClient client = (RouterClient)clients_to_be_kicked.get(i);
 			client.doError(true, new IOException("Checksum mismatch"));
@@ -114,12 +108,9 @@ final strictfp class Session {
 
 	private void start() {
 		this.started = true;
-		visit(new SessionVisitor() {
-                        @Override
-			public final void visit(RouterClient client) {
-				client.getInterface().start();
-			}
-		});
+		visit((RouterClient client) -> {
+                    client.getInterface().start();
+                });
 		this.initial_time = manager.start(this);
 	}
 

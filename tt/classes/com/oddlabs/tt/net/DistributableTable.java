@@ -21,14 +21,14 @@ public final strictfp class DistributableTable {
 		Integer name = (Integer)names.remove(distributable);
 		assert name != null: "Error unregistering name.";
 
-		Object o = distributables.remove(name.intValue());
+		Object o = distributables.remove(name);
 		assert o == distributable: "Error unregistering distributable.";
 	}
 
 	public final int getName(Distributable distributable) {
 		Integer val = (Integer)names.get(distributable);
 		assert val != null : distributable + " is not registrered.";
-		return val.intValue();
+		return val;
 	}
 
 	public final Distributable getDistributable(int name) {

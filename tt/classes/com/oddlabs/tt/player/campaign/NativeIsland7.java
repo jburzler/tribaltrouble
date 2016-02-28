@@ -79,37 +79,28 @@ public final strictfp class NativeIsland7 extends Island {
 		final Player enemy = getViewer().getWorld().getPlayers()[1];
 
 		// Introduction
-		final Runnable dialog1 = new Runnable() {
-                @Override
-			public final void run() {
-				CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header1"),
-						Utils.getBundleString(bundle, "dialog1"),
-						getCampaign().getIcons().getFaces()[0],
-						CampaignDialogForm.ALIGN_IMAGE_LEFT);
-				addModalForm(dialog);
-			}
-		};
-		final Runnable dialog0 = new Runnable() {
-                @Override
-			public final void run() {
-				CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header0"),
-						Utils.getBundleString(bundle, "dialog0"),
-						getCampaign().getIcons().getFaces()[5],
-						CampaignDialogForm.ALIGN_IMAGE_RIGHT,
-						dialog1);
-				addModalForm(dialog);
-			}
-		};
+		final Runnable dialog1 = () -> {
+                    CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header1"),
+                            Utils.getBundleString(bundle, "dialog1"),
+                            getCampaign().getIcons().getFaces()[0],
+                            CampaignDialogForm.ALIGN_IMAGE_LEFT);
+                    addModalForm(dialog);
+                };
+		final Runnable dialog0 = () -> {
+                    CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header0"),
+                            Utils.getBundleString(bundle, "dialog0"),
+                            getCampaign().getIcons().getFaces()[5],
+                            CampaignDialogForm.ALIGN_IMAGE_RIGHT,
+                            dialog1);
+                    addModalForm(dialog);
+                };
 		new GameStartedTrigger(getViewer().getWorld(), dialog0);
 
 		// Winner prize
-		runnable = new Runnable() {
-                @Override
-			public final void run() {
-				getCampaign().getState().setIslandState(7, CampaignState.ISLAND_COMPLETED);
-				getCampaign().victory(getViewer());
-			}
-		};
+		runnable = () -> {
+                    getCampaign().getState().setIslandState(7, CampaignState.ISLAND_COMPLETED);
+                    getCampaign().victory(getViewer());
+                };
 
 		// Winning condition
 		new VictoryTrigger(getViewer(), runnable);

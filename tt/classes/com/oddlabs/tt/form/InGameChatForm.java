@@ -127,12 +127,9 @@ public final strictfp class InGameChatForm extends Form implements ChatListener 
 			if (!chat.equals("")) {
 				chat_line.clear();
 				Map commands = new HashMap();
-				ChatMethod cheat = new ChatMethod() {
-                            @Override
-					public final void execute(InfoPrinter info_printer, String text) {
-						viewer.getCheat().enable();
-					}
-				};
+				ChatMethod cheat = (InfoPrinter info_printer1, String text1) -> {
+                                    viewer.getCheat().enable();
+                                };
 				commands.put("iamacheater", cheat);
 				if (!ChatCommand.filterCommand(info_printer, commands, chat)) {
 					viewer.getPeerHub().sendChat(chat, radio_button_group.getMarked() == radio_team);
