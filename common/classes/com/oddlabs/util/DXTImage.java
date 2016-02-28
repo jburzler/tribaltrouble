@@ -23,15 +23,16 @@ public final class DXTImage {
 		int size = 0;
 		int mipmap_width = width;
 		int mipmap_height = height;
-		for (int i = 0; i < mipmaps.length; i++) {
-			size += mipmaps[i].length;
-			assert mipmaps[i].length == getMipMapSize(internal_format, mipmap_width, mipmap_height);
-			mipmap_width /= 2;
-			mipmap_height /= 2;
-		}
+            for (byte[] mipmap : mipmaps) {
+                size += mipmap.length;
+                assert mipmap.length == getMipMapSize(internal_format, mipmap_width, mipmap_height);
+                mipmap_width /= 2;
+                mipmap_height /= 2;
+            }
 		ByteBuffer buffer = BufferUtils.createByteBuffer(size);
-		for (int i = 0; i < mipmaps.length; i++)
-			buffer.put(mipmaps[i]);
+            for (byte[] mipmap : mipmaps) {
+                buffer.put(mipmap);
+            }
 		buffer.flip();
 		return buffer;
 	}

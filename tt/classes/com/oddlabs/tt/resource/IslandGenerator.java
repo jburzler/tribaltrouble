@@ -173,23 +173,23 @@ System.out.println("Landscape created in = " + (time_after-time_before));
 					GL11.glScalef(1f/mip_scale, 1f/mip_scale, 1f);
 					GL11.glEnable(GL11.GL_BLEND);
 
-					for (int i = 0; i < blend_infos.length; i++) {
-						blend_infos[i].setup();
-						float structure_offset_u = x*structure_offset - structure_texels_per_chunk_border;
-						float structure_offset_v = y*structure_offset - structure_texels_per_chunk_border;
-						float alpha_offset_u = x*alpha_offset - alpha_texels_per_chunk_border;
-						float alpha_offset_v = y*alpha_offset - alpha_texels_per_chunk_border;
-						structure_tex_coords.put(0, structure_offset_u).put(1, structure_offset_v);
-						structure_tex_coords.put(2, structure_offset_u + structure_length).put(3, structure_offset_v);
-						structure_tex_coords.put(4, structure_offset_u + structure_length).put(5, structure_offset_v + structure_length);
-						structure_tex_coords.put(6, structure_offset_u).put(7, structure_offset_v + structure_length);
-						alpha_tex_coords.put(0, alpha_offset_u).put(1, alpha_offset_v);
-						alpha_tex_coords.put(2, alpha_offset_u + alpha_length).put(3, alpha_offset_v);
-						alpha_tex_coords.put(4, alpha_offset_u + alpha_length).put(5, alpha_offset_v + alpha_length);
-						alpha_tex_coords.put(6, alpha_offset_u).put(7, alpha_offset_v + alpha_length);
-						GL11.glDrawArrays(GL11.GL_QUADS, 0, 4);
-						blend_infos[i].reset();
-					}
+                                    for (BlendInfo blend_info : blend_infos) {
+                                        blend_info.setup();
+                                        float structure_offset_u = x*structure_offset - structure_texels_per_chunk_border;
+                                        float structure_offset_v = y*structure_offset - structure_texels_per_chunk_border;
+                                        float alpha_offset_u = x*alpha_offset - alpha_texels_per_chunk_border;
+                                        float alpha_offset_v = y*alpha_offset - alpha_texels_per_chunk_border;
+                                        structure_tex_coords.put(0, structure_offset_u).put(1, structure_offset_v);
+                                        structure_tex_coords.put(2, structure_offset_u + structure_length).put(3, structure_offset_v);
+                                        structure_tex_coords.put(4, structure_offset_u + structure_length).put(5, structure_offset_v + structure_length);
+                                        structure_tex_coords.put(6, structure_offset_u).put(7, structure_offset_v + structure_length);
+                                        alpha_tex_coords.put(0, alpha_offset_u).put(1, alpha_offset_v);
+                                        alpha_tex_coords.put(2, alpha_offset_u + alpha_length).put(3, alpha_offset_v);
+                                        alpha_tex_coords.put(4, alpha_offset_u + alpha_length).put(5, alpha_offset_v + alpha_length);
+                                        alpha_tex_coords.put(6, alpha_offset_u).put(7, alpha_offset_v + alpha_length);
+                                        GL11.glDrawArrays(GL11.GL_QUADS, 0, 4);
+                                        blend_info.reset();
+                                    }
 /*if (mip_level == 0)
 offscreen.dumpToFile("colormap-" + x + "-" + y);*/
 					offscreen.copyToTexture(chunk_maps[y][x], mip_level, Globals.COMPRESSED_RGB_FORMAT, 0, 0, mip_size, mip_size);

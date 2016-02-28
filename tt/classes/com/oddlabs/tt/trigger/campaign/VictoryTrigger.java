@@ -19,15 +19,14 @@ public final strictfp class VictoryTrigger extends IntervalTrigger {
 		Player[] players = viewer.getWorld().getPlayers();
 		Player local = viewer.getLocalPlayer();
 
-		for (int i = 0; i < players.length; i++) {
-			Player current = players[i];
-			if (local.isEnemy(current)) {
-				int units = current.getUnitCountContainer().getNumSupplies();
-				if (units > 0 || current.hasActiveChieftain()) {
-					return;
-				}
-			}
-		}
+            for (Player current : players) {
+                if (local.isEnemy(current)) {
+                    int units = current.getUnitCountContainer().getNumSupplies();
+                    if (units > 0 || current.hasActiveChieftain()) {
+                        return;
+                    }
+                }
+            }
 		triggered();
 	}
 

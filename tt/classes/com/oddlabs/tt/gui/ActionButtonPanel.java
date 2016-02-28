@@ -1104,10 +1104,11 @@ public final strictfp class ActionButtonPanel extends GUIObject implements Anima
 
                 @Override
 		public final boolean isDisabled() {
-			for (int i = 0; i < counters.length; i++) {
-				if (counters[i].getNumSupplies() == 0)
-					return true;
-			}
+                    for (SupplyCounter counter : counters) {
+                        if (counter.getNumSupplies() == 0) {
+                            return true;
+                        }
+                    }
 			return false;
 		}
 	}

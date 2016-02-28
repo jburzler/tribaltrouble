@@ -29,9 +29,11 @@ public strictfp class WeaponsProducer {
 	}
 
 	public final void animate(float t) {
-		for (int i = 0; i < production_containers.length; i++)
-			if (production_containers[i].getNumSupplies() > 0 && production_containers[i].hasEnoughSupplies())
-				build_list.add(production_containers[i]);
+            for (BuildProductionContainer production_container : production_containers) {
+                if (production_container.getNumSupplies() > 0 && production_container.hasEnoughSupplies()) {
+                    build_list.add(production_container);
+                }
+            }
 
 		if (build_list.size() > 0) {
 			if (break_time <= 0) {

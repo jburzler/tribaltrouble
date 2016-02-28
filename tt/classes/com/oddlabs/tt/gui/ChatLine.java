@@ -43,13 +43,12 @@ public final strictfp class ChatLine extends EditLine {
 
 		List new_words = new ArrayList();
 		int num_hits = 0;
-		for (int i = 0; i < tab_complete_list.length; i++) {
-			String tab_word = tab_complete_list[i];
-			if (tab_word.startsWith(partial_word)) {
-				num_hits++;
-				new_words.add(tab_word);
-			}
-		}
+            for (String tab_word : tab_complete_list) {
+                if (tab_word.startsWith(partial_word)) {
+                    num_hits++;
+                    new_words.add(tab_word);
+                }
+            }
 		if (num_hits == 1) {
 			String new_word = (String)new_words.get(0);
 			line.replace(word_start, word_end, new_word);

@@ -16,12 +16,14 @@ public final strictfp class PanelGroup extends GUIObject {
 		int tab_height = panels[0].getTab().getHeight();
 		int width = 0;
 		int height = 0;
-		for (int i = 0; i < panels.length; i++) {
-			if (width < panels[i].getWidth())
-				width = panels[i].getWidth();
-			if (height < panels[i].getHeight())
-				height = panels[i].getHeight();
-		}
+            for (Panel panel : panels) {
+                if (width < panel.getWidth()) {
+                    width = panel.getWidth();
+                }
+                if (height < panel.getHeight()) {
+                    height = panel.getHeight();
+                }
+            }
 		int total_height = height + tab_height;
 		setDim(width, total_height);
 		int x = Skin.getSkin().getPanelData().getLeftTabOffset();

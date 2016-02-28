@@ -99,7 +99,7 @@ public final strictfp class NativeIsland2 extends Island {
 		runnable = new Runnable() {
                 @Override
 			public final void run() {
-				String message = Utils.getBundleString(bundle, "dialog1", new Object[]{new Integer(captives.getUnitCountContainer().getNumSupplies())});
+				String message = Utils.getBundleString(bundle, "dialog1", new Object[]{captives.getUnitCountContainer().getNumSupplies()});
 				CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header1"),
 						message,
 						getCampaign().getIcons().getFaces()[0],

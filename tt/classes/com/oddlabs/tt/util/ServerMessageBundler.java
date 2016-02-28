@@ -70,9 +70,9 @@ public final strictfp class ServerMessageBundler {
 	public final static String getRegistrationKeyFormatExceptionMessage(RegistrationKeyFormatException e) {
 		switch (e.getType()) {
 			case RegistrationKeyFormatException.TYPE_INVALID_CHAR:
-				return Utils.getBundleString(bundle, "invalid_char", new Object[]{new Character(e.getInvalidChar())});
+				return Utils.getBundleString(bundle, "invalid_char", new Object[]{e.getInvalidChar()});
 			case RegistrationKeyFormatException.TYPE_INVALID_LENGTH:
-				return Utils.getBundleString(bundle, "invalid_length", new Object[]{new Integer(e.getStrippedLength())});
+				return Utils.getBundleString(bundle, "invalid_length", new Object[]{e.getStrippedLength()});
 			case RegistrationKeyFormatException.TYPE_INVALID_KEY:
 				return Utils.getBundleString(bundle, "invalid_key");
 			default:

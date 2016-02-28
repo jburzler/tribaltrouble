@@ -12,7 +12,7 @@ public final strictfp class SupplyTrigger extends TutorialTrigger {
 	private final static int ROCK = 10;
 
 	public SupplyTrigger(Player player) {
-		super(.5f, 0f, "supply", new Object[]{new Integer(TREE), new Integer(ROCK)});
+		super(.5f, 0f, "supply", new Object[]{TREE, ROCK});
 		player.enableHarvesting(true);
 	}
 

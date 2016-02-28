@@ -177,7 +177,7 @@ public final strictfp class NetworkSelector {
 	final void attachToKey(SelectionKey key, Handler handler) {
 		Object handler_key = null;
 		if (!deterministic.isPlayback()) {
-			handler_key = new Integer(current_handler_id++);
+			handler_key = current_handler_id++;
 			key.attach(handler_key);
 		}
 		handler_key = deterministic.log(handler_key);

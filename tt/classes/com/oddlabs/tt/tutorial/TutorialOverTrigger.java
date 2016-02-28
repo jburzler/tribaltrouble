@@ -14,13 +14,12 @@ public final strictfp class TutorialOverTrigger extends TutorialTrigger {
 		Player[] players = tutorial.getViewer().getWorld().getPlayers();
 		Player local_player = tutorial.getViewer().getLocalPlayer();
 
-		for (int i = 0; i < players.length; i++) {
-			Player current = players[i];
-			int units = current.getUnitCountContainer().getNumSupplies();
-			int buildings = current.getBuildingCountContainer().getNumSupplies();
-			if (units == 0 && (current == local_player || buildings == 0)) {
-				tutorial.done(TutorialForm.TUTORIAL_BATTLE);
-			}
-		}
+            for (Player current : players) {
+                int units = current.getUnitCountContainer().getNumSupplies();
+                int buildings = current.getBuildingCountContainer().getNumSupplies();
+                if (units == 0 && (current == local_player || buildings == 0)) {
+                    tutorial.done(TutorialForm.TUTORIAL_BATTLE);
+                }
+            }
 	}
 }

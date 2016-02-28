@@ -25,7 +25,7 @@ public final strictfp class TutorialOverDelegate extends CameraDelegate implemen
 		this.tutorial_info = tutorial_info;
 		ResourceBundle bundle = ResourceBundle.getBundle(TutorialOverDelegate.class.getName());
 		setDim(LocalInput.getViewWidth(), LocalInput.getViewHeight());
-		String tutorial_completed_str = Utils.getBundleString(bundle, "tutorial_completed", new Object[]{new Integer(tutorial_number)});
+		String tutorial_completed_str = Utils.getBundleString(bundle, "tutorial_completed", new Object[]{tutorial_number});
 		Label label = new Label(tutorial_completed_str, Skin.getSkin().getHeadlineFont());
 		addChild(label);
 		label.setPos((getWidth() - label.getWidth())/2, (getHeight() - label.getHeight())*2/3);

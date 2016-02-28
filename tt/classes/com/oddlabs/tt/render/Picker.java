@@ -235,12 +235,11 @@ public final strictfp class Picker implements Updatable {
 	private final Selectable[] pickAll(CameraState camera, int ability_filter) {
 		List result = new ArrayList();
 		Selectable[] complete_list = pickBoxed(camera, 0, 0, LocalInput.getViewWidth() - 1, LocalInput.getViewHeight() - 1, 2);
-		for (int i = 0; i < complete_list.length; i++) {
-			Selectable selectable = complete_list[i];
-			if (selectable.getAbilities().hasAbilities(ability_filter)) {
-				result.add(selectable);
-			}
-		}
+            for (Selectable selectable : complete_list) {
+                if (selectable.getAbilities().hasAbilities(ability_filter)) {
+                    result.add(selectable);
+                }
+            }
 		Selectable[] array = new Selectable[result.size()];
 		result.toArray(array);
 		return array;

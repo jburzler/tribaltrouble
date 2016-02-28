@@ -19,10 +19,10 @@ final strictfp class GameArgumentWriter extends DefaultARMIArgumentWriter {
 		} else if (Distributable[].class.isAssignableFrom(type)) {
 			Distributable[] distributables = (Distributable[])arg;
 			out.buffer().putShort((short)distributables.length);
-			for (int j = 0; j < distributables.length; j++) {
-				int name = distributable_table.getName(distributables[j]);
-				out.buffer().putInt(name);
-			}
+                    for (Distributable distributable : distributables) {
+                        int name = distributable_table.getName(distributable);
+                        out.buffer().putInt(name);
+                    }
 		} else {
 			super.writeArgument(type, arg, out);
 		}

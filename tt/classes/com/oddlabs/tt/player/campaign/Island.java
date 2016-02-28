@@ -64,17 +64,21 @@ public abstract class Island {
 				Player[] players = viewer.getWorld().getPlayers();
 				switch (campaign.getState().getDifficulty()) {
 					case CampaignState.DIFFICULTY_EASY:
-						for (int i = 0; i < players.length; i++)
-							if (players[i].isEnemy(viewer.getLocalPlayer()))
-								viewer.getLocalPlayer().setHitBonus(CAMPAIGN_DIFFICULTY_BONUS);
+                                for (Player player : players) {
+                                    if (player.isEnemy(viewer.getLocalPlayer())) {
+                                        viewer.getLocalPlayer().setHitBonus(CAMPAIGN_DIFFICULTY_BONUS);
+                                    }
+                                }
 						break;
 					case CampaignState.DIFFICULTY_NORMAL:
 						break;
 					case CampaignState.DIFFICULTY_HARD:
 						players = viewer.getWorld().getPlayers();
-						for (int i = 0; i < players.length; i++)
-							if (players[i].isEnemy(viewer.getLocalPlayer()))
-								players[i].setHitBonus(CAMPAIGN_DIFFICULTY_BONUS);
+                                for (Player player : players) {
+                                    if (player.isEnemy(viewer.getLocalPlayer())) {
+                                        player.setHitBonus(CAMPAIGN_DIFFICULTY_BONUS);
+                                    }
+                                }
 						break;
 					default:  
 						throw new RuntimeException();

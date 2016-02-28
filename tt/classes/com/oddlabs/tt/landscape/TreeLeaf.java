@@ -37,9 +37,8 @@ public final strictfp class TreeLeaf extends AbstractTreeGroup {
 	}
 
 	public final void visitTrees(TreeNodeVisitor visitor) {
-		for (int i = 0; i < infos.length; i++) {
-			TreeSupply info = infos[i];
-			visitor.visitTree(info);
-		}
+            for (TreeSupply info : infos) {
+                visitor.visitTree(info);
+            }
 	}
 }

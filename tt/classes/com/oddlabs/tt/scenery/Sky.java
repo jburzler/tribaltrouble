@@ -108,8 +108,9 @@ public final strictfp class Sky {
 		setupSky();
 
 		int end = subdiv_axis*(subdiv_height - 1);
-		for (int i = 0; i < strip_indices.length; i++)
-		   strip_indices[i].drawRangeElements(GL11.GL_TRIANGLE_STRIP, 0, end, subdiv_axis*2 + 2, 0);
+            for (ShortVBO strip_indice : strip_indices) {
+                strip_indice.drawRangeElements(GL11.GL_TRIANGLE_STRIP, 0, end, subdiv_axis*2 + 2, 0);
+            }
 		fan_indices.drawRangeElements(GL11.GL_TRIANGLE_FAN, 0, end, subdiv_axis + 2, 0);
 		resetSky();
 	}

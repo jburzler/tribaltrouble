@@ -258,7 +258,7 @@ final strictfp class Sprite {
 				Class generator_class = Class.forName(generator_class_name);
 				ResourceDescriptor descriptor = (ResourceDescriptor)generator_class.newInstance();
 				return ((Texture[])Resources.findResource(descriptor))[0];
-			} catch (Exception e) {
+			} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
 				throw new RuntimeException(e);
 			}
 		} else {

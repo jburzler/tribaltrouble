@@ -154,16 +154,18 @@ public final strictfp class Building extends Selectable implements Occupant {
 				weapons_producer.animate(t);
 
 			int num_deploying = 0;
-			for (int i = 0; i < deploy_containers.length; i++) {
-				if (deploy_containers[i] != null && deploy_containers[i].getNumSupplies() > 0)
-					num_deploying++;
-			}
+                    for (DeployContainer deploy_container : deploy_containers) {
+                        if (deploy_container != null && deploy_container.getNumSupplies() > 0) {
+                            num_deploying++;
+                        }
+                    }
 			if (num_deploying > 0) {
 				float amount = t/num_deploying;
-				for (int i = 0; i < deploy_containers.length; i++) {
-					if (deploy_containers[i] != null && deploy_containers[i].getNumSupplies() > 0)
-						deploy_containers[i].deploy(amount);
-				}
+                        for (DeployContainer deploy_container : deploy_containers) {
+                            if (deploy_container != null && deploy_container.getNumSupplies() > 0) {
+                                deploy_container.deploy(amount);
+                            }
+                        }
 			}
 		}
 
@@ -597,12 +599,12 @@ public final strictfp class Building extends Selectable implements Occupant {
 			int result = getOwner().getUnitCountContainer().increaseSupply(-worker_container.getNumSupplies());
 			assert result == -worker_container.getNumSupplies();
 		}
-		for (int i = 0; i < deploy_containers.length; i++) {
-			if (deploy_containers[i] != null) {
-				int result = getOwner().getUnitCountContainer().increaseSupply(-deploy_containers[i].getNumSupplies());
-				assert result == -deploy_containers[i].getNumSupplies();
-			}
-		}
+            for (DeployContainer deploy_container : deploy_containers) {
+                if (deploy_container != null) {
+                    int result = getOwner().getUnitCountContainer().increaseSupply(-deploy_container.getNumSupplies());
+                    assert result == -deploy_container.getNumSupplies();
+                }
+            }
 		free();
 		undoLandscape();
 		int result = getOwner().getBuildingCountContainer().increaseSupply(-1);

@@ -11,7 +11,7 @@ public final strictfp class WeaponTrigger extends TutorialTrigger {
 	private final static int WEAPONS = 10;
 
 	public WeaponTrigger(Player local_player) {
-		super(.5f, 0f, "weapon", new Object[]{new Integer(WEAPONS)});
+		super(.5f, 0f, "weapon", new Object[]{WEAPONS});
 		local_player.enableHarvesting(true);
 	}
 

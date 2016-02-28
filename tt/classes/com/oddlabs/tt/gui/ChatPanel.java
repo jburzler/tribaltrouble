@@ -111,15 +111,16 @@ public strictfp class ChatPanel extends Panel implements ChatListener {
 		if (users != null) {
 			lobby_users_list_box.clear();
 			playing_users_list_box.clear();
-			for (int i = 0; i < users.length; i++) {
-				int label_width = user_list_width - (Skin.getSkin().getMultiColumnComboBoxData().getBox().getLeftOffset() + Skin.getSkin().getMultiColumnComboBoxData().getBox().getRightOffset());
-				Label label = new Label(users[i].getNick(), Skin.getSkin().getMultiColumnComboBoxData().getFont(), label_width);
-				Row row = new Row(new GUIObject[]{label}, users[i]);
-				if (!users[i].isPlaying())
-					lobby_users_list_box.addRow(row);
-				else
-					playing_users_list_box.addRow(row);
-			}
+                    for (ChatRoomUser user : users) {
+                        int label_width = user_list_width - (Skin.getSkin().getMultiColumnComboBoxData().getBox().getLeftOffset() + Skin.getSkin().getMultiColumnComboBoxData().getBox().getRightOffset());
+                        Label label = new Label(user.getNick(), Skin.getSkin().getMultiColumnComboBoxData().getFont(), label_width);
+                        Row row = new Row(new GUIObject[]{label}, user);
+                        if (!user.isPlaying()) {
+                            lobby_users_list_box.addRow(row);
+                        } else {
+                            playing_users_list_box.addRow(row);
+                        }
+                    }
 		}
 		refreshMessages();
 	}

@@ -138,7 +138,7 @@ public final strictfp class VikingIsland12 extends Island {
 		runnable = new Runnable() {
                 @Override
 			public final void run() {
-				String new_units = Utils.getBundleString(bundle, "new_units", new Object[]{new Integer(stranded.getUnitCountContainer().getNumSupplies())});
+				String new_units = Utils.getBundleString(bundle, "new_units", new Object[]{stranded.getUnitCountContainer().getNumSupplies()});
 				CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "new_units_header"),
 						new_units,
 						getCampaign().getIcons().getFaces()[0],

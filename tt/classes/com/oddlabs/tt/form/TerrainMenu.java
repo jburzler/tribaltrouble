@@ -144,7 +144,7 @@ public final strictfp class TerrainMenu extends Group {
 			else
 				standard.addChild(label_default_name);
 		}
-		String rated_tip = Utils.getBundleString(bundle, "rated_game_tip", new Object[]{new Integer(GameSession.MIN_WINS_FOR_RANKING)});
+		String rated_tip = Utils.getBundleString(bundle, "rated_game_tip", new Object[]{GameSession.MIN_WINS_FOR_RANKING});
 		cb_rated = new CheckBox(false, Utils.getBundleString(bundle, "rated_game"), rated_tip);
 		if (multiplayer ) {
 			standard.addChild(cb_rated);
@@ -587,7 +587,7 @@ public final strictfp class TerrainMenu extends Group {
 		if (multiplayer) {
 			String game_name = editline_name.getContents();
 			if (game_name.length() < Game.MIN_LENGTH) {
-				String min_name = Utils.getBundleString(bundle, "min_name_length", new Object[]{new Integer(Game.MIN_LENGTH)});
+				String min_name = Utils.getBundleString(bundle, "min_name_length", new Object[]{Game.MIN_LENGTH});
 				gui_root.addModalForm(new MessageForm(min_name));
 				return false;
 			}
@@ -599,7 +599,7 @@ public final strictfp class TerrainMenu extends Group {
 				if (isChosen(difficulty_pulldown_menus[i]) && team_pulldown_menus[i].getChosenItemIndex() != team_pulldown_menus[0].getChosenItemIndex())
 					has_enemy = true;
 			if (!has_enemy) {
-				String min_name = Utils.getBundleString(bundle, "min_num_teams", new Object[]{new Integer(2)});
+				String min_name = Utils.getBundleString(bundle, "min_num_teams", new Object[]{2});
 				gui_root.addModalForm(new MessageForm(min_name));
 				return false;
 			}

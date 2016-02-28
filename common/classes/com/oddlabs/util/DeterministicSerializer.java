@@ -34,7 +34,7 @@ public final strictfp class DeterministicSerializer {
 			ObjectInputStream is = new ObjectInputStream(new FileInputStream(file));
 			object = is.readObject();
 			exception = null;
-		} catch (Exception e) {
+		} catch (IOException | ClassNotFoundException e) {
 			exception = e;
 			object = null;
 		}

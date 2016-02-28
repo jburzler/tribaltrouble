@@ -154,9 +154,9 @@ public final strictfp class NativeIsland1 extends Island {
                 @Override
 			public final void run() {
 				changeObjective(1);
-				for (int i = 0; i < scenery_models.length; i++) {
-					scenery_models[i].remove();
-				}
+                    for (SceneryModel scenery_model : scenery_models) {
+                        scenery_model.remove();
+                    }
 				if (!local_player.getUnitCountContainer().isSupplyFull())
 					new Unit(local_player, 48*2 + offset, 96*2 + offset, null, local_player.getRace().getUnitTemplate(Race.UNIT_PEON));
 				if (!local_player.getUnitCountContainer().isSupplyFull())

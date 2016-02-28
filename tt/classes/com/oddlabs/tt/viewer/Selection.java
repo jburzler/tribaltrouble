@@ -31,10 +31,11 @@ public final strictfp class Selection {
 
 	final void removeFromArmies(Selectable selectable) {
 		current_selection.remove(selectable);
-		for (int i = 0; i < shortcut_armies.length; i++) {
-			if (shortcut_armies[i] != null)
-				shortcut_armies[i].remove(selectable);
-		}
+            for (Army shortcut_armie : shortcut_armies) {
+                if (shortcut_armie != null) {
+                    shortcut_armie.remove(selectable);
+                }
+            }
 	}
 
 	public final void setShortcutArmy(int index) {

@@ -9,12 +9,12 @@ public strictfp abstract class ChieftainAI {
 	protected final int numEnemyUnits(Player owner) {
 		Player[] players = owner.getWorld().getPlayers();
 		int count = 0;
-		for (int i = 0; i < players.length; i++) {
-			if (owner.isEnemy(players[i])) {
-				Set units = players[i].getUnits().getSet();
-				count += units.size();
-			}
-		}
+            for (Player player : players) {
+                if (owner.isEnemy(player)) {
+                    Set units = player.getUnits().getSet();
+                    count += units.size();
+                }
+            }
 		return count;
 	}
 }

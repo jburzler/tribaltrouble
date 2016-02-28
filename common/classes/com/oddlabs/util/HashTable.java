@@ -87,18 +87,18 @@ public final strictfp class HashTable {
 	private final void rehash() {
 		LinkedList[] old_entries = entries;
 		entries = new LinkedList[entries.length*mul_factor];
-		for (int i = 0; i < old_entries.length; i++) {
-			if (old_entries[i] != null) {
-				HashEntry current_entry = (HashEntry)old_entries[i].getFirst();
-				while (current_entry != null) {
-					int hash = hash(current_entry.getKey());
-					HashEntry next_entry = (HashEntry)current_entry.getNext();
-					if (entries[hash] == null)
-						entries[hash] = new LinkedList();
-					entries[hash].addLast(current_entry);
-					current_entry = next_entry;
-				}
-			}
-		}
+            for (LinkedList old_entrie : old_entries) {
+                if (old_entrie != null) {
+                    HashEntry current_entry = (HashEntry) old_entrie.getFirst();
+                    while (current_entry != null) {
+                        int hash = hash(current_entry.getKey());
+                        HashEntry next_entry = (HashEntry)current_entry.getNext();
+                        if (entries[hash] == null)
+                            entries[hash] = new LinkedList();
+                        entries[hash].addLast(current_entry);
+                        current_entry = next_entry;
+                    }
+                }
+            }
 	}
 }

@@ -95,15 +95,15 @@ public final strictfp class WorldViewer implements Animated {
 				String result = "";
 				Player[] players = world.getPlayers();
 				int count = 0;
-				for (int i = 0; i < players.length; i++) {
-					int preferred_gamespeed = players[i].getPreferredGamespeed();
-					if (World.isValidGamespeed(preferred_gamespeed)) {
-						if (count > 0)
-							 result += ", ";
-						count++;
-						result += players[i].getPlayerInfo().getName() + ": " + ServerMessageBundler.getGamespeedString(preferred_gamespeed);
-					}
-				}
+                            for (Player player : players) {
+                                int preferred_gamespeed = player.getPreferredGamespeed();
+                                if (World.isValidGamespeed(preferred_gamespeed)) {
+                                    if (count > 0)
+                                        result += ", ";
+                                    count++;
+                                    result += player.getPlayerInfo().getName() + ": " + ServerMessageBundler.getGamespeedString(preferred_gamespeed);
+                                }
+                            }
 				if (count > 0 && isMultiplayer())
 					gui_root.getInfoPrinter().print(result);
 			}

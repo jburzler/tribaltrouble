@@ -88,29 +88,29 @@ final strictfp class EmitterRenderer {
 			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 			GL11.glTexEnvf(GL11.GL_TEXTURE_ENV, GL11.GL_TEXTURE_ENV_MODE, GL11.GL_REPLACE);
 		} else if (sprite_renderers != null) {
-			for (int j = 0; j < particles.length; j++) {
-				for (int i = particles[j].size() - 1; i >= 0; i--) {
-					Particle particle = (Particle)particles[j].get(i);
-					int index = particle.getType();
-					color_buffer.put(0, particle.getColorR());
-					color_buffer.put(1, particle.getColorG());
-					color_buffer.put(2, particle.getColorB());
-					color_buffer.put(3, StrictMath.min(particle.getColorA(), 1f));
-					SpriteRenderer sprite_renderer = render_queues.getRenderer(sprite_renderers[index]);
-					sprite_renderer.setupWithColor(0, color_buffer, false, false);
-//					sprite_renderer.setup(0, false);
-					float x = particle.getPosX();
-					float y = particle.getPosY();
-					float z = particle.getPosZ();
-					GL11.glPushMatrix();
-					GL11.glTranslatef(x, y, z);
-					GL11.glRotatef(ROTATION_FACTOR*(y + x), SQRT_2, SQRT_2, 0f);
-//					GL11.glScalef(scale_x, scale_y, scale_z);
-					sprite_renderer.getSpriteList().render(0, 0, 0f);
-					sprite_renderer.getSpriteList().reset(0, false, false);
-					GL11.glPopMatrix();
-				}
-			}
+                    for (List particle1 : particles) {
+                        for (int i = particle1.size() - 1; i >= 0; i--) {
+                            Particle particle = (Particle) particle1.get(i);
+                            int index = particle.getType();
+                            color_buffer.put(0, particle.getColorR());
+                            color_buffer.put(1, particle.getColorG());
+                            color_buffer.put(2, particle.getColorB());
+                            color_buffer.put(3, StrictMath.min(particle.getColorA(), 1f));
+                            SpriteRenderer sprite_renderer = render_queues.getRenderer(sprite_renderers[index]);
+                            sprite_renderer.setupWithColor(0, color_buffer, false, false);
+                            //					sprite_renderer.setup(0, false);
+                            float x = particle.getPosX();
+                            float y = particle.getPosY();
+                            float z = particle.getPosZ();
+                            GL11.glPushMatrix();
+                            GL11.glTranslatef(x, y, z);
+                            GL11.glRotatef(ROTATION_FACTOR*(y + x), SQRT_2, SQRT_2, 0f);
+                            //					GL11.glScalef(scale_x, scale_y, scale_z);
+                            sprite_renderer.getSpriteList().render(0, 0, 0f);
+                            sprite_renderer.getSpriteList().reset(0, false, false);
+                            GL11.glPopMatrix();
+                        }
+                    }
 		}
 	}
 }

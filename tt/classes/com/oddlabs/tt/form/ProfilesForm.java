@@ -89,18 +89,17 @@ public final strictfp class ProfilesForm extends Form {
 	public final void receivedProfiles(Profile[] profiles, String last_nick) {
 		profile_list_box.clear();
 		Row selected_row = null;
-		for (int i = 0; i < profiles.length; i++) {
-			Profile p = profiles[i];
-			Row row = new Row(new GUIObject[]{
-				new Label(p.getNick(), Skin.getSkin().getMultiColumnComboBoxData().getFont(), NICK_SIZE),
-				new IntegerLabel(p.getRating(), Skin.getSkin().getMultiColumnComboBoxData().getFont()),
-				new IntegerLabel(p.getWins(), Skin.getSkin().getMultiColumnComboBoxData().getFont()),
-				new IntegerLabel(p.getLosses(), Skin.getSkin().getMultiColumnComboBoxData().getFont()),
-				new IntegerLabel(p.getInvalid(), Skin.getSkin().getMultiColumnComboBoxData().getFont())}, p.getNick());
-			profile_list_box.addRow(row);
-			if (p.getNick().equalsIgnoreCase(last_nick))
-				selected_row = row;
-		}
+            for (Profile p : profiles) {
+                Row row = new Row(new GUIObject[]{
+                    new Label(p.getNick(), Skin.getSkin().getMultiColumnComboBoxData().getFont(), NICK_SIZE),
+                    new IntegerLabel(p.getRating(), Skin.getSkin().getMultiColumnComboBoxData().getFont()),
+                    new IntegerLabel(p.getWins(), Skin.getSkin().getMultiColumnComboBoxData().getFont()),
+                    new IntegerLabel(p.getLosses(), Skin.getSkin().getMultiColumnComboBoxData().getFont()),
+                    new IntegerLabel(p.getInvalid(), Skin.getSkin().getMultiColumnComboBoxData().getFont())}, p.getNick());
+                profile_list_box.addRow(row);
+                if (p.getNick().equalsIgnoreCase(last_nick))
+                    selected_row = row;
+            }
 		if (selected_row != null)
 			profile_list_box.selectRow(selected_row);
 	}

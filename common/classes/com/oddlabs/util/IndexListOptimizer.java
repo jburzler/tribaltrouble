@@ -29,7 +29,7 @@ dumpBuffer(buffer);*/
 				buffer.get(buffer.position() + i*3 + 1), buffer.get(buffer.position() + i*3 + 2)};
 			Index[] triangle_indices = new Index[index_array.length];
 			for (int j = 0; j < index_array.length; j++) {
-				Short index_key = new Short(index_array[j]);
+				Short index_key = index_array[j];
 				Index index = (Index)indices.get(index_key);
 				if (index == null) {
 					index = new Index(index_array[j]);
@@ -49,20 +49,19 @@ dumpBuffer(buffer);*/
 		while (!triangles.isEmpty()) {
 			float best_score = Float.NEGATIVE_INFINITY;
 			Triangle best_triangle = null;
-			for (int i = 0; i < lru.length; i++) {
-				Index index = lru[i];
-				if (index == null)
-					break;
+                    for (Index index : lru) {
+                        if (index == null)
+                            break;
 //System.out.println("index = " + index);
-				for (int j = 0; j < index.triangle_list.size(); j++) {
-					Triangle tri = (Triangle)index.triangle_list.get(j);
-					float tri_score = tri.getScore();
-					if (tri_score > best_score) {
-						best_score = tri_score;
-						best_triangle = tri;
-					}
-				}
-			}
+for (int j = 0; j < index.triangle_list.size(); j++) {
+    Triangle tri = (Triangle)index.triangle_list.get(j);
+    float tri_score = tri.getScore();
+    if (tri_score > best_score) {
+        best_score = tri_score;
+        best_triangle = tri;
+    }
+}
+                    }
 			if (best_triangle == null) {
 				it = triangles.iterator();
 				while (it.hasNext()) {
@@ -82,25 +81,24 @@ dumpBuffer(buffer);*/
 			assert success;
 			best_triangle.remove();
 			round++;
-			for (int i = 0; i < best_triangle.indices.length; i++) {
-				Index index = best_triangle.indices[i];
-//System.out.println("inserting index = " + index);
-				index.round_added = round;
-				Index swap_index = index;
-				int j;
-				for (j = 0; j < lru.length; j++) {
-					Index new_swap_index = lru[j];
-					lru[j] = swap_index;
-					swap_index.updateScore(j, round);
-					swap_index = new_swap_index;
-					if (swap_index == null || swap_index == index)
-						break;
-				}
-				if (j == lru.length) {
-					assert swap_index != index;
-					swap_index.updateScore(-1, round);
-				}
-			}
+                    for (Index index : best_triangle.indices) {
+                        //System.out.println("inserting index = " + index);
+                        index.round_added = round;
+                        Index swap_index = index;
+                        int j;
+                        for (j = 0; j < lru.length; j++) {
+                            Index new_swap_index = lru[j];
+                            lru[j] = swap_index;
+                            swap_index.updateScore(j, round);
+                            swap_index = new_swap_index;
+                            if (swap_index == null || swap_index == index)
+                                break;
+                        }
+                        if (j == lru.length) {
+                            assert swap_index != index;
+                            swap_index.updateScore(-1, round);
+                        }
+                    }
 		}
 		int old_position = buffer.position();
 		for (int i = 0; i < optimal_triangle_list.size(); i++) {
@@ -166,8 +164,9 @@ dumpBuffer(buffer);*/
 */
 		public Triangle(Index[] indices) {
 			this.indices = indices;
-			for (int i = 0; i < indices.length; i++)
-				indices[i].add(this);
+                    for (Index indice : indices) {
+                        indice.add(this);
+                    }
 		}
 
 /*		public final void updateScore() {
@@ -178,27 +177,30 @@ dumpBuffer(buffer);*/
 */
 		public final float getScore() {
 			float score = 0;
-			for (int i = 0; i < indices.length; i++)
-				score += indices[i].score;
+                    for (Index indice : indices) {
+                        score += indice.score;
+                    }
 			return score;
 		}
 
 		public final void remove() {
-			for (int i = 0; i < indices.length; i++) {
-				indices[i].remove(this);
-			}
+                    for (Index indice : indices) {
+                        indice.remove(this);
+                    }
 		}
 
 		public final void addToBuffer(ShortBuffer buffer) {
-			for (int i = 0; i < indices.length; i++)
-				buffer.put(indices[i].index);
+                    for (Index indice : indices) {
+                        buffer.put(indice.index);
+                    }
 		}
 
                 @Override
 		public final String toString() {
 			String result = "Triangle score = " + getScore();
-			for (int i = 0; i < indices.length; i++)
-				result += " " + indices[i].toString();
+                    for (Index indice : indices) {
+                        result += " " + indice.toString();
+                    }
 			return result;
 		}
 	}

@@ -76,7 +76,7 @@ public final strictfp class CreateChatRoomForm extends Form {
 	private final void create() {
 		String name = editline_name.getContents();
 		if (name.length() < MatchmakingServerInterface.MIN_ROOM_NAME_LENGTH) {
-			String min_name_error = Utils.getBundleString(bundle, "min_name_error", new Object[]{new Integer(MatchmakingServerInterface.MIN_ROOM_NAME_LENGTH)});
+			String min_name_error = Utils.getBundleString(bundle, "min_name_error", new Object[]{MatchmakingServerInterface.MIN_ROOM_NAME_LENGTH});
 			gui_root.addModalForm(new MessageForm(min_name_error));
 		} else {
 			Network.getMatchmakingClient().joinRoom(gui_root, name);

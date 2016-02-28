@@ -127,10 +127,11 @@ public final strictfp class NewCampaignForm extends Form implements Deterministi
 
 	private final boolean nameIsUnique(String name) {
 		if (campaign_states != null) {
-			for (int i = 0; i < campaign_states.length; i++) {
-				if (campaign_states[i].getName().equals(name))
-					return false;
-			}
+                    for (CampaignState campaign_state : campaign_states) {
+                        if (campaign_state.getName().equals(name)) {
+                            return false;
+                        }
+                    }
 		}
 		return true;
 	}

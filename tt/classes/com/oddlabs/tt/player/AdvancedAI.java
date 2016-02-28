@@ -84,9 +84,9 @@ public final strictfp class AdvancedAI extends AI {
 		}
 		enemy_score = (int)(DEFENSE_FACTOR[difficulty]*enemy_score);
 		if (getDefendingUnits() != null) {
-			for (int i = 0; i < getDefendingUnits().length; i++) {
-				enemy_score -= getUnitScore((Unit)getDefendingUnits()[i]);
-			}
+                    for (Selectable defendingUnit : getDefendingUnits()) {
+                        enemy_score -= getUnitScore((Unit) defendingUnit);
+                    }
 		}
 		if (enemy_score > 0) {
 			nodeDeployArmy();
@@ -159,13 +159,13 @@ public final strictfp class AdvancedAI extends AI {
 
 	private final int addFromList(Selectable[] list, ArrayList new_list, int progress, int score) {
 		int result = progress;
-		for (int i = 0; i < list.length; i++) {
-			Unit unit = (Unit)list[i];
-			new_list.add(unit);
-			result += getUnitScore(unit);
-			if (result > score)
-				break;
-		}
+            for (Selectable list1 : list) {
+                Unit unit = (Unit) list1;
+                new_list.add(unit);
+                result += getUnitScore(unit);
+                if (result > score)
+                    break;
+            }
 		return result;
 	}
 
@@ -439,22 +439,22 @@ else
 	private final Selectable[] getPeons(int min_num_peons) {
 		ArrayList builders = new ArrayList();
 		if (getIdlePeons() != null) {
-			for (int i = 0; i < getIdlePeons().length; i++) {
-				builders.add(getIdlePeons()[i]);
-			}
+                    for (Selectable idlePeon : getIdlePeons()) {
+                        builders.add(idlePeon);
+                    }
 		}
 
 		Selectable[][] peon_types = new Selectable[][]{getGatherIronPeons(), getGatherRockPeons(), getGatherTreePeons(), getGatherRubberPeons()};
-		for (int i = 0; i < peon_types.length; i++) {
-			if (builders.size() < min_num_peons && peon_types[i] != null) {
-				for (int j = 0; j < peon_types[i].length; j++) {
-					builders.add(peon_types[i][j]);
-					if (builders.size() == min_num_peons) {
-						break;
-					}
-				}
-			}
-		}
+            for (Selectable[] peon_type : peon_types) {
+                if (builders.size() < min_num_peons && peon_type != null) {
+                    for (Selectable peon_type : peon_type) {
+                        builders.add(peon_type);
+                        if (builders.size() == min_num_peons) {
+                            break;
+                        }
+                    }
+                }
+            }
 		Selectable[] result = new Selectable[builders.size()];
 		builders.toArray(result);
 		return result;

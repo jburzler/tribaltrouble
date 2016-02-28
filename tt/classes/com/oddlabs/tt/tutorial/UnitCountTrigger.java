@@ -10,7 +10,7 @@ public final strictfp class UnitCountTrigger extends TutorialTrigger {
 	private final int target_count;
 	
 	public UnitCountTrigger(int target_count) {
-		super(1f, 0f, "unit_count", new Object[]{new Integer(target_count)});
+		super(1f, 0f, "unit_count", new Object[]{target_count});
 		this.target_count = target_count;
 	}
 

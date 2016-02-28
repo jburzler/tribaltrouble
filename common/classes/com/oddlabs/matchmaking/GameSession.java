@@ -24,15 +24,14 @@ public final strictfp class GameSession implements Serializable {
 	private final boolean validateTeams() {
 		boolean[] teams = new boolean[MatchmakingServerInterface.MAX_PLAYERS];
 		int team_count = 0;
-		for (int i = 0; i < participants.length; i++) {
-			Participant p = participants[i];
-			if (!p.validate())
-				return false;
-			if (!teams[p.getTeam()]) {
-				teams[p.getTeam()] = true;
-				team_count++;
-			}
-		}
+            for (Participant p : participants) {
+                if (!p.validate())
+                    return false;
+                if (!teams[p.getTeam()]) {
+                    teams[p.getTeam()] = true;
+                    team_count++;
+                }
+            }
 		return team_count >= MatchmakingServerInterface.MIN_PLAYERS;
 	}
 	

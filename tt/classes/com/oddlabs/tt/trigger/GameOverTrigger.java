@@ -63,11 +63,10 @@ public final strictfp class GameOverTrigger implements Animated {
 			teams[i] = 0;
 		}
 
-		for (int i = 0; i < players.length; i++) {
-			Player current = players[i];
-			if (viewer.getPeerHub().isAlive(current) && current.getPlayerInfo().getTeam() != PlayerInfo.TEAM_NEUTRAL)
-				teams[current.getPlayerInfo().getTeam()]++;
-		}
+            for (Player current : players) {
+                if (viewer.getPeerHub().isAlive(current) && current.getPlayerInfo().getTeam() != PlayerInfo.TEAM_NEUTRAL)
+                    teams[current.getPlayerInfo().getTeam()]++;
+            }
 
 		int team_count = 0;
 		for (int i = 0; i < teams.length; i++) {

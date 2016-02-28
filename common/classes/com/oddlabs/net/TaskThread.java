@@ -133,7 +133,7 @@ public final strictfp class TaskThread {
 	}
 
 	private Callable lookupCallable(BlockingTask task) {
-		return (Callable)id_to_callable.get(new Integer(task.id));
+		return (Callable)id_to_callable.get(task.id);
 	}
 
 	public final void close() {

@@ -30,16 +30,17 @@ dumpEquation(eq_system);*/
 	}
 
 	private final static boolean checkSolution(float[][] eq_system, float[] solution) {
-		for (int row = 0; row < eq_system.length; row++) {
-			float right_side = 0f;
-			for (int column = 0; column < solution.length; column++)
-				right_side += eq_system[row][column]*solution[column];
-			float left_side = eq_system[row][eq_system[0].length -1];
-			if (!isEqual(right_side, left_side)) {
-				System.out.println("mismatch " + right_side + " != " + left_side);
-				return false;
-			}
-		}
+            for (float[] eq_system1 : eq_system) {
+                float right_side = 0f;
+                for (int column = 0; column < solution.length; column++) {
+                    right_side += eq_system1[column] * solution[column];
+                }
+                float left_side = eq_system1[eq_system[0].length -1];
+                if (!isEqual(right_side, left_side)) {
+                    System.out.println("mismatch " + right_side + " != " + left_side);
+                    return false;
+                }
+            }
 		return true;
 	}
 
@@ -74,14 +75,17 @@ dumpEquation(eq_system);*/
 	}
 
 	private final static boolean checkEquation(float[][] eq_system) {
-		for (int row = 0; row < eq_system.length; row++) {
-			int num_non_zero = 0;
-			for (int column = 0; column < eq_system[0].length; column++)
-				if (!isZero(eq_system[row][column]))
-					num_non_zero++;
-			if (num_non_zero == 1 && !isZero(eq_system[row][eq_system[0].length - 1]))
-				return false;
-		}
+            for (float[] eq_system1 : eq_system) {
+                int num_non_zero = 0;
+                for (int column = 0; column < eq_system[0].length; column++) {
+                    if (!isZero(eq_system1[column])) {
+                        num_non_zero++;
+                    }
+                }
+                if (num_non_zero == 1 && !isZero(eq_system1[eq_system[0].length - 1])) {
+                    return false;
+                }
+            }
 		return true;
 	}
 

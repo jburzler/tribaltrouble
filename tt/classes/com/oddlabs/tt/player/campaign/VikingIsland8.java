@@ -341,10 +341,11 @@ public final strictfp class VikingIsland8 extends Island {
 						getCampaign().getIcons().getFaces()[4],
 						CampaignDialogForm.ALIGN_IMAGE_RIGHT);
 				addModalForm(dialog);
-				for (int i = 0; i < neutrals.length; i++) {
-					if (!neutrals[i].isDead())
-						changeOwner(neutrals[i], local_player);
-				}
+                    for (Unit neutral : neutrals) {
+                        if (!neutral.isDead()) {
+                            changeOwner(neutral, local_player);
+                        }
+                    }
 			}
 		};
 		new NearArmyTrigger(neutrals, 10f, local_player, runnable);

@@ -80,6 +80,7 @@ import java.util.ResourceBundle;
 import java.util.prefs.Preferences;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.LWJGLUtil;
@@ -216,10 +217,10 @@ public final strictfp class Renderer {
 	}
 
 	private final static void deleteLog(File log) {
-		for (int i = 0; i < com.oddlabs.util.Utils.LOG_FILES.length; i++) {
-			File log_file = new File(log, com.oddlabs.util.Utils.LOG_FILES[i]);
-			log_file.delete();
-		}
+            for (String LOG_FILES : com.oddlabs.util.Utils.LOG_FILES) {
+                File log_file = new File(log, LOG_FILES);
+                log_file.delete();
+            }
 		log.delete();
 	}
 
@@ -227,13 +228,11 @@ public final strictfp class Renderer {
 		File[] logs = logs_dir.listFiles();
 		if (logs == null)
 			return;
-		for (int i = 0; i < logs.length; i++) {
-			File log = logs[i];
-
-			if (!log.isDirectory() || log.equals(last_log_dir) || log.equals(new_log_dir))
-				continue;
-			deleteLog(log);
-		}
+            for (File log : logs) {
+                if (!log.isDirectory() || log.equals(last_log_dir) || log.equals(new_log_dir))
+                    continue;
+                deleteLog(log);
+            }
 	}
 
 	private final void run(String[] args) {
@@ -444,7 +443,7 @@ e.printStackTrace();
 		e.printStackTrace();
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-		} catch(Exception je) {
+		} catch(ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException je) {
 			je.printStackTrace();
 		}
 

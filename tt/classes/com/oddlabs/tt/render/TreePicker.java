@@ -88,10 +88,12 @@ strictfp class TreePicker implements TreeNodeVisitor {
 	}
 
 	public final void getAllPicks(List pick_list) {
-		for (int i = 0; i < render_lists.length; i++)
-			getAllPicksFromRenderList(render_lists[i], pick_list);
-		for (int i = 0; i < respond_render_lists.length; i++)
-			getAllPicksFromRenderList(respond_render_lists[i], pick_list);
+            for (List render_list : render_lists) {
+                getAllPicksFromRenderList(render_list, pick_list);
+            }
+            for (List respond_render_list : respond_render_lists) {
+                getAllPicksFromRenderList(respond_render_list, pick_list);
+            }
 	}
 
 	private final void getAllPicksFromRenderList(List render_list, List pick_list) {

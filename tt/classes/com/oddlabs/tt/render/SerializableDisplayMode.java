@@ -35,11 +35,12 @@ public final strictfp class SerializableDisplayMode implements Serializable {
 		Deterministic deterministic = LocalEventQueue.getQueue().getDeterministic();
 		DisplayMode[] modes = Display.getAvailableDisplayModes();
 		SortedSet set = new TreeSet(new DisplayModeComparator(target_mode));
-		for (int i = 0; i < modes.length; i++)
-			if (isModeValid(modes[i])) {
-System.out.println("modes[i] = " + modes[i]);
-				set.add(modes[i]);
-			}
+            for (DisplayMode mode : modes) {
+                if (isModeValid(mode)) {
+                    System.out.println("modes[i] = " + mode);
+                    set.add(mode);
+                }
+            }
 
 System.out.println("target_mode = " + target_mode);
 		if (set.isEmpty())
@@ -118,15 +119,14 @@ System.out.println("setting mode = " + mode);
 
 	private final static void doSetMode(SerializableDisplayMode target_mode) throws LWJGLException {
 		DisplayMode[] lwjgl_modes = Display.getAvailableDisplayModes();
-		for (int i = 0; i < lwjgl_modes.length; i++) {
-			DisplayMode lwjgl_mode = lwjgl_modes[i];
-			SerializableDisplayMode mode = new SerializableDisplayMode(lwjgl_mode);
-			if (mode.equals(target_mode)) {
-				nativeSetMode(lwjgl_mode);
-				GL11.glViewport(0, 0, lwjgl_mode.getWidth(), lwjgl_mode.getHeight());
-				return;
-			}
-		}
+            for (DisplayMode lwjgl_mode : lwjgl_modes) {
+                SerializableDisplayMode mode = new SerializableDisplayMode(lwjgl_mode);
+                if (mode.equals(target_mode)) {
+                    nativeSetMode(lwjgl_mode);
+                    GL11.glViewport(0, 0, lwjgl_mode.getWidth(), lwjgl_mode.getHeight());
+                    return;
+                }
+            }
 		throw new LWJGLException("Could not find mode matching: " + target_mode);
 	}
 

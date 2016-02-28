@@ -102,11 +102,12 @@ public abstract strictfp class Deterministic {
 		Throwable t = new Throwable();
 		StackTraceElement[] stack_trace_elements = t.getStackTrace();
 		int hash = 0;
-		for (int i = 0; i < stack_trace_elements.length; i++) {
-			if (stack_trace_elements[i].getClassName().startsWith(Deterministic.class.getPackage().getName()))
-				continue;
-			hash += stack_trace_elements[i].getMethodName().hashCode();
-		}
+            for (StackTraceElement stack_trace_element : stack_trace_elements) {
+                if (stack_trace_element.getClassName().startsWith(Deterministic.class.getPackage().getName())) {
+                    continue;
+                }
+                hash += stack_trace_element.getMethodName().hashCode();
+            }
 		return hash;
 	}
 }

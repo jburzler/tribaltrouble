@@ -201,17 +201,15 @@ public final strictfp class Server implements ConnectionListenerInterface {
 
 	private final void resetReady() {
 		int num_humans = 0;
-		for (int i = 0; i < players.length; i++) {
-			PlayerSlot player_slot = players[i];
-			if (player_slot.getType() == PlayerSlot.HUMAN)
-				num_humans++;
-		}
+            for (PlayerSlot player_slot : players) {
+                if (player_slot.getType() == PlayerSlot.HUMAN)
+                    num_humans++;
+            }
 		if (num_humans > 1) {
-			for (int i = 0; i < players.length; i++) {
-				PlayerSlot player_slot = players[i];
-				if (player_slot.getType() == PlayerSlot.HUMAN)
-					player_slot.setReady(false);
-			}
+                for (PlayerSlot player_slot : players) {
+                    if (player_slot.getType() == PlayerSlot.HUMAN)
+                        player_slot.setReady(false);
+                }
 		}
 	}
 

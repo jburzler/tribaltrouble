@@ -62,9 +62,9 @@ final strictfp class Session {
 				Integer client_checksum = (Integer)client.getChecksums().get(0);
 				Integer count = (Integer)checksum_to_count.get(client_checksum);
 				if (count == null) {
-					count = new Integer(1);
+					count = 1;
 				} else {
-					count = new Integer(count.intValue() + 1);
+					count = count.intValue() + 1;
 				}
 				checksum_to_count.put(client_checksum, count);
 				if (best_checksum_count < count.intValue()) {

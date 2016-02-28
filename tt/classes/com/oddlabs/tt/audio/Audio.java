@@ -2,8 +2,10 @@ package com.oddlabs.tt.audio;
 
 import com.oddlabs.tt.resource.NativeResource;
 import com.oddlabs.util.ByteBufferOutputStream;
+import java.io.IOException;
 import java.net.URL;
 import java.nio.IntBuffer;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.openal.AL;
 import org.lwjgl.openal.AL10;
@@ -18,7 +20,7 @@ public final strictfp class Audio extends NativeResource {
 		Wave wave;
 		try {
 			wave = new Wave(file);
-		} catch (Exception e) {
+		} catch (UnsupportedAudioFileException | IOException e) {
 			// Assume it's an ogg vorbis file
 			wave = loadOGG(file);
 		}

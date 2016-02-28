@@ -78,7 +78,7 @@ public final strictfp class VikingIsland13 extends Island {
 		runnable = new Runnable() {
                 @Override
 			public final void run() {
-				String stay_alive_dialog = Utils.getBundleString(bundle, "dialog0", new Object[]{new Integer(minutes)});
+				String stay_alive_dialog = Utils.getBundleString(bundle, "dialog0", new Object[]{minutes});
 				CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header0"),
 						stay_alive_dialog,
 						getCampaign().getIcons().getFaces()[0],
@@ -295,6 +295,6 @@ public final strictfp class VikingIsland13 extends Island {
 
         @Override
 	public final CharSequence getCurrentObjective() {
-		return Utils.getBundleString(bundle, "objective", new Object[]{new Integer(minutes)});
+		return Utils.getBundleString(bundle, "objective", new Object[]{minutes});
 	}
 }

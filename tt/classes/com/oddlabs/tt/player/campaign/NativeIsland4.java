@@ -348,6 +348,6 @@ public final strictfp class NativeIsland4 extends Island {
 
         @Override
 	public final CharSequence getCurrentObjective() {
-		return Utils.getBundleString(bundle, "objective", new Object[]{new Integer(minutes)});
+		return Utils.getBundleString(bundle, "objective", new Object[]{minutes});
 	}
 }

@@ -19,18 +19,18 @@ public final strictfp class PassiveAI extends AI {
 				return;
 			Selectable[][] lists = getOwner().classifyUnits();
 
-			for (int i = 0; i < lists.length; i++) {
-				Selectable s = lists[i][0];
-				if (s.getPrimaryController() instanceof IdleController) {
-					for (int j = 0; j < lists[i].length; j++) {
-						float r = getOwner().getWorld().getRandom().nextFloat();
-						if (r < .2) {
-							Target walkable_target = getTarget(getOwner().getWorld().getRandom());
-							getOwner().setTarget(new Selectable[]{lists[i][j]}, walkable_target, Target.ACTION_ATTACK, true);
-						}
-					}
-				}
-			}
+                    for (Selectable[] list : lists) {
+                        Selectable s = list[0];
+                        if (s.getPrimaryController() instanceof IdleController) {
+                            for (Selectable list : list) {
+                                float r = getOwner().getWorld().getRandom().nextFloat();
+                                if (r < .2) {
+                                    Target walkable_target = getTarget(getOwner().getWorld().getRandom());
+                                    getOwner().setTarget(new Selectable[]{list}, walkable_target, Target.ACTION_ATTACK, true);
+                                }
+                            }
+                        }
+                    }
 			if (getOwner().hasActiveChieftain()) {
 				getOwner().getRace().getChieftainAI().decide(getOwner().getChieftain());
 			}

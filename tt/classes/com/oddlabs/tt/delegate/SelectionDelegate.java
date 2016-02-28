@@ -321,21 +321,20 @@ public final strictfp class SelectionDelegate extends ControllableCameraDelegate
 				List friendly_units = new ArrayList();
 				Selectable friendly_building = null;
 				Selectable enemy = null;
-				for (int i = 0; i < picked.length; i++) {
-					Selectable selectable = picked[i];
-					if (selectable != null) {
-						if (selectable.getOwner() == getViewer().getLocalPlayer()) {
-							if (selectable instanceof Building)
-								friendly_building = selectable;
-							else if (selectable instanceof Unit)
-								friendly_units.add(selectable);
-							else
-								throw new RuntimeException();
-						} else {
-							enemy = selectable;
-						}
-					}
-				}
+                            for (Selectable selectable : picked) {
+                                if (selectable != null) {
+                                    if (selectable.getOwner() == getViewer().getLocalPlayer()) {
+                                        if (selectable instanceof Building)
+                                            friendly_building = selectable;
+                                        else if (selectable instanceof Unit)
+                                            friendly_units.add(selectable);
+                                        else
+                                            throw new RuntimeException();
+                                    } else {
+                                        enemy = selectable;
+                                    }
+                                }
+                            }
 				if (LocalInput.isShiftDownCurrently() && getViewer().getSelection().getCurrentSelection().size() > 0)
 					updateSelection(friendly_units, friendly_building, enemy);
 				else

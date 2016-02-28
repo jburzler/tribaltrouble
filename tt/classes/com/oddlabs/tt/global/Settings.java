@@ -142,36 +142,35 @@ public final strictfp class Settings implements Serializable {
 		Settings original_settings = new Settings();
 		Properties props = new Properties();
 		Field[] pref_fields = Settings.class.getDeclaredFields();
-		for (int i = 0; i < pref_fields.length; i++) {
-			Field field = pref_fields[i];
-			int mods = field.getModifiers();
-			if (!hasValidModifiers(mods))
-				continue;
-			assert !Modifier.isStatic(mods);
-			Class field_type = field.getType();
-			try {
-				if (field_type.equals(boolean.class)) {
-					boolean field_value = field.getBoolean(this);
-					if (field_value != field.getBoolean(original_settings))
-						props.setProperty(field.getName(), ""+field_value);
-				} else if (field_type.equals(int.class)) {
-					int field_value = field.getInt(this);
-					if (field_value != field.getInt(original_settings))
-						props.setProperty(field.getName(), ""+field_value);
-				} else if (field_type.equals(float.class)) {
-					float field_value = field.getFloat(this);
-					if (field_value != field.getFloat(original_settings))
-						props.setProperty(field.getName(), ""+field_value);
-				} else if (field_type.equals(String.class)) {
-					String field_value = (String)field.get(this);
-					if (!field_value.equals(field.get(original_settings)))
-						props.setProperty(field.getName(), ""+field_value);
-				} else
-					throw new RuntimeException("Unsupported Settings type " + field_type);
-			} catch (IllegalAccessException e) {
-				throw new RuntimeException(e);
-			}
-		}
+            for (Field field : pref_fields) {
+                int mods = field.getModifiers();
+                if (!hasValidModifiers(mods))
+                    continue;
+                assert !Modifier.isStatic(mods);
+                Class field_type = field.getType();
+                try {
+                    if (field_type.equals(boolean.class)) {
+                        boolean field_value = field.getBoolean(this);
+                        if (field_value != field.getBoolean(original_settings))
+                            props.setProperty(field.getName(), ""+field_value);
+                    } else if (field_type.equals(int.class)) {
+                        int field_value = field.getInt(this);
+                        if (field_value != field.getInt(original_settings))
+                            props.setProperty(field.getName(), ""+field_value);
+                    } else if (field_type.equals(float.class)) {
+                        float field_value = field.getFloat(this);
+                        if (field_value != field.getFloat(original_settings))
+                            props.setProperty(field.getName(), ""+field_value);
+                    } else if (field_type.equals(String.class)) {
+                        String field_value = (String)field.get(this);
+                        if (!field_value.equals(field.get(original_settings)))
+                            props.setProperty(field.getName(), ""+field_value);
+                    } else
+                        throw new RuntimeException("Unsupported Settings type " + field_type);
+                } catch (IllegalAccessException e) {
+                    throw new RuntimeException(e);
+                }
+            }
 		File settings_file = new File(LocalInput.getGameDir(), Globals.SETTINGS_FILE_NAME);
 		try {
 			OutputStream out = new FileOutputStream(settings_file);
@@ -193,35 +192,33 @@ public final strictfp class Settings implements Serializable {
 			return;
 		}
 
-		for (int i = 0; i < pref_fields.length; i++) {
-			Field field = pref_fields[i];
-			int mods = field.getModifiers();
-			if (!hasValidModifiers(mods))
-				continue;
-			assert !Modifier.isStatic(mods);
-			String value = props.getProperty(field.getName());
-			if (value == null)
-				continue;
-
-			Class field_type = field.getType();
-			try {
-				if (field_type.equals(boolean.class)) {
-					boolean field_value = (new Boolean(value)).booleanValue();
-					field.setBoolean(this, field_value);
-				} else if (field_type.equals(int.class)) {
-					int field_value = (new Integer(value)).intValue();
-					field.setInt(this, field_value);
-				} else if (field_type.equals(float.class)) {
-					float field_value = (new Float(value)).floatValue();
-					field.setFloat(this, field_value);
-				} else if (field_type.equals(String.class)) {
-					field.set(this, value);
-				} else
-					throw new RuntimeException("Unsupported Settings type " + field_type);
-			} catch (Exception e) {
-				System.out.println("WARNING: " + field.getName() + " is not of type: " + field.getType() + ". Skipped");
-			}
-		}
+            for (Field field : pref_fields) {
+                int mods = field.getModifiers();
+                if (!hasValidModifiers(mods))
+                    continue;
+                assert !Modifier.isStatic(mods);
+                String value = props.getProperty(field.getName());
+                if (value == null)
+                    continue;
+                Class field_type = field.getType();
+                try {
+                    if (field_type.equals(boolean.class)) {
+                        boolean field_value = (new Boolean(value)).booleanValue();
+                        field.setBoolean(this, field_value);
+                    } else if (field_type.equals(int.class)) {
+                        int field_value = (new Integer(value)).intValue();
+                        field.setInt(this, field_value);
+                    } else if (field_type.equals(float.class)) {
+                        float field_value = (new Float(value)).floatValue();
+                        field.setFloat(this, field_value);
+                    } else if (field_type.equals(String.class)) {
+                        field.set(this, value);
+                    } else
+                        throw new RuntimeException("Unsupported Settings type " + field_type);
+                } catch (IllegalAccessException | RuntimeException e) {
+                    System.out.println("WARNING: " + field.getName() + " is not of type: " + field.getType() + ". Skipped");
+                }
+            }
 	}
 
 	private final static boolean hasValidModifiers(int mods) {

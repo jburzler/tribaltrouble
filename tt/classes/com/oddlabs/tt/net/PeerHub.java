@@ -282,16 +282,15 @@ public final strictfp class PeerHub implements Animated, RouterHandler {
 		if (getTick()%TICKS_PER_STATUS_UPDATE == 0 && Network.getMatchmakingClient().isConnected())
 			sendStatusUpdate();
 
-		for (int i = 0; i < peer_index_to_peer.length; i++) {
-			Peer peer = peer_index_to_peer[i];
-			if (peer != null) {
-				try {
-					peer.executeEvents(getTick());
-				} catch (IllegalARMIEventException e) {
-					peerDisconnected(peer, e.getMessage());
-				}
-			}
-		}
+            for (Peer peer : peer_index_to_peer) {
+                if (peer != null) {
+                    try {
+                        peer.executeEvents(getTick());
+                    } catch (IllegalARMIEventException e) {
+                        peerDisconnected(peer, e.getMessage());
+                    }
+                }
+            }
 		local_player.getWorld().tick(t);
 		if (getTick() % TICKS_PER_CHECKSUM == 0)
 			sendChecksum();
@@ -405,12 +404,12 @@ public final strictfp class PeerHub implements Animated, RouterHandler {
 		if (router != null)
 			router.close();
 		Object[] peers = peer_to_player.keySet().toArray();
-		for (int i = 0; i < peers.length; i++) {
-			Peer peer = (Peer)peers[i];
-			if (peer.getPlayer() != local_player) {
-				peerDisconnected(peer, "Synchronization failed");
-			}
-		}
+            for (Object peer1 : peers) {
+                Peer peer = (Peer) peer1;
+                if (peer.getPlayer() != local_player) {
+                    peerDisconnected(peer, "Synchronization failed");
+                }
+            }
 		stall_handler.stopStall();
 		leaveGame();
 	}

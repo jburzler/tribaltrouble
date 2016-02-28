@@ -37,8 +37,9 @@ public final strictfp class BezierPath {
 	}
 
 	public final void dumpPoints() {
-		for (int i = 0; i < points.length; i++)
-			System.out.println("points[i][0] = " + points[i][0] + " | points[i][1] = " + points[i][1]);
+            for (float[] point : points) {
+                System.out.println("points[i][0] = " + point[0] + " | points[i][1] = " + point[1]);
+            }
 	}
 
 	private final void computeCurvePointFromTime(float t, float[] point, float[] dir) {

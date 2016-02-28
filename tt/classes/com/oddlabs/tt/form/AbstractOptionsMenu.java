@@ -365,10 +365,11 @@ public abstract strictfp class AbstractOptionsMenu extends Form {
 			return;
 
 		String[][] languages = gui_root.getGUI().getLanguages().getLanguages();
-		for (int i = 0; i < languages.length; i++) {
-			if (Settings.getSettings().language.equals(languages[i][0]))
-				return;
-		}
+            for (String[] language : languages) {
+                if (Settings.getSettings().language.equals(language[0])) {
+                    return;
+                }
+            }
 		Settings.getSettings().language = "default";
 	}
 

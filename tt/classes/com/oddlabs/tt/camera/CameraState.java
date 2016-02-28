@@ -280,13 +280,13 @@ public final strictfp class CameraState {
 		frustum[5][2] = matrix.m23 + matrix.m22;
 		frustum[5][3] = matrix.m33 + matrix.m32;
 
-		for (int i = 0;  i < frustum.length; i++) {
-			/* Normalize the result */
-			float length_inv = 1f/((float)java.lang.StrictMath.sqrt(frustum[i][0] * frustum[i][0] + frustum[i][1] * frustum[i][1] + frustum[i][2] * frustum[i][2]));
-			frustum[i][0] *= length_inv;
-			frustum[i][1] *= length_inv;
-			frustum[i][2] *= length_inv;
-			frustum[i][3] *= length_inv;
-		}
+            for (float[] frustum1 : frustum) {
+                /* Normalize the result */
+                float length_inv = 1f / ((float) java.lang.StrictMath.sqrt(frustum1[0] * frustum1[0] + frustum1[1] * frustum1[1] + frustum1[2] * frustum1[2]));
+                frustum1[0] *= length_inv;
+                frustum1[1] *= length_inv;
+                frustum1[2] *= length_inv;
+                frustum1[3] *= length_inv;
+            }
 	}
 }

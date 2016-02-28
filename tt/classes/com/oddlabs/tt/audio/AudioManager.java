@@ -51,17 +51,16 @@ public final strictfp class AudioManager implements AudioImplementation {
 	public final void stopSources() {
 		sound_play_counter--;
 		if (sound_play_counter == 0) {
-			for (int i = 0; i < sources.length; i++) {
-				AudioSource source = sources[i];
-				int rank = source.getRank();
-				if (rank == AudioPlayer.AUDIO_RANK_MUSIC) {
-					continue;
-				} else if (rank == AudioPlayer.AUDIO_RANK_AMBIENT) {
-					AL10.alSourcePause(sources[i].getSource());
-				} else {
-					AL10.alSourceStop(sources[i].getSource());
-				}
-			}
+                    for (AudioSource source : sources) {
+                        int rank = source.getRank();
+                        if (rank == AudioPlayer.AUDIO_RANK_MUSIC) {
+                            continue;
+                        } else if (rank == AudioPlayer.AUDIO_RANK_AMBIENT) {
+                            AL10.alSourcePause(source.getSource());
+                        } else {
+                            AL10.alSourceStop(source.getSource());
+                        }
+                    }
 		}
 	}
 
@@ -107,27 +106,27 @@ public final strictfp class AudioManager implements AudioImplementation {
 	private AudioSource findSource(AudioParameters params) {
 		// Check for free sources
 		int worst_rank = Integer.MAX_VALUE;
-		for (int i = 0; i < sources.length; i++) {
-			AudioSource source = (AudioSource)sources[i];
-			int source_index = source.getSource();
-			if ((AL10.alGetSourcei(source_index, AL10.AL_SOURCE_STATE) == AL10.AL_STOPPED
-				|| AL10.alGetSourcei(source_index, AL10.AL_SOURCE_STATE) == AL10.AL_INITIAL) && source.getRank() < AudioPlayer.AUDIO_RANK_AMBIENT) {
-				if (source.getAudioPlayer() != null)
-					source.getAudioPlayer().stop();
-				return source;
-			}
-			if (worst_rank > source.getRank())
-				worst_rank = source.getRank();
-		}
+            for (AudioSource source1 : sources) {
+                AudioSource source = (AudioSource) source1;
+                int source_index = source.getSource();
+                if ((AL10.alGetSourcei(source_index, AL10.AL_SOURCE_STATE) == AL10.AL_STOPPED
+                        || AL10.alGetSourcei(source_index, AL10.AL_SOURCE_STATE) == AL10.AL_INITIAL) && source.getRank() < AudioPlayer.AUDIO_RANK_AMBIENT) {
+                    if (source.getAudioPlayer() != null)
+                        source.getAudioPlayer().stop();
+                    return source;
+                }
+                if (worst_rank > source.getRank())
+                    worst_rank = source.getRank();
+            }
 
 		if (params.rank > worst_rank) {
 			FloatBuffer position = BufferUtils.createFloatBuffer(3);
-			for (int i = 0; i < sources.length; i++) {
-				AudioSource source = (AudioSource)sources[i];
-				if (source.getRank() == worst_rank) {
-					return source;
-				}
-			}
+                for (AudioSource source1 : sources) {
+                    AudioSource source = (AudioSource) source1;
+                    if (source.getRank() == worst_rank) {
+                        return source;
+                    }
+                }
 		}
 		return null;
 	}
@@ -158,19 +157,19 @@ public final strictfp class AudioManager implements AudioImplementation {
 		if (best_source == null) {
 			float max_dist_squared = this_dist_squared;
 			FloatBuffer position = BufferUtils.createFloatBuffer(3);
-			for (int i = 0; i < sources.length; i++) {
-				AudioSource source = (AudioSource)sources[i];
-				if (source.getRank() == params.rank) {
-					int source_index = source.getSource();
-					AL10.alGetSource(source_index, AL10.AL_POSITION, position);
-
-					float dist_squared = getCamDistSquared(camera_state, position.get(0), position.get(1), position.get(2));
-					if (dist_squared > max_dist_squared) {
-						max_dist_squared = dist_squared;
-						best_source = source;
-					}
-				}
-			}
+                    for (AudioSource source1 : sources) {
+                        AudioSource source = (AudioSource) source1;
+                        if (source.getRank() == params.rank) {
+                            int source_index = source.getSource();
+                            AL10.alGetSource(source_index, AL10.AL_POSITION, position);
+                            
+                            float dist_squared = getCamDistSquared(camera_state, position.get(0), position.get(1), position.get(2));
+                            if (dist_squared > max_dist_squared) {
+                                max_dist_squared = dist_squared;
+                                best_source = source;
+                            }
+                        }
+                    }
 		}
 		stopSource(best_source);
 		return best_source;

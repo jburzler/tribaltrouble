@@ -100,33 +100,33 @@ public strictfp class ParametricEmitter extends Emitter {
 		List[] particles = getParticles();
 		int size = 0;
 
-		for (int j = 0; j < particles.length; j++) {
-			for (int i = 0; i < particles[j].size(); i++) {
-				ParametricParticle particle = (ParametricParticle)particles[j].get(i);
-				if (particle.getEnergy() > 0f) {
-					particle.update(t, getScaleX(), getScaleY(), getScaleZ());
-					float x = particle.getPosX();
-					float y = particle.getPosY();
-					float z = particle.getPosZ();
-					particle.setPos(getX() + x, getY() + y, getZ() + z);
-					x = particle.getPosX();
-					y = particle.getPosY();
-					z = particle.getPosZ();
-					float radius_x = particle.getRadiusX()*SQRT_2;
-					float radius_y = particle.getRadiusY()*SQRT_2;
-					float radius_z = particle.getRadiusZ()*SQRT_2;
-					x_min = StrictMath.min(x_min, x - radius_x);
-					x_max = StrictMath.max(x_max, x + radius_x);
-					y_min = StrictMath.min(y_min, y - radius_y);
-					y_max = StrictMath.max(y_max, y + radius_y);
-					z_min = StrictMath.min(z_min, z - radius_z);
-					z_max = StrictMath.max(z_max, z + radius_z);
-				} else {
-					particles[j].remove(i);
-				}
-			}
-			size += particles[j].size();
-		}
+            for (List particle1 : particles) {
+                for (int i = 0; i < particle1.size(); i++) {
+                    ParametricParticle particle = (ParametricParticle) particle1.get(i);
+                    if (particle.getEnergy() > 0f) {
+                        particle.update(t, getScaleX(), getScaleY(), getScaleZ());
+                        float x = particle.getPosX();
+                        float y = particle.getPosY();
+                        float z = particle.getPosZ();
+                        particle.setPos(getX() + x, getY() + y, getZ() + z);
+                        x = particle.getPosX();
+                        y = particle.getPosY();
+                        z = particle.getPosZ();
+                        float radius_x = particle.getRadiusX()*SQRT_2;
+                        float radius_y = particle.getRadiusY()*SQRT_2;
+                        float radius_z = particle.getRadiusZ()*SQRT_2;
+                        x_min = StrictMath.min(x_min, x - radius_x);
+                        x_max = StrictMath.max(x_max, x + radius_x);
+                        y_min = StrictMath.min(y_min, y - radius_y);
+                        y_max = StrictMath.max(y_max, y + radius_y);
+                        z_min = StrictMath.min(z_min, z - radius_z);
+                        z_max = StrictMath.max(z_max, z + radius_z);
+                    } else {
+                        particle1.remove(i);
+                    }
+                }
+                size += particle1.size();
+            }
 		setBounds(x_min, x_max, y_min, y_max, z_min, z_max);
 		reregister();
 		if (size == 0 && num_particles == 0) {

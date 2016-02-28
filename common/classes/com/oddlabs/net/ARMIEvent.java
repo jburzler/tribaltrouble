@@ -107,7 +107,7 @@ public final strictfp class ARMIEvent implements Serializable {
 		Object[] args;
 		try {
 			args = parseArgs(reader, method);
-		} catch (Throwable e) {
+		} catch (IOException | ClassNotFoundException e) {
 			throw new IllegalARMIEventException(e);
 		}
 		interface_methods.invoke(instance, method, args);

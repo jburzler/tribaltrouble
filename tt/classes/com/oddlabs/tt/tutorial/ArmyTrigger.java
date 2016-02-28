@@ -12,7 +12,7 @@ public final strictfp class ArmyTrigger extends TutorialTrigger {
 	private final static int ARMY_SIZE = 10;
 	
 	public ArmyTrigger(Player local_player) {
-		super(1f, 0f, "army", new Object[]{new Integer(ARMY_SIZE)});
+		super(1f, 0f, "army", new Object[]{ARMY_SIZE});
 		local_player.enableMoving(true);
 	}
 

@@ -62,11 +62,10 @@ public final strictfp class ToolTipBox extends TextField {
 		tool_tip_renderer.render(x + box.getLeftOffset(), y + box.getBottomOffset(), clip_left, clip_right, clip_bottom, clip_top, getText());
 		if (icons != null) {
 			int render_x = box_width - box.getRightOffset() - icons[icons.length - 1].getWidth();
-			for (int i = 0; i < icons.length; i++) {
-				Quad icon = icons[i];
-				icon.render(x + render_x, y + (box_height - icon.getHeight())/2);
-				render_x -= icon.getWidth()/3;
-			}
+                    for (Quad icon : icons) {
+                        icon.render(x + render_x, y + (box_height - icon.getHeight())/2);
+                        render_x -= icon.getWidth()/3;
+                    }
 		}
 	}
 }

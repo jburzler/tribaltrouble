@@ -29,8 +29,9 @@ public final strictfp class SpriteList {
 		}
 		for (int i = 0; i < sprites.length; i++)
 			sprites[i] = new Sprite(sprite_infos[i], animation_infos, sprite_file.hasAlpha(), sprite_file.isLighted(), sprite_file.isCulled(), sprite_file.hasModulateColor(), sprite_file.hasMaxAlpha(), sprite_file.getMipmapCutoff(), bounds, cpw_array, type_array, animation_length_array);
-		for (int i = 0; i < bounds.length; i++)
-			bounds[i].maximizeXYPlane();
+            for (BoundingBox bound : bounds) {
+                bound.maximizeXYPlane();
+            }
 	}
 
 	public final void reset(int index, boolean respond, boolean modulate_tex1) {

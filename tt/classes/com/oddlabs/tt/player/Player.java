@@ -308,25 +308,25 @@ public final strictfp class Player implements PlayerInterface {
 		Player[] players = world.getPlayers();
 		int best_dist_squared = Integer.MAX_VALUE;
 		Selectable best_target = null;
-		for (int i = 0; i < players.length; i++) {
-			if (isEnemy(players[i])) {
-				Set units = players[i].getUnits().getSet();
-				Iterator it = units.iterator();
-				while (it.hasNext()) {
-					Selectable s = (Selectable)it.next();
-					if (!(type.isInstance(s)) || s == target) {
-						continue;
-					}
-					int dx = s.getGridX() - start_x;
-					int dy = s.getGridY() - start_y;
-					int dist_squared = dx*dx + dy*dy;
-					if (best_dist_squared > dist_squared) {
-						best_dist_squared = dist_squared;
-						best_target = s;
-					}
-				}
-			}
-		}
+            for (Player player : players) {
+                if (isEnemy(player)) {
+                    Set units = player.getUnits().getSet();
+                    Iterator it = units.iterator();
+                    while (it.hasNext()) {
+                        Selectable s = (Selectable)it.next();
+                        if (!(type.isInstance(s)) || s == target) {
+                            continue;
+                        }
+                        int dx = s.getGridX() - start_x;
+                        int dy = s.getGridY() - start_y;
+                        int dist_squared = dx*dx + dy*dy;
+                        if (best_dist_squared > dist_squared) {
+                            best_dist_squared = dist_squared;
+                            best_target = s;
+                        }
+                    }
+                }
+            }
 		return best_target;
 	}
 
@@ -352,23 +352,23 @@ public final strictfp class Player implements PlayerInterface {
 
 	public final Building getArmory() {
 		Selectable[][] lists = classifyUnits();
-		for (int i = 0; i < lists.length; i++) {
-			Selectable s = lists[i][0];
-			if (s.getPrimaryController() instanceof NullController && s.getAbilities().hasAbilities(Abilities.BUILD_ARMIES)) {
-				return (Building)s;
-			}
-		}
+            for (Selectable[] list : lists) {
+                Selectable s = list[0];
+                if (s.getPrimaryController() instanceof NullController && s.getAbilities().hasAbilities(Abilities.BUILD_ARMIES)) {
+                    return (Building)s;
+                }
+            }
 		return null;
 	}
 
 	public final Building getQuarters() {
 		Selectable[][] lists = classifyUnits();
-		for (int i = 0; i < lists.length; i++) {
-			Selectable s = lists[i][0];
-			if (s.getPrimaryController() instanceof NullController && s.getAbilities().hasAbilities(Abilities.REPRODUCE)) {
-				return (Building)s;
-			}
-		}
+            for (Selectable[] list : lists) {
+                Selectable s = list[0];
+                if (s.getPrimaryController() instanceof NullController && s.getAbilities().hasAbilities(Abilities.REPRODUCE)) {
+                    return (Building)s;
+                }
+            }
 		return null;
 	}
 
@@ -450,10 +450,11 @@ public final strictfp class Player implements PlayerInterface {
         @Override
 	public final void placeBuilding(Selectable[] selection, int template_id, int placing_grid_x, int placing_grid_y) {
 		Building building = new Building(this, getRace().getBuildingTemplate(template_id), placing_grid_x, placing_grid_y);
-		for (int i = 0; i < selection.length; i++) {
-			if (isValid(selection[i]))
-				selection[i].initTarget(building, Target.ACTION_DEFAULT, false);
-		}
+            for (Selectable selection1 : selection) {
+                if (isValid(selection1)) {
+                    selection1.initTarget(building, Target.ACTION_DEFAULT, false);
+                }
+            }
 	}
 
         @Override
@@ -469,17 +470,19 @@ public final strictfp class Player implements PlayerInterface {
 
         @Override
 	public final void setTarget(Selectable[] selection, Target target, int action, boolean aggressive) {
-		for (int i = 0; i < selection.length; i++) {
-			if (isValid(selection[i]))
-				selection[i].initTarget(target, action, aggressive);
-		}
+            for (Selectable selection1 : selection) {
+                if (isValid(selection1)) {
+                    selection1.initTarget(target, action, aggressive);
+                }
+            }
 	}
 
 	public final void killSelection(Selectable[] selection) {
-		for (int i = 0; i < selection.length; i++) {
-			if (selection[i] != null)
-				selection[i].hit(10000, 0f, 1f, this);
-		}
+            for (Selectable selection1 : selection) {
+                if (selection1 != null) {
+                    selection1.hit(10000, 0f, 1f, this);
+                }
+            }
 	}
 
         @Override
@@ -526,9 +529,11 @@ public final strictfp class Player implements PlayerInterface {
 
 	public final boolean teamHasBuilding() {
 		Player[] players = world.getPlayers();
-		for (int i = 0; i < players.length; i++)
-			if (players[i].getPlayerInfo().getTeam() == player_info.getTeam() && players[i].getBuildingCountContainer().getNumSupplies() > 0)
-				return true;
+            for (Player player : players) {
+                if (player.getPlayerInfo().getTeam() == player_info.getTeam() && player.getBuildingCountContainer().getNumSupplies() > 0) {
+                    return true;
+                }
+            }
 		return false;
 	}
 

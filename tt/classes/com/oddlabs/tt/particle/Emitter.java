@@ -111,12 +111,12 @@ public abstract strictfp class Emitter extends Element implements Animated {
 	}
 
 	public final void forceColorChange(float dr, float dg, float db, float da) {
-		for (int j = 0; j < particles.length; j++) {
-			for (int i = 0; i < particles[j].size(); i++) {
-				Particle particle = (Particle)particles[j].get(i);
-				particle.setColor(particle.getColorR() + dr, particle.getColorG() + dg, particle.getColorB() + db, particle.getColorA() + da);
-			}
-		}
+            for (List particle1 : particles) {
+                for (int i = 0; i < particle1.size(); i++) {
+                    Particle particle = (Particle) particle1.get(i);
+                    particle.setColor(particle.getColorR() + dr, particle.getColorG() + dg, particle.getColorB() + db, particle.getColorA() + da);
+                }
+            }
 	}
 
 	protected final int getTypes() {

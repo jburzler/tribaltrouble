@@ -75,7 +75,7 @@ public final strictfp class ProgressBar extends GUIObject {
 		float done = (offset + step)/getWidth();
 		ResourceBundle bundle = ResourceBundle.getBundle(ProgressBar.class.getName());
 		int percentage = ((int)(done*100));
-		String string = Utils.getBundleString(bundle, "loading", new Object[]{new Integer(percentage)});
+		String string = Utils.getBundleString(bundle, "loading", new Object[]{percentage});
 		text_renderer.renderCropped(0, 0, clip_left, clip_right, clip_bottom, clip_top, new StringBuffer(string));
 	}
 
@@ -93,9 +93,9 @@ public final strictfp class ProgressBar extends GUIObject {
 
 	private final void pixelize(ProgressBarInfo[] info, int width) {
 		float sum = 0;
-		for (int i = 0; i < info.length; i++) {
-			sum += info[i].getWeight();
-		}
+            for (ProgressBarInfo info1 : info) {
+                sum += info1.getWeight();
+            }
 
 		info[0].setWaypoint((int)((info[0].getWeight()/sum)*width));
 		for (int i = 1; i < info.length - 1; i++) {
@@ -103,13 +103,13 @@ public final strictfp class ProgressBar extends GUIObject {
 		}
 		info[info.length - 1].setWaypoint(width);
 
-		for (int i = 0; i < info.length; i++) {
-			if (info[i].getWaypoint() > width - right_margin) {
-				info[i].setWaypoint(width - right_margin);
-			} else if (info[i].getWaypoint() < left_margin) {
-				info[i].setWaypoint(left_margin);
-			}
-		}
+            for (ProgressBarInfo info1 : info) {
+                if (info1.getWaypoint() > width - right_margin) {
+                    info1.setWaypoint(width - right_margin);
+                } else if (info1.getWaypoint() < left_margin) {
+                    info1.setWaypoint(left_margin);
+                }
+            }
 	}
 
 	private final void renderFill(int y) {

@@ -79,40 +79,35 @@ public final strictfp class LoadCampaignBox extends GUIObject implements Determi
 	}
 
 	private final void fillSlots(CampaignState[] campaign_states) {
-		for (int i = 0; i < campaign_states.length; i++) {
-			String race;
-			switch (campaign_states[i].getRace()) {
-				case CampaignState.RACE_VIKINGS:
-					race = Utils.getBundleString(bundle, "vikings");
-					break;
-				case CampaignState.RACE_NATIVES:
-					race = Utils.getBundleString(bundle, "natives");
-					break;
-				default:
-					throw new RuntimeException();
-			}
-			String difficulty;
-			switch (campaign_states[i].getDifficulty()) {
-				case CampaignState.DIFFICULTY_EASY:
-					difficulty = Utils.getBundleString(bundle, "easy");
-					break;
-				case CampaignState.DIFFICULTY_NORMAL:
-					difficulty = Utils.getBundleString(bundle, "normal");
-					break;
-				case CampaignState.DIFFICULTY_HARD:
-					difficulty = Utils.getBundleString(bundle, "hard");
-					break;
-				default:
-					throw new RuntimeException();
-			}
-			Row row = new Row(new GUIObject[] {
-				new Label(campaign_states[i].getName(), Skin.getSkin().getMultiColumnComboBoxData().getFont(), WIDTH_NAME),
-				new Label(race, Skin.getSkin().getMultiColumnComboBoxData().getFont(), WIDTH_RACE),
-				new Label(difficulty, Skin.getSkin().getMultiColumnComboBoxData().getFont(), WIDTH_DIFFICULTY),
-				new DateLabel(campaign_states[i].getDate(), Skin.getSkin().getMultiColumnComboBoxData().getFont(), WIDTH_DATE)},
-				campaign_states[i]);
-			list_box.addRow(row);
-		}
+            for (CampaignState campaign_state : campaign_states) {
+                String race;
+                switch (campaign_state.getRace()) {
+                    case CampaignState.RACE_VIKINGS:
+                        race = Utils.getBundleString(bundle, "vikings");
+                        break;
+                    case CampaignState.RACE_NATIVES:
+                        race = Utils.getBundleString(bundle, "natives");
+                        break;
+                    default:
+                        throw new RuntimeException();
+                }
+                String difficulty;
+                switch (campaign_state.getDifficulty()) {
+                    case CampaignState.DIFFICULTY_EASY:
+                        difficulty = Utils.getBundleString(bundle, "easy");
+                        break;
+                    case CampaignState.DIFFICULTY_NORMAL:
+                        difficulty = Utils.getBundleString(bundle, "normal");
+                        break;
+                    case CampaignState.DIFFICULTY_HARD:
+                        difficulty = Utils.getBundleString(bundle, "hard");
+                        break;
+                    default:
+                        throw new RuntimeException();
+                }
+                Row row = new Row(new GUIObject[]{new Label(campaign_state.getName(), Skin.getSkin().getMultiColumnComboBoxData().getFont(), WIDTH_NAME), new Label(race, Skin.getSkin().getMultiColumnComboBoxData().getFont(), WIDTH_RACE), new Label(difficulty, Skin.getSkin().getMultiColumnComboBoxData().getFont(), WIDTH_DIFFICULTY), new DateLabel(campaign_state.getDate(), Skin.getSkin().getMultiColumnComboBoxData().getFont(), WIDTH_DATE)}, campaign_state);
+                list_box.addRow(row);
+            }
 	}
 
         @Override

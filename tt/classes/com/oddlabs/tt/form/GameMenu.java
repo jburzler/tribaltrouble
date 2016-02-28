@@ -226,9 +226,11 @@ public final strictfp class GameMenu extends Panel implements ConfigurationListe
 
 	private final int countHumans(PlayerSlot[] players) {
 		int result = 0;
-		for (int i = 0; i < players.length; i++)
-			if (players[i].getType() == PlayerSlot.HUMAN)
-				result++;
+            for (PlayerSlot player : players) {
+                if (player.getType() == PlayerSlot.HUMAN) {
+                    result++;
+                }
+            }
 		return result;
 	}
 
@@ -306,9 +308,9 @@ public final strictfp class GameMenu extends Panel implements ConfigurationListe
 	}
 
 	private final void updateRatedLabels(int[] player_slots, int[] player_ratings, int[][] points) {
-		for (int i = 0; i < ratings.length; i++) {
-			ratings[i].clear();
-		}
+            for (Label rating : ratings) {
+                rating.clear();
+            }
 		for (int i = 0; i < player_slots.length; i++) {
 			int slot = player_slots[i];
 			if (slot == local_player_slot) {
@@ -474,9 +476,11 @@ public final strictfp class GameMenu extends Panel implements ConfigurationListe
 		start_button.setDisabled(true);
 		if (local_player_slot != 0)
 			return;
-		for (int i = 0; i < players.length; i++)
-			if (!players[i].isReady())
-				return;
+            for (PlayerSlot player : players) {
+                if (!player.isReady()) {
+                    return;
+                }
+            }
 		start_button.setDisabled(false);
 	}
 
@@ -508,11 +512,10 @@ public final strictfp class GameMenu extends Panel implements ConfigurationListe
 
 	private static int getNumTeams(PlayerSlot[] players) {
 		Set teams = new HashSet();
-		for (int i = 0; i < players.length; i++) {
-			PlayerSlot current = players[i];
-			if (current.getInfo() != null)
-				teams.add(new Integer(current.getInfo().getTeam()));
-		}
+            for (PlayerSlot current : players) {
+                if (current.getInfo() != null)
+                    teams.add(new Integer(current.getInfo().getTeam()));
+            }
 		return teams.size();
 	}
 

@@ -147,8 +147,9 @@ public abstract class Selectable extends Model implements Target, Animated, Mode
 
 	public final void pushControllers(Controller[] controllers) {
 		assert !isDead();
-		for (int i = 0; i < controllers.length; i++)
-			controller_stack.add(controllers[i]);
+            for (Controller controller : controllers) {
+                controller_stack.add(controller);
+            }
 		decide();
 	}
 

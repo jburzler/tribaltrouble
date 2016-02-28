@@ -266,10 +266,11 @@ System.out.println("height = " + height + " | plane_height = " + plane_height);
 		for (int i = 0; i < errors.length; i++) {
 			float max_error = Float.NEGATIVE_INFINITY;
 			LandscapeTileTriangle[][] current_quads = quad_to_planes[i];
-			for (int j = 0; j < current_quads.length; j++)
-				for (int k = 0; k < current_quads[j].length; k++) {
-					current_quads[j][k].update(heightmap, offset_x, offset_y);
-				}
+                    for (LandscapeTileTriangle[] current_quad : current_quads) {
+                        for (LandscapeTileTriangle current_quad : current_quad) {
+                            current_quad.update(heightmap, offset_x, offset_y);
+                        }
+                    }
 			int num_quads_exp = getNumQuadsExp(i);
 			int quad_size_exp = patch_exp - num_quads_exp;
 			int quad_size = 1 << quad_size_exp;

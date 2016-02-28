@@ -23,20 +23,21 @@ public final strictfp class NearArmyTrigger extends IntervalTrigger {
 
         @Override
 	protected final void check() {
-		for (int i = 0; i < src.length; i++) {
-			if (src[i].isDead())
-				continue;
-			FindOccupantFilter filter = new FindOccupantFilter(src[i].getPositionX(), src[i].getPositionY(), r, src[i], Selectable.class);
-			player.getWorld().getUnitGrid().scan(filter, src[i].getGridX(), src[i].getGridY());
-			List target_list = filter.getResult();
-			for (int j = 0; j < target_list.size(); j++) {
-				Unit unit = (Unit)target_list.get(j);
-				if (!unit.isDead() && unit.getOwner() == player) {
-					triggered();
-					return;
-				}
-			}
-		}
+            for (Unit src1 : src) {
+                if (src1.isDead()) {
+                    continue;
+                }
+                FindOccupantFilter filter = new FindOccupantFilter(src1.getPositionX(), src1.getPositionY(), r, src1, Selectable.class);
+                player.getWorld().getUnitGrid().scan(filter, src1.getGridX(), src1.getGridY());
+                List target_list = filter.getResult();
+                for (int j = 0; j < target_list.size(); j++) {
+                    Unit unit = (Unit)target_list.get(j);
+                    if (!unit.isDead() && unit.getOwner() == player) {
+                        triggered();
+                        return;
+                    }
+                }
+            }
 	}
 
         @Override

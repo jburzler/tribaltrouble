@@ -138,8 +138,9 @@ public final strictfp class ChatCommand {
 			result = Utils.getBundleString(bundle, "ignore_list_empty");
 		} else {
 			result = Utils.getBundleString(bundle, "ignore_list");
-			for (int i = 0; i < nicks.length; i++)
-				result += " " + nicks[i];
+                    for (String nick : nicks) {
+                        result += " " + nick;
+                    }
 		}
 		info_printer.print(result);
 	}

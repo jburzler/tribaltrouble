@@ -278,27 +278,29 @@ public final strictfp class NativeIsland0 extends Island {
 						getCampaign().getIcons().getFaces()[0],
 						CampaignDialogForm.ALIGN_IMAGE_LEFT);
 				addModalForm(dialog);
-				for (int i = 0; i < reinforcement_peons.length; i++) {
-					if (!reinforcement_peons[i].isDead())
-						changeOwner(reinforcement_peons[i], local_player);
-				}
+                    for (Unit reinforcement_peon : reinforcement_peons) {
+                        if (!reinforcement_peon.isDead()) {
+                            changeOwner(reinforcement_peon, local_player);
+                        }
+                    }
 			}
 		};
 		final Runnable dialog3 = new Runnable() {
                 @Override
 			public final void run() {
 				changeObjective(1);
-				// Remove statues
-				for (int i = 0; i < scenery_models.length; i++) {
-					scenery_models[i].remove();
-				}
+                    // Remove statues
+                    for (SceneryModel scenery_model : scenery_models) {
+                        scenery_model.remove();
+                    }
 				// Remove Vikings
 				Unit[] viking_units = new Unit[enemy.getUnits().getSet().size()];
 				enemy.getUnits().getSet().toArray(viking_units);
-				for (int i = 0; i < viking_units.length; i++) {
-					if (!viking_units[i].isDead())
-						viking_units[i].removeNow();
-				}
+                    for (Unit viking_unit : viking_units) {
+                        if (!viking_unit.isDead()) {
+                            viking_unit.removeNow();
+                        }
+                    }
 				// Insert new Vikings
 				int new_viking_start_x = 437*2;
 				int new_viking_start_y = 140*2;
@@ -321,10 +323,11 @@ public final strictfp class NativeIsland0 extends Island {
 				// Remove natives
 				Selectable[] native_selectables = new Selectable[natives.getUnits().getSet().size()];
 				natives.getUnits().getSet().toArray(native_selectables);
-				for (int i = 0; i < native_selectables.length; i++) {
-					if (!native_selectables[i].isDead())
-						native_selectables[i].hit(10000, 0, 1, enemy);
-				}
+                    for (Selectable native_selectable : native_selectables) {
+                        if (!native_selectable.isDead()) {
+                            native_selectable.hit(10000, 0, 1, enemy);
+                        }
+                    }
 			CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header3"),
 						Utils.getBundleString(bundle, "dialog3"),
 						getCampaign().getIcons().getFaces()[2],

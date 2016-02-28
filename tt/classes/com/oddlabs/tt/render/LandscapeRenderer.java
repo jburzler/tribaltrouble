@@ -56,9 +56,11 @@ public final strictfp class LandscapeRenderer implements Animated {
 
 		this.landscape_vertices = new LandscapeTileVertices(world.getHeightMap(), HeightMap.GRID_UNITS_PER_PATCH_EXP, world.getHeightMap().getPatchesPerWorld());
 		this.patch_levels = new PatchLevel[world.getHeightMap().getPatchesPerWorld()][world.getHeightMap().getPatchesPerWorld()];
-		for (int y = 0; y < patch_levels.length; y++)
-			for (int x = 0; x < patch_levels.length; x++)
-				patch_levels[y][x] = new PatchLevel();
+            for (PatchLevel[] patch_level : patch_levels) {
+                for (int x = 0; x < patch_levels.length; x++) {
+                    patch_level[x] = new PatchLevel();
+                }
+            }
 		for (int y = 0; y < patch_levels.length; y++)
 			for (int x = 0; x < patch_levels.length; x++) {
 				PatchLevel right = getPatchWrapped(x + 1, y);

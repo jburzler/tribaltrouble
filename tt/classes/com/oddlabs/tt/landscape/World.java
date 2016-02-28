@@ -117,14 +117,14 @@ public final strictfp class World {
 
 	public final void gamespeedChanged() {
 		int new_gamespeed = GAMESPEED_DONTCARE;
-		for (int i = 0; i < players.length; i++) {
-			int gamespeed = players[i].getPreferredGamespeed();
-			if (gamespeed != GAMESPEED_DONTCARE) {
-				if (new_gamespeed != GAMESPEED_DONTCARE && gamespeed != new_gamespeed)
-					return;
-				new_gamespeed = gamespeed;
-			}
-		}
+            for (Player player : players) {
+                int gamespeed = player.getPreferredGamespeed();
+                if (gamespeed != GAMESPEED_DONTCARE) {
+                    if (new_gamespeed != GAMESPEED_DONTCARE && gamespeed != new_gamespeed)
+                        return;
+                    new_gamespeed = gamespeed;
+                }
+            }
 		if (new_gamespeed != GAMESPEED_DONTCARE && new_gamespeed != gamespeed) {
 			gamespeed = new_gamespeed;
 			getNotificationListener().gamespeedChanged(gamespeed);

@@ -161,13 +161,13 @@ public final strictfp class LocalInput {
 		try {
 			DisplayMode[] lwjgl_modes = Display.getAvailableDisplayModes();
 			List modes = new ArrayList();
-			for (int i = 0; i < lwjgl_modes.length; i++) {
-				assert lwjgl_modes[i] != null;
-				if (SerializableDisplayMode.isModeValid(lwjgl_modes[i])) {
-					SerializableDisplayMode mode = new SerializableDisplayMode(lwjgl_modes[i]);
-					modes.add(mode);
-				}
-			}
+                    for (DisplayMode lwjgl_mode : lwjgl_modes) {
+                        assert lwjgl_mode != null;
+                        if (SerializableDisplayMode.isModeValid(lwjgl_mode)) {
+                            SerializableDisplayMode mode = new SerializableDisplayMode(lwjgl_mode);
+                            modes.add(mode);
+                        }
+                    }
 			modes = (List)LocalEventQueue.getQueue().getDeterministic().log(modes);
 
 			SerializableDisplayMode target_mode = new SerializableDisplayMode(0, 0, 0, 0);

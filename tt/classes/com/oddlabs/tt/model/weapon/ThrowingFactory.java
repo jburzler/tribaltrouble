@@ -4,6 +4,7 @@ import com.oddlabs.tt.audio.Audio;
 import com.oddlabs.tt.model.Selectable;
 import com.oddlabs.tt.model.Unit;
 import com.oddlabs.tt.render.SpriteKey;
+import java.lang.reflect.InvocationTargetException;
 
 public final strictfp class ThrowingFactory extends WeaponFactory {
 	private final static Class[] types = new Class[]{boolean.class, Unit.class, Selectable.class, SpriteKey.class, Audio.class, Audio[].class};
@@ -22,10 +23,10 @@ public final strictfp class ThrowingFactory extends WeaponFactory {
 
         @Override
 	protected final void doAttack(boolean hit, Unit src, Selectable target) {
-		Object[] args = new Object[]{new Boolean(hit), src, target, weapon_sprite, throw_sound, hit_sounds};
+		Object[] args = new Object[]{hit, src, target, weapon_sprite, throw_sound, hit_sounds};
 		try {
 			weapon_type.getConstructor(types).newInstance(args);
-		} catch (Exception e) {
+		} catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 			throw new RuntimeException(e);
 		}
 	}

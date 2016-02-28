@@ -6,21 +6,21 @@ public strictfp class DefaultARMIArgumentReader implements ARMIArgumentReader {
         @Override
 	public Object readArgument(Class type, ByteBufferInputStream in) throws IOException, ClassNotFoundException {
 		if (type.equals(char.class)) {
-			return new Character(in.buffer().getChar());
+			return in.buffer().getChar();
 		} else if (type.equals(byte.class)) {
-			return new Byte(in.buffer().get());
+			return in.buffer().get();
 		} else if (type.equals(short.class)) {
-			return new Short(in.buffer().getShort());
+			return in.buffer().getShort();
 		} else if (type.equals(int.class)) {
-			return new Integer(in.buffer().getInt());
+			return in.buffer().getInt();
 		} else if (type.equals(long.class)) {
-			return new Long(in.buffer().getLong());
+			return in.buffer().getLong();
 		} else if (type.equals(float.class)) {
-			return new Float(in.buffer().getFloat());
+			return in.buffer().getFloat();
 		} else if (type.equals(double.class)) {
-			return new Double(in.buffer().getDouble());
+			return in.buffer().getDouble();
 		} else if (type.equals(boolean.class)) {
-			return new Boolean(in.buffer().get() != 0);
+			return in.buffer().get() != 0;
 		} else if (type.equals(HostSequenceID.class)) {
 			int host_id = in.buffer().getInt();
 			int seq_id = in.buffer().getInt();
