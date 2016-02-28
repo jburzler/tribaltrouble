@@ -119,11 +119,11 @@ public final strictfp class NewUserForm extends Form {
 	}
 	
         @Override
-	public final void setFocus() {
+	public void setFocus() {
 		editline_username.setFocus();
 	}
 	
-	private final void createUser() {
+	private void createUser() {
 		String username = editline_username.getContents();
 		String password = editline_password.getPasswordDigest();
 		LoginDetails login_details = new LoginDetails(editline_email.getContents());
@@ -145,7 +145,7 @@ public final strictfp class NewUserForm extends Form {
 		}
 	}
 
-	private final void doCreateUser(String username, LoginDetails login_details, String password, Login login) {
+	private void doCreateUser(String username, LoginDetails login_details, String password, Login login) {
 		Settings.getSettings().username = username;
 		Settings.getSettings().pw_digest = password;
 		Form connecting_form = new MatchmakingConnectingForm(network, gui_root, this, main_menu, login, login_details);
@@ -154,12 +154,12 @@ public final strictfp class NewUserForm extends Form {
 
 	private final strictfp class CreateUserListener implements MouseClickListener, EnterListener {
                 @Override
-		public final void mouseClicked(int button, int x, int y, int clicks) {
+		public void mouseClicked(int button, int x, int y, int clicks) {
 			createUser();
 		}
 
                 @Override
-		public final void enterPressed(CharSequence text) {
+		public void enterPressed(CharSequence text) {
 			createUser();
 		}
 	}

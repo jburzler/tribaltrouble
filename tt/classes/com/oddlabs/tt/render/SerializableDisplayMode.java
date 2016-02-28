@@ -31,7 +31,7 @@ public final strictfp class SerializableDisplayMode implements Serializable {
 		this.freq = freq;
 	}
 
-	public final static void setModeToNearest(SerializableDisplayMode target_mode) throws LWJGLException {
+	public static void setModeToNearest(SerializableDisplayMode target_mode) throws LWJGLException {
 		Deterministic deterministic = LocalEventQueue.getQueue().getDeterministic();
 		DisplayMode[] modes = Display.getAvailableDisplayModes();
 		SortedSet set = new TreeSet(new DisplayModeComparator(target_mode));
@@ -74,7 +74,7 @@ System.out.println("considering mode = " + mode);
 			throw last_exception;
 	}
 
-	private final static void createWindow() throws LWJGLException {
+	private static void createWindow() throws LWJGLException {
 		int[] depth_array = new int[]{24, 16};
 		int[] samples_array = new int[]{/*Settings.getSettings().samples, */0};
 		LWJGLException last_exception = new LWJGLException("Could not find a suitable pixel format");
@@ -93,11 +93,11 @@ System.out.println("considering mode = " + mode);
 		throw last_exception;
 	}
 
-	public final static boolean isModeValid(DisplayMode mode) {
+	public static boolean isModeValid(DisplayMode mode) {
 		return mode.getWidth() >= 800 && mode.getHeight() >= 600;
 	}
 
-	public final static void switchMode(SerializableDisplayMode mode) {
+	public static void switchMode(SerializableDisplayMode mode) {
 		try {
 			doSetMode(mode);
 		} catch (LWJGLException e) {
@@ -105,11 +105,11 @@ System.out.println("considering mode = " + mode);
 		}
 	}
 	
-	public final static void setFullscreen(boolean fullscreen, boolean switch_now) {
+	public static void setFullscreen(boolean fullscreen, boolean switch_now) {
 		LocalInput.getLocalInput().fullscreenToggled(fullscreen, switch_now);
 	}
 
-	private final static void nativeSetMode(DisplayMode mode) throws LWJGLException {
+	private static void nativeSetMode(DisplayMode mode) throws LWJGLException {
 		if (!Display.getDisplayMode().equals(mode)) {
 System.out.println("setting mode = " + mode);
 			Display.setDisplayMode(mode);
@@ -117,7 +117,7 @@ System.out.println("setting mode = " + mode);
 		}
 	}
 
-	private final static void doSetMode(SerializableDisplayMode target_mode) throws LWJGLException {
+	private static void doSetMode(SerializableDisplayMode target_mode) throws LWJGLException {
 		DisplayMode[] lwjgl_modes = Display.getAvailableDisplayModes();
             for (DisplayMode lwjgl_mode : lwjgl_modes) {
                 SerializableDisplayMode mode = new SerializableDisplayMode(lwjgl_mode);
@@ -131,40 +131,40 @@ System.out.println("setting mode = " + mode);
 	}
 
         @Override
-	public final String toString() {
+	public String toString() {
 		return width + "x" + height + " " + bpp + "bit " + freq + "Hz";
 	}
 
-	public final int getWidth() {
+	public int getWidth() {
 		return width;
 	}
 
-	public final int getHeight() {
+	public int getHeight() {
 		return height;
 	}
 
-	public final int getFrequency() {
+	public int getFrequency() {
 		return freq;
 	}
 
-	public final int getBitsPerPixel() {
+	public int getBitsPerPixel() {
 		return bpp;
 	}
 
         @Override
-	public final boolean equals(Object other) {
+	public boolean equals(Object other) {
 		if (!(other instanceof SerializableDisplayMode))
 			return false;
 		SerializableDisplayMode other_mode = (SerializableDisplayMode)other;
 		return isEquivalent(other_mode) && getFrequency() == other_mode.getFrequency() && getBitsPerPixel() == other_mode.getBitsPerPixel();
 	}
 
-	public final boolean isEquivalent(SerializableDisplayMode other_mode) {
+	public boolean isEquivalent(SerializableDisplayMode other_mode) {
 		return getWidth() == other_mode.getWidth() && getHeight() == other_mode.getHeight();
 	}
 
         @Override
-	public final int hashCode() {
+	public int hashCode() {
 		return width ^ height ^ freq ^ bpp;
 	}
 }

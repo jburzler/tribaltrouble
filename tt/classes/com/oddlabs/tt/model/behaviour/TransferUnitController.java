@@ -16,7 +16,7 @@ public final strictfp class TransferUnitController extends Controller {
 	}
 
         @Override
-	public final void decide() {
+	public void decide() {
 		if (building_tracker != null && building_tracker.getOccupant() != null && unit.isCloseEnough(0f, building_tracker.getOccupant())) {
 			Building building = (Building)building_tracker.getOccupant();
 			if (building.getUnitContainer().canEnter(unit))

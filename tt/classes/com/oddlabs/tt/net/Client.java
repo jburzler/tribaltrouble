@@ -71,26 +71,26 @@ public final strictfp class Client implements ARMIEventBroker, GameClientInterfa
 		return configuration_listener;
 	}
 
-	public final void setConfigurationListener(ConfigurationListener listener) {
+	public void setConfigurationListener(ConfigurationListener listener) {
 		configuration_listener = listener;
 	}
 
-	public final void setUnitInfo(int slot, UnitInfo unit_info) {
+	public void setUnitInfo(int slot, UnitInfo unit_info) {
 		this.unit_infos[slot] = unit_info;
 	}
 
-	public final GameServerInterface getServerInterface() {
+	public GameServerInterface getServerInterface() {
 		return gameserver_interface;
 	}
 
         @Override
-	public final void chat(int player_slot, String chat) {
+	public void chat(int player_slot, String chat) {
 		if (chat != null && player_slot >= 0 && player_slot < player_slots.length)
 			Network.getChatHub().chat(new ChatMessage(player_slots[player_slot].getInfo().getName(), chat, ChatMessage.CHAT_GAME_MENU));
 	}
 	
         @Override
-	public final void setWorldGeneratorAndPlayerSlot(Game game, WorldGenerator generator, short player_slot) {
+	public void setWorldGeneratorAndPlayerSlot(Game game, WorldGenerator generator, short player_slot) {
 		if (state != CONNECTING)
 			return;
 		state = NEGOTIATING;
@@ -100,22 +100,22 @@ public final strictfp class Client implements ARMIEventBroker, GameClientInterfa
 	}
 
         @Override
-	public final void writeBufferDrained(AbstractConnection conn) {
+	public void writeBufferDrained(AbstractConnection conn) {
 	}
 
-	public final void close() {
+	public void close() {
 		connection.close();
 		state = CLOSED;
 		if (cleanup_action != null)
 			cleanup_action.run();
 	}
 
-	public final PlayerSlot[] getPlayers() {
+	public PlayerSlot[] getPlayers() {
 		return player_slots;
 	}
 
         @Override
-	public final void startGame(int session_id) {
+	public void startGame(int session_id) {
 		if (state != NEGOTIATING)
 			return;
 		close();
@@ -125,7 +125,7 @@ public final strictfp class Client implements ARMIEventBroker, GameClientInterfa
 	}
 
         @Override
-	public final void setPlayers(PlayerSlot[] player_slots) {
+	public void setPlayers(PlayerSlot[] player_slots) {
 		this.player_slots = player_slots;
 		for (short i = 0; i < player_slots.length; i++) {
 			if (player_slots[i] == null) {
@@ -137,7 +137,7 @@ public final strictfp class Client implements ARMIEventBroker, GameClientInterfa
 	}
 
         @Override
-	public final void handle(Object sender, ARMIEvent armi_event) {
+	public void handle(Object sender, ARMIEvent armi_event) {
 		try {
 			armi_event.execute(interface_methods, this);
 		} catch (IllegalARMIEventException e) {
@@ -146,15 +146,15 @@ public final strictfp class Client implements ARMIEventBroker, GameClientInterfa
 	}
 
         @Override
-	public final void connected(AbstractConnection conn) {
+	public void connected(AbstractConnection conn) {
 	}
 
         @Override
-	public final void error(AbstractConnection conn, IOException e) {
+	public void error(AbstractConnection conn, IOException e) {
 		error();
 	}
 
-	private final void error() {
+	private void error() {
 		getConfigurationListener().connectionLost();
 		close();
 	}

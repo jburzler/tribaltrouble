@@ -21,7 +21,7 @@ public final strictfp class InGameCampaignDialogForm extends CampaignDialogForm 
 	}
 
         @Override
-	protected final void run() {
+	protected void run() {
 		viewer.setPaused(false);
 		super.run();
 	}

@@ -13,17 +13,17 @@ public final strictfp class RadioButton extends RadioButtonGroupElement {
 	}
 
         @Override
-	protected final void mouseReleased(int button, int x, int y) {
+	protected void mouseReleased(int button, int x, int y) {
 		pressed = false;
 	}
 
         @Override
-	protected final void mousePressed(int button, int x, int y) {
+	protected void mousePressed(int button, int x, int y) {
 		pressed = true;
 	}
 
         @Override
-	protected final void renderGeometry() {
+	protected void renderGeometry() {
 		if (isDisabled()) {
 			if (isMarked())
 				Skin.getSkin().getRadioButtonMarked()[Skin.DISABLED].render(0, 0);

@@ -39,11 +39,11 @@ public final strictfp class NativeCursor extends NativeResource {
 		cursor = native_cursor;
 	}
 
-	public final org.lwjgl.input.Cursor getCursor() {
+	public org.lwjgl.input.Cursor getCursor() {
 		return cursor;
 	}
 
-	public final boolean setActive() {
+	public boolean setActive() {
 		if (Settings.getSettings().use_native_cursor && cursor != null) {
 			PointerInput.setActiveCursor(cursor);
 			return true;
@@ -54,7 +54,7 @@ public final strictfp class NativeCursor extends NativeResource {
 	}
 
         @Override
-	public final void doDelete() {
+	public void doDelete() {
 		if (cursor != null) {
 			PointerInput.deletingCursor(cursor);
 			cursor.destroy();

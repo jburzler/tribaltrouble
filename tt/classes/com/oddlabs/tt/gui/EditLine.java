@@ -135,7 +135,7 @@ public strictfp class EditLine extends TextField {
 		return super.isAllowed(ch) && getFont().getQuad(ch) != null && (allowed_chars == null || allowed_chars.indexOf(ch) != -1);
 	}
 	
-	private final void correctOffsetX() {
+	private void correctOffsetX() {
 		Box edit_box = Skin.getSkin().getEditBox();
 		int index_render_x = text_renderer.getIndexRenderX(edit_box.getLeftOffset(),
 										   edit_box.getBottomOffset(),
@@ -151,7 +151,7 @@ public strictfp class EditLine extends TextField {
 		}
 	}
 
-	private final int computeMaxX() {
+	private int computeMaxX() {
 		Box edit_box = Skin.getSkin().getEditBox();
 		return getWidth() - edit_box.getRightOffset() - Index.INDEX_WIDTH/* - getFont().getXBorder()/2*/;
 	}

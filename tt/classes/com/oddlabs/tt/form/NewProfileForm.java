@@ -68,36 +68,36 @@ public final strictfp class NewProfileForm extends Form {
 	}
 	
         @Override
-	public final void setFocus() {
+	public void setFocus() {
 		editline_nick.setFocus();
 	}
 
         @Override
-	public final void doCancel() {
+	public void doCancel() {
 		done();
 	}
 
-	private final void done() {
+	private void done() {
 		main_menu.setMenuCentered(profiles_form);
 	}
 	
-	private final void createProfile() {
+	private void createProfile() {
 		String nick = editline_nick.getContents();
 		gui_root.addModalForm(new CreatingProfileForm(gui_root, profiles_form, main_menu, nick));
 	}
 
-	public final void connectionLost() {
+	public void connectionLost() {
 		remove();
 	}
 
 	private final strictfp class CreateProfileListener implements MouseClickListener, EnterListener {
                 @Override
-		public final void mouseClicked(int button, int x, int y, int clicks) {
+		public void mouseClicked(int button, int x, int y, int clicks) {
 			createProfile();
 		}
 
                 @Override
-		public final void enterPressed(CharSequence text) {
+		public void enterPressed(CharSequence text) {
 			createProfile();
 		}
 	}

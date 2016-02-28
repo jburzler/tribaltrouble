@@ -125,7 +125,7 @@ public final strictfp class Voronoi {
 		}
 	}
 
-	public final Channel getDistance(float c1, float c2, float c3) {
+	public Channel getDistance(float c1, float c2, float c3) {
 		Channel channel = new Channel(size, size);
 		for (int y = 0; y < size; y++) {
 			for (int x = 0; x < size; x++) {
@@ -135,7 +135,7 @@ public final strictfp class Voronoi {
 		return channel.dynamicRange();
 	}
 	
-	public final Channel getHitpoint() {
+	public Channel getHitpoint() {
 		return hit;
 	}
 	

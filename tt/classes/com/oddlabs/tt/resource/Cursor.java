@@ -18,11 +18,11 @@ public final strictfp class Cursor {
 
 	private boolean render_gl_cursor;
 
-	public final void setActive() {
+	public void setActive() {
 		render_gl_cursor = !native_cursor.setActive();
 	}
 	
-	public final void render(float x, float y) {
+	public void render(float x, float y) {
 		if (render_gl_cursor || LocalEventQueue.getQueue().getDeterministic().isPlayback()) {
 			GL11.glBindTexture(GL11.GL_TEXTURE_2D, texture.getHandle());
 			GL11.glBegin(GL11.GL_QUADS);

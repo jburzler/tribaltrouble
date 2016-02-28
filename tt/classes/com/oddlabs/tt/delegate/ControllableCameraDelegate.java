@@ -66,12 +66,12 @@ public strictfp abstract class ControllableCameraDelegate extends InGameDelegate
 		}
 	}
 
-	private final void pushFirstPersonDelegate(boolean key_pressed) {
+	private void pushFirstPersonDelegate(boolean key_pressed) {
 		first_person_delegate = new FirstPersonDelegate(getViewer(), getCamera().getState(), key_pressed);
 		getGUIRoot().pushDelegate(first_person_delegate);
 	}
 	
-	private final void pushZoomDelegate() {
+	private void pushZoomDelegate() {
 		getGUIRoot().pushDelegate(new ZoomDelegate(getViewer(), game_camera));
 	}
 }

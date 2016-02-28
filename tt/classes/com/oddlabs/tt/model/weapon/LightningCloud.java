@@ -77,7 +77,7 @@ public final strictfp class LightningCloud implements Magic {
 	}
 
         @Override
-	public final void animate(float t) {
+	public void animate(float t) {
 		if (first_run) {
 			cloud_sound = owner.getWorld().getAudio().newAudio(new AudioParameters(owner.getWorld().getRacesResources().getCloudSound(), position.getX(), position.getY(), position.getZ(),
 					AudioPlayer.AUDIO_RANK_MAGIC,
@@ -149,7 +149,7 @@ public final strictfp class LightningCloud implements Magic {
 		}
 	}
 
-	private final void strike(Target target) {
+	private void strike(Target target) {
 		if (lightning_timer <= 0f) {
 			cloud.forceColorChange(BRIGHTNESS, BRIGHTNESS, BRIGHTNESS, 0f);
 			lightning_timer = LIGHTNING_TIME;
@@ -169,7 +169,7 @@ public final strictfp class LightningCloud implements Magic {
 	}
 
         @Override
-	public final void interrupt() {
+	public void interrupt() {
 		if (bubbling_sound != null)
 			bubbling_sound.stop(.2f, Settings.getSettings().sound_gain);
 	}

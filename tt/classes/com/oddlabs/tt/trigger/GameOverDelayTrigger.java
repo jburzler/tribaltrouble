@@ -22,7 +22,7 @@ public final strictfp class GameOverDelayTrigger implements Updatable {
 	}
 
         @Override
-	public final void update(Object anim) {
+	public void update(Object anim) {
 		delay_timer.stop();
 		viewer.getGUIRoot().pushDelegate(new GameStatsDelegate(viewer, camera, label_str));
 	}

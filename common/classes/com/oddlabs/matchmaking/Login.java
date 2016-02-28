@@ -15,7 +15,7 @@ public final strictfp class Login implements Serializable {
 	}
 
         @Override
-	public final boolean equals(Object other) {
+	public boolean equals(Object other) {
 		if (!(other instanceof Login))
 			return false;
 		Login other_login = (Login)other;
@@ -23,19 +23,19 @@ public final strictfp class Login implements Serializable {
 	}
 
         @Override
-	public final int hashCode() {
+	public int hashCode() {
 		return username.hashCode();
 	}
 
-	public final boolean isValid() {
+	public boolean isValid() {
 		return username != null && password_digest != null;
 	}
 	
-	public final String getUsername() {
+	public String getUsername() {
 		return username;
 	}
 
-	public final String getPasswordDigest() {
+	public String getPasswordDigest() {
 		return password_digest;
 	}
 }

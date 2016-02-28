@@ -40,11 +40,11 @@ public final strictfp class PlacingDelegate extends ControllableCameraDelegate {
 		this.building_index = building_index;
 	}
 
-	private final BuildingTemplate getTemplate() {
+	private BuildingTemplate getTemplate() {
 		return getViewer().getLocalPlayer().getRace().getBuildingTemplate(building_index);
 	}
 
-	public final void placeObject() {
+	public void placeObject() {
 		getViewer().getPicker().pickLocation(getCamera().getState(), landscape_hit);
 		UnitGrid unit_grid = getViewer().getWorld().getUnitGrid();
 		int placing_grid_x = UnitGrid.toGridCoordinate(landscape_hit.x);
@@ -66,7 +66,7 @@ public final strictfp class PlacingDelegate extends ControllableCameraDelegate {
 	}
 	*/
         @Override
-	public final void keyPressed(KeyboardEvent event) {
+	public void keyPressed(KeyboardEvent event) {
 		getCamera().keyPressed(event);
 		switch (event.getKeyCode()) {
 			case Keyboard.KEY_ESCAPE:
@@ -85,7 +85,7 @@ public final strictfp class PlacingDelegate extends ControllableCameraDelegate {
 	}
 
         @Override
-	public final void mousePressed(int button, int x, int y) {
+	public void mousePressed(int button, int x, int y) {
 		if (button == LocalInput.LEFT_BUTTON) {
 			placeObject();
 		} else if (button == LocalInput.RIGHT_BUTTON) {
@@ -101,7 +101,7 @@ public final strictfp class PlacingDelegate extends ControllableCameraDelegate {
 	}
 
         @Override
-	public final void render3D(LandscapeRenderer renderer, RenderQueues queues) {
+	public void render3D(LandscapeRenderer renderer, RenderQueues queues) {
 		getViewer().getPicker().pickLocation(getCamera().getState(), landscape_hit);
 		UnitGrid unit_grid = getViewer().getWorld().getUnitGrid();
 		int placing_grid_x = UnitGrid.toGridCoordinate(landscape_hit.x) - (getTemplate().getPlacingSize() - 1);

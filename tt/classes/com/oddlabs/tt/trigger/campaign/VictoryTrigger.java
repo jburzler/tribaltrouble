@@ -15,7 +15,7 @@ public final strictfp class VictoryTrigger extends IntervalTrigger {
 	}
 
         @Override
-	protected final void check() {
+	protected void check() {
 		Player[] players = viewer.getWorld().getPlayers();
 		Player local = viewer.getLocalPlayer();
 
@@ -31,7 +31,7 @@ public final strictfp class VictoryTrigger extends IntervalTrigger {
 	}
 
         @Override
-	protected final void done() {
+	protected void done() {
 		runnable.run();
 	}
 }

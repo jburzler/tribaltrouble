@@ -14,11 +14,11 @@ public final strictfp class UnitSupplyContainer extends SupplyContainer {
 	}
 
         @Override
-	public final int increaseSupply(int amount) {
+	public int increaseSupply(int amount) {
 		throw new RuntimeException();
 	}
 
-	public final int increaseSupply(int amount, Class type) {
+	public int increaseSupply(int amount, Class type) {
 		if (this.type != type) {
 			this.type = type;
 			super.increaseSupply(-super.getNumSupplies());
@@ -26,11 +26,11 @@ public final strictfp class UnitSupplyContainer extends SupplyContainer {
 		return super.increaseSupply(amount);
 	}
 
-	public final Class getSupplyType() {
+	public Class getSupplyType() {
 		return type;
 	}
 
-	public final SpriteKey getSupplySpriteRenderer(Class key) {
+	public SpriteKey getSupplySpriteRenderer(Class key) {
 		return (SpriteKey)supply_sprite_renderers.get(key);
 	}
 }

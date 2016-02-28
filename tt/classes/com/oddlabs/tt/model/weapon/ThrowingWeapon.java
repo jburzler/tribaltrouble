@@ -77,7 +77,7 @@ public abstract strictfp class ThrowingWeapon extends Accessories implements Ani
 		calcNumUpdatesAndZSpeed();
 	}
 
-	private final void calcNumUpdatesAndZSpeed() {
+	private void calcNumUpdatesAndZSpeed() {
 		start_x = getPositionX();
 		start_y = getPositionY();
 		updateTarget();
@@ -92,12 +92,12 @@ public abstract strictfp class ThrowingWeapon extends Accessories implements Ani
 
 	protected abstract float getMetersPerSecond();
 
-	private final void updateTarget() {
+	private void updateTarget() {
 		end_x = target.getPositionX();
 		end_y = target.getPositionY();
 	}
 	
-	private final void updateDirection() {
+	private void updateDirection() {
 		float dx = target.getPositionX() - getPositionX();
 		float dy = target.getPositionY() - getPositionY();
 		float len = (float)StrictMath.sqrt(dx*dx + dy*dy);

@@ -28,7 +28,7 @@ public final strictfp class ElementNode extends AbstractElementNode {
 		checkBoundsXY(child3);
 	}
 
-	private final AbstractElementNode createChild(/*int level,*/ int size, int x, int y) {
+	private AbstractElementNode createChild(/*int level,*/ int size, int x, int y) {
 		if (size != MIN_NODE_SIZE)
 			return new ElementNode(this, /*level + 1, */size, x, y);
 		else
@@ -36,7 +36,7 @@ public final strictfp class ElementNode extends AbstractElementNode {
 	}
 
         @Override
-	protected final AbstractElementNode doInsertElement(Element model) {
+	protected AbstractElementNode doInsertElement(Element model) {
 		incElementCount();
 		if (model.bmin_x >= getCX()) {
 			if (model.bmin_y >= getCY())
@@ -53,11 +53,11 @@ public final strictfp class ElementNode extends AbstractElementNode {
 	}
 
         @Override
-	public final void visit(ElementNodeVisitor visitor) {
+	public void visit(ElementNodeVisitor visitor) {
 		visitor.visitNode(this);
 	}
 
-	public final void visitChildren(ElementNodeVisitor visitor) {
+	public void visitChildren(ElementNodeVisitor visitor) {
 		if (getChildCount() > 0) {
 			child0.visit(visitor);
 			child1.visit(visitor);

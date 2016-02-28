@@ -18,18 +18,18 @@ final strictfp class SelectableShadowRenderer extends ShadowListRenderer {
 		halos = (Texture[])Resources.findResource(halos_desc);
 	}
 
-	public final void addToSelectionList(ModelState model) {
+	public void addToSelectionList(ModelState model) {
 		if (Globals.process_shadows)
 			selection_list.add(model);
 	}
 
-	public final void addToShadowList(ModelState model) {
+	public void addToShadowList(ModelState model) {
 		if (Globals.process_shadows)
 			shadowed_list.add(model);
 	}
 
         @Override
-	protected final void renderShadows(LandscapeRenderer renderer) {
+	protected void renderShadows(LandscapeRenderer renderer) {
 		setupShadows();
 		GL11.glColor3f(1f, 1f, 1f);
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, halos[GeneratorHalos.SHADOWED].getHandle());

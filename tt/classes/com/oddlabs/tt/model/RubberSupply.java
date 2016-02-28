@@ -71,17 +71,17 @@ public final strictfp class RubberSupply extends SupplyModel implements Animated
 	}
 	
         @Override
-	protected final float getZError() {
+	protected float getZError() {
 		return getLandscapeError();
 	}
 
         @Override
-	public final float getShadowDiameter() {
+	public float getShadowDiameter() {
 		return 1.2f;
 	}
 
         @Override
-	public final void animateSpawn(float t, float progress) {
+	public void animateSpawn(float t, float progress) {
 		anim_time += ANIMATION_SPEEDS[animation]*t;
 		float x = spawn_x + (UnitGrid.coordinateFromGrid(getGridX()) - spawn_x)*progress;
 		float y = spawn_y + (UnitGrid.coordinateFromGrid(getGridY()) - spawn_y)*progress;
@@ -91,19 +91,19 @@ public final strictfp class RubberSupply extends SupplyModel implements Animated
 	}
 
         @Override
-	public final void spawnComplete() {
+	public void spawnComplete() {
 		offset_z = 0;
 		spawning = false;
 		setNewAnimation(ANIMATION_IDLING);
 	}
 	
         @Override
-	public final Supply respawn() {
+	public Supply respawn() {
 		throw new RuntimeException();
 	}
 
         @Override
-	public final PathTracker getTracker() {
+	public PathTracker getTracker() {
 		return path_tracker;
 	}
 
@@ -117,17 +117,17 @@ public final strictfp class RubberSupply extends SupplyModel implements Animated
 	}
 */
         @Override
-	public final void free() {
+	public void free() {
 		getWorld().getUnitGrid().freeGrid(getGridX(), getGridY(), this);
 	}
 	
         @Override
-	public final void occupy() {
+	public void occupy() {
 		getWorld().getUnitGrid().occupyGrid(getGridX(), getGridY(), this);
 	}
 
         @Override
-	public final void setGridPosition(int grid_x, int grid_y) {
+	public void setGridPosition(int grid_x, int grid_y) {
 		Region current_region = getWorld().getUnitGrid().getRegion(getGridX(), getGridY());
 		Region new_region = getWorld().getUnitGrid().getRegion(grid_x, grid_y);
 		if (current_region != new_region) {
@@ -138,15 +138,15 @@ public final strictfp class RubberSupply extends SupplyModel implements Animated
 	}
 	
         @Override
-	public final void markBlocking() {
+	public void markBlocking() {
 	}
 
-	public final boolean isHit() {
+	public boolean isHit() {
 		return is_hit;
 	}
 
         @Override
-	public final void animate(float t) {
+	public void animate(float t) {
 		if (spawning)
 			return;
 		anim_time += ANIMATION_SPEEDS[animation]*t;
@@ -192,7 +192,7 @@ public final strictfp class RubberSupply extends SupplyModel implements Animated
 		}
 	}
 
-	private final void fly(float t) {
+	private void fly(float t) {
 		int state = path_tracker.animate(METERS_PER_SECOND*t);
 		switch (state) {
 			case PathTracker.OK:
@@ -209,7 +209,7 @@ public final strictfp class RubberSupply extends SupplyModel implements Animated
 	}
 
         @Override
-	public final float getOffsetZ() {
+	public float getOffsetZ() {
 		return offset_z;
 	}
 	
@@ -219,17 +219,17 @@ public final strictfp class RubberSupply extends SupplyModel implements Animated
 	}
 
         @Override
-	public final int getAnimation() {
+	public int getAnimation() {
 		return animation;
 	}
 
         @Override
-	public final float getAnimationTicks() {
+	public float getAnimationTicks() {
 		return anim_time;
 	}
 
         @Override
-	public final boolean hit() {
+	public boolean hit() {
 		if (!is_hit) {
 			is_hit = true;
 			setNewAnimation(ANIMATION_DYING);
@@ -244,7 +244,7 @@ public final strictfp class RubberSupply extends SupplyModel implements Animated
 	}
 
         @Override
-	protected final void register() {
+	protected void register() {
 		super.register();
 		getWorld().getAnimationManagerGameTime().registerAnimation(this);
 	}
@@ -256,11 +256,11 @@ public final strictfp class RubberSupply extends SupplyModel implements Animated
 	}
 
         @Override
-	public final void visit(ElementVisitor visitor) {
+	public void visit(ElementVisitor visitor) {
 		visitor.visitRubberSupply(this);
 	}
 
         @Override
-	public final void updateChecksum(StateChecksum checksum) {
+	public void updateChecksum(StateChecksum checksum) {
 	}
 }

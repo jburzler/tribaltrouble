@@ -13,16 +13,16 @@ public final strictfp class PlaceBuildingController extends Controller {
 		this.building = building;
 	}
 
-	public final Building getBuilding() {
+	public Building getBuilding() {
 		return building;
 	}
 
-	private final boolean canPlaceBuilding() {
+	private boolean canPlaceBuilding() {
 		return unit.isCloseEnough(building.getSize(), building);
 	}
 
         @Override
-	public final void decide() {
+	public void decide() {
 		if (building.isDead()) {
 			unit.popController();
 		} else if (building.isPlaced()) {

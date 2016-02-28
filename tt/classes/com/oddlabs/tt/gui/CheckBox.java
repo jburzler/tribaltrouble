@@ -27,11 +27,11 @@ public final strictfp class CheckBox extends GUIObject implements ToolTip {
 		setCanFocus(true);
 	}
 
-	public final boolean isMarked() {
+	public boolean isMarked() {
 		return marked;
 	}
 
-	public final void setMarked(boolean marked) {
+	public void setMarked(boolean marked) {
 		if (marked != this.marked) {
 			this.marked = marked;
 			checkedAll(marked);
@@ -39,32 +39,32 @@ public final strictfp class CheckBox extends GUIObject implements ToolTip {
 	}
 	
         @Override
-	public final void appendToolTip(ToolTipBox tool_tip_box) {
+	public void appendToolTip(ToolTipBox tool_tip_box) {
 		tool_tip_box.append(tool_tip);
 	}
 
-	private final void toggleMarked() {
+	private void toggleMarked() {
 		marked = !marked;
 		checkedAll(marked);
 	}
 
         @Override
-	protected final void mouseClicked(int button, int x, int y, int clicks) {
+	protected void mouseClicked(int button, int x, int y, int clicks) {
 		toggleMarked();
 	}
 
         @Override
-	protected final void mouseReleased(int button, int x, int y) {
+	protected void mouseReleased(int button, int x, int y) {
 		pressed = false;
 	}
 
         @Override
-	protected final void mousePressed(int button, int x, int y) {
+	protected void mousePressed(int button, int x, int y) {
 		pressed = true;
 	}
 
         @Override
-	protected final void renderGeometry() {
+	protected void renderGeometry() {
 		if (isDisabled()) {
 			if (marked)
 				Skin.getSkin().getCheckBoxMarked()[Skin.DISABLED].render(0, 0);
@@ -90,7 +90,7 @@ public final strictfp class CheckBox extends GUIObject implements ToolTip {
 		}
 	}
 
-	public final void checkedAll(boolean marked) {
+	public void checkedAll(boolean marked) {
 		checked(marked);
 		java.util.List list = getCheckBoxListeners();
 		for (int i = 0; i < list.size(); i++) {
@@ -108,15 +108,15 @@ public final strictfp class CheckBox extends GUIObject implements ToolTip {
 */
 	}
 
-	public final void addCheckBoxListener(CheckBoxListener listener) {
+	public void addCheckBoxListener(CheckBoxListener listener) {
 		event_listeners[CHECK_BOX_LISTENER].add(listener);
 	}
 
-	private final java.util.List getCheckBoxListeners() {
+	private java.util.List getCheckBoxListeners() {
 		return event_listeners[CHECK_BOX_LISTENER];
 	}
 
-	public final void removeCheckBoxListener(CheckBoxListener listener) {
+	public void removeCheckBoxListener(CheckBoxListener listener) {
 		event_listeners[CHECK_BOX_LISTENER].remove(listener);
 	}
 }

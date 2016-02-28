@@ -22,7 +22,7 @@ public abstract strictfp class VBO extends NativeResource {
 		handle_buffer = BufferUtils.createIntBuffer(1);
 	}
 
-	private final int createBuffer(int target, int usage, int size) {
+	private int createBuffer(int target, int usage, int size) {
 		ARBBufferObject.glGenBuffersARB(handle_buffer);
 		int handle = handle_buffer.get(0);
 		assert handle != 0;
@@ -31,7 +31,7 @@ public abstract strictfp class VBO extends NativeResource {
 		return handle;
 	}
 
-	private final static void makeCurrent(int target, int handle) {
+	private static void makeCurrent(int target, int handle) {
 		ARBBufferObject.glBindBufferARB(target, handle);
 	}
 

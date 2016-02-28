@@ -18,15 +18,15 @@ public final strictfp class AnimationInfo implements Serializable {
 		this.wpc = wpc;
 	}
 
-	public final float[][] getFrames() {
+	public float[][] getFrames() {
 		return frames;
 	}
 
-	public final int getType() {
+	public int getType() {
 		return type;
 	}
 
-	public final float getWPC() {
+	public float getWPC() {
 		return wpc;
 	}
 }

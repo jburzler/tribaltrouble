@@ -13,19 +13,19 @@ public final strictfp class WorldParameters {
 		this.initial_game_speed = initial_game_speed;
 	}
 
-	public final String getMapcode() {
+	public String getMapcode() {
 		return map_code;
 	}
 
-	public final int getInitialUnitCount() {
+	public int getInitialUnitCount() {
 		return initial_unit_count;
 	}
 
-	public final int getMaxUnitCount() {
+	public int getMaxUnitCount() {
 		return max_unit_count;
 	}
 
-	public final int getInitialGameSpeed() {
+	public int getInitialGameSpeed() {
 		return initial_game_speed;
 	}
 }

@@ -83,7 +83,7 @@ public abstract strictfp class SupplyModel extends Model implements Supply, Targ
 		return isEmpty();
 	}
 
-	private final void decreaseSupply() {
+	private void decreaseSupply() {
 		num_supplies--;
 		if (isEmpty()) {
 			UnitGrid unit_grid = getWorld().getUnitGrid();

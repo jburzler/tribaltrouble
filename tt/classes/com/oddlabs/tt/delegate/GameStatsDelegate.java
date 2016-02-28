@@ -133,13 +133,13 @@ public final strictfp class GameStatsDelegate extends CameraDelegate implements 
 	}
 
         @Override
-	public final void update(Object anim) {
+	public void update(Object anim) {
 		addChild(group_buttons);
 		delay_timer.stop();
 	}
 
         @Override
-	protected final void renderGeometry() {
+	protected void renderGeometry() {
 		renderBackgroundAlpha();
 	}
 
@@ -155,12 +155,12 @@ public final strictfp class GameStatsDelegate extends CameraDelegate implements 
 		}
 	}
 
-	public final void startMenu() {
+	public void startMenu() {
 		viewer.close();
 		setDisabled(true);
 	}
 
-	public final WorldViewer getViewer() {
+	public WorldViewer getViewer() {
 		return viewer;
 	}
 }

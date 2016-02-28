@@ -44,7 +44,7 @@ public final strictfp class IslandGenerator implements WorldGenerator {
 		this.terrain_type = terrain_type;
 	}
 
-	private final Texture createDetail(GLImage detail_image, int base_level) {
+	private Texture createDetail(GLImage detail_image, int base_level) {
 		GLImage[] detail_mipmaps = detail_image.buildMipMaps();
 		GLImage.updateMipMapsArea(detail_mipmaps, base_level, Globals.LANDSCAPE_DETAIL_FADEOUT_FACTOR,
 								  0, 0, detail_mipmaps[0].getWidth(), detail_mipmaps[0].getHeight(), false);
@@ -52,27 +52,27 @@ public final strictfp class IslandGenerator implements WorldGenerator {
 								  GL11.GL_LINEAR, GL11.GL_REPEAT, GL11.GL_REPEAT);
 	}
 
-	private final int getTexelsPerGridUnit() {
+	private int getTexelsPerGridUnit() {
 		int texels_per_grid_unit = Globals.TEXELS_PER_GRID_UNIT/(int)StrictMath.pow(2, Globals.TEXTURE_MIP_SHIFT[Settings.getSettings().graphic_detail]);
 		return texels_per_grid_unit;
 	}
 
         @Override
-	public final int getTerrainType() {
+	public int getTerrainType() {
 		return terrain_type;
 	}
 	
         @Override
-	public final int getMetersPerWorld() {
+	public int getMetersPerWorld() {
 		return meters_per_world;
 	}
 
-	public final FogInfo createFogInfo() {
+	public FogInfo createFogInfo() {
 		return Landscape.getFogInfo(terrain_type, meters_per_world);
 	}
 
         @Override
-	public final WorldInfo generate(int num_players, int initial_unit_count, float random_start_pos) {
+	public WorldInfo generate(int num_players, int initial_unit_count, float random_start_pos) {
 		int colormap_size = grid_units*getTexelsPerGridUnit();
 		int chunks_per_colormap = colormap_size/TEXELS_PER_CHUNK;
 
@@ -114,7 +114,7 @@ System.out.println("Landscape created in = " + (time_after-time_before));
 		return new WorldInfo(meters_per_world, landscape.getSeaLevelMeters(), colormap_size, chunks_per_colormap, chunk_maps, detail, heightmap, trees, palm_trees, rock, iron, plants, access_grid, build_grid, starting_locations);
 	}
 
-	private final static Texture[][] blendTextures(OffscreenRendererFactory factory, int chunks_per_colormap, BlendInfo[] blend_infos, int alpha_size, int structure_size, int scale) {
+	private static Texture[][] blendTextures(OffscreenRendererFactory factory, int chunks_per_colormap, BlendInfo[] blend_infos, int alpha_size, int structure_size, int scale) {
 		boolean use_pbuffer = Settings.getSettings().usePbuffer();
 		boolean use_fbo = Settings.getSettings().useFBO();
 		OffscreenRenderer offscreen = factory.createRenderer(TEXELS_PER_CHUNK, TEXELS_PER_CHUNK, new PixelFormat(Globals.VIEW_BIT_DEPTH, 0, 0, 0, 0), Settings.getSettings().use_copyteximage, use_pbuffer, use_fbo);

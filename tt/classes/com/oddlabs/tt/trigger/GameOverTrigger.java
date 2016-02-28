@@ -27,7 +27,7 @@ public final strictfp class GameOverTrigger implements Animated {
 	}
 
         @Override
-	public final void animate(float t) {
+	public void animate(float t) {
 		Player[] players = viewer.getWorld().getPlayers();
 		Player local_player = viewer.getLocalPlayer();
 		boolean enemy_alive = false;
@@ -58,7 +58,7 @@ public final strictfp class GameOverTrigger implements Animated {
 		}
 	}
 
-	private final int countTeams(Player[] players) {
+	private int countTeams(Player[] players) {
 		for (int i = 0; i < players.length; i++) {
 			teams[i] = 0;
 		}
@@ -77,19 +77,19 @@ public final strictfp class GameOverTrigger implements Animated {
 	}
 
         @Override
-	public final void updateChecksum(StateChecksum checksum) {
+	public void updateChecksum(StateChecksum checksum) {
 	}
 
-	public final void disable() {
+	public void disable() {
 		viewer.getWorld().getAnimationManagerRealTime().removeAnimation(this);
 	}
 
-	private final void createDelayTrigger(String text) {
+	private void createDelayTrigger(String text) {
 		GUIRoot gui_root = viewer.getGUIRoot();
 		new GameOverDelayTrigger(viewer, gui_root.getDelegate().getCamera(), text);
 	}
 	
-	private final void doGameOver(int team_count) {
+	private void doGameOver(int team_count) {
 		viewer.getPeerHub().leaveGame();
 		if (team_count < 2) {
 			createDelayTrigger(Utils.getBundleString(bundle, "you_defeated_game_over"));
@@ -99,13 +99,13 @@ public final strictfp class GameOverTrigger implements Animated {
 		disable();
 	}
 
-	private final void doGameWon() {
+	private void doGameWon() {
 		viewer.getPeerHub().gameWon();
 		createDelayTrigger(Utils.getBundleString(bundle, "you_victorious"));
 		disable();
 	}
 
-	private final void stop() {
+	private void stop() {
 		createDelayTrigger(Utils.getBundleString(bundle, "game_over"));
 		disable();
 	}

@@ -48,34 +48,34 @@ public final strictfp class LogoScreen extends CameraDelegate implements Updatab
 	}
 
         @Override
-	public final void displayChangedNotify(int width, int height) {
+	public void displayChangedNotify(int width, int height) {
 		setDim(width, height);
 		if (overlay != null)
 			overlay.setDim(width, height);
 	}
 
         @Override
-	public final void update(Object anim) {
+	public void update(Object anim) {
 		delay_timer.stop();
 		fade();
 	}
 
-	public final void fade() {
+	public void fade() {
 		if (!fade_started) {
 			fade_started = true;
 			getGUIRoot().getGUI().newFade(fadable, client_root, renderer);
 		}
 	}
 
-	public final void switchImage(GUIRoot gui_root) {
+	public void switchImage(GUIRoot gui_root) {
 		pop();
 	}
 
-	public final void fadingDone(GUIRoot gui_root) {
+	public void fadingDone(GUIRoot gui_root) {
 	}
 	
         @Override
-	protected final void keyPressed(KeyboardEvent event) {
+	protected void keyPressed(KeyboardEvent event) {
 		fade();
 	}
 

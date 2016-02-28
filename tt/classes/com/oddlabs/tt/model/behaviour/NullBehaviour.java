@@ -7,16 +7,16 @@ public final strictfp class NullBehaviour implements Behaviour {
 	}
 
         @Override
-	public final int animate(float t) {
+	public int animate(float t) {
 		return Selectable.INTERRUPTIBLE;
 	}
 
         @Override
-	public final boolean isBlocking() {
+	public boolean isBlocking() {
 		return true;
 	}
 
         @Override
-	public final void forceInterrupted() {
+	public void forceInterrupted() {
 	}
 }

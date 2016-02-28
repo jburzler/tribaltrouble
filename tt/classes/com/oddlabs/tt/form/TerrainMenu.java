@@ -427,7 +427,7 @@ public final strictfp class TerrainMenu extends Group {
 			pm_terrain_type.chooseItem(0);
 	}
 
-	private final void setMapcode() {
+	private void setMapcode() {
 		BigInteger max_val = BigInteger.ONE;
 		BigInteger result = BigInteger.ZERO;
 		result = result.add((new BigInteger(""+seed)).multiply(max_val));
@@ -470,7 +470,7 @@ public final strictfp class TerrainMenu extends Group {
 		label_mapcode.append(code);
 	}
 
-	public final void parseMapcode(String text) {
+	public void parseMapcode(String text) {
 		String code = text.toUpperCase();
 		BigInteger result = RegistrationKey.parseBits(code);
 		parseBigInteger(result);
@@ -478,7 +478,7 @@ public final strictfp class TerrainMenu extends Group {
 		label_mapcode.append(code);
 	}
 
-	private final void parseBigInteger(BigInteger result) {
+	private void parseBigInteger(BigInteger result) {
 		BigInteger max_val = MAX_VALUE;
 		for (int i = MatchmakingServerInterface.MAX_PLAYERS - 1; i >= 1; i--) {
 			result = result.mod(max_val);
@@ -538,27 +538,27 @@ public final strictfp class TerrainMenu extends Group {
 		seed = result.divide(max_val).intValue();
 	}
 
-	public final void setSeed(int seed) {
+	public void setSeed(int seed) {
 		this.seed = seed;
 	}
 
         @Override
-	public final void setFocus() {
+	public void setFocus() {
 		button_ok.setFocus();
 	}
 
-	public final GUIObject getButtonOK() {
+	public GUIObject getButtonOK() {
 		return button_ok;
 	}
 
 	private final strictfp class CancelButtonListener implements MouseClickListener {
                 @Override
-		public final void mouseClicked(int button, int x, int y, int clicks) {
+		public void mouseClicked(int button, int x, int y, int clicks) {
 			owner.terrainMenuCancel();
 		}
 	}
 
-	private final void randomize() {
+	private void randomize() {
 		Random random = new Random(LocalEventQueue.getQueue().getHighPrecisionManager().getTick()*LocalEventQueue.getQueue().getHighPrecisionManager().getTick());
 		random.nextInt();
 		BigInteger rand_int = new BigInteger(100, random);
@@ -566,16 +566,16 @@ public final strictfp class TerrainMenu extends Group {
 		setMapcode();
 	}
 
-	protected final void doCancel() {
+	protected void doCancel() {
 		if (multiplayer)
 			new SelectGameMenu(network, gui_root, main_menu);
 	}
 
-	private final boolean isChosen(PulldownMenu menu) {
+	private boolean isChosen(PulldownMenu menu) {
 		return menu.getChosenItemIndex() != 0;
 	}
 
-	public final boolean startGame() {
+	public boolean startGame() {
 		int hills = slider_hills.getValue();
 		int vegetation_amount = slider_vegetation.getValue();
 		int supplies_amount = slider_supplies.getValue();
@@ -644,14 +644,14 @@ System.out.println("Start server");
 
 	private final strictfp class MapcodeListener implements MouseClickListener {
                 @Override
-		public final void mouseClicked(int button, int x, int y, int clicks) {
+		public void mouseClicked(int button, int x, int y, int clicks) {
 			gui_root.addModalForm(new MapcodeForm(TerrainMenu.this));
 		}
 	}
 
 	private final strictfp class OKListener implements MouseClickListener {
                 @Override
-		public final void mouseClicked(int button, int x, int y, int clicks) {
+		public void mouseClicked(int button, int x, int y, int clicks) {
 			boolean started = startGame();
 			if (started)
 				button_ok.setDisabled(true);
@@ -666,7 +666,7 @@ System.out.println("Start server");
 		}
 
                 @Override
-		public final void itemChosen(PulldownMenu menu, int item_index) {
+		public void itemChosen(PulldownMenu menu, int item_index) {
 			if (item_index == 0) {
 				labels_players[i].setDisabled(true);
 				race_pulldown_buttons[i].setDisabled(true);
@@ -681,14 +681,14 @@ System.out.println("Start server");
 
 	private final strictfp class PulldownUpdateMapcodeListener implements ItemChosenListener {
                 @Override
-		public final void itemChosen(PulldownMenu menu, int item_index) {
+		public void itemChosen(PulldownMenu menu, int item_index) {
 			setMapcode();
 		}
 	}
 
 	private final strictfp class PulldownUpdateSizeListener implements ItemChosenListener {
                 @Override
-		public final void itemChosen(PulldownMenu menu, int item_index) {
+		public void itemChosen(PulldownMenu menu, int item_index) {
 			if (item_index == LARGE && !Renderer.isRegistered()) {
 				menu.chooseItem(MEDIUM);
 			}
@@ -697,7 +697,7 @@ System.out.println("Start server");
 
 	private final strictfp class PulldownUpdateHardListener implements ItemChosenListener {
                 @Override
-		public final void itemChosen(PulldownMenu menu, int item_index) {
+		public void itemChosen(PulldownMenu menu, int item_index) {
 			if (item_index == HARD && !Renderer.isRegistered()) {
 				menu.chooseItem(NORMAL);
 			}
@@ -706,7 +706,7 @@ System.out.println("Start server");
 
 	private final strictfp class PulldownUpdateTerrainListener implements ItemChosenListener {
                 @Override
-		public final void itemChosen(PulldownMenu menu, int item_index) {
+		public void itemChosen(PulldownMenu menu, int item_index) {
 			if (item_index == Game.TERRAIN_TYPE_VIKING && !Renderer.isRegistered()) {
 				menu.chooseItem(Game.TERRAIN_TYPE_NATIVE);
 			}
@@ -715,7 +715,7 @@ System.out.println("Start server");
 
 	private final strictfp class SliderUpdateMapcodeListener implements ValueListener {
                 @Override
-		public final void valueSet(int value) {
+		public void valueSet(int value) {
 			setMapcode();
 		}
 	}

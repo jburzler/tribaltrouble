@@ -39,47 +39,47 @@ public final strictfp class ScrollBarData {
 		 this.top_offset = top_offset;
 	}
 
-	public final Vertical getScrollBar() {
+	public Vertical getScrollBar() {
 		return scroll_bar;
 	}
 
-	public final Quad[] getScrollDownButtonPressed() {
+	public Quad[] getScrollDownButtonPressed() {
 		return scroll_down_button_pressed;
 	}
 
-	public final Quad[] getScrollDownButtonUnpressed() {
+	public Quad[] getScrollDownButtonUnpressed() {
 		return scroll_down_button_unpressed;
 	}
 
-	public final Quad[] getScrollDownArrow() {
+	public Quad[] getScrollDownArrow() {
 		return scroll_down_arrow;
 	}
 
-	public final Quad[] getScrollUpButtonPressed() {
+	public Quad[] getScrollUpButtonPressed() {
 		return scroll_up_button_pressed;
 	}
 
-	public final Quad[] getScrollUpButtonUnpressed() {
+	public Quad[] getScrollUpButtonUnpressed() {
 		return scroll_up_button_unpressed;
 	}
 
-	public final Quad[] getScrollUpArrow() {
+	public Quad[] getScrollUpArrow() {
 		return scroll_up_arrow;
 	}
 
-	public final Vertical getScrollButton() {
+	public Vertical getScrollButton() {
 		return scroll_button;
 	}
 
-	public final int getLeftOffset() {
+	public int getLeftOffset() {
 		return left_offset;
 	}
 
-	public final int getBottomOffset() {
+	public int getBottomOffset() {
 		return bottom_offset;
 	}
 
-	public final int getTopOffset() {
+	public int getTopOffset() {
 		return top_offset;
 	}
 }

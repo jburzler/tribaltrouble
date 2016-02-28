@@ -10,15 +10,15 @@ public final strictfp class GLIntImage extends GLImage {
 	private final IntBuffer pixels;
 
         @Override
-	public final int getPixelSize() {
+	public int getPixelSize() {
 		return 4;
 	}
 
-	public final IntBuffer getIntPixels() {
+	public IntBuffer getIntPixels() {
 		return pixels;
 	}
 
-	public final IntBuffer createCursorPixels() {
+	public IntBuffer createCursorPixels() {
 		IntBuffer cursor_pixels = BufferUtils.createIntBuffer(pixels.capacity());
 		boolean true_alpha_supported = (org.lwjgl.input.Cursor.getCapabilities() & org.lwjgl.input.Cursor.CURSOR_8_BIT_ALPHA) != 0;
 		while (pixels.hasRemaining()) {
@@ -73,17 +73,17 @@ public final strictfp class GLIntImage extends GLImage {
 	}
 
         @Override
-	public final GLImage createImage(int width, int height, int format) {
+	public GLImage createImage(int width, int height, int format) {
 		return new GLIntImage(width, height, format);
 	}
 
         @Override
-	public final int getPixel(int x, int y) {
+	public int getPixel(int x, int y) {
 		return pixels.get(y*getWidth() + x);
 	}
 
         @Override
-	public final void putPixel(int x, int y, int pixel) {
+	public void putPixel(int x, int y, int pixel) {
 		pixels.put(y*getWidth() + x, pixel);
 	}
 }

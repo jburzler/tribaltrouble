@@ -41,7 +41,7 @@ public final strictfp class FramebufferTextureRenderer extends OffscreenRenderer
 	}
 
         @Override
-	public final boolean isLost() {
+	public boolean isLost() {
 		return false;
 	}
 
@@ -54,7 +54,7 @@ public final strictfp class FramebufferTextureRenderer extends OffscreenRenderer
 	}
 
         @Override
-	protected final void finish() {
+	protected void finish() {
 		deleteBuffers();
 		popGLState();
 	}

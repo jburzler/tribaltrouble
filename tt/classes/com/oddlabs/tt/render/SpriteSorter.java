@@ -24,7 +24,7 @@ public final strictfp class SpriteSorter {
 		this.polycount_limit = polycount_limit;
 	}
 
-	public final int add(LODObject model, CameraState camera, boolean point) {
+	public int add(LODObject model, CameraState camera, boolean point) {
 		if (point && camera.inNoDetailMode()) {
 			model.markDetailPoint();
 			return DETAIL_POINT;
@@ -40,13 +40,13 @@ public final strictfp class SpriteSorter {
 		return DETAIL_POLYGON;
 	}
 
-	private final void addToPocket(float dist_squared, LODObject model) {
+	private void addToPocket(float dist_squared, LODObject model) {
 		// We can use Math here instead of StrictMath because the dist does not affect game state
 		int dist = (int)Math.sqrt(dist_squared);
 		sorted_models.add(dist, model);
 	}
 
-	public final void distributeModels() {
+	public void distributeModels() {
 		distributeHighPolygons();
 		while (sorted_models.size() > 0) {
 			LODObject model = (LODObject)sorted_models.removeBest();
@@ -57,7 +57,7 @@ public final strictfp class SpriteSorter {
 		used_polys = 0;
 	}
 
-	private final void distributeHighPolygons() {
+	private void distributeHighPolygons() {
 		while (used_polys < polycount_limit) {
 			if (sorted_models.size() > 0) {
 				LODObject model = (LODObject)sorted_models.removeBest();

@@ -15,12 +15,12 @@ public final strictfp class DebugRender {
 	private DebugRender() {
 	}
 
-	public final static void setColor(int i) {
+	public static void setColor(int i) {
 		float[] color = debug_colors[i%debug_colors.length];
 		GL11.glColor3f(color[0], color[1], color[2]);
 	}
 
-	public final static void drawBox(float bmin_x, float bmax_x, float bmin_y, float bmax_y, float bmin_z, float bmax_z, float r, float g, float b) {
+	public static void drawBox(float bmin_x, float bmax_x, float bmin_y, float bmax_y, float bmin_z, float bmax_z, float r, float g, float b) {
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 //		GL11.glDisable(GL11.GL_LIGHTING);
 		GL11.glColor3f(r, g, b);
@@ -66,7 +66,7 @@ public final strictfp class DebugRender {
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 	}
 
-	public final static void drawPoint(float x, float y, float z, float size, float r, float g, float b) {
+	public static void drawPoint(float x, float y, float z, float size, float r, float g, float b) {
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		GL11.glColor3f(r, g, b);
 		GL11.glPointSize(size);
@@ -76,7 +76,7 @@ public final strictfp class DebugRender {
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 	}
 	
-	public final static void drawLine(float x1, float y1, float z1, float x2, float y2, float z2, float r, float g, float b) {
+	public static void drawLine(float x1, float y1, float z1, float x2, float y2, float z2, float r, float g, float b) {
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		GL11.glColor3f(r, g, b);
 		GL11.glBegin(GL11.GL_LINES);
@@ -86,7 +86,7 @@ public final strictfp class DebugRender {
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 	}
 
-	public final static void drawQuad(float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4, float z, float r, float g, float b) {
+	public static void drawQuad(float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4, float z, float r, float g, float b) {
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		GL11.glColor3f(r, g, b);
 		GL11.glPolygonMode(GL11.GL_FRONT, GL11.GL_LINE);
@@ -104,7 +104,7 @@ public final strictfp class DebugRender {
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 	}
 
-	public final static void drawCylinder(float origin_x, float origin_y, float origin_z, float radius, int num_circles/*, float height*/, float r, float g, float b) {
+	public static void drawCylinder(float origin_x, float origin_y, float origin_z, float radius, int num_circles/*, float height*/, float r, float g, float b) {
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		GL11.glColor3f(r, g, b);
 //		for (float z = origin_z; z < origin_z + height; z += SUBDIV)
@@ -116,7 +116,7 @@ public final strictfp class DebugRender {
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 	}
 
-	private final static void drawCircle(float radius, float origin_x, float origin_y, float origin_z) {
+	private static void drawCircle(float radius, float origin_x, float origin_y, float origin_z) {
 		float x, y;
 		GL11.glBegin(GL11.GL_LINE_LOOP);
 		for (float phi = 0f; phi < (float)java.lang.StrictMath.PI*2; phi += ANGLE_DELTA) {
@@ -127,7 +127,7 @@ public final strictfp class DebugRender {
 		GL11.glEnd();
 	}
 
-	public final static void drawSphere(float origin_x, float origin_y, float origin_z, float radius, float r, float g, float b) {
+	public static void drawSphere(float origin_x, float origin_y, float origin_z, float radius, float r, float g, float b) {
 		float x, y, z;
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 //		GL11.glDisable(GL11.GL_LIGHTING);

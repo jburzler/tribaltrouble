@@ -18,23 +18,23 @@ public final strictfp class ProgressBarData {
 		this.font = font;
 	}
 
-	public final Horizontal getProgressBar() {
+	public Horizontal getProgressBar() {
 		return progress_bar;
 	}
 
-	public final Quad[] getLeftFill() {
+	public Quad[] getLeftFill() {
 		return left_fill;
 	}
 
-	public final Quad[] getCenterFill() {
+	public Quad[] getCenterFill() {
 		return center_fill;
 	}
 
-	public final Quad[] getRightFill() {
+	public Quad[] getRightFill() {
 		return right_fill;
 	}
 
-	public final Font getFont() {
+	public Font getFont() {
 		return font;
 	}
 }

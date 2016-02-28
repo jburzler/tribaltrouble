@@ -48,7 +48,7 @@ public final strictfp class MapCamera extends Camera {
 	}
 
         @Override
-	public final void doAnimate(float t) {
+	public void doAnimate(float t) {
 		float factor = t*1000f/StrictMath.max(t*1000f, Settings.getSettings().mapmode_delay*MAP_TIME_FACTOR);
 		float dx;
 		float dy;
@@ -101,7 +101,7 @@ public final strictfp class MapCamera extends Camera {
 		}
 	}
 
-	private final void changeMode(int mode) {
+	private void changeMode(int mode) {
 		map_mode = mode;
 		if (mode == IN_MAP) {
 			label.setPos((LocalInput.getViewWidth() - label.getWidth())/2, LocalInput.getViewHeight() - label.getHeight());
@@ -113,11 +113,11 @@ public final strictfp class MapCamera extends Camera {
 		}
 	}
 
-	public final void mapGoto(float x, float y) {
+	public void mapGoto(float x, float y) {
 		this.mapGoto(x, y, false);
 	}
 
-	public final void mapGoto(float x, float y, boolean override) {
+	public void mapGoto(float x, float y, boolean override) {
 		if (map_mode == IN_MAP || override) {
 			//	float radius = (float)StrictMath.cos(getVertAngle());
 			//	float old_dir_x = (float)StrictMath.cos(getHorizAngle())*radius;
@@ -135,7 +135,7 @@ public final strictfp class MapCamera extends Camera {
 	}
 
         @Override
-	public final void keyPressed(KeyboardEvent event) {
+	public void keyPressed(KeyboardEvent event) {
 		switch (event.getKeyCode()) {
 			case Keyboard.KEY_SPACE:
 			case Keyboard.KEY_NUMPAD5:

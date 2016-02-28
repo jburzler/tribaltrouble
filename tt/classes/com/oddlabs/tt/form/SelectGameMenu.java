@@ -230,7 +230,7 @@ public final strictfp class SelectGameMenu extends Form implements MatchmakingLi
 		}
 	}
 
-	private final void setPanel(int index, Panel panel) {
+	private void setPanel(int index, Panel panel) {
 		panels[index] = panel;
 		PanelGroup temp_group = new PanelGroup(panels, index);
 		temp_group.setPos(panel_group.getX(), panel_group.getY());
@@ -240,29 +240,29 @@ public final strictfp class SelectGameMenu extends Form implements MatchmakingLi
 		panel.setFocus();
 	}
 
-	private final ChatPanel createChatRoomPanel(ChatRoomInfo info) {
+	private ChatPanel createChatRoomPanel(ChatRoomInfo info) {
 		ChatPanel panel = new ChatPanel(gui_root, info, chat_room_list_panel.getWidth(), chat_room_list_panel.getHeight(), BUTTON_WIDTH_SHORT, new SendChatListener(), new LeaveListener());
 		Network.getChatHub().addListener(panel);
 		return panel;
 	}
 
-	public final void createGameMenu(GameNetwork game_network, Game game, WorldGenerator generator, int player_slot) {
+	public void createGameMenu(GameNetwork game_network, Game game, WorldGenerator generator, int player_slot) {
 		game_panel = new GameMenu(game_network, gui_root, this, game, generator, player_slot, game_list_panel.getWidth(), game_list_panel.getHeight(), BUTTON_WIDTH);
 		setGameMenu(game_panel);
 		game_network.getClient().setConfigurationListener(game_panel);
 	}
 
         @Override
-	public final void setFocus() {
+	public void setFocus() {
 		game_list_panel.setFocus();
 	}
 
-	private final static void updateList(int type) {
+	private static void updateList(int type) {
 		Network.getMatchmakingClient().requestList(type);
 	}
 
         @Override
-	public final void connectionLost() {
+	public void connectionLost() {
 		leaveChatRoom();
 		remove();
 		if (profiles_form != null)
@@ -271,12 +271,12 @@ public final strictfp class SelectGameMenu extends Form implements MatchmakingLi
 	}
 
         @Override
-	public final void loggedIn() {
+	public void loggedIn() {
 		assert false;
 	}
 
         @Override
-	public final void loginError(int error_code) {
+	public void loginError(int error_code) {
 		assert false;
 	}
 
@@ -300,7 +300,7 @@ public final strictfp class SelectGameMenu extends Form implements MatchmakingLi
 	}
 
         @Override
-	public final void joinedChat(ChatRoomInfo info) {
+	public void joinedChat(ChatRoomInfo info) {
 		if (chat_panel != null) {
 			chat_panel.connectionLost();
 			Network.getChatHub().removeListener(chat_panel);
@@ -310,23 +310,23 @@ public final strictfp class SelectGameMenu extends Form implements MatchmakingLi
 	}
 
         @Override
-	protected final void doRemove() {
+	protected void doRemove() {
 		super.doRemove();
 		Network.getChatHub().removeListener(chat_panel);
 	}
 
         @Override
-	public final void receivedProfiles(Profile[] profiles, String last_nick) {
+	public void receivedProfiles(Profile[] profiles, String last_nick) {
 		profiles_form.receivedProfiles(profiles, last_nick);
 	}
 
         @Override
-	public final void updateChatRoom(ChatRoomInfo info) {
+	public void updateChatRoom(ChatRoomInfo info) {
 		chat_panel.update(info);
 	}
 
         @Override
-	public final void receivedList(int type, Object[] names) {
+	public void receivedList(int type, Object[] names) {
 		switch (type) {
 			case MatchmakingServerInterface.TYPE_GAME:
                 for (Object name : names) {
@@ -351,7 +351,7 @@ public final strictfp class SelectGameMenu extends Form implements MatchmakingLi
 	}
 
         @Override
-	public final void clearList(int type) {
+	public void clearList(int type) {
 		switch (type) {
 			case MatchmakingServerInterface.TYPE_GAME:
 				game_hosts.clear();
@@ -369,7 +369,7 @@ public final strictfp class SelectGameMenu extends Form implements MatchmakingLi
 		}
 	}
 
-	private final void updateRankingList(RankingEntry ranking) {
+	private void updateRankingList(RankingEntry ranking) {
 		Row row = new Row(new GUIObject[]{
 			new IntegerLabel(ranking.getRanking(), Skin.getSkin().getMultiColumnComboBoxData().getFont()),
 			new Label(ranking.getName(), Skin.getSkin().getMultiColumnComboBoxData().getFont(), user_name_size),
@@ -380,7 +380,7 @@ public final strictfp class SelectGameMenu extends Form implements MatchmakingLi
 		ranking_list_box.addRow(row);
 	}
 
-	private final void updateGameListGUI() {
+	private void updateGameListGUI() {
 		Font combofont = Skin.getSkin().getMultiColumnComboBoxData().getFont();
 		for (int i = 0; i < game_hosts.size(); i++) {
 			GameHost game_host = (GameHost)game_hosts.get(i);
@@ -396,7 +396,7 @@ public final strictfp class SelectGameMenu extends Form implements MatchmakingLi
 		}
 	}
 
-	private final void updateChatRoomListGUI() {
+	private void updateChatRoomListGUI() {
 		Font combofont = Skin.getSkin().getMultiColumnComboBoxData().getFont();
 		for (int i = 0; i < chat_rooms.size(); i++) {
 			ChatRoomEntry chat_room_info = (ChatRoomEntry)chat_rooms.get(i);
@@ -410,14 +410,14 @@ public final strictfp class SelectGameMenu extends Form implements MatchmakingLi
 	}
 
         @Override
-	protected final void doCancel() {
+	protected void doCancel() {
 		leaveChatRoom();
 		if (game_panel != null)
 			game_panel.cancel();
 		Network.getMatchmakingClient().close();
 	}
 
-	private final void leaveChatRoom() {
+	private void leaveChatRoom() {
 		Network.getMatchmakingClient().leaveChatRoom();
 		if (chat_panel != null)
 			chat_panel.connectionLost();
@@ -425,7 +425,7 @@ public final strictfp class SelectGameMenu extends Form implements MatchmakingLi
 		setPanel(PANEL_INDEX_CHAT, chat_room_list_panel);
 	}
 
-	private final void joinGame(GameHost selected_game) {
+	private void joinGame(GameHost selected_game) {
 		if (Network.getMatchmakingClient().getProfile() != null) {
 			if (selected_game != null) {
 				boolean rated = selected_game.getGame().isRated();
@@ -440,7 +440,7 @@ public final strictfp class SelectGameMenu extends Form implements MatchmakingLi
 		}
 	}
 
-	private final void joinRoom(ChatRoomEntry chat_room_info) {
+	private void joinRoom(ChatRoomEntry chat_room_info) {
 		if (Network.getMatchmakingClient().getProfile() != null) {
 			if (chat_room_info != null)
 				Network.getMatchmakingClient().joinRoom(gui_root, chat_room_info.getName());
@@ -449,19 +449,19 @@ public final strictfp class SelectGameMenu extends Form implements MatchmakingLi
 
 	private final strictfp class RoomDoubleClickedListener implements RowListener {
                 @Override
-		public final void rowDoubleClicked(Object context) {
+		public void rowDoubleClicked(Object context) {
 			ChatRoomEntry chat_room_info = (ChatRoomEntry)context;
 			joinRoom(chat_room_info);
 		}
 
                 @Override
-		public final void rowChosen(Object context) {
+		public void rowChosen(Object context) {
 		}
 	}
 
 	private final strictfp class GameListPanelListener implements FocusListener {
                 @Override
-		public final void activated(boolean activated) {
+		public void activated(boolean activated) {
 			if (activated)
 				updateList(MatchmakingServerInterface.TYPE_GAME);
 		}
@@ -469,19 +469,19 @@ public final strictfp class SelectGameMenu extends Form implements MatchmakingLi
 
 	private final strictfp class GameDoubleClickedListener implements RowListener {
                 @Override
-		public final void rowDoubleClicked(Object context) {
+		public void rowDoubleClicked(Object context) {
 			GameHost selected_game = (GameHost)context;
 			joinGame(selected_game);
 		}
 
                 @Override
-		public final void rowChosen(Object context) {
+		public void rowChosen(Object context) {
 		}
 	}
 
 	private final strictfp class JoinGameListener implements MouseClickListener {
                 @Override
-		public final void mouseClicked(int button, int x, int y, int clicks) {
+		public void mouseClicked(int button, int x, int y, int clicks) {
 			GameHost selected_game = (GameHost)game_list_box.getSelected();
 			joinGame(selected_game);
 		}
@@ -489,21 +489,21 @@ public final strictfp class SelectGameMenu extends Form implements MatchmakingLi
 
 	private final strictfp class UpdateScoresListener implements MouseClickListener {
                 @Override
-		public final void mouseClicked(int button, int x, int y, int clicks) {
+		public void mouseClicked(int button, int x, int y, int clicks) {
 			updateList(MatchmakingServerInterface.TYPE_RANKING_LIST);
 		}
 	}
 
 	private final strictfp class UpdateGameListListener implements MouseClickListener {
                 @Override
-		public final void mouseClicked(int button, int x, int y, int clicks) {
+		public void mouseClicked(int button, int x, int y, int clicks) {
 			updateList(MatchmakingServerInterface.TYPE_GAME);
 		}
 	}
 
 	private final strictfp class CreateGameListener implements MouseClickListener {
                 @Override
-		public final void mouseClicked(int button, int x, int y, int clicks) {
+		public void mouseClicked(int button, int x, int y, int clicks) {
 			if (Network.getMatchmakingClient().getProfile() != null) {
 				Panel panel = new Panel(Utils.getBundleString(bundle, "game"));
 				Group g = new TerrainMenu(network, gui_root, main_menu, true, SelectGameMenu.this);
@@ -517,7 +517,7 @@ public final strictfp class SelectGameMenu extends Form implements MatchmakingLi
 
 	private final strictfp class JoinRoomListener implements MouseClickListener {
                 @Override
-		public final void mouseClicked(int button, int x, int y, int clicks) {
+		public void mouseClicked(int button, int x, int y, int clicks) {
 			ChatRoomEntry chat_room_info = (ChatRoomEntry)chat_room_list_box.getSelected();
 			joinRoom(chat_room_info);
 		}
@@ -525,14 +525,14 @@ public final strictfp class SelectGameMenu extends Form implements MatchmakingLi
 
 	private final strictfp class UpdateRoomListListener implements MouseClickListener {
                 @Override
-		public final void mouseClicked(int button, int x, int y, int clicks) {
+		public void mouseClicked(int button, int x, int y, int clicks) {
 			updateList(MatchmakingServerInterface.TYPE_CHAT_ROOM_LIST);
 		}
 	}
 
 	private final strictfp class CreateRoomListener implements MouseClickListener {
                 @Override
-		public final void mouseClicked(int button, int x, int y, int clicks) {
+		public void mouseClicked(int button, int x, int y, int clicks) {
 			if (Network.getMatchmakingClient().getProfile() != null) {
 				main_menu.setMenuCentered(new CreateChatRoomForm(gui_root, main_menu, SelectGameMenu.this));
 			}
@@ -541,7 +541,7 @@ public final strictfp class SelectGameMenu extends Form implements MatchmakingLi
 
 	private strictfp final class SendChatListener implements EnterListener {
                 @Override
-		public final void enterPressed(CharSequence text) {
+		public void enterPressed(CharSequence text) {
 			String chat = text.toString();
 			if (!chat.equals("")) {
 				if (!ChatCommand.filterCommand(gui_root.getInfoPrinter(), chat)) {
@@ -553,7 +553,7 @@ public final strictfp class SelectGameMenu extends Form implements MatchmakingLi
 
 	private strictfp final class LeaveListener implements MouseClickListener {
                 @Override
-		public final void mouseClicked(int button, int x, int y, int clicks) {
+		public void mouseClicked(int button, int x, int y, int clicks) {
 			leaveChatRoom();
 		}
 	}
@@ -566,7 +566,7 @@ public final strictfp class SelectGameMenu extends Form implements MatchmakingLi
 		}
 
                 @Override
-		public final void itemChosen(PulldownMenu menu, int item_index) {
+		public void itemChosen(PulldownMenu menu, int item_index) {
 			GameHost host = (GameHost)box.getRightClickedRowData();
 			switch (item_index) {
 				case 0: //Join

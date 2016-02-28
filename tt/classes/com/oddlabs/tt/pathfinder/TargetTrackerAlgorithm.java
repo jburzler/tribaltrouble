@@ -15,17 +15,17 @@ public final strictfp class TargetTrackerAlgorithm implements TrackerAlgorithm {
 	}
 	
         @Override
-	public final boolean isDone(int x, int y) {
+	public boolean isDone(int x, int y) {
 		return target.isDead() || Selectable.isCloseEnough(unit_grid, max_dist, x, y, target);
 	}
 
         @Override
-	public final boolean acceptRegion(Region region) {
+	public boolean acceptRegion(Region region) {
 		return !target.isDead() && unit_grid.getRegion(target.getGridX(), target.getGridY()) == region;
 	}
 	
         @Override
-	public final Region findPathRegion(int src_x, int src_y) {
+	public Region findPathRegion(int src_x, int src_y) {
 		if (!target.isDead())
 			return PathFinder.findPathRegion(unit_grid, unit_grid.getRegion(src_x, src_y), unit_grid.getRegion(target.getGridX(), target.getGridY()));
 		else
@@ -33,7 +33,7 @@ public final strictfp class TargetTrackerAlgorithm implements TrackerAlgorithm {
 	}
 
         @Override
-	public final GridPathNode findPathGrid(Region target_region, Region next_region, int src_x, int src_y, boolean allow_secondary_targets) {
+	public GridPathNode findPathGrid(Region target_region, Region next_region, int src_x, int src_y, boolean allow_secondary_targets) {
 		if (!target.isDead())
 			return PathFinder.findPathGrid(unit_grid, next_region, null,
 										   src_x, src_y,

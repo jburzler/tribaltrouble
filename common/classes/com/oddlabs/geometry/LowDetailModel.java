@@ -17,19 +17,19 @@ public final strictfp class LowDetailModel implements Serializable {
 		this.poly_count = indices.length/3;
 	}
 
-	public final short[] getIndices() {
+	public short[] getIndices() {
 		return indices;
 	}
 
-	public final float[] getVertices() {
+	public float[] getVertices() {
 		return vertices;
 	}
 
-	public final float[] getTexCoords() {
+	public float[] getTexCoords() {
 		return tex_coords;
 	}
 
-	public final int getPolyCount() {
+	public int getPolyCount() {
 		return poly_count;
 	}
 }

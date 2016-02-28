@@ -17,33 +17,33 @@ public final strictfp class Participant implements Serializable {
 		this.race = race;
 	}
 
-	public final boolean validate() {
+	public boolean validate() {
 		return team >= 0 && team < MatchmakingServerInterface.MAX_PLAYERS;
 	}
 
-	public final int getMatchID() {
+	public int getMatchID() {
 		return match_id;
 	}
 
-	public final String getNick() {
+	public String getNick() {
 		return nick;
 	}
 
-	public final int getTeam() {
+	public int getTeam() {
 		return team;
 	}
 
-	public final int getRace() {
+	public int getRace() {
 		return race;
 	}
 
         @Override
-	public final int hashCode() {
+	public int hashCode() {
 		return match_id ^ team;
 	}
 
         @Override
-	public final boolean equals(Object other) {
+	public boolean equals(Object other) {
 		if (!(other instanceof Participant))
 			return false;
 		Participant other_part = (Participant)other;

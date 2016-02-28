@@ -64,16 +64,16 @@ public final strictfp class CreateChatRoomForm extends Form {
 	}
 	
         @Override
-	public final void setFocus() {
+	public void setFocus() {
 		editline_name.setFocus();
 	}
 
         @Override
-	protected final void doCancel() {
+	protected void doCancel() {
 		main_menu.setMenuCentered(menu);
 	}
 
-	private final void create() {
+	private void create() {
 		String name = editline_name.getContents();
 		if (name.length() < MatchmakingServerInterface.MIN_ROOM_NAME_LENGTH) {
 			String min_name_error = Utils.getBundleString(bundle, "min_name_error", new Object[]{MatchmakingServerInterface.MIN_ROOM_NAME_LENGTH});
@@ -86,12 +86,12 @@ public final strictfp class CreateChatRoomForm extends Form {
 
 	private final strictfp class OKListener implements MouseClickListener, EnterListener {
                 @Override
-		public final void mouseClicked(int button, int x, int y, int clicks) {
+		public void mouseClicked(int button, int x, int y, int clicks) {
 			create();
 		}
 
                 @Override
-		public final void enterPressed(CharSequence text) {
+		public void enterPressed(CharSequence text) {
 			create();
 		}
 	}

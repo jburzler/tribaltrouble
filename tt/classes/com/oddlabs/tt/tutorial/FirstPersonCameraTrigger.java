@@ -9,7 +9,7 @@ public final strictfp class FirstPersonCameraTrigger extends TutorialTrigger {
 	}
 
         @Override
-	protected final void run(Tutorial tutorial) {
+	protected void run(Tutorial tutorial) {
 		Delegate delegate = tutorial.getViewer().getGUIRoot().getDelegate();
 		if (delegate instanceof FirstPersonDelegate)
 			tutorial.next(new MapModeTrigger());

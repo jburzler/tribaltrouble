@@ -15,7 +15,7 @@ public final strictfp class TerrainMenuForm extends Form implements TerrainMenuL
 	}
 
         @Override
-	public final void setFocus() {
+	public void setFocus() {
 		terrain.getButtonOK().setFocus();
 	}
 

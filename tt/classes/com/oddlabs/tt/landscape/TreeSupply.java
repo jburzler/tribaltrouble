@@ -71,33 +71,33 @@ public final strictfp class TreeSupply extends AbstractTreeGroup implements Supp
 	}
 	
         @Override
-	public final World getWorld() {
+	public World getWorld() {
 		return world;
 	}
 
-	public final int getLowDetailStartIndex() {
+	public int getLowDetailStartIndex() {
 		return low_detail_start_vertex_index;
 	}
 
         @Override
-	public final void visit(ToolTipVisitor visitor) {
+	public void visit(ToolTipVisitor visitor) {
 		visitor.visitSupply(this);
 	}
 
-	public final void setLowDetailStartIndex(int index) {
+	public void setLowDetailStartIndex(int index) {
 		low_detail_start_vertex_index = index;
 	}
 
-	public final float getScale() {
+	public float getScale() {
 		return scale;
 	}
 
-	public final float getTreeFallProgress() {
+	public float getTreeFallProgress() {
 		return animation_time/SECOND_PER_TREEFALL;
 	}
 
         @Override
-	public final Supply respawn() {
+	public Supply respawn() {
 		occupyTree();
 		hide = false;
 		num_supplies = INITIAL_SUPPLIES;
@@ -105,7 +105,7 @@ public final strictfp class TreeSupply extends AbstractTreeGroup implements Supp
 	}
 
         @Override
-	public final void animateSpawn(float t, float progress) {
+	public void animateSpawn(float t, float progress) {
 		float inv = 1 - progress;
 		scale = 1 - inv*inv*inv*inv*inv*inv;
 
@@ -115,15 +115,15 @@ public final strictfp class TreeSupply extends AbstractTreeGroup implements Supp
 	}
 
         @Override
-	public final void spawnComplete() {
+	public void spawnComplete() {
 	}
 
         @Override
-	public final String toString() {
+	public String toString() {
 		return "Tree at " + grid_x + " " + grid_y + " isEmpty() " + isEmpty();
 	}
 
-	private final void occupyTree() {
+	private void occupyTree() {
 		UnitGrid grid = world.getUnitGrid();
 		world.getNotificationListener().registerTarget(this);
 		Region region = grid.getRegion(getGridX(), getGridY());
@@ -140,7 +140,7 @@ public final strictfp class TreeSupply extends AbstractTreeGroup implements Supp
 		grid.occupyGrid(grid_x, grid_y, this);
 	}
 
-	private final void unoccupyTree() {
+	private void unoccupyTree() {
 		UnitGrid grid = world.getUnitGrid();
 		world.getNotificationListener().unregisterTarget(this);
 		Region region = grid.getRegion(grid_x, grid_y);
@@ -149,42 +149,42 @@ public final strictfp class TreeSupply extends AbstractTreeGroup implements Supp
 	}
 
         @Override
-	public final float getSize() {
+	public float getSize() {
 		return size;
 	}
 
         @Override
-	public final float getPositionX() {
+	public float getPositionX() {
 		return x;
 	}
 
         @Override
-	public final float getPositionY() {
+	public float getPositionY() {
 		return y;
 	}
 
         @Override
-	public final int getGridX() {
+	public int getGridX() {
 		return grid_x;
 	}
 
         @Override
-	public final int getGridY() {
+	public int getGridY() {
 		return grid_y;
 	}
 
         @Override
-	public final int getPenalty() {
+	public int getPenalty() {
 		return Occupant.STATIC;
 	}
 
         @Override
-	public final boolean isEmpty() {
+	public boolean isEmpty() {
 		return num_supplies == 0;
 	}
 
         @Override
-	public final boolean hit() {
+	public boolean hit() {
 		hit_counter++;
 		if (hit_counter == Supply.HITS_PER_HARVEST) {
 			hit_counter = 0;
@@ -195,11 +195,11 @@ public final strictfp class TreeSupply extends AbstractTreeGroup implements Supp
 	}
 	
         @Override
-	public final boolean isDead() {
+	public boolean isDead() {
 		return isEmpty();
 	}
 	
-	private final void decreaseSupply() {
+	private void decreaseSupply() {
 		num_supplies --;
 		if (isEmpty()) {
 			unoccupyTree();
@@ -210,18 +210,18 @@ public final strictfp class TreeSupply extends AbstractTreeGroup implements Supp
 		}
 	}
 
-	public final int getTreeTypeIndex() {
+	public int getTreeTypeIndex() {
 		return tree_type_index;
 	}
 
         @Override
-	protected final boolean initBounds() {
+	protected boolean initBounds() {
 		super.initBounds();
 		return true;
 	}
 
         @Override
-	public final void animate(float t) {
+	public void animate(float t) {
 		animation_time += t;
 		float time = getTreeFallProgress();
 		low_detail_translate.set(0f, 0f, -13f*(time*time*time*time*time*time));
@@ -236,11 +236,11 @@ public final strictfp class TreeSupply extends AbstractTreeGroup implements Supp
 		}
 	}
 
-	public final StrictMatrix4f getMatrix() {
+	public StrictMatrix4f getMatrix() {
 		return matrix;
 	}
 
-	public final boolean isHidden() {
+	public boolean isHidden() {
 		return hide;
 	}
 
@@ -248,7 +248,7 @@ public final strictfp class TreeSupply extends AbstractTreeGroup implements Supp
 	public void updateChecksum(StateChecksum checksum) {}
 
         @Override
-	public final void visit(TreeNodeVisitor visitor) {
+	public void visit(TreeNodeVisitor visitor) {
 		visitor.visitTree(this);
 	}
 }

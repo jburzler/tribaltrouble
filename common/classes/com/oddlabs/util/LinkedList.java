@@ -5,7 +5,7 @@ public final strictfp class LinkedList {
 	private ListElement last = null;
 	private int size = 0;
 
-	private final boolean checkParent(ListElement elem) {
+	private boolean checkParent(ListElement elem) {
 		if (elem.getListOwner() == null) {
 			elem.setListOwner(this);
 			return false;
@@ -16,7 +16,7 @@ public final strictfp class LinkedList {
 		return false;
 	}
 
-	public final void addLast(ListElement elem) {
+	public void addLast(ListElement elem) {
 		if (checkParent(elem)) return;
 		if (last == null) {
 			first = elem;
@@ -32,7 +32,7 @@ public final strictfp class LinkedList {
 		size++;
 	}
 
-	public final void addFirst(ListElement elem) {
+	public void addFirst(ListElement elem) {
 		if (checkParent(elem)) return;
 		if (last == null) {
 			first = elem;
@@ -48,7 +48,7 @@ public final strictfp class LinkedList {
 		size++;
 	}
 
-	public final void remove(ListElement element) {
+	public void remove(ListElement element) {
 		assert element.getListOwner() == this;
 		element.setListOwner(null);
 		if (last == element && first == element) {
@@ -67,7 +67,7 @@ public final strictfp class LinkedList {
 		size--;
 	}
 
-	public final void insert(ListElement element, ListElement next_elem) {
+	public void insert(ListElement element, ListElement next_elem) {
 		if (next_elem == null) {
 			addLast(element);
 			return;
@@ -87,24 +87,24 @@ public final strictfp class LinkedList {
 		size++;
 	}
 
-	public final int size() {
+	public int size() {
 		return size;
 	}
 
-	public final ListElement getFirst() {
+	public ListElement getFirst() {
 		return first;
 	}
 
-	public final ListElement getLast() {
+	public ListElement getLast() {
 		return last;
 	}
 
-	public final void putLast(ListElement element) {
+	public void putLast(ListElement element) {
 		remove(element);
 		addLast(element);
 	}
 
-	public final void putFirst(ListElement element) {
+	public void putFirst(ListElement element) {
 		remove(element);
 		addFirst(element);
 	}

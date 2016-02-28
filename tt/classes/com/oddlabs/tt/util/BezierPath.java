@@ -22,27 +22,27 @@ public final strictfp class BezierPath {
 		initState();
 	}
 
-	private final void initState() {
+	private void initState() {
 		t = 1f;
 	}
 
-	public final boolean isDone() {
+	public boolean isDone() {
 		return t >= 1f;
 	}
 
-	public final void computeCurvePoint(float speed) {
+	public void computeCurvePoint(float speed) {
 		assert !isDone();
 		computeCurvePointFromTime(t, current_point, current_dir);
 		t += dt*speed;
 	}
 
-	public final void dumpPoints() {
+	public void dumpPoints() {
             for (float[] point : points) {
                 System.out.println("points[i][0] = " + point[0] + " | points[i][1] = " + point[1]);
             }
 	}
 
-	private final void computeCurvePointFromTime(float t, float[] point, float[] dir) {
+	private void computeCurvePointFromTime(float t, float[] point, float[] dir) {
 		float t2 = t*t;
 		float t3 = t2*t;
 		float b0 = 1 - 3*t + 3*t2 - t3;
@@ -68,23 +68,23 @@ public final strictfp class BezierPath {
 		}
 	}
 
-	public final float getCurrentDirectionX() {
+	public float getCurrentDirectionX() {
 		return current_dir[0];
 	}
 
-	public final float getCurrentDirectionY() {
+	public float getCurrentDirectionY() {
 		return current_dir[1];
 	}
 
-	public final float getCurrentX() {
+	public float getCurrentX() {
 		return current_point[0];
 	}
 
-	public final float getCurrentY() {
+	public float getCurrentY() {
 		return current_point[1];
 	}
 
-	public final void init(float inv_length, float x1, float y1, float x2, float y2) {
+	public void init(float inv_length, float x1, float y1, float x2, float y2) {
 		assert x1 != x2 || y1 != y2: x1 + " " + y1;
 		points[START][0] = x1 + (x1 - x2);
 		points[START][1] = y1 + (y1 - y2);
@@ -96,7 +96,7 @@ public final strictfp class BezierPath {
 		dt = inv_length;
 	}
 
-	public final void nextPoint(float inv_length, float x, float y) {
+	public void nextPoint(float inv_length, float x, float y) {
 		assert x != points[NEXT][0] || y != points[NEXT][1]: x + " " + y;
 		cyclePoints();
 		points[NEXT][0] = x;
@@ -105,15 +105,15 @@ public final strictfp class BezierPath {
 		dt = inv_length;
 	}
 
-	public final float getNextX() {
+	public float getNextX() {
 		return points[NEXT][0];
 	}
 
-	public final float getNextY() {
+	public float getNextY() {
 		return points[NEXT][1];
 	}
 
-	private final void cyclePoints() {
+	private void cyclePoints() {
 		float[] previous = points[PREVIOUS];
 		points[PREVIOUS] = points[START];
 		points[START] = points[END];
@@ -121,13 +121,13 @@ public final strictfp class BezierPath {
 		points[NEXT] = previous;
 	}
 
-	public final void endPath() {
+	public void endPath() {
 		float next_x = points[NEXT][0] + (points[NEXT][0] - points[END][0]);
 		float next_y = points[NEXT][1] + (points[NEXT][1] - points[END][1]);
 		nextPoint(dt, next_x, next_y);
 	}
 
-	public final void debugRender(HeightMap heightmap) {
+	public void debugRender(HeightMap heightmap) {
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		GL11.glColor3f(1f, 1f, 1f);
 		GL11.glBegin(GL11.GL_LINE_STRIP);

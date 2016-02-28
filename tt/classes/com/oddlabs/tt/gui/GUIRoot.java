@@ -78,23 +78,23 @@ public final strictfp class GUIRoot extends GUIObject implements Updatable {
 		info_printer.setPos(0, 0);
 	}
 
-	public final GUI getGUI() {
+	public GUI getGUI() {
 		return gui;
 	}
 
-	public final InputState getInputState() {
+	public InputState getInputState() {
 		return input_state;
 	}
 
-	public final GUIObject getGlobalFocus() {
+	public GUIObject getGlobalFocus() {
 		return global_focus;
 	}
 
-	public final void setGlobalFocus(GUIObject object) {
+	public void setGlobalFocus(GUIObject object) {
 		global_focus = object;
 	}
 
-	public final void setToolTipTimer() {
+	public void setToolTipTimer() {
 		tool_tip_timer.setTimerInterval(Settings.getSettings().tooltip_delay*ToolTipBox.MAX_DELAY_SECONDS);
 	}
 
@@ -104,11 +104,11 @@ public final strictfp class GUIRoot extends GUIObject implements Updatable {
 		tool_tip_timer.stop();
 	}
 
-	public final InfoPrinter getInfoPrinter() {
+	public InfoPrinter getInfoPrinter() {
 		return info_printer;
 	}
 
-	public final void pushDelegate(CameraDelegate delegate) {
+	public void pushDelegate(CameraDelegate delegate) {
 		if (delegate_stack.size() > 0) {
 			getDelegate().remove();
 		}
@@ -118,7 +118,7 @@ public final strictfp class GUIRoot extends GUIObject implements Updatable {
 		mousePick();
 	}
 
-	public final void removeDelegate(CameraDelegate delegate) {
+	public void removeDelegate(CameraDelegate delegate) {
 		boolean top_most = getDelegate() == delegate;
 		delegate.remove();
 
@@ -130,14 +130,14 @@ public final strictfp class GUIRoot extends GUIObject implements Updatable {
 		mousePick();
 	}
 
-	public final CameraDelegate getDelegate() {
+	public CameraDelegate getDelegate() {
 		if (delegate_stack.size() == 0)
 			return null;
 		else
 			return (CameraDelegate)delegate_stack.get(delegate_stack.size() - 1);
 	}
 
-	private final void pushModalDelegate(ModalDelegate delegate) {
+	private void pushModalDelegate(ModalDelegate delegate) {
 		if (modal_delegate_stack.size() > 0) {
 			getModalDelegate().remove();
 		}
@@ -146,7 +146,7 @@ public final strictfp class GUIRoot extends GUIObject implements Updatable {
 		mousePick();
 	}
 
-	private final void popModalDelegate(ModalDelegate delegate) {
+	private void popModalDelegate(ModalDelegate delegate) {
 		int index = modal_delegate_stack.indexOf(delegate);
 		if (index == -1)
 			return;
@@ -166,14 +166,14 @@ public final strictfp class GUIRoot extends GUIObject implements Updatable {
 		mousePick();
 	}
 
-	public final ModalDelegate getModalDelegate() {
+	public ModalDelegate getModalDelegate() {
 		if (modal_delegate_stack.size() > 0)
 			return (ModalDelegate)modal_delegate_stack.get(modal_delegate_stack.size() - 1);
 		else
 			return null;
 	}
 
-	public final void addModalForm(Form form) {
+	public void addModalForm(Form form) {
 		focus_backup_stack.add(global_focus);
 		ModalDelegate delegate = new ModalDelegate();
 		delegate.addChild(form);
@@ -190,26 +190,26 @@ public final strictfp class GUIRoot extends GUIObject implements Updatable {
 		}
 
                 @Override
-		public final void closed() {
+		public void closed() {
 			popModalDelegate(delegate);
 		}
 	}
 
-	public final void swapFocusBackup(GUIObject o) {
+	public void swapFocusBackup(GUIObject o) {
 		focus_backup_stack.remove(focus_backup_stack.size() - 1);
 		focus_backup_stack.add(o);
 	}
 
-	public final static float getUnitsPerPixel(float z) {
+	public static float getUnitsPerPixel(float z) {
 		return (float)(z*StrictMath.tan(Globals.FOV*(StrictMath.PI/180.0f)*0.5f)/(LocalInput.getViewHeight()*0.5d));
 	}
 
-	public final void displayChanged() {
+	public void displayChanged() {
 		displayChanged(Settings.getSettings().view_width, Settings.getSettings().view_height);
 	}
 
         @Override
-	protected final void displayChangedNotify(int width, int height) {
+	protected void displayChangedNotify(int width, int height) {
 		//Reset The Current Viewport And Perspective Transformation
 		setDim(width, height);
 		if (width != 0) {
@@ -235,7 +235,7 @@ public final strictfp class GUIRoot extends GUIObject implements Updatable {
 	}
 
         @Override
-	protected final void keyPressed(KeyboardEvent event) {
+	protected void keyPressed(KeyboardEvent event) {
 		switch (event.getKeyCode()) {
 			case Keyboard.KEY_S:
 				if (event.isControlDown()) {
@@ -466,7 +466,7 @@ System.out.println("GC Forced");
 		}
 	}
 
-	public final void mousePick() {
+	public void mousePick() {
 		mousePick(LocalInput.getMouseX(), LocalInput.getMouseY());
 	}
 
@@ -494,11 +494,11 @@ System.out.println("GC Forced");
 		}
 	}
 
-	public final GUIObject getCurrentGUIObject() {
+	public GUIObject getCurrentGUIObject() {
 		return current_gui_object;
 	}
 
-	public final void setupGUIView() {
+	public void setupGUIView() {
 		GL11.glDisable(GL11.GL_DEPTH_TEST);
 		GL11.glEnable(GL11.GL_ALPHA_TEST);
 		GL11.glAlphaFunc(GL11.GL_GREATER, 0f);
@@ -512,7 +512,7 @@ System.out.println("GC Forced");
 	}
 
         @Override
-	public final void addChild(Renderable child) {
+	public void addChild(Renderable child) {
 		super.addChild(child);
 		ModalDelegate modal_delegate = getModalDelegate();
 		putFirst(info_printer);
@@ -522,7 +522,7 @@ System.out.println("GC Forced");
 	}
 
         @Override
-	protected final void renderGeometry() {
+	protected void renderGeometry() {
 		getDelegate().render2D();
 
 		Skin.getSkin().bindTexture();
@@ -541,11 +541,11 @@ System.out.println("GC Forced");
 		}
 	}
 
-	final boolean showToolTip() {
+	boolean showToolTip() {
 		return getModalDelegate() != null || getDelegate().renderCursor();
 	}
 
-	public final void renderTopmost() {
+	public void renderTopmost() {
 		if (Globals.draw_status)
 			status.render(0, getWidth(), 0, getHeight());
 		GL11.glEnd(); // Started in renderGeometry()
@@ -560,20 +560,20 @@ System.out.println("GC Forced");
 			PointerInput.setActiveCursor(null);
 	}
 
-	public final static void resetGUIView() {
+	public static void resetGUIView() {
 		GL11.glDisable(GL11.GL_BLEND);
 		GL11.glDisable(GL11.GL_ALPHA_TEST);
 		GL11.glEnable(GL11.GL_DEPTH_TEST);
 	}
 
-	final ToolTip getToolTip() {
+	ToolTip getToolTip() {
 		if (getCurrentGUIObject() instanceof ToolTip && render_tool_tip)
 			return (ToolTip)getCurrentGUIObject();
 		else
 			return null;
 	}
 
-	final void renderToolTip(ToolTip hovered) {
+	void renderToolTip(ToolTip hovered) {
 		if (hovered != null) {
 			tool_tip.clear();
 			hovered.appendToolTip(tool_tip);

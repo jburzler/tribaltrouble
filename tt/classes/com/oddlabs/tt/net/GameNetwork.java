@@ -10,16 +10,16 @@ public final strictfp class GameNetwork {
 		assert client != null;
 	}
 
-	public final void closeServer() {
+	public void closeServer() {
 		if (server != null)
 			server.close();
 	}
 
-	public final Client getClient() {
+	public Client getClient() {
 		return client;
 	}
 
-	public final void close() {
+	public void close() {
 		client.close();
 		closeServer();
 	}

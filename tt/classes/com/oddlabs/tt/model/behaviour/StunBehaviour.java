@@ -13,7 +13,7 @@ public final strictfp class StunBehaviour implements Behaviour {
 	}
 
         @Override
-	public final int animate(float t) {
+	public int animate(float t) {
 		unit.switchToIdleAnimation();
 		if (!controller.shouldSleep(t))
 			return Selectable.DONE;
@@ -22,11 +22,11 @@ public final strictfp class StunBehaviour implements Behaviour {
 	}
 
         @Override
-	public final boolean isBlocking() {
+	public boolean isBlocking() {
 		return true;
 	}
 
         @Override
-	public final void forceInterrupted() {
+	public void forceInterrupted() {
 	}
 }

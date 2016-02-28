@@ -22,31 +22,31 @@ public final strictfp class Profile implements Serializable {
 	}
 
         @Override
-	public final String toString() {
+	public String toString() {
 		return nick;
 	}
 	
-	public final String getNick() {
+	public String getNick() {
 		return nick;
 	}
 
-	public final int getRating() {
+	public int getRating() {
 		return rating;
 	}
 
-	public final int getWins() {
+	public int getWins() {
 		return wins;
 	}
 
-	public final int getLosses() {
+	public int getLosses() {
 		return losses;
 	}
 
-	public final int getInvalid() {
+	public int getInvalid() {
 		return invalid;
 	}
 
-	public final int getRevision() {
+	public int getRevision() {
 		return revision;
 	}
 }

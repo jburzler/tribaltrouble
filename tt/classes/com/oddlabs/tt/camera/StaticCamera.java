@@ -7,6 +7,6 @@ public final strictfp class StaticCamera extends Camera {
 	}
 
         @Override
-	public final void doAnimate(float t) {
+	public void doAnimate(float t) {
 	}
 }

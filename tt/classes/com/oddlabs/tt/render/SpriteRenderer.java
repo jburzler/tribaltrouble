@@ -21,7 +21,7 @@ public final strictfp class SpriteRenderer {
 		sprite_list_renderer = new SpriteListRenderer(sprite_list);
 	}
 
-	public final void renderNoDetail(ModelState model) {
+	public void renderNoDetail(ModelState model) {
 		float[] color = model.getTeamColor();
 		GL11.glColor3f(color[0], color[1], color[2]);
 		GL11.glBegin(GL11.GL_QUADS);
@@ -36,23 +36,23 @@ public final strictfp class SpriteRenderer {
 		GL11.glEnd();
 	}
 
-	public final SpriteList getSpriteList() {
+	public SpriteList getSpriteList() {
 		return sprite_list;
 	}
 
-	public final void setupWithColor(int index, FloatBuffer material_color, boolean respond, boolean modulate_tex1) {
+	public void setupWithColor(int index, FloatBuffer material_color, boolean respond, boolean modulate_tex1) {
 		getSpriteList().getSprite(index).setupWithColor(material_color, tex_index, respond, modulate_tex1);
 	}
 
-	public final void setup(int index, boolean respond) {
+	public void setup(int index, boolean respond) {
 		getSpriteList().getSprite(index).setup(tex_index, respond);
 	}
 
-	public final void addToNoDetailList(ModelState model) {
+	public void addToNoDetailList(ModelState model) {
 		no_detail_render_list.add(model);
 	}
 
-	public final void addToRenderList(int index, ModelState model, boolean respond) {
+	public void addToRenderList(int index, ModelState model, boolean respond) {
 		index = StrictMath.min(sprite_list.getNumSprites() - 1, index);
 		if (respond) {
 			sprite_list_renderer.addToRespondRenderList(model, index, tex_index);
@@ -61,16 +61,16 @@ public final strictfp class SpriteRenderer {
 		}
 	}
 
-	public final int getTriangleCount(int index) {
+	public int getTriangleCount(int index) {
 		index = StrictMath.min(sprite_list.getNumSprites() - 1, index);
 		return sprite_list.getSprite(index).getTriangleCount();
 	}
 
-	private final void clearRenderLists() {
+	private void clearRenderLists() {
 		no_detail_render_list.clear();
 	}
 
-	public final void getAllPicks(List pick_list) {
+	public void getAllPicks(List pick_list) {
 		for (int i = 0; i < sprite_list.getNumSprites(); i++)
 			sprite_list_renderer.getAllPicks(pick_list, i, tex_index);
 		for (int i = 0; i < no_detail_render_list.size(); i++) {
@@ -81,7 +81,7 @@ public final strictfp class SpriteRenderer {
 		clearRenderLists();
 	}
 
-	public final void renderAll() {
+	public void renderAll() {
 		for (int i = 0; i < sprite_list.getNumSprites(); i++) {
 			sprite_list_renderer.renderAll(i, tex_index);
 		}

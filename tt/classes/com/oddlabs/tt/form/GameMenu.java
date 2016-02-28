@@ -78,7 +78,7 @@ public final strictfp class GameMenu extends Panel implements ConfigurationListe
 	private boolean updating;
 	private boolean ready;
 
-	public final static ResourceBundle getBundle() {
+	public static ResourceBundle getBundle() {
 		return ResourceBundle.getBundle(GameMenu.class.getName());
 	}
 
@@ -165,7 +165,7 @@ public final strictfp class GameMenu extends Panel implements ConfigurationListe
 		compileCanvas();
 	}
 
-	private final void adjustPlayerSlot(int player_slot) {
+	private void adjustPlayerSlot(int player_slot) {
 		if (updating || game_network.getClient() == null)
 			return;
 		PlayerSlot player = game_network.getClient().getPlayers()[player_slot];
@@ -215,16 +215,16 @@ public final strictfp class GameMenu extends Panel implements ConfigurationListe
 	}
 
         @Override
-	public final void connected(Client client, Game game, WorldGenerator generator, int player_slot) {
+	public void connected(Client client, Game game, WorldGenerator generator, int player_slot) {
 		assert false;
 	}
 
         @Override
-	public final void setFocus() {
+	public void setFocus() {
 		chat_line.setFocus();
 	}
 
-	private final int countHumans(PlayerSlot[] players) {
+	private int countHumans(PlayerSlot[] players) {
 		int result = 0;
             for (PlayerSlot player : players) {
                 if (player.getType() == PlayerSlot.HUMAN) {
@@ -235,7 +235,7 @@ public final strictfp class GameMenu extends Panel implements ConfigurationListe
 	}
 
         @Override
-	public final void setPlayers(PlayerSlot[] players) {
+	public void setPlayers(PlayerSlot[] players) {
 		int num_humans = countHumans(players);
 		int[] player_slots = new int[num_humans];
 		int[] player_ratings = new int[num_humans];
@@ -307,7 +307,7 @@ public final strictfp class GameMenu extends Panel implements ConfigurationListe
 		updating = false;
 	}
 
-	private final void updateRatedLabels(int[] player_slots, int[] player_ratings, int[][] points) {
+	private void updateRatedLabels(int[] player_slots, int[] player_ratings, int[][] points) {
             for (Label rating : ratings) {
                 rating.clear();
             }
@@ -325,11 +325,11 @@ public final strictfp class GameMenu extends Panel implements ConfigurationListe
 		}
 	}
 
-	private final boolean canControlSlot(int slot) {
+	private boolean canControlSlot(int slot) {
 		return local_player_slot == 0 || slot == local_player_slot;
 	}
 
-	private final GUIObject createPlayerPulldown(GUIRoot gui_root, Group group,
+	private GUIObject createPlayerPulldown(GUIRoot gui_root, Group group,
 			GUIObject previous,
 			PulldownButton[] slot_buttons,
 			PulldownButton[] race_buttons,
@@ -408,37 +408,37 @@ public final strictfp class GameMenu extends Panel implements ConfigurationListe
 	}
 
         @Override
-	protected final void doAdd() {
+	protected void doAdd() {
 		super.doAdd();
 		Network.getChatHub().addListener(this);
 	}
 
         @Override
-	protected final void doRemove() {
+	protected void doRemove() {
 		super.doRemove();
 		Network.getChatHub().removeListener(this);
 	}
 
         @Override
-	public final void connectionLost() {
+	public void connectionLost() {
 		remove();
 		owner.removeGameMenu();
 		gui_root.addModalForm(new MessageForm(Utils.getBundleString(bundle, "connection_lost")));
 	}
 
         @Override
-	public final void gameStarted() {
+	public void gameStarted() {
 //		owner.removeGameMenu();
 		setDisabled(true);
 	}
 
-	private final void finishChatAppend() {
+	private void finishChatAppend() {
 		chat_box.setOffsetY(Integer.MAX_VALUE);
 		getTab().updateNotify();
 	}
 
         @Override
-	public final void chat(ChatMessage message) {
+	public void chat(ChatMessage message) {
 		if (message.type != ChatMessage.CHAT_GAME_MENU)
 			return;
 		if (chat_box.length() > 0)
@@ -450,21 +450,21 @@ public final strictfp class GameMenu extends Panel implements ConfigurationListe
 		finishChatAppend();
 	}
 
-	private final void playerLeft(String name) {
+	private void playerLeft(String name) {
 		if (chat_box.length() > 0)
 			chat_box.append("\n");
 		chat_box.append(Utils.getBundleString(bundle, "left_game", new Object[]{name}));
 		finishChatAppend();
 	}
 
-	private final void playerJoined(String name) {
+	private void playerJoined(String name) {
 		if (chat_box.length() > 0)
 			chat_box.append("\n");
 		chat_box.append(Utils.getBundleString(bundle, "joined_game", new Object[]{name}));
 		finishChatAppend();
 	}
 
-	private final void setReady(boolean r) {
+	private void setReady(boolean r) {
 		if (r != ready) {
 			ready = r;
 			ready_button.setDisabled(ready);
@@ -472,7 +472,7 @@ public final strictfp class GameMenu extends Panel implements ConfigurationListe
 		}
 	}
 
-	private final void setStartEnable(PlayerSlot[] players) {
+	private void setStartEnable(PlayerSlot[] players) {
 		start_button.setDisabled(true);
 		if (local_player_slot != 0)
 			return;
@@ -484,28 +484,28 @@ public final strictfp class GameMenu extends Panel implements ConfigurationListe
 		start_button.setDisabled(false);
 	}
 
-	final void cancel() {
+	void cancel() {
 		game_network.close();
 		owner.removeGameMenu();
 	}
 
 	private final strictfp class InfoButtonListener implements MouseClickListener {
                 @Override
-		public final void mouseClicked(int button, int x, int y, int clicks) {
+		public void mouseClicked(int button, int x, int y, int clicks) {
 			gui_root.addModalForm(new GameInfoForm(game));
 		}
 	}
 
 	private final strictfp class CancelButtonListener implements MouseClickListener {
                 @Override
-		public final void mouseClicked(int button, int x, int y, int clicks) {
+		public void mouseClicked(int button, int x, int y, int clicks) {
 			cancel();
 		}
 	}
 
 	private final strictfp class ReadyListener implements MouseClickListener {
                 @Override
-		public final void mouseClicked(int button, int x, int y, int clicks) {
+		public void mouseClicked(int button, int x, int y, int clicks) {
 			setReady(true);
 		}
 	}
@@ -521,7 +521,7 @@ public final strictfp class GameMenu extends Panel implements ConfigurationListe
 
 	private final strictfp class StartListener implements MouseClickListener {
                 @Override
-		public final void mouseClicked(int button, int x, int y, int clicks) {
+		public void mouseClicked(int button, int x, int y, int clicks) {
 			final int MIN_TEAMS = 2;
 			int num_teams = getNumTeams(game_network.getClient().getPlayers());
 			if (num_teams < MIN_TEAMS) {
@@ -541,7 +541,7 @@ public final strictfp class GameMenu extends Panel implements ConfigurationListe
 		}
 
                 @Override
-		public final void itemChosen(PulldownMenu menu, int item_index) {
+		public void itemChosen(PulldownMenu menu, int item_index) {
 			setReady(false);
 			adjustPlayerSlot(player_slot);
 		}
@@ -549,7 +549,7 @@ public final strictfp class GameMenu extends Panel implements ConfigurationListe
 
 	private final strictfp class ChatListener implements EnterListener {
                 @Override
-		public final void enterPressed(CharSequence text) {
+		public void enterPressed(CharSequence text) {
 			String chat = text.toString();
 			if (!chat.equals("")) {
 				chat_line.clear();
@@ -561,7 +561,7 @@ public final strictfp class GameMenu extends Panel implements ConfigurationListe
 
 	private strictfp final class SendListener implements MouseClickListener {
                 @Override
-		public final void mouseClicked(int button, int x, int y, int clicks) {
+		public void mouseClicked(int button, int x, int y, int clicks) {
 			chat_line.enterPressedAll();
 		}
 	}

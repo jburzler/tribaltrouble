@@ -58,12 +58,12 @@ public final strictfp class TutorialOverDelegate extends CameraDelegate implemen
 	}
 
         @Override
-	protected final void renderGeometry() {
+	protected void renderGeometry() {
 		renderBackgroundAlpha();
 	}
 
         @Override
-	public final void update(Object anim) {
+	public void update(Object anim) {
 		addChild(group_buttons);
 		delay_timer.stop();
 	}
@@ -76,7 +76,7 @@ public final strictfp class TutorialOverDelegate extends CameraDelegate implemen
 		}
 		
                 @Override
-		public final void mouseClicked(int button, int x, int y, int clicks) {
+		public void mouseClicked(int button, int x, int y, int clicks) {
 			if (tutorial_info.setNextTutorial(viewer.getGUIRoot(), tutorial_number))
 				viewer.close();
 		}

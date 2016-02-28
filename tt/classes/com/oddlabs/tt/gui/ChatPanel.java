@@ -28,7 +28,7 @@ public strictfp class ChatPanel extends Panel implements ChatListener {
 		return ResourceBundle.getBundle(ChatPanel.class.getName());
 	}
 
-	private final static String getI18N(String key) {
+	private static String getI18N(String key) {
 		return Utils.getBundleString(getBundle(), key);
 	}
 
@@ -158,14 +158,14 @@ public strictfp class ChatPanel extends Panel implements ChatListener {
 
 	private strictfp final class SendListener implements MouseClickListener {
                 @Override
-		public final void mouseClicked(int button, int x, int y, int clicks) {
+		public void mouseClicked(int button, int x, int y, int clicks) {
 			chat_line.enterPressedAll();
 		}
 	}
 
 	private strictfp final class ClearListener implements EnterListener {
                 @Override
-		public final void enterPressed(CharSequence text) {
+		public void enterPressed(CharSequence text) {
 			chat_line.clear();
 		}
 	}
@@ -178,7 +178,7 @@ public strictfp class ChatPanel extends Panel implements ChatListener {
 		}
 		
                 @Override
-		public final void itemChosen(PulldownMenu menu, int item_index) {
+		public void itemChosen(PulldownMenu menu, int item_index) {
 			ChatRoomUser user = (ChatRoomUser)box.getRightClickedRowData();
 			String nick = user.getNick();
 			switch (item_index) {
@@ -209,14 +209,14 @@ public strictfp class ChatPanel extends Panel implements ChatListener {
 		}
 		
                 @Override
-		public final void rowDoubleClicked(Object context) {
+		public void rowDoubleClicked(Object context) {
 			ChatRoomUser user = (ChatRoomUser)context;
 			private_message_form = new PrivateMessageForm(gui_root, user.getNick());
 			gui_root.addModalForm(private_message_form);
 		}
 
                 @Override
-		public final void rowChosen(Object context) {
+		public void rowChosen(Object context) {
 			ChatRoomUser user = (ChatRoomUser)context;
 			String item_text;
 			if (ChatCommand.isIgnoring(user.getNick()))

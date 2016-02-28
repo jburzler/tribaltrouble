@@ -9,24 +9,24 @@ public final strictfp class WorkerUnitContainer extends UnitContainer {
 	}
 
         @Override
-	public final void enter(Unit unit) {
+	public void enter(Unit unit) {
 		assert canEnter(unit);
 		unit.removeNow();
 		increaseSupply(1);
 	}
 
         @Override
-	public final boolean canEnter(Unit unit) {
+	public boolean canEnter(Unit unit) {
 		return getTotalSupplies() != getMaxSupplyCount();
 	}
 
-	private final int getTotalSupplies() {
+	private int getTotalSupplies() {
 //		return getNumSupplies() + building.getBuildSupplyContainer(Unit.class).getNumSupplies() == getMaxSupplyCount();
 		return getNumSupplies() + getNumPreparing();
 	}
 
         @Override
-	public final Unit exit() {
+	public Unit exit() {
 		assert getNumSupplies() > 0;
 		increaseSupply(-1);
 		return null;
@@ -40,6 +40,6 @@ public final strictfp class WorkerUnitContainer extends UnitContainer {
 	}
 
         @Override
-	public final void animate(float t) {
+	public void animate(float t) {
 	}
 }

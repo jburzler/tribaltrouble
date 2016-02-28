@@ -38,14 +38,14 @@ public final strictfp class Texture extends NativeResource {
 		border_color_buffer = BufferUtils.createFloatBuffer(4);
 	}
 
-	private final static int bestWrap(int wrap) {
+	private static int bestWrap(int wrap) {
 		if (wrap == GL12.GL_CLAMP_TO_EDGE && !GLContext.getCapabilities().OpenGL12) {
 			return GL11.GL_CLAMP;
 		} else
 			return wrap;
 	}
 
-	private final static int initTexture(int min_filter, int mag_filter, int wrap_s, int wrap_t, int max_mipmap_level) {
+	private static int initTexture(int min_filter, int mag_filter, int wrap_s, int wrap_t, int max_mipmap_level) {
 		wrap_s = bestWrap(wrap_s);
 		wrap_t = bestWrap(wrap_t);
 		GL11.glGenTextures(handle_buffer);
@@ -64,15 +64,15 @@ public final strictfp class Texture extends NativeResource {
 		return tex_handle;
 	}
 
-	public final int getWidth() {
+	public int getWidth() {
 		return width;
 	}
 
-	public final int getHeight() {
+	public int getHeight() {
 		return height;
 	}
 
-	public final void setSize(int size) {
+	public void setSize(int size) {
 		global_size += size - this.size;
 		this.size = size;
 	}
@@ -113,15 +113,15 @@ public final strictfp class Texture extends NativeResource {
 		uploadTexture(mipmaps, internal_format, max_mipmap_level);
 	}
 
-	private final static int getDetailShift(int num_mipmaps) {
+	private static int getDetailShift(int num_mipmaps) {
 		return StrictMath.min(num_mipmaps - 1, Globals.TEXTURE_MIP_SHIFT[Settings.getSettings().graphic_detail]);
 	}
 
-	private final static int getMaxMipmapIndex(int num_mipmaps, int max_mipmap_level, int detail_shift) {
+	private static int getMaxMipmapIndex(int num_mipmaps, int max_mipmap_level, int detail_shift) {
 		return StrictMath.min(num_mipmaps, max_mipmap_level + 1) - detail_shift;
 	}
 
-	private final void uploadDXTTexture(DXTImage dxt_image, TextureFile texture_file) {
+	private void uploadDXTTexture(DXTImage dxt_image, TextureFile texture_file) {
 		int detail_shift = getDetailShift(dxt_image.getNumMipMaps());
 		int max_index = getMaxMipmapIndex(dxt_image.getNumMipMaps(), texture_file.getMaxMipmapLevel(), detail_shift);
 		int total_size = 0;
@@ -150,7 +150,7 @@ GLUtils.saveTexture(i, new java.io.File(texture_file.getURL().getFile() + dxt_im
 }*/
 	}
 
-	private final void uploadTexture(GLImage[] mipmaps, int internal_format, int max_mipmap_level) {
+	private void uploadTexture(GLImage[] mipmaps, int internal_format, int max_mipmap_level) {
 		assert mipmaps.length > 0;
 		int detail_shift = getDetailShift(mipmaps.length);
 		int max_index = getMaxMipmapIndex(mipmaps.length, max_mipmap_level, detail_shift);
@@ -198,12 +198,12 @@ GLUtils.saveTexture(i, new java.io.File(texture_file.getURL().getFile() + dxt_im
 		}
 	}
 
-	public final int getHandle() {
+	public int getHandle() {
 		return texture_handle;
 	}
 
         @Override
-	public final void doDelete() {
+	public void doDelete() {
 		global_size -= size;
 		handle_buffer.put(0, texture_handle);
 		GL11.glDeleteTextures(handle_buffer);

@@ -9,7 +9,7 @@ public final strictfp class BuildMenuTrigger extends TutorialTrigger {
 	}
 
         @Override
-	protected final void run(Tutorial tutorial) {
+	protected void run(Tutorial tutorial) {
 		if (tutorial.getViewer().getPanel().inBuildMenu())
 			tutorial.next(new WeaponTrigger(tutorial.getViewer().getLocalPlayer()));
 	}

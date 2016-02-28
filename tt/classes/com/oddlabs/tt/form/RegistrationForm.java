@@ -96,11 +96,11 @@ public final strictfp class RegistrationForm extends Form implements RegisterPro
 	}
 	
         @Override
-	public final void setFocus() {
+	public void setFocus() {
 		editline_reg.setFocus();
 	}
 	
-	private final void register() {
+	private void register() {
 		String reg_key = editline_reg.getContents();
 		RegisterProgressForm form = new RegisterProgressForm(gui_root, this);
 		Renderer.getRegistrationClient().setListener(form);
@@ -122,11 +122,11 @@ public final strictfp class RegistrationForm extends Form implements RegisterPro
 	}*/
 
         @Override
-	public final void registrationFailed() {
+	public void registrationFailed() {
 	}
 	
         @Override
-	public final void registrationCompleted() {
+	public void registrationCompleted() {
 		Settings.getSettings().reg_key = editline_reg.getContents();
 		remove();
 		ResourceBundle bundle2 = ResourceBundle.getBundle(RegisterProgressForm.class.getName());
@@ -135,7 +135,7 @@ public final strictfp class RegistrationForm extends Form implements RegisterPro
 		main_menu.reload();
 	}
 	
-	private final void pasteClipboard(String contents) {
+	private void pasteClipboard(String contents) {
 		contents = contents.trim();
 		editline_reg.clear();
 		StringBuffer append_buffer = new StringBuffer();
@@ -147,12 +147,12 @@ public final strictfp class RegistrationForm extends Form implements RegisterPro
 		editline_reg.append(append_buffer);
 	}
 	
-	private final void showQuitForm() {
+	private void showQuitForm() {
 		gui_root.addModalForm(new QuitForm(gui_root, false));
 	}
 
         @Override
-	protected final void keyRepeat(KeyboardEvent event) {
+	protected void keyRepeat(KeyboardEvent event) {
 		if (online)
 			super.keyPressed(event);
 		else if (event.getKeyCode() == Keyboard.KEY_ESCAPE)
@@ -161,7 +161,7 @@ public final strictfp class RegistrationForm extends Form implements RegisterPro
 
 	private final strictfp class PasteListener implements MouseClickListener {
                 @Override
-		public final void mouseClicked(int button, int x, int y, int clicks) {
+		public void mouseClicked(int button, int x, int y, int clicks) {
 			String clipboard = (String)LocalEventQueue.getQueue().getDeterministic().log(Sys.getClipboard());
 			if (clipboard != null)
 				pasteClipboard(clipboard);
@@ -170,19 +170,19 @@ public final strictfp class RegistrationForm extends Form implements RegisterPro
 
 	private final strictfp class RegistrationListener implements MouseClickListener, EnterListener {
                 @Override
-		public final void mouseClicked(int button, int x, int y, int clicks) {
+		public void mouseClicked(int button, int x, int y, int clicks) {
 			register();
 		}
 
                 @Override
-		public final void enterPressed(CharSequence text) {
+		public void enterPressed(CharSequence text) {
 			register();
 		}
 	}
 
 	private final strictfp class ExitListener implements MouseClickListener {
                 @Override
-		public final void mouseClicked(int button, int x, int y, int clicks) {
+		public void mouseClicked(int button, int x, int y, int clicks) {
 			showQuitForm();
 		}
 	}

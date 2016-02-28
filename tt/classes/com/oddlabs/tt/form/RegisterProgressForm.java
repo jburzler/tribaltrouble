@@ -43,14 +43,14 @@ public final strictfp class RegisterProgressForm extends Form implements Registr
 	}
 
         @Override
-	public final void doRemove() {
+	public void doRemove() {
 		super.doRemove();
 		Renderer.getRegistrationClient().cancelRegistration();
 		//reg_client.close();
 	}
 
         @Override
-	public final void registrationFailed(int reason_id, Exception e) { //interface RegistrationListener
+	public void registrationFailed(int reason_id, Exception e) { //interface RegistrationListener
 		remove();
 		parent_form.registrationFailed();
 		
@@ -73,13 +73,13 @@ public final strictfp class RegisterProgressForm extends Form implements Registr
 	}
 
         @Override
-	public final void registrationCompleted() { //interface RegistrationListener
+	public void registrationCompleted() { //interface RegistrationListener
 		remove();
 		parent_form.registrationCompleted();
 	}
 
         @Override
-	protected final void doCancel() {
+	protected void doCancel() {
 		Renderer.getRegistrationClient().cancelRegistration();
 		//reg_client.close();
 	}

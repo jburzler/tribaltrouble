@@ -13,7 +13,7 @@ public final strictfp class ChatRoomHistory extends ChatHistory {
 
 	private ChatRoomUser[] old_users;
 
-	final void update(ChatRoomUser[] new_users) {
+	void update(ChatRoomUser[] new_users) {
 		if (old_users == null)
 			return;
 		Set new_users_set = new HashSet(Arrays.asList(new_users));
@@ -36,7 +36,7 @@ public final strictfp class ChatRoomHistory extends ChatHistory {
 	}
 
         @Override
-	public final void chat(ChatMessage message) {
+	public void chat(ChatMessage message) {
 		if (message.type != ChatMessage.CHAT_PRIVATE && message.type != ChatMessage.CHAT_CHATROOM)
 			return;
 		addMessage(message.formatLong());

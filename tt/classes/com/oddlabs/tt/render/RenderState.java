@@ -46,37 +46,37 @@ public final strictfp class RenderState implements ElementVisitor {
 		this.render_state_cache = new RenderStateCache(() -> new ElementRenderState(RenderState.this));
 	}
 
-	final Player getLocalPlayer() {
+	Player getLocalPlayer() {
 		return local_player;
 	}
 
-	final boolean isResponding(Object target) {
+	boolean isResponding(Object target) {
 		return picker.getRespondManager().isResponding(target);
 	}
 
-	final RenderQueues getRenderQueues() {
+	RenderQueues getRenderQueues() {
 		return render_queues;
 	}
 
-	public final void setVisibleOverride(boolean override) {
+	public void setVisibleOverride(boolean override) {
 		this.visible_override = visible_override;
 	}
 
-	public final void setup(boolean picking, CameraState camera_state) {
+	public void setup(boolean picking, CameraState camera_state) {
 		this.picking = picking;
 		this.camera = camera_state;
 		render_state_cache.clear();
 	}
 
-	final CameraState getCamera() {
+	CameraState getCamera() {
 		return camera;
 	}
 
-	final boolean isPicking() {
+	boolean isPicking() {
 		return picking;
 	}
 
-	final boolean overrideVisibility() {
+	boolean overrideVisibility() {
 		return visible_override;
 	}
 
@@ -95,7 +95,7 @@ public final strictfp class RenderState implements ElementVisitor {
 		}
 	};
         @Override
-	public final void visitUnit(final Unit unit) {
+	public void visitUnit(final Unit unit) {
 		float z_offset = getVisuallyCorrectHeight(unit.getPositionX(), unit.getPositionY()) + unit.getOffsetZ();
 		visitSelectable(unit_visitor, unit, z_offset, unit.getUnitTemplate().getSelectionRadius(), unit.getUnitTemplate().getSelectionHeight());
 	}
@@ -183,32 +183,32 @@ public final strictfp class RenderState implements ElementVisitor {
 
 	private final static ModelVisitor building_visitor = new SelectableVisitor();
         @Override
-	public final void visitBuilding(final Building building) {
+	public void visitBuilding(final Building building) {
 		visitSelectable(building_visitor, building, building.getPositionZ(), getBuildingSelectionRadius(building), getBuildingSelectionHeight(building));
 	}
 
-	final int addToRenderList(LODObject model) {
+	int addToRenderList(LODObject model) {
 		return addToRenderList(model, false);
 	}
 
-	final int addToRenderList(LODObject model, boolean point_on_map) {
+	int addToRenderList(LODObject model, boolean point_on_map) {
 		return sprite_sorter.add(model, camera, point_on_map);
 	}
 
         @Override
-	public final void visitEmitter(final Emitter emitter) {
+	public void visitEmitter(final Emitter emitter) {
 		if (!picking)
 			emitter_queue.add(emitter);
 	}
 
         @Override
-	public final void visitLightning(final Lightning lightning) {
+	public void visitLightning(final Lightning lightning) {
 		if (!picking)
 			lightning_queue.add(lightning);
 	}
 
         @Override
-	public final void visitRespond(final LandscapeTargetRespond respond) {
+	public void visitRespond(final LandscapeTargetRespond respond) {
 		if (!picking)
 			target_respond_renderer.addToTargetList(respond);
 	}
@@ -222,7 +222,7 @@ public final strictfp class RenderState implements ElementVisitor {
 		}
 	};
         @Override
-	public final void visitSupplyModel(final SupplyModel model) {
+	public void visitSupplyModel(final SupplyModel model) {
 		addToRenderList(getCachedState(supply_model_visitor, model));
 	}
 
@@ -234,7 +234,7 @@ public final strictfp class RenderState implements ElementVisitor {
 		}
 	};
         @Override
-	public final void visitRubberSupply(final RubberSupply model) {
+	public void visitRubberSupply(final RubberSupply model) {
 		float z_offset = getVisuallyCorrectHeight(model.getPositionX(), model.getPositionY()) + model.getOffsetZ();
 		ModelState state = getCachedState(rubber_model_visitor, model, z_offset);
 		addToRenderList(state);
@@ -250,7 +250,7 @@ public final strictfp class RenderState implements ElementVisitor {
 		}
 	};
         @Override
-	public final void visitSceneryModel(final SceneryModel model) {
+	public void visitSceneryModel(final SceneryModel model) {
 		ModelState state = getCachedState(scenery_model_visitor, model);
 		addToRenderList(state);
 		if (!picking) {
@@ -276,7 +276,7 @@ public final strictfp class RenderState implements ElementVisitor {
 		}
 	};
         @Override
-	public final void visitPlants(final Plants plants) {
+	public void visitPlants(final Plants plants) {
 		if (!picking && Globals.draw_plants) {
 			float camera_dist_sqr = RenderTools.getEyeDistanceSquared(plants, camera.getCurrentX(), camera.getCurrentY(), camera.getCurrentZ());
 			if (camera_dist_sqr <= PLANTS_CUT_DIST*PLANTS_CUT_DIST)
@@ -293,7 +293,7 @@ public final strictfp class RenderState implements ElementVisitor {
 		}
 	};
         @Override
-	public final void visitDirectedThrowingWeapon(final DirectedThrowingWeapon model) {
+	public void visitDirectedThrowingWeapon(final DirectedThrowingWeapon model) {
 		if (!picking) {
 			addToRenderList(getCachedState(directed_weapon_model_visitor, model));
 		}
@@ -308,17 +308,17 @@ public final strictfp class RenderState implements ElementVisitor {
 		}
 	};
         @Override
-	public final void visitRotatingThrowingWeapon(final RotatingThrowingWeapon model) {
+	public void visitRotatingThrowingWeapon(final RotatingThrowingWeapon model) {
 		if (!picking) {
 			addToRenderList(getCachedState(rotating_weapon_model_visitor, model));
 		}
 	}
 
-	public final List getEmitterQueue() {
+	public List getEmitterQueue() {
 		return emitter_queue;
 	}
 
-	public final List getLightningQueue() {
+	public List getLightningQueue() {
 		return lightning_queue;
 	}
 }

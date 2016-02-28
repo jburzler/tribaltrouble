@@ -20,7 +20,7 @@ final strictfp class Fade {
 		this.renderer = renderer;
 	}
 
-	public final void animate(GUI gui, float t) {
+	public void animate(GUI gui, float t) {
 		time += t;
 		if (!image_switched && time >= FADE_TIME/2) {
 			image_switched = true;
@@ -34,10 +34,10 @@ final strictfp class Fade {
 		}
 	}
 
-	public final void updateChecksum(StateChecksum checksum) {
+	public void updateChecksum(StateChecksum checksum) {
 	}
 
-	protected final void render() {
+	protected void render() {
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		float alpha = (float)StrictMath.sin(StrictMath.PI*time/FADE_TIME);
 		GL11.glColor4f(0f, 0f, 0f, alpha);

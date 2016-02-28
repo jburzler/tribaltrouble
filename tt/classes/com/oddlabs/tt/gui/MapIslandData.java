@@ -25,31 +25,31 @@ public final strictfp class MapIslandData {
 		 this.pin_y = pin_y;
 	}
 
-	public final IconQuad[] getButton() {
+	public IconQuad[] getButton() {
 		return button;
 	}
 
-	public final int getX() {
+	public int getX() {
 		return x;
 	}
 
-	public final int getY() {
+	public int getY() {
 		return y;
 	}
 
-	public final IconQuad getFlag() {
+	public IconQuad getFlag() {
 		return flag;
 	}
 
-	public final IconQuad getBoat() {
+	public IconQuad getBoat() {
 		return boat;
 	}
 
-	public final int getPinX() {
+	public int getPinX() {
 		return pin_x;
 	}
 
-	public final int getPinY() {
+	public int getPinY() {
 		return pin_y;
 	}
 }

@@ -28,7 +28,7 @@ public final strictfp class CryptUtils {
 		}
 	}
 
-	private final static String digest(byte[] message_bytes) {
+	private static String digest(byte[] message_bytes) {
 		byte[] digest_bytes = digest.digest(message_bytes);
 		StringBuffer buf = new StringBuffer();
 		for (int i = 0; i < digest_bytes.length; i++) {
@@ -41,7 +41,7 @@ public final strictfp class CryptUtils {
 		return buf.toString();
 	}
 
-	private final static String buggyDigest(byte[] message_bytes) {
+	private static String buggyDigest(byte[] message_bytes) {
 		byte[] digest_bytes = digest.digest(message_bytes);
 		// Pad array with one zeroed byte to make the hash unsigned
 		byte[] unsigned_digest_bytes = new byte[digest_bytes.length + 1];
@@ -50,7 +50,7 @@ public final strictfp class CryptUtils {
 		return b.toString(16);
 	}
 
-	public final static String digest(String str) {
+	public static String digest(String str) {
 		try {
 			byte[] message_bytes = str.getBytes("UTF-8");
 			return buggyDigest(message_bytes);
@@ -59,7 +59,7 @@ public final strictfp class CryptUtils {
 		}
 	}
 
-	public final static void  setupHttpsConnection(HttpsURLConnection https_connection) throws Exception {
+	public static void  setupHttpsConnection(HttpsURLConnection https_connection) throws Exception {
 		SSLContext ssl_context = SSLContext.getInstance("SSL");
 		ssl_context.init(null, new TrustManager[]{new X509TrustManager() {
                         @Override

@@ -12,11 +12,11 @@ final class RenderStateCache {
 		this.factory = factory;
 	}
 
-	final void clear() {
+	void clear() {
 		current_index = 0;
 	}
 
-	final Object get() {
+	Object get() {
 		if (current_index == cache.size()) {
 			cache.add(factory.create());
 		}

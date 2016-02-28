@@ -15,21 +15,21 @@ public final strictfp class Selection {
 		clearSelection();
 	}
 
-	public final SelectionArmy getCurrentSelection() {
+	public SelectionArmy getCurrentSelection() {
 		return current_selection;
 	}
 
-	public final void clearSelection() {
+	public void clearSelection() {
 		current_selection = new SelectionArmy(local_player);
 	}
 
-	public final void clearShortcutArmies() {
+	public void clearShortcutArmies() {
 		for (int i = 0; i < shortcut_armies.length; i++) {
 			shortcut_armies[i] = null;
 		}
 	}
 
-	final void removeFromArmies(Selectable selectable) {
+	void removeFromArmies(Selectable selectable) {
 		current_selection.remove(selectable);
             for (Army shortcut_armie : shortcut_armies) {
                 if (shortcut_armie != null) {
@@ -38,7 +38,7 @@ public final strictfp class Selection {
             }
 	}
 
-	public final void setShortcutArmy(int index) {
+	public void setShortcutArmy(int index) {
 		if (shortcut_armies[index] != null)
 			shortcut_armies[index].clear();
 		else
@@ -51,7 +51,7 @@ public final strictfp class Selection {
 		}
 	}
 
-	public final boolean enableShortcutArmy(int index) {
+	public boolean enableShortcutArmy(int index) {
 		boolean empty = true;
 		if (shortcut_armies[index] != null) {
 			current_selection.clear();

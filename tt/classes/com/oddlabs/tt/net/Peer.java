@@ -26,20 +26,20 @@ public final strictfp class Peer implements PeerHubInterface {
 		this.argument_reader = argument_reader;
 	}
 
-	public final int getPeerIndex() {
+	public int getPeerIndex() {
 		return peer_index;
 	}
 
         @Override
-	public final String toString() {
+	public String toString() {
 		return "player: " + player.toString();
 	}
 
-	public final void addEvent(int tick, ARMIEvent event) {
+	public void addEvent(int tick, ARMIEvent event) {
 		event_queue.add(new GameEvent(tick, event));
 	}
 
-	public final void executeEvents(int tick) throws IllegalARMIEventException {
+	public void executeEvents(int tick) throws IllegalARMIEventException {
 		while (!event_queue.isEmpty()) {
 			GameEvent game_event = (GameEvent)event_queue.get(0);
 			if (game_event.tick != tick)
@@ -50,24 +50,24 @@ public final strictfp class Peer implements PeerHubInterface {
 	}
 	
         @Override
-	public final void chat(String text, boolean team) {
+	public void chat(String text, boolean team) {
 		peer_hub.receiveChat(player.getPlayerInfo().getName(), text, team);
 	}
 
         @Override
-	public final void beacon(float x, float y) {
+	public void beacon(float x, float y) {
 		peer_hub.receiveBeacon(x, y, player.getPlayerInfo().getName());
 	}
 
-	public final PeerHubInterface getPeerHubInterface() {
+	public PeerHubInterface getPeerHubInterface() {
 		return peerhub_interface;
 	}
 	
-	public final PlayerInfo getPlayerInfo() {
+	public PlayerInfo getPlayerInfo() {
 		return player.getPlayerInfo();
 	}
 	
-	public final Player getPlayer() {
+	public Player getPlayer() {
 		return player;
 	}
 

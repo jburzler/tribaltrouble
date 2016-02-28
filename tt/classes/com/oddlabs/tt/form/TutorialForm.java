@@ -36,7 +36,7 @@ public final strictfp class TutorialForm extends Form {
 	private final GUIRoot gui_root;
 	private final NetworkSelector network;
 
-	private final static String formatTutorial(int tutorial_number) {
+	private static String formatTutorial(int tutorial_number) {
 		return Utils.getBundleString(bundle, "tutorial", new Object[]{Integer.toString(tutorial_number)});
 	}
 
@@ -117,7 +117,7 @@ public final strictfp class TutorialForm extends Form {
 		}
 
                 @Override
-		public final void run(WorldViewer viewer) {
+		public void run(WorldViewer viewer) {
 			new Tutorial(viewer, ingame_info, factory.create(viewer));
 		}
 	}
@@ -148,11 +148,11 @@ public final strictfp class TutorialForm extends Form {
 		return MainMenu.startNewGame(network, gui_root, null, new WorldParameters(Game.GAMESPEED_NORMAL, "Tutorial" + tutorial_num, initial_unit_count, Player.DEFAULT_MAX_UNIT_COUNT), ingame_info, compound_action, null, size, Landscape.NATIVE, hills, trees, 0f, seed, new String[]{ai_string + "0", ai_string + "1", ai_string + "2", ai_string + "3", ai_string + "4", ai_string + "5"});
 	}
 
-	public final static boolean checkTutorial(GUIRoot gui_root, int tutorial_number) {
+	public static boolean checkTutorial(GUIRoot gui_root, int tutorial_number) {
 		return true;
 	}
 
-	public final static void startTutorial(NetworkSelector network, GUIRoot gui_root, int tutorial_number) {
+	public static void startTutorial(NetworkSelector network, GUIRoot gui_root, int tutorial_number) {
 		final TutorialInGameInfo ingame_info;
 		GameNetwork game_network;
 		switch (tutorial_number) {
@@ -208,7 +208,7 @@ public final strictfp class TutorialForm extends Form {
 		}
 
                 @Override
-		public final void mouseClicked(int button, int x, int y, int clicks) {
+		public void mouseClicked(int button, int x, int y, int clicks) {
 			if (checkTutorial(gui_root, number)) {
 				startTutorial(network, gui_root, number);
 				TutorialForm.this.remove();

@@ -15,7 +15,7 @@ public final strictfp class Languages {
 		}
 	}
 
-	public final boolean hasLanguage(String language) {
+	public boolean hasLanguage(String language) {
             for (String[] language1 : languages) {
                 if (language1[0].equals(language)) {
                     return true;
@@ -24,11 +24,11 @@ public final strictfp class Languages {
 		return false;
 	}
 	
-	public final String[][] getLanguages() {
+	public String[][] getLanguages() {
 		return languages;
 	}
 
-	public final Quad[] getFlags() {
+	public Quad[] getFlags() {
 		Quad[] flags;
 		if (beta_mode) {
 			flags = new Quad[]{Skin.getSkin().getFlagDa(), Skin.getSkin().getFlagEn(), Skin.getSkin().getFlagDe(), Skin.getSkin().getFlagEs(), Skin.getSkin().getFlagIt()};

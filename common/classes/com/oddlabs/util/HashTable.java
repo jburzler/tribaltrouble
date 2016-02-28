@@ -17,11 +17,11 @@ public final strictfp class HashTable {
 		num_entries = 0;
 	}
 
-	public final int size() {
+	public int size() {
 		return num_entries;
 	}
 
-	private final int hash(int key) {
+	private int hash(int key) {
 		int hash = key % entries.length;
 		if (hash >= 0)
 			return hash;
@@ -29,7 +29,7 @@ public final strictfp class HashTable {
 			return hash + entries.length;
 	}
 
-	public final Object put(int key, Object val) {
+	public Object put(int key, Object val) {
 		int hash = hash(key);
 		if (entries[hash] == null) {
 			entries[hash] = new LinkedList();
@@ -52,7 +52,7 @@ public final strictfp class HashTable {
 		return null;
 	}
 
-	public final Object get(int key) {
+	public Object get(int key) {
 		int hash = hash(key);
 		if (entries[hash] == null)
 			return null;
@@ -66,7 +66,7 @@ public final strictfp class HashTable {
 		return null;
 	}
 
-	public final Object remove(int key) {
+	public Object remove(int key) {
 		int hash = hash(key);
 
 		if (entries[hash] == null)
@@ -84,7 +84,7 @@ public final strictfp class HashTable {
 		return null;
 	}
 
-	private final void rehash() {
+	private void rehash() {
 		LinkedList[] old_entries = entries;
 		entries = new LinkedList[entries.length*mul_factor];
             for (LinkedList old_entrie : old_entries) {

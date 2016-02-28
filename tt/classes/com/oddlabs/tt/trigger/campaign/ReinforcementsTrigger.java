@@ -16,7 +16,7 @@ public final strictfp class ReinforcementsTrigger extends IntervalTrigger {
 	}
 
         @Override
-	protected final void check() {
+	protected void check() {
 		if (player.getArmory() == null) {
 			triggered();
 		} else if (units_deployed < player.getUnitsLost()) {
@@ -32,6 +32,6 @@ public final strictfp class ReinforcementsTrigger extends IntervalTrigger {
 	}
 
         @Override
-	protected final void done() {
+	protected void done() {
 	}
 }

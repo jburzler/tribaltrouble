@@ -77,7 +77,7 @@ public final strictfp class ProfilesForm extends Form {
 	}
 	
         @Override
-	public final void setFocus() {
+	public void setFocus() {
 		join_button.setFocus();
 	}
 
@@ -86,7 +86,7 @@ public final strictfp class ProfilesForm extends Form {
 		Network.getMatchmakingClient().close(); 
 	}
 
-	public final void receivedProfiles(Profile[] profiles, String last_nick) {
+	public void receivedProfiles(Profile[] profiles, String last_nick) {
 		profile_list_box.clear();
 		Row selected_row = null;
             for (Profile p : profiles) {
@@ -104,14 +104,14 @@ public final strictfp class ProfilesForm extends Form {
 			profile_list_box.selectRow(selected_row);
 	}
 
-	private final void join(String nick) {
+	private void join(String nick) {
 		Network.getMatchmakingClient().setProfile(nick);
 		main_menu.setMenuCentered(game_menu);
 	}
 
 	private final strictfp class CreateProfileListener implements MouseClickListener {
                 @Override
-		public final void mouseClicked(int button, int x, int y, int clicks) {
+		public void mouseClicked(int button, int x, int y, int clicks) {
 			new_profile_form = new NewProfileForm(gui_root, main_menu, ProfilesForm.this);
 			main_menu.setMenu(new_profile_form);
 		}
@@ -119,7 +119,7 @@ public final strictfp class ProfilesForm extends Form {
 
 	private final strictfp class DeleteProfileListener implements MouseClickListener {
                 @Override
-		public final void mouseClicked(int button, int x, int y, int clicks) {
+		public void mouseClicked(int button, int x, int y, int clicks) {
 			String nick = (String)profile_list_box.getSelected();
 			if (nick == null) {
 				gui_root.addModalForm(new MessageForm(Utils.getBundleString(bundle, "no_profiles")));
@@ -147,7 +147,7 @@ public final strictfp class ProfilesForm extends Form {
 		}
 
                 @Override
-		public final void mouseClicked(int button, int x, int y, int clicks) {
+		public void mouseClicked(int button, int x, int y, int clicks) {
 			Network.getMatchmakingClient().deleteProfile(nick);
 			Network.getMatchmakingClient().requestProfiles();
 		}
@@ -155,7 +155,7 @@ public final strictfp class ProfilesForm extends Form {
 
 	private final strictfp class JoinListener implements MouseClickListener, RowListener {
                 @Override
-		public final void mouseClicked(int button, int x, int y, int clicks) {
+		public void mouseClicked(int button, int x, int y, int clicks) {
 			String nick = (String)profile_list_box.getSelected();
 			if (nick == null) {
 				gui_root.addModalForm(new MessageForm(Utils.getBundleString(bundle, "no_profiles")));
@@ -165,14 +165,14 @@ public final strictfp class ProfilesForm extends Form {
 		}
 
                 @Override
-		public final void rowDoubleClicked(Object row_context) {
+		public void rowDoubleClicked(Object row_context) {
 			String nick = (String)row_context;
 			if (nick != null)
 				join(nick);
 		}
 		
                 @Override
-		public final void rowChosen(Object row_context) {
+		public void rowChosen(Object row_context) {
 		}
 	}
 }

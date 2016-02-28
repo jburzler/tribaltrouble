@@ -33,7 +33,7 @@ public final strictfp class NativeIsland3 extends Island {
 	}
 
         @Override
-	public final void init(NetworkSelector network, GUIRoot gui_root) {
+	public void init(NetworkSelector network, GUIRoot gui_root) {
 		String[] ai_names = new String[]{Utils.getBundleString(bundle, "name0"),
 			Utils.getBundleString(bundle, "name1"),
 			Utils.getBundleString(bundle, "name2"),
@@ -67,7 +67,7 @@ public final strictfp class NativeIsland3 extends Island {
 	}
 
         @Override
-	protected final void start() {
+	protected void start() {
 		Runnable runnable;
 		final Player local_player = getViewer().getLocalPlayer();
 		final Player enemy = getViewer().getWorld().getPlayers()[1];
@@ -286,21 +286,21 @@ public final strictfp class NativeIsland3 extends Island {
 	}
 
         @Override
-	public final CharSequence getHeader() {
+	public CharSequence getHeader() {
 		return Utils.getBundleString(bundle, "header");
 	}
 
         @Override
-	public final CharSequence getDescription() {
+	public CharSequence getDescription() {
 		return Utils.getBundleString(bundle, "description");
 	}
 
         @Override
-	public final CharSequence getCurrentObjective() {
+	public CharSequence getCurrentObjective() {
 		return Utils.getBundleString(bundle, "objective" + objective);
 	}
 
-	private final void changeObjective(int objective) {
+	private void changeObjective(int objective) {
 		this.objective = objective;
 	}
 }

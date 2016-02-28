@@ -25,12 +25,12 @@ public final strictfp class SpriteFile extends File {
 	}
 
         @Override
-	public final Object newInstance() {
+	public Object newInstance() {
 		return new SpriteList(this);
 	}
 
         @Override
-	public final boolean equals(Object o) {
+	public boolean equals(Object o) {
 		if (!(o instanceof SpriteFile))
 			return false;
 		SpriteFile other = (SpriteFile)o;
@@ -39,27 +39,27 @@ public final strictfp class SpriteFile extends File {
 		return super.equals(o);
 	}
 
-	public final int getMipmapCutoff() {
+	public int getMipmapCutoff() {
 		return mipmap_cutoff;
 	}
 
-	public final boolean isLighted() {
+	public boolean isLighted() {
 		return lighting;
 	}
 
-	public final boolean isCulled() {
+	public boolean isCulled() {
 		return cullface;
 	}
 
-	public final boolean hasAlpha() {
+	public boolean hasAlpha() {
 		return alpha;
 	}
 
-	public final boolean hasModulateColor() {
+	public boolean hasModulateColor() {
 		return modulate_color;
 	}
 	
-	public final boolean hasMaxAlpha() {
+	public boolean hasMaxAlpha() {
 		return max_alpha;
 	}
 }

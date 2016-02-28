@@ -50,63 +50,63 @@ public final strictfp class Game implements Serializable {
 		assert isValid(): game_name.length();
 	}
 
-	public final boolean isValid() {
+	public boolean isValid() {
 		return game_name != null && game_name.length() >= MIN_LENGTH && game_name.length() <= MAX_LENGTH;
 	}
 
-	public final boolean isValidGuestGame() {
+	public boolean isValidGuestGame() {
 		return true;
 	}
 	
-	public final String getName() {
+	public String getName() {
 		return game_name;
 	}
 
-	public final byte getSize() {
+	public byte getSize() {
 		return size;
 	}
 
-	public final byte getTerrainType() {
+	public byte getTerrainType() {
 		return terrain_type;
 	}
 	
-	public final byte getHills() {
+	public byte getHills() {
 		return hills;
 	}
 	
-	public final byte getTrees() {
+	public byte getTrees() {
 		return trees;
 	}
 	
-	public final byte getSupplies() {
+	public byte getSupplies() {
 		return supplies;
 	}
 
-	public final boolean isRated() {
+	public boolean isRated() {
 		return rated;
 	}
 
-	public final byte getGamespeed() {
+	public byte getGamespeed() {
 		return gamespeed;
 	}
 	
-	public final String getMapcode() {
+	public String getMapcode() {
 		return mapcode;
 	}
 
-	public final float getRandomStartPos() {
+	public float getRandomStartPos() {
 		return random_start_pos;
 	}
 
-	public final int getMaxUnitCount() {
+	public int getMaxUnitCount() {
 		return max_unit_count;
 	}
 
-	public final void setDatabaseID(int database_id) {
+	public void setDatabaseID(int database_id) {
 		this.database_id = database_id;
 	}
 
-	public final int getDatabaseID() {
+	public int getDatabaseID() {
 		return database_id;
 	}
 }

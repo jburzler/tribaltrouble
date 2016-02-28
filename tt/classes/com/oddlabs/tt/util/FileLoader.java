@@ -32,11 +32,11 @@ public final strictfp class FileLoader implements FileLoaderInterface {
 	}
 
         @Override
-	public final void newFile(File file, long length) {
+	public void newFile(File file, long length) {
 		listener.newFile(file, length);
 	}
 	
-	public final void load() {
+	public void load() {
 		if (LocalEventQueue.getQueue().getDeterministic().log(file_channel == null || !file_channel.isOpen()))
 			return;
 		buffer.clear();
@@ -64,17 +64,17 @@ public final strictfp class FileLoader implements FileLoaderInterface {
 	}
 
         @Override
-	public final void data(byte[] data, int num_bytes_read, boolean eof) {
+	public void data(byte[] data, int num_bytes_read, boolean eof) {
 		listener.data(data, num_bytes_read, eof);
 	}
 	
         @Override
-	public final void error(IOException e) {
+	public void error(IOException e) {
 		close();
 		listener.error(e);
 	}
 
-	public final void close() {
+	public void close() {
 		if (file_channel != null) {
 			try {
 				file_channel.close();

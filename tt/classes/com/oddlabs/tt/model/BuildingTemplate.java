@@ -85,95 +85,95 @@ public final strictfp class BuildingTemplate extends Template {
 		this.chimney_z = chimney_z;
 	}
 
-	public final int getTemplateID() {
+	public int getTemplateID() {
 		return template_id;
 	}
 
-	public final float getBuiltSelectionRadius() {
+	public float getBuiltSelectionRadius() {
 		return built_selection_radius;
 	}
 
-	public final float getBuiltSelectionHeight() {
+	public float getBuiltSelectionHeight() {
 		return built_selection_height;
 	}
 
-	public final float getHalfbuiltSelectionRadius() {
+	public float getHalfbuiltSelectionRadius() {
 		return halfbuilt_selection_radius;
 	}
 
-	public final float getHalfbuiltSelectionHeight() {
+	public float getHalfbuiltSelectionHeight() {
 		return halfbuilt_selection_height;
 	}
 
-	public final float getStartSelectionRadius() {
+	public float getStartSelectionRadius() {
 		return start_selection_radius;
 	}
 
-	public final float getStartSelectionHeight() {
+	public float getStartSelectionHeight() {
 		return start_selection_height;
 	}
 
-	public final int getPlacingSize() {
+	public int getPlacingSize() {
 		return placing_size;
 	}
 
-	public final float getSmokeRadius() {
+	public float getSmokeRadius() {
 		return smoke_radius;
 	}
 	
-	public final float getSmokeHeight() {
+	public float getSmokeHeight() {
 		return smoke_height;
 	}
 
-	public final int getNumFragments() {
+	public int getNumFragments() {
 		return num_fragments;
 	}
 	
-	public final SpriteKey getBuiltRenderer() {
+	public SpriteKey getBuiltRenderer() {
 		return built_renderer;
 	}
 
-	public final SpriteKey getStartRenderer() {
+	public SpriteKey getStartRenderer() {
 		return start_renderer;
 	}
 
-	public final SpriteKey getHalfbuiltRenderer() {
+	public SpriteKey getHalfbuiltRenderer() {
 		return halfbuilt_renderer;
 	}
 
-	public final int getMaxHitPoints() {
+	public int getMaxHitPoints() {
 		return max_hit_points;
 	}
 
-	public final UnitContainerFactory getUnitContainerFactory() {
+	public UnitContainerFactory getUnitContainerFactory() {
 		return unit_container_factory;
 	}
 
-	public final float getMountOffset() {
+	public float getMountOffset() {
 		return mount_offset;
 	}
 
-	public final float getRallyX() {
+	public float getRallyX() {
 		return rally_x;
 	}
 
-	public final float getRallyY() {
+	public float getRallyY() {
 		return rally_y;
 	}
 
-	public final float getRallyZ() {
+	public float getRallyZ() {
 		return rally_z;
 	}
 
-	public final float getChimneyX() {
+	public float getChimneyX() {
 		return chimney_x;
 	}
 
-	public final float getChimneyY() {
+	public float getChimneyY() {
 		return chimney_y;
 	}
 
-	public final float getChimneyZ() {
+	public float getChimneyZ() {
 		return chimney_z;
 	}
 }

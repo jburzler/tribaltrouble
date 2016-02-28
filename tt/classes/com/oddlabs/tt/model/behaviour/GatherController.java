@@ -24,16 +24,16 @@ public final strictfp class GatherController extends Controller {
 		this.supply_type = supply_type;
 	}
 
-	public final Class getSupplyType() {
+	public Class getSupplyType() {
 		return supply_type;
 	}
 
         @Override
-	public final String getKey() {
+	public String getKey() {
 		return super.getKey() + supply_type;
 	}
 
-	private final void gather() {
+	private void gather() {
 		resetGiveUpCounter(DROPOFF_STATE);
 		if (supply != null && supply.isDead()) {
 			supply = null;
@@ -54,7 +54,7 @@ public final strictfp class GatherController extends Controller {
 		}
 	}
 
-	private final void dropoff() {
+	private void dropoff() {
 		resetGiveUpCounter(HARVEST_STATE);
 		if (building_tracker != null && building_tracker.getOccupant() != null && unit.isCloseEnough(0f, building_tracker.getOccupant())) {
 			Building building = (Building)building_tracker.getOccupant();
@@ -75,7 +75,7 @@ public final strictfp class GatherController extends Controller {
 	}
 
         @Override
-	public final void decide() {
+	public void decide() {
 		if (unit.getSupplyContainer().getNumSupplies() > 0 && unit.getSupplyContainer().getSupplyType() == supply_type) {
 			dropoff();
 		} else {

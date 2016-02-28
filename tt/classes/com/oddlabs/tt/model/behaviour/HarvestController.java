@@ -19,7 +19,7 @@ public final strictfp class HarvestController extends Controller {
 		this.supply_class = supply_class;
 	}
 
-	private final void gather() {
+	private void gather() {
 		if (supply != null && !supply.isEmpty() && unit.isCloseEnough(0f, supply)) {
 			resetGiveUpCounter(0);
 			unit.setBehaviour(new HarvestBehaviour(unit, supply));
@@ -32,7 +32,7 @@ public final strictfp class HarvestController extends Controller {
 	}
 
         @Override
-	public final void decide() {
+	public void decide() {
 		if (unit.getSupplyContainer().getSupplyType() == supply_class && unit.getSupplyContainer().isSupplyFull()) {
 			unit.popController();
 		} else {

@@ -21,12 +21,12 @@ public final strictfp class AttackBehaviour implements Behaviour {
 	}
 
         @Override
-	public final boolean isBlocking() {
+	public boolean isBlocking() {
 		return true;
 	}
 
         @Override
-	public final int animate(float t) {
+	public int animate(float t) {
 		switch (state) {
 			case THROWING:
 				updateAttack(t);
@@ -51,18 +51,18 @@ public final strictfp class AttackBehaviour implements Behaviour {
 		}
 	}
 
-	private final void updateAttack(float t) {
+	private void updateAttack(float t) {
 		anim_time -= t;
 		unit.aimAtTarget(target);
 	}
 
-	private final void init() {
+	private void init() {
 		state = THROWING;
 		anim_time += unit.getWeaponFactory().getSecondsPerRelease(1f/SECONDS_PER_ATTACK);
 		unit.switchAnimation(1f/SECONDS_PER_ATTACK, Unit.ANIMATION_THROWING);
 	}
 
         @Override
-	public final void forceInterrupted() {
+	public void forceInterrupted() {
 	}
 }

@@ -20,7 +20,7 @@ final strictfp class ParametricParticle extends Particle {
 		this.offset_z = offset_z;
 	}
 
-	public final void update(float t, float scale_x, float scale_y, float scale_z) {
+	public void update(float t, float scale_x, float scale_y, float scale_z) {
 		super.update(t);
 		u += velocity_u*t;
 		v += velocity_v*t;
@@ -31,16 +31,16 @@ final strictfp class ParametricParticle extends Particle {
 		setPos(x, y, z);
 	}
 
-	public final void setVelocity(float u, float v) {
+	public void setVelocity(float u, float v) {
 		velocity_u = u;
 		velocity_v = v;
 	}
 
-	public final float getVelocityU() {
+	public float getVelocityU() {
 		return velocity_u;
 	}
 
-	public final float getVelocityV() {
+	public float getVelocityV() {
 		return velocity_v;
 	}
 }

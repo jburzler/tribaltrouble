@@ -29,7 +29,7 @@ public final strictfp class MenuCamera extends Camera {
 		updatePos(0f);
 	}
 
-	private final void updatePos(float t) {
+	private void updatePos(float t) {
 		center_angle = (center_angle + ANGLE_DELTA*t)%(2*(float)StrictMath.PI);
 		getState().setCurrentX(CENTER_X + RADIUS*(float)StrictMath.cos(center_angle));
 		getState().setCurrentY(CENTER_Y + RADIUS*(float)StrictMath.sin(center_angle));
@@ -38,7 +38,7 @@ public final strictfp class MenuCamera extends Camera {
 	}
 	
         @Override
-	public final void doAnimate(float t) {
+	public void doAnimate(float t) {
 		updatePos(t);
 		world.tick(t);
 		manager.runAnimations(t);

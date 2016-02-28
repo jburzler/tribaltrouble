@@ -41,7 +41,7 @@ final strictfp class WorldStarter implements LoadCallback {
 	}
 
         @Override
-	public final UIRenderer load(GUIRoot gui_root) {
+	public UIRenderer load(GUIRoot gui_root) {
 		AnimationManager.freezeTime();
 		List player_slot_list = new ArrayList();
 		List unit_info_list = new ArrayList();

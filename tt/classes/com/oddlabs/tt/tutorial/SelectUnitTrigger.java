@@ -6,7 +6,7 @@ public final strictfp class SelectUnitTrigger extends TutorialTrigger {
 	}
 
         @Override
-	protected final void run(Tutorial tutorial) {
+	protected void run(Tutorial tutorial) {
 		if (tutorial.getViewer().getSelection().getCurrentSelection().getNumUnits() > 0)
 			tutorial.next(new MoveUnitTrigger(tutorial.getViewer().getLocalPlayer()));
 	}

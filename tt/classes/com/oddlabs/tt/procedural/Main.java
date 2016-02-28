@@ -4,7 +4,7 @@ import com.oddlabs.procedural.Channel;
 
 public final strictfp class Main {
 
-	public final static void main(String[] args) {
+	public static void main(String[] args) {
 		long time = System.currentTimeMillis();
 		
 		/*

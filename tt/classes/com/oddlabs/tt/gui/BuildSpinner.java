@@ -34,7 +34,7 @@ public final strictfp class BuildSpinner extends IconSpinner {
 	}
 
         @Override
-	public final int computeCount() {
+	public int computeCount() {
 		if (!current_building.isDead()) {
 			BuildSupplyContainer build_container = current_building.getBuildSupplyContainer(type);
 			int count = StrictMath.min(build_container.getMaxSupplyCount(),
@@ -46,11 +46,11 @@ public final strictfp class BuildSpinner extends IconSpinner {
 	}
 
         @Override
-	public final boolean renderInfinite() {
+	public boolean renderInfinite() {
 		return infinite;
 	}
 
-	private final void order(int num) {
+	private void order(int num) {
 		if (!current_building.isDead()) {
 			if (type == RockAxeWeapon.class) {
 				player_interface.buildRockWeapons(current_building, num, infinite);
@@ -65,24 +65,24 @@ public final strictfp class BuildSpinner extends IconSpinner {
 	}
 
         @Override
-	public final void appendToolTip(ToolTipBox tool_tip_box) {
+	public void appendToolTip(ToolTipBox tool_tip_box) {
 		if (!isDisabled())
 			super.appendToolTip(tool_tip_box);
 	}
 
         @Override
-	protected final float getProgress() {
+	protected float getProgress() {
 		if (!current_building.isDead())
 			return ((BuildProductionContainer)current_building.getBuildSupplyContainer(type)).getBuildProgress();
 		else
 			return 0;
 	}
 
-	protected final Building getBuilding() {
+	protected Building getBuilding() {
 		return current_building;
 	}
 
-	protected final int getOrderDiff() {
+	protected int getOrderDiff() {
 		if (!current_building.isDead())
 			return num_orders - current_building.getBuildSupplyContainer(type).getNumOrders();
 		else
@@ -102,13 +102,13 @@ public final strictfp class BuildSpinner extends IconSpinner {
 	}
 
         @Override
-	protected final void release() {
+	protected void release() {
 		order(order_size);
 		order_size = 0;
 	}
 
         @Override
-	protected final int getOrderSize() {
+	protected int getOrderSize() {
 		return order_size;
 	}
 

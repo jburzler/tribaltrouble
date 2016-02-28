@@ -36,7 +36,7 @@ public final strictfp class PointerInput {
 											 img_32_8, 4, 27);
 	}
 
-	public final static void setActiveCursor(Cursor cursor) {
+	public static void setActiveCursor(Cursor cursor) {
 		if (cursor != null && Mouse.isGrabbed()) {
 			Mouse.setGrabbed(false);
 			resetCursorPos();
@@ -49,7 +49,7 @@ public final strictfp class PointerInput {
 		}
 	}
 
-	public final static void setCursorPosition(int x, int y) {
+	public static void setCursorPosition(int x, int y) {
 		if (Mouse.isCreated() && !LocalEventQueue.getQueue().getDeterministic().isPlayback())
 			Mouse.setCursorPosition(x, y);
 	}
@@ -60,7 +60,7 @@ public final strictfp class PointerInput {
 		while (Mouse.isCreated() && Mouse.next());
 	}
 
-	private final static void doSetActiveCursor(Cursor cursor) {
+	private static void doSetActiveCursor(Cursor cursor) {
 		active_cursor = cursor;
 		try {
 			Mouse.setNativeCursor(LocalEventQueue.getQueue().getDeterministic().isPlayback() ? debug_cursor.getCursor() : cursor);
@@ -69,12 +69,12 @@ public final strictfp class PointerInput {
 		}
 	}
 
-	public final static void deletingCursor(Cursor cursor) {
+	public static void deletingCursor(Cursor cursor) {
 		if (active_cursor == cursor)
 			doSetActiveCursor(null);
 	}
 
-	private final static void updateMouse(GUIRoot gui_root, int x, int y, int dz) {
+	private static void updateMouse(GUIRoot gui_root, int x, int y, int dz) {
 		if (x != last_x || y != last_y) {
 			last_x = (short)x;
 			last_y = (short)y;
@@ -88,7 +88,7 @@ public final strictfp class PointerInput {
 			LocalInput.getLocalInput().mouseScrolled(gui_root, dz);
 	}
 
-	public final static void poll(GUIRoot gui_root) {
+	public static void poll(GUIRoot gui_root) {
 		Deterministic deterministic = LocalEventQueue.getQueue().getDeterministic();
 		if (deterministic.log(!Mouse.isCreated()))
 			return;

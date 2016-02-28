@@ -217,7 +217,7 @@ public final strictfp class Grass {
 		}
 	}
 	
-	public final Layer toLayer() {
+	public Layer toLayer() {
 		return new Layer(r, g, b);
 	}
 

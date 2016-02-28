@@ -6,7 +6,7 @@ import com.oddlabs.tt.resource.GLIntImage;
 
 public final strictfp class GeneratePies {
 
-	public final static void main(String[] args) {
+	public static void main(String[] args) {
 		int dia = 20;
 		Channel channel;
 		Channel alpha = new Pie(dia, 1f, Pie.CIRCLE).toChannel().channelBrightest(new Pie(dia, 1f, Pie.CIRCLE).toChannel().flipH());

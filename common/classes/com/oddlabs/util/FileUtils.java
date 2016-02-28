@@ -4,7 +4,7 @@ import java.io.*;
 import java.nio.channels.FileChannel;
 
 public final strictfp class FileUtils {
-	public final static void copyFile(File src, File dst) throws IOException {
+	public static void copyFile(File src, File dst) throws IOException {
             FileChannel dst_channel;
             try (FileChannel src_channel = new FileInputStream(src).getChannel()) {
                 dst_channel = new FileOutputStream(dst).getChannel();

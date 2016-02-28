@@ -27,7 +27,7 @@ public final strictfp class Spectral {
 	}
 
 	// generate noise octaves
-	private final void generateOctaves(int base_frequency, int octaves, long seed) {
+	private void generateOctaves(int base_frequency, int octaves, long seed) {
 		base_frequency = StrictMath.max(2, base_frequency);
 		noise_channels = new Channel[octaves];
 		random = new Random(seed);
@@ -43,7 +43,7 @@ public final strictfp class Spectral {
 	}
 
 	// interpolate and sum octave channels
-	private final void mergeOctaves(int size, float persistence, int octaves, int interpolation) {
+	private void mergeOctaves(int size, float persistence, int octaves, int interpolation) {
 		channel = new Channel(size, size);
 		int method_threshold = 0;
 		if (interpolation == SMOOTH) {
@@ -167,11 +167,11 @@ public final strictfp class Spectral {
 		}
 	}
 
-	public final Layer toLayer() {
+	public Layer toLayer() {
 		return new Layer(channel, channel.copy(), channel.copy());
 	}
 
-	public final Channel toChannel() {
+	public Channel toChannel() {
 		return channel;
 	}
 

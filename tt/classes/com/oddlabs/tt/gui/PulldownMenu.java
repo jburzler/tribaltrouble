@@ -17,16 +17,16 @@ public final strictfp class PulldownMenu extends Group {// GUIObject {
 		setFocusCycle(true);
 	}
 
-	public final PulldownItem getItem(int index) {
+	public PulldownItem getItem(int index) {
 		return (PulldownItem)items.get(index);
 	}
 
-	public final int getSize() {
+	public int getSize() {
 		return items.size();
 	}
 
         @Override
-	protected final void renderGeometry() {
+	protected void renderGeometry() {
 		// Render bottom edge
 		Horizontal bot = Skin.getSkin().getPulldownData().getPulldownBottom();
 		bot.render(0, 0, getWidth(), Skin.NORMAL);
@@ -36,7 +36,7 @@ public final strictfp class PulldownMenu extends Group {// GUIObject {
 		top.render(0, getHeight() - top.getHeight(), getWidth(), Skin.NORMAL);
 	}
 
-	public final void addItem(PulldownItem item) {
+	public void addItem(PulldownItem item) {
 		items.add(item);
 		addChild(item);
 		item.addMouseClickListener(new ItemListener(items.size() - 1));
@@ -44,7 +44,7 @@ public final strictfp class PulldownMenu extends Group {// GUIObject {
 	}
 
         @Override
-	public final void setDim(int width, int height) {
+	public void setDim(int width, int height) {
 		int min_width = 0;
 		Box item_box = Skin.getSkin().getPulldownData().getPulldownItem();
 		// Adjust all items
@@ -66,24 +66,24 @@ public final strictfp class PulldownMenu extends Group {// GUIObject {
 		super.setDim(min_width, min_height);
 	}
 
-	public final int getChosenItemIndex() {
+	public int getChosenItemIndex() {
 		return chosen_item_index;
 	}
 
-	public final void chooseItem(int index) {
+	public void chooseItem(int index) {
 		chosen_item_index = index;
 		itemChosenAll();
 	}
 
         @Override
-	protected final void focusNotify(boolean focus) {
+	protected void focusNotify(boolean focus) {
 		if (!focus) {
 			remove();
 		}
 	}
 
         @Override
-	protected final void keyRepeat(KeyboardEvent event) {
+	protected void keyRepeat(KeyboardEvent event) {
 		switch (event.getKeyCode()) {
 			case Keyboard.KEY_UP:
 				focusPrior();
@@ -98,7 +98,7 @@ public final strictfp class PulldownMenu extends Group {// GUIObject {
 	}
 
 	// Sending click on to appropiate item when PulldownButton has been pressed and released on an item
-	protected final void clickItem(int button, int x, int y, int clicks) {
+	protected void clickItem(int button, int x, int y, int clicks) {
 		for (int i = 0; i < items.size(); i++) {
 			PulldownItem item = getItem(i);
 			if (item.isHovered())
@@ -106,7 +106,7 @@ public final strictfp class PulldownMenu extends Group {// GUIObject {
 		}
 	}
 
-	public final void itemChosenAll() {
+	public void itemChosenAll() {
 		for (int i = 0; i < chosen_listeners.size(); i++) {
 			ItemChosenListener listener = (ItemChosenListener)chosen_listeners.get(i);
 			if (listener != null)
@@ -114,11 +114,11 @@ public final strictfp class PulldownMenu extends Group {// GUIObject {
 		}
 	}
 
-	public final void addItemChosenListener(ItemChosenListener listener) {
+	public void addItemChosenListener(ItemChosenListener listener) {
 		chosen_listeners.add(listener);
 	}
 
-	public final void removeItemChosenListener(ItemChosenListener listener) {
+	public void removeItemChosenListener(ItemChosenListener listener) {
 		chosen_listeners.remove(listener);
 	}
 
@@ -130,7 +130,7 @@ public final strictfp class PulldownMenu extends Group {// GUIObject {
 		}
 
                 @Override
-		public final void mouseClicked(int button, int x, int y, int clicks) {
+		public void mouseClicked(int button, int x, int y, int clicks) {
 			chooseItem(index);
 		}
 	}

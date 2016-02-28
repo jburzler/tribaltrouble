@@ -106,7 +106,7 @@ public final strictfp class GameInfoForm extends Form {
 	}
 	
         @Override
-	public final void setFocus() {
+	public void setFocus() {
 		ok_button.setFocus();
 	}
 }

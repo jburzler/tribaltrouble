@@ -78,7 +78,7 @@ public final strictfp class InfoForm extends Form {
 	}
 	
         @Override
-	public final void setFocus() {
+	public void setFocus() {
 		ok_button.setFocus();
 	}
 }

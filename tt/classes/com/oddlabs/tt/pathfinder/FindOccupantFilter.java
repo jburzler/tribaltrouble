@@ -21,17 +21,17 @@ public final strictfp class FindOccupantFilter implements ScanFilter {
 	}
 
         @Override
-	public final int getMinRadius() {
+	public int getMinRadius() {
 		return 0;
 	}
 
         @Override
-	public final int getMaxRadius() {
+	public int getMaxRadius() {
 		return UnitGrid.toGridCoordinate(radius);
 	}
 
         @Override
-	public final boolean filter(int grid_x, int grid_y, Occupant occ) {
+	public boolean filter(int grid_x, int grid_y, Occupant occ) {
 		if (type.isInstance(occ) && occ != src) {
 			Selectable s = (Selectable)occ;
 			float dx = s.getPositionX() - x;
@@ -44,7 +44,7 @@ public final strictfp class FindOccupantFilter implements ScanFilter {
 		return false;
 	}
 
-	public final List getResult() {
+	public List getResult() {
 		return result;
 	}
 }

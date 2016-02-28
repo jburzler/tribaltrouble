@@ -44,42 +44,42 @@ public final strictfp class ScrollBar extends GUIObject {
 		addChild(focus_group);
 	}
 
-	public final void update() {
+	public void update() {
 		if (scroll_button != null)
 			scroll_button.setupPos(this);
 	}
 
         @Override
-	public final void setPos(int x, int y) {
+	public void setPos(int x, int y) {
 		super.setPos(x, y);
 		if (scroll_button != null)
 			scroll_button.setupPos(this);
 	}
 
         @Override
-	public final void setDim(int width, int height) {
+	public void setDim(int width, int height) {
 		super.setDim(width, height);
 		if (scroll_button != null)
 			scroll_button.setupPos(this);
 	}
 
         @Override
-	public final void setFocus() {
+	public void setFocus() {
 		focus_group.setGroupFocus(LocalInput.isShiftDownCurrently() ? -1 : 1);
 	}
 
         @Override
-	protected final void renderGeometry() {
+	protected void renderGeometry() {
 		ScrollBarData data = Skin.getSkin().getScrollBarData();
 		Vertical scroll_bar = data.getScrollBar();
 		scroll_bar.render(0, less_button.getHeight(), getHeight() - less_button.getHeight() - more_button.getHeight(), Skin.NORMAL);
 	}
 
-	public final int getButtonX() {
+	public int getButtonX() {
 		return Skin.getSkin().getScrollBarData().getLeftOffset();
 	}
 
-	public final int getButtonY() {
+	public int getButtonY() {
 		ScrollBarData data = Skin.getSkin().getScrollBarData();
 		int max_height = getHeight() - less_button.getHeight() - more_button.getHeight() - data.getBottomOffset() - data.getTopOffset();
 		int size = getButtonHeight();
@@ -87,7 +87,7 @@ public final strictfp class ScrollBar extends GUIObject {
 		return less_button.getHeight() + data.getBottomOffset() + offset;
 	}
 
-	public final int getButtonHeight() {
+	public int getButtonHeight() {
 		ScrollBarData data = Skin.getSkin().getScrollBarData();
 		int max_height = getHeight() - less_button.getHeight() - more_button.getHeight() - data.getBottomOffset() - data.getTopOffset();
 		float ratio = owner.getScrollBarRatio();
@@ -98,7 +98,7 @@ public final strictfp class ScrollBar extends GUIObject {
 	}
 
         @Override
-	protected final void mouseClicked(int button, int x, int y, int clicks) {
+	protected void mouseClicked(int button, int x, int y, int clicks) {
 		int button_y = getButtonY();
 		owner.jumpPage(y > button_y);
 		scroll_button.setupPos(this);
@@ -106,32 +106,32 @@ public final strictfp class ScrollBar extends GUIObject {
 
 	private final strictfp class LessListener implements MouseButtonListener {
                 @Override
-		public final void mousePressed(int button, int x, int y) {
+		public void mousePressed(int button, int x, int y) {
 			owner.setOffsetY(owner.getOffsetY() + owner.getStepHeight());
 			scroll_button.setupPos(ScrollBar.this);
 		}
 
                 @Override
-		public final void mouseReleased(int button, int x, int y) {}
+		public void mouseReleased(int button, int x, int y) {}
                 @Override
-		public final void mouseHeld(int button, int x, int y) {}
+		public void mouseHeld(int button, int x, int y) {}
                 @Override
-		public final void mouseClicked(int button, int x, int y, int clicks) {}
+		public void mouseClicked(int button, int x, int y, int clicks) {}
 	}
 
 	private final strictfp class MoreListener implements MouseButtonListener {
                 @Override
-		public final void mousePressed(int button, int x, int y) {
+		public void mousePressed(int button, int x, int y) {
 			owner.setOffsetY(owner.getOffsetY() - owner.getStepHeight());
 			scroll_button.setupPos(ScrollBar.this);
 		}
 
                 @Override
-		public final void mouseReleased(int button, int x, int y) {}
+		public void mouseReleased(int button, int x, int y) {}
                 @Override
-		public final void mouseHeld(int button, int x, int y) {}
+		public void mouseHeld(int button, int x, int y) {}
                 @Override
-		public final void mouseClicked(int button, int x, int y, int clicks) {}
+		public void mouseClicked(int button, int x, int y, int clicks) {}
 	}
 
 	private final strictfp class DragListener implements MouseMotionListener, MouseButtonListener {
@@ -139,12 +139,12 @@ public final strictfp class ScrollBar extends GUIObject {
 		float start_offset;
 
                 @Override
-		public final void mousePressed(int button, int x, int y) {
+		public void mousePressed(int button, int x, int y) {
 			start_offset = owner.getScrollBarOffset();
 		}
 
                 @Override
-		public final void mouseDragged(int button, int x, int y, int rel_x, int rel_y, int abs_x, int abs_y) {
+		public void mouseDragged(int button, int x, int y, int rel_x, int rel_y, int abs_x, int abs_y) {
 			int max_height = getHeight() - less_button.getHeight() - more_button.getHeight() - data.getBottomOffset() - data.getTopOffset();
 			float ratio = owner.getScrollBarRatio();
 			int size = (int)(ratio*max_height);
@@ -154,22 +154,22 @@ public final strictfp class ScrollBar extends GUIObject {
 		}
 
                 @Override
-		public final void mouseMoved(int x, int y) {}
+		public void mouseMoved(int x, int y) {}
                 @Override
-		public final void mouseEntered() {}
+		public void mouseEntered() {}
                 @Override
-		public final void mouseExited() {}
+		public void mouseExited() {}
                 @Override
-		public final void mouseReleased(int button, int x, int y) {}
+		public void mouseReleased(int button, int x, int y) {}
                 @Override
-		public final void mouseHeld(int button, int x, int y) {}
+		public void mouseHeld(int button, int x, int y) {}
                 @Override
-		public final void mouseClicked(int button, int x, int y, int clicks) {}
+		public void mouseClicked(int button, int x, int y, int clicks) {}
 	}
 
 	private final strictfp class ButtonKeyListener implements KeyListener {
                 @Override
-		public final void keyRepeat(KeyboardEvent event) {
+		public void keyRepeat(KeyboardEvent event) {
 			switch (event.getKeyCode()) {
 				case Keyboard.KEY_UP:
 					owner.setOffsetY(owner.getOffsetY() - owner.getStepHeight());
@@ -185,8 +185,8 @@ public final strictfp class ScrollBar extends GUIObject {
 		}
 
                 @Override
-		public final void keyPressed(KeyboardEvent event) {}
+		public void keyPressed(KeyboardEvent event) {}
                 @Override
-		public final void keyReleased(KeyboardEvent event) {}
+		public void keyReleased(KeyboardEvent event) {}
 	}
 }

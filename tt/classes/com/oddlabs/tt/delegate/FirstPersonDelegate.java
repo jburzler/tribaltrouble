@@ -19,7 +19,7 @@ public strictfp class FirstPersonDelegate extends InGameDelegate {
 		created_tick = LocalEventQueue.getQueue().getManager().getTick();
 	}
 
-	private final void release() {
+	private void release() {
 		done = true;
 	}
 

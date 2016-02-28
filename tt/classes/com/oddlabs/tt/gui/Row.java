@@ -16,11 +16,11 @@ public final strictfp class Row extends GUIObject implements Comparable {
 		setCanFocus(true);
 	}
 
-	public final Object getColumn(int index) {
+	public Object getColumn(int index) {
 		return columns[index];
 	}
 
-	public final void setColumnInfos(ColumnInfo[] column_infos) {
+	public void setColumnInfos(ColumnInfo[] column_infos) {
 		int x = 0;
 		for (int i = 0; i < column_infos.length; i++) {
 			GUIObject gui_object = (GUIObject)getColumn(i);
@@ -38,23 +38,23 @@ public final strictfp class Row extends GUIObject implements Comparable {
 		setDim(x, getHeight());
 	}
 
-	public final void setSortIndex(int sort_index) {
+	public void setSortIndex(int sort_index) {
 		this.sort_index = sort_index;
 	}
 
         @Override
-	public final int compareTo(Object o) {
+	public int compareTo(Object o) {
 		Comparable local_object = (Comparable)getColumn(sort_index);
 		Comparable compared_object = (Comparable)((Row)o).getColumn(sort_index);
 		return local_object.compareTo(compared_object);
 	}
 
-	public final void setColor(Color color) {
+	public void setColor(Color color) {
 		this.color = color;
 	}
 
         @Override
-	protected final void renderGeometry(float clip_left, float clip_right, float clip_bottom ,float clip_top) {
+	protected void renderGeometry(float clip_left, float clip_right, float clip_bottom ,float clip_top) {
 		GL11.glEnd();
 		if (marked) {
 			Color color = Skin.getSkin().getMultiColumnComboBoxData().getColorMarked();
@@ -74,11 +74,11 @@ public final strictfp class Row extends GUIObject implements Comparable {
 		GL11.glBegin(GL11.GL_QUADS);
 	}
 
-	public final Object getContentObject() {
+	public Object getContentObject() {
 		return content_object;
 	}
 
-	public final void mark(boolean marked) {
+	public void mark(boolean marked) {
 		this.marked = marked;
 	}
 }

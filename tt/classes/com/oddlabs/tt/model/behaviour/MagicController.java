@@ -15,12 +15,12 @@ public final strictfp class MagicController extends Controller {
 		this.magic_factory = magic_factory;
 	}
 
-	public final void popNextTime() {
+	public void popNextTime() {
 		should_pop = true;
 	}
 
         @Override
-	public final void decide() {
+	public void decide() {
 		if (should_pop) {
 			unit.popController();
 		} else {

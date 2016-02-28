@@ -58,7 +58,7 @@ public strictfp class WeaponsProducer {
 		break_time -= t;
 	}
 
-	private final void startSound() {
+	private void startSound() {
 		if (production_player == null) {
 			production_player = building.getOwner().getWorld().getAudio().newAudio(new AudioParameters(building.getOwner().getWorld().getRacesResources().getArmorySound(), building.getPositionX(), building.getPositionY(), building.getPositionZ(),
 					AudioPlayer.AUDIO_RANK_ARMORY,

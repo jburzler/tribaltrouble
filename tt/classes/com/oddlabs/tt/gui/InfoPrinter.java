@@ -31,34 +31,34 @@ public final strictfp class InfoPrinter extends GUIObject implements Animated, C
 		time = 0;
 	}
 
-	public final GUIRoot getGUIRoot() {
+	public GUIRoot getGUIRoot() {
 		return gui_root;
 	}
 
         @Override
-	protected final void doAdd() {
+	protected void doAdd() {
 		super.doAdd();
 		Network.getChatHub().addListener(this);
 	}
 
         @Override
-	protected final void doRemove() {
+	protected void doRemove() {
 		super.doRemove();
 		Network.getChatHub().removeListener(this);
 		LocalEventQueue.getQueue().getManager().removeAnimation(this);
 	}
 
         @Override
-	protected final void displayChangedNotify(int width, int height) {
+	protected void displayChangedNotify(int width, int height) {
 		setDim(width, height);
 	}
 
         @Override
-	public final void chat(ChatMessage message) {
+	public void chat(ChatMessage message) {
 		chat(message.formatShort(), message.type);
 	}
 
-	public final void chat(String text, int type) {
+	public void chat(String text, int type) {
 		switch (type) {
 			case ChatMessage.CHAT_NORMAL:
 				print(text);
@@ -74,11 +74,11 @@ public final strictfp class InfoPrinter extends GUIObject implements Animated, C
 		}
 	}
 
-	public final void print(String text) {
+	public void print(String text) {
 		print(text, null);
 	}
 
-	public final void print(String text, float[] color) {
+	public void print(String text, float[] color) {
 		int width = StrictMath.min(font.getWidth(text), getWidth());
 		LabelBox label_box = new BackgroundLabelBox(text, font, width);
 		if (color != null)
@@ -93,7 +93,7 @@ public final strictfp class InfoPrinter extends GUIObject implements Animated, C
 		setLabelsPos();
 	}
 
-	private final void removeLine(int index) {
+	private void removeLine(int index) {
 		LabelBox label_box = (LabelBox)history.get(index);
 		label_box.remove();
 		history.remove(index);
@@ -102,7 +102,7 @@ public final strictfp class InfoPrinter extends GUIObject implements Animated, C
 	}
 
         @Override
-	public final void animate(float t) {
+	public void animate(float t) {
 		time += t;
 		for (int i = timers.size() - 1; i >= 0; i--) {
 			float remove_time = ((Float)timers.get(i));
@@ -113,14 +113,14 @@ public final strictfp class InfoPrinter extends GUIObject implements Animated, C
 	}
 
         @Override
-	public final void updateChecksum(StateChecksum checksum) {
+	public void updateChecksum(StateChecksum checksum) {
 	}
 
         @Override
-	protected final void renderGeometry() {
+	protected void renderGeometry() {
 	}
 
-	private final void setLabelsPos() {
+	private void setLabelsPos() {
 		int y = getHeight();
 		for (int i = 0; i < history.size(); i++) {
 			LabelBox label_box = (LabelBox)history.get(i);

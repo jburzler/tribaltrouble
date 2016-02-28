@@ -4,7 +4,7 @@ import java.util.Comparator;
 
 public final strictfp class MethodComparator implements Comparator {
         @Override
-	public final int compare(Object o1, Object o2) {
+	public int compare(Object o1, Object o2) {
 		return o1.toString().compareTo(o2.toString());
 	}
 }

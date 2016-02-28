@@ -59,7 +59,7 @@ final strictfp class QueuedAudioPlayer extends AbstractAudioPlayer {
 		AudioManager.getManager().registerQueuedPlayer(this);
 	}
 
-	private final void fillBufferFromStream(int al_buffer) {
+	private void fillBufferFromStream(int al_buffer) {
 		buffer_stream.buffer().flip();
 /*		buffer_stream.buffer().limit(256);
 		buffer_stream.buffer().position(0);
@@ -70,7 +70,7 @@ final strictfp class QueuedAudioPlayer extends AbstractAudioPlayer {
 		AL10.alBufferData(al_buffer, Wave.getFormat(channels, 16), buffer_stream.buffer(), ogg_stream.getRate());
 	}
 
-	private final int fillBuffer(int al_buffer) {
+	private int fillBuffer(int al_buffer) {
 		buffer_stream.reset();
 		int bytes = ogg_stream.read(buffer_stream);
 		if (bytes > 0) {
@@ -83,7 +83,7 @@ final strictfp class QueuedAudioPlayer extends AbstractAudioPlayer {
 		return bytes;
 	}
 
-	public final void refill() { // Run by the Refiller thread
+	public void refill() { // Run by the Refiller thread
 		int processed = AL10.alGetSourcei(source.getSource(), AL10.AL_BUFFERS_PROCESSED);
 //System.out.println("this = " + this + " | processed = " + processed);
 		while (processed > 0) {
@@ -112,7 +112,7 @@ final strictfp class QueuedAudioPlayer extends AbstractAudioPlayer {
 	}
 
         @Override
-	public final void stop() {
+	public void stop() {
 		if (isPlaying()) {
 			AudioManager.getManager().removeQueuedPlayer(this);
 			super.stop();

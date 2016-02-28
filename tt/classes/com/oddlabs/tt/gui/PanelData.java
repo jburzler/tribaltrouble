@@ -25,31 +25,31 @@ public final strictfp class PanelData {
 		this.bottom_tab_offset = bottom_tab_offset;
 	}
 
-	public final Box getBox() {
+	public Box getBox() {
 		return box;
 	}
 
-	public final Horizontal getTab() {
+	public Horizontal getTab() {
 		return tab;
 	}
 
-	public final int getLeftCaptionOffset() {
+	public int getLeftCaptionOffset() {
 		return left_caption_offset;
 	}
 
-	public final int getRightCaptionOffset() {
+	public int getRightCaptionOffset() {
 		return right_caption_offset;
 	}
 
-	public final int getBottomCaptionOffset() {
+	public int getBottomCaptionOffset() {
 		return bottom_caption_offset;
 	}
 
-	public final int getLeftTabOffset() {
+	public int getLeftTabOffset() {
 		return left_tab_offset;
 	}
 
-	public final int getBottomTabOffset() {
+	public int getBottomTabOffset() {
 		return bottom_tab_offset;
 	}
 }

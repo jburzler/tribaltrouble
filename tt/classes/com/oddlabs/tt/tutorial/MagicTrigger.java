@@ -15,7 +15,7 @@ public final strictfp class MagicTrigger extends TutorialTrigger {
 	}
 
         @Override
-	protected final void run(Tutorial tutorial) {
+	protected void run(Tutorial tutorial) {
 		int last = chieftain.getLastMagicIndex();
 		if (last != -1)
 			magic_used[last] = true;

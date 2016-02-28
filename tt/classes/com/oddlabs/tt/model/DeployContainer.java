@@ -39,7 +39,7 @@ public strictfp class DeployContainer extends SupplyContainer {
 		}
 	}
 
-	private final void orderSupply(int amount, int orders) {
+	private void orderSupply(int amount, int orders) {
 		increaseSupply(amount);
 		num_orders += orders;
 	}
@@ -57,7 +57,7 @@ public strictfp class DeployContainer extends SupplyContainer {
 		}
 	}
 
-	private final void doDeploy() {
+	private void doDeploy() {
 		switch (deploy_type) {
 			case Building.KEY_DEPLOY_ROCK_WARRIOR:
 				building.createArmy(0, 1, 0, 0);

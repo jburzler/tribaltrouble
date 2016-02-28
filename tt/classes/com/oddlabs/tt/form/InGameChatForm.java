@@ -37,7 +37,7 @@ public final strictfp class InGameChatForm extends Form implements ChatListener 
 	private final ResourceBundle bundle = getBundle();
 	private final WorldViewer viewer;
 
-	private final static ResourceBundle getBundle() {
+	private static ResourceBundle getBundle() {
 		return ResourceBundle.getBundle(InGameChatForm.class.getName());
 	}
 	
@@ -75,19 +75,19 @@ public final strictfp class InGameChatForm extends Form implements ChatListener 
 	}
 
         @Override
-	protected final void doAdd() {
+	protected void doAdd() {
 		super.doAdd();
 		Network.getChatHub().addListener(this);
 		refreshMessages();
 	}
 
         @Override
-	protected final void doRemove() {
+	protected void doRemove() {
 		super.doRemove();
 		Network.getChatHub().removeListener(this);
 	}
 
-	public final void setReceivers(boolean all) {
+	public void setReceivers(boolean all) {
 		if (all)
 			radio_button_group.mark(radio_all);
 		else
@@ -95,12 +95,12 @@ public final strictfp class InGameChatForm extends Form implements ChatListener 
 	}
 
         @Override
-	public final void setFocus() {
+	public void setFocus() {
 		chat_line.setFocus();
 	}
 
         @Override
-	public final void chat(ChatMessage message) {
+	public void chat(ChatMessage message) {
 		refreshMessages();
 	}
 
@@ -122,7 +122,7 @@ public final strictfp class InGameChatForm extends Form implements ChatListener 
 
 	private strictfp final class ChatListener implements EnterListener {
                 @Override
-		public final void enterPressed(CharSequence text) {
+		public void enterPressed(CharSequence text) {
 			String chat = text.toString();
 			if (!chat.equals("")) {
 				chat_line.clear();
@@ -142,7 +142,7 @@ public final strictfp class InGameChatForm extends Form implements ChatListener 
 
 	private strictfp final class SendListener implements MouseClickListener {
                 @Override
-		public final void mouseClicked(int button, int x, int y, int clicks) {
+		public void mouseClicked(int button, int x, int y, int clicks) {
 			chat_line.enterPressedAll();
 		}
 	}

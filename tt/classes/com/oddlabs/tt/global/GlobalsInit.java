@@ -5,11 +5,11 @@ import org.lwjgl.opengl.GL11;
 
 // Class that initializes all static data in Globals - must be called once before anything else
 public final strictfp class GlobalsInit {
-	public final static void init() {
+	public static void init() {
 		initTextureSize();
 	}
 
-	private final static int bestTextureSize(int size) {
+	private static int bestTextureSize(int size) {
 		int texture_max = Globals.MIN_TEXTURE_SIZE;
 		int texture_min = texture_max;
 		for (; texture_max < Globals.MAX_TEXTURE_SIZE; texture_min = texture_max, texture_max <<= 1)
@@ -20,7 +20,7 @@ public final strictfp class GlobalsInit {
 			return texture_min;
 	}
 
-	private final static void initTextureSize() {
+	private static void initTextureSize() {
 		int tex_pow;
 		int max_size = GLUtils.getGLInteger(GL11.GL_MAX_TEXTURE_SIZE);
 		System.out.println("Maximum texture size " + max_size);

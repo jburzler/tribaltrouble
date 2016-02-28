@@ -39,7 +39,7 @@ public final strictfp class ProgressBar extends GUIObject {
 		setCanFocus(false);
 	}
 
-	public final void progress() {
+	public void progress() {
 		assert index < info.length: "Too much progress";
 		index++;
 		step = 0;
@@ -54,7 +54,7 @@ public final strictfp class ProgressBar extends GUIObject {
 		update();
 	}
 
-	public final void progress(float fraction) {
+	public void progress(float fraction) {
 		int current = 0;
 		if (index > 0)
 			current = info[index - 1].getWaypoint();
@@ -68,7 +68,7 @@ public final strictfp class ProgressBar extends GUIObject {
 		update();
 	}
 
-	private final void renderText(float clip_left, float clip_right, float clip_bottom, float clip_top) {
+	private void renderText(float clip_left, float clip_right, float clip_bottom, float clip_top) {
 		int offset = 0;
 		if (index > 0)
 			offset = info[index - 1].getWaypoint();
@@ -80,7 +80,7 @@ public final strictfp class ProgressBar extends GUIObject {
 	}
 
         @Override
-	protected final void renderGeometry(float clip_left, float clip_right, float clip_bottom, float clip_top) {
+	protected void renderGeometry(float clip_left, float clip_right, float clip_bottom, float clip_top) {
 		if (text_only)
 			renderText(clip_left, clip_right, clip_bottom, clip_top);
 		else {
@@ -91,7 +91,7 @@ public final strictfp class ProgressBar extends GUIObject {
 		}
 	}
 
-	private final void pixelize(ProgressBarInfo[] info, int width) {
+	private void pixelize(ProgressBarInfo[] info, int width) {
 		float sum = 0;
             for (ProgressBarInfo info1 : info) {
                 sum += info1.getWeight();
@@ -112,7 +112,7 @@ public final strictfp class ProgressBar extends GUIObject {
             }
 	}
 
-	private final void renderFill(int y) {
+	private void renderFill(int y) {
 		if (index == 0 && step < left_margin)
 			return;
 		ProgressBarData data = Skin.getSkin().getProgressBarData();
@@ -130,7 +130,7 @@ public final strictfp class ProgressBar extends GUIObject {
 		}
 	}
 
-	private final void update() {
+	private void update() {
 		Renderer.clearScreen();
 		gui.renderGUI();
 		network.tick();

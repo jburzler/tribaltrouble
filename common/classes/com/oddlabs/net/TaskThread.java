@@ -33,7 +33,7 @@ public final strictfp class TaskThread {
 		}
 
                 @Override
-		public final void deliverResult(TaskExecutorLoopbackInterface callback) {
+		public void deliverResult(TaskExecutorLoopbackInterface callback) {
 			callback.taskFailed(result);
 		}
 	}
@@ -46,7 +46,7 @@ public final strictfp class TaskThread {
 		}
 
                 @Override
-		public final void deliverResult(TaskExecutorLoopbackInterface callback) {
+		public void deliverResult(TaskExecutorLoopbackInterface callback) {
 			callback.taskCompleted(result);
 		}
 	}
@@ -83,11 +83,11 @@ public final strictfp class TaskThread {
 			notification_action.run();
 	}
 
-	public final Deterministic getDeterministic() {
+	public Deterministic getDeterministic() {
 		return deterministic;
 	}
 	
-	public final Task addTask(Callable callable) {
+	public Task addTask(Callable callable) {
 		BlockingTask task;
 		synchronized (lock) {
 			int task_id = current_id++;
@@ -105,7 +105,7 @@ public final strictfp class TaskThread {
 		return task;
 	}
 
-	public final void poll() {
+	public void poll() {
 		while (true) {
 			BlockingTask task;
 			Callable callable;
@@ -131,7 +131,7 @@ public final strictfp class TaskThread {
 		return (Callable)id_to_callable.get(task.id);
 	}
 
-	public final void close() {
+	public void close() {
 		finished = true;
 		if (!deterministic.isPlayback())
 			thread.interrupt();

@@ -11,7 +11,7 @@ public final strictfp class SortedLabel extends Label {
 	}
 
         @Override
-	public final int compareTo(Object o) {
+	public int compareTo(Object o) {
 		if (o instanceof IntegerLabel) {
 			SortedLabel other = (SortedLabel)o;
 			return index - other.index;

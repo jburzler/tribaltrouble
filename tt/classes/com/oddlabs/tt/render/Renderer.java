@@ -125,19 +125,19 @@ public final strictfp class Renderer {
 	private boolean movie_recording_started = false;
 	private AmbientAudio ambient;
 
-	public final static float getFPS() {
+	public static float getFPS() {
 		return fps.getAveragePerUpdate();
 	}
 
-	public final static RegistrationClient getRegistrationClient() {
+	public static RegistrationClient getRegistrationClient() {
 		return registration_client;
 	}
 
-	public final static boolean isRegistered() {
+	public static boolean isRegistered() {
 		return registration_client.isRegistered();
 	}
 
-	public final static void makeCurrent() {
+	public static void makeCurrent() {
 		try {
 			Display.makeCurrent();
 			GLStateStack.setCurrent(display_state_stack);
@@ -146,19 +146,19 @@ public final strictfp class Renderer {
 		}
 	}
 
-	public final static void runGame(String[] args) {
+	public static void runGame(String[] args) {
 		renderer_instance.run(args);
 	}
 
-	public final static Renderer getRenderer() {
+	public static Renderer getRenderer() {
 		return renderer_instance;
 	}
 
-	private final void runGameLoop(NetworkSelector network, GUI gui) {
+	private void runGameLoop(NetworkSelector network, GUI gui) {
 		AnimationManager.runGameLoop(network, gui, grab_frames);
 	}
 
-	private final void setupMatrices(GUIRoot gui_root) {
+	private void setupMatrices(GUIRoot gui_root) {
 		proj.setIdentity();
 		multProjection(proj);
 		CameraState camera = gui_root.getDelegate().getCamera().getState();
@@ -185,15 +185,15 @@ public final strictfp class Renderer {
 				Globals.VIEW_MAX);
 	}
 
-	public final static void registerTrianglesRendered(int count) {
+	public static void registerTrianglesRendered(int count) {
 		num_triangles_rendered += count;
 	}
 
-	public final static int getTrianglesRendered() {
+	public static int getTrianglesRendered() {
 		return num_triangles_rendered;
 	}
 
-	private final void display(GUI gui) {
+	private void display(GUI gui) {
 		num_triangles_rendered = 0;
 		fps.updateDelta(System.currentTimeMillis());
 		NativeResource.deleteFinalized();
@@ -201,14 +201,14 @@ public final strictfp class Renderer {
 		gui.render(ambient, frustum_state);
 	}
 
-	public final static void shutdownWithQuitScreen(GUIRoot gui_root) {
+	public static void shutdownWithQuitScreen(GUIRoot gui_root) {
 		if (!isRegistered()) {
 			new QuitScreen(gui_root, gui_root.getDelegate().getCamera());
 		} else
 			shutdown();
 	}
 
-	public final static void shutdown() {
+	public static void shutdown() {
 		finished = true;
 	}
 
@@ -216,7 +216,7 @@ public final strictfp class Renderer {
 		return finished;
 	}
 
-	private final static void deleteLog(File log) {
+	private static void deleteLog(File log) {
             for (String LOG_FILES : com.oddlabs.util.Utils.LOG_FILES) {
                 File log_file = new File(log, LOG_FILES);
                 log_file.delete();
@@ -224,7 +224,7 @@ public final strictfp class Renderer {
 		log.delete();
 	}
 
-	private final static void deleteOldLogs(File last_log_dir, File new_log_dir, File logs_dir) {
+	private static void deleteOldLogs(File last_log_dir, File new_log_dir, File logs_dir) {
 		File[] logs = logs_dir.listFiles();
 		if (logs == null)
 			return;
@@ -235,7 +235,7 @@ public final strictfp class Renderer {
             }
 	}
 
-	private final void run(String[] args) {
+	private void run(String[] args) {
 		long start_time = System.currentTimeMillis();
 		boolean first_frame = true;
 		System.out.println("********** Running tt **********");
@@ -425,7 +425,7 @@ e.printStackTrace();
 		}
 	}
 
-	private final HttpRequestParameters createRegistrationParameters() {
+	private HttpRequestParameters createRegistrationParameters() {
 		String affiliate_id = "";
 		try {
 			Preferences pref = Preferences.userNodeForPackage(com.oddlabs.tt.render.Renderer.class);
@@ -438,11 +438,11 @@ e.printStackTrace();
 		return new HttpRequestParameters("https://" + Settings.getSettings().registration_address + "/oddlabs/registration", parameters);
 	}
 
-	public final Locale getDefaultLocale() {
+	public Locale getDefaultLocale() {
 		return default_locale;
 	}
 
-	private final static void failedOpenGL(LWJGLException e) {
+	private static void failedOpenGL(LWJGLException e) {
 		e.printStackTrace();
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -519,7 +519,7 @@ e.printStackTrace();
 		}
 	}
 
-	public final static void startMenu(NetworkSelector network, GUI gui) {
+	public static void startMenu(NetworkSelector network, GUI gui) {
 		setupMainMenu(network, gui, false);
 	}
 
@@ -616,28 +616,28 @@ e.printStackTrace();
 		return LocalEventQueue.getQueue().getDeterministic().log(is_network_created);
 	}
 
-	public final void startMovieRecording() {
+	public void startMovieRecording() {
 		System.out.println("ACTION!");
 		movie_recording_started = true;
 	}
 
-	public final void cleanup() {
+	public void cleanup() {
 		System.out.println("Cleaning up...");
 		LocalEventQueue.getQueue().dispose();
 		destroyNative();
 		System.out.println("Cleanup complete. Exiting");
 	}
 
-	public final static void resetInput() {
+	public static void resetInput() {
 		LocalInput.resetKeys();
 	}
 
-	private final static void destroyNative() {
+	private static void destroyNative() {
 		destroyAL();
 		Display.destroy();
 	}
 
-	public final static void dumpWindowInfo() {
+	public static void dumpWindowInfo() {
 		int r = GLUtils.getGLInteger(GL11.GL_RED_BITS);
 		int g = GLUtils.getGLInteger(GL11.GL_GREEN_BITS);
 		int b = GLUtils.getGLInteger(GL11.GL_BLUE_BITS);
@@ -653,7 +653,7 @@ e.printStackTrace();
 		System.out.println("r = " + r + " | g = " + g + " | b = " + b + " | a = " + a + " | depth = " + depth + " | stencil = " + stencil + " | sample_buffers = " + sample_buffers + " | samples = " + samples);
 	}
 
-	private final void initNative(boolean crashed, NetworkSelector network) throws LWJGLException {
+	private void initNative(boolean crashed, NetworkSelector network) throws LWJGLException {
 		String os_name = System.getProperty("os.name");
 		System.out.println("os_name = '" + os_name + "'");
 		String os_arch = System.getProperty("os.arch");
@@ -739,7 +739,7 @@ System.out.println("use_texture_compression = " + Settings.getSettings().useText
 		initVisibleGL();
 	}
 
-	private final void initAL() {
+	private void initAL() {
 		if (AL.isCreated()) {
 			AL10.alDistanceModel(AL10.AL_INVERSE_DISTANCE);
 //			resetMusicPath();
@@ -748,7 +748,7 @@ System.out.println("use_texture_compression = " + Settings.getSettings().useText
 		}
 	}
 
-	public final void toggleSound() {
+	public void toggleSound() {
 		Settings.getSettings().play_sfx = !Settings.getSettings().play_sfx;
 		if (Settings.getSettings().play_sfx)
 			AudioManager.getManager().startSources();
@@ -756,7 +756,7 @@ System.out.println("use_texture_compression = " + Settings.getSettings().useText
 			AudioManager.getManager().stopSources();
 	}
 
-	public final void toggleMusic() {
+	public void toggleMusic() {
 		Settings.getSettings().play_music = !Settings.getSettings().play_music;
 		if (Settings.getSettings().play_music) {
 			initMusicPlayer();
@@ -765,11 +765,11 @@ System.out.println("use_texture_compression = " + Settings.getSettings().useText
 		}
 	}
 
-	private final static void initMusicPlayer() {
+	private static void initMusicPlayer() {
 		music = AudioManager.getManager().newAudio(new AudioParameters(music_path, 0f, 0f, 0f, AudioPlayer.AUDIO_RANK_MUSIC, AudioPlayer.AUDIO_DISTANCE_MUSIC, Settings.getSettings().music_gain, 1f, 1f, true, true, true));
 	}
 
-	public final static void setMusicPath(String music_path, float delay) {
+	public static void setMusicPath(String music_path, float delay) {
 		if (AL.isCreated()) {
 			if (music != null && Settings.getSettings().play_music) {
 				music.stop(2.5f, Settings.getSettings().music_gain);
@@ -786,7 +786,7 @@ System.out.println("use_texture_compression = " + Settings.getSettings().useText
 
 	private final static class MusicTimer implements Updatable {
                 @Override
-		public final void update(Object anim) {
+		public void update(Object anim) {
 			if (music_timer != null)
 				music_timer.stop();
 			music_timer = null;
@@ -796,18 +796,18 @@ System.out.println("use_texture_compression = " + Settings.getSettings().useText
 		}
 	}
 
-	public final static AbstractAudioPlayer getMusicPlayer() {
+	public static AbstractAudioPlayer getMusicPlayer() {
 		return music;
 	}
 
-	private final static void destroyAL() {
+	private static void destroyAL() {
 		if (AL.isCreated()) {
 			AudioManager.getManager().destroy();
 			AL.destroy();
 		}
 	}
 
-	private final void initVisibleGL() {
+	private void initVisibleGL() {
 		if (Settings.getSettings().fullscreen_depth_workaround) {
 			IntBuffer dummy_buf = BufferUtils.createIntBuffer(1);
 			GL11.glReadPixels(0, 0, 1, 1, GL11.GL_DEPTH_COMPONENT, GL11.GL_UNSIGNED_INT, dummy_buf);
@@ -832,7 +832,7 @@ System.out.println("use_texture_compression = " + Settings.getSettings().useText
 		Display.update();
 	}
 
-	public final static void initGL() {
+	public static void initGL() {
 		VBO.releaseAll();
 		GL11.glFrontFace(GL11.GL_CCW);
 		GL11.glCullFace(GL11.GL_BACK);
@@ -871,7 +871,7 @@ System.out.println("use_texture_compression = " + Settings.getSettings().useText
 		GL11.glClearDepth(1.0);
 	}
 
-	public final static void clearScreen() {
+	public static void clearScreen() {
 		GL11.glClearColor(0f, 0f, 0f, 0f);
 		GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);
 		//GL11.glClearColor(1f, 0f, 1f, 0f);

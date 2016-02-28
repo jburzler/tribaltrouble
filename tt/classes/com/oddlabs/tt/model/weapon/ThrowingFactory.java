@@ -22,7 +22,7 @@ public final strictfp class ThrowingFactory extends WeaponFactory {
 	}
 
         @Override
-	protected final void doAttack(boolean hit, Unit src, Selectable target) {
+	protected void doAttack(boolean hit, Unit src, Selectable target) {
 		Object[] args = new Object[]{hit, src, target, weapon_sprite, throw_sound, hit_sounds};
 		try {
 			weapon_type.getConstructor(types).newInstance(args);
@@ -32,7 +32,7 @@ public final strictfp class ThrowingFactory extends WeaponFactory {
 	}
 
         @Override
-	public final Class getType() {
+	public Class getType() {
 		return weapon_type;
 	}
 }

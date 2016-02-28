@@ -21,18 +21,18 @@ public final strictfp class TunnelledConnectionListener extends AbstractConnecti
 		Network.getMatchmakingClient().registerTunnelledListener(this);
 	}
 
-	public final void requestTunnelledConnection(HostSequenceID address, InetAddress inet_address, InetAddress local_address, Profile profile) {
+	public void requestTunnelledConnection(HostSequenceID address, InetAddress inet_address, InetAddress local_address, Profile profile) {
 		TunnelledConnection conn = new TunnelledConnection(address, null);
 		incoming_connections.add(conn);
 		notifyIncomingConnection(new TunnelIdentifier(profile, new TunnelAddress(address.getHostID(), inet_address, local_address)));
 	}
 	
-	private final TunnelledConnection getNextTunnel() {
+	private TunnelledConnection getNextTunnel() {
 		return (TunnelledConnection)incoming_connections.remove(0);
 	}
 
         @Override
-	protected final AbstractConnection doAcceptConnection(ConnectionInterface connection_interface) {
+	protected AbstractConnection doAcceptConnection(ConnectionInterface connection_interface) {
 		TunnelledConnection conn = getNextTunnel();
 		conn.setConnectionInterface(connection_interface);
 		conn.accept();
@@ -40,17 +40,17 @@ public final strictfp class TunnelledConnectionListener extends AbstractConnecti
 	}
 	
         @Override
-	public final void rejectConnection() {
+	public void rejectConnection() {
 		getNextTunnel().close();
 	}
 
-	public final void connectionClosed() {
+	public void connectionClosed() {
 		open = false;
 		notifyError(new ClosedChannelException());
 	}
 
         @Override
-	public final void close() {
+	public void close() {
 		if (open) {
 			Network.getMatchmakingClient().unregisterTunnelledListener(this);
 			open = false;

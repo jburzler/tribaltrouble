@@ -64,7 +64,7 @@ public final strictfp class PoisonFog implements Magic {
 	}
 
         @Override
-	public final void animate(float t) {
+	public void animate(float t) {
 		time += t;
 		if (time >= total_time) {
 			owner.getWorld().getAnimationManagerGameTime().removeAnimation(this);
@@ -111,7 +111,7 @@ public final strictfp class PoisonFog implements Magic {
 		}
 	}
 
-	private final void hitUnits(float radius) {
+	private void hitUnits(float radius) {
 		FindOccupantFilter filter = new FindOccupantFilter(start_x, start_y, radius, src, Unit.class);
 		UnitGrid unit_grid = owner.getWorld().getUnitGrid();
 		unit_grid.scan(filter, unit_grid.toGridCoordinate(start_x), unit_grid.toGridCoordinate(start_y));
@@ -135,7 +135,7 @@ public final strictfp class PoisonFog implements Magic {
 	}
 
         @Override
-	public final void interrupt() {
+	public void interrupt() {
 		if (bubbling_sound != null)
 			bubbling_sound.stop(.2f, Settings.getSettings().sound_gain);
 	}

@@ -27,7 +27,7 @@ public final strictfp class MenuButton extends ButtonObject {
 		text_renderer = new TextLineRenderer(font);
 	}
 
-	private final void scaleHovered() {
+	private void scaleHovered() {
 		float time = (LocalEventQueue.getQueue().getTime() - start_hover_time)%SECONDS_PER_HOVER_CYCLE;
 		float cycle_position = time/SECONDS_PER_HOVER_CYCLE;
 		float scale = 1f + HOVER_SCALE_FACTOR*(float)StrictMath.sin(cycle_position*2*StrictMath.PI);
@@ -35,7 +35,7 @@ public final strictfp class MenuButton extends ButtonObject {
 	}
 
         @Override
-	protected final void renderGeometry(float clip_left, float clip_right, float clip_bottom, float clip_top) {
+	protected void renderGeometry(float clip_left, float clip_right, float clip_bottom, float clip_top) {
 		GL11.glEnd();
 		GL11.glPushMatrix();
 		GL11.glTranslatef(getWidth()/2, getHeight()/2, 0);
@@ -61,7 +61,7 @@ public final strictfp class MenuButton extends ButtonObject {
 	}
 
         @Override
-	protected final void mouseEntered() {
+	protected void mouseEntered() {
 		if (!isActive()) {
 			start_hover_time = LocalEventQueue.getQueue().getTime()%SECONDS_PER_HOVER_CYCLE;
 			setFocus();

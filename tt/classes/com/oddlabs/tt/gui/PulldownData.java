@@ -31,35 +31,35 @@ public final strictfp class PulldownData {
 		this.font = font;
 	}
 
-	public final Horizontal getPulldownTop() {
+	public Horizontal getPulldownTop() {
 		return pulldown_top;
 	}
 
-	public final Horizontal getPulldownBottom() {
+	public Horizontal getPulldownBottom() {
 		return pulldown_bottom;
 	}
 
-	public final Box getPulldownItem() {
+	public Box getPulldownItem() {
 		return pulldown_item;
 	}
 
-	public final Horizontal getPulldownButton() {
+	public Horizontal getPulldownButton() {
 		return pulldown_button;
 	}
 
-	public final Quad[] getArrow() {
+	public Quad[] getArrow() {
 		return arrow;
 	}
 
-	public final int getArrowOffsetRight() {
+	public int getArrowOffsetRight() {
 		return arrow_offset_right;
 	}
 
-	public final int getTextOffsetLeft() {
+	public int getTextOffsetLeft() {
 		return text_offset_left;
 	}
 
-	public final Font getFont() {
+	public Font getFont() {
 		return font;
 	}
 }

@@ -38,7 +38,7 @@ public final strictfp class RubberGroup {
 		}
 	}
 
-	private final int[] getGroupPosition() {
+	private int[] getGroupPosition() {
 		List tree_positions = world.getHeightMap().getTrees();
 		int start_index = world.getRandom().nextInt(tree_positions.size());
 		int index = (start_index + 1)%tree_positions.size();
@@ -52,7 +52,7 @@ public final strictfp class RubberGroup {
 		return null;
 	}
 
-	public final void remove(RubberSupply supply) {
+	public void remove(RubberSupply supply) {
 		boolean in_list = supplies.remove(supply);
 		assert in_list;
 		if (supplies.size() == 0)

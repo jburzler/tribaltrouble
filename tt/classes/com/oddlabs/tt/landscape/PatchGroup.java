@@ -32,18 +32,18 @@ public final strictfp class PatchGroup extends AbstractPatchGroup {
 	}
 
         @Override
-	public final void visit(PatchGroupVisitor visitor) {
+	public void visit(PatchGroupVisitor visitor) {
 		visitor.visitGroup(this);
 	}
 
-	public final void visitChildren(PatchGroupVisitor visitor) {
+	public void visitChildren(PatchGroupVisitor visitor) {
 		child0.visit(visitor);
 		child1.visit(visitor);
 		child2.visit(visitor);
 		child3.visit(visitor);
 	}
 
-	private final AbstractPatchGroup createChild(World world, int size, int x, int y, int level) {
+	private AbstractPatchGroup createChild(World world, int size, int x, int y, int level) {
 		if (size == 1) {
 			LandscapeLeaf leaf = new LandscapeLeaf(world, x, y, this);
 			return leaf;

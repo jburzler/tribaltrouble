@@ -26,7 +26,7 @@ public final strictfp class DNSTask implements Callable {
 
 	/* WARNING: Potentially threaded and not deterministic. See Callable.java for details */
         @Override
-	public final Object call() throws Exception {
+	public Object call() throws Exception {
 		InetAddress inet_address = InetAddress.getByName(dns_name);
 		InetSocketAddress address = new InetSocketAddress(inet_address, port);
 		return address;

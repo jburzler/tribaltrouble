@@ -27,7 +27,7 @@ public abstract strictfp class WeaponFactory {
 		return range;
 	}
 
-	private final static float computeTerrainBonus(HeightMap heightmap, Target src, Target dst) {
+	private static float computeTerrainBonus(HeightMap heightmap, Target src, Target dst) {
 		float src_z = heightmap.getNearestHeight(src.getPositionX(), src.getPositionY());
 		float dst_z = heightmap.getNearestHeight(dst.getPositionX(), dst.getPositionY());
 		float bonus = (src_z - dst_z)*TERRAIN_BONUS_PER_HEIGHT;

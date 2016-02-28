@@ -39,7 +39,7 @@ public final strictfp class Wave {
 		format = getFormat(channels, bitrate);
 	}
 
-	public final static int getFormat(int channels, int sample_size_in_bits) {
+	public static int getFormat(int channels, int sample_size_in_bits) {
 		if (channels == 1 && sample_size_in_bits == 8)
 			return AL10.AL_FORMAT_MONO8;
 		else if (channels == 1 && sample_size_in_bits == 16)
@@ -52,7 +52,7 @@ public final strictfp class Wave {
 			throw new RuntimeException("Unsupported wave format");
 	}
 
-	private final ByteBuffer directWaveOrder(byte[] buffer, int bits) {
+	private ByteBuffer directWaveOrder(byte[] buffer, int bits) {
 		ByteBuffer src = ByteBuffer.wrap(buffer);
 		src.order(ByteOrder.LITTLE_ENDIAN);
 		ByteBuffer dest = ByteBuffer.allocateDirect(buffer.length);
@@ -72,15 +72,15 @@ public final strictfp class Wave {
 	}
 
 
-	public final ByteBuffer getData() {
+	public ByteBuffer getData() {
 		return data;
 	}
 
-	public final int getFormat() {
+	public int getFormat() {
 		return format;
 	}
 
-	public final int getSampleRate() {
+	public int getSampleRate() {
 		return sample_rate;
 	}
 }

@@ -12,15 +12,15 @@ public final strictfp class ConnectionInfo {
 		this.priority = priority;
 	}
 
-	public final int getPriority() {
+	public int getPriority() {
 		return priority;
 	}
 
-	public final void addEvent(ARMIEvent event) {
+	public void addEvent(ARMIEvent event) {
 		backlog.add(event);
 	}
 
-	public final List getBackLog() {
+	public List getBackLog() {
 		return backlog;
 	}
 }

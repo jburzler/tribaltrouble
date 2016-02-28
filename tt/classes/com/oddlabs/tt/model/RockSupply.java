@@ -11,7 +11,7 @@ public final strictfp class RockSupply extends SupplyModel {
 	}
 
         @Override
-	public final Supply respawn() {
+	public Supply respawn() {
 		return new RockSupply(getWorld(), getSpriteRenderer(), getSize(), getGridX(), getGridY(), getPositionX(), getPositionY(), 0, false);
 	}
 }

@@ -27,7 +27,7 @@ public final strictfp class DieBehaviour implements Behaviour {
 	}
 
         @Override
-	public final int animate(float t) {
+	public int animate(float t) {
 		anim_time -= t;
 		offset_z -= dz*t;
 		if (anim_time < 0)
@@ -35,7 +35,7 @@ public final strictfp class DieBehaviour implements Behaviour {
 		return Selectable.UNINTERRUPTIBLE;
 	}
 
-	private final void switchState() {
+	private void switchState() {
 		switch (state) {
 			case DYING:
 				anim_time += LYING_SECONDS;
@@ -54,22 +54,22 @@ public final strictfp class DieBehaviour implements Behaviour {
 		}
 	}
 
-	public final float getOffsetZ() {
+	public float getOffsetZ() {
 		return offset_z;
 	}
 
         @Override
-	public final boolean isBlocking() {
+	public boolean isBlocking() {
 		throw new RuntimeException();
 	}
 
-	private final void init() {
+	private void init() {
 		anim_time = SECONDS_PER_DEATH;
 		state = DYING;
 		unit.switchAnimation(1f/anim_time, Unit.ANIMATION_DYING);
 	}
 
         @Override
-	public final void forceInterrupted() {
+	public void forceInterrupted() {
 	}
 }

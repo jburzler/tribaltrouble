@@ -18,35 +18,35 @@ public final strictfp class TextLineRenderer {
 		dot_limit = font.getWidth("...");
 	}
 
-	public final int getIndexRenderX(int x, int y, int offset_x, CharSequence text, int index) {
+	public int getIndexRenderX(int x, int y, int offset_x, CharSequence text, int index) {
 		render(x, y, offset_x, Float.NEGATIVE_INFINITY, Float.POSITIVE_INFINITY, Float.NEGATIVE_INFINITY, Float.POSITIVE_INFINITY, text, index, false);
 		return index_render_x;
 	}
 
-	public final int jumpDirect(int x, int y, int new_x, CharSequence text, int index) {
+	public int jumpDirect(int x, int y, int new_x, CharSequence text, int index) {
 		target_render_x = new_x;
 		best_dx = Integer.MAX_VALUE;
 		render(x, y, 0, Float.NEGATIVE_INFINITY, Float.POSITIVE_INFINITY, Float.NEGATIVE_INFINITY, Float.POSITIVE_INFINITY, text, index, false);
 		return new_index;
 	}
 
-	public final void renderCropped(int x, int y, float clip_left, float clip_right, float clip_bottom, float clip_top, CharSequence text) {
+	public void renderCropped(int x, int y, float clip_left, float clip_right, float clip_bottom, float clip_top, CharSequence text) {
 		render(x, y, 0, clip_left, clip_right, clip_bottom, clip_top, text, -1, true, true);
 	}
 
-	public final void render(int x, int y, float clip_left, float clip_right, float clip_bottom, float clip_top, CharSequence text) {
+	public void render(int x, int y, float clip_left, float clip_right, float clip_bottom, float clip_top, CharSequence text) {
 		render(x, y, 0, clip_left, clip_right, clip_bottom, clip_top, text, -1);
 	}
 
-	public final void render(int x, int y, int offset_x, float clip_left, float clip_right, float clip_bottom, float clip_top, CharSequence text, int index) {
+	public void render(int x, int y, int offset_x, float clip_left, float clip_right, float clip_bottom, float clip_top, CharSequence text, int index) {
 		render(x, y, offset_x, clip_left, clip_right, clip_bottom, clip_top, text, index, true, false);
 	}
 
-	private final void render(int x, int y, int offset_x, float clip_left, float clip_right, float clip_bottom, float clip_top, CharSequence text, int index, boolean render) {
+	private void render(int x, int y, int offset_x, float clip_left, float clip_right, float clip_bottom, float clip_top, CharSequence text, int index, boolean render) {
 		render(x, y, offset_x, clip_left, clip_right, clip_bottom, clip_top, text, index, render, false);
 	}
 
-	private final void render(int x, int y, int offset_x, float clip_left, float clip_right, float clip_bottom, float clip_top, CharSequence text, int index, boolean render, boolean render_dots) {
+	private void render(int x, int y, int offset_x, float clip_left, float clip_right, float clip_bottom, float clip_top, CharSequence text, int index, boolean render, boolean render_dots) {
 		if (render) {
 			font.setup();
 		}
@@ -71,7 +71,7 @@ public final strictfp class TextLineRenderer {
 		}
 	}
 
-	private final void renderDots(int render_x, int render_y, float clip_left, float clip_right, float clip_bottom, float clip_top, boolean render) {
+	private void renderDots(int render_x, int render_y, float clip_left, float clip_right, float clip_bottom, float clip_top, boolean render) {
 		if (render) {
 			Quad quad = font.getQuad('.');
 			int dx = getQuadWidth(quad);
@@ -82,7 +82,7 @@ public final strictfp class TextLineRenderer {
 		}
 	}
 
-	private final int getQuadWidth(Quad quad) {
+	private int getQuadWidth(Quad quad) {
 		if (quad != null) {
 			return quad.getWidth() - font.getXBorder();
 		} else {
@@ -90,7 +90,7 @@ public final strictfp class TextLineRenderer {
 		}
 	}
 
-	private final boolean nearEnd(CharSequence text, int render_pos, int available) {
+	private boolean nearEnd(CharSequence text, int render_pos, int available) {
 		int length = getQuadWidth(font.getQuad(text.charAt(render_pos)));
 
 		if (length + dot_limit < available) {
@@ -109,7 +109,7 @@ public final strictfp class TextLineRenderer {
 		return false;
 	}
 
-	private final void renderIndex(int index, int render_pos, boolean render) {
+	private void renderIndex(int index, int render_pos, boolean render) {
 		if (!render) {
 			int dx = StrictMath.abs(render_x + font.getXBorder()/2 - target_render_x);
 			if (dx < best_dx) {
@@ -127,7 +127,7 @@ public final strictfp class TextLineRenderer {
 		}
 	}
 
-	public final Font getFont() {
+	public Font getFont() {
 		return font;
 	}
 }

@@ -13,12 +13,12 @@ public final strictfp class HuntController extends Controller {
 		this.target = target;
 	}
 
-	private final boolean canAttack() {
+	private boolean canAttack() {
 		return unit.isCloseEnough(unit.getRange(target), target);
 	}
 
         @Override
-	public final void decide() {
+	public void decide() {
 		if (target.isDead()) {
 			unit.popController();
 		} else if (canAttack()) {

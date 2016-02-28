@@ -10,7 +10,7 @@ public final strictfp class TutorialOverTrigger extends TutorialTrigger {
 	}
 
         @Override
-	protected final void run(Tutorial tutorial) {
+	protected void run(Tutorial tutorial) {
 		Player[] players = tutorial.getViewer().getWorld().getPlayers();
 		Player local_player = tutorial.getViewer().getLocalPlayer();
 

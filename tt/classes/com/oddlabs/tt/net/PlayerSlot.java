@@ -35,59 +35,59 @@ public final strictfp class PlayerSlot implements Serializable {
 		this.slot = slot;
 	}
 
-	final static boolean isValidType(int type) {
+	static boolean isValidType(int type) {
 		return type == HUMAN || type == AI/* || type == OPEN || type == CLOSED*/;
 	}
 
-	final void setRating(int rating) {
+	void setRating(int rating) {
 		this.rating = rating;
 	}
 
-	final void setType(int type) {
+	void setType(int type) {
 		this.type = type;
 	}
 
-	final void setAIDifficulty(int ai_difficulty) {
+	void setAIDifficulty(int ai_difficulty) {
 		this.ai_difficulty = ai_difficulty;
 	}
 
-	final void setAddress(TunnelAddress address) {
+	void setAddress(TunnelAddress address) {
 		this.address = address;
 	}
 
-	final void setReady(boolean ready) {
+	void setReady(boolean ready) {
 		this.ready = ready;
 	}
 
-	final int getSlot() {
+	int getSlot() {
 		return slot;
 	}
 
-	final void setInfo(PlayerInfo player_info) {
+	void setInfo(PlayerInfo player_info) {
 		this.player_info = player_info;
 	}
 
-	public final PlayerInfo getInfo() {
+	public PlayerInfo getInfo() {
 		return player_info;
 	}
 
-	public final boolean isReady() {
+	public boolean isReady() {
 		return ready;
 	}
 
-	public final TunnelAddress getAddress() {
+	public TunnelAddress getAddress() {
 		return address;
 	}
 
-	public final int getAIDifficulty() {
+	public int getAIDifficulty() {
 		return ai_difficulty;
 	}
 
-	public final int getType() {
+	public int getType() {
 		return type;
 	}
 
-	public final int getRating() {
+	public int getRating() {
 		return rating;
 	}
 }

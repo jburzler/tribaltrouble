@@ -14,7 +14,7 @@ public final strictfp class DefendController extends Controller {
 	}
 
         @Override
-	public final void decide() {
+	public void decide() {
 		if (shouldGiveUp(0))
 			unit.popController();
 		else

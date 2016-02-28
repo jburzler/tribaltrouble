@@ -35,7 +35,7 @@ public final strictfp class Audio extends NativeResource {
 		AL10.alGenBuffers(al_buffers);
 	}
 
-	private final Wave loadOGG(URL file) {
+	private Wave loadOGG(URL file) {
 		ByteBufferOutputStream output = new ByteBufferOutputStream(true);
 		OGGStream ogg_stream = new OGGStream(file);
 		int channels = ogg_stream.getChannels();
@@ -51,16 +51,16 @@ public final strictfp class Audio extends NativeResource {
 		return new Wave(output.buffer(), channels, 16, rate);
 	}
 		
-	public final IntBuffer getBuffers() {
+	public IntBuffer getBuffers() {
 		return al_buffers;
 	}
 
-	public final int getBuffer() {
+	public int getBuffer() {
 		return al_buffers.get(0);
 	}
 
         @Override
-	protected final void doDelete() {
+	protected void doDelete() {
 		if (AL.isCreated()) {
 			al_buffers.clear();
 			AL10.alDeleteBuffers(al_buffers);

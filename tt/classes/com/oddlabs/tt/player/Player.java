@@ -103,14 +103,14 @@ public final strictfp class Player implements PlayerInterface {
 	}
 
         @Override
-	public final void changePreferredGamespeed(int delta) {
+	public void changePreferredGamespeed(int delta) {
 		int old_speed = getGamespeed();
 		int new_speed = Math.max(Game.GAMESPEED_PAUSE, Math.min(old_speed + delta, Game.GAMESPEED_LUDICROUS));
 		setPreferredGamespeed(new_speed);
 	}
 
         @Override
-	public final void setPreferredGamespeed(int speed) {
+	public void setPreferredGamespeed(int speed) {
 		if (!World.isValidPreferredGamespeed(speed))
 			return;
 		if (preferred_speed != speed) {
@@ -122,151 +122,151 @@ public final strictfp class Player implements PlayerInterface {
 		}
 	}
 
-	public final int getGamespeed() {
+	public int getGamespeed() {
 		if (World.isValidGamespeed(preferred_speed))
 			return preferred_speed;
 		else
 			return world.getGamespeed();
 	}
 
-	public final int getPreferredGamespeed() {
+	public int getPreferredGamespeed() {
 		return preferred_speed;
 	}
 
-	public final float getHitBonus() {
+	public float getHitBonus() {
 		return hit_bonus;
 	}
 
-	public final void setHitBonus(float bonus) {
+	public void setHitBonus(float bonus) {
 		this.hit_bonus = bonus;
 	}
 
-	public final World getWorld() {
+	public World getWorld() {
 		return world;
 	}
 
-	public final void enableArmies(boolean enabled) {
+	public void enableArmies(boolean enabled) {
 		can_build_armies = enabled;
 	}
 
-	public final void enableWeapons(boolean enabled) {
+	public void enableWeapons(boolean enabled) {
 		can_build_weapons = enabled;
 	}
 
-	public final void enableTransporting(boolean enabled) {
+	public void enableTransporting(boolean enabled) {
 		can_transport = enabled;
 	}
 
-	public final void enableHarvesting(boolean enabled) {
+	public void enableHarvesting(boolean enabled) {
 		can_harvest = enabled;
 	}
 
-	public final void enableRubber(boolean enabled) {
+	public void enableRubber(boolean enabled) {
 		can_use_rubber = enabled;
 	}
 
-	public final void enableChieftains(boolean enabled) {
+	public void enableChieftains(boolean enabled) {
 		can_build_chieftains = enabled;
 	}
 
-	public final void enableTowerExits(boolean enabled) {
+	public void enableTowerExits(boolean enabled) {
 		can_exit_towers = enabled;
 	}
 
-	public final void enableRepairing(boolean enabled) {
+	public void enableRepairing(boolean enabled) {
 		can_repair = enabled;
 	}
 
-	public final void enableBuilding(int building, boolean enabled) {
+	public void enableBuilding(int building, boolean enabled) {
 		can_build[building] = enabled;
 	}
 
-	public final void enableAttacking(boolean enabled) {
+	public void enableAttacking(boolean enabled) {
 		can_attack = enabled;
 	}
 
-	public final void enableRallyPoints(boolean enabled) {
+	public void enableRallyPoints(boolean enabled) {
 		can_set_rally = enabled;
 	}
 
-	public final void enableMoving(boolean enabled) {
+	public void enableMoving(boolean enabled) {
 		can_move = enabled;
 	}
 
-	public final boolean canTransport() {
+	public boolean canTransport() {
 		return can_transport;
 	}
 
-	public final boolean canBuildWeapons() {
+	public boolean canBuildWeapons() {
 		return can_build_weapons;
 	}
 
-	public final boolean canHarvest() {
+	public boolean canHarvest() {
 		return can_harvest;
 	}
 
-	public final boolean canBuildArmies() {
+	public boolean canBuildArmies() {
 		return can_build_armies;
 	}
 
-	public final boolean canSetRallyPoints() {
+	public boolean canSetRallyPoints() {
 		return can_set_rally;
 	}
 
-	public final boolean canUseRubber() {
+	public boolean canUseRubber() {
 		return can_use_rubber;
 	}
 
-	public final void enableMagic(int magic_index, boolean enabled) {
+	public void enableMagic(int magic_index, boolean enabled) {
 		can_do_magic[magic_index] = enabled;
 	}
 
-	public final boolean canDoMagic(int magic_index) {
+	public boolean canDoMagic(int magic_index) {
 		return can_do_magic[magic_index];
 	}
 
-	public final boolean canExitTowers() {
+	public boolean canExitTowers() {
 		return can_exit_towers;
 	}
 
-	public final boolean canAttack() {
+	public boolean canAttack() {
 		return can_attack;
 	}
 
-	public final boolean canMove() {
+	public boolean canMove() {
 		return can_move;
 	}
 
-	public final boolean canBuild(int building) {
+	public boolean canBuild(int building) {
 		return can_build[building] && getBuildingCountContainer().getNumSupplies() < Player.MAX_BUILDING_COUNT;
 	}
 
-	public final boolean canRepair() {
+	public boolean canRepair() {
 		return can_repair;
 	}
 
-	public final boolean canBuildChieftains() {
+	public boolean canBuildChieftains() {
 		return can_build_chieftains;
 	}
 
         @Override
-	public final String toString() {
+	public String toString() {
 		return player_info.toString();
 	}
 
-	public final PlayerInfo getPlayerInfo() {
+	public PlayerInfo getPlayerInfo() {
 		return player_info;
 	}
 
-	public final void setAI(AI ai) {
+	public void setAI(AI ai) {
 		this.ai = ai;
 	}
 
-	public final AI getAI() {
+	public AI getAI() {
 		return ai;
 	}
 
-	public final Building buildBuilding(int building_type, int grid_x, int grid_y) {
+	public Building buildBuilding(int building_type, int grid_x, int grid_y) {
 		BuildingSiteScanFilter filter = new BuildingSiteScanFilter(world.getUnitGrid(), getRace().getBuildingTemplate(building_type), 40, true);
 		world.getUnitGrid().scan(filter, grid_x, grid_y);
 		List target_list = filter.getResult();
@@ -280,20 +280,20 @@ public final strictfp class Player implements PlayerInterface {
 		return b;
 	}
 
-	public final void init(float[] starting_location) {
+	public void init(float[] starting_location) {
 		this.start_x = starting_location[0];
 		this.start_y = starting_location[1];
 	}
 
-	public final Selectable findNearestEnemy(int start_x, int start_y) {
+	public Selectable findNearestEnemy(int start_x, int start_y) {
 		return findNearestEnemy(start_x, start_y, null);
 	}
 
-	public final Selectable findNearestEnemy(int start_x, int start_y, Selectable target) {
+	public Selectable findNearestEnemy(int start_x, int start_y, Selectable target) {
 		return findNearestEnemy(start_x, start_y, target, Selectable.class);
 	}
 
-	public final int getStatus() {
+	public int getStatus() {
 		Set units = getUnits().getSet();
 		Iterator it = units.iterator();
 		int status = 0;
@@ -304,7 +304,7 @@ public final strictfp class Player implements PlayerInterface {
 		return status;
 	}
 	
-	public final Selectable findNearestEnemy(int start_x, int start_y, Selectable target, Class type) {
+	public Selectable findNearestEnemy(int start_x, int start_y, Selectable target, Class type) {
 		Player[] players = world.getPlayers();
 		int best_dist_squared = Integer.MAX_VALUE;
 		Selectable best_target = null;
@@ -330,27 +330,27 @@ public final strictfp class Player implements PlayerInterface {
 		return best_target;
 	}
 
-	public final Selectable findNearestEnemyBuilding(int start_x, int start_y) {
+	public Selectable findNearestEnemyBuilding(int start_x, int start_y) {
 		return findNearestEnemy(start_x, start_y, null, Building.class);
 	}
 
-	public final Race getRace() {
+	public Race getRace() {
 		return getWorld().getRacesResources().getRace(player_info.getRace());
 	}
 
-	public final SupplyContainer getUnitCountContainer() {
+	public SupplyContainer getUnitCountContainer() {
 		return unit_count;
 	}
 	
-	public final SupplyContainer getBuildingCountContainer() {
+	public SupplyContainer getBuildingCountContainer() {
 		return building_count;
 	}
 
-	public final void setActiveChieftain(Unit chieftain) {
+	public void setActiveChieftain(Unit chieftain) {
 		this.chieftain = chieftain;
 	}
 
-	public final Building getArmory() {
+	public Building getArmory() {
 		Selectable[][] lists = classifyUnits();
             for (Selectable[] list : lists) {
                 Selectable s = list[0];
@@ -361,7 +361,7 @@ public final strictfp class Player implements PlayerInterface {
 		return null;
 	}
 
-	public final Building getQuarters() {
+	public Building getQuarters() {
 		Selectable[][] lists = classifyUnits();
             for (Selectable[] list : lists) {
                 Selectable s = list[0];
@@ -372,83 +372,83 @@ public final strictfp class Player implements PlayerInterface {
 		return null;
 	}
 
-	public final boolean isAlive() {
+	public boolean isAlive() {
 		int units = getUnitCountContainer().getNumSupplies();
 		return units > 0 || hasActiveChieftain() || getQuarters() != null;
 	}
 
 	
-	public final boolean hasActiveChieftain() {
+	public boolean hasActiveChieftain() {
 		return chieftain != null;
 	}
 
-	public final Unit getChieftain() {
+	public Unit getChieftain() {
 		return chieftain;
 	}
 	
-	public final void setTrainingChieftain(boolean training_chieftain) {
+	public void setTrainingChieftain(boolean training_chieftain) {
 		assert this.training_chieftain != training_chieftain;
 		this.training_chieftain = training_chieftain;
 	}
 
-	public final boolean isTrainingChieftain() {
+	public boolean isTrainingChieftain() {
 		return training_chieftain;
 	}
 	
-	public final float[] getColor() {
+	public float[] getColor() {
 		return color;
 	}
 
         @Override
-	public final void deployUnits(Building building, int type, int num_units) {
+	public void deployUnits(Building building, int type, int num_units) {
 		if (isValid(building))
 			building.deployUnits(type, num_units);
 	}
 
         @Override
-	public final void createHarvesters(Building building, int num_tree, int num_rock, int num_iron, int num_rubber) {
+	public void createHarvesters(Building building, int num_tree, int num_rock, int num_iron, int num_rubber) {
 		if (isValid(building))
 			building.createHarvesters(num_tree, num_rock, num_iron, num_rubber);
 	}
 
         @Override
-	public final void buildRockWeapons(Building building, int num_weapons, boolean infinite) {
+	public void buildRockWeapons(Building building, int num_weapons, boolean infinite) {
 		if (isValid(building))
 			building.buildWeapons(RockAxeWeapon.class, num_weapons, infinite);
 	}
 
         @Override
-	public final void buildIronWeapons(Building building, int num_weapons, boolean infinite) {
+	public void buildIronWeapons(Building building, int num_weapons, boolean infinite) {
 		if (isValid(building))
 			building.buildWeapons(IronAxeWeapon.class, num_weapons, infinite);
 	}
 
         @Override
-	public final void buildRubberWeapons(Building building, int num_weapons, boolean infinite) {
+	public void buildRubberWeapons(Building building, int num_weapons, boolean infinite) {
 		if (isValid(building))
 			building.buildWeapons(RubberAxeWeapon.class, num_weapons, infinite);
 	}
 
         @Override
-	public final void doMagic(Unit chieftain, int magic) {
+	public void doMagic(Unit chieftain, int magic) {
 		if (isValid(chieftain))
 			chieftain.doMagic(magic, true);
 	}
 
         @Override
-	public final void exitTower(Building building) {
+	public void exitTower(Building building) {
 		if (isValid(building))
 			building.exitTower();
 	}
 
         @Override
-	public final void trainChieftain(Building building, boolean start) {
+	public void trainChieftain(Building building, boolean start) {
 		if (isValid(building))
 			building.trainChieftain(start);
 	}
 
         @Override
-	public final void placeBuilding(Selectable[] selection, int template_id, int placing_grid_x, int placing_grid_y) {
+	public void placeBuilding(Selectable[] selection, int template_id, int placing_grid_x, int placing_grid_y) {
 		Building building = new Building(this, getRace().getBuildingTemplate(template_id), placing_grid_x, placing_grid_y);
             for (Selectable selection1 : selection) {
                 if (isValid(selection1)) {
@@ -458,18 +458,18 @@ public final strictfp class Player implements PlayerInterface {
 	}
 
         @Override
-	public final void setRallyPoint(Building building, Target target) {
+	public void setRallyPoint(Building building, Target target) {
 		if (isValid(building) && target != null)
 			building.setRallyPoint(target);
 	}
 
         @Override
-	public final void setRallyPoint(Building building, int grid_x, int grid_y) {
+	public void setRallyPoint(Building building, int grid_x, int grid_y) {
 		setRallyPoint(building, new LandscapeTarget(grid_x, grid_y));
 	}
 
         @Override
-	public final void setTarget(Selectable[] selection, Target target, int action, boolean aggressive) {
+	public void setTarget(Selectable[] selection, Target target, int action, boolean aggressive) {
             for (Selectable selection1 : selection) {
                 if (isValid(selection1)) {
                     selection1.initTarget(target, action, aggressive);
@@ -477,7 +477,7 @@ public final strictfp class Player implements PlayerInterface {
             }
 	}
 
-	public final void killSelection(Selectable[] selection) {
+	public void killSelection(Selectable[] selection) {
             for (Selectable selection1 : selection) {
                 if (selection1 != null) {
                     selection1.hit(10000, 0f, 1f, this);
@@ -486,7 +486,7 @@ public final strictfp class Player implements PlayerInterface {
 	}
 
         @Override
-	public final void setLandscapeTarget(Selectable[] selection, int grid_x, int grid_y, int action, boolean aggressive) {
+	public void setLandscapeTarget(Selectable[] selection, int grid_x, int grid_y, int action, boolean aggressive) {
 		if (selection.length == 0)
 			return;
 		int grid_size = world.getUnitGrid().getGridSize();
@@ -499,27 +499,27 @@ public final strictfp class Player implements PlayerInterface {
 		}
 	}
 
-	private final boolean isValid(Selectable s) {
+	private boolean isValid(Selectable s) {
 		return s != null && !s.isDead() && s.getOwner() == this;
 	}
 
-	public final float getStartX() {
+	public float getStartX() {
 		return start_x;
 	}
 
-	public final void setStartX(float x) {
+	public void setStartX(float x) {
 		start_x = x;
 	}
 
-	public final float getStartY() {
+	public float getStartY() {
 		return start_y;
 	}
 
-	public final void setStartY(float y) {
+	public void setStartY(float y) {
 		start_y = y;
 	}
 
-	public final boolean isEnemy(Player other_player) {
+	public boolean isEnemy(Player other_player) {
 		if (other_player.player_info.getTeam() == PlayerInfo.TEAM_NEUTRAL
 				|| this.player_info.getTeam() == PlayerInfo.TEAM_NEUTRAL) {
 			return false;
@@ -527,7 +527,7 @@ public final strictfp class Player implements PlayerInterface {
 		return other_player.player_info.getTeam() != this.player_info.getTeam();
 	}
 
-	public final boolean teamHasBuilding() {
+	public boolean teamHasBuilding() {
 		Player[] players = world.getPlayers();
             for (Player player : players) {
                 if (player.getPlayerInfo().getTeam() == player_info.getTeam() && player.getBuildingCountContainer().getNumSupplies() > 0) {
@@ -537,11 +537,11 @@ public final strictfp class Player implements PlayerInterface {
 		return false;
 	}
 
-	public final Army getUnits() {
+	public Army getUnits() {
 		return units;
 	}
 
-	public final Selectable[][] classifyUnits() {
+	public Selectable[][] classifyUnits() {
 		Map map = new HashMap();
 		List lists = new ArrayList();
 		Iterator it = units.getSet().iterator();
@@ -566,63 +566,63 @@ public final strictfp class Player implements PlayerInterface {
 		return result;
 	}
 
-	public final void magicCast() {
+	public void magicCast() {
 		magics++;
 	}
 	
-	public final int getMagics() {
+	public int getMagics() {
 		return magics;
 	}
 	
-	public final void weaponThrown() {
+	public void weaponThrown() {
 		weapons_thrown++;
 	}
 	
-	public final int getWeaponsThrown() {
+	public int getWeaponsThrown() {
 		return weapons_thrown;
 	}
 	
-	public final void unitMoved() {
+	public void unitMoved() {
 		units_moved++;
 	}
 	
-	public final int getUnitsMoved() {
+	public int getUnitsMoved() {
 		return units_moved;
 	}
 	
-	public final void unitLost() {
+	public void unitLost() {
 		units_lost++;
 	}
 	
-	public final int getUnitsLost() {
+	public int getUnitsLost() {
 		return units_lost;
 	}
 	
-	public final void buildingLost() {
+	public void buildingLost() {
 		buildings_lost++;
 	}
 	
-	public final int getBuildingsLost() {
+	public int getBuildingsLost() {
 		return buildings_lost;
 	}
 	
-	public final void unitKilled() {
+	public void unitKilled() {
 		units_killed++;
 	}
 	
-	public final int getUnitsKilled() {
+	public int getUnitsKilled() {
 		return units_killed;
 	}
 	
-	public final void buildingDestroyed() {
+	public void buildingDestroyed() {
 		buildings_destroyed++;
 	}
 	
-	public final int getBuildingsDestroyed() {
+	public int getBuildingsDestroyed() {
 		return buildings_destroyed;
 	}
 	
-	public final void harvested(Class type) {
+	public void harvested(Class type) {
 		if (type == TreeSupply.class) {
 			tree_harvested++;
 		} else if (type == RockSupply.class) {
@@ -635,19 +635,19 @@ public final strictfp class Player implements PlayerInterface {
 			throw new RuntimeException();
 	}
 	
-	public final int getTreeHarvested() {
+	public int getTreeHarvested() {
 		return tree_harvested;
 	}
 	
-	public final int getRockHarvested() {
+	public int getRockHarvested() {
 		return rock_harvested;
 	}
 	
-	public final int getIronHarvested() {
+	public int getIronHarvested() {
 		return iron_harvested;
 	}
 	
-	public final int getRubberHarvested() {
+	public int getRubberHarvested() {
 		return rubber_harvested;
 	}
 }

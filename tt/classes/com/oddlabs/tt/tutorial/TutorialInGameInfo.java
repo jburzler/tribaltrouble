@@ -14,7 +14,7 @@ import com.oddlabs.tt.viewer.WorldViewer;
 public final strictfp class TutorialInGameInfo implements InGameInfo {
 	private int next_tutorial = -1;
 
-	public final boolean setNextTutorial(GUIRoot gui_root, int next_tutorial) {
+	public boolean setNextTutorial(GUIRoot gui_root, int next_tutorial) {
 		if (TutorialForm.checkTutorial(gui_root, next_tutorial)) {
 			this.next_tutorial = next_tutorial;
 			return true;
@@ -23,38 +23,38 @@ public final strictfp class TutorialInGameInfo implements InGameInfo {
 	}
 
         @Override
-	public final boolean isRated() {
+	public boolean isRated() {
 		return false;
 	}
 
         @Override
-	public final boolean isMultiplayer() {
+	public boolean isMultiplayer() {
 		return false;
 	}
 
         @Override
-	public final float getRandomStartPosition() {
+	public float getRandomStartPosition() {
 		return 0f;
 	}
 
         @Override
-	public final void addGUI(WorldViewer viewer, InGameMainMenu menu, Group game_infos) {
+	public void addGUI(WorldViewer viewer, InGameMainMenu menu, Group game_infos) {
 		menu.addAbortButton(Utils.getBundleString(Menu.bundle, "end_tutorial"));
 	}
 
         @Override
-	public final void addGameOverGUI(WorldViewer viewer, GameStatsDelegate delegate, int header_y, Group group) {
+	public void addGameOverGUI(WorldViewer viewer, GameStatsDelegate delegate, int header_y, Group group) {
 		throw new RuntimeException("Not implemented");
 	}
 
         @Override
-	public final void abort(WorldViewer viewer) {
+	public void abort(WorldViewer viewer) {
 		next_tutorial = -1;
 		viewer.close();
 	}
 
         @Override
-	public final void close(WorldViewer viewer) {
+	public void close(WorldViewer viewer) {
 		if (next_tutorial != -1)
 			TutorialForm.startTutorial(viewer.getNetwork(), viewer.getGUIRoot(), next_tutorial);
 		else

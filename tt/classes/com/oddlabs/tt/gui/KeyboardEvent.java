@@ -19,23 +19,23 @@ public final strictfp class KeyboardEvent {
 		this.clicks = clicks;
 	}
 
-	public final int getKeyCode() {
+	public int getKeyCode() {
 		return key_code;
 	}
 
-	public final char getKeyChar() {
+	public char getKeyChar() {
 		return key_char;
 	}
 
-	public final boolean isShiftDown() {
+	public boolean isShiftDown() {
 		return shift_down;
 	}
 
-	public final boolean isControlDown() {
+	public boolean isControlDown() {
 		return control_down;
 	}
 
-	public final int getNumClicks() {
+	public int getNumClicks() {
 		return clicks;
 	}
 }

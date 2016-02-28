@@ -18,17 +18,17 @@ public final strictfp class RepairController extends Controller {
 		this.building = building;
 	}
 
-	public final Building getBuilding() {
+	public Building getBuilding() {
 		return building;
 	}
 
         @Override
-	public final String getKey() {
+	public String getKey() {
 		return super.getKey() + building.hashCode();
 	}
 
         @Override
-	public final void decide() {
+	public void decide() {
 		if (building.isDead()) {
 			unit.popController();
 		} else if (unit.getSupplyContainer().getSupplyType() == TreeSupply.class && unit.getSupplyContainer().getNumSupplies() > 0) {

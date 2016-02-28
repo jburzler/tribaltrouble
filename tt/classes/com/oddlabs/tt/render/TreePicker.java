@@ -91,7 +91,7 @@ strictfp class TreePicker implements TreeNodeVisitor {
             }
 	}
 
-	private final void getAllPicksFromRenderList(List render_list, List pick_list) {
+	private void getAllPicksFromRenderList(List render_list, List pick_list) {
 		for (int i = 0; i < render_list.size(); i++) {
 			TreeSupply group = (TreeSupply)render_list.get(i);
 			render_list.set(i, null);
@@ -180,7 +180,7 @@ strictfp class TreePicker implements TreeNodeVisitor {
 			sprite_sorter.add(getRenderState(tree), camera, false);
 	}
 
-	private final LODObject getRenderState(TreeSupply tree_supply) {
+	private LODObject getRenderState(TreeSupply tree_supply) {
 		TreeRenderState render_state = (TreeRenderState)render_state_cache.get();
 		render_state.setup(tree_supply);
 		return render_state;

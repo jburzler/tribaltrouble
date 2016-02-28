@@ -17,11 +17,11 @@ public final strictfp class NotificationManager {
 		this.gui_root = gui_root;
 	}
 
-	public final Notification getLatestNotification() {
+	public Notification getLatestNotification() {
 		return latest_notification;
 	}
 	
-	public final void newAttackNotification(AnimationManager manager, Selectable target, Player local_player) {
+	public void newAttackNotification(AnimationManager manager, Selectable target, Player local_player) {
 		for (int i = 0; i < attack_notifies.size(); i++) {
 			AttackNotification current = (AttackNotification)attack_notifies.get(i);
 			if (current.contains(target)) {
@@ -32,28 +32,28 @@ public final strictfp class NotificationManager {
 		addNotification(new AttackNotification(local_player, gui_root, target, this, manager), attack_notifies);
 	}
 
-	public final void newSelectableNotification(Selectable s, AnimationManager manager, Player local_player) {
+	public void newSelectableNotification(Selectable s, AnimationManager manager, Player local_player) {
 		newNotification(manager, local_player, s.getPositionX(), s.getPositionY(), 0f, 1f, 0f, false);
 	}
 
-	public final void newBeacon(AnimationManager manager, Player local_player, float x, float y) {
+	public void newBeacon(AnimationManager manager, Player local_player, float x, float y) {
 		newNotification(manager, local_player, x, y, 0f, 0f, 1f, true);
 	}
 
-	private final void newNotification(AnimationManager manager, Player local_player, float x, float y, float r, float g, float b, boolean show_always) {
+	private void newNotification(AnimationManager manager, Player local_player, float x, float y, float r, float g, float b, boolean show_always) {
 		addNotification(new Notification(local_player.getWorld(), gui_root, x, y, this, r, g, b, local_player.getRace().getBuildingNotificationAudio(), show_always, manager), notifies);
 	}
 	
-	private final void addNotification(Notification notification, List list) {
+	private void addNotification(Notification notification, List list) {
 		list.add(notification);
 		latest_notification = notification;
 	}
 
-	public final void removeAttackNotification(AttackNotification current) {
+	public void removeAttackNotification(AttackNotification current) {
 		attack_notifies.remove(current);
 	}
 	
-	public final void removeNotification(Notification current) {
+	public void removeNotification(Notification current) {
 		notifies.remove(current);
 	}
 }

@@ -9,7 +9,7 @@ public final strictfp class HarvestMenuTrigger extends TutorialTrigger {
 	}
 
         @Override
-	protected final void run(Tutorial tutorial) {
+	protected void run(Tutorial tutorial) {
 		if (tutorial.getViewer().getPanel().inHarvestMenu())
 			tutorial.next(new SupplyTrigger(tutorial.getViewer().getLocalPlayer()));
 	}

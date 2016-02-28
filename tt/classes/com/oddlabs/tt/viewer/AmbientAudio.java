@@ -59,7 +59,7 @@ public final strictfp class AmbientAudio {
 		ambient_wind = null;
 	}
 */
-	public final void updateSoundListener(CameraState camera, HeightMap heightmap) {
+	public void updateSoundListener(CameraState camera, HeightMap heightmap) {
 		if (AL.isCreated() && Settings.getSettings().play_sfx) {
 			AL10.alListener3f(AL10.AL_POSITION, camera.getCurrentX(), camera.getCurrentY(), camera.getCurrentZ());
 			camera.updateDirectionAndNormal(f, u, s);

@@ -28,43 +28,43 @@ public final strictfp class FormData {
 		this.caption_font = caption_font;
 	}
 
-	public final Box getForm() {
+	public Box getForm() {
 		return form;
 	}
 
-	public final Box getSlimForm() {
+	public Box getSlimForm() {
 		return slim_form;
 	}
 
-	public final Quad[] getFormClose() {
+	public Quad[] getFormClose() {
 		return form_close;
 	}
 
-	public final int getObjectSpacing() {
+	public int getObjectSpacing() {
 		return object_spacing;
 	}
 
-	public final int getSectionSpacing() {
+	public int getSectionSpacing() {
 		return section_spacing;
 	}
 
-	public final int getCaptionLeft() {
+	public int getCaptionLeft() {
 		return caption_left;
 	}
 
-	public final int getCaptionY() {
+	public int getCaptionY() {
 		return caption_y;
 	}
 
-	public final int getCloseRight() {
+	public int getCloseRight() {
 		return close_right;
 	}
 
-	public final int getCloseTop() {
+	public int getCloseTop() {
 		return close_top;
 	}
 
-	public final Font getCaptionFont() {
+	public Font getCaptionFont() {
 		return caption_font;
 	}
 }

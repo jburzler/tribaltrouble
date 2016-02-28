@@ -10,17 +10,17 @@ public final strictfp class ByteBufferInputStream extends InputStream {
 		buffer = ByteBuffer.wrap(array);
 	}
 	
-	public final ByteBuffer buffer() {
+	public ByteBuffer buffer() {
 		return buffer;
 	}
 
         @Override
-	public final int available() {
+	public int available() {
 		return buffer.remaining();
 	}
 
         @Override
-	public final int read(byte[] bytes, int offset, int length) {
+	public int read(byte[] bytes, int offset, int length) {
 		if (available() == 0)
 			return -1;
 		length = StrictMath.min(length, available());
@@ -29,7 +29,7 @@ public final strictfp class ByteBufferInputStream extends InputStream {
 	}
 	
         @Override
-	public final int read() {
+	public int read() {
 		if (available() > 0) {
 			int b = buffer.get();
 			return b & 0xff;

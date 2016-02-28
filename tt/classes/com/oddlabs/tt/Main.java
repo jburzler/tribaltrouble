@@ -8,7 +8,7 @@ import org.lwjgl.Sys;
 import org.lwjgl.opengl.Display;
 
 public final strictfp class Main {
-	public final static void fail(Throwable t) {
+	public static void fail(Throwable t) {
 		try {
 			t.printStackTrace();
 			if (Display.isCreated())
@@ -24,11 +24,11 @@ public final strictfp class Main {
 		}
 	}
 
-	public final static void shutdown() {
+	public static void shutdown() {
 		System.exit(0);
 	}
 
-	public final static void main(String[] args) {
+	public static void main(String[] args) {
 		try {
 			System.out.println("Starting game....");
 			System.out.flush();

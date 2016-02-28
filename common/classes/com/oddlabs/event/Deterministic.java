@@ -15,7 +15,7 @@ public abstract strictfp class Deterministic {
 		return log(b, false);
 	}
 
-	private final boolean log(boolean b, boolean def) {
+	private boolean log(boolean b, boolean def) {
 		assert enabled;
 		return log(b ? (byte)1 : (byte)0, def ? (byte)1 : (byte)0) != 0;
 	}

@@ -68,11 +68,11 @@ public final strictfp class TextureFile extends File {
 		return null;
 	}
 
-	private final static URL locateDXT(String location) {
+	private static URL locateDXT(String location) {
 		return locate(location + ".dxtn");
 	}
 
-	private final static URL locateTexture(String location) {
+	private static URL locateTexture(String location) {
 		URL url = locateDXT(location);
 		if (url != null)
 			return url;
@@ -89,7 +89,7 @@ public final strictfp class TextureFile extends File {
 		throw new RuntimeException(location);
 	}
 
-	private final BufferedImage readFile(URL url) {
+	private BufferedImage readFile(URL url) {
 		try {
 			return ImageIO.read(url);
 		} catch (IOException e) {
@@ -97,11 +97,11 @@ public final strictfp class TextureFile extends File {
 		}
 	}
 
-	public final boolean isDXTImage() {
+	public boolean isDXTImage() {
 		return is_dxt;
 	}
 
-	public final DXTImage getDXTImage() {
+	public DXTImage getDXTImage() {
 		try {
 			return DXTImage.read(getURL());
 		} catch (IOException e) {
@@ -109,7 +109,7 @@ public final strictfp class TextureFile extends File {
 		}
 	}
 
-	public final GLImage getImage() {
+	public GLImage getImage() {
 		GLImage img;
 /*		URL url_jpg = Utils.class.getResource(loc + ".jpg");
 		if (url_jpg != null) {
@@ -162,12 +162,12 @@ public final strictfp class TextureFile extends File {
 	}
 	
         @Override
-	public final Object newInstance() {
+	public Object newInstance() {
 		return new Texture(this);
 	}
 
         @Override
-	public final boolean equals(Object o) {
+	public boolean equals(Object o) {
 		if (!(o instanceof TextureFile))
 			return false;
 		TextureFile other = (TextureFile)o;
@@ -178,39 +178,39 @@ public final strictfp class TextureFile extends File {
 		return super.equals(o);
 	}
 
-	public final int getInternalFormat() {
+	public int getInternalFormat() {
 		return internal_format;
 	}
 
-	public final int getMinFilter() {
+	public int getMinFilter() {
 		return min_filter;
 	}
 
-	public final int getMagFilter() {
+	public int getMagFilter() {
 		return mag_filter;
 	}
 
-	public final int getWrapS() {
+	public int getWrapS() {
 		return wrap_s;
 	}
 
-	public final int getWrapT() {
+	public int getWrapT() {
 		return wrap_t;
 	}
 
-	public final int getBaseFadeoutLevel() {
+	public int getBaseFadeoutLevel() {
 		return base_fadeout_level;
 	}
 
-	public final int getMaxMipmapLevel() {
+	public int getMaxMipmapLevel() {
 		return max_mipmap_level;
 	}
 
-	public final float getFadeoutFactor() {
+	public float getFadeoutFactor() {
 		return fadeout_factor;
 	}
 
-	public final boolean hasMaxAlpha() {
+	public boolean hasMaxAlpha() {
 		return max_alpha;
 	}
 }

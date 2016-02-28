@@ -143,7 +143,7 @@ public final strictfp class LandscapeTileTriangle {
 		}
 	}
 
-	final void addIndices(ShortBuffer buffer, int border_set) {
+	void addIndices(ShortBuffer buffer, int border_set) {
 		if (containsBorder(border_set)) {
 			t0.addIndices(buffer);
 			t1.addIndices(buffer);
@@ -155,7 +155,7 @@ public final strictfp class LandscapeTileTriangle {
 		buffer.put(i0).put(i1).put(i2);
 	}
 
-	final void setupMapping(int patch_exp, int lod, LandscapeTileTriangle[][][] quad_to_planes) {
+	void setupMapping(int patch_exp, int lod, LandscapeTileTriangle[][][] quad_to_planes) {
 		int min_x = StrictMath.min(i0_x, StrictMath.min(i1_x, i2_x));
 		int min_y = StrictMath.min(i0_y, StrictMath.min(i1_y, i2_y));
 		int num_quads_exp = LandscapeTileIndices.getNumQuadsExp(lod);
@@ -180,7 +180,7 @@ public final strictfp class LandscapeTileTriangle {
 		return (border_set & border_direction) != 0;
 	}
 
-	public final void putIndices(int lod, int border_set, ShortBuffer indices) {
+	public void putIndices(int lod, int border_set, ShortBuffer indices) {
 //System.out.println("lod = " + lod + " | Integer.toHexString(border_set) = " + Integer.toHexString(border_set) + " | Integer.toHexString(border_direction) = " + Integer.toHexString(border_direction));
 		if (lod > 0 || (lod == 0 && containsBorder(border_set))) {
 			t0.putIndices(lod - 1, border_set, indices);
@@ -192,16 +192,16 @@ public final strictfp class LandscapeTileTriangle {
 		}
 	}
 
-	public final void update(HeightMap heightmap, int offset_x, int offset_y) {
+	public void update(HeightMap heightmap, int offset_x, int offset_y) {
 		heightmap.makePlaneVector(i0_x + offset_x, i0_y + offset_y, i1_x + offset_x, i1_y + offset_y, i2_x + offset_x, i2_y + offset_y, current_plane);
 	}
 
-	public final float getHeight(HeightMap heightmap, float x, float y) {
+	public float getHeight(HeightMap heightmap, float x, float y) {
 		return heightmap.planeHeight(x, y, current_plane);
 	}
 
         @Override
-	public final String toString() {
+	public String toString() {
 		return "i0_x = " + i0_x + " | i0_y = " + i0_y + " | i1_x = " + i1_x + " | i1_y = " + i1_y + " | i2_x = " + i2_x + " | i2_y = " + i2_y;
 	}
 }

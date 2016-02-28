@@ -16,11 +16,11 @@ public final strictfp class Cheat {
 		this.can_enable = can_enable;
 	}
 
-	public final boolean isEnabled() {
+	public boolean isEnabled() {
 		return enabled;
 	}
 
-	public final void enable() {
+	public void enable() {
 		if (Renderer.isRegistered() && can_enable)
 			enabled = true;
 	}

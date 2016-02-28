@@ -61,7 +61,7 @@ public strictfp class BuildProductionContainer extends BuildSupplyContainer {
 		return man_seconds/man_seconds_per_production;
 	}
 
-	private final void stopProduction() {
+	private void stopProduction() {
 		increaseSupply(-getNumSupplies());
 	}
 }

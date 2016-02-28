@@ -128,7 +128,7 @@ dumpBuffer(buffer);*/
 			this.index = index;
 		}
 
-		public final void updateScore(int cache_index, int round) {
+		public void updateScore(int cache_index, int round) {
 			score = 0;
 			if (cache_index != -1) {
 				if (round != round_added) {
@@ -141,18 +141,18 @@ dumpBuffer(buffer);*/
 			score += VALENCE_BOOST_SCALE*(float)StrictMath.pow(triangle_list.size(), -VALENCE_BOOST_POWER);
 		}
 
-		public final void add(Triangle triangle) {
+		public void add(Triangle triangle) {
 //			assert !triangle_list.contains(triangle);
 			triangle_list.add(triangle);
 		}
 
-		public final void remove(Triangle triangle) {
+		public void remove(Triangle triangle) {
 			boolean success = triangle_list.remove(triangle);
 			assert success;
 		}
 
                 @Override
-		public final String toString() {
+		public String toString() {
 			return "[index = " + index + " score = " + score + " round = " + round_added + " num_triangles = " + triangle_list.size() + "]";
 		}
 	}
@@ -175,7 +175,7 @@ dumpBuffer(buffer);*/
 				score += indices[i].score;
 		}
 */
-		public final float getScore() {
+		public float getScore() {
 			float score = 0;
                     for (Index indice : indices) {
                         score += indice.score;
@@ -183,20 +183,20 @@ dumpBuffer(buffer);*/
 			return score;
 		}
 
-		public final void remove() {
+		public void remove() {
                     for (Index indice : indices) {
                         indice.remove(this);
                     }
 		}
 
-		public final void addToBuffer(ShortBuffer buffer) {
+		public void addToBuffer(ShortBuffer buffer) {
                     for (Index indice : indices) {
                         buffer.put(indice.index);
                     }
 		}
 
                 @Override
-		public final String toString() {
+		public String toString() {
 			String result = "Triangle score = " + getScore();
                     for (Index indice : indices) {
                         result += " " + indice.toString();

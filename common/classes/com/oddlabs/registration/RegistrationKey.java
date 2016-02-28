@@ -20,21 +20,21 @@ public final strictfp class RegistrationKey {
 	public final static String SEPARATOR = "-";
 	public final static String ALLOWED_CHARS = CHAR_TO_WORD + SEPARATOR + LOWER_CASE_CHARS;
 
-	public final static PublicKey loadPublicKey() throws Exception {
+	public static PublicKey loadPublicKey() throws Exception {
 		URL key_url = Utils.tryMakeURL("/" + RegServiceInterface.PUBLIC_KEY_FILE);
 		byte[] encoded_key = (byte[])Utils.tryLoadObject(key_url);
 		return KeyManager.readPublicKey(encoded_key, RegServiceInterface.KEY_ALGORITHM);
 	}
 	
-	public final static boolean verify(PublicKey public_key, SignedObject signed_object) throws GeneralSecurityException {
+	public static boolean verify(PublicKey public_key, SignedObject signed_object) throws GeneralSecurityException {
 		return signed_object.verify(public_key, Signature.getInstance(RegServiceInterface.SIGN_ALGORITHM));
 	}
 
-	private final static int computeShifting() {
+	private static int computeShifting() {
 		return (int)(StrictMath.log(CHAR_TO_WORD.length())/StrictMath.log(2));
 	}
 
-	public final static BigInteger parseBits(String str) throws RegistrationKeyFormatException {
+	public static BigInteger parseBits(String str) throws RegistrationKeyFormatException {
 		byte[] index = new byte[1]; // must be two bytes, to avoid negative values
 		BigInteger result = BigInteger.ZERO;
 		int shifting = computeShifting();
@@ -52,7 +52,7 @@ public final strictfp class RegistrationKey {
 		return result;
 	}
 	
-	public final static String createString(BigInteger val) throws NumberFormatException {
+	public static String createString(BigInteger val) throws NumberFormatException {
 		String result = "";
 		int shifting = computeShifting();
 		BigInteger filter = new BigInteger(new byte[]{(byte)(CHAR_TO_WORD.length() - 1)});
@@ -63,7 +63,7 @@ public final strictfp class RegistrationKey {
 		return result;
 	}
 	
-	private final static byte[] splitToBytes(long l) {
+	private static byte[] splitToBytes(long l) {
 		byte[] bytes = new byte[8]; // One superfluous byte to avoid signedness
 		int accum_shifting = 64;
 		int index = 0; // Start at first byte and fill the next 8
@@ -75,11 +75,11 @@ public final strictfp class RegistrationKey {
 		return bytes;
 	}
 
-	public final static String normalize(String key_str) throws RegistrationKeyFormatException {
+	public static String normalize(String key_str) throws RegistrationKeyFormatException {
 		return encode(decode(key_str));
 	}
 
-	public final static long decode(String key_str) throws RegistrationKeyFormatException {
+	public static long decode(String key_str) throws RegistrationKeyFormatException {
 		key_str = key_str.toUpperCase();
 		key_str = key_str.replaceAll("-", "");
 		if (key_str.length() != STRIPPED_LENGTH)
@@ -95,7 +95,7 @@ public final strictfp class RegistrationKey {
 		return key_code;
 	}
 
-	private final static BigInteger computeChecksum(long key) {
+	private static BigInteger computeChecksum(long key) {
 		Checksum crc = new CRC32();
 		byte[] key_bytes = splitToBytes(key);
 		crc.update(key_bytes, 0, key_bytes.length);
@@ -103,7 +103,7 @@ public final strictfp class RegistrationKey {
 		return new BigInteger(splitToBytes(crc_val));
 	}
 	
-	public final static String encode(long key_code) {
+	public static String encode(long key_code) {
 		key_code = key_code & 0x7fffffffffffffffl;
 		BigInteger key_big = new BigInteger(splitToBytes(key_code));
 		BigInteger crc = computeChecksum(key_code);
@@ -125,7 +125,7 @@ public final strictfp class RegistrationKey {
 	}
 
 	// test
-	public final static void main(String[] args) {
+	public static void main(String[] args) {
 		//System.out.println(Long.toHexString(decode(args[0])));
 		//System.out.println(encode(Long.parseLong(args[0])));
 		//System.out.println("checksum: " + computeChecksum(Long.parseLong(args[0])));
@@ -137,7 +137,7 @@ public final strictfp class RegistrationKey {
 		}
 	}
 
-	private final static void test(long key) {
+	private static void test(long key) {
 		String key_encoded = encode(key);
 		long key_decoded = decode(key_encoded);
 		if (key_decoded != key)

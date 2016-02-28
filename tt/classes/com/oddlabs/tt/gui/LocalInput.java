@@ -39,69 +39,69 @@ public final strictfp class LocalInput {
 
 	private final static LocalInput instance = new LocalInput();
 
-	public final static void setKeys(int key_code, boolean state, boolean shift_down, boolean control_down, boolean menu_down) {
+	public static void setKeys(int key_code, boolean state, boolean shift_down, boolean control_down, boolean menu_down) {
 		keys[key_code] = state;
 		global_menu_state = menu_down;
 		global_control_state = control_down;
 		global_shift_state = shift_down;
 	}
 
-	public final static void keyTyped(GUIRoot gui_root, int key_code, char key_char) {
+	public static void keyTyped(GUIRoot gui_root, int key_code, char key_char) {
 		gui_root.getInputState().keyTyped(key_code, key_char);
 	}
 
-	public final static void keyPressed(GUIRoot gui_root, int key_code, char key_char, boolean shift_down, boolean control_down, boolean menu_down, boolean repeat) {
+	public static void keyPressed(GUIRoot gui_root, int key_code, char key_char, boolean shift_down, boolean control_down, boolean menu_down, boolean repeat) {
 		setKeys(key_code, true, shift_down, control_down, menu_down);
 		gui_root.getInputState().keyPressed(key_code, key_char, shift_down, control_down, menu_down, repeat);
 	}
 
-	public final static void keyReleased(GUIRoot gui_root, int key_code, char key_char, boolean shift_down, boolean control_down, boolean menu_down) {
+	public static void keyReleased(GUIRoot gui_root, int key_code, char key_char, boolean shift_down, boolean control_down, boolean menu_down) {
 		setKeys(key_code, false, shift_down, control_down, menu_down);
 		gui_root.getInputState().keyReleased(key_code, key_char, shift_down, control_down, menu_down);
 	}
 
-	public final static void mouseDragged(GUIRoot gui_root, int button, short x, short y) {
+	public static void mouseDragged(GUIRoot gui_root, int button, short x, short y) {
 		setPos(x, y);
 		gui_root.getInputState().mouseDragged(button, x, y);
 	}
 
-	public final static void mouseReleased(GUIRoot gui_root, int button) {
+	public static void mouseReleased(GUIRoot gui_root, int button) {
 		gui_root.getInputState().mouseReleased(button);
 	}
 
-	public final static void mousePressed(GUIRoot gui_root, int button) {
+	public static void mousePressed(GUIRoot gui_root, int button) {
 		gui_root.getInputState().mousePressed(button);
 	}
 
-	public final static void mouseScrolled(GUIRoot gui_root, int dz) {
+	public static void mouseScrolled(GUIRoot gui_root, int dz) {
 		gui_root.getInputState().mouseScrolled(dz);
 	}
 
-	public final static void mouseMoved(GUIRoot gui_root, short x, short y) {
+	public static void mouseMoved(GUIRoot gui_root, short x, short y) {
 		setPos(x, y);
 		gui_root.getInputState().mouseMoved(x, y);
 	}
 
-	public final static boolean isShiftDownCurrently() {
+	public static boolean isShiftDownCurrently() {
 		return global_shift_state;
 	}
 
-	public final static boolean isControlDownCurrently() {
+	public static boolean isControlDownCurrently() {
 		return global_control_state;
 	}
 
-	public final static boolean isMenuDownCurrently() {
+	public static boolean isMenuDownCurrently() {
 		return global_menu_state;
 	}
 
-	public final static void resetKeys() {
+	public static void resetKeys() {
 		// Clear event queue
 		KeyboardInput.reset();
 		for (int i = 0; i < keys.length; i++)
 			keys[i] = false;
 	}
 
-	public final static boolean isKeyDown(int key_code) {
+	public static boolean isKeyDown(int key_code) {
 		if (key_code >= keys.length) {
 			System.out.println("Unsupported key " + key_code);
 			return false;
@@ -109,55 +109,55 @@ public final strictfp class LocalInput {
 		return keys[key_code];
 	}
 
-	public final static void setPos(int x, int y) {
+	public static void setPos(int x, int y) {
 		mouse_x = x;
 		mouse_y = y;
 	}
 
-	public final static void resetKeyboard() {
+	public static void resetKeyboard() {
 		resetKeys();
 		global_menu_state = false;
 		global_control_state = false;
 		global_shift_state = false;
 	}
 
-	public final static int getMouseY() {
+	public static int getMouseY() {
 		return mouse_y;
 	}
 
-	public final static int getMouseX() {
+	public static int getMouseX() {
 		return mouse_x;
 	}
 
-	public final static boolean alIsCreated() {
+	public static boolean alIsCreated() {
 		return LocalEventQueue.getQueue().getDeterministic().log(AL.isCreated());
 	}
 
-	public final static File getGameDir() {
+	public static File getGameDir() {
 		return game_dir;
 	}
 
-	public final static int getRevision() {
+	public static int getRevision() {
 		return revision;
 	}
 
-	public final static int getViewWidth() {
+	public static int getViewWidth() {
 		return view_width;
 	}
 
-	public final static int getViewHeight() {
+	public static int getViewHeight() {
 		return view_height;
 	}
 
-	public final static boolean inFullscreen() {
+	public static boolean inFullscreen() {
 		return fullscreen;
 	}
 
-	public static final LocalInput getLocalInput() {
+	public static LocalInput getLocalInput() {
 		return instance;
 	}
 
-	public final static SerializableDisplayMode[] getAvailableModes() {
+	public static SerializableDisplayMode[] getAvailableModes() {
 		try {
 			DisplayMode[] lwjgl_modes = Display.getAvailableDisplayModes();
 			List modes = new ArrayList();
@@ -183,20 +183,20 @@ public final strictfp class LocalInput {
 		}
 	}
 
-	public final static SerializableDisplayMode getCurrentMode() {
+	public static SerializableDisplayMode getCurrentMode() {
 		return (SerializableDisplayMode)LocalEventQueue.getQueue().getDeterministic().log(new SerializableDisplayMode(Display.getDisplayMode()));
 	}
 
-	public final static int getNativeCursorCaps() {
+	public static int getNativeCursorCaps() {
 		return LocalEventQueue.getQueue().getDeterministic().log(Cursor.getCapabilities());
 	}
 
-	public final static void settings(File game_dir, File event_log_dir, Settings settings) {
+	public static void settings(File game_dir, File event_log_dir, Settings settings) {
 		instance.setSettings(game_dir, event_log_dir,
 				revision, settings);
 	}
 
-	public final void setSettings(File game_dir, File event_log_dir, int revision, Settings settings) {
+	public void setSettings(File game_dir, File event_log_dir, int revision, Settings settings) {
 		System.out.println("revision = " + revision);
 		LocalInput.game_dir = game_dir;
 		LocalInput.revision = revision;
@@ -208,7 +208,7 @@ public final strictfp class LocalInput {
 		fullscreen = settings.fullscreen;
 	}
 
-	public final static void init() {
+	public static void init() {
 		Deterministic deterministic = LocalEventQueue.getQueue().getDeterministic();
 		mouse_x = deterministic.log(org.lwjgl.input.Mouse.getX());
 		mouse_y = deterministic.log(org.lwjgl.input.Mouse.getY());
@@ -236,7 +236,7 @@ public final strictfp class LocalInput {
 		Settings.getSettings().view_freq = new_mode.getFrequency();
 	}
 
-	public final void fullscreenToggled(boolean fullscreen, boolean switch_now) {
+	public void fullscreenToggled(boolean fullscreen, boolean switch_now) {
 		Settings.getSettings().fullscreen = fullscreen;
 		if (switch_now && LocalInput.fullscreen != fullscreen) {
 			toggleFullscreen();
@@ -244,7 +244,7 @@ public final strictfp class LocalInput {
 		}
 	}
 
-	public static final void toggleFullscreen() {
+	public static void toggleFullscreen() {
 		fullscreen = !fullscreen;
 		try {
 			Display.setFullscreen(fullscreen && !LocalEventQueue.getQueue().getDeterministic().isPlayback());
@@ -268,15 +268,15 @@ public final strictfp class LocalInput {
 		modeSwitchedNow(mode);
 	}
 
-	public static final float getViewAspect() {
+	public static float getViewAspect() {
 		return (float)view_width/view_height;
 	}
 
-	private static final float getUnitsPerPixel() {
+	private static float getUnitsPerPixel() {
 		return (float)(Globals.VIEW_MIN*StrictMath.tan(Globals.FOV*(StrictMath.PI/180.0f)*0.5d)/(view_height*0.5d));
 	}
 
-	public static final float getErrorConstant() {
+	public static float getErrorConstant() {
 		return Globals.VIEW_MIN/(getUnitsPerPixel()*Globals.ERROR_TOLERANCE);
 	}
 }

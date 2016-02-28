@@ -88,11 +88,11 @@ public final strictfp class AnimationManager {
 		freezeTime();
 	}
 
-	public final static void warpTime(long warp_delta) {
+	public static void warpTime(long warp_delta) {
 		time_warp += warp_delta;
 	}
 
-	public final static long getSystemTime() {
+	public static long getSystemTime() {
 		if (time_frozen) {
 			return frozen_start_time_warped;
 		} else
@@ -108,14 +108,14 @@ public final strictfp class AnimationManager {
 System.out.println("time_stopped = " + time_stopped);
 	}
 
-	private final static void unfreezeTime() {
+	private static void unfreezeTime() {
 		if (!time_frozen)
 			return;
 		time_frozen = false;
 		time_warp -= time_source.getMillis() - frozen_start_time;
 	}
 	
-	public final static void freezeTime() {
+	public static void freezeTime() {
 		if (time_frozen)
 			return;
 		frozen_start_time_warped = getSystemTime();
@@ -123,7 +123,7 @@ System.out.println("time_stopped = " + time_stopped);
 		frozen_start_time = time_source.getMillis();
 	}
 
-	public final static void runGameLoop(NetworkSelector network, GUI gui, boolean grab_frames) {
+	public static void runGameLoop(NetworkSelector network, GUI gui, boolean grab_frames) {
 		KeyboardInput.checkMagicKeys();
 		if (time_frozen && !time_stopped)
 			unfreezeTime();
@@ -200,37 +200,37 @@ for (int i = 0; i < medium.length; i++) {
 		deterministic.setEnabled(false);
 	}
 
-	public final int getTick() {
+	public int getTick() {
 		return tick;
 	}
 
-	public final void registerAnimation(Animated anim) {
+	public void registerAnimation(Animated anim) {
 		deleted_animations.remove(anim);
 		if (!animations.contains(anim)) {
 			animations.add(anim);
 		}
 	}
 
-	public final void removeAnimation(Animated anim) {
+	public void removeAnimation(Animated anim) {
 		if (animations.contains(anim) && !deleted_animations.contains(anim)) {
 			deleted_animations.add(anim);
 		}
 	}
 
-	private final void flushAnimations() {
+	private void flushAnimations() {
 		for (int i = 0; i < deleted_animations.size(); i++)
 			animations.remove(deleted_animations.get(i));
 		deleted_animations.clear();
 	}
 
-	public final void updateChecksum(StateChecksum checksum) {
+	public void updateChecksum(StateChecksum checksum) {
 		flushAnimations();
 		for (int i = 0; i < animations.size(); i++) {
 			((Animated)animations.get(i)).updateChecksum(checksum);
 		}
 	}
 
-	public final void runAnimations(float t) {
+	public void runAnimations(float t) {
 		tick++;
 		flushAnimations();
 		for (int i = 0; i < animations.size(); i++) {
@@ -241,7 +241,7 @@ for (int i = 0; i < medium.length; i++) {
 		}
 	}
 
-	public final void debugPrintAnimations() {
+	public void debugPrintAnimations() {
 		flushAnimations();
 		for (int i = 0; i < animations.size(); i++) {
 System.out.println("anim = " + animations.get(i));

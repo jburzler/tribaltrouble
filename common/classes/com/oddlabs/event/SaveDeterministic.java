@@ -26,11 +26,11 @@ public final strictfp class SaveDeterministic extends Deterministic {
 	}
 
         @Override
-	public final boolean isPlayback() {
+	public boolean isPlayback() {
 		return false;
 	}
 
-	private final void flushBuffer() {
+	private void flushBuffer() {
 		try {
 			buffer.flip();
 			while (buffer.hasRemaining()) {
@@ -43,7 +43,7 @@ public final strictfp class SaveDeterministic extends Deterministic {
 	}
 
         @Override
-	public final void endLog() {
+	public void endLog() {
 		startLog(0, false);
 		try {
 			flushBuffer();
@@ -54,7 +54,7 @@ public final strictfp class SaveDeterministic extends Deterministic {
 		}
 	}
 	
-	private final boolean startLog(int num_bytes, boolean def) {
+	private boolean startLog(int num_bytes, boolean def) {
 		if (def && num_defaults < MAX_DEFAULTS) {
 			num_defaults++;
 			return false;
@@ -71,42 +71,42 @@ public final strictfp class SaveDeterministic extends Deterministic {
 	}
 
         @Override
-	protected final byte log(byte b, byte def) {
+	protected byte log(byte b, byte def) {
 		if (startLog(1, b == def))
 			buffer.put(b);
 		return b;
 	}
 
         @Override
-	protected final char log(char c, char def) {
+	protected char log(char c, char def) {
 		if (startLog(2, c == def))
 			buffer.putChar(c);
 		return c;
 	}
 
         @Override
-	protected final int log(int i, int def) {
+	protected int log(int i, int def) {
 		if (startLog(4, i == def))
 			buffer.putInt(i);
 		return i;
 	}
 
         @Override
-	protected final long log(long l, long def) {
+	protected long log(long l, long def) {
 		if (startLog(8, l == def))
 			buffer.putLong(l);
 		return l;
 	}
 
         @Override
-	protected final float log(float f, float def) {
+	protected float log(float f, float def) {
 		if (startLog(4, f == def))
 			buffer.putFloat(f);
 		return f;
 	}
 	
         @Override
-	protected final Object logObject(Object o) {
+	protected Object logObject(Object o) {
 		try (ObjectOutputStream object_output_stream = new ObjectOutputStream(byte_buffer_output_stream)) {
 			object_output_stream.writeObject(o);
 		} catch (IOException e) {
@@ -116,7 +116,7 @@ public final strictfp class SaveDeterministic extends Deterministic {
 	}
 	
         @Override
-	protected final void logBuffer(ByteBuffer b) {
+	protected void logBuffer(ByteBuffer b) {
 		if (startLog(0, false)) {
 			while (true) {
 				int saved_limit = b.limit();
@@ -132,7 +132,7 @@ public final strictfp class SaveDeterministic extends Deterministic {
 
 	public final strictfp class ByteBufferOutputStream extends OutputStream {
                 @Override
-		public final void write(int b) throws IOException {
+		public void write(int b) throws IOException {
 			log((byte)b);
 		}
 	}   

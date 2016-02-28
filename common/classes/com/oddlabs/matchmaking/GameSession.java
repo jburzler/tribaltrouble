@@ -21,7 +21,7 @@ public final strictfp class GameSession implements Serializable {
 		this.rated = rated;
 	}
 
-	private final boolean validateTeams() {
+	private boolean validateTeams() {
 		boolean[] teams = new boolean[MatchmakingServerInterface.MAX_PLAYERS];
 		int team_count = 0;
             for (Participant p : participants) {
@@ -36,36 +36,36 @@ public final strictfp class GameSession implements Serializable {
 	}
 	
         @Override
-	public final int hashCode() {
+	public int hashCode() {
 		return session_id;
 	}
 	
         @Override
-	public final boolean equals(Object other) {
+	public boolean equals(Object other) {
 		if (!(other instanceof GameSession))
 			return false;
 		GameSession other_game = (GameSession)other;
 		return other_game.session_id == session_id && Arrays.equals(other_game.participants, participants) && rated == other_game.rated;
 	}
 	
-	public final boolean validate() {
+	public boolean validate() {
 		return participants != null && participants.length <= MatchmakingServerInterface.MAX_PLAYERS && participants.length >= MatchmakingServerInterface.MIN_PLAYERS &&
 			validateTeams();
 	}
 
-	public final int getID() {
+	public int getID() {
 		return session_id;
 	}
 	
-	public final Participant[] getParticipants() {
+	public Participant[] getParticipants() {
 		return participants;
 	}
 
-	public final boolean isRated() {
+	public boolean isRated() {
 		return rated;
 	}
 
-	public final static int[][] calculateMatchPoints(int[] player_ratings, int[] player_teams) {
+	public static int[][] calculateMatchPoints(int[] player_ratings, int[] player_teams) {
 		assert player_ratings.length == player_teams.length;
 		int num_players = player_ratings.length;
 

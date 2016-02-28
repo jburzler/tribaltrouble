@@ -12,26 +12,26 @@ public final strictfp class ChieftainContainer {
 		this.building = building;
 	}
 
-	public final float getBuildProgress() {
+	public float getBuildProgress() {
 		return progress;
 	}
 
-	public final void startTraining() {
+	public void startTraining() {
 		training = true;
 		((ReproduceUnitContainer)building.getUnitContainer()).resetProgress();
 	}
 
-	public final void stopTraining() {
+	public void stopTraining() {
 		training = false;
 		progress = 0f;
 		((ReproduceUnitContainer)building.getUnitContainer()).resetProgress();
 	}
 
-	public final boolean isTraining() {
+	public boolean isTraining() {
 		return training;
 	}
 
-	public final void progress() {
+	public void progress() {
 		progress += PROGRESS_AMOUNT;
 		if (progress >= 1f) {
 			building.deployChieftain();

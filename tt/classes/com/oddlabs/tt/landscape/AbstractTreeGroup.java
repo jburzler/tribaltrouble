@@ -73,7 +73,7 @@ public abstract strictfp class AbstractTreeGroup extends BoundingBox {
 		return root;
 	}
 
-	private final void buildTrees(final World world, LowDetailModel[] tree_low_details, final int tree_type_index, final int grid_size, final float radius, List tree_positions, float scale_factor, float min_size) {
+	private void buildTrees(final World world, LowDetailModel[] tree_low_details, final int tree_type_index, final int grid_size, final float radius, List tree_positions, float scale_factor, float min_size) {
 		StrictMatrix4f matrix2 = new StrictMatrix4f();
 		StrictVector3f vector = new StrictVector3f();
 		final float[] tree_low_vertices = tree_low_details[tree_type_index].getVertices();

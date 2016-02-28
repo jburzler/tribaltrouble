@@ -17,7 +17,7 @@ public final strictfp class DateLabel extends Label {
 		this.val = val;
 	}
 
-	private final static String format(long date) {
+	private static String format(long date) {
 		if (date < 0)
 			return "-";
 		else
@@ -25,7 +25,7 @@ public final strictfp class DateLabel extends Label {
 	}
 
         @Override
-	public final int compareTo(Object o) {
+	public int compareTo(Object o) {
 		if (o instanceof DateLabel) {
 			DateLabel other = (DateLabel)o;
 			return val < other.val ? -1 : 1;

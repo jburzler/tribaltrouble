@@ -8,7 +8,7 @@ import com.oddlabs.tt.util.Utils;
 import java.util.ResourceBundle;
 
 public final strictfp class QuitForm extends QuestionForm {
-	private final static String getI18N(String key) {
+	private static String getI18N(String key) {
 		ResourceBundle bundle = ResourceBundle.getBundle(QuitForm.class.getName());
 		return Utils.getBundleString(bundle, key);
 	}

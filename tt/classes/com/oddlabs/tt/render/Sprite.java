@@ -123,11 +123,11 @@ final strictfp class Sprite {
 		this.respond_texture = ((Texture[])Resources.findResource(new GeneratorRespond()))[0];
 	}
 
-	public final boolean modulateColor() {
+	public boolean modulateColor() {
 		return modulate_color;
 	}
 
-	public final int getTriangleCount() {
+	public int getTriangleCount() {
 		return num_triangles;
 	}
 
@@ -148,7 +148,7 @@ final strictfp class Sprite {
 		setupDecalColor(color);
 	}
 
-	public final void renderAll(List render_list, int tex_index, boolean respond) {
+	public void renderAll(List render_list, int tex_index, boolean respond) {
 		for (int i = 0; i < render_list.size(); i++) {
 			ModelState model = (ModelState)render_list.get(i);
 			render_list.set(i, null);
@@ -163,7 +163,7 @@ final strictfp class Sprite {
 		}
 	}
 
-	private final void expandAnimation(AnimationInfo[] animations, float[][][] tmp_vertices, float[][][] tmp_normals, float[] initial_pose_vertices, float[] initial_pose_normals, byte[][] skin_names, float[][] skin_weights, BoundingBox[] bounding_boxes) {
+	private void expandAnimation(AnimationInfo[] animations, float[][][] tmp_vertices, float[][][] tmp_normals, float[] initial_pose_vertices, float[] initial_pose_normals, byte[][] skin_names, float[][] skin_weights, BoundingBox[] bounding_boxes) {
 		int num_bones = animations[0].getFrames()[0].length/12;
 		Matrix4f[] frame_bones = new Matrix4f[num_bones];
 		for (int bone = 0; bone < frame_bones.length; bone++)
@@ -250,7 +250,7 @@ final strictfp class Sprite {
 		}
 	}
 
-	private final static Texture getTextureForName(String texture_name, int color_format, int mipmap_cutoff, boolean max_alpha) {
+	private static Texture getTextureForName(String texture_name, int color_format, int mipmap_cutoff, boolean max_alpha) {
 		String GENERATOR_STRING = "Generator:";
 		if (texture_name.startsWith(GENERATOR_STRING)) {
 			String generator_class_name = texture_name.substring(GENERATOR_STRING.length());
@@ -266,15 +266,15 @@ final strictfp class Sprite {
 		}
 	}
 
-	public final void setup(int tex_index, boolean respond) {
+	public void setup(int tex_index, boolean respond) {
 		setupWithColor(white_color, tex_index, respond, modulate_color);
 	}
 
-	public final void setupWithColor(FloatBuffer color, int tex_index, boolean respond, boolean modulate_color) {
+	public void setupWithColor(FloatBuffer color, int tex_index, boolean respond, boolean modulate_color) {
 		doSetup(color, tex_index, respond, modulate_color);
 	}
 
-	private final void doSetup(FloatBuffer color, int tex_index, boolean respond, boolean modulate_color) {
+	private void doSetup(FloatBuffer color, int tex_index, boolean respond, boolean modulate_color) {
 		int gl_flags = setupBasic();
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, textures[tex_index][TEXTURE_NORMAL].getHandle());
 		if (modulate_color) {
@@ -303,7 +303,7 @@ final strictfp class Sprite {
 		GLStateStack.switchState(gl_flags);
 	}
 
-	private final int setupBasic() {
+	private int setupBasic() {
 		int gl_flags = GLState.VERTEX_ARRAY | GLState.TEXCOORD0_ARRAY;
 		if (!culled) {
 			GL11.glDisable(GL11.GL_CULL_FACE);
@@ -316,27 +316,27 @@ final strictfp class Sprite {
 		return gl_flags;
 	}
 
-	public final boolean hasTeamDecal() {
+	public boolean hasTeamDecal() {
 		return textures[0][TEXTURE_TEAM] != null;
 	}
 
-	public final int getNumTextures() {
+	public int getNumTextures() {
 		return textures.length;
 	}
 
-	public final static void setupTeamDecal() {
+	public static void setupTeamDecal() {
 		GLState.activeTexture(GL13.GL_TEXTURE1);
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 		GL11.glTexEnvf(GL11.GL_TEXTURE_ENV, GL11.GL_TEXTURE_ENV_MODE, GL11.GL_BLEND);
 	}
 
-	public final static void resetTeamDecal() {
+	public static void resetTeamDecal() {
 		GL11.glTexEnvf(GL11.GL_TEXTURE_ENV, GL11.GL_TEXTURE_ENV_MODE, GL11.GL_DECAL);
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		GLState.activeTexture(GL13.GL_TEXTURE0);
 	}
 
-	public final void reset(boolean respond, boolean modulate_color) {
+	public void reset(boolean respond, boolean modulate_color) {
 		if (!modulate_color && (hasTeamDecal() || respond)) {
 			resetTeamDecal();
 		}
@@ -350,7 +350,7 @@ final strictfp class Sprite {
 		resetBasic();
 	}
 
-	private final void resetBasic() {
+	private void resetBasic() {
 		if (!culled) {
 			GL11.glEnable(GL11.GL_CULL_FACE);
 		}
@@ -359,7 +359,7 @@ final strictfp class Sprite {
 		}
 	}
 
-	private final int getFrameCapped(int animation, int frame) {
+	private int getFrameCapped(int animation, int frame) {
 		int anim_length = animation_length_array[animation];
 		if (type_array[animation] == AnimationInfo.ANIM_LOOP)
 			return frame%anim_length;
@@ -367,7 +367,7 @@ final strictfp class Sprite {
 			return StrictMath.min(frame, anim_length - 1);
 	}
 
-	public final void render(int animation, float anim_ticks) {
+	public void render(int animation, float anim_ticks) {
 		float anim_position = anim_ticks*cpw_array[animation];
 		int frame_non_capped = (int)(anim_position*animation_length_array[animation]);
 		int frame = getFrameCapped(animation, frame_non_capped);
@@ -381,7 +381,7 @@ final strictfp class Sprite {
 		indices.drawRangeElements(GL11.GL_TRIANGLES, 0, num_vertices - 1, num_triangles*3, 0);
 	}
 
-	public final void renderModel(int tex_index) {
+	public void renderModel(int tex_index) {
 		int gl_flags = setupBasic();
 		GLStateStack.switchState(gl_flags);
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, textures[tex_index][TEXTURE_NORMAL].getHandle());
@@ -389,11 +389,11 @@ final strictfp class Sprite {
 		resetBasic();
 	}
 
-	public final float[] getModelClearColor() {
+	public float[] getModelClearColor() {
 		return getClearColor();
 	}
 
-	public final float[] getClearColor() {
+	public float[] getClearColor() {
 		return clear_color;
 	}
 }

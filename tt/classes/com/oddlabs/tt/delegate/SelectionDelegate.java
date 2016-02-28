@@ -53,15 +53,15 @@ public final strictfp class SelectionDelegate extends ControllableCameraDelegate
 		((GameCamera)getCamera()).setOwner(this);
 	}
 
-	public final InGameChatForm getChatForm() {
+	public InGameChatForm getChatForm() {
 		return chat_form;
 	}
 
-	public final ActionButtonPanel getActionButtonPanel() {
+	public ActionButtonPanel getActionButtonPanel() {
 		return getViewer().getPanel();
 	}
 
-	public final void setObserverMode() {
+	public void setObserverMode() {
 		observer = true;
 		getViewer().getSelection().clearSelection();
 		if (!map_mode)
@@ -69,7 +69,7 @@ public final strictfp class SelectionDelegate extends ControllableCameraDelegate
 	}
 
         @Override
-	public final void keyPressed(KeyboardEvent event) {
+	public void keyPressed(KeyboardEvent event) {
 		getCamera().keyPressed(event);
 		int army_number = 0;
 		switch (event.getKeyCode()) {
@@ -156,7 +156,7 @@ public final strictfp class SelectionDelegate extends ControllableCameraDelegate
 		getViewer().getPeerHub().getPlayerInterface().changePreferredGamespeed(delta);
 	}
 
-	private final void nextIdlePeon() {
+	private void nextIdlePeon() {
 		Set set = getViewer().getLocalPlayer().getUnits().getSet();
 		Iterator it = set.iterator();
 
@@ -204,7 +204,7 @@ public final strictfp class SelectionDelegate extends ControllableCameraDelegate
 	}
 
         @Override
-	public final void keyRepeat(KeyboardEvent event) {
+	public void keyRepeat(KeyboardEvent event) {
 //		getCamera().keyRepeat(event);
 		switch (event.getKeyChar()) {
 			case '+':
@@ -221,7 +221,7 @@ public final strictfp class SelectionDelegate extends ControllableCameraDelegate
 	}
 
         @Override
-	public final void keyReleased(KeyboardEvent event) {
+	public void keyReleased(KeyboardEvent event) {
 		getCamera().keyReleased(event);
 		switch (event.getKeyCode()) {
 			case Keyboard.KEY_RETURN:
@@ -244,7 +244,7 @@ public final strictfp class SelectionDelegate extends ControllableCameraDelegate
 	}
 
         @Override
-	protected final int getCursorIndex() {
+	protected int getCursorIndex() {
 		if (map_mode) {
 			return GUIRoot.CURSOR_TARGET;
 		} else {
@@ -252,7 +252,7 @@ public final strictfp class SelectionDelegate extends ControllableCameraDelegate
 		}
 	}
 
-	public final void exitMapMode() {
+	public void exitMapMode() {
 		map_mode = false;
 		getCamera().disable();
 		setCamera(game_camera);
@@ -269,7 +269,7 @@ public final strictfp class SelectionDelegate extends ControllableCameraDelegate
 		}
 	}
 
-	private final void updateSelection(List friendly_units, Selectable friendly_building, Selectable enemy) {
+	private void updateSelection(List friendly_units, Selectable friendly_building, Selectable enemy) {
 		Army current_selection = getViewer().getSelection().getCurrentSelection();
 		Selectable first = (Selectable)current_selection.getSet().iterator().next();
 		if (first instanceof Building || first.getOwner() != getViewer().getLocalPlayer()) {
@@ -298,7 +298,7 @@ public final strictfp class SelectionDelegate extends ControllableCameraDelegate
 		}
 	}
 
-	private final void replaceSelection(List friendly_units, Selectable friendly_building, Selectable enemy) {
+	private void replaceSelection(List friendly_units, Selectable friendly_building, Selectable enemy) {
 		Army current_selection = getViewer().getSelection().getCurrentSelection();
 		current_selection.clear();
 		if (friendly_units.size() > 0) {
@@ -313,7 +313,7 @@ public final strictfp class SelectionDelegate extends ControllableCameraDelegate
 	}
 
         @Override
-	public final void mouseClicked(int button, int x, int y, int clicks) {
+	public void mouseClicked(int button, int x, int y, int clicks) {
 		if (button == LocalInput.LEFT_BUTTON && !map_mode && !observer) {
 			if (selection) {
 				selection = false;
@@ -345,7 +345,7 @@ public final strictfp class SelectionDelegate extends ControllableCameraDelegate
 	}
 
         @Override
-	public final void mouseReleased(int button, int x, int y) {
+	public void mouseReleased(int button, int x, int y) {
 		if (map_mode) {
 			if (button == LocalInput.LEFT_BUTTON) {
 				getViewer().getPicker().pickMapGoto(x, y, (MapCamera)getCamera());
@@ -366,7 +366,7 @@ public final strictfp class SelectionDelegate extends ControllableCameraDelegate
 	}
 
         @Override
-	public final void mouseDragged(int button, int x, int y, int relative_x, int relative_y, int absolute_x, int absolute_y) {
+	public void mouseDragged(int button, int x, int y, int relative_x, int relative_y, int absolute_x, int absolute_y) {
 		if (!map_mode) {
 			if (!observer) {
 				if (button == LocalInput.LEFT_BUTTON) {
@@ -382,7 +382,7 @@ public final strictfp class SelectionDelegate extends ControllableCameraDelegate
 	}
 
         @Override
-	public final void mousePressed(int button, int x, int y) {
+	public void mousePressed(int button, int x, int y) {
 		if (!map_mode) {
 			if (!observer) {
 				if (button == LocalInput.LEFT_BUTTON) {
@@ -408,17 +408,17 @@ public final strictfp class SelectionDelegate extends ControllableCameraDelegate
 		
 	}
 
-	public final boolean isSelecting() {
+	public boolean isSelecting() {
 		return selection;
 	}
 
         @Override
-	public final boolean keyboardBlocked() {
+	public boolean keyboardBlocked() {
 		return chat_visible && chat_form.isActive();
 	}
 
         @Override
-	public final void render2D() {
+	public void render2D() {
 		if (selection) {
 			GL11.glColor3f(.3f, 1f, 0f);
 			GL11.glPolygonMode(GL11.GL_FRONT, GL11.GL_LINE);
@@ -439,14 +439,14 @@ public final strictfp class SelectionDelegate extends ControllableCameraDelegate
 	}
 
         @Override
-	public final void displayChangedNotify(int width, int height) {
+	public void displayChangedNotify(int width, int height) {
 		super.displayChangedNotify(width, height);
 		observer_label.setPos((width - observer_label.getWidth())/2, height - observer_label.getHeight());
 	}
 
 	private strictfp final class ChatCloseListener implements CloseListener {
                 @Override
-		public final void closed() {
+		public void closed() {
 			if (LocalInput.isKeyDown(Keyboard.KEY_RETURN)) {
 				close_chat_override = true;
 			}

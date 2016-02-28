@@ -59,7 +59,7 @@ public final strictfp class MacOSXUtil extends OSUtil {
 	}
 
         @Override
-	public final void registerURLScheme(String gamename, URLAssociation association) {
+	public void registerURLScheme(String gamename, URLAssociation association) {
 		Map script_parameters = new HashMap();
 		script_parameters.put("description", association.description);
 		script_parameters.put("scheme", association.scheme);
@@ -68,7 +68,7 @@ public final strictfp class MacOSXUtil extends OSUtil {
 	}
 
         @Override
-	public final void registerAssociation(String gamename, Association association) {
+	public void registerAssociation(String gamename, Association association) {
 		Map script_parameters = new HashMap();
 		script_parameters.put("mimetype", association.mime_type);
 		script_parameters.put("extension", association.extension);

@@ -7,7 +7,7 @@ public final strictfp class LandscapeLeaf extends AbstractPatchGroup {
 	private final int patch_y;
 	private final float max_error;
 
-	public final float getMaxError() {
+	public float getMaxError() {
 		return max_error;
 	}
 
@@ -36,20 +36,20 @@ public final strictfp class LandscapeLeaf extends AbstractPatchGroup {
 		heightmap.registerLeaf(patch_x, patch_y, this);
 	}
 
-	public final float[] getErrors() {
+	public float[] getErrors() {
 		return errors;
 	}
 
-	public final int getPatchX() {
+	public int getPatchX() {
 		return patch_x;
 	}
 
-	public final int getPatchY() {
+	public int getPatchY() {
 		return patch_y;
 	}
 
         @Override
-	public final void visit(PatchGroupVisitor visitor) {
+	public void visit(PatchGroupVisitor visitor) {
 		visitor.visitLeaf(this);
 	}
 }

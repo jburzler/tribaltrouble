@@ -94,11 +94,11 @@ public final strictfp class RacesResources {
 	private final SpriteKey[] treasure_sprites = new SpriteKey[6];
 	private final Race[] races;
 
-	public final static boolean isValidRace(int race) {
+	public static boolean isValidRace(int race) {
 		return race == RACE_NATIVES || race == RACE_VIKINGS;
 	}
 
-	private final static BuildingTemplate createBuildingTemplate(
+	private static BuildingTemplate createBuildingTemplate(
 			RenderQueues queues,
 			int template_id,
 			String built_name,
@@ -799,104 +799,104 @@ public final strictfp class RacesResources {
 		ProgressForm.progress(1f/num_progress);
 	}
 	
-	public final TextureKey[] getSmokeTextures() {
+	public TextureKey[] getSmokeTextures() {
 		return smoke_textures;
 	}
 
-	public final TextureKey[] getDamageSmokeTextures() {
+	public TextureKey[] getDamageSmokeTextures() {
 		return damage_smoke_textures;
 	}
 
-	public final TextureKey[] getPoisonTextures() {
+	public TextureKey[] getPoisonTextures() {
 		return poison_textures;
 	}
 
-	public final TextureKey getLightningTexture() {
+	public TextureKey getLightningTexture() {
 		return lightning_texture;
 	}
 
-	public final TextureKey[] getSonicTextures() {
+	public TextureKey[] getSonicTextures() {
 		return sonic_textures;
 	}
 
-	public final TextureKey[] getNoteTextures() {
+	public TextureKey[] getNoteTextures() {
 		return note_textures;
 	}
 
-	public final TextureKey[] getStarTextures() {
+	public TextureKey[] getStarTextures() {
 		return star_textures;
 	}
 
-	public final Audio getHarvestSound(Class key, Random random) {
+	public Audio getHarvestSound(Class key, Random random) {
 		Audio[] sounds = (Audio[])harvest_sounds.get(key);
 		return sounds[random.nextInt(sounds.length)];
 	}
 
-	public final Audio[] getTreeFallSound() {
+	public Audio[] getTreeFallSound() {
 		return tree_fall_sound;
 	}
 
-	public final Audio getBuildingHitSound(Random random) {
+	public Audio getBuildingHitSound(Random random) {
 		return building_hit_sound[random.nextInt(building_hit_sound.length)];
 	}
 	
-	public final Audio getGasSound() {
+	public Audio getGasSound() {
 		return gas_sound;
 	}
 
-	public final Audio getBubblingSound() {
+	public Audio getBubblingSound() {
 		return bubbling_sound;
 	}
 
-	public final Audio getLightningSound() {
+	public Audio getLightningSound() {
 		return lightning_sound;
 	}
 
-	public final Audio getCloudSound() {
+	public Audio getCloudSound() {
 		return cloud_sound;
 	}
 
-	public final Audio getStunSound(Random random) {
+	public Audio getStunSound(Random random) {
 		return stun_sound[random.nextInt(stun_sound.length)];
 	}
 
-	public final Audio getBlastLurSound(Random random) {
+	public Audio getBlastLurSound(Random random) {
 		return blast_lur_sound[random.nextInt(blast_lur_sound.length)];
 	}
 
-	public final Audio getBlastRumbleSound() {
+	public Audio getBlastRumbleSound() {
 		return blast_rumble_sound;
 	}
 
-	public final Audio getBlastBlastSound() {
+	public Audio getBlastBlastSound() {
 		return blast_blast_sound;
 	}
 
-	public final Audio getArmorySound() {
+	public Audio getArmorySound() {
 		return armory_sound;
 	}
 
-	public final Audio getBuildingCollapseSound() {
+	public Audio getBuildingCollapseSound() {
 		return building_collapse_sound;
 	}
 
-	public final Race getRace(int i) {
+	public Race getRace(int i) {
 		return races[i];
 	}
 	
-	public final static String getRaceName(int i) {
+	public static String getRaceName(int i) {
 		return race_names[i];
 	}
 
-	public final static int getNumRaces() {
+	public static int getNumRaces() {
 		return race_names.length;
 	}
 
-	public final SpriteKey[] getWoodFragments() {
+	public SpriteKey[] getWoodFragments() {
 		return wood_fragment_sprites;
 	}
 
-	public final SpriteKey[] getTreasures() {
+	public SpriteKey[] getTreasures() {
 		return treasure_sprites;
 	}
 }

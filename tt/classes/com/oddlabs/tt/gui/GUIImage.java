@@ -30,7 +30,7 @@ public final strictfp class GUIImage extends GUIObject {
 	}
 
         @Override
-	protected final void renderGeometry() {
+	protected void renderGeometry() {
 		int width = getWidth();
 		int height = getHeight();
 

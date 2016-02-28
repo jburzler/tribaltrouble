@@ -11,7 +11,7 @@ public final strictfp class GeneratorPoison extends TextureGenerator {
 	private static final int TEXTURE_SIZE = 128;
 
         @Override
-	public final Texture[] generate() {
+	public Texture[] generate() {
 		int seed = Globals.LANDSCAPE_SEED;
 		
 		/*
@@ -35,7 +35,7 @@ public final strictfp class GeneratorPoison extends TextureGenerator {
 	}
 
         @Override
-	public final int hashCode() {
+	public int hashCode() {
 		return TEXTURE_SIZE + 398;
 	}
 }

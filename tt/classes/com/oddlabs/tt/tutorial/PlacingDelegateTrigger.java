@@ -15,7 +15,7 @@ public final strictfp class PlacingDelegateTrigger extends TutorialTrigger {
 	}
 
         @Override
-	protected final void run(Tutorial tutorial) {
+	protected void run(Tutorial tutorial) {
 		if (tutorial.getViewer().getGUIRoot().getDelegate() instanceof PlacingDelegate)
 			tutorial.next(new QuartersTrigger());
 	}

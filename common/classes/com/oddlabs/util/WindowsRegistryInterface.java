@@ -3,7 +3,7 @@ package com.oddlabs.util;
 import java.lang.reflect.*;
 
 public final strictfp class WindowsRegistryInterface {
-	public final static String queryRegistrationKey(String root, String subkey, String value) throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException, NoSuchFieldException, InvocationTargetException {
+	public static String queryRegistrationKey(String root, String subkey, String value) throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException, NoSuchFieldException, InvocationTargetException {
 		Class org_lwjgl_opengl_WindowsRegistry = Class.forName("org.lwjgl.opengl.WindowsRegistry");
 		Field root_key_enum_field = org_lwjgl_opengl_WindowsRegistry.getDeclaredField(root);
 		root_key_enum_field.setAccessible(true);

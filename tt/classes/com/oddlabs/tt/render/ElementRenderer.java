@@ -17,17 +17,17 @@ final strictfp class ElementRenderer implements ElementNodeVisitor {
 		this.render_state = new RenderState(local_player, renderer, sprite_sorter, render_queues, picker, selection);
 	}
 
-	final RenderState getRenderState() {
+	RenderState getRenderState() {
 		return render_state;
 	}
 
-	final void setup(CameraState camera_state) {
+	void setup(CameraState camera_state) {
 		this.camera = camera_state;
 		render_state.setup(picking, camera);
 	}
 
         @Override
-	public final void visitNode(ElementNode node) {
+	public void visitNode(ElementNode node) {
 		int frustum_state = RenderTools.NOT_IN_FRUSTUM;
 		if (visible_override || (frustum_state = RenderTools.inFrustum(node, camera.getFrustum())) >= RenderTools.IN_FRUSTUM) {
 			boolean old_override = visible_override;
@@ -39,7 +39,7 @@ final strictfp class ElementRenderer implements ElementNodeVisitor {
 	}
 
         @Override
-	public final void visitLeaf(ElementLeaf leaf) {
+	public void visitLeaf(ElementLeaf leaf) {
 		int frustum_state = RenderTools.NOT_IN_FRUSTUM;
 		if (visible_override || (frustum_state = RenderTools.inFrustum(leaf, camera.getFrustum())) >= RenderTools.IN_FRUSTUM) {
 			boolean old_override = visible_override;
@@ -50,7 +50,7 @@ final strictfp class ElementRenderer implements ElementNodeVisitor {
 	}
 
         @Override
-	public final void visit(Element element) {
+	public void visit(Element element) {
 		int frustum_state = RenderTools.NOT_IN_FRUSTUM;
 		if (visible_override || (frustum_state = RenderTools.inFrustum(element, camera.getFrustum())) >= RenderTools.IN_FRUSTUM) {
 			boolean old_override = visible_override;

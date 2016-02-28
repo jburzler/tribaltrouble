@@ -18,7 +18,7 @@ public final strictfp class ConnectionListener extends AbstractConnectionListene
 
 	private List incoming_connections = new LinkedList();
 	
-	private final static SelectionKey createServerSocket(NetworkSelector network, InetAddress ip, int port) throws IOException {
+	private static SelectionKey createServerSocket(NetworkSelector network, InetAddress ip, int port) throws IOException {
 		ServerSocketChannel server_channel = ServerSocketChannel.open();
 		server_channel.configureBlocking(false);
 		SocketAddress address = new InetSocketAddress(ip, port);
@@ -46,12 +46,12 @@ public final strictfp class ConnectionListener extends AbstractConnectionListene
 			network.attachToKey(key, this);
 	}
 	
-	public final int getPort() {
+	public int getPort() {
 		return network.getDeterministic().log(key != null ? ((ServerSocketChannel)key.channel()).socket().getLocalPort() : -1);
 	}
 
         @Override
-	public final void handle() throws IOException {
+	public void handle() throws IOException {
 		IOException exception = null;
 		SocketChannel channel = null;
 		if (!network.getDeterministic().isPlayback()) {
@@ -74,15 +74,15 @@ public final strictfp class ConnectionListener extends AbstractConnectionListene
 		notifyIncomingConnection();
 	}
 
-	public final void error(IOException e) {
+	public void error(IOException e) {
 		notifyError(e);
 	}
 
-	public final void incoming(InetAddress remote_address) {
+	public void incoming(InetAddress remote_address) {
 		notifyIncomingConnection(remote_address);
 	}
 	
-	private final void notifyIncomingConnection() {
+	private void notifyIncomingConnection() {
 		InetAddress remote_inet_address = null;
 		if (!network.getDeterministic().isPlayback()) {
 			SocketChannel channel = (SocketChannel)incoming_connections.get(0);
@@ -92,18 +92,18 @@ public final strictfp class ConnectionListener extends AbstractConnectionListene
 		incoming((InetAddress)network.getDeterministic().log(remote_inet_address));
 	}
 
-	private final SocketChannel removeNextChannel() {
+	private SocketChannel removeNextChannel() {
 		return (SocketChannel)incoming_connections.remove(0);
 	}
 	
-	private final SocketChannel getNextConnection() {
+	private SocketChannel getNextConnection() {
 		SocketChannel channel = removeNextChannel();
 		if (incoming_connections.size() > 0)
 			notifyIncomingConnection();
 		return channel;
 	}
 	
-	private final SelectionKey getNextConnectionKey() {
+	private SelectionKey getNextConnectionKey() {
 		try {
 			SocketChannel channel = getNextConnection();
 			SelectionKey socket_key = channel.register(network.getSelector(), SelectionKey.OP_READ);
@@ -114,7 +114,7 @@ public final strictfp class ConnectionListener extends AbstractConnectionListene
 	}
 
         @Override
-	protected final AbstractConnection doAcceptConnection(ConnectionInterface conn_interface) {
+	protected AbstractConnection doAcceptConnection(ConnectionInterface conn_interface) {
 		SelectionKey socket_key;
 		if (!network.getDeterministic().isPlayback())
 			socket_key = getNextConnectionKey();
@@ -124,7 +124,7 @@ public final strictfp class ConnectionListener extends AbstractConnectionListene
 	}
 
         @Override
-	public final void rejectConnection() {
+	public void rejectConnection() {
 		try {
 			SocketChannel channel = getNextConnection();
 			if (!network.getDeterministic().isPlayback())
@@ -135,7 +135,7 @@ public final strictfp class ConnectionListener extends AbstractConnectionListene
 	}
 
         @Override
-	public final void close() {
+	public void close() {
 		if (key != null && key.isValid()) {
 			try {
 				key.channel().close();
@@ -150,7 +150,7 @@ public final strictfp class ConnectionListener extends AbstractConnectionListene
 	}
 	
         @Override
-	public final void handleError(IOException e) throws IOException {
+	public void handleError(IOException e) throws IOException {
 		error(e);
 	}
 }

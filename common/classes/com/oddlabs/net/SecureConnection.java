@@ -55,11 +55,11 @@ public final strictfp class SecureConnection extends AbstractConnection implemen
 			this.key_agreement = null;
 	}
 
-	public final AbstractConnection getWrappedConnection() {
+	public AbstractConnection getWrappedConnection() {
 		return wrapped_connection;
 	}
 
-	private final SealedObject encrypt(ARMIEvent event) {
+	private SealedObject encrypt(ARMIEvent event) {
 		try {
 			return new SealedObject(event, encrypt_cipher);
 		} catch (IllegalBlockSizeException | IOException e) {
@@ -68,7 +68,7 @@ public final strictfp class SecureConnection extends AbstractConnection implemen
 	}
 
         @Override
-	public final void initAgreement(byte[] public_key_encoded) {
+	public void initAgreement(byte[] public_key_encoded) {
 		if (isConnected())
 			return;
 		try {
@@ -94,7 +94,7 @@ public final strictfp class SecureConnection extends AbstractConnection implemen
 	}
 
         @Override
-	public final void tunnelEvent(SealedObject sealed_event) {
+	public void tunnelEvent(SealedObject sealed_event) {
 		try {
 			if (decrypt_cipher == null)
 				throw new IOException("Illegal stream state, event received before key agreement");
@@ -107,17 +107,17 @@ public final strictfp class SecureConnection extends AbstractConnection implemen
 		}
 	}
 
-	public final AbstractConnection getWrappedConnectionAndShutdown() {
+	public AbstractConnection getWrappedConnectionAndShutdown() {
 		wrapped_connection.setConnectionInterface(getConnectionInterface());
 		return wrapped_connection;
 	}
 	
         @Override
-	protected final void doClose() {
+	protected void doClose() {
 		wrapped_connection.close();
 	}
 
-	private final void tunnel(ARMIEvent event) {
+	private void tunnel(ARMIEvent event) {
 		secure_interface.tunnelEvent(encrypt(event));
 	}
 
@@ -130,7 +130,7 @@ public final strictfp class SecureConnection extends AbstractConnection implemen
 	}
 	
         @Override
-	public final void handle(ARMIEvent event) {
+	public void handle(ARMIEvent event) {
 		if (encrypt_cipher == null)
 			event_backlog.add(event);
 		else {

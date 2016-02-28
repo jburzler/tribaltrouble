@@ -16,22 +16,22 @@ public final strictfp class ByteBufferOutputStream extends OutputStream {
 			buffer = ByteBuffer.allocate(BUFFER_SIZE);
 	}
 
-	public final void reset() {
+	public void reset() {
 		buffer.clear();
 	}
 
-	public final byte[] toByteArray() {
+	public byte[] toByteArray() {
 		byte[] result = new byte[buffer.position()];
 		buffer.flip();
 		buffer.get(result);
 		return result;
 	}
 	
-	public final ByteBuffer buffer() {
+	public ByteBuffer buffer() {
 		return buffer;
 	}
 
-	private final void ensureCapacity(int size) {
+	private void ensureCapacity(int size) {
 		if (buffer.remaining() < size) {
 			ByteBuffer new_buffer;
 			if (buffer.isDirect())
@@ -45,13 +45,13 @@ public final strictfp class ByteBufferOutputStream extends OutputStream {
 	}
 	
         @Override
-	public final void write(byte[] bytes, int offset, int length) {
+	public void write(byte[] bytes, int offset, int length) {
 		ensureCapacity(length);
 		buffer.put(bytes, offset, length);
 	}
 	
         @Override
-	public final void write(int b_int) {
+	public void write(int b_int) {
 		ensureCapacity(1);
 		byte b = (byte)(b_int & 0xff);
 		buffer.put(b);

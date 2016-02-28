@@ -10,19 +10,19 @@ public final strictfp class StatCounter {
 		values = new long[average_count];
 	}
 
-	public final void updateDelta(long val) {
+	public void updateDelta(long val) {
 		long diff = val - old_val;
 		old_val = val;
 		updateAbsolute(diff);
 	}
 
-	public final void updateAbsolute(long val) {
+	public void updateAbsolute(long val) {
 		sum += val - values[position];
 		values[position] = val;
 		position = (position + 1)%values.length;
 	}
 
-	public final long getMax() {
+	public long getMax() {
 		long max = Long.MIN_VALUE;
 		for (int i = 0; i < values.length; i++) {
 			if (values[i] > max)
@@ -31,11 +31,11 @@ public final strictfp class StatCounter {
 		return max;
 	}
 	
-	public final long getAveragePerUpdateFloored() {
+	public long getAveragePerUpdateFloored() {
 		return sum/values.length;
 	}
 	
-	public final float getAveragePerUpdate() {
+	public float getAveragePerUpdate() {
 		return (float)sum/values.length;
 	}
 }

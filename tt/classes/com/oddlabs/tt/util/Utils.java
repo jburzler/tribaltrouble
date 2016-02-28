@@ -19,33 +19,33 @@ public final strictfp class Utils {
 
 	private final static Object[] empty_object_array = new Object[0];
 
-	public final static String getBundleString(ResourceBundle bundle, String key) {
+	public static String getBundleString(ResourceBundle bundle, String key) {
 		return getBundleString(bundle, key, empty_object_array);
 	}
 	
-	public final static String getBundleString(ResourceBundle bundle, String key, Object[] object_array) {
+	public static String getBundleString(ResourceBundle bundle, String key, Object[] object_array) {
 		return MessageFormat.format(bundle.getString(key), object_array);
 	}
  
-	public final static File getInstallDir() {
+	public static File getInstallDir() {
 		return new File(System.getProperty("user.dir"));
 	}
 
-	public final static FloatBuffer toBuffer(float[] floats) {
+	public static FloatBuffer toBuffer(float[] floats) {
 		FloatBuffer buffer = BufferUtils.createFloatBuffer(floats.length);
 		buffer.put(floats);
 		buffer.rewind();
 		return buffer;
 	}
 
-	public final static ShortBuffer toBuffer(short[] shorts) {
+	public static ShortBuffer toBuffer(short[] shorts) {
 		ShortBuffer buffer = BufferUtils.createShortBuffer(shorts.length);
 		buffer.put(shorts);
 		buffer.rewind();
 		return buffer;
 	}
 
-	public final static void saveAsBMP(String filename, ByteBuffer pixel_data, int width, int height) {
+	public static void saveAsBMP(String filename, ByteBuffer pixel_data, int width, int height) {
 		long before = System.currentTimeMillis();
 		int pad = 4 - (width*3)%4;
 		if (pad == 4)
@@ -139,7 +139,7 @@ public final strictfp class Utils {
 		System.out.println("File " + filename + " saved in " + (after - before) + " milliseconds");
 	}
 
-	public final static void saveAsTGA(String filename, ByteBuffer pixel_data, int width, int height) {
+	public static void saveAsTGA(String filename, ByteBuffer pixel_data, int width, int height) {
 		long before = System.currentTimeMillis();
 		try (FileOutputStream fout = new FileOutputStream(filename + ".tga")) {
 
@@ -177,15 +177,15 @@ public final strictfp class Utils {
 		System.out.println("File " + filename + " saved in " + (after - before) + " milliseconds");
 	}
 
-	public final static int numTextureSplits(int size) {
+	public static int numTextureSplits(int size) {
 		return (size >> Globals.MAX_TEXTURE_POWER) + Globals.TEXTURE_SPLITS[size & (Globals.MAX_TEXTURE_SIZE - 1)];
 	}
 
-	public final static int toTextureSize(int size) {
+	public static int toTextureSize(int size) {
 		return (size & ~(Globals.MAX_TEXTURE_SIZE - 1)) + Globals.TEXTURE_SIZES[size & (Globals.MAX_TEXTURE_SIZE - 1)];
 	}
 
-	public final static int roundToTextureSize(int size) {
+	public static int roundToTextureSize(int size) {
 		assert size <= Globals.MAX_TEXTURE_SIZE;
 		int tex_size = 1;
 		while (tex_size < size)
@@ -193,29 +193,29 @@ public final strictfp class Utils {
 		return tex_size;
 	}
 
-	public final static int bestTextureSize(int size) {
+	public static int bestTextureSize(int size) {
 		if (size >= Globals.MAX_TEXTURE_SIZE)
 			return Globals.MAX_TEXTURE_SIZE;
 		return Globals.BEST_SIZES[size];
 	}
 
 	// int = 0xAARRGGBB A=alpha R=red G=green B=blue
-	public final static float intToRed(int color) {
+	public static float intToRed(int color) {
 		int red = (color >> 16) & 0xff;
 		return ((float)red)/255;
 	}
 
-	public final static float intToGreen(int color) {
+	public static float intToGreen(int color) {
 		int green = (color >> 8) & 0xff;
 		return ((float)green)/255;
 	}
 
-	public final static float intToBlue(int color) {
+	public static float intToBlue(int color) {
 		int blue = color & 0xff;
 		return ((float)blue)/255;
 	}
 
-	public final static float invsqrt(float x) {
+	public static float invsqrt(float x) {
 		float xhalf = 0.5f * x;
 		sqrtFloatBuf.put(0, x);
 		int i = sqrtIntBuf.get(0);
@@ -226,7 +226,7 @@ public final strictfp class Utils {
 		return x;
 	}
 
-	public final static void storeMatrixInArray(StrictMatrix4f m, float[][] a) {
+	public static void storeMatrixInArray(StrictMatrix4f m, float[][] a) {
 		a[0][0] = m.m00;
 		a[0][1] = m.m01;
 		a[0][2] = m.m02;

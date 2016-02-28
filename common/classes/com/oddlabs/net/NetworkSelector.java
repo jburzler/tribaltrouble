@@ -33,11 +33,11 @@ public final strictfp class NetworkSelector {
 		this.time_manager = new MonotoneTimeManager(time_manager);
 	}
 
-	public final Deterministic getDeterministic() {
+	public Deterministic getDeterministic() {
 		return deterministic;
 	}
 
-	final void asyncConnect(String dns_name, int port, Connection conn) {
+	void asyncConnect(String dns_name, int port, Connection conn) {
 		try {
 			initSelector();
 		} catch (IOException e) {
@@ -47,19 +47,19 @@ public final strictfp class NetworkSelector {
 		getTaskThread().addTask(task);
 	}
 
-	public final TaskThread getTaskThread() {
+	public TaskThread getTaskThread() {
 		if (task_thread == null) {
 			task_thread = new TaskThread(deterministic, selector::wakeup);
 		}
 		return task_thread;
 	}
 
-	public final void initSelector() throws IOException {
+	public void initSelector() throws IOException {
 		if (selector == null)
 			selector = Selector.open();
 	}
 
-	final Selector getSelector() {
+	Selector getSelector() {
 		try {
 			initSelector();
 		} catch (IOException e) {
@@ -68,28 +68,28 @@ public final strictfp class NetworkSelector {
 		return selector;
 	}
 
-	final void unregisterForPinging(Connection conn) {
+	void unregisterForPinging(Connection conn) {
 		TimedConnection unregister_key = new TimedConnection(-1, conn);
 		ping_timeouts.remove(unregister_key);
 		ping_connections.remove(unregister_key);
 	}
 	
-	final void registerForPingTimeout(Connection conn) {
+	void registerForPingTimeout(Connection conn) {
 		long ping_timeout = time_manager.getMillis() + PING_TIMEOUT;
 		ping_timeouts.add(new TimedConnection(ping_timeout, conn));
 	}
 	
-	final void registerForPing(Connection conn) {
+	void registerForPing(Connection conn) {
 		long ping_time = time_manager.getMillis() + PING_DELAY;
 		ping_connections.add(new TimedConnection(ping_time, conn));
 	}
 	
-	private final void processTasks() {
+	private void processTasks() {
 		if (task_thread != null)
 			task_thread.poll();
 	}
 	
-	private final long processPings(long millis) {
+	private long processPings(long millis) {
 		long next_select_timeout = PING_DELAY;
 		while (ping_timeouts.size() > 0) {
 			TimedConnection first_conn = (TimedConnection)ping_timeouts.get(0);
@@ -120,7 +120,7 @@ public final strictfp class NetworkSelector {
 		return next_select_timeout;
 	}
 	
-	public final void tickBlocking(long timeout) throws IOException {
+	public void tickBlocking(long timeout) throws IOException {
 		processTasks();
 		long millis = time_manager.getMillis();
 		long next_timeout;
@@ -135,11 +135,11 @@ public final strictfp class NetworkSelector {
 			doTick();
 	}
 
-	public final void tickBlocking() throws IOException {
+	public void tickBlocking() throws IOException {
 		tickBlocking(0);
 	}
 
-	public final void tick() {
+	public void tick() {
 		try {
 			processTasks();
 			processPings(time_manager.getMillis());
@@ -150,11 +150,11 @@ public final strictfp class NetworkSelector {
 		}
 	}
 
-	public final MonotoneTimeManager getTimeManager() {
+	public MonotoneTimeManager getTimeManager() {
 		return time_manager;
 	}
 
-	final void cancelKey(SelectionKey key, Handler handler) {
+	void cancelKey(SelectionKey key, Handler handler) {
 		Object handler_key = null;
 		if (!deterministic.isPlayback()) {
 			handler_key = key.attachment();
@@ -164,7 +164,7 @@ public final strictfp class NetworkSelector {
 		handler_map.remove(handler_key);
 	}
 
-	final void attachToKey(SelectionKey key, Handler handler) {
+	void attachToKey(SelectionKey key, Handler handler) {
 		Object handler_key = null;
 		if (!deterministic.isPlayback()) {
 			handler_key = current_handler_id++;
@@ -174,7 +174,7 @@ public final strictfp class NetworkSelector {
 		handler_map.put(handler_key, handler);
 	}
 
-	private final void doTick() throws IOException {
+	private void doTick() throws IOException {
 		Iterator selected_keys = null;
 		if (!deterministic.isPlayback())
 			selected_keys = selector.selectedKeys().iterator();

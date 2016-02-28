@@ -57,11 +57,11 @@ public final strictfp class Ring {
 		channelfinal.quadJoin(channel, channel.copy().rotate(270), channel.copy().rotate(90), channel.copy().rotate(180));
 	}
 
-	public final Layer toLayer() {
+	public Layer toLayer() {
 		return new Layer(channelfinal, channelfinal.copy(), channelfinal.copy());
 	}
 
-	public final Channel toChannel() {
+	public Channel toChannel() {
 		return channelfinal;
 	}
 

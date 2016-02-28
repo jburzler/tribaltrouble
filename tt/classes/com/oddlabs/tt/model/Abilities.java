@@ -19,23 +19,23 @@ public final strictfp class Abilities {
 		this.abilities = abilities;
 	}
 
-	public final boolean hasAbilities(int abilities) {
+	public boolean hasAbilities(int abilities) {
 		return (this.abilities | abilities) == this.abilities;
 	}
 
-	public final void addAbilities(Abilities abilities) {
+	public void addAbilities(Abilities abilities) {
 		addAbilities(abilities.abilities);
 	}
 
-	public final void addAbilities(int abilities) {
+	public void addAbilities(int abilities) {
 		this.abilities = this.abilities | abilities;
 	}
 
-	public final void removeAbilities(Abilities abilities) {
+	public void removeAbilities(Abilities abilities) {
 		removeAbilities(abilities.abilities);
 	}
 
-	public final void removeAbilities(int abilities) {
+	public void removeAbilities(int abilities) {
 		this.abilities = this.abilities & ~abilities;
 	}
 }

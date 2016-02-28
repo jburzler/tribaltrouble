@@ -46,11 +46,11 @@ public final strictfp class ProgressForm {
 			LOADING_TIPS[i] = Utils.getBundleString(bundle, TIP_PREFIX + i);
 	}
 
-	public final static void setProgressForm(NetworkSelector network, GUI gui, LoadCallback callback) {
+	public static void setProgressForm(NetworkSelector network, GUI gui, LoadCallback callback) {
 		setProgressForm(network, gui, callback, false);
 	}
 
-	public final static void setProgressForm(NetworkSelector network, final GUI gui, final LoadCallback callback, final boolean first_progress) {
+	public static void setProgressForm(NetworkSelector network, final GUI gui, final LoadCallback callback, final boolean first_progress) {
 		String texture;
 		int texture_width;
 		int texture_height;
@@ -137,7 +137,7 @@ public final strictfp class ProgressForm {
 		}
 	}
 
-	private final static void callback(GUI gui, LoadCallback callback, boolean first_progress) {
+	private static void callback(GUI gui, LoadCallback callback, boolean first_progress) {
 		String logo_file = Settings.getSettings().affiliate_logo_file;
 		// For backwards compatibility with old affiliate installers
 		logo_file = logo_file.replaceAll("(.*).image", "$1");
@@ -167,11 +167,11 @@ public final strictfp class ProgressForm {
 		}
 	}
 
-	public final static void progress() {
+	public static void progress() {
 		current_progress.progress_bar.progress();
 	}
 
-	public final static void progress(float step) {
+	public static void progress(float step) {
 		current_progress.progress_bar.progress(step);
 	}
 }

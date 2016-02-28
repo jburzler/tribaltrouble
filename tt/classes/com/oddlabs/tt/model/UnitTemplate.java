@@ -56,55 +56,55 @@ public final strictfp class UnitTemplate extends Template {
 		this.status_value = status_value;
 	}
 
-	public final float getSelectionRadius() {
+	public float getSelectionRadius() {
 		return selection_radius;
 	}
 
-	public final float getSelectionHeight() {
+	public float getSelectionHeight() {
 		return selection_height;
 	}
 
-	public final float getMetersPerSecond() {
+	public float getMetersPerSecond() {
 		return meters_per_second;
 	}
 
-	public final WeaponFactory getWeaponFactory() {
+	public WeaponFactory getWeaponFactory() {
 		return weapon_factory;
 	}
 
-	public final SpriteKey getSpriteRenderer() {
+	public SpriteKey getSpriteRenderer() {
 		return sprite_renderer;
 	}
 
-	public final UnitSupplyContainerFactory getUnitSupplyContainerFactory() {
+	public UnitSupplyContainerFactory getUnitSupplyContainerFactory() {
 		return supply_container_factory;
 	}
 
-	public final Audio getDeathSound() {
+	public Audio getDeathSound() {
 		return death_sound;
 	}
 
-	public final float getDeathPitch() {
+	public float getDeathPitch() {
 		return death_pitch;
 	}
 
-	public final int getMaxHitPoints() {
+	public int getMaxHitPoints() {
 		return max_hit_points;
 	}
 
-	public final float getStunX() {
+	public float getStunX() {
 		return stun_x;
 	}
 
-	public final float getStunY() {
+	public float getStunY() {
 		return stun_y;
 	}
 
-	public final float getStunZ() {
+	public float getStunZ() {
 		return stun_z;
 	}
 
-	public final int getStatusValue() {
+	public int getStatusValue() {
 		return status_value;
 	}
 }

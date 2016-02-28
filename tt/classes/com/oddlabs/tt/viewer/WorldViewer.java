@@ -154,32 +154,32 @@ public final strictfp class WorldViewer implements Animated {
 		LocalEventQueue.getQueue().getManager().registerAnimation(this);
 	}
 
-	public final AnimationManager getAnimationManagerLocal() {
+	public AnimationManager getAnimationManagerLocal() {
 		return animation_manager_local;
 	}
 
         @Override
-	public final void animate(float t) {
+	public void animate(float t) {
 		animation_manager_local.runAnimations(t);
 	}
 
         @Override
-	public final void updateChecksum(StateChecksum sum) {
+	public void updateChecksum(StateChecksum sum) {
 	}
 
-	public final WorldParameters getParameters() {
+	public WorldParameters getParameters() {
 		return world_params;
 	}
 
-	public final Cheat getCheat() {
+	public Cheat getCheat() {
 		return cheat;
 	}
 
-	public final void setPaused(boolean p) {
+	public void setPaused(boolean p) {
 		peerhub.setPaused(p);
 	}
 
-	public final Player getLocalPlayer() {
+	public Player getLocalPlayer() {
 		return local_player;
 	}
 
@@ -254,78 +254,78 @@ public final strictfp class WorldViewer implements Animated {
 		}
 	}
 
-	private final LandscapeRenderer getLandscapeRenderer() {
+	private LandscapeRenderer getLandscapeRenderer() {
 		return landscape_renderer;
 	}
 
-	public final Picker getPicker() {
+	public Picker getPicker() {
 		return picker;
 	}
 
-	public final DefaultRenderer getRenderer() {
+	public DefaultRenderer getRenderer() {
 		return renderer;
 	}
 
-	public final World getWorld() {
+	public World getWorld() {
 		return world;
 	}
 
-	public final NetworkSelector getNetwork() {
+	public NetworkSelector getNetwork() {
 		return network;
 	}
 
-	public final Selection getSelection() {
+	public Selection getSelection() {
 		return selection;
 	}
 
-	public final NotificationManager getNotificationManager() {
+	public NotificationManager getNotificationManager() {
 		return notification_manager;
 	}
 
-	public final DistributableTable getDistributableTable() {
+	public DistributableTable getDistributableTable() {
 		return distributable_table;
 	}
 
-	public final GUIRoot getGUIRoot() {
+	public GUIRoot getGUIRoot() {
 		return gui_root;
 	}
 
-	public final boolean isMultiplayer() {
+	public boolean isMultiplayer() {
 		return ingame_info.isMultiplayer();
 	}
 
-	public final void abort() {
+	public void abort() {
 		ingame_info.abort(this);
 	}
 
-	public final void addGameOverGUI(GameStatsDelegate delegate, int header_y, Group buttons) {
+	public void addGameOverGUI(GameStatsDelegate delegate, int header_y, Group buttons) {
 		ingame_info.addGameOverGUI(this, delegate, header_y, buttons);
 	}
 
-	public final void addGUI(InGameMainMenu menu, Group game_infos) {
+	public void addGUI(InGameMainMenu menu, Group game_infos) {
 		ingame_info.addGUI(this, menu, game_infos);
 	}
 
-	public final void close() {
+	public void close() {
 		LocalEventQueue.getQueue().getManager().removeAnimation(this);
 		if (peerhub != null)
 			peerhub.close();
 		ingame_info.close(this);
 	}
 
-	public final GameCamera getCamera() {
+	public GameCamera getCamera() {
 		return camera;
 	}
 
-	public final PeerHub getPeerHub() {
+	public PeerHub getPeerHub() {
 		return peerhub;
 	}
 
-	public final ActionButtonPanel getPanel() {
+	public ActionButtonPanel getPanel() {
 		return panel;
 	}
 
-	public final SelectionDelegate getDelegate() {
+	public SelectionDelegate getDelegate() {
 		return delegate;
 	}
 }

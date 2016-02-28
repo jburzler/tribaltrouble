@@ -54,7 +54,7 @@ public final strictfp class Layer {
 		this.a = a;
 	}
 
-	public final void loadFromBytes(byte[] data) {
+	public void loadFromBytes(byte[] data) {
 		float inv_255 = 1f/255f;
 		int index = 0;
 		for (int y = 0; y < getHeight(); y++)
@@ -74,7 +74,7 @@ public final strictfp class Layer {
 			}
 	}
 
-	public final byte[] convertToBytes() {
+	public byte[] convertToBytes() {
 		byte[] byte_pixel_data = new byte[getWidth()*getHeight()*4];
 		for (int y = 0; y < getHeight(); y++)
 			for (int x = 0; x < getWidth(); x++) {
@@ -103,11 +103,11 @@ public final strictfp class Layer {
 		return image;
 	}
 
-	public final void saveAsPNG(String filename) {
+	public void saveAsPNG(String filename) {
 		saveAsPNG(new File(filename + ".png"));
 	}
 	
-	public final void saveAsPNG(File file) {
+	public void saveAsPNG(File file) {
 		BufferedImage image = convertToImage();
 		try (FileOutputStream fos = new FileOutputStream(file)) {
 			ImageIO.write(image, "PNG", fos);
@@ -116,45 +116,45 @@ public final strictfp class Layer {
 		}
 	}
 
-	public final void addAlpha() {
+	public void addAlpha() {
 		a = new Channel(width, height);
 	}
 	
-	public final void addAlpha(Channel alpha) {
+	public void addAlpha(Channel alpha) {
 		a = alpha;
 	}
 
-	public final int getWidth() {
+	public int getWidth() {
 		return width;
 	}
 
-	public final int getHeight() {
+	public int getHeight() {
 		return height;
 	}
 
-	public final Channel getR() {
+	public Channel getR() {
 		return r;
 	}
 
-	public final Channel getG() {
+	public Channel getG() {
 		return g;
 	}
 
-	public final Channel getB() {
+	public Channel getB() {
 		return b;
 	}
 
-	public final Channel getA() {
+	public Channel getA() {
 		return a;
 	}
 
-	public final void putPixel(int x, int y, float r, float g, float b) {
+	public void putPixel(int x, int y, float r, float g, float b) {
 		this.r.putPixel(x, y, r);
 		this.g.putPixel(x, y, g);
 		this.b.putPixel(x, y, b);
 	}
 
-	public final void putPixel(int x, int y, float r, float g, float b, float a) {
+	public void putPixel(int x, int y, float r, float g, float b, float a) {
 		this.r.putPixel(x, y, r);
 		this.g.putPixel(x, y, g);
 		this.b.putPixel(x, y, b);
@@ -163,13 +163,13 @@ public final strictfp class Layer {
 		}
 	}
 
-	public final void putPixelWrap(int x, int y, float r, float g, float b) {
+	public void putPixelWrap(int x, int y, float r, float g, float b) {
 		this.r.putPixelWrap(x, y, r);
 		this.g.putPixelWrap(x, y, g);
 		this.b.putPixelWrap(x, y, b);
 	}
 
-	public final void putPixelWrap(int x, int y, float r, float g, float b, float a) {
+	public void putPixelWrap(int x, int y, float r, float g, float b, float a) {
 		this.r.putPixelWrap(x, y, r);
 		this.g.putPixelWrap(x, y, g);
 		this.b.putPixelWrap(x, y, b);
@@ -178,13 +178,13 @@ public final strictfp class Layer {
 		}
 	}
 
-	public final void putPixelClip(int x, int y, float r, float g, float b) {
+	public void putPixelClip(int x, int y, float r, float g, float b) {
 		this.r.putPixelClip(x, y, r);
 		this.g.putPixelClip(x, y, g);
 		this.b.putPixelClip(x, y, b);
 	}
 
-	public final void putPixelClip(int x, int y, float r, float g, float b, float a) {
+	public void putPixelClip(int x, int y, float r, float g, float b, float a) {
 		this.r.putPixelClip(x, y, r);
 		this.g.putPixelClip(x, y, g);
 		this.b.putPixelClip(x, y, b);
@@ -193,19 +193,19 @@ public final strictfp class Layer {
 		}
 	}
 
-	public final void fill(float value) {
+	public void fill(float value) {
 		r.fill(value);
 		g.fill(value);
 		b.fill(value);
 	}
 
-	public final void fill(float r, float g, float b) {
+	public void fill(float r, float g, float b) {
 		this.r.fill(r);
 		this.g.fill(g);
 		this.b.fill(b);
 	}
 
-	public final void fill(float r, float g, float b, float a) {
+	public void fill(float r, float g, float b, float a) {
 		this.r.fill(r);
 		this.g.fill(g);
 		this.b.fill(b);
@@ -214,21 +214,21 @@ public final strictfp class Layer {
 		}
 	}
 
-	public final float findMin() {
+	public float findMin() {
 		float min_r = r.findMin();
 		float min_g = g.findMin();
 		float min_b = b.findMin();
 		return StrictMath.min(min_r, StrictMath.min(min_g, min_b));
 	}
 
-	public final float findMax() {
+	public float findMax() {
 		float max_r = r.findMax();
 		float max_g = g.findMax();
 		float max_b = b.findMax();
 		return StrictMath.max(max_r, StrictMath.max(max_g, max_b));
 	}
 
-	public final Layer copy() {
+	public Layer copy() {
 		if (a != null) {
 			return new Layer(r.copy(), g.copy(), b.copy(), a.copy());
 		} else {
@@ -236,7 +236,7 @@ public final strictfp class Layer {
 		}
 	}
 
-	public final Layer dynamicRange() {
+	public Layer dynamicRange() {
 		float min_r = r.findMin();
 		float min_g = g.findMin();
 		float min_b = b.findMin();
@@ -257,7 +257,7 @@ public final strictfp class Layer {
 		return this;
 	}
 
-	public final Layer dynamicRange(float new_min, float new_max) {
+	public Layer dynamicRange(float new_min, float new_max) {
 		float min_r = r.findMin();
 		float min_g = g.findMin();
 		float min_b = b.findMin();
@@ -278,21 +278,21 @@ public final strictfp class Layer {
 		return this;
 	}
 
-	public final Layer dynamicRange(float min, float max, float new_min, float new_max) {
+	public Layer dynamicRange(float min, float max, float new_min, float new_max) {
 		r.dynamicRange(min, max, new_min, new_max);
 		g.dynamicRange(min, max, new_min, new_max);
 		b.dynamicRange(min, max, new_min, new_max);
 		return this;
 	}
 
-	public final Layer clip() {
+	public Layer clip() {
 		r.clip();
 		g.clip();
 		b.clip();
 		return this;
 	}
 
-	public final Layer crop(int x_lo, int y_lo, int x_hi, int y_hi) {
+	public Layer crop(int x_lo, int y_lo, int x_hi, int y_hi) {
 		r = r.crop(x_lo, y_lo, x_hi, y_hi);
 		g = g.crop(x_lo, y_lo, x_hi, y_hi);
 		b = b.crop(x_lo, y_lo, x_hi, y_hi);
@@ -304,7 +304,7 @@ public final strictfp class Layer {
 		return this;
 	}
 
-	public final Layer cropWrap(int x_lo, int y_lo, int x_hi, int y_hi) {
+	public Layer cropWrap(int x_lo, int y_lo, int x_hi, int y_hi) {
 		r = r.cropWrap(x_lo, y_lo, x_hi, y_hi);
 		g = g.cropWrap(x_lo, y_lo, x_hi, y_hi);
 		b = b.cropWrap(x_lo, y_lo, x_hi, y_hi);
@@ -316,7 +316,7 @@ public final strictfp class Layer {
 		return this;
 	}
 
-	public final Layer tile(int new_width, int new_height) {
+	public Layer tile(int new_width, int new_height) {
 		r = r.tile(new_width, new_height);
 		g = g.tile(new_width, new_height);
 		b = b.tile(new_width, new_height);
@@ -328,7 +328,7 @@ public final strictfp class Layer {
 		return this;
 	}
 
-	public final Layer tileDouble() {
+	public Layer tileDouble() {
 		r = r.tileDouble();
 		g = g.tileDouble();
 		b = b.tileDouble();
@@ -340,7 +340,7 @@ public final strictfp class Layer {
 		return this;
 	}
 
-	public final Layer offset(int x_offset, int y_offset) {
+	public Layer offset(int x_offset, int y_offset) {
 		r = r.offset(x_offset, y_offset);
 		g = g.offset(x_offset, y_offset);
 		b = b.offset(x_offset, y_offset);
@@ -350,35 +350,35 @@ public final strictfp class Layer {
 		return this;
 	}
 
-	public final Layer brightness(float brightness) {
+	public Layer brightness(float brightness) {
 		r.brightness(brightness);
 		g.brightness(brightness);
 		b.brightness(brightness);
 		return this;
 	}
 
-	public final Layer brightness(float r, float g, float b) {
+	public Layer brightness(float r, float g, float b) {
 		this.r.brightness(r);
 		this.g.brightness(g);
 		this.b.brightness(b);
 		return this;
 	}
 
-	public final Layer multiply(float factor) {
+	public Layer multiply(float factor) {
 		r.multiply(factor);
 		g.multiply(factor);
 		b.multiply(factor);
 		return this;
 	}
 
-	public final Layer multiply(float r, float g, float b) {
+	public Layer multiply(float r, float g, float b) {
 		this.r.multiply(r);
 		this.g.multiply(g);
 		this.b.multiply(b);
 		return this;
 	}
 	
-	public final Layer multiply(float r, float g, float b, float a) {
+	public Layer multiply(float r, float g, float b, float a) {
 		this.r.multiply(r);
 		this.g.multiply(g);
 		this.b.multiply(b);
@@ -388,28 +388,28 @@ public final strictfp class Layer {
 		return this;
 	}
 
-	public final Layer add(float add) {
+	public Layer add(float add) {
 		r.add(add);
 		g.add(add);
 		b.add(add);
 		return this;
 	}
 
-	public final Layer add(float r, float g, float b) {
+	public Layer add(float r, float g, float b) {
 		this.r.add(r);
 		this.g.add(g);
 		this.b.add(b);
 		return this;
 	}
 	
-	public final Layer addClip(float r, float g, float b) {
+	public Layer addClip(float r, float g, float b) {
 		this.r.addClip(r);
 		this.g.addClip(g);
 		this.b.addClip(b);
 		return this;
 	}
 	
-	public final Layer addClip(float r, float g, float b, float a) {
+	public Layer addClip(float r, float g, float b, float a) {
 		this.r.addClip(r);
 		this.g.addClip(g);
 		this.b.addClip(b);
@@ -419,70 +419,70 @@ public final strictfp class Layer {
 		return this;
 	}
 
-	public final Layer contrast(float contrast) {
+	public Layer contrast(float contrast) {
 		r.contrast(contrast);
 		g.contrast(contrast);
 		b.contrast(contrast);
 		return this;
 	}
 
-	public final Layer contrast(float r, float g, float b) {
+	public Layer contrast(float r, float g, float b) {
 		this.r.contrast(r);
 		this.g.contrast(g);
 		this.b.contrast(b);
 		return this;
 	}
 
-	public final Layer gamma(float gamma) {
+	public Layer gamma(float gamma) {
 		r.gamma(gamma);
 		g.gamma(gamma);
 		b.gamma(gamma);
 		return this;
 	}
 
-	public final Layer gamma(float r, float g, float b) {
+	public Layer gamma(float r, float g, float b) {
 		this.r.gamma(r);
 		this.g.gamma(g);
 		this.b.gamma(b);
 		return this;
 	}
 
-	public final Layer gamma2() {
+	public Layer gamma2() {
 		r.gamma2();
 		g.gamma2();
 		b.gamma2();
 		return this;
 	}
 
-	public final Layer gamma4() {
+	public Layer gamma4() {
 		r.gamma4();
 		g.gamma4();
 		b.gamma4();
 		return this;
 	}
 
-	public final Layer gamma8() {
+	public Layer gamma8() {
 		r.gamma8();
 		g.gamma8();
 		b.gamma8();
 		return this;
 	}
 
-	public final Layer invert() {
+	public Layer invert() {
 		r.invert();
 		g.invert();
 		b.invert();
 		return this;
 	}
 
-	public final Layer threshold(float start, float end) {
+	public Layer threshold(float start, float end) {
 		r.threshold(start, end);
 		g.threshold(start, end);
 		b.threshold(start, end);
 		return this;
 	}
 
-	public final Layer scaleHalf() {
+	public Layer scaleHalf() {
 		r = r.scaleHalf();
 		g = g.scaleHalf();
 		b = b.scaleHalf();
@@ -494,7 +494,7 @@ public final strictfp class Layer {
 		return this;
 	}
 
-	public final Layer scale(int new_width, int new_height) {
+	public Layer scale(int new_width, int new_height) {
 		r = r.scale(new_width, new_height);
 		g = g.scale(new_width, new_height);
 		b = b.scale(new_width, new_height);
@@ -506,7 +506,7 @@ public final strictfp class Layer {
 		return this;
 	}
 
-	public final Layer scaleCubic(int new_width, int new_height) {
+	public Layer scaleCubic(int new_width, int new_height) {
 		r = r.scaleCubic(new_width, new_height);
 		g = g.scaleCubic(new_width, new_height);
 		b = b.scaleCubic(new_width, new_height);
@@ -518,7 +518,7 @@ public final strictfp class Layer {
 		return this;
 	}
 
-	public final Layer scaleFast(int new_width, int new_height) {
+	public Layer scaleFast(int new_width, int new_height) {
 		r = r.scaleFast(new_width, new_height);
 		g = g.scaleFast(new_width, new_height);
 		b = b.scaleFast(new_width, new_height);
@@ -530,7 +530,7 @@ public final strictfp class Layer {
 		return this;
 	}
 
-	public final Layer rotate(int degrees) {
+	public Layer rotate(int degrees) {
 		r = r.rotate(degrees);
 		g = g.rotate(degrees);
 		b = b.rotate(degrees);
@@ -542,7 +542,7 @@ public final strictfp class Layer {
 		return this;
 	}
 
-	public final Layer shear(float offset) {
+	public Layer shear(float offset) {
 		r = r.shear(offset);
 		g = g.shear(offset);
 		b = b.shear(offset);
@@ -552,7 +552,7 @@ public final strictfp class Layer {
 		return this;
 	}
 
-	public final Layer flipH() {
+	public Layer flipH() {
 		r = r.flipH();
 		g = g.flipH();
 		b = b.flipH();
@@ -562,7 +562,7 @@ public final strictfp class Layer {
 		return this;
 	}
 
-	public final Layer flipV() {
+	public Layer flipV() {
 		r = r.flipV();
 		g = g.flipV();
 		b = b.flipV();
@@ -572,14 +572,14 @@ public final strictfp class Layer {
 		return this;
 	}
 
-	public final Layer smooth(int radius) {
+	public Layer smooth(int radius) {
 		r.smooth(radius);
 		g.smooth(radius);
 		b.smooth(radius);
 		return this;
 	}
 
-	public final Layer sharpen(int radius) {
+	public Layer sharpen(int radius) {
 		r.sharpen(radius);
 		g.sharpen(radius);
 		b.sharpen(radius);
@@ -587,21 +587,21 @@ public final strictfp class Layer {
 		return this;
 	}
 
-	public final Layer convolution(float[][] filter, float divisor, float offset) {
+	public Layer convolution(float[][] filter, float divisor, float offset) {
 		r.convolution(filter, divisor, offset);
 		g.convolution(filter, divisor, offset);
 		b.convolution(filter, divisor, offset);
 		return this;
 	}
 
-	public final Layer grow(float r, float g, float b, int radius) {
+	public Layer grow(float r, float g, float b, int radius) {
 		this.r.grow(r, radius);
 		this.g.grow(g, radius);
 		this.b.grow(b, radius);
 		return this;
 	}
 
-	public final Layer bump(Channel bumpmap, float lx, float ly, float shadow, float light_r, float light_g, float light_b, float ambient_r, float ambient_g, float ambient_b) {
+	public Layer bump(Channel bumpmap, float lx, float ly, float shadow, float light_r, float light_g, float light_b, float ambient_r, float ambient_g, float ambient_b) {
 		assert bumpmap.getWidth() == width && bumpmap.getHeight() == height: "bumpmap size does not match layer size";
 		for (int y = 0; y < height; y++) {
 			for (int x = 0; x < width; x++) {
@@ -622,7 +622,7 @@ public final strictfp class Layer {
 		return this;
 	}
 
-	public final Layer bumpFast(Channel bumpmap, float lx, float light, float ambient) {
+	public Layer bumpFast(Channel bumpmap, float lx, float light, float ambient) {
 		assert bumpmap.getWidth() == width && bumpmap.getHeight() == height: "bumpmap size does not match layer size";
 		ambient = 1f - ambient;
 		for (int y = 0; y < height; y++) {
@@ -644,7 +644,7 @@ public final strictfp class Layer {
 		return this;
 	}
 
-	public final Layer bumpSpecular(Channel bumpmap, float lx, float ly, float lz, float shadow, float light_r, float light_g, float light_b, int specular) {
+	public Layer bumpSpecular(Channel bumpmap, float lx, float ly, float lz, float shadow, float light_r, float light_g, float light_b, int specular) {
 		assert bumpmap.getWidth() == width && bumpmap.getHeight() == height: "bumpmap size does not match layer size";
 		float lnorm = (float)StrictMath.sqrt(lx*lx + ly*ly + lz*lz);
 		float nz = 4*(1f/StrictMath.min(width, height));
@@ -672,7 +672,7 @@ public final strictfp class Layer {
 		return this;
 	}
 
-	public final Layer toHSV() {
+	public Layer toHSV() {
 		float min = 0;
 		float max = 0;
 		float delta = 0;
@@ -720,7 +720,7 @@ public final strictfp class Layer {
 		return this;
 	}
 
-	public final Layer toRGB() {
+	public Layer toRGB() {
 		int i;
 		float f;
 		float p;
@@ -798,7 +798,7 @@ public final strictfp class Layer {
 		return this;
 	}
 
-	public final Layer saturation(float saturation) {
+	public Layer saturation(float saturation) {
 		toHSV();
 		float s_val;
 		for (int y = 0; y < height; y++) {
@@ -817,7 +817,7 @@ public final strictfp class Layer {
 		return toRGB();
 	}
 
-	public final Layer hue(float hue) {
+	public Layer hue(float hue) {
 		toHSV();
 		float h_val;
 		for (int y = 0; y < height; y++) {
@@ -836,20 +836,20 @@ public final strictfp class Layer {
 		return toRGB();
 	}
 
-	public final Layer hueRotation(float min, float max, float new_min, float new_max) {
+	public Layer hueRotation(float min, float max, float new_min, float new_max) {
 		toHSV();
 		r.dynamicRange(min, max, new_min, new_max);
 		return toRGB();
 	}
 
-	public final Layer lineart() {
+	public Layer lineart() {
 		r.lineart();
 		g.lineart();
 		b.lineart();
 		return this;
 	}
 
-	public final Layer place(Layer sprite, int x_offset, int y_offset) {
+	public Layer place(Layer sprite, int x_offset, int y_offset) {
 		r.place(sprite.r, x_offset, y_offset);
 		g.place(sprite.g, x_offset, y_offset);
 		b.place(sprite.b, x_offset, y_offset);
@@ -858,25 +858,25 @@ public final strictfp class Layer {
 		return this;
 	}
 
-	public final Layer abs() {
+	public Layer abs() {
 		r.abs();
 		g.abs();
 		b.abs();
 		return this;
 	}
 
-	public final Layer layerBlend(Layer layer, float alpha) {
+	public Layer layerBlend(Layer layer, float alpha) {
 		r.channelBlend(layer.r, alpha);
 		g.channelBlend(layer.g, alpha);
 		b.channelBlend(layer.b, alpha);
 		return this;
 	}
 
-	public final Layer layerBlend(Layer rgb, Channel a) {
+	public Layer layerBlend(Layer rgb, Channel a) {
 		return layerBlend(new Layer(rgb.r, rgb.g, rgb.b, a));
 	}
 
-	public final Layer layerBlend(Layer layer) {
+	public Layer layerBlend(Layer layer) {
 		assert layer.a != null : "cannot blend RGB only layer";
 
 		if (a == null) {
@@ -914,49 +914,49 @@ public final strictfp class Layer {
 		return this;
 	}
 
-	public final Layer layerAdd(Layer layer) {
+	public Layer layerAdd(Layer layer) {
 		r.channelAdd(layer.r);
 		g.channelAdd(layer.g);
 		b.channelAdd(layer.b);
 		return this;
 	}
 
-	public final Layer layerSubtract(Layer layer) {
+	public Layer layerSubtract(Layer layer) {
 		r.channelSubtract(layer.r);
 		g.channelSubtract(layer.g);
 		b.channelSubtract(layer.b);
 		return this;
 	}
 
-	public final Layer layerAverage(Layer layer) {
+	public Layer layerAverage(Layer layer) {
 		r.channelAverage(layer.r);
 		g.channelAverage(layer.g);
 		b.channelAverage(layer.b);
 		return this;
 	}
 
-	public final Layer layerMultiply(Layer layer) {
+	public Layer layerMultiply(Layer layer) {
 		r.channelMultiply(layer.r);
 		g.channelMultiply(layer.g);
 		b.channelMultiply(layer.b);
 		return this;
 	}
 
-	public final Layer layerDifference(Layer layer) {
+	public Layer layerDifference(Layer layer) {
 		r.channelDifference(layer.r);
 		g.channelDifference(layer.g);
 		b.channelDifference(layer.b);
 		return this;
 	}
 
-	public final Layer layerDarkest(Layer layer) {
+	public Layer layerDarkest(Layer layer) {
 		r.channelDarkest(layer.r);
 		g.channelDarkest(layer.g);
 		b.channelDarkest(layer.b);
 		return this;
 	}
 
-	public final Layer layerBrightest(Layer layer) {
+	public Layer layerBrightest(Layer layer) {
 		r.channelBrightest(layer.r);
 		g.channelBrightest(layer.g);
 		b.channelBrightest(layer.b);

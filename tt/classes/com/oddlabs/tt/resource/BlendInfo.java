@@ -6,7 +6,7 @@ import org.lwjgl.opengl.GL11;
 public abstract strictfp class BlendInfo {
 	private final Texture alpha_map;
 
-	private final Texture createAlphaMap(GLByteImage alpha_image, int format) {
+	private Texture createAlphaMap(GLByteImage alpha_image, int format) {
 		return new Texture(new GLByteImage[]{alpha_image}, format, GL11.GL_LINEAR,
 										  GL11.GL_LINEAR, GL11.GL_REPEAT, GL11.GL_REPEAT);
 	}

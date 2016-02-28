@@ -53,7 +53,7 @@ public final strictfp class ConnectingForm extends Form implements Configuration
 	}
 
         @Override
-	public final void connected(Client client, Game game, WorldGenerator generator, int player_slot) {
+	public void connected(Client client, Game game, WorldGenerator generator, int player_slot) {
 		if (multiplayer) {
 			Random random = new Random(LocalEventQueue.getQueue().getHighPrecisionManager().getTick());
 			random.nextFloat(); // first one allways in same area
@@ -72,29 +72,29 @@ public final strictfp class ConnectingForm extends Form implements Configuration
 		}
 	}
 
-	public final void chat(int player_slot, String chat) {
+	public void chat(int player_slot, String chat) {
 	}
 	
         @Override
-	public final void setPlayers(PlayerSlot[] players) {
+	public void setPlayers(PlayerSlot[] players) {
 		assert !multiplayer;
 	}
 
         @Override
-	public final void connectionLost() {
+	public void connectionLost() {
 		remove();
 		gui_root.addModalForm(new MessageForm(Utils.getBundleString(bundle, "connection_lost")));
 	}
 
         @Override
-	public final void gameStarted() {
+	public void gameStarted() {
 		remove();
 //		main_menu.remove();
 		assert !multiplayer;
 	}
 
         @Override
-	protected final void doCancel() {
+	protected void doCancel() {
 		game_network.close();
 	}
 }

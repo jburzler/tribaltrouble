@@ -85,12 +85,12 @@ public final strictfp class DefaultRenderer implements UIRenderer {
 	}
 
         @Override
-	public final void renderGUI(GUIRoot gui_root) {
+	public void renderGUI(GUIRoot gui_root) {
 		if (cheat.isEnabled())
 			Icons.getIcons().getCheatIcon().render(gui_root.getWidth() - Icons.getIcons().getCheatIcon().getWidth() - 10, 5);
 	}
 
-	public final void setSelectedBuilding(Building building) {
+	public void setSelectedBuilding(Building building) {
 		this.selected_building = building;
 	}
 
@@ -99,7 +99,7 @@ public final strictfp class DefaultRenderer implements UIRenderer {
 			doRenderRallyPoint(camera_state);
 	}
 
-	private final void doRenderRallyPoint(CameraState camera_state) {
+	private void doRenderRallyPoint(CameraState camera_state) {
 		float rally_point_dir_x = 1f;
 		float rally_point_dir_y = 0f;
 		Target rally_point = selected_building.getRallyPoint();
@@ -130,7 +130,7 @@ public final strictfp class DefaultRenderer implements UIRenderer {
 	}
 
         @Override
-	public final void pickHover(boolean can_hover_behind, CameraState camera, int x, int y) {
+	public void pickHover(boolean can_hover_behind, CameraState camera, int x, int y) {
 		if (can_hover_behind) {
 			picker.pickHover(camera, LocalInput.getMouseX(), LocalInput.getMouseY());
 		} else {
@@ -139,16 +139,16 @@ public final strictfp class DefaultRenderer implements UIRenderer {
 	}
 
         @Override
-	public final ToolTip getToolTip() {
+	public ToolTip getToolTip() {
 		return picker.getCurrentToolTip();
 	}
 
-	public final TreeRenderer getTreeRenderer() {
+	public TreeRenderer getTreeRenderer() {
 		return tree_renderer;
 	}
 
         @Override
-	public final boolean clearColorBuffer() {
+	public boolean clearColorBuffer() {
 		return Globals.clear_frame_buffer || cheat.line_mode;
 	}
 

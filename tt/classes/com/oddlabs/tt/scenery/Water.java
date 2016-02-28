@@ -21,7 +21,7 @@ public final strictfp class Water {
 		patch_vertices = makePatchVertices(heightmap);
 	}
 
-	private final void setup() {
+	private void setup() {
 		GLStateStack.switchState(GLState.VERTEX_ARRAY);
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, ocean[0].getHandle());
 		GL11.glEnable(GL11.GL_TEXTURE_GEN_S);
@@ -40,7 +40,7 @@ public final strictfp class Water {
 		GL11.glEnable(GL11.GL_BLEND);
 	}
 
-	public final void render(Sky sky) {
+	public void render(Sky sky) {
 		setup();
 
 		sky.getWaterVertices().vertexPointer(3, 0, 0);
@@ -53,7 +53,7 @@ public final strictfp class Water {
 		reset();
 	}
 
-	private final void reset() {
+	private void reset() {
 		if (Globals.draw_detail) {
 			GLState.activeTexture(GL13.GL_TEXTURE1);
 			GL11.glDisable(GL11.GL_TEXTURE_GEN_S);

@@ -15,7 +15,7 @@ import org.apache.commons.pool.impl.StackKeyedObjectPoolFactory;
 public final strictfp class DBUtils {
 	private static DataSource ds;
 	
-	public final static void initConnection(String address, String user, String password) throws ClassNotFoundException {
+	public static void initConnection(String address, String user, String password) throws ClassNotFoundException {
 		Class.forName("com.mysql.jdbc.Driver");
 		GenericObjectPool connectionPool = new GenericObjectPool(null);
 		ConnectionFactory connectionFactory = new DriverManagerConnectionFactory(address, user, password);
@@ -24,15 +24,15 @@ public final strictfp class DBUtils {
 		ds = new PoolingDataSource(connectionPool);
 	}
 
-	public final static Connection createDatabaseConnection() throws SQLException {
+	public static Connection createDatabaseConnection() throws SQLException {
 		return ds.getConnection();
 	}
 
-	public final static PreparedStatement createStatement(String sql) throws SQLException {
+	public static PreparedStatement createStatement(String sql) throws SQLException {
 		return createDatabaseConnection().prepareStatement(sql);
 	}
 
-	public final static void postHermesMessage(String message) throws SQLException {
+	public static void postHermesMessage(String message) throws SQLException {
 		PreparedStatement stmt = DBUtils.createStatement("INSERT INTO messages (time, message) " + 
 				"VALUES (NOW(), ?)");
 		try {

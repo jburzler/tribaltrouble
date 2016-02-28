@@ -9,16 +9,16 @@ final strictfp class Tree {
 		this.crown = crown;
 	}
 
-	public final SpriteList getTrunk() {
+	public SpriteList getTrunk() {
 		return trunk;
 	}
 
-	public final SpriteList getCrown() {
+	public SpriteList getCrown() {
 		return crown;
 	}
 
         @Override
-	public final boolean equals(Object other) {
+	public boolean equals(Object other) {
 		if (!(other instanceof Tree))
 			return false;
 		Tree other_tree = (Tree)other;

@@ -14,15 +14,15 @@ final strictfp class ClientConnection {
 		this.client = client;
 	}
 
-	public final GameClientInterface getClientInterface() {
+	public GameClientInterface getClientInterface() {
 		return gameclient_interface;
 	}
 
-	public final AbstractConnection getConnection() {
+	public AbstractConnection getConnection() {
 		return connection;
 	}
 
-	public final ClientInfo getClient() {
+	public ClientInfo getClient() {
 		return client;
 	}
 }

@@ -63,39 +63,39 @@ public final strictfp class Race {
 		this.music_path = music_path;
 	}
 
-	public final BuildingTemplate getBuildingTemplate(int index) {
+	public BuildingTemplate getBuildingTemplate(int index) {
 		return buildings[index];
 	}
 
-	public final UnitTemplate getUnitTemplate(int index) {
+	public UnitTemplate getUnitTemplate(int index) {
 		return units[index];
 	}
 
-	public final SpriteKey getRallyPoint() {
+	public SpriteKey getRallyPoint() {
 		return rally_point;
 	}
 
-	public final RaceIcons getIcons() {
+	public RaceIcons getIcons() {
 		return icons;
 	}
 
-	public final Audio getAttackNotificationAudio() {
+	public Audio getAttackNotificationAudio() {
 		return attack_notification;
 	}
 
-	public final Audio getBuildingNotificationAudio() {
+	public Audio getBuildingNotificationAudio() {
 		return building_notification;
 	}
 
-	public final MagicFactory getMagicFactory(int i) {
+	public MagicFactory getMagicFactory(int i) {
 		return magic_factory[i];
 	}
 
-	public final ChieftainAI getChieftainAI() {
+	public ChieftainAI getChieftainAI() {
 		return chieftain_ai;
 	}
 
-	public final String getMusicPath() {
+	public String getMusicPath() {
 		return music_path;
 	}
 }

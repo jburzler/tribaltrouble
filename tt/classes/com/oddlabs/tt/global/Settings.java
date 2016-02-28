@@ -104,39 +104,39 @@ public final strictfp class Settings implements Serializable {
 
 	public int frame_grab_milliseconds_per_frame = 40;
 
-	public final static void setSettings(Settings new_settings) {
+	public static void setSettings(Settings new_settings) {
 		settings = new_settings;
 	}
 
-	public final static Settings getSettings() {
+	public static Settings getSettings() {
 		return settings;
 	}
 
-	public final boolean useFBO() {
+	public boolean useFBO() {
 		return use_fbo && GLContext.getCapabilities().GL_EXT_framebuffer_object && !GLUtils.isIntelGMA950();
 	}
 
-	public final boolean usePbuffer() {
+	public boolean usePbuffer() {
 		return use_pbuffer && ((Pbuffer.getCapabilities() & Pbuffer.PBUFFER_SUPPORTED) != 0);
 	}
 
-	public final boolean useTextureCompression() {
+	public boolean useTextureCompression() {
 		return use_texture_compression && (GLContext.getCapabilities().GL_ARB_texture_compression || GLContext.getCapabilities().OpenGL13);
 	}
 
-	public final boolean useVBO() {
+	public boolean useVBO() {
 		return use_vbo && GLContext.getCapabilities().GL_ARB_vertex_buffer_object;
 	}
 
-	public final boolean inDeveloperMode() {
+	public boolean inDeveloperMode() {
 		return developer_mode.equals("randomgryf") && Renderer.isRegistered();
 	}
 
-	public final boolean inBetaMode() {
+	public boolean inBetaMode() {
 		return beta_mode.equals("mythol");
 	}
 
-	public final void save() {
+	public void save() {
 		if (LocalEventQueue.getQueue().getDeterministic().isPlayback())
 			return;
 		Settings original_settings = new Settings();
@@ -180,7 +180,7 @@ public final strictfp class Settings implements Serializable {
 		}
 	}
 
-	public final void load(File game_dir) {
+	public void load(File game_dir) {
 		Field[] pref_fields = getClass().getDeclaredFields();
 		Properties props = new Properties();
 		File settings_file = new File(game_dir, Globals.SETTINGS_FILE_NAME);
@@ -221,7 +221,7 @@ public final strictfp class Settings implements Serializable {
             }
 	}
 
-	private final static boolean hasValidModifiers(int mods) {
+	private static boolean hasValidModifiers(int mods) {
 		return !Modifier.isStatic(mods) && !Modifier.isFinal(mods);
 	}
 }

@@ -21,7 +21,7 @@ public final strictfp class InGameOptionsMenu extends AbstractOptionsMenu {
 	}
 
         @Override
-	protected final void changeGamespeed(int index) {
+	protected void changeGamespeed(int index) {
 		super.changeGamespeed(index);
 		viewer.getPeerHub().getPlayerInterface().setPreferredGamespeed(index);
 	}

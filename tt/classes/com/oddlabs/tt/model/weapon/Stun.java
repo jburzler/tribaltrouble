@@ -66,7 +66,7 @@ public final strictfp class Stun implements Magic {
 	}
 
         @Override
-	public final void animate(float t) {
+	public void animate(float t) {
 		for (int i = 0; i < target_list.size(); i++) {
 			Unit unit = null;
 			if (target_list.get(i) instanceof Unit) {
@@ -96,7 +96,7 @@ public final strictfp class Stun implements Magic {
 		interrupt();
 	}
 
-	private final float calculateValueFromCurrentRadius(float current_radius, float max, float min) {
+	private float calculateValueFromCurrentRadius(float current_radius, float max, float min) {
 		float base_factor = 6f/7f;
 		float error = (float)StrictMath.pow(base_factor, hit_radius);
 		float factor = (float)StrictMath.pow(base_factor, current_radius);
@@ -109,7 +109,7 @@ public final strictfp class Stun implements Magic {
 	}
 
         @Override
-	public final void interrupt() {
+	public void interrupt() {
 		if (emitter != null) {
 			emitter.done();
 		}

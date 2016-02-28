@@ -63,7 +63,7 @@ public final strictfp class World {
 		return new RacesResources(queues);
 	}
 
-	public final static World newWorld(AudioImplementation audio_implementation, LandscapeResources landscape_resources, RacesResources races_resources, LowDetailModel[] tree_low_details, NotificationListener notification_listener, WorldParameters world_params, WorldInfo world_info, int terrain_type, PlayerInfo[] player_infos, float[][] colors) {
+	public static World newWorld(AudioImplementation audio_implementation, LandscapeResources landscape_resources, RacesResources races_resources, LowDetailModel[] tree_low_details, NotificationListener notification_listener, WorldParameters world_params, WorldInfo world_info, int terrain_type, PlayerInfo[] player_infos, float[][] colors) {
 		NativeResource.gc();
 		ProgressForm.progress();
 		World world = new World(audio_implementation, landscape_resources, races_resources, tree_low_details, notification_listener, world_params, world_info, terrain_type, player_infos, colors);
@@ -79,31 +79,31 @@ public final strictfp class World {
 		return world;
 	}
 
-	public final LandscapeResources getLandscapeResources() {
+	public LandscapeResources getLandscapeResources() {
 		return landscape_resources;
 	}
 
-	public final RacesResources getRacesResources() {
+	public RacesResources getRacesResources() {
 		return races_resources;
 	}
 
-	public final AudioImplementation getAudio() {
+	public AudioImplementation getAudio() {
 		return audio_impl;
 	}
 
-	public final int getChecksum() {
+	public int getChecksum() {
 		return global_checksum;
 	}
 
-	public final void updateGlobalChecksum(int value) {
+	public void updateGlobalChecksum(int value) {
 		global_checksum += value;
 	}
 
-	public final int getGamespeed() {
+	public int getGamespeed() {
 		return gamespeed;
 	}
 
-	public final float getSecondsPerTick() {
+	public float getSecondsPerTick() {
 		return GAMESPEEDS[gamespeed];
 	}
 
@@ -115,7 +115,7 @@ public final strictfp class World {
 		return speed >= 0 && speed < GAMESPEEDS.length;
 	}
 
-	public final void gamespeedChanged() {
+	public void gamespeedChanged() {
 		int new_gamespeed = GAMESPEED_DONTCARE;
             for (Player player : players) {
                 int gamespeed = player.getPreferredGamespeed();
@@ -131,12 +131,12 @@ public final strictfp class World {
 		}
 	}
 
-	public final void tick(float t) {
+	public void tick(float t) {
 		getAnimationManagerGameTime().runAnimations(getSecondsPerTick()*t/AnimationManager.ANIMATION_SECONDS_PER_TICK);
 		getAnimationManagerRealTime().runAnimations(t/*AnimationManager.ANIMATION_SECONDS_PER_TICK*/);
 	}
 
-	public final int getTick() {
+	public int getTick() {
 		return getAnimationManagerRealTime().getTick();
 	}
 
@@ -180,31 +180,31 @@ public final strictfp class World {
 		AbstractElementNode.buildSupplies(this, world_info.iron, world_info.rocks, world_info.plants, terrain_type);
 	}
 
-	public final AbstractElementNode getElementRoot() {
+	public AbstractElementNode getElementRoot() {
 		return element_root;
 	}
 
-	public final AbstractTreeGroup getTreeRoot() {
+	public AbstractTreeGroup getTreeRoot() {
 		return tree_root;
 	}
 
-	public final LandscapeTileIndices getLandscapeIndices() {
+	public LandscapeTileIndices getLandscapeIndices() {
 		return landscape_indices;
 	}
 
-	public final AbstractPatchGroup getPatchRoot() {
+	public AbstractPatchGroup getPatchRoot() {
 		return patch_root;
 	}
 
-	public final UnitGrid getUnitGrid() {
+	public UnitGrid getUnitGrid() {
 		return unit_grid;
 	}
 
-	public final SupplyManager getSupplyManager(Class cl) {
+	public SupplyManager getSupplyManager(Class cl) {
 		return supply_managers.getSupplyManager(cl);
 	}
 
-	public final Player[] getPlayers() {
+	public Player[] getPlayers() {
 		return players;
 	}
 
@@ -212,23 +212,23 @@ public final strictfp class World {
 		return max_unit_count;
 	}
 
-	public final NotificationListener getNotificationListener() {
+	public NotificationListener getNotificationListener() {
 		return notification_listener;
 	}
 
-	public final HeightMap getHeightMap() {
+	public HeightMap getHeightMap() {
 		return world;
 	}
 	
-	public final AnimationManager getAnimationManagerGameTime() {
+	public AnimationManager getAnimationManagerGameTime() {
 		return animation_manager_game_time;
 	}
 
-	public final AnimationManager getAnimationManagerRealTime() {
+	public AnimationManager getAnimationManagerRealTime() {
 		return animation_manager_real_time;
 	}
 
-	public final Random getRandom() {
+	public Random getRandom() {
 		return random;
 	}
 }

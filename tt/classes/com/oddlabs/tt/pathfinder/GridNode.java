@@ -29,12 +29,12 @@ final strictfp class GridNode extends Node {
 		dir_node_grid[2][2] = new DirectionNode(inv_sqrt_2, 1, 1);
 	}
 
-	private final static DirectionNode lookupDirectionNode(int dx, int dy) {
+	private static DirectionNode lookupDirectionNode(int dx, int dy) {
 		return dir_node_grid[dx + 1][dy + 1];
 	}
 
         @Override
-	public final PathNode newPath() {
+	public PathNode newPath() {
 		Node graph_node = this;
 		GridPathNode current_node = null;
 		while (graph_node.getParent() != null) {
@@ -54,16 +54,16 @@ final strictfp class GridNode extends Node {
 	}
 
         @Override
-	public final int getGridX() {
+	public int getGridX() {
 		return local_grid_x + offset.offset_x;
 	}
 
         @Override
-	public final int getGridY() {
+	public int getGridY() {
 		return local_grid_y + offset.offset_y;
 	}
 
-	public final static Offset setupPathFinding(int src_grid_x, int src_grid_y, int dst_grid_x, int dst_grid_y) {
+	public static Offset setupPathFinding(int src_grid_x, int src_grid_y, int dst_grid_x, int dst_grid_y) {
 		if (StrictMath.abs(dst_grid_x - src_grid_x) >= RegionBuilder.GRID_SIZE &&
 				StrictMath.abs(dst_grid_y - src_grid_y) >= RegionBuilder.GRID_SIZE)
 			return null;
@@ -72,14 +72,14 @@ final strictfp class GridNode extends Node {
 		return new Offset(path_offset_x, path_offset_y);
 	}
 
-	public final static GridNode getPathfinderNode(Offset offset, int x, int y) {
+	public static GridNode getPathfinderNode(Offset offset, int x, int y) {
 		GridNode node = getPathfinderNodeOffset(x - offset.offset_x, y - offset.offset_y);
 		if (node != null)
 			node.offset = offset;
 		return node;
 	}
 
-	private final static GridNode getPathfinderNodeOffset(int local_x, int local_y) {
+	private static GridNode getPathfinderNodeOffset(int local_x, int local_y) {
 		if (local_x < 0 || local_x >= pathfinder_grid.length ||
 			local_y < 0 || local_y >= pathfinder_grid.length)
 			return null;
@@ -87,7 +87,7 @@ final strictfp class GridNode extends Node {
 			return pathfinder_grid[local_y][local_x];
 	}
 
-	private final boolean addNeighbour(PathFinderAlgorithm finder, UnitGrid unit_grid, int x, int y, int cost) {
+	private boolean addNeighbour(PathFinderAlgorithm finder, UnitGrid unit_grid, int x, int y, int cost) {
 		GridNode node = getPathfinderNode(offset, x, y);
 		if (node == null || node.isVisited())
 			return false;
@@ -105,7 +105,7 @@ final strictfp class GridNode extends Node {
 	}
 
         @Override
-	public final boolean addNeighbours(PathFinderAlgorithm finder, UnitGrid unit_grid) {
+	public boolean addNeighbours(PathFinderAlgorithm finder, UnitGrid unit_grid) {
 		int x = getGridX();
 		int y = getGridY();
 		return	addNeighbour(finder, unit_grid, x, y - 1, RegionBuilder.STRAIGHT) ||

@@ -24,7 +24,7 @@ public final strictfp class ErosionHydraulic {
 	private static Channel deposition;
 	private static Channel old;
 
-	public final static Channel erodeReference(Channel channel, int iterations) {
+	public static Channel erodeReference(Channel channel, int iterations) {
 		height = channel;
 		height_d = new Channel(height.width, height.height);
 		water = new Channel(height.width, height.height);
@@ -47,16 +47,16 @@ public final strictfp class ErosionHydraulic {
 		return height;
 	}
 	
-	private final static void water(int i) {
+	private static void water(int i) {
 		if (i%rain_freq == 0) water.add(rain);
 	}
 	
-	private final static void dissolve() {
+	private static void dissolve() {
 		sediment.channelAdd(water.copy().multiply(solulibility));
 		height.channelSubtract(water.copy().multiply(solulibility));
 	}
 	
-	private final static void transport() {
+	private static void transport() {
 		float h, h1, h2, h3, h4, h5, h6, h7, h8, d1, d2, d3, d4, d5, d6, d7, d8, total_height, total_height_d, min_d, avr_height, water_amount, h_new, sum_d, factor, water_transport, sediment_amount, sediment_per_height, sediment_transport;
 		int cells;
 		for (int y = 1; y < height.height - 1; y++) {
@@ -210,14 +210,14 @@ public final strictfp class ErosionHydraulic {
 		sediment_d.fill(0f);
 	}
 	
-	private final static void sedimentation() {
+	private static void sedimentation() {
 		water.multiply(1f - vaporization);
 		deposition = sediment.copy().channelSubtract(water);
 		sediment.channelSubtract(deposition);
 		height.channelAdd(deposition);
 	}
 	
-	private final static void save(int i) {
+	private static void save(int i) {
 		if (i%10 == 0) {
 			System.out.println("height   " + i + " checksum: " + height.sum());
 			System.out.println("water    " + i + " checksum: " + water.sum());
@@ -239,7 +239,7 @@ public final strictfp class ErosionHydraulic {
 		}
 	}
 	
-	private final static void score(int i) {
+	private static void score(int i) {
 		Channel slope = height.copy().lineart();
 		float average = Analyzer.average(slope);
 		float deviation = Analyzer.deviation(slope);
@@ -247,18 +247,18 @@ public final strictfp class ErosionHydraulic {
 		System.out.println(score);
 	}
 	
-	private final static void timer(int i, long start) {
+	private static void timer(int i, long start) {
 		long stop = System.currentTimeMillis();
 		System.out.println((stop - start)/1000f);
 	}
 	
-	private final static void diff(int i) {
+	private static void diff(int i) {
 		float diff = old.channelDifference(height).sum();
 		System.out.println(diff/(old.width*old.height));
 		old = height.copy();
 	}
 
-	public final static Channel erodeFast(Channel channel, int iterations) {
+	public static Channel erodeFast(Channel channel, int iterations) {
 		height = channel;
 		water = new Channel(channel.width, channel.height);
 		deposition = new Channel(channel.width, channel.height);

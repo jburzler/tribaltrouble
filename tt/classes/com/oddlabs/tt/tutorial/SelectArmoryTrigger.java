@@ -21,7 +21,7 @@ public final strictfp class SelectArmoryTrigger extends TutorialTrigger {
 	}
 
         @Override
-	protected final void run(Tutorial tutorial) {
+	protected void run(Tutorial tutorial) {
 		Building building = tutorial.getViewer().getSelection().getCurrentSelection().getBuilding();
 		if (building != null && building.getAbilities().hasAbilities(Abilities.BUILD_ARMIES))
 			tutorial.next(new HarvestMenuTrigger(tutorial.getViewer().getLocalPlayer()));

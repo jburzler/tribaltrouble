@@ -5,7 +5,7 @@ import org.lwjgl.opengl.Display;
 public final strictfp class BackBufferRenderer extends OffscreenRenderer {
 	private static boolean back_buffer_dirty = false;
 
-	public final static boolean isBackBufferDirty() {
+	public static boolean isBackBufferDirty() {
 		boolean result = back_buffer_dirty;
 		back_buffer_dirty = false;
 		return result;
@@ -20,12 +20,12 @@ public final strictfp class BackBufferRenderer extends OffscreenRenderer {
 	}
 
         @Override
-	public final boolean isLost() {
+	public boolean isLost() {
 		return Display.isDirty();
 	}
 
         @Override
-	protected final void finish() {
+	protected void finish() {
 		popGLState();
 	}
 }

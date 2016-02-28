@@ -85,111 +85,111 @@ public final strictfp class RaceIcons {
 		this.magic2_desc = magic2_desc;
 	}
 
-	public final IconQuad getUnitStatusIcon() {
+	public IconQuad getUnitStatusIcon() {
 		return unit_status_icon;
 	}
 
-	public final IconQuad getWeaponRockStatusIcon() {
+	public IconQuad getWeaponRockStatusIcon() {
 		return weapon_rock_status_icon;
 	}
 
-	public final IconQuad getWeaponIronStatusIcon() {
+	public IconQuad getWeaponIronStatusIcon() {
 		return weapon_iron_status_icon;
 	}
 
-	public final IconQuad getWeaponRubberStatusIcon() {
+	public IconQuad getWeaponRubberStatusIcon() {
 		return weapon_rubber_status_icon;
 	}
 
-	public final IconQuad[] getBuildWeaponsIcon() {
+	public IconQuad[] getBuildWeaponsIcon() {
 		return build_weapons_icon;
 	}
 
-	public final IconQuad[] getBuildWeaponRockIcon() {
+	public IconQuad[] getBuildWeaponRockIcon() {
 		return build_weapon_rock_icon;
 	}
 
-	public final IconQuad[] getBuildWeaponIronIcon() {
+	public IconQuad[] getBuildWeaponIronIcon() {
 		return build_weapon_iron_icon;
 	}
 
-	public final IconQuad[] getBuildWeaponRubberIcon() {
+	public IconQuad[] getBuildWeaponRubberIcon() {
 		return build_weapon_rubber_icon;
 	}
 
-	public final IconQuad[] getArmyIcon() {
+	public IconQuad[] getArmyIcon() {
 		return army_icon;
 	}
 
-	public final IconQuad[] getWarriorRockIcon() {
+	public IconQuad[] getWarriorRockIcon() {
 		return warrior_rock_icon;
 	}
 
-	public final IconQuad[] getWarriorIronIcon() {
+	public IconQuad[] getWarriorIronIcon() {
 		return warrior_iron_icon;
 	}
 
-	public final IconQuad[] getWarriorRubberIcon() {
+	public IconQuad[] getWarriorRubberIcon() {
 		return warrior_rubber_icon;
 	}
 
-	public final IconQuad[] getPeonIcon() {
+	public IconQuad[] getPeonIcon() {
 		return peon_icon;
 	}
 
-	public final IconQuad[] getChieftainIcon() {
+	public IconQuad[] getChieftainIcon() {
 		return chieftain_icon;
 	}
 
-	public final IconQuad[] getTransportIcon() {
+	public IconQuad[] getTransportIcon() {
 		return transport_icon;
 	}
 
-	public final IconQuad[] getAttackIcon() {
+	public IconQuad[] getAttackIcon() {
 		return attack_icon;
 	}
 
-	public final IconQuad[] getMoveIcon() {
+	public IconQuad[] getMoveIcon() {
 		return move_icon;
 	}
 
-	public final IconQuad[] getGatherRepairIcon() {
+	public IconQuad[] getGatherRepairIcon() {
 		return gather_repair_icon;
 	}
 
-	public final IconQuad[] getQuartersIcon() {
+	public IconQuad[] getQuartersIcon() {
 		return quarters_icon;
 	}
 
-	public final IconQuad[] getArmoryIcon() {
+	public IconQuad[] getArmoryIcon() {
 		return armory_icon;
 	}
 
-	public final IconQuad[] getTowerIcon() {
+	public IconQuad[] getTowerIcon() {
 		return tower_icon;
 	}
 
-	public final IconQuad[] getTowerExitIcon() {
+	public IconQuad[] getTowerExitIcon() {
 		return tower_exit_icon;
 	}
 
-	public final IconQuad[] getRallyPointIcon() {
+	public IconQuad[] getRallyPointIcon() {
 		return rally_point_icon;
 	}
 
-	public final IconQuad[] getMagic1Icon() {
+	public IconQuad[] getMagic1Icon() {
 		return magic1_icon;
 	}
 
-	public final String getMagic1Desc() {
+	public String getMagic1Desc() {
 		return magic1_desc;
 	}
 
-	public final IconQuad[] getMagic2Icon() {
+	public IconQuad[] getMagic2Icon() {
 		return magic2_icon;
 	}
 
-	public final String getMagic2Desc() {
+	public String getMagic2Desc() {
 		return magic2_desc;
 	}
 }

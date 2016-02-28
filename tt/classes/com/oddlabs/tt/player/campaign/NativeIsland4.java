@@ -34,7 +34,7 @@ public final strictfp class NativeIsland4 extends Island {
 	}
 
         @Override
-	public final void init(NetworkSelector network, GUIRoot gui_root) {
+	public void init(NetworkSelector network, GUIRoot gui_root) {
 		String[] ai_names = new String[]{Utils.getBundleString(bundle, "name0"),
 			Utils.getBundleString(bundle, "name1"),
 			Utils.getBundleString(bundle, "name2"),
@@ -73,7 +73,7 @@ public final strictfp class NativeIsland4 extends Island {
 	}
 
         @Override
-	protected final void start() {
+	protected void start() {
 		alive = true;
 		counter.start(getViewer().getWorld().getAnimationManagerGameTime());
 		counter.setPos(0, 0);
@@ -296,28 +296,28 @@ public final strictfp class NativeIsland4 extends Island {
 		new PlayerEleminatedTrigger(runnable, captives);
 	}
 
-	private final boolean isAlive() {
+	private boolean isAlive() {
 		return alive;
 	}
 
-	public final void removeCounter() {
+	public void removeCounter() {
 		alive = false;
 		counter.remove();
 		getViewer().getWorld().getAnimationManagerGameTime().removeAnimation(counter);
 	}
 
         @Override
-	public final CharSequence getHeader() {
+	public CharSequence getHeader() {
 		return Utils.getBundleString(bundle, "header");
 	}
 
         @Override
-	public final CharSequence getDescription() {
+	public CharSequence getDescription() {
 		return Utils.getBundleString(bundle, "description");
 	}
 
         @Override
-	public final CharSequence getCurrentObjective() {
+	public CharSequence getCurrentObjective() {
 		return Utils.getBundleString(bundle, "objective", new Object[]{minutes});
 	}
 }

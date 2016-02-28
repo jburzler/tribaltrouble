@@ -5,7 +5,7 @@ import com.oddlabs.tt.resource.GLIntImage;
 
 public final strictfp class ErosionVelocity {
 
-	public final Channel velocityFieldErosion1(Channel channel, int iterations) {
+	public Channel velocityFieldErosion1(Channel channel, int iterations) {
 		float water_particle = 1f;
 		float erosion_factor = 0.1f;
 
@@ -103,7 +103,7 @@ public final strictfp class ErosionVelocity {
 		return channel;
 	}
 
-	public final Channel velocityFieldErosion2(Channel channel, int iterations) {
+	public Channel velocityFieldErosion2(Channel channel, int iterations) {
 		float erosion_factor = 0.001f;
 
 		// step 0 - prepare arrays
@@ -245,7 +245,7 @@ public final strictfp class ErosionVelocity {
 		return channel;
 	}
 
-	public final Channel velocityFieldErosion3(Channel channel, int iterations) {
+	public Channel velocityFieldErosion3(Channel channel, int iterations) {
 		int s_iters = 1;
 		float erosion_factor = 0.01f;
 
@@ -380,7 +380,7 @@ public final strictfp class ErosionVelocity {
 		return channel;
 	}
 
-	public final Channel velocityFieldErosion4(Channel channel, int iterations) {
+	public Channel velocityFieldErosion4(Channel channel, int iterations) {
 		int s_iters = 10;
 		float erosion_factor = 0.01f;
 

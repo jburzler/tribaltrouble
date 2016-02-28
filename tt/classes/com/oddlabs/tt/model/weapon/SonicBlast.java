@@ -73,7 +73,7 @@ public final strictfp class SonicBlast implements Magic {
 	}
 
         @Override
-	public final void animate(float t) {
+	public void animate(float t) {
 		time = StrictMath.min(time + t, seconds);
 		if (time >= seconds) {
 			owner.getWorld().getAnimationManagerGameTime().removeAnimation(this);
@@ -144,7 +144,7 @@ public final strictfp class SonicBlast implements Magic {
 		}
 	}
 
-	private final float calculateValueFromCurrentRadius(float current_radius, float max, float min) {
+	private float calculateValueFromCurrentRadius(float current_radius, float max, float min) {
 		float base_factor = 4f/7f;
 		float error = (float)StrictMath.pow(base_factor, hit_radius);
 		float factor = (float)StrictMath.pow(base_factor, current_radius);
@@ -157,7 +157,7 @@ public final strictfp class SonicBlast implements Magic {
 	}
 
         @Override
-	public final void interrupt() {
+	public void interrupt() {
 		if (lur != null) {
 			lur.stop(.2f, Settings.getSettings().sound_gain);
 		}

@@ -34,7 +34,7 @@ public final strictfp class AudioManager implements AudioImplementation {
 		generateSources(MAX_NUM_SOURCES);
 	}
 
-	private final void generateSources(int max) {
+	private void generateSources(int max) {
 		ArrayList list = new ArrayList();
 		for (int i = 0; i < max; i++) {
 			try {
@@ -48,7 +48,7 @@ public final strictfp class AudioManager implements AudioImplementation {
 		list.toArray(sources);
 	}
 
-	public final void stopSources() {
+	public void stopSources() {
 		sound_play_counter--;
 		if (sound_play_counter == 0) {
                     for (AudioSource source : sources) {
@@ -64,13 +64,13 @@ public final strictfp class AudioManager implements AudioImplementation {
 		}
 	}
 
-	public final AbstractAudioPlayer newAudio(CameraState camera_state, AudioParameters params) {
+	public AbstractAudioPlayer newAudio(CameraState camera_state, AudioParameters params) {
 		AudioSource source = getSource(camera_state, params);
 		return doNewAudio(source, params);
 	}
 
         @Override
-	public final AbstractAudioPlayer newAudio(AudioParameters params) {
+	public AbstractAudioPlayer newAudio(AudioParameters params) {
 		AudioSource source = getSource(params);
 		return doNewAudio(source, params);
 	}
@@ -82,7 +82,7 @@ public final strictfp class AudioManager implements AudioImplementation {
 			return new QueuedAudioPlayer(source, params);
 	}
 
-	public final void startSources() {
+	public void startSources() {
 		if (sound_play_counter == 0) {
 			for (int i = 0; i < ambients.size(); i++) {
 				AL10.alSourcePlay(((AudioSource)ambients.get(i)).getSource());
@@ -91,15 +91,15 @@ public final strictfp class AudioManager implements AudioImplementation {
 		sound_play_counter++;
 	}
 
-	public final void registerAmbient(AudioSource source) {
+	public void registerAmbient(AudioSource source) {
 		ambients.add(source);
 	}
 
-	public final void removeAmbient(AudioSource source) {
+	public void removeAmbient(AudioSource source) {
 		ambients.remove(source);
 	}
 
-	final boolean startPlaying() {
+	boolean startPlaying() {
 		return sound_play_counter > 0;
 	}
 
@@ -188,15 +188,15 @@ public final strictfp class AudioManager implements AudioImplementation {
 		return dx*dx + dy*dy + dz*dz;
 	}
 
-	public final void registerQueuedPlayer(QueuedAudioPlayer q) {
+	public void registerQueuedPlayer(QueuedAudioPlayer q) {
 		queued_players.registerQueuedPlayer(q);
 	}
 
-	public final void removeQueuedPlayer(QueuedAudioPlayer q) {
+	public void removeQueuedPlayer(QueuedAudioPlayer q) {
 		queued_players.removeQueuedPlayer(q);
 	}
 
-	public final void destroy() {
+	public void destroy() {
 		queued_players.destroy();
 	}
 }

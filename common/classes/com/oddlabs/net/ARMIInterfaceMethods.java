@@ -18,19 +18,19 @@ public final strictfp class ARMIInterfaceMethods {
             }
 	}
 
-	private final boolean isLegal(Method method) {
+	private boolean isLegal(Method method) {
 		return method.getReturnType().equals(void.class) && method.getExceptionTypes().length == 0;
 	}
 	
-	final boolean isInstance(Object instance) {
+	boolean isInstance(Object instance) {
 		return armi_interface.isInstance(instance);
 	}
 
-	final Class getInterfaceClass() {
+	Class getInterfaceClass() {
 		return armi_interface;
 	}
 	
-	final void invoke(Object instance, Method method, Object[] args) throws IllegalARMIEventException {
+	void invoke(Object instance, Method method, Object[] args) throws IllegalARMIEventException {
 		try {
 			method.invoke(instance, args);
 		} catch (IllegalAccessException | IllegalArgumentException e) {
@@ -40,11 +40,11 @@ public final strictfp class ARMIInterfaceMethods {
 		}
 	}
 
-	final Method getMethod(byte index) {
+	Method getMethod(byte index) {
 		return methods[index];
 	}
 
-	final byte getMethodIndex(Method method) {
+	byte getMethodIndex(Method method) {
 		for (byte i = 0; i < methods.length; i++)
 			if (methods[i].equals(method))
 				return i;

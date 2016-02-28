@@ -12,16 +12,16 @@ public final strictfp class TunnelIdentifier {
 		this.address = address;
 	}
 
-	public final Profile getProfile() {
+	public Profile getProfile() {
 		return profile;
 	}
 
-	public final TunnelAddress getAddress() {
+	public TunnelAddress getAddress() {
 		return address;
 	}
 
         @Override
-	public final String toString() {
+	public String toString() {
 		return "profile: " + profile + " tunnel address: " + address;
 	}
 }

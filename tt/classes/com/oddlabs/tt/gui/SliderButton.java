@@ -14,7 +14,7 @@ public final strictfp class SliderButton extends ButtonObject {
 	}
 
         @Override
-	protected final void renderGeometry() {
+	protected void renderGeometry() {
 		GUIObject parent = (GUIObject)getParent();
 		if (parent.isDisabled()) {
 			button[Skin.DISABLED].render(0, 0);
@@ -26,11 +26,11 @@ public final strictfp class SliderButton extends ButtonObject {
 	}
 
         @Override
-	public final void mouseHeld(int button, int x, int y) {
+	public void mouseHeld(int button, int x, int y) {
 	}
 
         @Override
-	public final void keyPressed(KeyboardEvent event) {
+	public void keyPressed(KeyboardEvent event) {
 		switch (event.getKeyCode()) {
 			case Keyboard.KEY_RIGHT:
 				slider.setValue(slider.getValue() + 1);

@@ -13,17 +13,17 @@ public final strictfp class FinderTrackerAlgorithm implements TrackerAlgorithm {
 	}
 
         @Override
-	public final boolean isDone(int x, int y) {
+	public boolean isDone(int x, int y) {
 		return target != null && !target.isDead() && Selectable.isCloseEnough(unit_grid, 0f, x, y, target);
 	}
 
         @Override
-	public final boolean acceptRegion(Region region) {
+	public boolean acceptRegion(Region region) {
 		return filter.getOccupantFromRegion(region, true) != null;
 	}
 
         @Override
-	public final Region findPathRegion(int src_x, int src_y) {
+	public Region findPathRegion(int src_x, int src_y) {
 		TargetRegionFinder region_finder = new TargetRegionFinder(unit_grid, filter);
 		Region region = PathFinder.findPathRegion(unit_grid, region_finder, unit_grid.getRegion(src_x, src_y));
 		if (region == null)
@@ -31,7 +31,7 @@ public final strictfp class FinderTrackerAlgorithm implements TrackerAlgorithm {
 		return region;
 	}
 
-	public final Occupant getOccupant() {
+	public Occupant getOccupant() {
 		if (target != null && target.isDead())
 			return null;
 		else
@@ -39,7 +39,7 @@ public final strictfp class FinderTrackerAlgorithm implements TrackerAlgorithm {
 	}
 
         @Override
-	public final GridPathNode findPathGrid(Region target_region, Region next_region, int src_x, int src_y, boolean allow_secondary_targets) {
+	public GridPathNode findPathGrid(Region target_region, Region next_region, int src_x, int src_y, boolean allow_secondary_targets) {
 		Occupant hint_occupant = filter.getOccupantFromRegion(target_region, true);
 		TargetFinderAlgorithm grid_finder = new TargetFinderAlgorithm(unit_grid, filter, next_region, hint_occupant.getGridX(), hint_occupant.getGridY(), allow_secondary_targets);
 		GridPathNode path = PathFinder.findPathGrid(unit_grid, grid_finder, src_x, src_y);

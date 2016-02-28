@@ -55,7 +55,7 @@ public final strictfp class Box {
 		top_height = top[Skin.NORMAL].getHeight();
 	}
 
-	public final void render(float x, float y, int width, int height, int type) {
+	public void render(float x, float y, int width, int height, int type) {
 		int center_width = width - left_width - right_width;
 		int center_height = height - bottom_height - top_height;
 		left_bottom[type].render(x, y);
@@ -69,19 +69,19 @@ public final strictfp class Box {
 		center[type].render(x + left_width, y + bottom_height, center_width, center_height);
 	}
 
-	public final int getLeftOffset() {
+	public int getLeftOffset() {
 		return left_offset;
 	}
 
-	public final int getBottomOffset() {
+	public int getBottomOffset() {
 		return bottom_offset;
 	}
 
-	public final int getRightOffset() {
+	public int getRightOffset() {
 		return right_offset;
 	}
 
-	public final int getTopOffset() {
+	public int getTopOffset() {
 		return top_offset;
 	}
 }

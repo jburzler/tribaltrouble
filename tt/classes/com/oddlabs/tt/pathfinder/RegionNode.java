@@ -9,12 +9,12 @@ public final strictfp class RegionNode implements PathNode {
 		this.region = region;
 	}
 
-	public final Region getRegion() {
+	public Region getRegion() {
 		return region;
 	}
 
         @Override
-	public final PathNode getParent() {
+	public PathNode getParent() {
 		return parent;
 	}
 }

@@ -53,7 +53,7 @@ abstract strictfp class Node {
 		this.visited = visited;
 	}
 
-	private final void setTotalCost(int total_cost) {
+	private void setTotalCost(int total_cost) {
 		assert !this.visited;
 		setVisited(true);
 		this.total_cost = total_cost;

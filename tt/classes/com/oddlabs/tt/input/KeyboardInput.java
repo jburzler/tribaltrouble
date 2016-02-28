@@ -25,16 +25,16 @@ public final strictfp class KeyboardInput {
 		instance = new KeyboardInput();
 	}
 
-	public final static void reset() {
+	public static void reset() {
 		while (Keyboard.isCreated() && Keyboard.next())
 			;
 	}
 
-	public static final boolean isMenuDown() {
+	public static boolean isMenuDown() {
 		return instance.menu_down;
 	}
 
-	private final boolean checkMagicKey(Deterministic deterministic, boolean event_key_state, int event_key, boolean override, boolean repeat) {
+	private boolean checkMagicKey(Deterministic deterministic, boolean event_key_state, int event_key, boolean override, boolean repeat) {
 		boolean keys_enabled = Settings.getSettings().inDeveloperMode() && control_down && shift_down && !repeat;
 		if (event_key_state && (keys_enabled || override)) {
 			// check for special events that shouldn't generate events
@@ -66,11 +66,11 @@ public final strictfp class KeyboardInput {
 		return keys_enabled;
 	}
 
-	public final static void checkMagicKeys() {
+	public static void checkMagicKeys() {
 		instance.doCheckMagicKeys();
 	}
 
-	public final void doCheckMagicKeys() {
+	public void doCheckMagicKeys() {
 		Deterministic deterministic = LocalEventQueue.getQueue().getDeterministic();
 		if (deterministic.isPlayback()) {
 			Keyboard.poll();
@@ -82,11 +82,11 @@ public final strictfp class KeyboardInput {
 		}
 	}
 
-	public static final boolean poll(GUIRoot gui_root) {
+	public static boolean poll(GUIRoot gui_root) {
 		return instance.doPoll(gui_root);
 	}
 
-	public final boolean doPoll(GUIRoot gui_root) {
+	public boolean doPoll(GUIRoot gui_root) {
 		Deterministic deterministic = LocalEventQueue.getQueue().getDeterministic();
 		LocalInput local_input = LocalInput.getLocalInput();
 		boolean result = false;

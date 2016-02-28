@@ -45,11 +45,11 @@ public final strictfp class IFS {
 		}
 	}
 
-	public final Layer toLayer() {
+	public Layer toLayer() {
 			return new Layer(channel, channel, channel);
 	}
 
-	public final Channel toChannel() {
+	public Channel toChannel() {
 			return channel;
 	}
 

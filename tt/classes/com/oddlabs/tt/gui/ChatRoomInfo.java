@@ -11,15 +11,15 @@ public final strictfp class ChatRoomInfo {
 		this.name = name;
 	}
 
-	public final void setUsers(ChatRoomUser[] users) {
+	public void setUsers(ChatRoomUser[] users) {
 		this.users = users;
 	}
 
-	public final String getName() {
+	public String getName() {
 		return name;
 	}
 
-	public final ChatRoomUser[] getUsers() {
+	public ChatRoomUser[] getUsers() {
 		return users;
 	}
 }

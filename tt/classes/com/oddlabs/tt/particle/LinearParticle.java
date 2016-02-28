@@ -17,7 +17,7 @@ final strictfp class LinearParticle extends Particle {
 	}
 
         @Override
-	public final void update(float t) {
+	public void update(float t) {
 		super.update(t);
 		velocity_x += acceleration_x*t;
 		velocity_y += acceleration_y*t;
@@ -28,39 +28,39 @@ final strictfp class LinearParticle extends Particle {
 		setPos(x, y, z);
 	}
 
-	public final void setVelocity(float x, float y, float z) {
+	public void setVelocity(float x, float y, float z) {
 		velocity_x = x;
 		velocity_y = y;
 		velocity_z = z;
 	}
 
-	public final float getVelocityX() {
+	public float getVelocityX() {
 		return velocity_x;
 	}
 
-	public final float getVelocityY() {
+	public float getVelocityY() {
 		return velocity_y;
 	}
 
-	public final float getVelocityZ() {
+	public float getVelocityZ() {
 		return velocity_z;
 	}
 
-	public final void setAcceleration(float x, float y, float z) {
+	public void setAcceleration(float x, float y, float z) {
 		acceleration_x = x;
 		acceleration_y = y;
 		acceleration_z = z;
 	}
 
-	public final float getAccelerationX() {
+	public float getAccelerationX() {
 		return acceleration_x;
 	}
 
-	public final float getAccelerationY() {
+	public float getAccelerationY() {
 		return acceleration_y;
 	}
 
-	public final float getAccelerationZ() {
+	public float getAccelerationZ() {
 		return acceleration_z;
 	}
 }

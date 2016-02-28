@@ -17,21 +17,21 @@ public final strictfp class PulldownItem extends ButtonObject {
 		setDim(0, label.getHeight());
 	}
 
-	public final Object getAttachment() {
+	public Object getAttachment() {
 		return attachment;
 	}
 	
-	public final int getTextHeight() {
+	public int getTextHeight() {
 		return label.getHeight();
 	}
 
-	public final int getTextWidth() {
+	public int getTextWidth() {
 //		return label.getWidth();
 		return label.getTextWidth();
 	}
 
         @Override
-	public final void setDim(int width, int height) {
+	public void setDim(int width, int height) {
 		super.setDim(width, height);
 		Box item = Skin.getSkin().getPulldownData().getPulldownItem();
 		label.setDim(getWidth() - item.getLeftOffset() - item.getRightOffset(), label.getHeight());
@@ -39,7 +39,7 @@ public final strictfp class PulldownItem extends ButtonObject {
 	}
 
         @Override
-	protected final void renderGeometry() {
+	protected void renderGeometry() {
 		Box item = Skin.getSkin().getPulldownData().getPulldownItem();
 		if (isDisabled())
 			item.render(0, 0, getWidth(), getHeight(), Skin.NORMAL);
@@ -49,16 +49,16 @@ public final strictfp class PulldownItem extends ButtonObject {
 			item.render(0, 0, getWidth(), getHeight(), Skin.NORMAL);
 	}
 
-	public final void setLabelString(CharSequence label_str) {
+	public void setLabelString(CharSequence label_str) {
 		label.set(label_str);
 	}
 
-	public final CharSequence getLabelString() {
+	public CharSequence getLabelString() {
 		return label;
 	}
 
         @Override
-	protected final void mouseClicked(int button, int x, int y, int clicks) {
+	protected void mouseClicked(int button, int x, int y, int clicks) {
             // Prevent super.mouseClicked from being called to avoid infinite loop.
 
 	}

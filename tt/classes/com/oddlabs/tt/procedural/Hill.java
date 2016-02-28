@@ -29,7 +29,7 @@ public final strictfp class Hill {
 		}
 	}
 	
-	private final void circle() {
+	private void circle() {
 		Channel quarter = new Channel(size>>1, size>>1);
 		for (int y = 0; y < size>>1; y++) {
 			float y_coord = (float)y/size;
@@ -45,7 +45,7 @@ public final strictfp class Hill {
 		channel.quadJoin(quarter, quarter.copy().rotate(270), quarter.copy().rotate(90), quarter.copy().rotate(180));
 	}
 	
-	private final void oval() {
+	private void oval() {
 		Channel quarter = new Channel(size>>1, size>>1);
 		for (int y = 0; y < size>>1; y++) {
 			float y_coord = (float)y/size;
@@ -61,7 +61,7 @@ public final strictfp class Hill {
 		channel.quadJoin(quarter, quarter.copy().rotate(270), quarter.copy().rotate(90), quarter.copy().rotate(180));
 	}
 	
-	private final void square() {
+	private void square() {
 		Channel quarter = new Channel(size>>1, size>>1);
 		for (int y = 0; y < size>>1; y++) {
 			float y_coord = (float)y/size;
@@ -79,11 +79,11 @@ public final strictfp class Hill {
 		channel.quadJoin(quarter, quarter.copy().rotate(270), quarter.copy().rotate(90), quarter.copy().rotate(180));
 	}
 
-	public final Layer toLayer() {
+	public Layer toLayer() {
 		return new Layer(channel, channel.copy(), channel.copy());
 	}
 
-	public final Channel toChannel() {
+	public Channel toChannel() {
 		return channel;
 	}
 

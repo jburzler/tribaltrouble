@@ -34,7 +34,7 @@ final strictfp class LandscapeTileVertices {
 		patch_vertex_buffer.put(vertices);
 	}
 
-	public final void reload(int patch_x, int patch_y) {
+	public void reload(int patch_x, int patch_y) {
 		edit_buffer.clear();
 		fillVertexData(edit_buffer, patch_x, patch_y);
 		edit_buffer.flip();
@@ -45,7 +45,7 @@ final strictfp class LandscapeTileVertices {
 		return (patch_x + patch_y*num_patches)*elements_per_patch;
 	}
 
-	public final void bind(int patch_x, int patch_y) {
+	public void bind(int patch_x, int patch_y) {
 		int position = getVertexIndex(patch_x, patch_y);
 //System.out.println("patch_x = " + patch_x + " | patch_y = " + patch_y + " | position = " + position);
 		patch_vertex_buffer.vertexPointer(3, 0, position);

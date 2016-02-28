@@ -58,39 +58,39 @@ public final strictfp class GameCamera extends Camera {
 		super();
 	}
 */
-	public final void setOwner(SelectionDelegate owner) {
+	public void setOwner(SelectionDelegate owner) {
 		this.owner = owner;
 	}
 
-	public final float getScrollX() {
+	public float getScrollX() {
 		return scrolling_x;
 	}
 	
-	public final float getScrollY() {
+	public float getScrollY() {
 		return scrolling_y;
 	}
 
-	public final void resetLastZoomFactor() {
+	public void resetLastZoomFactor() {
 		last_zoom_factor = 0f;
 	}
 
-	public final float getLastZoomFactor() {
+	public float getLastZoomFactor() {
 		return last_zoom_factor;
 	}
 
-	public final boolean pitchUp() {
+	public boolean pitchUp() {
 		return pitch_up;
 	}
 
-	public final boolean pitchDown() {
+	public boolean pitchDown() {
 		return pitch_down;
 	}
 
-	public final boolean rotateRight() {
+	public boolean rotateRight() {
 		return rotate_right;
 	}
 
-	public final boolean rotateLeft() {
+	public boolean rotateLeft() {
 		return rotate_left;
 	}
 
@@ -104,10 +104,10 @@ public final strictfp class GameCamera extends Camera {
    old_z = World.getHeightMap().getNearestHeight(x, y) - old_dir_z*distance_to_landscape;
 
 */
-	public final void reset() {
+	public void reset() {
 	}
 
-	public final void reset(float x, float y) {
+	public void reset(float x, float y) {
 		float dx = x - .5f*getHeightMap().getMetersPerWorld();
 		float dy = y - .5f*getHeightMap().getMetersPerWorld();
 		float r = (float)StrictMath.sqrt(dx*dx + dy*dy);
@@ -125,7 +125,7 @@ public final strictfp class GameCamera extends Camera {
 		updateDirection();
 	}
 
-	public final void setPos(float x, float y) {
+	public void setPos(float x, float y) {
 		float radius = (float)StrictMath.cos(getState().getTargetVertAngle());
 		float dir_x = (float)StrictMath.cos(getState().getTargetHorizAngle())*radius;
 		float dir_y = (float)StrictMath.sin(getState().getTargetHorizAngle())*radius;
@@ -136,12 +136,12 @@ public final strictfp class GameCamera extends Camera {
 		checkPosition();
 	}
 
-	private final void updateDirection() {
+	private void updateDirection() {
 		left_dir_x = -(float)StrictMath.sin(getState().getTargetHorizAngle());
 		left_dir_y = (float)StrictMath.cos(getState().getTargetHorizAngle());
 	}
 
-	private final void doZoom(float time_delta) {
+	private void doZoom(float time_delta) {
 		zoom(zoom_time*time_delta*ZOOM_SPEED*getState().getTargetZ());
 		if (zoom_time < 0f)
 			zoom_time = StrictMath.min(0f, zoom_time + time_delta);
@@ -149,7 +149,7 @@ public final strictfp class GameCamera extends Camera {
 			zoom_time = StrictMath.max(0f, zoom_time - time_delta);
 	}
 
-	public final void zoom(float zoom_factor) {
+	public void zoom(float zoom_factor) {
 		if (zoom_factor != 0f) {
 			last_zoom_factor = zoom_factor;
 			float radius = (float)StrictMath.cos(getState().getTargetVertAngle());
@@ -193,7 +193,7 @@ public final strictfp class GameCamera extends Camera {
 		}
 	}
 
-	private final void doScroll(float time_delta) {
+	private void doScroll(float time_delta) {
 		if (!viewer.getGUIRoot().getDelegate().canScroll())
 			return;
 		float scroll_speed = scroll_start_speed*(.4f + (scroll_acceleration_seconds/SCROLL_ACCELERATION_SECONDS_MAX)*SCROLL_ACCELERATION_FACTOR);
@@ -226,7 +226,7 @@ public final strictfp class GameCamera extends Camera {
 			scroll_acceleration_seconds = SCROLL_ACCELERATION_SECONDS_MAX;
 	}
 
-	private final void doPitch(float time_delta) {
+	private void doPitch(float time_delta) {
 		checkKeys();
 		if ((pitch_down && !Settings.getSettings().invert_camera_pitch) ||
 			(pitch_up && Settings.getSettings().invert_camera_pitch)) {
@@ -240,7 +240,7 @@ public final strictfp class GameCamera extends Camera {
 		}
 	}
 
-	private final void doRotate(float time_delta) {
+	private void doRotate(float time_delta) {
 		checkKeys();
 		if (rotate_left || rotate_right) {
 			float dx;
@@ -268,7 +268,7 @@ public final strictfp class GameCamera extends Camera {
 		}
 	}
 
-	public final int getRotateY() {
+	public int getRotateY() {
 		int center_y = LocalInput.getViewHeight()/2;
 		if (getState().getTargetVertAngle() < ROTATE_PICKING_ANGLE_MAX) {
 			return center_y;
@@ -282,12 +282,12 @@ public final strictfp class GameCamera extends Camera {
 		}
 	}
 
-	private final boolean insideWorld(float x, float y) {
+	private boolean insideWorld(float x, float y) {
 		return x > 0 && x < getHeightMap().getMetersPerWorld() && y > 0 && y < getHeightMap().getMetersPerWorld();
 	}
 
         @Override
-	public final void doAnimate(float t) {
+	public void doAnimate(float t) {
 		doZoom(t);
 		doScroll(t);
 		doPitch(t);
@@ -296,7 +296,7 @@ public final strictfp class GameCamera extends Camera {
 	}
 
         @Override
-	public final void mouseScrolled(int amount) {
+	public void mouseScrolled(int amount) {
 		zoom_time += amount*.05f;
 		if (zoom_time > .15f)
 			zoom_time = .15f;
@@ -304,11 +304,11 @@ public final strictfp class GameCamera extends Camera {
 			zoom_time = -.15f;
 	}
 
-	public final void setRotationPoint(Target target) {
+	public void setRotationPoint(Target target) {
 		rotation_point = target;
 	}
 
-	protected final float[] getRotationPoint() {
+	protected float[] getRotationPoint() {
 		float[] point = new float[2];
 		if (rotation_point != null) {
 			point[0] = rotation_point.getPositionX();
@@ -321,7 +321,7 @@ public final strictfp class GameCamera extends Camera {
 	}
 
         @Override
-	public final void mouseMoved(int x, int y) {
+	public void mouseMoved(int x, int y) {
 		if ((owner == null || !owner.isSelecting()) && (x < SCROLL_BUFFER || y < SCROLL_BUFFER ||
 				x > LocalInput.getViewWidth() - 1 - SCROLL_BUFFER || y > LocalInput.getViewHeight() - 1 - SCROLL_BUFFER)) {
 			if (scroll_start) {
@@ -343,7 +343,7 @@ public final strictfp class GameCamera extends Camera {
 		}
 	}
 
-	private final boolean scrollSpeedLocked(int key) {
+	private boolean scrollSpeedLocked(int key) {
 		return scroll_x != 0
 			|| scroll_y != 0
 			|| (LocalInput.isKeyDown(Keyboard.KEY_UP) && key != Keyboard.KEY_UP)
@@ -352,7 +352,7 @@ public final strictfp class GameCamera extends Camera {
 			|| (LocalInput.isKeyDown(Keyboard.KEY_RIGHT) && key != Keyboard.KEY_RIGHT);
 	}
 
-	private final void setScrollSpeed() {
+	private void setScrollSpeed() {
 		viewer.getPicker().pickRotate(this);
 		float[] landscape_point = getRotationPoint();
 		float landscape_z = getHeightMap().getNearestHeight(landscape_point[0], landscape_point[1]);
@@ -362,12 +362,12 @@ public final strictfp class GameCamera extends Camera {
 		scroll_start_speed = StrictMath.min((float)StrictMath.sqrt(dx*dx + dy*dy + dz*dz), SCROLL_START_MAX_SPEED);
 	}
 
-	public final World getWorld() {
+	public World getWorld() {
 		return viewer.getWorld();
 	}
 
         @Override
-	public final void keyPressed(KeyboardEvent event) {
+	public void keyPressed(KeyboardEvent event) {
 		switch (event.getKeyCode()) {
 			case Keyboard.KEY_HOME:
 			case Keyboard.KEY_NUMPAD8:
@@ -418,7 +418,7 @@ public final strictfp class GameCamera extends Camera {
 		}
 	}
 
-	private final void checkKeys() {
+	private void checkKeys() {
 		if (viewer.getGUIRoot().getDelegate().keyboardBlocked() || viewer.getGUIRoot().getModalDelegate() != null) {
 			pitch_up = false;
 			pitch_down = false;
@@ -449,7 +449,7 @@ public final strictfp class GameCamera extends Camera {
 	}
 
         @Override
-	public final void enable() {
+	public void enable() {
 		super.enable();
 		mouseMoved(LocalInput.getMouseX(), LocalInput.getMouseY());
 	}

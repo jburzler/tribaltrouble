@@ -81,11 +81,11 @@ public final strictfp class LandscapeRenderer implements Animated {
 		resetEditing();
 	}
 
-	public final HeightMap getHeightMap() {
+	public HeightMap getHeightMap() {
 		return world.getHeightMap();
 	}
 
-	public final PatchLevel getPatchLevelFromCoordinates(float x_f, float y_f) {
+	public PatchLevel getPatchLevelFromCoordinates(float x_f, float y_f) {
 		int patch_x = world.getHeightMap().coordinateToPatch(x_f);
 		int patch_y = world.getHeightMap().coordinateToPatch(y_f);
 		return getPatchLevel(patch_x, patch_y);
@@ -95,7 +95,7 @@ public final strictfp class LandscapeRenderer implements Animated {
 		return patch_levels[patch_y][patch_x];
 	}
 
-	public final PatchLevel getPatchLevel(LandscapeLeaf leaf) {
+	public PatchLevel getPatchLevel(LandscapeLeaf leaf) {
 		return getPatchLevel(leaf.getPatchX(), leaf.getPatchY());
 	}
 
@@ -105,19 +105,19 @@ public final strictfp class LandscapeRenderer implements Animated {
 		return getPatchLevel(patch_x, patch_y);
 	}
 
-	public final void bindDetail() {
+	public void bindDetail() {
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, detail.getHandle());
 	}
 
-	final void bindMap(int x, int y) {
+	void bindMap(int x, int y) {
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, colormaps[y][x].getHandle());
 	}
 
-	final void bindLeaf(LandscapeLeaf leaf) {
+	void bindLeaf(LandscapeLeaf leaf) {
 		landscape_vertices.bind(leaf.getPatchX(), leaf.getPatchY());
 	}
 
-	private final void clearRenderList() {
+	private void clearRenderList() {
 		for (int i = 0; i < render_list.size(); i++) {
 			LandscapeLeaf patch = (LandscapeLeaf)render_list.get(i);
 			render_list.set(i, null);
@@ -145,11 +145,11 @@ public final strictfp class LandscapeRenderer implements Animated {
 		}
 	}
 	
-	public final void pick(CameraState camera, boolean visible_override, Set set) {
+	public void pick(CameraState camera, boolean visible_override, Set set) {
 		doPrepareAll(camera, visible_override, set);
 	}
 
-	public final void prepareAll(CameraState camera, boolean visible_override) {
+	public void prepareAll(CameraState camera, boolean visible_override) {
 		clearRenderList();
 		doPrepareAll(camera, visible_override, render_list);
 	}
@@ -161,7 +161,7 @@ public final strictfp class LandscapeRenderer implements Animated {
 		world.getPatchRoot().visit(patch_visitor);
 	}
 
-	public final void endEdit() {
+	public void endEdit() {
 		if (!editing)
 			return;
 
@@ -179,7 +179,7 @@ public final strictfp class LandscapeRenderer implements Animated {
 		editing = false;
 	}
 
-	public final void patchesEdited(int patch_x0, int patch_y0, int patch_x1, int patch_y1) {
+	public void patchesEdited(int patch_x0, int patch_y0, int patch_x1, int patch_y1) {
 		editing = true;
 		edit_patch_x0 = StrictMath.min(edit_patch_x0, patch_x0);
 		edit_patch_y0 = StrictMath.min(edit_patch_y0, patch_y0);
@@ -187,7 +187,7 @@ public final strictfp class LandscapeRenderer implements Animated {
 		edit_patch_y1 = StrictMath.max(edit_patch_y1, patch_y1);
 	}
 
-	public final void renderAll() {
+	public void renderAll() {
 		setupLandscape();
 		doRenderAll();
 		disableLandscape();
@@ -218,7 +218,7 @@ public final strictfp class LandscapeRenderer implements Animated {
 		}
 	};
         @Override
-	public final void animate(float t) {
+	public void animate(float t) {
 		world.getPatchRoot().visit(level_updater);
 		for (int i = patch_lists.length - 1; i >= 0; i--) {
 			List patches = patch_lists[i];
@@ -233,10 +233,10 @@ public final strictfp class LandscapeRenderer implements Animated {
 	}
 
         @Override
-	public final void updateChecksum(StateChecksum sum) {
+	public void updateChecksum(StateChecksum sum) {
 	}
 
-	private final void setupColormap(int map_x, int map_y) {
+	private void setupColormap(int map_x, int map_y) {
 		if (current_map_x != map_x || current_map_y != map_y) {
 			bindMap(map_x, map_y);
 			float tex_translate_x = map_x*world.getHeightMap().getMetersPerChunk() - world.getHeightMap().getMetersPerChunkBorder();
@@ -248,7 +248,7 @@ public final strictfp class LandscapeRenderer implements Animated {
 		}
 	}
 
-	private final void setupLandscape() {
+	private void setupLandscape() {
 		current_map_x = -1;
 		current_map_y = -1;
 		GL11.glEnable(GL11.GL_TEXTURE_GEN_S);
@@ -267,7 +267,7 @@ public final strictfp class LandscapeRenderer implements Animated {
 		GL11.glEnable(GL11.GL_BLEND);
 	}
 
-	private final static void disableLandscape() {
+	private static void disableLandscape() {
 		GL11.glDisable(GL11.GL_BLEND);
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		if (Globals.draw_detail) {
@@ -281,11 +281,11 @@ public final strictfp class LandscapeRenderer implements Animated {
 		GL11.glDisable(GL11.GL_TEXTURE_GEN_T);
 	}
 
-	public final void reload(int patch_x, int patch_y) {
+	public void reload(int patch_x, int patch_y) {
 		landscape_vertices.reload(patch_x, patch_y);
 	}
 
-	final void renderShadow(int patch_x, int patch_y, int start_x, int start_y, int end_x, int end_y) {
+	void renderShadow(int patch_x, int patch_y, int start_x, int start_y, int end_x, int end_y) {
 		landscape_vertices.bind(patch_x, patch_y);
 		PatchLevel patch_level = getPatchLevel(patch_x, patch_y);
 		shadow_indices_buffer.clear();
@@ -306,7 +306,7 @@ public final strictfp class LandscapeRenderer implements Animated {
 		}
 
                 @Override
-		public final void visitGroup(PatchGroup group) {
+		public void visitGroup(PatchGroup group) {
 			int frustum_state = RenderTools.NOT_IN_FRUSTUM;
 			if (visible_override || (frustum_state = RenderTools.inFrustum(group, camera.getFrustum())) >= RenderTools.IN_FRUSTUM) {
 				boolean old_override = visible_override;
@@ -317,7 +317,7 @@ public final strictfp class LandscapeRenderer implements Animated {
 		}
 
                 @Override
-		public final void visitLeaf(LandscapeLeaf leaf) {
+		public void visitLeaf(LandscapeLeaf leaf) {
 			if (visible_override || RenderTools.inFrustum(leaf, camera.getFrustum()) >= RenderTools.IN_FRUSTUM) {
 				result.add(leaf);
 			}

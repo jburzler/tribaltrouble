@@ -15,23 +15,23 @@ public final strictfp class ToolTipBoxInfo {
 		this.top_offset = top_offset;
 	}
 
-	public final Horizontal getBox() {
+	public Horizontal getBox() {
 		return box;
 	}
 
-	public final int getLeftOffset() {
+	public int getLeftOffset() {
 		return left_offset;
 	}
 
-	public final int getBottomOffset() {
+	public int getBottomOffset() {
 		return bottom_offset;
 	}
 
-	public final int getRightOffset() {
+	public int getRightOffset() {
 		return right_offset;
 	}
 
-	public final int getTopOffset() {
+	public int getTopOffset() {
 		return top_offset;
 	}
 }

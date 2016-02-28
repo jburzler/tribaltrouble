@@ -11,14 +11,14 @@ public final strictfp class LoggerOutputStream extends OutputStream {
 	}
 
         @Override
-	public final void write(byte[] bytes, int offset, int length) throws IOException {
+	public void write(byte[] bytes, int offset, int length) throws IOException {
             for (OutputStream stream : streams) {
                 stream.write(bytes, offset, length);
             }
 	}
 
         @Override
-	public final void write(int b) throws IOException {
+	public void write(int b) throws IOException {
             for (OutputStream stream : streams) {
                 stream.write(b);
             }

@@ -15,20 +15,20 @@ public final strictfp class TunnelAddress implements Serializable {
 		this.local_address = local_address;
 	}
 
-	public final int getHostID() {
+	public int getHostID() {
 		return host_id;
 	}
 
-	public final InetAddress getAddress() {
+	public InetAddress getAddress() {
 		return address;
 	}
 
-	public final InetAddress getLocalAddress() {
+	public InetAddress getLocalAddress() {
 		return local_address;
 	}
 
         @Override
-	public final String toString() {
+	public String toString() {
 		return "host id = " + host_id + " address = " + address + " local_address = " + local_address;
 	}
 }	

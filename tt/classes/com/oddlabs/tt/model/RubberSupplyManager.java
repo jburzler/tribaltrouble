@@ -18,20 +18,20 @@ public final strictfp class RubberSupplyManager extends SupplyManager {
 	}
 
         @Override
-	protected final boolean shouldSpawn() {
+	protected boolean shouldSpawn() {
 		return current_groups < MAX_NUM_GROUPS;
 	}
 
         @Override
-	protected final void insertSupply() {
+	protected void insertSupply() {
 		new RubberGroup(getWorld());
 	}
 
-	public final void newGroup() {
+	public void newGroup() {
 		current_groups++;
 	}
 
-	public final void emptyGroup() {
+	public void emptyGroup() {
 		current_groups--;
 	}
 }

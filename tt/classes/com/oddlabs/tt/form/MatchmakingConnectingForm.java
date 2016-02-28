@@ -49,44 +49,44 @@ public final strictfp class MatchmakingConnectingForm extends Form implements Ma
 	}
 
         @Override
-	public final void clearList(int type) {
+	public void clearList(int type) {
 		assert false;
 	}
 
         @Override
-	public final void receivedList(int type, Object[] names) {
+	public void receivedList(int type, Object[] names) {
 		assert false;
 	}
 
         @Override
-	public final void joinedChat(ChatRoomInfo info) {
+	public void joinedChat(ChatRoomInfo info) {
 		assert false;
 	}
 	
         @Override
-	public final void updateChatRoom(ChatRoomInfo info) {
+	public void updateChatRoom(ChatRoomInfo info) {
 		assert false;
 	}
 
         @Override
-	public final void receivedProfiles(Profile[] profiles, String last_nick) {
+	public void receivedProfiles(Profile[] profiles, String last_nick) {
 		assert false;
 	}
 
         @Override
-	public final void doRemove() {
+	public void doRemove() {
 		super.doRemove();
 		Network.setMatchmakingListener(null);
 	}
 
         @Override
-	public final void connectionLost() {
+	public void connectionLost() {
 		remove();
 		gui_root.addModalForm(new MessageForm(Utils.getBundleString(bundle, "connection_failed")));
 	}
 
         @Override
-	public final void loginError(int error_code) {
+	public void loginError(int error_code) {
 		remove();
 		String error_message;
 		switch (error_code) {
@@ -121,7 +121,7 @@ public final strictfp class MatchmakingConnectingForm extends Form implements Ma
 	}
 	
         @Override
-	public final void loggedIn() {
+	public void loggedIn() {
 		remove();
 		if (parent_form != null)
 			parent_form.remove();
@@ -129,7 +129,7 @@ public final strictfp class MatchmakingConnectingForm extends Form implements Ma
 	}
 
         @Override
-	protected final void doCancel() {
+	protected void doCancel() {
 		Network.getMatchmakingClient().close();
 	}
 }

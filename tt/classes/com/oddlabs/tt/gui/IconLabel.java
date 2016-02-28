@@ -21,7 +21,7 @@ public final strictfp class IconLabel extends GUIObject implements Comparable {
 		icon.render(0, 0);
 	}
 
-	private final Label getLabel() {
+	private Label getLabel() {
 		return label;
 	}
 

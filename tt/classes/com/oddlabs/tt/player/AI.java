@@ -200,7 +200,7 @@ public abstract strictfp class AI implements Animated {
 			return lists[INDEX_DEFENDING_UNITS];
 	}
 
-	private final void classifyIndex(Selectable[][] lists) {
+	private void classifyIndex(Selectable[][] lists) {
 		INDEX_IDLE_PEONS = -1;
 		INDEX_IDLE_CHIEFTAINS = -1;
 		INDEX_IDLE_WARRIORS = -1;
@@ -288,7 +288,7 @@ public abstract strictfp class AI implements Animated {
 		this.tower_under_construction = tower_under_construction;
 	}
 
-	private final void reset() {
+	private void reset() {
 		sleep_time = owner.getWorld().getRandom().nextFloat()*SLEEP_SECONDS + MIN_SLEEP_SECONDS;
 	}
 

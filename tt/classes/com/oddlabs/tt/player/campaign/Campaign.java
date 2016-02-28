@@ -63,7 +63,7 @@ public abstract class Campaign {
 				});
 	}
 
-	private final void doSave(final WorldViewer viewer) {
+	private void doSave(final WorldViewer viewer) {
 		for (int i = 0; i < campaign_states.length; i++) {
 			if (campaign_states[i].getName().equals(getState().getName())) {
 				campaign_states[i] = getState();
@@ -86,7 +86,7 @@ public abstract class Campaign {
 				});
 	}
 
-	private final void doFailed(Exception e, WorldViewer viewer) {
+	private void doFailed(Exception e, WorldViewer viewer) {
 		String failed_message = Utils.getBundleString(bundle, "failed_message", new Object[]{LoadCampaignBox.SAVEGAMES_FILE_NAME, e.getMessage()});
 		viewer.getGUIRoot().addModalForm(new MessageForm(failed_message));
 	}

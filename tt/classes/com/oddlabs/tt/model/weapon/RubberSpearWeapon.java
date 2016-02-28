@@ -30,12 +30,12 @@ public final strictfp class RubberSpearWeapon extends DirectedThrowingWeapon {
 
 
         @Override
-	protected final float getMetersPerSecond() {
+	protected float getMetersPerSecond() {
 		return METERS_PER_SECOND;
 	}
 
         @Override
-	protected final int getDamage() {
+	protected int getDamage() {
 		return 2;
 	}
 }

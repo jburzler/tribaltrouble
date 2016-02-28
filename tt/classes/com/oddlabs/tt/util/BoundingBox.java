@@ -51,7 +51,7 @@ public strictfp class BoundingBox {
 		return box_radius*box_radius;
 	}
 
-	private final float computeCenteredRadius() {
+	private float computeCenteredRadius() {
 		float radius_squared_x = cx - bmin_x;
 		float radius_squared_y = cy - bmin_y;
 		float radius_squared_z = cz - bmin_z;
@@ -147,7 +147,7 @@ public strictfp class BoundingBox {
 		computeCenter();
 	}
 
-	private final void computeXYCenter() {
+	private void computeXYCenter() {
 		cx = (bmax_x + bmin_x)*0.5f;
 		cy = (bmax_y + bmin_y)*0.5f;
 	}
@@ -158,7 +158,7 @@ public strictfp class BoundingBox {
 		return (float)StrictMath.sqrt(radius_squared_x*radius_squared_x + radius_squared_y*radius_squared_y);
 	}
 
-	private final float computeXYRadius() {
+	private float computeXYRadius() {
 		float longest_x = StrictMath.max(bmax_x, -bmin_x);
 		float longest_y = StrictMath.max(bmax_y, -bmin_y);
 		return (float)StrictMath.sqrt(longest_x*longest_x + longest_y*longest_y);
@@ -178,7 +178,7 @@ public strictfp class BoundingBox {
 		computeCenter();
 	}
 
-	private final void computeCenter() {
+	private void computeCenter() {
 		computeXYCenter();
 		cz = (bmax_z + bmin_z)*0.5f;
 	}

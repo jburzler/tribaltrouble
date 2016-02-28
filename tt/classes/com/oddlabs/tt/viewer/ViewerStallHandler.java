@@ -22,7 +22,7 @@ final strictfp class ViewerStallHandler implements StallHandler {
 	}
 
         @Override
-	public final void stopStall() {
+	public void stopStall() {
 		if (waiting_for_players_form != null) {
 			waiting_for_players_form.remove();
 			waiting_for_players_form = null;
@@ -30,12 +30,12 @@ final strictfp class ViewerStallHandler implements StallHandler {
 	}
 
         @Override
-	public final void peerhubFailed() {
+	public void peerhubFailed() {
 		viewer.close();
 	}
 
         @Override
-	public final void processStall(int tick) {
+	public void processStall(int tick) {
 		if (stall_tick != tick) {
 			System.out.println("Stalled on tick " + tick);
 			stall_tick = tick;

@@ -13,32 +13,32 @@ final strictfp class ElementRenderState implements ModelState {
 	}
 
         @Override
-	public final Model getModel() {
+	public Model getModel() {
 		return model;
 	}
 
         @Override
-	public final void transform() {
+	public void transform() {
 		visitor.transform(this);
 	}
 
         @Override
-	public final float[] getTeamColor() {
+	public float[] getTeamColor() {
 		return visitor.getTeamColor(this);
 	}
 
         @Override
-	public final float[] getSelectionColor() {
+	public float[] getSelectionColor() {
 		return visitor.getSelectionColor(this);
 	}
 
-	final void setup(ModelVisitor visitor, Model model, float f) {
+	void setup(ModelVisitor visitor, Model model, float f) {
 		this.visitor = visitor;
 		this.model = model;
 		this.f = f;
 	}
 
-	final void setup(ModelVisitor visitor, Model model) {
+	void setup(ModelVisitor visitor, Model model) {
 		this.visitor = visitor;
 		this.model = model;
 	}
@@ -54,16 +54,16 @@ final strictfp class ElementRenderState implements ModelState {
 	}
 
         @Override
-	public final int getTriangleCount(int index) {
+	public int getTriangleCount(int index) {
 		return visitor.getTriangleCount(this, index);
 	}
 
         @Override
-	public final float getEyeDistanceSquared() {
+	public float getEyeDistanceSquared() {
 		return visitor.getEyeDistanceSquared(this);
 	}
 
-	final SpriteRenderer getRenderer(SpriteKey key) {
+	SpriteRenderer getRenderer(SpriteKey key) {
 		return render_state.getRenderQueues().getRenderer(key);
 	}
 }

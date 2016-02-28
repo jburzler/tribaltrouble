@@ -15,23 +15,23 @@ public final strictfp class NotifyArrowData {
 		this.end_y = end_y;
 	}
 
-	public final IconQuad getArrow() {
+	public IconQuad getArrow() {
 		return arrow;
 	}
 
-	public final int getHeadX() {
+	public int getHeadX() {
 		return head_x;
 	}
 
-	public final int getHeadY() {
+	public int getHeadY() {
 		return head_y;
 	}
 
-	public final int getEndX() {
+	public int getEndX() {
 		return end_x;
 	}
 
-	public final int getEndY() {
+	public int getEndY() {
 		return end_y;
 	}
 }

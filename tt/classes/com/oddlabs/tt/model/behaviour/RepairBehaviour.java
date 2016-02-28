@@ -27,12 +27,12 @@ public final strictfp class RepairBehaviour implements Behaviour {
 	}
 
         @Override
-	public final boolean isBlocking() {
+	public boolean isBlocking() {
 		return true;
 	}
 
         @Override
-	public final int animate(float t) {
+	public int animate(float t) {
 		anim_time += t;
 		if (anim_time > unit.getWeaponFactory().getSecondsPerRelease(1f/SECONDS_PER_ANIMATION_CYCLE) && !sound) {
 			sound = true;
@@ -58,13 +58,13 @@ public final strictfp class RepairBehaviour implements Behaviour {
 		return Selectable.INTERRUPTIBLE;
 	}
 
-	private final void restartAnimation() {
+	private void restartAnimation() {
 		anim_time = 0;
 		sound = false;
 		unit.switchAnimation(1f/SECONDS_PER_ANIMATION_CYCLE, Unit.ANIMATION_THROWING);
 	}
 
         @Override
-	public final void forceInterrupted() {
+	public void forceInterrupted() {
 	}
 }

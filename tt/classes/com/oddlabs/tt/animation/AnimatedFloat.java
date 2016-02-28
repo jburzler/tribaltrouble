@@ -9,17 +9,17 @@ public final strictfp class AnimatedFloat {
 		reset(0f);
 	}
 
-	public final void change(float animation_complete) {
+	public void change(float animation_complete) {
 		if (animation_complete >= 1.0f)
 			val = dval;
 		cval = (dval - val) * animation_complete + val;
 	}
 
-	public final void updateVal() {
+	public void updateVal() {
 		val = cval;
 	}
 
-	public final void reset(float new_val) {
+	public void reset(float new_val) {
 		val = new_val; dval = new_val; cval = new_val;
 	}
 }

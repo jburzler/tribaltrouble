@@ -30,7 +30,7 @@ public final strictfp class DefeatTrigger extends IntervalTrigger {
 	}
 
         @Override
-	protected final void check() {
+	protected void check() {
 		Player current = viewer.getLocalPlayer();
 		if (chieftain != current.getChieftain()) {
 			triggered_by_chieftain_death = true;
@@ -44,7 +44,7 @@ public final strictfp class DefeatTrigger extends IntervalTrigger {
 	}
 
         @Override
-	protected final void done() {
+	protected void done() {
 		if (runnable == null) {
 			GUIRoot gui_root = viewer.getGUIRoot();
 			ResourceBundle bundle = ResourceBundle.getBundle(DefeatTrigger.class.getName());

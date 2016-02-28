@@ -9,11 +9,11 @@ public final strictfp class ColumnInfo {
 		this.width = width;
 	}
 
-	public final String getCaption() {
+	public String getCaption() {
 		return caption;
 	}
 
-	public final int getWidth() {
+	public int getWidth() {
 		return width;
 	}
 }

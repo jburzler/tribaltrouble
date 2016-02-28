@@ -87,31 +87,31 @@ public final strictfp class LandscapeResources {
 		return new LowDetailModel[]{jungle_lowdetail, palm_lowdetail, oak_lowdetail, pine_lowdetail};
 	}
 
-	public final SpriteKey[] getRockFragments() {
+	public SpriteKey[] getRockFragments() {
 		return rock_fragment_sprites;
 	}
 	
-	public final SpriteKey[] getIronFragments() {
+	public SpriteKey[] getIronFragments() {
 		return iron_fragment_sprites;
 	}
 
-	public final SpriteKey[][] getPlants() {
+	public SpriteKey[][] getPlants() {
 		return plant_sprites;
 	}
 
-	public final SpriteKey getChicken() {
+	public SpriteKey getChicken() {
 		return chicken;
 	}
 
-	public final Audio getBirdIdleSound(Random random) {
+	public Audio getBirdIdleSound(Random random) {
 		return bird_idle_sound[random.nextInt(bird_idle_sound.length)];
 	}
 	
-	public final Audio getBirdPeckSound() {
+	public Audio getBirdPeckSound() {
 		return bird_peck_sound;
 	}
 	
-	public final Audio getBirdDeathSound() {
+	public Audio getBirdDeathSound() {
 		return bird_death_sound;
 	}
 }

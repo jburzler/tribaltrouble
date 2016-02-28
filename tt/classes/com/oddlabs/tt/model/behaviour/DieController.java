@@ -11,7 +11,7 @@ public final strictfp class DieController extends Controller {
 	}
 
         @Override
-	public final void decide() {
+	public void decide() {
 		unit.setBehaviour(new DieBehaviour(unit));
 	}
 }

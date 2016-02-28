@@ -42,122 +42,122 @@ public final strictfp class CampaignState implements Serializable {
 		}
 	}
 
-	public final void setIslandState(int index, int state) {
+	public void setIslandState(int index, int state) {
 		if (island_states[index] == ISLAND_SEMI_AVAILABLE && state == ISLAND_SEMI_AVAILABLE)
 			island_states[index] = ISLAND_AVAILABLE;
 		else if (island_states[index] != ISLAND_COMPLETED)
 			island_states[index] = state;
 	}
 
-	public final int getIslandState(int index) {
+	public int getIslandState(int index) {
 /*		for (int i = 0; i < island_states.length; i++)
 			island_states[i] = ISLAND_AVAILABLE;
 		island_states[0] = ISLAND_COMPLETED;*/
 		return island_states[index];
 	}
 
-	public final void setCurrentIsland(int current_island) {
+	public void setCurrentIsland(int current_island) {
 		prev_island = this.current_island;
 		this.current_island = current_island;
 	}
 
-	public final int getCurrentIsland() {
+	public int getCurrentIsland() {
 		return current_island;
 	}
 
-	public final void setPrevIsland(int prev_island) {
+	public void setPrevIsland(int prev_island) {
 		this.prev_island = prev_island;
 	}
 
-	public final int getPrevIsland() {
+	public int getPrevIsland() {
 		return prev_island;
 	}
 
-	public final void setNumPeons(int num_peons) {
+	public void setNumPeons(int num_peons) {
 		this.num_peons = num_peons;
 	}
 
-	public final int getNumPeons() {
+	public int getNumPeons() {
 		return num_peons;
 	}
 
-	public final void setNumRockWarriors(int num_rock_warriors) {
+	public void setNumRockWarriors(int num_rock_warriors) {
 		this.num_rock_warriors = num_rock_warriors;
 	}
 
-	public final int getNumRockWarriors() {
+	public int getNumRockWarriors() {
 		return num_rock_warriors;
 	}
 
-	public final void setNumIronWarriors(int num_iron_warriors) {
+	public void setNumIronWarriors(int num_iron_warriors) {
 		this.num_iron_warriors = num_iron_warriors;
 	}
 
-	public final int getNumIronWarriors() {
+	public int getNumIronWarriors() {
 		return num_iron_warriors;
 	}
 
-	public final void setNumRubberWarriors(int num_rubber_warriors) {
+	public void setNumRubberWarriors(int num_rubber_warriors) {
 		this.num_rubber_warriors = num_rubber_warriors;
 	}
 
-	public final int getNumRubberWarriors() {
+	public int getNumRubberWarriors() {
 		return num_rubber_warriors;
 	}
 
-	public final void setHasRubberWeapons(boolean has_rubber_weapons) {
+	public void setHasRubberWeapons(boolean has_rubber_weapons) {
 		this.has_rubber_weapons = has_rubber_weapons;
 	}
 
-	public final boolean hasRubberWeapons() {
+	public boolean hasRubberWeapons() {
 		return has_rubber_weapons;
 	}
 
-	public final void setHasMagic0(boolean has_magic0) {
+	public void setHasMagic0(boolean has_magic0) {
 		this.has_magic0 = has_magic0;
 	}
 
-	public final boolean hasMagic0() {
+	public boolean hasMagic0() {
 		return has_magic0;
 	}
 
-	public final void setHasMagic1(boolean has_magic1) {
+	public void setHasMagic1(boolean has_magic1) {
 		this.has_magic1 = has_magic1;
 	}
 
-	public final boolean hasMagic1() {
+	public boolean hasMagic1() {
 		return has_magic1;
 	}
 
-	public final String getName() {
+	public String getName() {
 		return name;
 	}
 
-	public final void setName(String name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 
-	public final long getDate() {
+	public long getDate() {
 		return date;
 	}
 
-	public final void setDate(long date) {
+	public void setDate(long date) {
 		this.date = date;
 	}
 
-	public final void setRace(int race) {
+	public void setRace(int race) {
 		this.race = race;
 	}
 	
-	public final int getRace() {
+	public int getRace() {
 		return race;
 	}
 
-	public final void setDifficulty(int difficulty) {
+	public void setDifficulty(int difficulty) {
 		this.difficulty = difficulty;
 	}
 	
-	public final int getDifficulty() {
+	public int getDifficulty() {
 		return difficulty;
 	}
 }

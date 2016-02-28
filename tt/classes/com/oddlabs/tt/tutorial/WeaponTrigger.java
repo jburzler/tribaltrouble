@@ -16,7 +16,7 @@ public final strictfp class WeaponTrigger extends TutorialTrigger {
 	}
 
         @Override
-	protected final void run(Tutorial tutorial) {
+	protected void run(Tutorial tutorial) {
 		Set set = tutorial.getViewer().getSelection().getCurrentSelection().getSet(); 
 		Iterator it = set.iterator();
 		while (it.hasNext()) {

@@ -33,37 +33,37 @@ final strictfp class RouterClient implements ConnectionInterface {
                 });
 	}
 
-	final List getChecksums() {
+	List getChecksums() {
 		return checksums;
 	}
 
-	final Session getSession() {
+	Session getSession() {
 		return session;
 	}
 
-	final void setTimeout(SessionManager.Timeout timeout) {
+	void setTimeout(SessionManager.Timeout timeout) {
 		this.timeout = timeout;
 	}
 
-	final SessionManager.Timeout getTimeout() {
+	SessionManager.Timeout getTimeout() {
 		return timeout;
 	}
 
-	final void heartbeat(int millis) {
+	void heartbeat(int millis) {
 		client_interface.heartbeat(millis);
 	}
 
-	final RouterClientInterface getInterface() {
+	RouterClientInterface getInterface() {
 		return client_interface;
 	}
 
         @Override
-	public final void writeBufferDrained(AbstractConnection conn) {
+	public void writeBufferDrained(AbstractConnection conn) {
 		if (session != null && session.isComplete())
 			session.startTimeout(this);
 	}
 
-	final int getClientID() {
+	int getClientID() {
 		return client_id;
 	}
 
@@ -121,7 +121,7 @@ final strictfp class RouterClient implements ConnectionInterface {
 	}
 
         @Override
-	public final void handle(Object sender, ARMIEvent event) {
+	public void handle(Object sender, ARMIEvent event) {
 		try {
 			event.execute(current_interface.methods, current_interface.instance);
 		} catch (IllegalARMIEventException e) {
@@ -130,15 +130,15 @@ final strictfp class RouterClient implements ConnectionInterface {
 	}
 
         @Override
-	public final void connected(AbstractConnection conn) {
+	public void connected(AbstractConnection conn) {
 	}
 
         @Override
-	public final void error(AbstractConnection conn, IOException e) {
+	public void error(AbstractConnection conn, IOException e) {
 		doError(false, e);
 	}
 
-	final void close(final boolean checksum_error) {
+	void close(final boolean checksum_error) {
 		connection.close();
 		if (session != null) {
 			logger.info("Removing client: " + this);
@@ -149,7 +149,7 @@ final strictfp class RouterClient implements ConnectionInterface {
 		}
 	}
 
-	final void doError(final boolean checksum_error, Exception e) {
+	void doError(final boolean checksum_error, Exception e) {
 		close(checksum_error);
 		router.removeClient(this);
 		logger.info("Client disconnected, reason: " + e);

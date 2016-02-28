@@ -32,27 +32,27 @@ public final strictfp class SonicBlastFactory implements MagicFactory {
 	}
 
         @Override
-	public final float getHitRadius() {
+	public float getHitRadius() {
 		return hit_radius;
 	}
 
         @Override
-	public final float getSecondsPerAnim() {
+	public float getSecondsPerAnim() {
 		return seconds_per_anim;
 	}
 
         @Override
-	public final float getSecondsPerInit() {
+	public float getSecondsPerInit() {
 		return init_ratio*seconds_per_anim;
 	}
 
         @Override
-	public final float getSecondsPerRelease() {
+	public float getSecondsPerRelease() {
 		return release_ratio*seconds_per_anim;
 	}
 
         @Override
-	public final Magic execute(Unit src) {
+	public Magic execute(Unit src) {
 		return new SonicBlast(offset_x, offset_y, offset_z, hit_radius, hit_chance_closest, hit_chance_farthest, damage_closest, damage_farthest, seconds, src);
 	}
 }

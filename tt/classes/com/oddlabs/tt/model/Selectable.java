@@ -104,7 +104,7 @@ public abstract class Selectable extends Model implements Target, Animated, Mode
 		getUnitGrid().scan(filter, getGridX(), getGridY());
 	}
 
-	private final static boolean isAdjacent(UnitGrid unit_grid, int grid_x, int grid_y, Occupant occ) {
+	private static boolean isAdjacent(UnitGrid unit_grid, int grid_x, int grid_y, Occupant occ) {
 		int t_x = occ.getGridX();
 		int t_y = occ.getGridY();
 		int dx = 0;
@@ -153,7 +153,7 @@ public abstract class Selectable extends Model implements Target, Animated, Mode
 		decide();
 	}
 
-	private final void decide() {
+	private void decide() {
 		if (last_behaviour_state != UNINTERRUPTIBLE) {
 			doDecide();
 		} else {
@@ -161,7 +161,7 @@ public abstract class Selectable extends Model implements Target, Animated, Mode
 		}
 	}
 
-	private final void doDecide() {
+	private void doDecide() {
 		should_decide = false;
 		current_behaviour = null;
 		getCurrentController().decide();

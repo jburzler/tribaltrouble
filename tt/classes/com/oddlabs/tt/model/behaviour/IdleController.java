@@ -24,13 +24,13 @@ public final strictfp class IdleController extends Controller {
 		this.can_move = can_move;
 	}
 
-	public final boolean shouldSleep(float t) {
+	public boolean shouldSleep(float t) {
 		redecide_time -= t;
 		return redecide_time > 0;
 	}
 
         @Override
-	public final void decide() {
+	public void decide() {
 		unit.setBehaviour(idle_behaviour);
 		if (shouldSleep(0f))
 			return;

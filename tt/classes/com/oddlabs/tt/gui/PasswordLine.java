@@ -35,7 +35,7 @@ public strictfp class PasswordLine extends EditLine {
 		updatePassword();
 	}
 
-	private final void updatePassword() {
+	private void updatePassword() {
 		password_digest = CryptUtils.digest(getText().toString());
 	}
 	

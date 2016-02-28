@@ -13,19 +13,19 @@ public final strictfp class Color {
 		this.a = a;
 	}
 
-	public final float getR() {
+	public float getR() {
 		return r;
 	}
 
-	public final float getG() {
+	public float getG() {
 		return g;
 	}
 
-	public final float getB() {
+	public float getB() {
 		return b;
 	}
 
-	public final float getA() {
+	public float getA() {
 		return a;
 	}
 }

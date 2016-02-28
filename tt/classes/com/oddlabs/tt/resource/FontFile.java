@@ -9,13 +9,13 @@ public final strictfp class FontFile extends File {
 	}
 
         @Override
-	public final Object newInstance() {
+	public Object newInstance() {
 		FontInfo font_info = FontInfo.loadFromFile(getURL());
 		return new Font(font_info);
 	}
 
         @Override
-	public final boolean equals(Object o) {
+	public boolean equals(Object o) {
 		if (!(o instanceof FontFile))
 			return false;
 		return super.equals(o);

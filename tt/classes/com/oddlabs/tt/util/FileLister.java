@@ -14,7 +14,7 @@ public final strictfp class FileLister implements FileListerInterface {
 	}
 
         @Override
-	public final void newFiles(File[] new_files) {
+	public void newFiles(File[] new_files) {
 		listener.newFiles(new_files);
 	}
 
@@ -26,7 +26,7 @@ public final strictfp class FileLister implements FileListerInterface {
 		}
 
                 @Override
-		public final boolean accept(File dir, String name) {
+		public boolean accept(File dir, String name) {
 			return Pattern.matches(pattern, name);
 		}
 	}

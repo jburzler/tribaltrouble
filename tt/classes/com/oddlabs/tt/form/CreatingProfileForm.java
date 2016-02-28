@@ -43,14 +43,14 @@ public final strictfp class CreatingProfileForm extends Form implements ProfileL
 	}
 
         @Override
-	public final void success() {
+	public void success() {
 		remove();
 		main_menu.setMenuCentered(profiles_form);
 		Network.getMatchmakingClient().requestProfiles();
 	}
 	
         @Override
-	public final void error(int error_code) {
+	public void error(int error_code) {
 		remove();
 		String error_message;
 		switch (error_code) {
@@ -79,6 +79,6 @@ public final strictfp class CreatingProfileForm extends Form implements ProfileL
 	}
 	
         @Override
-	protected final void doCancel() {
+	protected void doCancel() {
 	}
 }

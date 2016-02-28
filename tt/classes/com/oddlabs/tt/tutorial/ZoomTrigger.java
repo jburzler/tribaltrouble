@@ -12,7 +12,7 @@ public final strictfp class ZoomTrigger extends TutorialTrigger {
 	}
 
         @Override
-	protected final void run(Tutorial tutorial) {
+	protected void run(Tutorial tutorial) {
 		GameCamera camera = tutorial.getViewer().getCamera();
 		if (camera.getLastZoomFactor() > 0f) {
 			zoom_dirs[0] = true;

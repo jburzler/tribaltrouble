@@ -14,7 +14,7 @@ public final strictfp class ErosionThermal {
 	private static Channel height_d;
 	private static Channel old;
 
-	public final static Channel erodeReference(Channel channel, int iterations) {
+	public static Channel erodeReference(Channel channel, int iterations) {
 		height = channel;
 		height_d = new Channel(channel.width, channel.height);
 		float talus = 4f/channel.width;
@@ -116,7 +116,7 @@ public final strictfp class ErosionThermal {
 		return channel;
 	}
 
-	public final static Channel erodeFast(Channel channel, int iterations) {
+	public static Channel erodeFast(Channel channel, int iterations) {
 		height = channel;
 		float talus = 3.75f/channel.width;
 		long start = System.currentTimeMillis();
@@ -200,7 +200,7 @@ public final strictfp class ErosionThermal {
 		return channel;
 	}
 	
-	public final static Channel erodeFast2(Channel channel, int iterations) {
+	public static Channel erodeFast2(Channel channel, int iterations) {
 		height = channel;
 		float talus = 12f/channel.width;
 		long start = System.currentTimeMillis();
@@ -254,7 +254,7 @@ public final strictfp class ErosionThermal {
 		return channel;
 	}
 	
-	public final static Channel erodeFast3(Channel channel, int iterations) {
+	public static Channel erodeFast3(Channel channel, int iterations) {
 		height = channel;
 		float talus = 16f/channel.width;
 		long start = System.currentTimeMillis();
@@ -308,7 +308,7 @@ public final strictfp class ErosionThermal {
 		return channel;
 	}
 	
-	private final static void save(int i) {
+	private static void save(int i) {
 		System.out.println("height " + i + " checksum: " + height.sum());
 		if (i < 10) {
 			new GLIntImage(height.toLayer()).saveAsBMP("height00" + i);
@@ -319,7 +319,7 @@ public final strictfp class ErosionThermal {
 		}
 	}
 	
-	private final static void score(int i) {
+	private static void score(int i) {
 		Channel slope = height.copy().lineart();
 		float average = Analyzer.average(slope);
 		float deviation = Analyzer.deviation(slope);
@@ -327,12 +327,12 @@ public final strictfp class ErosionThermal {
 		System.out.println(score);
 	}
 	
-	private final static void timer(int i, long start) {
+	private static void timer(int i, long start) {
 		long stop = System.currentTimeMillis();
 		System.out.println((stop - start)/1000f);
 	}
 	
-	private final static void diff(int i) {
+	private static void diff(int i) {
 		float diff = old.channelDifference(height).sum();
 		System.out.println(diff/(old.width*old.height));
 		old = height.copy();

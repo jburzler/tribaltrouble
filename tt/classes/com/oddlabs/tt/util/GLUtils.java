@@ -22,19 +22,19 @@ public final strictfp class GLUtils {
 		int_buf = BufferUtils.createIntBuffer(16);
 	}
 
-	public final static GLIntImage loadAsGLImage(String location) {
+	public static GLIntImage loadAsGLImage(String location) {
 		Image img = null;
 		img = Image.read(com.oddlabs.util.Utils.makeURL(location));
 		GLIntImage glimage = new GLIntImage(img.getWidth(), img.getHeight(), img.getPixels(), GL11.GL_RGBA);
 		return glimage;
 	}
 
-	public final static boolean getGLBoolean(int gl_enum) {
+	public static boolean getGLBoolean(int gl_enum) {
 		GL11.glGetBoolean(gl_enum, byte_buf);
 		return byte_buf.get(0) == (byte)1;
 	}
 
-	public final static int getGLInteger(int gl_enum) {
+	public static int getGLInteger(int gl_enum) {
 		GL11.glGetInteger(gl_enum, int_buf);
 		return int_buf.get(0);
 	}
@@ -52,7 +52,7 @@ public final strictfp class GLUtils {
 		GL11.glTexGen(GL11.GL_T, GL11.GL_OBJECT_PLANE, plane);
 	}
 
-	public final static String takeScreenshot(String filename) {
+	public static String takeScreenshot(String filename) {
 		if (filename.equals("")) {
 			int i = 0;
 			File file;

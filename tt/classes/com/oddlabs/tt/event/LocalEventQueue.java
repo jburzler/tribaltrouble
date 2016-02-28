@@ -15,31 +15,31 @@ public final strictfp class LocalEventQueue {
 	private Deterministic deterministic;
 	private float time = 0;
 
-	public final float getTime() {
+	public float getTime() {
 		return time;
 	}
 
-	public final long getMillis() {
+	public long getMillis() {
 		return high_precision_manager.getTick()*AnimationManager.ANIMATION_MILLISECONDS_PER_PRECISION_TICK;
 	}
 
-	public final static LocalEventQueue getQueue() {
+	public static LocalEventQueue getQueue() {
 		return queue_instance;
 	}
 
-	public final void setEventsLogged(File log_file) {
+	public void setEventsLogged(File log_file) {
 		assert deterministic == null;
 		this.deterministic = new SaveDeterministic(log_file);
 	}
 
-	public final void dispose() {
+	public void dispose() {
 		if (deterministic != null)
 			deterministic.endLog();
 		deterministic = null;
 	}
 
 //public static Deterministic stack_deterministic;
-	public final void loadEvents(File log_file, boolean zipped) {
+	public void loadEvents(File log_file, boolean zipped) {
 		this.deterministic = new LoadDeterministic(log_file, zipped);
 /*		File stack_file = new File("stack.log");
 		if (stack_file.exists())
@@ -49,15 +49,15 @@ public final strictfp class LocalEventQueue {
 		this.deterministic = new StackTraceDeterministic(deterministic, stack_deterministic);*/
 	}
 
-	public final AnimationManager getHighPrecisionManager() {
+	public AnimationManager getHighPrecisionManager() {
 		return high_precision_manager;
 	}
 
-	public final AnimationManager getManager() {
+	public AnimationManager getManager() {
 		return manager;
 	}
 
-	public final int computeChecksum() {
+	public int computeChecksum() {
 		checksum.update(getManager().getTick());
 		checksum.update(getHighPrecisionManager().getTick());
 		manager.updateChecksum(checksum);
@@ -65,20 +65,20 @@ public final strictfp class LocalEventQueue {
 		return checksum.getValue();
 	}
 
-	public final Deterministic getDeterministic() {
+	public Deterministic getDeterministic() {
 		return deterministic;
 	}
 
-	public final void tickHighPrecision(float t) {
+	public void tickHighPrecision(float t) {
 		time += t;
 		getHighPrecisionManager().runAnimations(t);
 	}
 
-	public final void tickLowPrecision(float t) {
+	public void tickLowPrecision(float t) {
 		getManager().runAnimations(t);
 	}
 
-	public final void debugPrintAnimations() {
+	public void debugPrintAnimations() {
 		getManager().debugPrintAnimations();
 	}
 }

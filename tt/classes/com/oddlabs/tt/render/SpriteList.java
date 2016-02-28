@@ -34,35 +34,35 @@ public final strictfp class SpriteList {
             }
 	}
 
-	public final void reset(int index, boolean respond, boolean modulate_tex1) {
+	public void reset(int index, boolean respond, boolean modulate_tex1) {
 		getSprite(index).reset(respond, modulate_tex1);
 	}
 
-	public final void render(int index, int animation, float anim_ticks) {
+	public void render(int index, int animation, float anim_ticks) {
 		getSprite(index).render(animation, anim_ticks);
 	}
 
-	public final float[] getClearColor() {
+	public float[] getClearColor() {
 		return getSprite(0).getClearColor();
 	}
 
-	public final void renderModel(int tex_index) {
+	public void renderModel(int tex_index) {
 		getSprite(0).renderModel(tex_index);
 	}
 
-	public final BoundingBox[] getBounds() {
+	public BoundingBox[] getBounds() {
 		return bounds;
 	}
 
-	public final int getNumSprites() {
+	public int getNumSprites() {
 		return sprites.length;
 	}
 
-	public final Sprite getSprite(int index) {
+	public Sprite getSprite(int index) {
 		return sprites[index];
 	}
 
-	public final int[] getAnimationTypes() {
+	public int[] getAnimationTypes() {
 		return type_array;
 	}
 }

@@ -58,11 +58,11 @@ public final strictfp class PrivateMessageForm extends Form {
 	}
 	
         @Override
-	public final void setFocus() {
+	public void setFocus() {
 		editline_name.setFocus();
 	}
 
-	private final void send() {
+	private void send() {
 		String message = editline_name.getContents();
 		Network.getMatchmakingClient().sendPrivateMessage(gui_root, nick, message);
 		remove();
@@ -70,12 +70,12 @@ public final strictfp class PrivateMessageForm extends Form {
 
 	private final strictfp class OKListener implements MouseClickListener, EnterListener {
                 @Override
-		public final void mouseClicked(int button, int x, int y, int clicks) {
+		public void mouseClicked(int button, int x, int y, int clicks) {
 			send();
 		}
 
                 @Override
-		public final void enterPressed(CharSequence text) {
+		public void enterPressed(CharSequence text) {
 			send();
 		}
 	}

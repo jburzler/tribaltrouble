@@ -22,7 +22,7 @@ public final strictfp class RowCollection extends GUIObject {
 		setCanFocus(true);
 	}
 
-	public final void clear() {
+	public void clear() {
 		for (int i = 0; i < rows.size(); i++) {
 			Row row = (Row)rows.get(i);
 			row.remove();
@@ -32,7 +32,7 @@ public final strictfp class RowCollection extends GUIObject {
 		replaceRows();
 	}
 
-	public final void addRow(Row row) {
+	public void addRow(Row row) {
 		rows.add(row);
 		row.addMouseClickListener(new RowListener(row));
 		row.setSortIndex(sort_index);
@@ -41,11 +41,11 @@ public final strictfp class RowCollection extends GUIObject {
 		replaceRows();
 	}
 
-	public final int getSize() {
+	public int getSize() {
 		return rows.size();
 	}
 
-	public final void markChanged(int index, boolean sorted_descending) {
+	public void markChanged(int index, boolean sorted_descending) {
 		sort_index = index;
 		this.sorted_descending = sorted_descending;
 		for (int i = 0; i < rows.size(); i++) {
@@ -55,7 +55,7 @@ public final strictfp class RowCollection extends GUIObject {
 		replaceRows();
 	}
 
-	public final void replaceRows() {
+	public void replaceRows() {
 		int y = getHeight() + ((MultiColumnComboBox)getParent()).getOffsetY();
 		for (int i = 0; i < rows.size(); i++) {
 			Row row;
@@ -72,7 +72,7 @@ public final strictfp class RowCollection extends GUIObject {
 		}
 	}
 
-	public final int getContentHeight() {
+	public int getContentHeight() {
 		int height = 0;
 		for (int i = 0; i < rows.size(); i++) {
 			height += ((Row)rows.get(i)).getHeight();
@@ -80,13 +80,13 @@ public final strictfp class RowCollection extends GUIObject {
 		return height;
 	}
 
-	public final Object getSelected() {
+	public Object getSelected() {
 		if (selected_row == null)
 			return null;
 		return selected_row.getContentObject();
 	}
 
-	public final void selectRow(Row row) {
+	public void selectRow(Row row) {
 		assert rows.contains(row); 
 		if (selected_row != null)
 			selected_row.mark(false);
@@ -102,7 +102,7 @@ public final strictfp class RowCollection extends GUIObject {
 		}
 
                 @Override
-		public final void mouseClicked(int button, int x, int y, int clicks) {
+		public void mouseClicked(int button, int x, int y, int clicks) {
 			selectRow(row);
 			if (button == LocalInput.RIGHT_BUTTON) {
 				multi_box.clickedRow();

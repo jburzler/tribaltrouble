@@ -123,29 +123,29 @@ public final strictfp class Building extends Selectable implements Occupant {
 	}
 	
         @Override
-	public final float getOffsetZ() {
+	public float getOffsetZ() {
 		return 0;
 	}
 	
         @Override
-	public final void visit(ElementVisitor visitor) {
+	public void visit(ElementVisitor visitor) {
 		visitor.visitBuilding(this);
 	}
 
-	public final BuildingTemplate getBuildingTemplate() {
+	public BuildingTemplate getBuildingTemplate() {
 		return (BuildingTemplate)getTemplate();
 	}
 
-	public final boolean hasRallyPoint() {
+	public boolean hasRallyPoint() {
 		return rally_point != this;
 	}
 
-	public final Target getRallyPoint() {
+	public Target getRallyPoint() {
 		return rally_point;
 	}
 
         @Override
-	protected final void doAnimate(float t) {
+	protected void doAnimate(float t) {
 		if (!isDead()) {
 			UnitContainer unit_container = getUnitContainer();
 			if (unit_container != null)
@@ -192,47 +192,47 @@ public final strictfp class Building extends Selectable implements Occupant {
 		}
 	}
 
-	public final UnitContainer getUnitContainer() {
+	public UnitContainer getUnitContainer() {
 		assert !isDead();
 		return (UnitContainer)supply_containers.get(Unit.class);
 	}
 
-	public final SupplyContainer getSupplyContainer(Class key) {
+	public SupplyContainer getSupplyContainer(Class key) {
 		assert !isDead();
 		return (SupplyContainer)supply_containers.get(key);
 	}
 
-	public final BuildSupplyContainer getBuildSupplyContainer(Class key) {
+	public BuildSupplyContainer getBuildSupplyContainer(Class key) {
 		assert !isDead();
 		return (BuildSupplyContainer)build_containers.get(key);
 	}
 
-	public final DeployContainer getDeployContainer(int key) {
+	public DeployContainer getDeployContainer(int key) {
 		assert !isDead();
 		return deploy_containers[key];
 	}
 
-	public final ChieftainContainer getChieftainContainer() {
+	public ChieftainContainer getChieftainContainer() {
 		assert !isDead();
 		return chieftain_container;
 	}
 
         @Override
-	public final boolean isEnabled() {
+	public boolean isEnabled() {
 		return !isDead();
 	}
 
-	public final int getUnitCount() {
+	public int getUnitCount() {
 		assert !isDead();
 		return getUnitContainer().getNumSupplies();
 	}
 
-	public final boolean canExitTower() {
+	public boolean canExitTower() {
 		return !isDead() && getAbilities().hasAbilities(Abilities.ATTACK) && getUnitContainer().getNumSupplies() > 0 && getOwner().canExitTowers() &&
 			!(((MountUnitContainer)getUnitContainer()).getUnit().getCurrentController() instanceof StunController);
 	}
 
-	public final void exitTower() {
+	public void exitTower() {
 		assert !isDead();
 		UnitContainer container = getUnitContainer();
 		if (canExitTower()) {
@@ -245,14 +245,14 @@ public final strictfp class Building extends Selectable implements Occupant {
 		}
 	}
 
-	public final void deployUnits(int type, int num_units) {
+	public void deployUnits(int type, int num_units) {
 		assert !isDead();
 		getOwner().getWorld().updateGlobalChecksum(type);
 		getOwner().getWorld().updateGlobalChecksum(num_units);
 		getDeployContainer(type).orderSupply(num_units);
 	}
 
-	public final void createHarvesters(int num_tree, int num_rock, int num_iron, int num_rubber) {
+	public void createHarvesters(int num_tree, int num_rock, int num_iron, int num_rubber) {
 		assert !isDead();
 		createHarvesters(TreeSupply.class, num_tree);
 		createHarvesters(RockSupply.class, num_rock);
@@ -260,7 +260,7 @@ public final strictfp class Building extends Selectable implements Occupant {
 		createHarvesters(RubberSupply.class, num_rubber);
 	}
 
-	private final void createHarvesters(Class supply_type, int amount) {
+	private void createHarvesters(Class supply_type, int amount) {
 		Race race = getOwner().getRace();
 		for (int i = 0; i < amount; i++) {
 			getUnitContainer().prepareDeploy(-1);
@@ -270,7 +270,7 @@ public final strictfp class Building extends Selectable implements Occupant {
 		}
 	}
 
-	public final void buildWeapons(Class type, int num_weapons, boolean infinite) {
+	public void buildWeapons(Class type, int num_weapons, boolean infinite) {
 		assert !isDead();
 		if (infinite)
 			getOwner().getWorld().updateGlobalChecksum(num_weapons);
@@ -279,15 +279,15 @@ public final strictfp class Building extends Selectable implements Occupant {
 		((BuildProductionContainer)getBuildSupplyContainer(type)).orderSupply(num_weapons, infinite);
 	}
 
-	public final boolean canBuildChieftain() {
+	public boolean canBuildChieftain() {
 		return !isDead() && chieftain_container != null && getOwner().canBuildChieftains() && !getOwner().hasActiveChieftain() && !getOwner().isTrainingChieftain();
 	}
 
-	public final boolean canStopChieftain() {
+	public boolean canStopChieftain() {
 		return !isDead() && chieftain_container != null && chieftain_container.isTraining();
 	}
 
-	public final void trainChieftain(boolean start) {
+	public void trainChieftain(boolean start) {
 		if (canBuildChieftain() && start) {
 			chieftain_container.startTraining();
 			getOwner().setTrainingChieftain(true);
@@ -299,7 +299,7 @@ public final strictfp class Building extends Selectable implements Occupant {
 		}
 	}
 
-	public final void deployChieftain() {
+	public void deployChieftain() {
 		chieftain_container.stopTraining();
 		getOwner().setTrainingChieftain(false);
 		is_training_chieftain = false;
@@ -307,11 +307,11 @@ public final strictfp class Building extends Selectable implements Occupant {
 		getOwner().setActiveChieftain(chieftain);
 	}
 
-	private final Unit createUnit(Target rally_point, UnitTemplate template) {
+	private Unit createUnit(Target rally_point, UnitTemplate template) {
 		return new Unit(getOwner(), getPositionX(), getPositionY(), rally_point, template, null, true, true);
 	}
 
-	public final void createArmy(int num_peon, int num_rock, int num_iron, int num_rubber) {
+	public void createArmy(int num_peon, int num_rock, int num_iron, int num_rubber) {
 		assert !isDead();
 		createArmy(num_peon, Race.UNIT_PEON);
 		createArmy(num_rock, Race.UNIT_WARRIOR_ROCK);
@@ -319,7 +319,7 @@ public final strictfp class Building extends Selectable implements Occupant {
 		createArmy(num_rubber, Race.UNIT_WARRIOR_RUBBER);
 	}
 
-	private final void createArmy(int amount, int template) {
+	private void createArmy(int amount, int template) {
 		Race race = getOwner().getRace();
 		checkRallyPoint();
 		for (int i = 0; i < amount; i++) {
@@ -340,12 +340,12 @@ public final strictfp class Building extends Selectable implements Occupant {
 		createTransporters(num_rubber, RubberSupply.class);
 	}
 
-	private final void checkRallyPoint() {
+	private void checkRallyPoint() {
 		if (hasRallyPoint() && rally_point.isDead())
 			rally_point = this;
 	}
 
-	private final void createTransporters(int amount, Class supply) {
+	private void createTransporters(int amount, Class supply) {
 		Race race = getOwner().getRace();
 		checkRallyPoint();
 		for (int i = 0; i < amount; i++) {
@@ -359,16 +359,16 @@ public final strictfp class Building extends Selectable implements Occupant {
 
 	}
 
-	public final boolean isDamaged() {
+	public boolean isDamaged() {
 		assert !isDead();
 		return hit_points > 0 && hit_points < getBuildingTemplate().getMaxHitPoints();
 	}
 
-	public final int getHitPoints() {
+	public int getHitPoints() {
 		return hit_points;
 	}
 
-	private final void setHitPoints(int new_hit_points) {
+	private void setHitPoints(int new_hit_points) {
 		final float MIN_ENERGY = 3f;
 		final float MAX_ENERGY = 5f;
 		final int START_SMOKE = getBuildingTemplate().getMaxHitPoints()/2;
@@ -382,7 +382,7 @@ public final strictfp class Building extends Selectable implements Occupant {
 			damaged_emitter.stop();
 	}
 
-	public final void repair(int amount) {
+	public void repair(int amount) {
 		assert !isDead();
 		assert isPlaced();
 		if (!isDamaged())
@@ -483,30 +483,30 @@ public final strictfp class Building extends Selectable implements Occupant {
 		}
 	}
 
-	public final static boolean isPlacingLegal(UnitGrid unit_grid, BuildingTemplate template, int grid_x, int grid_y) {
+	public static boolean isPlacingLegal(UnitGrid unit_grid, BuildingTemplate template, int grid_x, int grid_y) {
 		return doIsPlacingLegal(unit_grid, grid_x, grid_y, template.getPlacingSize());
 	}
 
-	public final boolean isPlacingLegal() {
+	public boolean isPlacingLegal() {
 		return !isDead() && getOwner().canBuild(getBuildingTemplate().getTemplateID()) && 
 			doIsPlacingLegal(getUnitGrid(), getGridX(), getGridY(), getBuildingTemplate().getPlacingSize() - PLACING_BORDER);
 	}
 
-	public final boolean isPlaced() {
+	public boolean isPlaced() {
 		assert !isDead();
 		return build_points != 0;
 	}
 
-	public final boolean isComplete() {
+	public boolean isComplete() {
 		return build_points == getBuildingTemplate().getMaxHitPoints();
 	}
 
         @Override
-	public final float getHitOffsetZ() {
+	public float getHitOffsetZ() {
 		return getTemplate().getHitOffsetZ(getRenderLevel());
 	}
 
-	public final static boolean doIsPlacingLegal(UnitGrid unit_grid, int grid_x, int grid_y, int size) {
+	public static boolean doIsPlacingLegal(UnitGrid unit_grid, int grid_x, int grid_y, int size) {
 		if (!unit_grid.getHeightMap().canBuild(grid_x, grid_y, size))
 			return false;
 
@@ -522,7 +522,7 @@ public final strictfp class Building extends Selectable implements Occupant {
 	}
 	
         @Override
-	public final int getAttackPriority() {
+	public int getAttackPriority() {
 		if (getAbilities().hasAbilities(Abilities.ATTACK))
 			return AttackScanFilter.PRIORITY_TOWER;
 		else if (getAbilities().hasAbilities(Abilities.BUILD_ARMIES))
@@ -532,7 +532,7 @@ public final strictfp class Building extends Selectable implements Occupant {
 	}
 
         @Override
-	protected final void setTarget(Target target, int action, boolean aggressive) {
+	protected void setTarget(Target target, int action, boolean aggressive) {
 		if (getAbilities().hasAbilities(Abilities.ATTACK)) {
 			if (target != this) {
 				Unit unit = ((MountUnitContainer)getUnitContainer()).getUnit();
@@ -547,7 +547,7 @@ public final strictfp class Building extends Selectable implements Occupant {
 		}
 	}
 
-	public final void place() {
+	public void place() {
 		assert !isDead();
 		assert isPlacingLegal();
 		register();
@@ -560,20 +560,20 @@ public final strictfp class Building extends Selectable implements Occupant {
 	}
 
         @Override
-	public final float getSize() {
+	public float getSize() {
 		assert !isDead();
 		float radius = (getBuildingTemplate().getPlacingSize() - 1);
 		return (float)StrictMath.sqrt(2)*radius + .1f;
 	}
 
         @Override
-	public final int getPenalty() {
+	public int getPenalty() {
 		assert !isDead();
 		return Occupant.STATIC;
 	}
 
         @Override
-	protected final void removeDying() {
+	protected void removeDying() {
 		
 		new RandomVelocityEmitter(getOwner().getWorld(), new Vector3f(getPositionX(), getPositionY(), getPositionZ()), 0f, 0f,
 					getBuildingTemplate().getSmokeRadius(), getBuildingTemplate().getSmokeHeight(), 1f, 1f,
@@ -612,14 +612,14 @@ public final strictfp class Building extends Selectable implements Occupant {
 		super.removeDying();
 	}
 
-	public final boolean isValidRallyPoint(Target t) {
+	public boolean isValidRallyPoint(Target t) {
 		if (!(t instanceof Building))
 			return false;
 		Building b = (Building)t;
 		return getOwner() == b.getOwner() && b.getAbilities().hasAbilities(Abilities.RALLY_TO);
 	}
 	
-	public final void setRallyPoint(Target target) {
+	public void setRallyPoint(Target target) {
 		if (!getOwner().canSetRallyPoints())
 			return;
 		if (isValidRallyPoint(target)) {
@@ -629,7 +629,7 @@ public final strictfp class Building extends Selectable implements Occupant {
 		}
 	}
 
-	public final int getRenderLevel() {
+	public int getRenderLevel() {
 		if (build_points == getBuildingTemplate().getMaxHitPoints())
 			return RENDER_BUILT;
 		else if ((float)build_points/getBuildingTemplate().getMaxHitPoints() < .5)
@@ -639,7 +639,7 @@ public final strictfp class Building extends Selectable implements Occupant {
 	}
 
         @Override
-	public final SpriteKey getSpriteRenderer() {
+	public SpriteKey getSpriteRenderer() {
 		int render_level = getRenderLevel();
 		switch (render_level) {
 			case RENDER_START:
@@ -654,11 +654,11 @@ public final strictfp class Building extends Selectable implements Occupant {
 	}
 
         @Override
-	public final void visit(ToolTipVisitor visitor) {
+	public void visit(ToolTipVisitor visitor) {
 		visitor.visitBuilding(this);
 	}
 
-	private final void flattenLandscape() {
+	private void flattenLandscape() {
 		int size = getBuildingTemplate().getPlacingSize();
 		int height_points = (size - PLACING_BORDER)*2;
 		int offset_x = getGridX() - (size - 1);
@@ -679,7 +679,7 @@ public final strictfp class Building extends Selectable implements Occupant {
 			}
 	}
 
-	private final void undoLandscape() {
+	private void undoLandscape() {
 		int size = getBuildingTemplate().getPlacingSize();
 		int offset_x = getGridX() - (size - 1);
 		int offset_y = getGridY() - (size - 1);
@@ -688,7 +688,7 @@ public final strictfp class Building extends Selectable implements Occupant {
 				getOwner().getWorld().getHeightMap().editHeight(offset_x + x + PLACING_BORDER, offset_y + y + PLACING_BORDER, old_landscape_heights[y][x]);
 	}
 
-	private final void occupy() {
+	private void occupy() {
 		UnitGrid grid = getUnitGrid();
 		grid.getRegion(getGridX(), getGridY()).registerObject(getClass(), this);
 		int size = getBuildingTemplate().getPlacingSize()*2 - 1;
@@ -698,7 +698,7 @@ public final strictfp class Building extends Selectable implements Occupant {
 			}
 	}
 
-	private final void free() {
+	private void free() {
 		UnitGrid grid = getUnitGrid();
 		grid.getRegion(getGridX(), getGridY()).unregisterObject(getClass(), this);
 		int size = getBuildingTemplate().getPlacingSize()*2 - 1;
@@ -709,7 +709,7 @@ public final strictfp class Building extends Selectable implements Occupant {
 	}
 
         @Override
-	public final void hit(int damage, float dir_x, float dir_y, Player owner) {
+	public void hit(int damage, float dir_x, float dir_y, Player owner) {
 		super.hit(damage, dir_x, dir_y, owner);
 		if (!isDead()) {
 			setHitPoints(hit_points - damage);
@@ -727,28 +727,28 @@ public final strictfp class Building extends Selectable implements Occupant {
 	}
 
         @Override
-	public final String toString() {
+	public String toString() {
 		return "Building: isDead() = " + isDead();
 	}
 
         @Override
-	public final float getAnimationTicks() {
+	public float getAnimationTicks() {
 		return 0;
 	}
 
         @Override
-	public final int getAnimation() {
+	public int getAnimation() {
 		return 0;
 	}
 
-	public final void fillSupplies(Class key, int max) {
+	public void fillSupplies(Class key, int max) {
 		SupplyContainer container = getSupplyContainer(key);
 		if (container != null) {
 			container.increaseSupply((int)StrictMath.min(container.getMaxSupplyCount() - container.getNumSupplies(), max));
 		}
 	}
 
-	public final void removeSupplies(Class key) {
+	public void removeSupplies(Class key) {
 		SupplyContainer container = getSupplyContainer(key);
 		if (container != null) {
 			container.increaseSupply(-container.getNumSupplies());
@@ -756,7 +756,7 @@ public final strictfp class Building extends Selectable implements Occupant {
 	}
 
         @Override
-	public final int getStatusValue() {
+	public int getStatusValue() {
 		if (getAbilities().hasAbilities(Abilities.REPRODUCE)) {
 			return getUnitContainer().getNumSupplies();
 		} else if (getAbilities().hasAbilities(Abilities.BUILD_ARMIES)) {
@@ -765,7 +765,7 @@ public final strictfp class Building extends Selectable implements Occupant {
 			return 0;
 	}
 
-	public final void printDebugInfo() {
+	public void printDebugInfo() {
 		System.out.println("-----------------------------------");
 		if (getAbilities().hasAbilities(Abilities.REPRODUCE)) {
 			System.out.println("Units = " + getUnitContainer().getNumSupplies());

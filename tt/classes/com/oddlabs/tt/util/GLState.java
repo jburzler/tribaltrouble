@@ -22,39 +22,39 @@ public final strictfp class GLState implements Cloneable {
 	private boolean color_array;
 
         @Override
-	public final Object clone() throws CloneNotSupportedException {
+	public Object clone() throws CloneNotSupportedException {
 		return super.clone();
 	}
 
-	private final void matchGLClientState(int gl_flag, boolean enable) {
+	private void matchGLClientState(int gl_flag, boolean enable) {
 		if (enable)
 			GL11.glEnableClientState(gl_flag);
 		else
 			GL11.glDisableClientState(gl_flag);
 	}
 	
-	public final static void activeTexture(int texture) {
+	public static void activeTexture(int texture) {
 		if (GLContext.getCapabilities().OpenGL13)
 			GL13.glActiveTexture(texture);
 		else
 			ARBMultitexture.glActiveTextureARB(texture);
 	}
 
-	public final static void glCompressedTexImage2D(int target, int level, int internalformat, int width, int height, int border, ByteBuffer pData) {
+	public static void glCompressedTexImage2D(int target, int level, int internalformat, int width, int height, int border, ByteBuffer pData) {
 		if (GLContext.getCapabilities().OpenGL13)
 			GL13.glCompressedTexImage2D(target, level, internalformat, width, height, border, pData);
 		else
 			ARBTextureCompression.glCompressedTexImage2DARB(target, level, internalformat, width, height, border, pData);
 	}
 
-	public final static void clientActiveTexture(int texture) {
+	public static void clientActiveTexture(int texture) {
 		if (GLContext.getCapabilities().OpenGL13)
 			GL13.glClientActiveTexture(texture);
 		else
 			ARBMultitexture.glClientActiveTextureARB(texture);
 	}
 
-	public final void switchState(int client_flags) {
+	public void switchState(int client_flags) {
 		boolean target_vertex_array = (client_flags & VERTEX_ARRAY) != 0;
 //		assert GLUtils.getGLInteger(GL13.GL_CLIENT_ACTIVE_TEXTURE) == GL13.GL_TEXTURE0;
 		if (target_vertex_array != vertex_array) {

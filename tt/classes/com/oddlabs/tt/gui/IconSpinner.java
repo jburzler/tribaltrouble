@@ -71,7 +71,7 @@ public abstract strictfp class IconSpinner extends GUIObject implements ToolTip 
 	protected abstract boolean renderInfinite();
 	protected abstract float getProgress();
 
-	private final void setCount() {
+	private void setCount() {
 		int count = computeCount();
 		if (count != text_count) {
 			text_count = count;
@@ -145,16 +145,16 @@ public abstract strictfp class IconSpinner extends GUIObject implements ToolTip 
 
 	private final strictfp class IncreaseListener implements MouseButtonListener {
                 @Override
-		public final void mouseClicked(int button, int x, int y, int clicks) {
+		public void mouseClicked(int button, int x, int y, int clicks) {
 		}
 
                 @Override
-		public final void mouseHeld(int button, int x, int y) {
+		public void mouseHeld(int button, int x, int y) {
 			mousePressed(button, x, y);
 		}
 
                 @Override
-		public final void mousePressed(int button, int x, int y) {
+		public void mousePressed(int button, int x, int y) {
 			if (button == LocalInput.RIGHT_BUTTON)
 					increase(10);
 				else
@@ -162,23 +162,23 @@ public abstract strictfp class IconSpinner extends GUIObject implements ToolTip 
 		}
 
                 @Override
-		public final void mouseReleased(int button, int x, int y) {
+		public void mouseReleased(int button, int x, int y) {
 			release();
 		}
 	}
 
 	private final strictfp class DecreaseListener implements MouseButtonListener {
                 @Override
-		public final void mouseClicked(int button, int x, int y, int clicks) {
+		public void mouseClicked(int button, int x, int y, int clicks) {
 		}
 
                 @Override
-		public final void mouseHeld(int button, int x, int y) {
+		public void mouseHeld(int button, int x, int y) {
 			mousePressed(button, x, y);
 		}
 
                 @Override
-		public final void mousePressed(int button, int x, int y) {
+		public void mousePressed(int button, int x, int y) {
 			if (button == LocalInput.RIGHT_BUTTON)
 					decrease(10);
 				else
@@ -186,7 +186,7 @@ public abstract strictfp class IconSpinner extends GUIObject implements ToolTip 
 		}
 
                 @Override
-		public final void mouseReleased(int button, int x, int y) {
+		public void mouseReleased(int button, int x, int y) {
 			release();
 		}
 	}

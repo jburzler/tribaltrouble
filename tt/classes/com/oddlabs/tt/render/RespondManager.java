@@ -23,7 +23,7 @@ public final strictfp class RespondManager implements Animated {
 	}
 
         @Override
-	public final void animate(float t) {
+	public void animate(float t) {
 		time += t;
 		timeout();
 	}
@@ -35,11 +35,11 @@ public final strictfp class RespondManager implements Animated {
 		}
 	}
 
-	public final void addResponder(Object target) {
+	public void addResponder(Object target) {
 		addResponder(target, null);
 	}
 
-	final void addResponder(Object target, Runnable stop_action) {
+	void addResponder(Object target, Runnable stop_action) {
 		addResponder(SECONDS_PER_PICK_RESPOND, target, null);
 	}
 
@@ -59,7 +59,7 @@ public final strictfp class RespondManager implements Animated {
 		}
 	}
 
-	final boolean isResponding(Object target) {
+	boolean isResponding(Object target) {
 		if (respond_targets.size() == 0)
 			return false; // Quick exit in the common case of no responding targets
 		else
@@ -75,7 +75,7 @@ public final strictfp class RespondManager implements Animated {
 	}
 
         @Override
-	public final void updateChecksum(StateChecksum checksum) {
+	public void updateChecksum(StateChecksum checksum) {
 	}
 
 	private final static strictfp class Timeout implements Comparable {
@@ -92,13 +92,13 @@ public final strictfp class RespondManager implements Animated {
 		}
 
                 @Override
-		public final boolean equals(Object other) {
+		public boolean equals(Object other) {
 			Timeout timeout_obj = (Timeout)other;
 			return timeout_obj.timeout == timeout && timeout_obj.id == id;
 		}
 
                 @Override
-		public final int compareTo(Object other) {
+		public int compareTo(Object other) {
 			Timeout timeout_obj = (Timeout)other;
 			float diff = timeout - timeout_obj.timeout;
 			if (diff != 0f)

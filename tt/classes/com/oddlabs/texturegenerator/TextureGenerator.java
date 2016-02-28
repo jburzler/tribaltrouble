@@ -64,7 +64,7 @@ public final strictfp class TextureGenerator {
 	}
 
 
-	private final void generateLowDetailTexture(OffscreenRenderer buffer, LowDetailModel[] models, String dest) {
+	private void generateLowDetailTexture(OffscreenRenderer buffer, LowDetailModel[] models, String dest) {
 		int[] indices = new int[models.length];
 		for (int i = 0; i < models.length; i++) {
 			indices[i] = i;
@@ -75,7 +75,7 @@ public final strictfp class TextureGenerator {
 		} while (buffer.isLost());
 	}
 
-	private final static void generateBillboardMip(LowDetailModel lowdetail, TextureGenerator renderer, int mode, float ortho_size, int tex_index) {
+	private static void generateBillboardMip(LowDetailModel lowdetail, TextureGenerator renderer, int mode, float ortho_size, int tex_index) {
 		GL11.glMatrixMode(GL11.GL_PROJECTION);
 		GL11.glLoadIdentity();
 		GL11.glOrtho(0.0f, ortho_size, 0.0f, ortho_size, -50.0f, 50.0f);
@@ -90,7 +90,7 @@ public final strictfp class TextureGenerator {
 		BillboardPainter.finish();
 	}
 
-	private final static void drawBillboardsToBuffer(LowDetailModel[] lowdetails, TextureGenerator renderer, int[] modes, OffscreenRenderer buffer, int format, int mipmap_cutoff, int tex_index) {
+	private static void drawBillboardsToBuffer(LowDetailModel[] lowdetails, TextureGenerator renderer, int[] modes, OffscreenRenderer buffer, int format, int mipmap_cutoff, int tex_index) {
 		int ortho_size = 1;
 		float[] clear_color = renderer.getModelClearColor();
 		GL11.glClearColor(clear_color[0], clear_color[1], clear_color[2], 0f);
@@ -100,11 +100,11 @@ public final strictfp class TextureGenerator {
 			generateBillboardMip(lowdetails[i], renderer, modes[i], ortho_size, tex_index);
 	}
 
-	public final float[] getModelClearColor() {
+	public float[] getModelClearColor() {
 		return trunks[0].getClearColor();
 	}
 
-	public final void renderModel(int mode, int tex_index) {
+	public void renderModel(int mode, int tex_index) {
 		trunks[mode].renderModel(tex_index);
 		crowns[mode].renderModel(tex_index);
 	}

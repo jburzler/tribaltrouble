@@ -18,28 +18,28 @@ public final strictfp class AudioSource extends NativeResource {
 		source = source_buffer;
 	}
 
-	public final int getSource() {
+	public int getSource() {
 		return source.get(0);
 	}
 
-	public final AbstractAudioPlayer getAudioPlayer() {
+	public AbstractAudioPlayer getAudioPlayer() {
 		return audio_player;
 	}
 
-	public final int getRank() {
+	public int getRank() {
 		if (audio_player == null)
 			return AudioPlayer.AUDIO_RANK_NOT_INITIALIZED;
 		return audio_player.getParameters().rank;
 	}
 
-	public final void setPlayer(AbstractAudioPlayer audio_player) {
+	public void setPlayer(AbstractAudioPlayer audio_player) {
 		if (this.audio_player != null)
 			this.audio_player.stop();
 		this.audio_player = audio_player;
 	}
 
         @Override
-	protected final void doDelete() {
+	protected void doDelete() {
 		if (source != null && AL.isCreated()) {
 			assert AL10.alGetSourcei(getSource(), AL10.AL_SOURCE_STATE) != AL10.AL_PLAYING;
 			AL10.alDeleteSources(source);

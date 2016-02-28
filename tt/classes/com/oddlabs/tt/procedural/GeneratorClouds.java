@@ -20,7 +20,7 @@ public final strictfp class GeneratorClouds extends TextureGenerator {
 	}
 
         @Override
-	public final Texture[] generate() {
+	public Texture[] generate() {
 		int seed = Globals.LANDSCAPE_SEED;
 		Channel clouds1 = new Midpoint(TEXTURE_SIZE, 3, 0.55f, seed).toChannel();
 		Channel clouds2 = new Midpoint(TEXTURE_SIZE, 2, 0.4f, seed).toChannel();
@@ -50,7 +50,7 @@ public final strictfp class GeneratorClouds extends TextureGenerator {
 	}
 	
         @Override
-	public final int hashCode() {
+	public int hashCode() {
 		return TEXTURE_SIZE;
 	}
 

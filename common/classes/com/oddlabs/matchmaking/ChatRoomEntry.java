@@ -13,11 +13,11 @@ public final strictfp class ChatRoomEntry implements Serializable {
 		this.num_joined = num_joined;
 	}
 
-	public final String getName() {
+	public String getName() {
 		return name;
 	}
 
-	public final int getNumJoined() {
+	public int getNumJoined() {
 		return num_joined;
 	}
 }

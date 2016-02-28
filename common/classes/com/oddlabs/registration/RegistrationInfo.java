@@ -35,56 +35,56 @@ public final strictfp class RegistrationInfo implements Serializable {
                 System.out.println(this);
 	}
 
-	public final String getRegTime() {
+	public String getRegTime() {
 		return reg_time;
 	}
 
-	public final String getRegEmail() {
+	public String getRegEmail() {
 		return reg_email;
 	}
 
-	public final long getTimeStamp() {
+	public long getTimeStamp() {
 		return time_stamp;
 	}
 
-	public final long getKey() {
+	public long getKey() {
 		return key;
 	}
 
         @Override
-	public final String toString() {
+	public String toString() {
 		return key + " " + reg_key + " " + name + " " + address1 + " " + address2 + " " + zip + " " + city + " " + state + " " + country;
 	}
 
-	public final String getRegKey() {
+	public String getRegKey() {
 		return reg_key;
 	}
 
-	public final String getName() {
+	public String getName() {
 		return name;
 	}
 
-	public final String getAddress1() {
+	public String getAddress1() {
 		return address1;
 	}
 
-	public final String getAddress2() {
+	public String getAddress2() {
 		return address2;
 	}
 
-	public final String getZip() {
+	public String getZip() {
 		return zip;
 	}
 
-	public final String getCity() {
+	public String getCity() {
 		return city;
 	}
 
-	public final String getState() {
+	public String getState() {
 		return state;
 	}
 
-	public final String getCountry() {
+	public String getCountry() {
 		return country;
 	}
 }

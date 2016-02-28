@@ -19,7 +19,7 @@ public final strictfp class ToolTipBox extends TextField {
 		throw new RuntimeException();
 	}
 
-	public final void append(Quad[] icons) {
+	public void append(Quad[] icons) {
 		this.icons = icons;
 	}
 
@@ -29,7 +29,7 @@ public final strictfp class ToolTipBox extends TextField {
 		icons = null;
 	}
 	
-	public final void render(int center_x, int top_y, int clip_left, int clip_right, int clip_bottom, int clip_top) {
+	public void render(int center_x, int top_y, int clip_left, int clip_right, int clip_bottom, int clip_top) {
 		if (getText().length() == 0)
 			return;
 		ToolTipBoxInfo box = Skin.getSkin().getToolTipInfo();

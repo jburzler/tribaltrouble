@@ -5,15 +5,15 @@ public final strictfp class Network {
 	private final static MatchmakingClient matchmaking_client = new MatchmakingClient();
 	private static MatchmakingListener matchmaking_listener;
 
-	public final static MatchmakingListener getMatchmakingListener() {
+	public static MatchmakingListener getMatchmakingListener() {
 		return matchmaking_listener;
 	}
 
-	public final static void setMatchmakingListener(MatchmakingListener listener) {
+	public static void setMatchmakingListener(MatchmakingListener listener) {
 		matchmaking_listener = listener;
 	}
 	
-	public final static void closeMatchmakingClient() {
+	public static void closeMatchmakingClient() {
 		matchmaking_listener = null;
 		matchmaking_client.close();
 	}

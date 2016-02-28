@@ -11,12 +11,12 @@ public final strictfp class VikingChieftainAI extends ChieftainAI {
 	private final static int NUM_UNITS_FOR_BLAST = 7;
 
         @Override
-	public final void decide(Unit chieftain) {
+	public void decide(Unit chieftain) {
 		nodeBlast(chieftain);
 		nodeStun(chieftain);
 	}
 
-	private final void nodeStun(Unit chieftain) {
+	private void nodeStun(Unit chieftain) {
 		if (chieftain.getMagicProgress(RacesResources.INDEX_MAGIC_STUN) < 1)
 			return;
 
@@ -30,7 +30,7 @@ public final strictfp class VikingChieftainAI extends ChieftainAI {
 		}
 	}
 
-	private final void nodeBlast(Unit chieftain) {
+	private void nodeBlast(Unit chieftain) {
 		if (chieftain.getMagicProgress(RacesResources.INDEX_MAGIC_BLAST) < 1)
 			return;
 
@@ -46,7 +46,7 @@ public final strictfp class VikingChieftainAI extends ChieftainAI {
 		}
 	}
 
-	private final int getNumEnemyUnitsClose(Unit chieftain, float hit_radius, Class type) {
+	private int getNumEnemyUnitsClose(Unit chieftain, float hit_radius, Class type) {
 		FindOccupantFilter filter = new FindOccupantFilter(chieftain.getPositionX(), chieftain.getPositionY(), hit_radius, chieftain, type);
 		chieftain.getUnitGrid().scan(filter, chieftain.getGridX(), chieftain.getGridY());
 		List target_list = filter.getResult();
@@ -66,7 +66,7 @@ public final strictfp class VikingChieftainAI extends ChieftainAI {
 		return num_enemy_units_close;
 	}
 
-	private final int getNumFriendlyUnitsClose(Unit chieftain, float hit_radius) {
+	private int getNumFriendlyUnitsClose(Unit chieftain, float hit_radius) {
 		FindOccupantFilter filter = new FindOccupantFilter(chieftain.getPositionX(), chieftain.getPositionY(), hit_radius, chieftain, Selectable.class);
 		chieftain.getUnitGrid().scan(filter, chieftain.getGridX(), chieftain.getGridY());
 		List target_list = filter.getResult();

@@ -126,20 +126,20 @@ public final strictfp class LoginForm extends Form implements RegisterProgressFo
 	}
 
         @Override
-	public final void registrationFailed() {
+	public void registrationFailed() {
 	}
 	
         @Override
-	public final void registrationCompleted() {
+	public void registrationCompleted() {
 		main_menu.setMenu(this);
 	}
 	
         @Override
-	public final void setFocus() {
+	public void setFocus() {
 		editline_username.setFocus();
 	}
 	
-	private final void login() {
+	private void login() {
 		String username = editline_username.getContents();
 		String password = editline_password.getPasswordDigest();
 		Login login = new Login(username, password);
@@ -149,7 +149,7 @@ public final strictfp class LoginForm extends Form implements RegisterProgressFo
 			doLogin(username, password, login, remember_checkbox.isMarked());
 	}
 
-	private final void doLogin(String username, String password, Login login, boolean remember_login) {
+	private void doLogin(String username, String password, Login login, boolean remember_login) {
 		if (remember_login) {
 			Settings.getSettings().username = username;
 			Settings.getSettings().pw_digest = password;
@@ -161,7 +161,7 @@ public final strictfp class LoginForm extends Form implements RegisterProgressFo
 
 	private final strictfp class NewUserListener implements MouseClickListener {
                 @Override
-		public final void mouseClicked(int button, int x, int y, int clicks) {
+		public void mouseClicked(int button, int x, int y, int clicks) {
 			remove();
 			main_menu.setMenu(new NewUserForm(network, gui_root, main_menu));
 		}
@@ -169,12 +169,12 @@ public final strictfp class LoginForm extends Form implements RegisterProgressFo
 
 	private final strictfp class LoginListener implements MouseClickListener, EnterListener {
                 @Override
-		public final void mouseClicked(int button, int x, int y, int clicks) {
+		public void mouseClicked(int button, int x, int y, int clicks) {
 			login();
 		}
 
                 @Override
-		public final void enterPressed(CharSequence text) {
+		public void enterPressed(CharSequence text) {
 			login();
 		}
 	}

@@ -6,18 +6,18 @@ import java.util.List;
 public final strictfp class ChatHub implements ChatListener {
 	private final List listeners = new ArrayList();
 
-	public final void addListener(ChatListener listener) {
+	public void addListener(ChatListener listener) {
 		if (!listeners.contains(listener)) {
 			listeners.add(listener);
 		}
 	}
 
-	public final void removeListener(ChatListener listener) {
+	public void removeListener(ChatListener listener) {
 		listeners.remove(listener);
 	}
 
         @Override
-	public final void chat(ChatMessage message) {
+	public void chat(ChatMessage message) {
 		if (!ChatCommand.isIgnoring(message.nick)) {
 			for (int i = 0; i < listeners.size(); i++) {
 				ChatListener listener = (ChatListener)listeners.get(i);

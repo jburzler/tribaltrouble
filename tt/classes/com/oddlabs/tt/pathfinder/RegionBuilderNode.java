@@ -12,7 +12,7 @@ final strictfp class RegionBuilderNode {
 		total_cost = Integer.MAX_VALUE;
 	}
 
-	public final Region getRegion(UnitGrid unit_grid) {
+	public Region getRegion(UnitGrid unit_grid) {
 		return unit_grid.getRegion(x, y);
 	}
 
@@ -20,7 +20,7 @@ final strictfp class RegionBuilderNode {
 		unit_grid.setRegion(x, y, region);
 	}
 */
-	public final int getGridX() {
+	public int getGridX() {
 		return x;
 	}
 
@@ -32,23 +32,23 @@ final strictfp class RegionBuilderNode {
 		unit_grid.occupyGrid(x, y, occupant);
 	}
 */
-	public final int getGridY() {
+	public int getGridY() {
 		return y;
 	}
 
-	public final void setVisited(boolean visited) {
+	public void setVisited(boolean visited) {
 		this.visited = visited;
 	}
 
-	public final void setTotalCost(int total_cost) {
+	public void setTotalCost(int total_cost) {
 		this.total_cost = total_cost;
 	}
 
-	public final int getTotalCost() {
+	public int getTotalCost() {
 		return total_cost;
 	}
 
-	public final boolean isVisited() {
+	public boolean isVisited() {
 		return visited;
 	}
 }

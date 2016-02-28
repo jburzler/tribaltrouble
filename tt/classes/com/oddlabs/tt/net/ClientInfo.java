@@ -18,7 +18,7 @@ public final strictfp class ClientInfo implements GameServerInterface, Connectio
 	}
 
         @Override
-	public final void handle(Object sender, ARMIEvent armi_event) {
+	public void handle(Object sender, ARMIEvent armi_event) {
 		try {
 			armi_event.execute(interface_methods, this);
 		} catch (IllegalARMIEventException e) {
@@ -27,39 +27,39 @@ public final strictfp class ClientInfo implements GameServerInterface, Connectio
 	}
 
         @Override
-	public final void writeBufferDrained(AbstractConnection conn) {
+	public void writeBufferDrained(AbstractConnection conn) {
 	}
 
         @Override
-	public final void error(AbstractConnection conn, IOException e) {
+	public void error(AbstractConnection conn, IOException e) {
 		server.handleError(conn, e);
 	}
 
         @Override
-	public final void connected(AbstractConnection conn) { 
+	public void connected(AbstractConnection conn) { 
 	}
 
-	public final PlayerSlot getPlayerSlot() {
+	public PlayerSlot getPlayerSlot() {
 		return player_slot;
 	}
 
         @Override
-	public final void resetSlotState(int slot, boolean open) {
+	public void resetSlotState(int slot, boolean open) {
 		server.resetSlotState(player_slot, slot, open);
 	}
 
         @Override
-	public final void setPlayerSlot(int slot, int type, int race, int team, boolean ready, int ai_difficulty) {
+	public void setPlayerSlot(int slot, int type, int race, int team, boolean ready, int ai_difficulty) {
 		server.setPlayerSlot(player_slot, slot, type, race, team, ready, ai_difficulty);
 	}
 
         @Override
-	public final void startServer() {
+	public void startServer() {
 		server.startServer(player_slot);
 	}
 
         @Override
-	public final void chat(String chat) {
+	public void chat(String chat) {
 		server.chat(player_slot, chat);
 	}
 }

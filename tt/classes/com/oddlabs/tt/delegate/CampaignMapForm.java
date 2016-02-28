@@ -124,7 +124,7 @@ public final strictfp class CampaignMapForm extends CameraDelegate {
 	}
 
         @Override
-	protected final void keyPressed(KeyboardEvent event) {
+	protected void keyPressed(KeyboardEvent event) {
 		switch (event.getKeyCode()) {
 			case Keyboard.KEY_ESCAPE:
 				getGUIRoot().pushDelegate(new CampaignMapMenu(network, getGUIRoot(), new StaticCamera(getCamera().getState())));
@@ -135,17 +135,17 @@ public final strictfp class CampaignMapForm extends CameraDelegate {
 		}
 	}
 
-	public final static void closeCampaign(NetworkSelector network, GUI gui) {
+	public static void closeCampaign(NetworkSelector network, GUI gui) {
 		Renderer.startMenu(network, gui);
 	}
 
         @Override
-	public final boolean forceRender() {
+	public boolean forceRender() {
 		return true;
 	}
 
         @Override
-	protected final void renderGeometry() {
+	protected void renderGeometry() {
 		campaign.getIcons().getMap().render(0, 0);
 //		campaign.extraRender();
 	}
@@ -166,7 +166,7 @@ public final strictfp class CampaignMapForm extends CameraDelegate {
 		}
 		
                 @Override
-		public final void mouseClicked(int button, int x, int y, int clicks) {
+		public void mouseClicked(int button, int x, int y, int clicks) {
 			campaign.islandChosen(network, getGUIRoot(), number);
 		}
 	}

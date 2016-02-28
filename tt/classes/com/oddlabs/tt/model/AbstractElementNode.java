@@ -73,7 +73,7 @@ public abstract strictfp class AbstractElementNode extends BoundingBox {
 		addPlants(world, plants, terrain_type);
 	}
 
-	private final static void buildRockSupplies(World world, List positions) {
+	private static void buildRockSupplies(World world, List positions) {
 		SpriteKey[] sprite_renderers = world.getLandscapeResources().getRockFragments();
 		int num_supplies = positions.size();
 System.out.println("num_rocks = " + num_supplies);
@@ -88,7 +88,7 @@ System.out.println("num_rocks = " + num_supplies);
 		}
 	}
 
-	private final static void buildIronSupplies(World world, List positions) {
+	private static void buildIronSupplies(World world, List positions) {
 		SpriteKey[] sprite_renderers = world.getLandscapeResources().getIronFragments();
 		int num_supplies = positions.size();
 System.out.println("num_iron = " + num_supplies);
@@ -103,7 +103,7 @@ System.out.println("num_iron = " + num_supplies);
 		}
 	}
 
-	private final static void addPlants(World world, float[][] plants, int terrain_type) {
+	private static void addPlants(World world, float[][] plants, int terrain_type) {
 		int num_plants = 0;
 		for (int t = 0; t < plants.length; t++) {
 			num_plants += plants[t].length/2;

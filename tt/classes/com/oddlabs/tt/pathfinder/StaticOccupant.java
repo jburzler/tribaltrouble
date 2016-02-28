@@ -2,45 +2,45 @@ package com.oddlabs.tt.pathfinder;
 
 public final strictfp class StaticOccupant implements Occupant {
         @Override
-	public final int getPenalty() {
+	public int getPenalty() {
 		return Occupant.STATIC;
 	}
 
         @Override
-	public final int getGridX() {
+	public int getGridX() {
 		throw new RuntimeException();
 	}
 
         @Override
-	public final int getGridY() {
+	public int getGridY() {
 		throw new RuntimeException();
 	}
 
         @Override
-	public final float getPositionX() {
+	public float getPositionX() {
 		throw new RuntimeException();
 	}
 
         @Override
-	public final float getPositionY() {
+	public float getPositionY() {
 		throw new RuntimeException();
 	}
 
         @Override
-	public final float getSize() {
+	public float getSize() {
 		throw new RuntimeException();
 	}
 
         @Override
-	public final boolean isDead() {
+	public boolean isDead() {
 		throw new RuntimeException();
 	}
 
-	public final void startRespond() {
+	public void startRespond() {
 		throw new RuntimeException();
 	}
 	
-	public final void stopRespond() {
+	public void stopRespond() {
 		throw new RuntimeException();
 	}
 }

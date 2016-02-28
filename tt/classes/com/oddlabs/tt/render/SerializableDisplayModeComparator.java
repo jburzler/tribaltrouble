@@ -10,7 +10,7 @@ public final strictfp class SerializableDisplayModeComparator implements Compara
 	}
 
         @Override
-	public final int compare(Object o1, Object o2) {
+	public int compare(Object o1, Object o2) {
 		SerializableDisplayMode d1 = (SerializableDisplayMode)o1;
 		SerializableDisplayMode d2 = (SerializableDisplayMode)o2;
 
@@ -39,14 +39,14 @@ public final strictfp class SerializableDisplayModeComparator implements Compara
 			return 0;
 	}
 
-	private final int getDistanceFromBestMode(SerializableDisplayMode mode) {
+	private int getDistanceFromBestMode(SerializableDisplayMode mode) {
 		int dx = StrictMath.abs(target_mode.getWidth() - mode.getWidth());
 		int dy = StrictMath.abs(target_mode.getHeight() - mode.getHeight());
 		return dx + dy;
 	}
 
         @Override
-	public final boolean equals(Object obj) {
+	public boolean equals(Object obj) {
 		return this == obj;
 	}
 }

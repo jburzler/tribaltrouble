@@ -11,7 +11,7 @@ public final strictfp class DisplayModeComparator implements Comparator {
 	}
 
         @Override
-	public final int compare(Object o1, Object o2) {
+	public int compare(Object o1, Object o2) {
 		DisplayMode d1 = (DisplayMode)o1;
 		DisplayMode d2 = (DisplayMode)o2;
 
@@ -40,14 +40,14 @@ public final strictfp class DisplayModeComparator implements Comparator {
 			return 0;
 	}
 
-	private final int getDistanceFromBestMode(DisplayMode mode) {
+	private int getDistanceFromBestMode(DisplayMode mode) {
 		int dx = StrictMath.abs(target_mode.getWidth() - mode.getWidth());
 		int dy = StrictMath.abs(target_mode.getHeight() - mode.getHeight());
 		return dx + dy;
 	}
 
         @Override
-	public final boolean equals(Object obj) {
+	public boolean equals(Object obj) {
 		return this == obj;
 	}
 }

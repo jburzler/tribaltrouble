@@ -88,7 +88,7 @@ public strictfp class Icons {
 		return (Quad[])(tool_tip_icons.get(key));
 	}
 
-	private final RaceIcons parseRaceIcons(Node n, String head, String magic1_desc, String magic2_desc) {
+	private RaceIcons parseRaceIcons(Node n, String head, String magic1_desc, String magic2_desc) {
 		return new RaceIcons(getNamedIconQuad(n, head + "_unit_status_icon", texture),
 							 getNamedIconQuad(n, head + "_weapon_rock_status_icon", texture),
 							 getNamedIconQuad(n, head + "_weapon_iron_status_icon", texture),
@@ -166,7 +166,7 @@ public strictfp class Icons {
 		return rubber_icon;
 	}
 
-	private final IconQuad[] parseWatch(Node n) {
+	private IconQuad[] parseWatch(Node n) {
 		ArrayList list = new ArrayList();
 		Node node = getNodeByName("watch", n);
 		NodeList nl = node.getChildNodes();
@@ -225,7 +225,7 @@ public strictfp class Icons {
 		return loadTexture(n.getAttributes().getNamedItem("texture").getNodeValue());
 	}
 
-	private final static Texture loadTexture(String tex_file) {
+	private static Texture loadTexture(String tex_file) {
 		TextureFile file = new TextureFile(tex_file,
 										   GL11.GL_RGBA,
 										   GL11.GL_LINEAR,
@@ -250,7 +250,7 @@ public strictfp class Icons {
 		return Integer.parseInt(string);
 	}
 
-	private final NotifyArrowData parseNotifyArrowData(Node n) {
+	private NotifyArrowData parseNotifyArrowData(Node n) {
 		Node node = getNodeByName("notify_arrow", n);
 		IconQuad arrow = getIconQuad(node, texture);
 		return new NotifyArrowData(arrow,
@@ -268,7 +268,7 @@ public strictfp class Icons {
 		return getIconQuad(getNodeByName(name, n), texture);
 	}
 
-	private final static IconQuad[] getIconQuads(Node n, Texture texture) {
+	private static IconQuad[] getIconQuads(Node n, Texture texture) {
 		IconQuad[] result = new IconQuad[3];
 		Node normal = getNodeByName("normal", n);
 		result[Skin.NORMAL] = getIconQuad(normal, texture);
@@ -279,7 +279,7 @@ public strictfp class Icons {
 		return result;
 	}
 
-	private final static IconQuad getIconQuad(Node n, Texture texture) {
+	private static IconQuad getIconQuad(Node n, Texture texture) {
 		Node q = getNodeByName("quad", n);
 		int left = getInt(q, "left");
 		int top = getInt(q, "top");

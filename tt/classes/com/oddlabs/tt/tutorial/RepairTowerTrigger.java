@@ -12,7 +12,7 @@ public final strictfp class RepairTowerTrigger extends TutorialTrigger {
 	}
 
         @Override
-	protected final void run(Tutorial tutorial) {
+	protected void run(Tutorial tutorial) {
 		if (!tower.isDamaged()) {
 			tutorial.next(new EmptyTowerTrigger(tower));
 		}

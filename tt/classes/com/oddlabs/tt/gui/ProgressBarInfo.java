@@ -13,19 +13,19 @@ public final strictfp class ProgressBarInfo {
 		this.weight = weight;
 	}
 
-	public final float getWeight() {
+	public float getWeight() {
 		return weight;
 	}
 
-	public final void setWaypoint(int waypoint) {
+	public void setWaypoint(int waypoint) {
 		this.waypoint = waypoint;
 	}
 
-	public final int getWaypoint() {
+	public int getWaypoint() {
 		return waypoint;
 	}
 
-	public final Label getLabel() {
+	public Label getLabel() {
 		return label;
 	}
 }

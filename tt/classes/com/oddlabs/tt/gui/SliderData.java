@@ -18,19 +18,19 @@ public final strictfp class SliderData {
 		 this.right_offset = right_offset;
 	}
 
-	public final Horizontal getSlider() {
+	public Horizontal getSlider() {
 		return slider;
 	}
 
-	public final Quad[] getButton() {
+	public Quad[] getButton() {
 		return button;
 	}
 
-	public final int getLeftOffset() {
+	public int getLeftOffset() {
 		return left_offset;
 	}
 
-	public final int getRightOffset() {
+	public int getRightOffset() {
 		return right_offset;
 	}
 }

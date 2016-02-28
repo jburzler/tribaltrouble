@@ -28,12 +28,12 @@ public final strictfp class ColumnButton extends RadioButtonGroupElement {
 	}
 
         @Override
-	protected final void mouseReleased(int button, int x, int y) {
+	protected void mouseReleased(int button, int x, int y) {
 		pressed = false;
 	}
 
         @Override
-	protected final void mousePressed(int button, int x, int y) {
+	protected void mousePressed(int button, int x, int y) {
 		pressed = true;
 	}
 
@@ -47,12 +47,12 @@ public final strictfp class ColumnButton extends RadioButtonGroupElement {
 		rows.markChanged(column_index, sorted_descending);
 	}
 
-	public final int getColumnIndex() {
+	public int getColumnIndex() {
 		return column_index;
 	}
 
         @Override
-	protected final void renderGeometry() {
+	protected void renderGeometry() {
 		if (isDisabled()) {
 			Skin.getSkin().getMultiColumnComboBoxData().getButtonUnpressed().render(0, 0, getWidth(), Skin.DISABLED);
 			if (isMarked())
@@ -72,7 +72,7 @@ public final strictfp class ColumnButton extends RadioButtonGroupElement {
 		}
 	}
 
-	private final void renderMark(int mode) {
+	private void renderMark(int mode) {
 		Quad[] arrow;
 		if (sorted_descending)
 			arrow = Skin.getSkin().getMultiColumnComboBoxData().getDescending();

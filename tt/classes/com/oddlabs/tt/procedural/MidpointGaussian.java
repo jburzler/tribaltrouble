@@ -168,11 +168,11 @@ public final strictfp class MidpointGaussian {
 		channel.dynamicRange();
 	}
 
-	public final Layer toLayer() {
+	public Layer toLayer() {
 		return new Layer(channel, channel.copy(), channel.copy());
 	}
 
-	public final Channel toChannel() {
+	public Channel toChannel() {
 		return channel;
 	}
 

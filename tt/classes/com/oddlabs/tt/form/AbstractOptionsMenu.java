@@ -360,7 +360,7 @@ public abstract strictfp class AbstractOptionsMenu extends Form {
 		pm_gamespeed.chooseItem(speed);
 	}
 
-	private final void checkLanguage() {
+	private void checkLanguage() {
 		if (Settings.getSettings().language.equals("default"))
 			return;
 
@@ -377,7 +377,7 @@ public abstract strictfp class AbstractOptionsMenu extends Form {
 		Globals.gamespeed = index;
 	}
 
-	private final void checkDetailChange() {
+	private void checkDetailChange() {
 		int slider_value = pm_detail.getChosenItemIndex();
 		if (last_detail_value != slider_value) {
 			last_detail_value = slider_value;
@@ -389,7 +389,7 @@ public abstract strictfp class AbstractOptionsMenu extends Form {
 	// Sound
 	private final strictfp class CBMusicListener implements CheckBoxListener {
                 @Override
-		public final void checked(boolean marked) {
+		public void checked(boolean marked) {
 			if (Settings.getSettings().play_music != marked)
 				Renderer.getRenderer().toggleMusic();
 			slider_music.setDisabled(!marked);
@@ -399,7 +399,7 @@ public abstract strictfp class AbstractOptionsMenu extends Form {
 
 	private final strictfp class CBSFXListener implements CheckBoxListener {
                 @Override
-		public final void checked(boolean marked) {
+		public void checked(boolean marked) {
 			if (Settings.getSettings().play_sfx != marked)
 				Renderer.getRenderer().toggleSound();
 			slider_sound.setDisabled(!marked);
@@ -409,7 +409,7 @@ public abstract strictfp class AbstractOptionsMenu extends Form {
 
 	private final strictfp class SliderMusicListener implements ValueListener {
                 @Override
-		public final void valueSet(int value) {
+		public void valueSet(int value) {
 			float music_gain = (float)value/(MAX_VALUE);
 			Settings.getSettings().music_gain = music_gain;
 			Renderer.getMusicPlayer().setGain(music_gain);
@@ -418,21 +418,21 @@ public abstract strictfp class AbstractOptionsMenu extends Form {
 
 	private final strictfp class SliderSFXListener implements ValueListener {
                 @Override
-		public final void valueSet(int value) {
+		public void valueSet(int value) {
 			Settings.getSettings().sound_gain = (float)value/(MAX_VALUE);
 		}
 	}
 
 	private final strictfp class SliderMapmodeListener implements ValueListener {
                 @Override
-		public final void valueSet(int value) {
+		public void valueSet(int value) {
 			Settings.getSettings().mapmode_delay = (float)value/(MAX_VALUE);
 		}
 	}
 
 	private final strictfp class SliderTooltipListener implements ValueListener {
                 @Override
-		public final void valueSet(int value) {
+		public void valueSet(int value) {
 			Settings.getSettings().tooltip_delay = (float)value/(MAX_VALUE);
 			gui_root.setToolTipTimer();
 		}
@@ -440,12 +440,12 @@ public abstract strictfp class AbstractOptionsMenu extends Form {
 
 	private final strictfp class CBFullscreen implements CheckBoxListener, DoNowListener {
                 @Override
-		public final void doChange(boolean switch_now) {
+		public void doChange(boolean switch_now) {
 			SerializableDisplayMode.setFullscreen(cb_fullscreen.isMarked(), switch_now);
 		}
 
                 @Override
-		public final void checked(boolean marked) {
+		public void checked(boolean marked) {
 			DisplayChangeForm display_change_form = new DisplayChangeForm(this);
 			gui_root.addModalForm(display_change_form);
 		}
@@ -454,28 +454,28 @@ public abstract strictfp class AbstractOptionsMenu extends Form {
 
 	private final strictfp class CBHardwareCursor implements CheckBoxListener {
                 @Override
-		public final void checked(boolean marked) {
+		public void checked(boolean marked) {
 			Settings.getSettings().use_native_cursor = marked;
 		}
 	}
 
 	private final strictfp class OptionsCloseListener implements CloseListener {
                 @Override
-		public final void closed() {
+		public void closed() {
 			checkDetailChange();
 		}
 	}
 
 	private final strictfp class CBAggressiveUnits implements CheckBoxListener {
                 @Override
-		public final void checked(boolean marked) {
+		public void checked(boolean marked) {
 			Settings.getSettings().aggressive_units = marked;
 		}
 	}
 
 	private final strictfp class CBInvertCamera implements CheckBoxListener {
                 @Override
-		public final void checked(boolean marked) {
+		public void checked(boolean marked) {
 			Settings.getSettings().invert_camera_pitch = marked;
 		}
 	}
@@ -484,26 +484,26 @@ public abstract strictfp class AbstractOptionsMenu extends Form {
 		private SerializableDisplayMode mode;
 
                 @Override
-		public final void doChange(boolean switch_now) {
+		public void doChange(boolean switch_now) {
 			LocalInput.getLocalInput().switchMode(mode, switch_now);
 			gui_root.displayChanged();
 		}
 
                 @Override
-		public final void rowChosen(Object o) {
+		public void rowChosen(Object o) {
 			mode = (SerializableDisplayMode)o;
 			DisplayChangeForm display_change_form = new DisplayChangeForm(this);
 			gui_root.addModalForm(display_change_form);
 		}
 
                 @Override
-		public final void rowDoubleClicked(Object o) {
+		public void rowDoubleClicked(Object o) {
 		}
 	}
 
 	private final strictfp class LanguageListener implements RowListener {
                 @Override
-		public final void rowChosen(Object o) {
+		public void rowChosen(Object o) {
 			Locale locale = (Locale)o;
 			if (locale.getVariant().equals("default"))
 				Settings.getSettings().language = "default";
@@ -513,20 +513,20 @@ public abstract strictfp class AbstractOptionsMenu extends Form {
 		}
 
                 @Override
-		public final void rowDoubleClicked(Object o) {
+		public void rowDoubleClicked(Object o) {
 		}
 	}
 
 	private final strictfp class GamespeedListener implements ItemChosenListener {
                 @Override
-		public final void itemChosen(PulldownMenu menu, int item_index) {
+		public void itemChosen(PulldownMenu menu, int item_index) {
 			changeGamespeed(item_index);
 		}
 	}
 
 	private final strictfp class AboutListener implements MouseClickListener {
                 @Override
-		public final void mouseClicked(int button, int x, int y, int clicks) {
+		public void mouseClicked(int button, int x, int y, int clicks) {
 			gui_root.addModalForm(new CreditsForm());
 		}
 	}

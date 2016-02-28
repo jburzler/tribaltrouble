@@ -42,7 +42,7 @@ public final strictfp class WalkBehaviour implements Behaviour {
 	}
 
         @Override
-	public final boolean isBlocking() {
+	public boolean isBlocking() {
 		return state == PathTracker.BLOCKED;
 	}
 	
@@ -73,12 +73,12 @@ public final strictfp class WalkBehaviour implements Behaviour {
 		unit.getTracker().appendToolTip(tool_tip_box);
 	}
 
-	private final void switchToMoving() {
+	private void switchToMoving() {
 		unit.switchAnimation(unit.getMetersPerSecond(), Unit.ANIMATION_MOVING);
 	}
 
         @Override
-	public final int animate(float t) {
+	public int animate(float t) {
 		retry_delay_counter -= t;
 		boolean blocker_moved = blocking_movable != null && (blocking_movable.getGridX() != blocker_x || blocking_movable.getGridY() != blocker_y);
 		if (retry_delay_counter > 0 && !blocker_moved) {
@@ -120,7 +120,7 @@ public final strictfp class WalkBehaviour implements Behaviour {
 		}
 	}
 
-	private final void scan() {
+	private void scan() {
 		if (scan_attack) {
 			unit.scanVicinity(scan_filter);
 			Selectable s = scan_filter.removeTarget();
@@ -135,17 +135,17 @@ public final strictfp class WalkBehaviour implements Behaviour {
 		retry_delay_counter = 0f;
 	}
 */
-	private final int doRetry() {
+	private int doRetry() {
 		retry_delay_counter = retry_delay;
 		unit.switchToIdleAnimation();
 		return Selectable.INTERRUPTIBLE;
 	}
 
-	private final void init() {
+	private void init() {
 		unit.getTracker().setTarget(tracker_algorithm);
 	}
 
         @Override
-	public final void forceInterrupted() {
+	public void forceInterrupted() {
 	}
 }

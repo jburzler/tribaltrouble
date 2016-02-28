@@ -21,27 +21,27 @@ public final strictfp class RankingEntry implements Serializable {
 		this.invalid = invalid;
 	}
 
-	public final int getRanking() {
+	public int getRanking() {
 		return ranking;
 	}
 
-	public final String getName() {
+	public String getName() {
 		return name;
 	}
 
-	public final int getRating() {
+	public int getRating() {
 		return rating;
 	}
 
-	public final int getWins() {
+	public int getWins() {
 		return wins;
 	}
 
-	public final int getLosses() {
+	public int getLosses() {
 		return losses;
 	}
 	
-	public final int getInvalid() {
+	public int getInvalid() {
 		return invalid;
 	}
 }

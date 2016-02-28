@@ -16,19 +16,19 @@ public final strictfp class ChatLine extends EditLine {
 		this.tab_complete_list = new String[0];
 	}
 
-	public final void setTabCompleteList(String[] list) {
+	public void setTabCompleteList(String[] list) {
 		tab_complete_list = list;
 	}
 
         @Override
-	protected final void keyRepeat(KeyboardEvent e) {
+	protected void keyRepeat(KeyboardEvent e) {
 		if (catch_tab && e.getKeyChar() == '\t')
 			tabComplete(getText());
 		else
 			super.keyRepeat(e);
 	}
 
-	private final void tabComplete(StringBuffer line) {
+	private void tabComplete(StringBuffer line) {
 		int index = getIndex();
 
 		int word_start = line.lastIndexOf(" ", index - 1) + 1;
@@ -77,7 +77,7 @@ public final strictfp class ChatLine extends EditLine {
 		runCommand(command);
 	}
 */
-	private final void tabPressedAll(String[] words) {
+	private void tabPressedAll(String[] words) {
 		tabPressed(words);
 		for (int i = 0; i < tab_listeners.size(); i++) {
 			TabListener listener = (TabListener)tab_listeners.get(i);
@@ -86,10 +86,10 @@ public final strictfp class ChatLine extends EditLine {
 		}
 	}
 
-	protected final void tabPressed(String[] words) {
+	protected void tabPressed(String[] words) {
 	}
 
-	public final void addTabListener(TabListener listener) {
+	public void addTabListener(TabListener listener) {
 		tab_listeners.add(listener);
 	}
 }

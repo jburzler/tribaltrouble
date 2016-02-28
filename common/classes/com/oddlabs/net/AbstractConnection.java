@@ -33,7 +33,7 @@ public abstract strictfp class AbstractConnection implements ARMIEventWriter {
 		return connection_interface;
 	}
 
-	private final void signalConnected() {
+	private void signalConnected() {
 		if (!connected_signaled) {
 			connection_interface.connected(this);
 			connected_signaled = true;

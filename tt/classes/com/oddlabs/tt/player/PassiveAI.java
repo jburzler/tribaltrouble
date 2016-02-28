@@ -13,7 +13,7 @@ public final strictfp class PassiveAI extends AI {
 	}
 
         @Override
-	public final void animate(float time) {
+	public void animate(float time) {
 		if (walk_around) {
 			if (!shouldDoAction(time))
 				return;

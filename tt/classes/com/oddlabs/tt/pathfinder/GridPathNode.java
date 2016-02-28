@@ -9,12 +9,12 @@ public final strictfp class GridPathNode implements PathNode {
 		this.dir = dir;
 	}
 
-	public final DirectionNode getDirection() {
+	public DirectionNode getDirection() {
 		return dir;
 	}
 
         @Override
-	public final PathNode getParent() {
+	public PathNode getParent() {
 		return parent;
 	}
 }

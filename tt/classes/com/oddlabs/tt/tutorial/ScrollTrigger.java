@@ -19,7 +19,7 @@ public final strictfp class ScrollTrigger extends TutorialTrigger {
 	}
 
         @Override
-	protected final void run(Tutorial tutorial) {
+	protected void run(Tutorial tutorial) {
 		GameCamera camera = tutorial.getViewer().getCamera();
 		if (camera.getScrollX() > 0) {
 			scroll_dirs[0] = true;

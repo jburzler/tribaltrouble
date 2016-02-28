@@ -28,7 +28,7 @@ public final strictfp class CampaignMapMenu extends Menu {
 	}
 
         @Override
-	protected final void addButtons() {
+	protected void addButtons() {
 		addResumeButton();
 
 		addDefaultOptionsButton();
@@ -39,7 +39,7 @@ public final strictfp class CampaignMapMenu extends Menu {
 	}
 
         @Override
-	protected final void keyPressed(KeyboardEvent event) {
+	protected void keyPressed(KeyboardEvent event) {
 		switch(event.getKeyCode()) {
 			case Keyboard.KEY_ESCAPE:
 				pop();
@@ -51,28 +51,28 @@ public final strictfp class CampaignMapMenu extends Menu {
 	}
 
         @Override
-	protected final void renderGeometry() {
+	protected void renderGeometry() {
 		super.renderGeometry();
 		renderBackgroundAlpha();
 	}
 
 	private final strictfp class ResumeListener implements MouseClickListener {
                 @Override
-		public final void mouseClicked(int button, int x, int y, int clicks) {
+		public void mouseClicked(int button, int x, int y, int clicks) {
 			pop();
 		}
 	}
 
 	private final strictfp class AbortListener implements MouseClickListener {
                 @Override
-		public final void mouseClicked(int button, int x, int y, int clicks) {
+		public void mouseClicked(int button, int x, int y, int clicks) {
 			setMenuCentered(new QuestionForm(Utils.getBundleString(bundle, "end_game_confirm"), new ActionAbortListener()));
 		}
 	}
 
 	private final strictfp class ActionAbortListener implements MouseClickListener {
                 @Override
-		public final void mouseClicked(int button, int x, int y, int clicks) {
+		public void mouseClicked(int button, int x, int y, int clicks) {
 			CampaignMapForm.closeCampaign(getNetwork(), getGUIRoot().getGUI());
 		}
 	}

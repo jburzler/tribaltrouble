@@ -28,7 +28,7 @@ public final strictfp class Tutorial {
 		old_after_done_time = first_trigger.getAfterDoneTime();
 	}
 
-	final WorldViewer getViewer() {
+	WorldViewer getViewer() {
 		return viewer;
 	}
 
@@ -37,13 +37,13 @@ public final strictfp class Tutorial {
 			info.remove();
 	}
 
-	final void done(int next_tutorial) {
+	void done(int next_tutorial) {
 		timer.stop();
 		removeInfo();
 		viewer.getGUIRoot().pushDelegate(new TutorialOverDelegate(viewer, tutorial_info, viewer.getGUIRoot().getDelegate().getCamera(), next_tutorial));
 	}
 
-	final void next(final TutorialTrigger trigger) {
+	void next(final TutorialTrigger trigger) {
 		timer.stop();
 		TimerAnimation delay_timer = new TimerAnimation(viewer.getAnimationManagerLocal(), (Object anim) -> {
                     ((TimerAnimation)anim).stop();

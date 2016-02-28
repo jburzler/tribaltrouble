@@ -25,7 +25,7 @@ public final strictfp class PulldownButton extends GUIObject {
 	}
 
         @Override
-	public final void setDim(int width, int height) {
+	public void setDim(int width, int height) {
 		super.setDim(width, height);
 		PulldownData data = Skin.getSkin().getPulldownData();
 		label.setDim(getWidth() - data.getTextOffsetLeft() - data.getArrowOffsetRight() - data.getArrow()[0].getWidth(), label.getHeight());
@@ -35,7 +35,7 @@ public final strictfp class PulldownButton extends GUIObject {
 	}
 
         @Override
-	protected final void renderGeometry() {
+	protected void renderGeometry() {
 		PulldownData data = Skin.getSkin().getPulldownData();
 		Quad[] arrow = data.getArrow();
 
@@ -52,7 +52,7 @@ public final strictfp class PulldownButton extends GUIObject {
 	}
 
         @Override
-	protected final void mousePressed(int button, int x, int y) {
+	protected void mousePressed(int button, int x, int y) {
 		if (menu_active) {
 			deactivateMenu();
 		} else {
@@ -66,30 +66,30 @@ public final strictfp class PulldownButton extends GUIObject {
 	}
 
         @Override
-	protected final void mouseReleased(int button, int x, int y) {
+	protected void mouseReleased(int button, int x, int y) {
 		if (!menu.isActive())
 			menu.getItem(menu.getChosenItemIndex()).setFocus();
 		menu.clickItem(button, x, y, 1);
 	}
 
-	private final void activateMenu() {
+	private void activateMenu() {
 		menu_active = true;
 		menu.setPos((int)(getRootX() + getWidth() - menu.getWidth()), (int)(getRootY() - menu.getHeight()));
 		gui_root.getDelegate().addChild(menu);
 	}
 
-	private final void deactivateMenu() {
+	private void deactivateMenu() {
 		menu_active = false;
 		setFocus();
 		menu.remove();
 	}
 
-	public final PulldownMenu getMenu() {
+	public PulldownMenu getMenu() {
 		return menu;
 	}
 
         @Override
-	protected final void doRemove() {
+	protected void doRemove() {
 		super.doRemove();
 		if (!menu.isActive())
 			menu.remove();
@@ -97,7 +97,7 @@ public final strictfp class PulldownButton extends GUIObject {
 
 	private final strictfp class ItemListener implements ItemChosenListener {
                 @Override
-		public final void itemChosen(PulldownMenu menu, int item_index) {
+		public void itemChosen(PulldownMenu menu, int item_index) {
 			PulldownItem item = menu.getItem(item_index);
 			label.set(item.getLabelString());
 			if (menu.isActive())

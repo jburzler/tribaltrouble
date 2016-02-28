@@ -19,57 +19,57 @@ public final strictfp class GUI implements Animated {
 		this.languages = languages;
 	}
 
-	public final GUIRoot newFade() {
+	public GUIRoot newFade() {
 		return newFade(null, null);
 	}
 
-	public final GUIRoot newFade(Fadable fadable, UIRenderer renderer) {
+	public GUIRoot newFade(Fadable fadable, UIRenderer renderer) {
 		GUIRoot gui_root = createRoot();
 		newFade(fadable, gui_root, renderer);
 		return gui_root;
 	}
 
-	public final void newFade(Fadable fadable, GUIRoot gui_root, UIRenderer renderer) {
+	public void newFade(Fadable fadable, GUIRoot gui_root, UIRenderer renderer) {
 		fade = new Fade(fadable, gui_root, renderer);
 		LocalEventQueue.getQueue().getManager().registerAnimation(this);
 	}
 
-	public final GUIRoot createRoot() {
+	public GUIRoot createRoot() {
 		GUIRoot gui_root = new GUIRoot(this);
 		gui_root.displayChanged();
 		return gui_root;
 	}
 
-	public final Languages getLanguages() {
+	public Languages getLanguages() {
 		return languages;
 	}
 
         @Override
-	public final void animate(float t) {
+	public void animate(float t) {
 		fade.animate(this, t);
 	}
 
-	final void stopFade() {
+	void stopFade() {
 		fade = null;
 		LocalEventQueue.getQueue().getManager().removeAnimation(this);
 	}
 
         @Override
-	public final void updateChecksum(StateChecksum checksum) {
+	public void updateChecksum(StateChecksum checksum) {
 	}
 
-	final void switchRoot(GUIRoot gui_root, UIRenderer renderer) {
+	void switchRoot(GUIRoot gui_root, UIRenderer renderer) {
 		if (current_root != null)
 			current_root.removeTree();
 		current_root = gui_root;
 		this.renderer = renderer;
 	}
 
-	public final GUIRoot getGUIRoot() {
+	public GUIRoot getGUIRoot() {
 		return current_root;
 	}
 
-	public final void render(AmbientAudio ambient, CameraState frustum_state) {
+	public void render(AmbientAudio ambient, CameraState frustum_state) {
 		boolean clear_color = renderer != null ? renderer.clearColorBuffer() : true;
 		if (clear_color)
 			GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
@@ -80,14 +80,14 @@ public final strictfp class GUI implements Animated {
 		renderGUI();
 	}
 
-	public final void pickHover() {
+	public void pickHover() {
 		CameraState camera = getGUIRoot().getDelegate().getCamera().getState();
 		GUIObject gui_hit = getGUIRoot().getCurrentGUIObject();
 		if (renderer != null)
 			renderer.pickHover(gui_hit.canHoverBehind(), camera, LocalInput.getMouseX(), LocalInput.getMouseY());
 	}
 
-	public final void renderGUI() {
+	public void renderGUI() {
 		current_root.setupGUIView();
 		current_root.render();
 		if (current_root.showToolTip()) {

@@ -21,7 +21,7 @@ public abstract strictfp class Model extends Element implements ListElement {
 	public abstract SpriteKey getSpriteRenderer();
 	public abstract float getNoDetailSize();
 
-	private final void updateBounds() {
+	private void updateBounds() {
 		float x = getPositionX();
 		float y = getPositionY();
 		float z = getPositionZ();

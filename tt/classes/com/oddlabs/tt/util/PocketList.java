@@ -15,7 +15,7 @@ public final strictfp class PocketList {
 		reset();
 	}
 
-	public final void add(int cost, Object obj) {
+	public void add(int cost, Object obj) {
 		if (cost >= pockets.length)
 			cost = pockets.length - 1;
 		pockets[cost].add(obj);
@@ -26,7 +26,7 @@ public final strictfp class PocketList {
 		size++;
 	}
 
-	public final Object removeBest() {
+	public Object removeBest() {
 		List current_pocket = pockets[min_list_index];
 		while (current_pocket.isEmpty()) {
 			min_list_index++;
@@ -37,7 +37,7 @@ public final strictfp class PocketList {
 		return node;
 	}
 
-	public final void clear() {
+	public void clear() {
 		for (int i = min_list_index; i <= max_list_index; i++)
 			pockets[i].clear();
 //		check();
@@ -49,11 +49,11 @@ public final strictfp class PocketList {
 			assert pockets[i].isEmpty(): min_list_index + " " + max_list_index + " " + i;
 	}
 */
-	public final int size() {
+	public int size() {
 		return size;
 	}
 
-	private final void reset() {
+	private void reset() {
 		min_list_index = pockets.length;
 		max_list_index = 0;
 		size = 0;

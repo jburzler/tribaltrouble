@@ -11,7 +11,7 @@ public abstract strictfp class RotatingThrowingWeapon extends ThrowingWeapon {
 		super(hit, src, target, sprite_renderer, throw_sound, hit_sounds);
 	}
 
-	private final void setAngle(float angle) {
+	private void setAngle(float angle) {
 		this.angle = angle;
 	}
 

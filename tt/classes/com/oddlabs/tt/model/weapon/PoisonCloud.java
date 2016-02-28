@@ -29,7 +29,7 @@ public final strictfp class PoisonCloud {
 		emitter.scale(START_SCALE, START_SCALE, START_SCALE);
 	}
 
-	public final void animate(float t) {
+	public void animate(float t) {
 		time += t;
 		float x;
 		float y;

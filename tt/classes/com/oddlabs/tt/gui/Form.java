@@ -186,15 +186,15 @@ public strictfp class Form extends Group {
 		}
 
                 @Override
-		public final void mouseDragged(int button, int x, int y, int rel_x, int rel_y, int abs_x, int abs_y) {
+		public void mouseDragged(int button, int x, int y, int rel_x, int rel_y, int abs_x, int abs_y) {
 			owner.mouseDragged(button, x, y, rel_x, rel_y, abs_x, abs_y);
 		}
 
                 @Override
-		public final void mouseMoved(int x, int y) {}
+		public void mouseMoved(int x, int y) {}
                 @Override
-		public final void mouseEntered() {}
+		public void mouseEntered() {}
                 @Override
-		public final void mouseExited() {}
+		public void mouseExited() {}
 	}
 }

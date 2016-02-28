@@ -35,14 +35,14 @@ public final strictfp class KeyManager {
 	public final static String AGREEMENT_ALGORITHM = "DH";
 	private final static String PASSWORD_ALGORITHM = "PBEWithMD5AndDES";
 
-	public final static AlgorithmParameterSpec generateParameterSpec() throws GeneralSecurityException {
+	public static AlgorithmParameterSpec generateParameterSpec() throws GeneralSecurityException {
 		AlgorithmParameterGenerator paramGen = AlgorithmParameterGenerator.getInstance(AGREEMENT_ALGORITHM);
 		paramGen.init(KEY_SIZE);
 		AlgorithmParameters params = paramGen.generateParameters();
 		return params.getParameterSpec(DHParameterSpec.class);
 	}
 
-	public final static KeyPair generateInitialKeyPair(AlgorithmParameterSpec param_spec) {
+	public static KeyPair generateInitialKeyPair(AlgorithmParameterSpec param_spec) {
 		try {
 			KeyPairGenerator key_pair_gen = KeyPairGenerator.getInstance(AGREEMENT_ALGORITHM);
 			key_pair_gen.initialize(param_spec);
@@ -53,7 +53,7 @@ public final strictfp class KeyManager {
 		}
 	}
 
-	public final static Cipher createCipher(int cipher_mode, KeyAgreement key_agreement, PublicKey public_key) throws InvalidKeyException, IOException, InvalidAlgorithmParameterException {
+	public static Cipher createCipher(int cipher_mode, KeyAgreement key_agreement, PublicKey public_key) throws InvalidKeyException, IOException, InvalidAlgorithmParameterException {
 		try {
 			key_agreement.doPhase(public_key, true);
 			SecretKey secret_key = key_agreement.generateSecret("DESede");
@@ -65,7 +65,7 @@ public final strictfp class KeyManager {
 		}
 	}
 
-	public final static PrivateKey readPrivateKey(byte[] encoded_private_key, String algorithm) throws InvalidKeySpecException {
+	public static PrivateKey readPrivateKey(byte[] encoded_private_key, String algorithm) throws InvalidKeySpecException {
 		try {
 			KeyFactory key_factory = KeyFactory.getInstance(algorithm);
 			KeySpec key_spec = new PKCS8EncodedKeySpec(encoded_private_key);
@@ -75,7 +75,7 @@ public final strictfp class KeyManager {
 		}
 	}
 
-	public final static PublicKey readPublicKey(byte[] encoded_public_key, String algorithm) throws InvalidKeySpecException {
+	public static PublicKey readPublicKey(byte[] encoded_public_key, String algorithm) throws InvalidKeySpecException {
 		try {
 			KeyFactory key_factory = KeyFactory.getInstance(algorithm);
 			KeySpec key_spec = new X509EncodedKeySpec(encoded_public_key);
@@ -85,7 +85,7 @@ public final strictfp class KeyManager {
 		}
 	}
 
-	public final static KeyAgreement generateAgreement(PrivateKey private_key) {
+	public static KeyAgreement generateAgreement(PrivateKey private_key) {
 		try {
 			KeyAgreement key_agreement = KeyAgreement.getInstance(AGREEMENT_ALGORITHM);
 			key_agreement.init(private_key);
@@ -95,7 +95,7 @@ public final strictfp class KeyManager {
 		}
 	}
 
-	public final static KeyPair generateKeyPairFromKey(PublicKey public_key) throws InvalidKeyException {
+	public static KeyPair generateKeyPairFromKey(PublicKey public_key) throws InvalidKeyException {
 		if (!(public_key instanceof DHPublicKey))
 			throw new InvalidKeyException("Not a public key");
 		try {
@@ -108,7 +108,7 @@ public final strictfp class KeyManager {
 		}
 	}
 
-	public final static Cipher createPasswordCipherFromPassword(char[] password, int mode) throws IOException, GeneralSecurityException {
+	public static Cipher createPasswordCipherFromPassword(char[] password, int mode) throws IOException, GeneralSecurityException {
 		PBEKeySpec pbeKeySpec;
 		PBEParameterSpec pbeParamSpec;
 		SecretKeyFactory keyFac;
@@ -142,14 +142,14 @@ public final strictfp class KeyManager {
 		return pbeCipher;
 	}
 
-	public final static Cipher createPasswordCipher(String pass_prompt, int mode) throws IOException, GeneralSecurityException {
+	public static Cipher createPasswordCipher(String pass_prompt, int mode) throws IOException, GeneralSecurityException {
 		return createPasswordCipherFromPassword(readPassword(pass_prompt, System.in), mode);
 	}
 
 	/**
 	 * Reads user password from given input stream.
 	 */
-	public final static char[] readPassword(String pass_prompt, InputStream in) throws IOException {
+	public static char[] readPassword(String pass_prompt, InputStream in) throws IOException {
 		char[] lineBuffer;
 		char[] buf;
 		buf = lineBuffer = new char[128];

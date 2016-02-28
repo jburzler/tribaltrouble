@@ -11,15 +11,15 @@ public final strictfp class DirectionNode {
 		this.direction_y = direction_y;
 	}
 
-	public final float getInvLength() {
+	public float getInvLength() {
 		return inv_length;
 	}
 
-	public final int getDirectionX() {
+	public int getDirectionX() {
 		return direction_x;
 	}
 
-	public final int getDirectionY() {
+	public int getDirectionY() {
 		return direction_y;
 	}
 }

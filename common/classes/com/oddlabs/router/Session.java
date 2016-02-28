@@ -36,14 +36,14 @@ final strictfp class Session {
 		return result[0];
 	}
 
-	final void removePlayer(RouterClient client) {
+	void removePlayer(RouterClient client) {
 		players.remove(client);
 		if (getNumPlayers() == 0)
 			manager.remove(this);
 		checksum();
 	}
 
-	final void checksum() {
+	void checksum() {
 		final Map checksum_to_count = new HashMap();
 		final int[] best_checksum = new int[1];
 		final boolean[] missing_checksum = new boolean[1];
@@ -92,17 +92,17 @@ final strictfp class Session {
 		}
 	}
 
-	final void addPlayer(RouterClient client) {
+	void addPlayer(RouterClient client) {
 		players.add(client);
 		if (info.num_participants == players.size())
 			start();
 	}
 	
-	final int getNextTick() {
+	int getNextTick() {
 		return manager.getNextTick(this);
 	}
 
-	final void startTimeout(RouterClient client) {
+	void startTimeout(RouterClient client) {
 		manager.startTimeout(client);
 	}
 
@@ -114,15 +114,15 @@ final strictfp class Session {
 		this.initial_time = manager.start(this);
 	}
 
-	final long getInitialTime() {
+	long getInitialTime() {
 		return initial_time;
 	}
 
-	final boolean isComplete() {
+	boolean isComplete() {
 		return started;
 	}
 
-	final void visit(SessionVisitor visitor) {
+	void visit(SessionVisitor visitor) {
 		Iterator it = players.iterator();
 		while (it.hasNext()) {
 			RouterClient client = (RouterClient)it.next();
@@ -130,12 +130,12 @@ final strictfp class Session {
 		}
 	}
 
-	final int getNumPlayers() {
+	int getNumPlayers() {
 		return players.size();
 	}
 	
         @Override
-	public final String toString() {
+	public String toString() {
 		String result = "(Session: info = " + info + " players : (";
 		Iterator it = players.iterator();
 		while (it.hasNext()) {

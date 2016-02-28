@@ -116,7 +116,7 @@ public final strictfp class ActionButtonPanel extends GUIObject implements Anima
 	private boolean current_tower = false;
 //	private boolean[] magic_disabled = new boolean[2];
 
-	private final String formatTip(String tip_key, String shortcut_key) {
+	private String formatTip(String tip_key, String shortcut_key) {
 		return Utils.getBundleString(bundle, tip_key, new Object[]{shortcut_key});
 	}
 
@@ -362,23 +362,23 @@ public final strictfp class ActionButtonPanel extends GUIObject implements Anima
 	}
 
         @Override
-	public final void doAdd() {
+	public void doAdd() {
 		super.doAdd();
 		viewer.getAnimationManagerLocal().registerAnimation(this);
 	}
 
         @Override
-	protected final void doRemove() {
+	protected void doRemove() {
 		super.doRemove();
 		viewer.getAnimationManagerLocal().removeAnimation(this);
 	}
 
         @Override
-	public final void updateChecksum(StateChecksum sum) {
+	public void updateChecksum(StateChecksum sum) {
 	}
 
         @Override
-	public final void animate(float t) {
+	public void animate(float t) {
 		Building new_building = viewer.getSelection().getCurrentSelection().getBuilding();
 		boolean different_building = new_building != current_building;
 		current_building = new_building;
@@ -462,7 +462,7 @@ public final strictfp class ActionButtonPanel extends GUIObject implements Anima
 		updateButtons();
 	}
 
-	private final void updateButtons() {
+	private void updateButtons() {
 		if (current_building != null && current_building.getAbilities().hasAbilities(Abilities.ATTACK)) {
 			tower_attack_button.doUpdate();
 			tower_exit_button.doUpdate();
@@ -516,7 +516,7 @@ public final strictfp class ActionButtonPanel extends GUIObject implements Anima
 		}
 	}
 
-	private final void removeGroups() {
+	private void removeGroups() {
 		unit_group.remove();
 		peon_group.remove();
 		chieftain_group.remove();
@@ -532,7 +532,7 @@ public final strictfp class ActionButtonPanel extends GUIObject implements Anima
 		current_submenu = null;
 	}
 
-	private final void updateCounters() {
+	private void updateCounters() {
 		assert current_building != null: "Building is null";
 		SupplyCounter unit_counter = new SupplyCounter(current_building, Unit.class);
 		unit_status.setCounter(unit_counter);
@@ -584,7 +584,7 @@ public final strictfp class ActionButtonPanel extends GUIObject implements Anima
 	}
 
         @Override
-	public final void displayChangedNotify(int width, int height) {
+	public void displayChangedNotify(int width, int height) {
 		setDim(width, height);
 		updateGroups();
 	}
@@ -610,16 +610,16 @@ public final strictfp class ActionButtonPanel extends GUIObject implements Anima
 	}
 
         @Override
-	protected final void keyReleased(KeyboardEvent event) {
+	protected void keyReleased(KeyboardEvent event) {
 		((GUIObject)getParent()).keyReleased(event);
 	}
 
         @Override
-	protected final void keyPressed(KeyboardEvent event) {
+	protected void keyPressed(KeyboardEvent event) {
 		((GUIObject)getParent()).keyPressed(event);
 	}
 
-	public final boolean doKeyPressed(KeyboardEvent event) {
+	public boolean doKeyPressed(KeyboardEvent event) {
 		switch (event.getKeyCode()) {
 			case Keyboard.KEY_M:
 			case Keyboard.KEY_Q:
@@ -664,7 +664,7 @@ public final strictfp class ActionButtonPanel extends GUIObject implements Anima
 		return false;
 	}
 
-	public final boolean doKeyRepeat(KeyboardEvent event) {
+	public boolean doKeyRepeat(KeyboardEvent event) {
 		switch (event.getKeyCode()) {
 			case Keyboard.KEY_M:
 				if (current_unit) {
@@ -848,7 +848,7 @@ public final strictfp class ActionButtonPanel extends GUIObject implements Anima
 		return false;
 	}
 
-	public final boolean doKeyReleased(KeyboardEvent event) {
+	public boolean doKeyReleased(KeyboardEvent event) {
 		switch (event.getKeyCode()) {
 			case Keyboard.KEY_C:
 				if (current_armory) {
@@ -946,28 +946,28 @@ public final strictfp class ActionButtonPanel extends GUIObject implements Anima
 	}
 
         @Override
-	protected final void renderGeometry() {
+	protected void renderGeometry() {
 	}
 
-	public final boolean inHarvestMenu() {
+	public boolean inHarvestMenu() {
 		return current_submenu == harvest_group;
 	}
 
-	public final boolean inBuildMenu() {
+	public boolean inBuildMenu() {
 		return current_submenu == build_group;
 	}
 
-	public final boolean inArmyMenu() {
+	public boolean inArmyMenu() {
 		return current_submenu == army_group;
 	}
 
-	public final boolean inTransportMenu() {
+	public boolean inTransportMenu() {
 		return current_submenu == transport_group;
 	}
 
 
         @Override
-	public final void mouseDragged(int button, int x, int y, int relative_x, int relative_y, int absolute_x, int absolute_y) {
+	public void mouseDragged(int button, int x, int y, int relative_x, int relative_y, int absolute_x, int absolute_y) {
 		if (getParent() != null)
 			((GUIObject)getParent()).mouseDragged(button, x, y, relative_x, relative_y, absolute_x, absolute_y);
 	}
@@ -980,7 +980,7 @@ public final strictfp class ActionButtonPanel extends GUIObject implements Anima
 		}
 
                 @Override
-		public final void mouseClicked(int button, int x, int y, int clicks) {
+		public void mouseClicked(int button, int x, int y, int clicks) {
 			viewer.getGUIRoot().pushDelegate(new TargetDelegate(viewer, camera, action));
 		}
 	}
@@ -995,7 +995,7 @@ public final strictfp class ActionButtonPanel extends GUIObject implements Anima
 		}
 
                 @Override
-		public final void mouseClicked(int button, int x, int y, int clicks) {
+		public void mouseClicked(int button, int x, int y, int clicks) {
 			remove_group.remove();
 			addChild(add_group);
 			current_submenu = add_group;
@@ -1006,7 +1006,7 @@ public final strictfp class ActionButtonPanel extends GUIObject implements Anima
 
 	private final strictfp class CancelListener implements MouseClickListener {
                 @Override
-		public final void mouseClicked(int button, int x, int y, int clicks) {
+		public void mouseClicked(int button, int x, int y, int clicks) {
 			removeGroups();
 			update = true;
 		}
@@ -1014,7 +1014,7 @@ public final strictfp class ActionButtonPanel extends GUIObject implements Anima
 
 	private final strictfp class TowerExitListener implements MouseClickListener {
                 @Override
-		public final void mouseClicked(int button, int x, int y, int clicks) {
+		public void mouseClicked(int button, int x, int y, int clicks) {
 			if (!current_building.isDead())
 				viewer.getPeerHub().getPlayerInterface().exitTower(current_building);
 			removeGroups();
@@ -1024,7 +1024,7 @@ public final strictfp class ActionButtonPanel extends GUIObject implements Anima
 
 	private final strictfp class RallyPointListener implements MouseClickListener {
                 @Override
-		public final void mouseClicked(int button, int x, int y, int clicks) {
+		public void mouseClicked(int button, int x, int y, int clicks) {
 			if (!current_building.isDead())
 				viewer.getGUIRoot().pushDelegate(new RallyPointDelegate(viewer,  camera, current_building));
 			removeGroups();
@@ -1040,7 +1040,7 @@ public final strictfp class ActionButtonPanel extends GUIObject implements Anima
 		}
 
                 @Override
-		public final boolean isDisabled() {
+		public boolean isDisabled() {
 			return !building.canBuildChieftain() && !building.canStopChieftain();
 		}
 	}
@@ -1055,7 +1055,7 @@ public final strictfp class ActionButtonPanel extends GUIObject implements Anima
 		}
 
                 @Override
-		public final boolean isDisabled() {
+		public boolean isDisabled() {
 			return !unit.canDoMagic(magic_index);
 		}
 	}
@@ -1068,7 +1068,7 @@ public final strictfp class ActionButtonPanel extends GUIObject implements Anima
 		}
 
                 @Override
-		public final boolean isDisabled() {
+		public boolean isDisabled() {
                     for (SupplyCounter counter : counters) {
                         if (counter.getNumSupplies() == 0) {
                             return true;
@@ -1088,7 +1088,7 @@ public final strictfp class ActionButtonPanel extends GUIObject implements Anima
 		}
 
                 @Override
-		public final boolean isDisabled() {
+		public boolean isDisabled() {
 			if (exit)
 				return !building.canExitTower();
 			else
@@ -1104,14 +1104,14 @@ public final strictfp class ActionButtonPanel extends GUIObject implements Anima
 		}
 
                 @Override
-		public final boolean isDisabled() {
+		public boolean isDisabled() {
 			return !viewer.getLocalPlayer().canBuild(building);
 		}
 	}
 
 	private final strictfp class TowerPlaceListener implements MouseClickListener {
                 @Override
-		public final void mouseClicked(int button, int x, int y, int clicks) {
+		public void mouseClicked(int button, int x, int y, int clicks) {
 			viewer.getGUIRoot().pushDelegate(new PlacingDelegate(viewer, camera.getState(), Race.BUILDING_TOWER));
 		}
 	}
@@ -1124,7 +1124,7 @@ public final strictfp class ActionButtonPanel extends GUIObject implements Anima
 		}
 
                 @Override
-		public final void mouseClicked(int button, int x, int y, int clicks) {
+		public void mouseClicked(int button, int x, int y, int clicks) {
 			viewer.getGUIRoot().pushDelegate(new PlacingDelegate(viewer, camera.getState(), building_index));
 		}
 	}

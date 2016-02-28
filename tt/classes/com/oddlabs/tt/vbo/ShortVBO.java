@@ -66,7 +66,7 @@ public final strictfp class ShortVBO extends VBO {
 		}
 	}
 
-	public final void drawRangeElements(int mode, int start, int end, int count, int index) {
+	public void drawRangeElements(int mode, int start, int end, int count, int index) {
 		registerTrianglesRendered(mode, count);
 		if (!use_vbo) {
 			saved_buffer.position(index);
@@ -85,7 +85,7 @@ public final strictfp class ShortVBO extends VBO {
 		}
 	}
 
-	public final void put(ShortBuffer buffer) {
+	public void put(ShortBuffer buffer) {
 		if (!use_vbo) {
 //			saved_buffer.position(index);
 			saved_buffer.put(buffer);
@@ -101,7 +101,7 @@ public final strictfp class ShortVBO extends VBO {
 //		} while (!unmap());
 	}
 
-	public final void put(short[] buffer) {
+	public void put(short[] buffer) {
 		put(Utils.toBuffer(buffer));
 //		do {
 //			map(ARBBufferObject.GL_WRITE_ONLY_ARB);
@@ -109,7 +109,7 @@ public final strictfp class ShortVBO extends VBO {
 //		} while (!unmap());
 	}
 
-	public final void drawElements(int mode, int count, int index) {
+	public void drawElements(int mode, int count, int index) {
 		registerTrianglesRendered(mode, count);
 		if (!use_vbo) {
 			saved_buffer.position(index);
@@ -123,7 +123,7 @@ public final strictfp class ShortVBO extends VBO {
 	}
 
         @Override
-	public final int capacity() {
+	public int capacity() {
 		return getSize()>>1;
 	}
 }

@@ -15,16 +15,16 @@ public final strictfp class Region extends Node {
 	private int center_y;
 
         @Override
-	public final int getGridX() {
+	public int getGridX() {
 		return center_x;
 	}
 
         @Override
-	public final int getGridY() {
+	public int getGridY() {
 		return center_y;
 	}
 
-	public final void setPosition(int center_x, int center_y) {
+	public void setPosition(int center_x, int center_y) {
 		this.center_x = center_x;
 		this.center_y = center_y;
 	}
@@ -34,7 +34,7 @@ public final strictfp class Region extends Node {
 		return "Region: " + center_x + " " + center_y;
 	}
         @Override
-	public final PathNode newPath() {
+	public PathNode newPath() {
 		Node graph_node = this;
 		assert graph_node != null;
 		RegionNode current_node = null;
@@ -45,14 +45,14 @@ public final strictfp class Region extends Node {
 		return current_node;
 	}
 
-	public final static void link(Region r1, Region r2) {
+	public static void link(Region r1, Region r2) {
 		if (r1 == null || r2 == null || r1 == r2 || r1.neighbours.contains(r2))
 			return;
 		r1.addNeighbour(r2);
 		r2.addNeighbour(r1);
 	}
 
-	public final List getObjects(Class key) {
+	public List getObjects(Class key) {
 		List list = (List)object_lists.get(key);
 		if (list == null) {
 			list = new ArrayList();
@@ -61,21 +61,21 @@ public final strictfp class Region extends Node {
 		return list;
 	}
 
-	public final void registerObject(Class key, Object object) {
+	public void registerObject(Class key, Object object) {
 		getObjects(key).add(object);
 	}
 
-	public final void unregisterObject(Class key, Object object) {
+	public void unregisterObject(Class key, Object object) {
 		List list = (List)object_lists.get(key);
 		list.remove(object);
 	}
 
-	private final void addNeighbour(Region n) {
+	private void addNeighbour(Region n) {
 		neighbours.add(n);
 	}
 
         @Override
-	public final boolean addNeighbours(PathFinderAlgorithm finder, UnitGrid unit_grid) {
+	public boolean addNeighbours(PathFinderAlgorithm finder, UnitGrid unit_grid) {
 		for (int i = 0; i < neighbours.size(); i++) {
 			Region neighbour = (Region)neighbours.get(i);
 			if (!neighbour.isVisited())
@@ -84,13 +84,13 @@ public final strictfp class Region extends Node {
 		return false;
 	}
 
-	private final void debugVertex(HeightMap heightmap) {
+	private void debugVertex(HeightMap heightmap) {
 		float xf = UnitGrid.coordinateFromGrid(getGridX());
 		float yf = UnitGrid.coordinateFromGrid(getGridY());
 		GL11.glVertex3f(xf, yf, heightmap.getNearestHeight(xf, yf) + 2f);
 	}
 
-	public final void debugRenderConnectionsReset() {
+	public void debugRenderConnectionsReset() {
 		if (!isVisited())
 			return;
 		setVisited(false);
@@ -100,7 +100,7 @@ public final strictfp class Region extends Node {
 		}
 	}
 
-	public final void debugRenderConnections(HeightMap heightmap) {
+	public void debugRenderConnections(HeightMap heightmap) {
 		if (isVisited())
 			return;
 		setVisited(true);

@@ -25,15 +25,15 @@ public final strictfp class JumpDelegate extends InGameDelegate {
 	}
 
         @Override
-	public final void keyPressed(KeyboardEvent event) {
+	public void keyPressed(KeyboardEvent event) {
 	}
 
         @Override
-	public final void keyRepeat(KeyboardEvent event) {
+	public void keyRepeat(KeyboardEvent event) {
 	}
 
         @Override
-	public final void keyReleased(KeyboardEvent event) {
+	public void keyReleased(KeyboardEvent event) {
 	}
 
         @Override
@@ -41,7 +41,7 @@ public final strictfp class JumpDelegate extends InGameDelegate {
 	}
 
         @Override
-	public final void doRemove() {
+	public void doRemove() {
 		super.doRemove();
 		if (runnable != null)
 			runnable.run();

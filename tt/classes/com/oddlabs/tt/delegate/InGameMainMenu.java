@@ -29,25 +29,25 @@ public final strictfp class InGameMainMenu extends Menu {
 	}
 
         @Override
-	protected final void doAdd() {
+	protected void doAdd() {
 		super.doAdd();
 		viewer.setPaused(true);
 	}
 
         @Override
-	protected final void doRemove() {
+	protected void doRemove() {
 		super.doRemove();
 		viewer.setPaused(false);
 	}
 
-	public final void addAbortButton(String abort_text) {
+	public void addAbortButton(String abort_text) {
 		MenuButton abort = new MenuButton(abort_text, COLOR_NORMAL, COLOR_ACTIVE);
 		addChild(abort);
 		abort.addMouseClickListener(new AbortListener());
 	}
 
         @Override
-	protected final void addButtons() {
+	protected void addButtons() {
 		addResumeButton();
 
 		addOptionsButton(() -> new InGameOptionsMenu(getGUIRoot(), viewer));
@@ -60,14 +60,14 @@ public final strictfp class InGameMainMenu extends Menu {
 	}
 
         @Override
-	public final void displayChangedNotify(int width, int height) {
+	public void displayChangedNotify(int width, int height) {
 		super.displayChangedNotify(width, height);
 		if (game_infos != null)
 			game_infos.setPos((width - game_infos.getWidth())/2, (height - game_infos.getHeight())/2);
 	}
 
         @Override
-	protected final void keyPressed(KeyboardEvent event) {
+	protected void keyPressed(KeyboardEvent event) {
 		switch(event.getKeyCode()) {
 			case Keyboard.KEY_ESCAPE:
 				pop();
@@ -79,21 +79,21 @@ public final strictfp class InGameMainMenu extends Menu {
 	}
 
         @Override
-	protected final void renderGeometry() {
+	protected void renderGeometry() {
 		super.renderGeometry();
 		renderBackgroundAlpha();
 	}
 
 	private final strictfp class AbortListener implements MouseClickListener {
                 @Override
-		public final void mouseClicked(int button, int x, int y, int clicks) {
+		public void mouseClicked(int button, int x, int y, int clicks) {
 			setMenuCentered(new QuestionForm(Utils.getBundleString(bundle, "end_game_confirm"), new ActionAbortListener()));
 		}
 	}
 
 	private final strictfp class ActionAbortListener implements MouseClickListener {
                 @Override
-		public final void mouseClicked(int button, int x, int y, int clicks) {
+		public void mouseClicked(int button, int x, int y, int clicks) {
 			viewer.abort();
 		}
 	}

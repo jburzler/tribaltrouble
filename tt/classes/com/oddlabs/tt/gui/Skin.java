@@ -61,12 +61,12 @@ public final strictfp class Skin {
 	private final Quad flag_es;
 	private final Quad flag_it;
 
-	public final static void load() {
+	public static void load() {
 		if (skin == null)
 			skin = new Skin("/gui/gui_skin.xml");
 	}
 
-	public final static Skin getSkin() {
+	public static Skin getSkin() {
 		return skin;
 	}
 
@@ -108,7 +108,7 @@ public final strictfp class Skin {
 		flag_it = getNamedQuad(root, "flag_it");
 	}
 
-	private final static Node loadFile(String xml_file, ErrorHandler error_handler) {
+	private static Node loadFile(String xml_file, ErrorHandler error_handler) {
 		URL url = Utils.makeURL(xml_file);
 
 		try {
@@ -123,11 +123,11 @@ public final strictfp class Skin {
 		}
 	}
 
-	private final static Texture loadTexture(Node n) {
+	private static Texture loadTexture(Node n) {
 		return loadTexture(n.getAttributes().getNamedItem("texture").getNodeValue());
 	}
 
-	private final static Texture loadTexture(String tex_file) {
+	private static Texture loadTexture(String tex_file) {
 		TextureFile file = new TextureFile(tex_file,
 										   GL11.GL_RGBA,
 										   GL11.GL_LINEAR,
@@ -137,7 +137,7 @@ public final strictfp class Skin {
 		return (Texture)Resources.findResource(file);
 	}
 
-	private final static Node getNodeByName(String name, Node n) {
+	private static Node getNodeByName(String name, Node n) {
 		NodeList nl = n.getChildNodes();
 		for (int i = 0; i < nl.getLength(); i++) {
 			if (nl.item(i).getNodeName().equals(name))
@@ -147,12 +147,12 @@ public final strictfp class Skin {
 		return null;
 	}
 
-	private final static int getInt(Node n, String key) {
+	private static int getInt(Node n, String key) {
 		String string = n.getAttributes().getNamedItem(key).getNodeValue();
 		return Integer.parseInt(string);
 	}
 
-	private final Color getColor(Node n) {
+	private Color getColor(Node n) {
 		Node q = getNodeByName("color", n);
 		int r = getInt(q, "r");
 		int g = getInt(q, "g");
@@ -164,15 +164,15 @@ public final strictfp class Skin {
 						 a/255f);
 	}
 
-	private final Quad[] getNamedQuads(Node n, String name) {
+	private Quad[] getNamedQuads(Node n, String name) {
 		return getQuads(getNodeByName(name, n), texture);
 	}
 
-	private final Quad getNamedQuad(Node n, String name) {
+	private Quad getNamedQuad(Node n, String name) {
 		return getQuad(getNodeByName(name, n), texture);
 	}
 
-	private final Quad[] getQuads(Node n, Texture texture) {
+	private Quad[] getQuads(Node n, Texture texture) {
 		Quad[] result = new Quad[3];
 		Node normal = getNodeByName("normal", n);
 		result[NORMAL] = getQuad(normal, texture);
@@ -183,12 +183,12 @@ public final strictfp class Skin {
 		return result;
 	}
 
-	private final Quad getQuad(Node n, Texture texture) {
+	private Quad getQuad(Node n, Texture texture) {
 		Node q = getNodeByName("quad", n);
 		return readQuadData(q, texture);
 	}
 
-	private final Quad readQuadData(Node n, Texture texture) {
+	private Quad readQuadData(Node n, Texture texture) {
 		int left = getInt(n, "left");
 		int top = getInt(n, "top");
 		int right = getInt(n, "right");
@@ -201,7 +201,7 @@ public final strictfp class Skin {
 						bottom - top);
 	}
 
-	private final Horizontal getHorizontal(Node n) {
+	private Horizontal getHorizontal(Node n) {
 		Node horizontal_node = getNodeByName("horizontal", n);
 		Node left_node = getNodeByName("left", horizontal_node);
 		Quad[] left = getQuads(left_node, texture);
@@ -212,7 +212,7 @@ public final strictfp class Skin {
 		return new Horizontal(left, center, right);
 	}
 
-	private final Vertical getVertical(Node n) {
+	private Vertical getVertical(Node n) {
 		Node vertical_node = getNodeByName("vertical", n);
 		Node bottom_node = getNodeByName("bottom", vertical_node);
 		Quad[] bottom = getQuads(bottom_node, texture);
@@ -223,7 +223,7 @@ public final strictfp class Skin {
 		return new Vertical(bottom, center, top);
 	}
 
-	private final Box getBox(Node n) {
+	private Box getBox(Node n) {
 		Node box_node = getNodeByName("box", n);
 		Node left_bottom_node = getNodeByName("left_bottom", box_node);
 		Quad[] left_bottom = getQuads(left_bottom_node, texture);
@@ -261,104 +261,104 @@ public final strictfp class Skin {
 					   top_offset);
 	}
 
-	private final Font getFont(Node n) {
+	private Font getFont(Node n) {
 		String path = n.getFirstChild().getNodeValue();
 		FontFile font_file = new FontFile(path);
 		return (Font)Resources.findResource(font_file);
 	}
 
-	public final void bindTexture() {
+	public void bindTexture() {
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, texture.getHandle());
 	}
 
-	private final Font parseEditFont(Node n) {
+	private Font parseEditFont(Node n) {
 		Node node = getNodeByName("editfont", n);
 		return getFont(node);
 	}
 
-	public final Font getEditFont() {
+	public Font getEditFont() {
 		return edit_font;
 	}
 
-	private final Font parseButtonFont(Node n) {
+	private Font parseButtonFont(Node n) {
 		Node node = getNodeByName("buttonfont", n);
 		return getFont(node);
 	}
 
-	public final Font getButtonFont() {
+	public Font getButtonFont() {
 		return button_font;
 	}
 
-	private final Font parseHeadlineFont(Node n) {
+	private Font parseHeadlineFont(Node n) {
 		Node node = getNodeByName("headlinefont", n);
 		return getFont(node);
 	}
 
-	public final Font getHeadlineFont() {
+	public Font getHeadlineFont() {
 		return headline_font;
 	}
 
-	private final Quad[] parseCheckBoxMarked(Node n) {
+	private Quad[] parseCheckBoxMarked(Node n) {
 		Node node = getNodeByName("checkbox", n);
 		node = getNodeByName("marked", node);
 		return getQuads(node, texture);
 	}
 
-	public final Quad[] getCheckBoxMarked() {
+	public Quad[] getCheckBoxMarked() {
 		return check_box_marked;
 	}
 
-	private final Quad[] parseCheckBoxUnmarked(Node n) {
+	private Quad[] parseCheckBoxUnmarked(Node n) {
 		Node node = getNodeByName("checkbox", n);
 		node = getNodeByName("unmarked", node);
 		return getQuads(node, texture);
 	}
 
-	public final Quad[] getCheckBoxUnmarked() {
+	public Quad[] getCheckBoxUnmarked() {
 		return check_box_unmarked;
 	}
 
-	private final Quad[] parseRadioButtonMarked(Node n) {
+	private Quad[] parseRadioButtonMarked(Node n) {
 		Node node = getNodeByName("radiobutton", n);
 		node = getNodeByName("marked", node);
 		return getQuads(node, texture);
 	}
 
-	public final Quad[] getRadioButtonMarked() {
+	public Quad[] getRadioButtonMarked() {
 		return radio_button_marked;
 	}
 
-	private final Quad[] parseRadioButtonUnmarked(Node n) {
+	private Quad[] parseRadioButtonUnmarked(Node n) {
 		Node node = getNodeByName("radiobutton", n);
 		node = getNodeByName("unmarked", node);
 		return getQuads(node, texture);
 	}
 
-	public final Quad[] getRadioButtonUnmarked() {
+	public Quad[] getRadioButtonUnmarked() {
 		return radio_button_unmarked;
 	}
 
-	private final Horizontal parseHorizButtonPressed(Node n) {
+	private Horizontal parseHorizButtonPressed(Node n) {
 		Node node = getNodeByName("horiz_button", n);
 		node = getNodeByName("horiz_pressed", node);
 		return getHorizontal(node);
 	}
 
-	public final Horizontal getHorizButtonPressed() {
+	public Horizontal getHorizButtonPressed() {
 		return horiz_button_pressed;
 	}
 
-	private final Horizontal parseHorizButtonUnpressed(Node n) {
+	private Horizontal parseHorizButtonUnpressed(Node n) {
 		Node node = getNodeByName("horiz_button", n);
 		node = getNodeByName("horiz_unpressed", node);
 		return getHorizontal(node);
 	}
 
-	public final Horizontal getHorizButtonUnpressed() {
+	public Horizontal getHorizButtonUnpressed() {
 		return horiz_button_unpressed;
 	}
 
-	private final ScrollBarData parseScrollBarData(Node n) {
+	private ScrollBarData parseScrollBarData(Node n) {
 		Node node = getNodeByName("vert_scroll", n);
 		Vertical scroll_bar = getVertical(node);
 
@@ -405,11 +405,11 @@ public final strictfp class Skin {
 								 getInt(node, "top_offset"));
 	}
 
-	public final ScrollBarData getScrollBarData() {
+	public ScrollBarData getScrollBarData() {
 		return scroll_bar_data;
 	}
 
-	private final SliderData parseSliderData(Node n) {
+	private SliderData parseSliderData(Node n) {
 		Node node = getNodeByName("slider", n);
 		Horizontal slider = getHorizontal(node);
 
@@ -421,11 +421,11 @@ public final strictfp class Skin {
 							  getInt(node, "right_offset"));
 	}
 
-	public final SliderData getSliderData() {
+	public SliderData getSliderData() {
 		return slider_data;
 	}
 
-	private final PulldownData parsePulldownData(Node n) {
+	private PulldownData parsePulldownData(Node n) {
 		Node node = getNodeByName("pulldown_menu", n);
 
 		Node temp;
@@ -453,11 +453,11 @@ public final strictfp class Skin {
 								getFont(getNodeByName("pulldownfont", n)));
 	}
 
-	public final PulldownData getPulldownData() {
+	public PulldownData getPulldownData() {
 		return pulldown_data;
 	}
 
-	private final ProgressBarData parseProgressBarData(Node n) {
+	private ProgressBarData parseProgressBarData(Node n) {
 		Node node = getNodeByName("progressbar", n);
 		Horizontal progressbar = getHorizontal(node);
 
@@ -478,11 +478,11 @@ public final strictfp class Skin {
 								   getFont(getNodeByName("progressfont", n)));
 	}
 
-	public final ProgressBarData getProgressBarData() {
+	public ProgressBarData getProgressBarData() {
 		return progress_bar_data;
 	}
 
-	private final FormData parseFormData(Node n) {
+	private FormData parseFormData(Node n) {
 		Node node = getNodeByName("slim_form", n);
 		Box slim_form = getBox(node);
 
@@ -499,48 +499,48 @@ public final strictfp class Skin {
 							getFont(getNodeByName("formfont", n)));
 	}
 
-	public final FormData getFormData() {
+	public FormData getFormData() {
 		return form_data;
 	}
 
-	public final Quad[] getPlusButton() {
+	public Quad[] getPlusButton() {
 		return plus_button;
 	}
 
-	public final Quad[] getMinusButton() {
+	public Quad[] getMinusButton() {
 		return minus_button;
 	}
 
-	public final Quad[] getAcceptButton() {
+	public Quad[] getAcceptButton() {
 		return accept_button;
 	}
 
-	public final Quad[] getCancelButton() {
+	public Quad[] getCancelButton() {
 		return cancel_button;
 	}
 	
-	public final Quad[] getBackButton() {
+	public Quad[] getBackButton() {
 		return back_button;
 	}
 
-	public final Quad[] getDiode() {
+	public Quad[] getDiode() {
 		return diode;
 	}
 
-	private final Box parseBox(Node n, String name) {
+	private Box parseBox(Node n, String name) {
 		Node node = getNodeByName(name, n);
 		return getBox(node);
 	}
 
-	public final Box getEditBox() {
+	public Box getEditBox() {
 		return edit_box;
 	}
 
-	public final Box getBackgroundBox() {
+	public Box getBackgroundBox() {
 		return background_box;
 	}
 
-	private final GroupData parseGroupData(Node n) {
+	private GroupData parseGroupData(Node n) {
 		Node node = getNodeByName("group", n);
 		return new GroupData(getBox(node),
 							 getInt(node, "caption_left"),
@@ -549,11 +549,11 @@ public final strictfp class Skin {
 							 getFont(getNodeByName("groupfont", n)));
 	}
 
-	public final GroupData getGroupData() {
+	public GroupData getGroupData() {
 		return group_data;
 	}
 
-	private final MultiColumnComboBoxData parseMultiColumnComboBoxData(Node n) {
+	private MultiColumnComboBoxData parseMultiColumnComboBoxData(Node n) {
 		Node node = getNodeByName("multi_column_combo", n);
 		Node desc = getNodeByName("descending", node);
 		Node asc = getNodeByName("ascending", node);
@@ -572,11 +572,11 @@ public final strictfp class Skin {
 										   getInt(node, "caption_offset"));
 	}
 
-	public final MultiColumnComboBoxData getMultiColumnComboBoxData() {
+	public MultiColumnComboBoxData getMultiColumnComboBoxData() {
 		return multi_columnCombo_box_data;
 	}
 
-	private final ToolTipBoxInfo parseToolTipInfo(Node n) {
+	private ToolTipBoxInfo parseToolTipInfo(Node n) {
 		Node node = getNodeByName("tool_tip", n);
 		return new ToolTipBoxInfo(getHorizontal(node),
 							  getInt(node, "left_offset"),
@@ -585,11 +585,11 @@ public final strictfp class Skin {
 							  getInt(node, "top_offset"));
 	}
 
-	public final ToolTipBoxInfo getToolTipInfo() {
+	public ToolTipBoxInfo getToolTipInfo() {
 		return tool_tip;
 	}
 
-	private final PanelData parsePanelData(Node n) {
+	private PanelData parsePanelData(Node n) {
 		Node node = getNodeByName("panel", n);
 		return new PanelData(getBox(node),
 							 getHorizontal(node),
@@ -600,31 +600,31 @@ public final strictfp class Skin {
 							 getInt(node, "bottom_tab_offset"));
 	}
 
-	public final PanelData getPanelData() {
+	public PanelData getPanelData() {
 		return panel_data;
 	}
 
-	public final Quad getFlagDefault() {
+	public Quad getFlagDefault() {
 		return flag_default;
 	}
 
-	public final Quad getFlagDa() {
+	public Quad getFlagDa() {
 		return flag_da;
 	}
 
-	public final Quad getFlagEn() {
+	public Quad getFlagEn() {
 		return flag_en;
 	}
 
-	public final Quad getFlagDe() {
+	public Quad getFlagDe() {
 		return flag_de;
 	}
 
-	public final Quad getFlagEs() {
+	public Quad getFlagEs() {
 		return flag_es;
 	}
 
-	public final Quad getFlagIt() {
+	public Quad getFlagIt() {
 		return flag_it;
 	}
 }

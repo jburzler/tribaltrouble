@@ -11,7 +11,7 @@ public final strictfp class ReproduceUnitContainer extends UnitContainer {
 		this.building = building;
 	}
 
-	public final float getBuildProgress() {
+	public float getBuildProgress() {
 		ChieftainContainer chieftain_container = building.getChieftainContainer();
 		if (chieftain_container.isTraining()) {
 			return 0;
@@ -20,29 +20,29 @@ public final strictfp class ReproduceUnitContainer extends UnitContainer {
 		}
 	}
 
-	public final void resetProgress() {
+	public void resetProgress() {
 		unit_reproduction = 0f;
 	}
 
         @Override
-	public final void enter(Unit unit) {
+	public void enter(Unit unit) {
 		assert canEnter(unit);
 		unit.removeNow();
 		increaseSupply(1);
 	}
 
         @Override
-	public final boolean canEnter(Unit unit) {
+	public boolean canEnter(Unit unit) {
 		return !unit.getAbilities().hasAbilities(Abilities.THROW) && getTotalSupplies() != getMaxSupplyCount();
 	}
 
-	private final int getTotalSupplies() {
+	private int getTotalSupplies() {
 //		return getNumSupplies() + building.getBuildSupplyContainer(Unit.class).getNumSupplies() == getMaxSupplyCount();
 		return getNumSupplies() + getNumPreparing();
 	}
 
         @Override
-	public final Unit exit() {
+	public Unit exit() {
 		assert getNumSupplies() > 0;
 		increaseSupply(-1);
 		return null;
@@ -56,7 +56,7 @@ public final strictfp class ReproduceUnitContainer extends UnitContainer {
 	}
 
         @Override
-	public final void animate(float t) {
+	public void animate(float t) {
 		ChieftainContainer chieftain_container = building.getChieftainContainer();
 		
 		if ((building.getOwner().getUnitCountContainer().getNumSupplies() < getMaxSupplyCount() && getTotalSupplies() != getMaxSupplyCount())

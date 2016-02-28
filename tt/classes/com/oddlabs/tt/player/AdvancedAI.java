@@ -55,7 +55,7 @@ public final strictfp class AdvancedAI extends AI {
 	}
 
         @Override
-	public final void animate(float t) {
+	public void animate(float t) {
 		if (!shouldDoAction(t))
 			return;
 		reclassify();
@@ -74,7 +74,7 @@ public final strictfp class AdvancedAI extends AI {
 		}
 	}
 
-	private final void nodeDefendBase() {
+	private void nodeDefendBase() {
 		int enemy_score = 0;
 		if (getQuarters() != null) {
 			enemy_score = scanForEnemies(getQuarters()[0]);
@@ -94,7 +94,7 @@ public final strictfp class AdvancedAI extends AI {
 		}
 	}
 
-	private final void nodeDeployArmy() {
+	private void nodeDeployArmy() {
 		if (getArmory() != null) {
 			Building armory = (Building)getArmory()[0];
 			int num_units = armory.getUnitContainer().getNumSupplies() - MIN_UNITS_BUILDING_WEAPONS[difficulty];
@@ -127,7 +127,7 @@ public final strictfp class AdvancedAI extends AI {
 		}
 	}
 
-	private final void nodeDefend(int score) {
+	private void nodeDefend(int score) {
 		ArrayList unit_list = new ArrayList();
 
 		int result = 0;
@@ -157,7 +157,7 @@ public final strictfp class AdvancedAI extends AI {
 		}
 	}
 
-	private final int addFromList(Selectable[] list, ArrayList new_list, int progress, int score) {
+	private int addFromList(Selectable[] list, ArrayList new_list, int progress, int score) {
 		int result = progress;
             for (Selectable list1 : list) {
                 Unit unit = (Unit) list1;
@@ -169,7 +169,7 @@ public final strictfp class AdvancedAI extends AI {
 		return result;
 	}
 
-	private final int scanForEnemies(Selectable src) {
+	private int scanForEnemies(Selectable src) {
 		FindOccupantFilter filter = new FindOccupantFilter(src.getPositionX(), src.getPositionY(), 30f, src, Unit.class);
 		getUnitGrid().scan(filter, src.getGridX(), src.getGridY());
 		List target_list = filter.getResult();
@@ -186,7 +186,7 @@ public final strictfp class AdvancedAI extends AI {
 		return score;
 	}
 
-	private final int getUnitScore(Unit unit) {
+	private int getUnitScore(Unit unit) {
 		if (unit.getAbilities().hasAbilities(Abilities.HARVEST)) {
 			return SCORE_PEON;
 		} else if (unit.getAbilities().hasAbilities(Abilities.MAGIC)) {
@@ -201,7 +201,7 @@ public final strictfp class AdvancedAI extends AI {
 		throw new RuntimeException();
 	}
 
-	private final void nodeGuardTowers(int num_towers) {
+	private void nodeGuardTowers(int num_towers) {
 		if ((getTowers() == null && num_towers > 0) || (getTowers() != null && num_towers > getTowers().length)) {
 			nodeBuildTower(num_towers);
 		} else if (num_towers > 0) {
@@ -216,7 +216,7 @@ public final strictfp class AdvancedAI extends AI {
 		}
 	}
 
-	private final void nodeBuildTower(int number) {
+	private void nodeBuildTower(int number) {
 		if (!towerUnderConstruction() && ((getTowers() == null && number == 1) || (getTowers() != null && getTowers().length < number)) && getQuarters() != null && getArmory() != null) {
 			Selectable[] builders = getPeons(10);
 			if (builders.length == 0)
@@ -239,7 +239,7 @@ public final strictfp class AdvancedAI extends AI {
 		}
 	}
 
-	private final void nodeAssignIdlePeons() {
+	private void nodeAssignIdlePeons() {
 		if (getIdlePeons() != null) {
 			if (quartersUnderConstruction() && getConstructionSites() != null) {
 				getOwner().setTarget(getIdlePeons(), getConstructionSites()[0], Target.ACTION_DEFAULT, false);
@@ -253,7 +253,7 @@ public final strictfp class AdvancedAI extends AI {
 		}
 	}
 
-	private final void nodeAttackWithWarriorsAndChieftain(int num_warriors, boolean use_chieftain) {
+	private void nodeAttackWithWarriorsAndChieftain(int num_warriors, boolean use_chieftain) {
 /*
 System.out.print("nodeAttackWithWarriorsAndChieftain");
 if (getIdleWarriors() == null)
@@ -292,7 +292,7 @@ else
 		}
 	}
 
-	private final void nodeTrainChieftain() {
+	private void nodeTrainChieftain() {
 		if (!getOwner().hasActiveChieftain() && !getOwner().isTrainingChieftain()) {
 			if (getQuarters() != null) {
 				getOwner().trainChieftain((Building)getQuarters()[0], true);
@@ -300,7 +300,7 @@ else
 		}
 	}
 
-	private final void nodeDeployUnitsInArmory(int num_warriors) {
+	private void nodeDeployUnitsInArmory(int num_warriors) {
 		Building armory = null;
 		if (getArmory() != null && getArmory().length > 0) {
 			armory = (Building)getArmory()[0];
@@ -334,7 +334,7 @@ else
 		}
 	}
 
-	private final void nodeGather(Building armory, int num_units) {
+	private void nodeGather(Building armory, int num_units) {
 		int tree = 0;
 		int rock = 0;
 		int iron = 0;
@@ -382,7 +382,7 @@ else
 		} while (deployed);
 	}
 
-	private final void nodeTransferUnits(int num_units, Building armory) {
+	private void nodeTransferUnits(int num_units, Building armory) {
 		Building quarters = null;
 		if (getQuarters() != null && getQuarters().length > 0) {
 			quarters = (Building)getQuarters()[0];
@@ -400,7 +400,7 @@ else
 		}
 	}
 
-	private final void nodeBuildArmory() {
+	private void nodeBuildArmory() {
 		if (!quartersUnderConstruction() && getQuarters() == null) {
 			nodeBuildQuarters();
 		}
@@ -424,7 +424,7 @@ else
 		}
 	}
 
-	private final void nodeBuildQuarters() {
+	private void nodeBuildQuarters() {
 		if (!quartersUnderConstruction() && getQuarters() == null) {
 			Selectable[] builders = getPeons(MIN_UNITS_REPRODUCING[difficulty]);
 			if (builders.length == 0)
@@ -436,7 +436,7 @@ else
 		}
 	}
 
-	private final Selectable[] getPeons(int min_num_peons) {
+	private Selectable[] getPeons(int min_num_peons) {
 		ArrayList builders = new ArrayList();
 		if (getIdlePeons() != null) {
                     for (Selectable idlePeon : getIdlePeons()) {
@@ -472,13 +472,13 @@ else
 		return result;
 	}
 */
-	private final int numWeapons(Building armory) {
+	private int numWeapons(Building armory) {
 		return armory.getSupplyContainer(RockAxeWeapon.class).getNumSupplies()
 			+ armory.getSupplyContainer(IronAxeWeapon.class).getNumSupplies()
 			+ armory.getSupplyContainer(RubberAxeWeapon.class).getNumSupplies();
 	}
 
-	private final Target findTarget(int start_x, int start_y) {
+	private Target findTarget(int start_x, int start_y) {
 		Target best_building = getOwner().findNearestEnemyBuilding(start_x, start_y);
 		Target best_target = getOwner().findNearestEnemy(start_x, start_y);
 		if (best_building == null) {
@@ -499,7 +499,7 @@ else
 			return best_building;
 	}
 
-	private final boolean buildBuilding(int building_type, Selectable[] selection, int grid_x, int grid_y) {
+	private boolean buildBuilding(int building_type, Selectable[] selection, int grid_x, int grid_y) {
 		BuildingSiteScanFilter filter = new BuildingSiteScanFilter(getUnitGrid(), getOwner().getRace().getBuildingTemplate(building_type), 40, true);
 		getUnitGrid().scan(filter, grid_x, grid_y);
 		List target_list = filter.getResult();

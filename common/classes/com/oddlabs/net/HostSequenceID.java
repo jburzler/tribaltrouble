@@ -13,26 +13,26 @@ public final strictfp class HostSequenceID implements Serializable {
 		this.seq_id = seq_id;
 	}
 
-	public final int getHostID() {
+	public int getHostID() {
 		return host_id;
 	}
 
-	public final int getSequenceID() {
+	public int getSequenceID() {
 		return seq_id;
 	}
 
         @Override
-	public final int hashCode() {
+	public int hashCode() {
 		return host_id ^ seq_id;
 	}
 
         @Override
-	public final String toString() {
+	public String toString() {
 		return host_id + " " + seq_id;
 	}
 
         @Override
-	public final boolean equals(Object other) {
+	public boolean equals(Object other) {
 		if (!(other instanceof HostSequenceID))
 			return false;
 		HostSequenceID other_id = (HostSequenceID)other;

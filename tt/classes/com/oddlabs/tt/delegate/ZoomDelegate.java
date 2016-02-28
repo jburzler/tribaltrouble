@@ -23,7 +23,7 @@ public strictfp class ZoomDelegate extends InGameDelegate {
 		start_y = LocalInput.getMouseY();
 	}
 
-	private final void release() {
+	private void release() {
 		done = true;
 	}
 

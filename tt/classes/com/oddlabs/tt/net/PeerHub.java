@@ -132,14 +132,14 @@ public final strictfp class PeerHub implements Animated, RouterHandler {
 	}
 
         @Override
-	public final void routerFailed(Exception e) {
+	public void routerFailed(Exception e) {
 		System.out.println("Router failed with exception: " + e);
 		closeNetwork();
 		stall_handler.peerhubFailed();
 	}
 
         @Override
-	public final void heartbeat(int millis) {
+	public void heartbeat(int millis) {
 		if (millis < server_millis) {
 			routerFailed(new IOException("Invalid time received: " + millis + " (tick currently at " + getTick() + ")"));
 			return;
@@ -148,7 +148,7 @@ public final strictfp class PeerHub implements Animated, RouterHandler {
 	}
 
         @Override
-	public final void receiveEvent(int client_id, ARMIEvent event) {
+	public void receiveEvent(int client_id, ARMIEvent event) {
 		Peer peer = getPeerFromClientID(client_id);
 		if (peer == null) {
 			routerFailed(new IOException("Invalid client_id received: " + client_id));
@@ -162,7 +162,7 @@ public final strictfp class PeerHub implements Animated, RouterHandler {
 	}
 
         @Override
-	public final void receiveGameStateEvent(int client_id, int millis, ARMIEvent event) {
+	public void receiveGameStateEvent(int client_id, int millis, ARMIEvent event) {
 		if (millis < server_millis) {
 			routerFailed(new IOException("Invalid time received for event: " + millis + " (tick currently at " + getTick() + ")"));
 			return;
@@ -177,7 +177,7 @@ public final strictfp class PeerHub implements Animated, RouterHandler {
 	}
 
         @Override
-	public final void playerDisconnected(int client_id, boolean checksum_error) {
+	public void playerDisconnected(int client_id, boolean checksum_error) {
 		Peer peer = getPeerFromClientID(client_id);
 		if (checksum_error)
 			peerChecksumError(peer);
@@ -185,7 +185,7 @@ public final strictfp class PeerHub implements Animated, RouterHandler {
 			peerDisconnected(peer, "Peer disconnected");
 	}
 
-	private final void peerChecksumError(Peer peer) {
+	private void peerChecksumError(Peer peer) {
 		System.out.println("Disconnecting peer because of checksum mismatch: " + peer.getPlayerInfo().getName());
 		peerDisconnected(peer, "Checksum error");
 		Globals.checksum_error_in_last_game = true;
@@ -203,15 +203,15 @@ public final strictfp class PeerHub implements Animated, RouterHandler {
 	}
 
         @Override
-	public final void start() {
+	public void start() {
 		is_synchronized = true;
 	}
 	
-	private final Peer locatePeerFromPlayer(Player player) {
+	private Peer locatePeerFromPlayer(Player player) {
 		return (Peer)player_to_peer.get(player);
 	}
 
-	private final boolean isDisconnected(Peer peer) {
+	private boolean isDisconnected(Peer peer) {
 		return getPlayerFromPeer(peer) == null;
 	}
 
@@ -219,24 +219,24 @@ public final strictfp class PeerHub implements Animated, RouterHandler {
 		return (Player)peer_to_player.get(peer);
 	}
 
-	public final boolean isAlive(Player player) {
+	public boolean isAlive(Player player) {
 		return (nonhuman_players.contains(player) || locatePeerFromPlayer(player) != null) && player.isAlive();
 	}
 
-	public final PlayerInterface getPlayerInterface() {
+	public PlayerInterface getPlayerInterface() {
 		return player_interface;
 	}
 
-	private final int millisToTickCeil(int millis) {
+	private int millisToTickCeil(int millis) {
 		return millisToTick(millis + AnimationManager.ANIMATION_MILLISECONDS_PER_TICK - 1);
 	}
 
-	private final int millisToTick(int millis) {
+	private int millisToTick(int millis) {
 		return millis/AnimationManager.ANIMATION_MILLISECONDS_PER_TICK - pause_ticks;
 	}
 
         @Override
-	public final void animate(float t) {
+	public void animate(float t) {
 		if (router != null)
 			router.process();
 		int server_tick = millisToTick(server_millis);
@@ -258,7 +258,7 @@ public final strictfp class PeerHub implements Animated, RouterHandler {
 		return local_player.getWorld().getTick();
 	}
 
-	private final void doTick(float t) {
+	private void doTick(float t) {
 		stall_handler.stopStall();
 		if (getFreeQuitTicksLeft(local_player.getWorld()) == 0 && Network.getMatchmakingClient().isConnected())
 			Network.getMatchmakingClient().getInterface().freeQuitStopNotify();
@@ -301,7 +301,7 @@ public final strictfp class PeerHub implements Animated, RouterHandler {
 		return paused > 0;
 	}
 
-	private final void sendStatusUpdate() {
+	private void sendStatusUpdate() {
 		int[] status = new int[num_participants];
 		for (int i = 0; i < status.length; i++) {
 			Peer peer = getPeerFromClientID(i);
@@ -311,31 +311,31 @@ public final strictfp class PeerHub implements Animated, RouterHandler {
 		Network.getMatchmakingClient().getInterface().updateGameStatus(getTick(), status);
 	}
 
-	private final Iterator getPeerIterator()  {
+	private Iterator getPeerIterator()  {
 		return peer_to_player.keySet().iterator();
 	}
 
-	public final PeerHubInterface getInterface() {
+	public PeerHubInterface getInterface() {
 		return peerhubs_interface;
 	}
 
-	private final void processStall() {
+	private void processStall() {
 		stall_handler.processStall(getTick());
 	}
 
-	private final void removePeerFromActiveList(Peer peer) {
+	private void removePeerFromActiveList(Peer peer) {
 		System.out.println("Removing from active list:" + peer);
 		peer_index_to_peer[peer.getPeerIndex()] = null;
 		peer.getPlayer().setPreferredGamespeed(World.GAMESPEED_DONTCARE);
 	}
 
         @Override
-	public final void updateChecksum(StateChecksum sum) {
+	public void updateChecksum(StateChecksum sum) {
 		sum.update(getTick());
 		sum.update(checksum.getValue());
 	}
 
-	public final void peerDisconnected(Peer peer, String reason) {
+	public void peerDisconnected(Peer peer, String reason) {
 		Player player = getPlayerFromPeer(peer);
 		if (player == null)
 			return;
@@ -349,7 +349,7 @@ public final strictfp class PeerHub implements Animated, RouterHandler {
 			Network.getMatchmakingClient().getInterface().gameQuitNotify(peer.getPlayerInfo().getName());
 	}
 
-	public final void sendChat(String text, boolean team_only) {
+	public void sendChat(String text, boolean team_only) {
 		Iterator it = getPeerIterator();
 		int local_team = local_player.getPlayerInfo().getTeam();
 		while (it.hasNext()) {
@@ -360,7 +360,7 @@ public final strictfp class PeerHub implements Animated, RouterHandler {
 		}
 	}
 
-	public final void sendBeacon(float x, float y) {
+	public void sendBeacon(float x, float y) {
 		Iterator it = getPeerIterator();
 		int local_team = local_player.getPlayerInfo().getTeam();
 		while (it.hasNext()) {
@@ -371,14 +371,14 @@ public final strictfp class PeerHub implements Animated, RouterHandler {
 		}
 	}
 
-	public final void receiveChat(String name, String text, boolean team) {
+	public void receiveChat(String name, String text, boolean team) {
 		if (team)
 			Network.getChatHub().chat(new ChatMessage(name, text, ChatMessage.CHAT_TEAM));
 		else
 			Network.getChatHub().chat(new ChatMessage(name, text, ChatMessage.CHAT_NORMAL));
 	}
 
-	public final void receiveBeacon(float x, float y, String owner) {
+	public void receiveBeacon(float x, float y, String owner) {
 		if (!ChatCommand.isIgnoring(owner))
 			notification_manager.newBeacon(manager, local_player, x, y);
 	}
@@ -398,7 +398,7 @@ public final strictfp class PeerHub implements Animated, RouterHandler {
 		leaveGame();
 	}
 
-	public final void close() {
+	public void close() {
 		closeNetwork();
 		LocalEventQueue.getQueue().getManager().removeAnimation(this);
 System.out.println("PeerHub closed");
@@ -413,7 +413,7 @@ System.out.println("PeerHub closed");
 		return left*AnimationManager.ANIMATION_SECONDS_PER_TICK;
 	}
 
-	public final void leaveGame() {
+	public void leaveGame() {
 		if (Network.getMatchmakingClient().isConnected()) {
 			if (getFreeQuitTicksLeft(local_player.getWorld()) >= 0) {
 				Network.getMatchmakingClient().getInterface().gameQuitNotify(local_player.getPlayerInfo().getName());
@@ -423,18 +423,18 @@ System.out.println("PeerHub closed");
 		}
 	}
 
-	public final void gameWon() {
+	public void gameWon() {
 		if (Network.getMatchmakingClient().isConnected()) {
 			Network.getMatchmakingClient().getInterface().gameWonNotify();
 			waiting_for_ack = true;
 		}
 	}
 
-	public final static void receivedAck() {
+	public static void receivedAck() {
 		waiting_for_ack = false;
 	}
 
-	public final static boolean isWaitingForAck() {
+	public static boolean isWaitingForAck() {
 		return waiting_for_ack;
 	}
 }

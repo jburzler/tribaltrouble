@@ -86,7 +86,7 @@ public abstract strictfp class TextField extends GUIObject implements CharSequen
 		append(digit_buf);
 	}
 
-	private final static void fillDigitBuffer(long i) {
+	private static void fillDigitBuffer(long i) {
 		digit_buf.delete(0, digit_buf.length());
 		boolean sign = i < 0;
 		if (sign)

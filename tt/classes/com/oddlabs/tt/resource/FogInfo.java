@@ -22,7 +22,7 @@ public final strictfp class FogInfo {
 		this.fog_end = fog_end;
 	}
 
-	public final void enableFog(float camera_z) {
+	public void enableFog(float camera_z) {
 		GL11.glFog(GL11.GL_FOG_COLOR, fog_color);
 		GL11.glFogf(GL11.GL_FOG_MODE, fog_mode);
 		GL11.glFogf(GL11.GL_FOG_START, computeFogOffset(camera_z) + fog_start);
@@ -40,7 +40,7 @@ public final strictfp class FogInfo {
 		return 1 - (camera_z/fog_height_factor);
 	}
 
-	public final void disableFog() {
+	public void disableFog() {
 		GL11.glDisable(GL11.GL_FOG);
 	}
 }

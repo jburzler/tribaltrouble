@@ -12,11 +12,11 @@ public final strictfp class SpriteKey extends RenderQueueKey {
 		this.anim_types = anim_types;
 	}
 
-	public final BoundingBox getBounds(int anim_index) {
+	public BoundingBox getBounds(int anim_index) {
 		return bounds[anim_index];
 	}
 
-	public final int getAnimationType(int anim) {
+	public int getAnimationType(int anim) {
 		return anim_types[anim];
 	}
 }

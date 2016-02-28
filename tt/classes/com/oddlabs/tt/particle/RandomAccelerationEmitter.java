@@ -141,7 +141,7 @@ public final strictfp class RandomAccelerationEmitter extends LinearEmitter {
 		return 1;
 	}
 
-	private final void randomizeAcceleration() {
+	private void randomizeAcceleration() {
 		float dx_angle = random.nextFloat()*angle_max_jump - .5f*angle_max_jump;
 		float dy_angle = random.nextFloat()*angle_max_jump - .5f*angle_max_jump;
 

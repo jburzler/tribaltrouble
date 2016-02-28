@@ -18,27 +18,27 @@ public final strictfp class PlayerInfo implements Serializable {
 	}
 
         @Override
-	public final boolean equals(Object other) {
+	public boolean equals(Object other) {
 		if (!(other instanceof PlayerInfo))
 			return false;
 		PlayerInfo player = (PlayerInfo)other;
 		return team == player.team && race == player.race;
 	}
 
-	public final int getRace() {
+	public int getRace() {
 		return race;
 	}
 
-	public final String getName() {
+	public String getName() {
 		return name;
 	}
 
-	public final int getTeam() {
+	public int getTeam() {
 		return team;
 	}
 
         @Override
-	public final String toString() {
+	public String toString() {
 		return name;
 	}
 }

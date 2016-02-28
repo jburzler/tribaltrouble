@@ -42,28 +42,28 @@ public final strictfp class InputState {
 		press_obj = gui_root;
 	}
 
-	private final GUIObject pick() {
+	private GUIObject pick() {
 		gui_root.mousePick();
 		return gui_root.getCurrentGUIObject();
 	}
 
-	public final void mouseMoved(short x, short y) {
+	public void mouseMoved(short x, short y) {
 		GUIObject gui_hit = pick();
 		gui_hit.mouseMovedAll(x, y);
 	}
 
-	private final void resetKeyTimer() {
+	private void resetKeyTimer() {
 		Index.resetBlinking();
 	}
 
-	public final void mouseScrolled(int dz) {
+	public void mouseScrolled(int dz) {
 		GUIObject gui_hit = pick();
 		int scroll_amount = StrictMath.round(dz*Globals.WHEEL_SCALE);
 		gui_hit.setFocus();
 		gui_hit.mouseScrolledAll(scroll_amount);
 	}
 
-	public final void mousePressed(int button) {
+	public void mousePressed(int button) {
 		GUIObject gui_hit = pick();
 		int local_x = gui_hit.translateXToLocal(LocalInput.getMouseX());
 		int local_y = gui_hit.translateYToLocal(LocalInput.getMouseY());
@@ -96,7 +96,7 @@ public final strictfp class InputState {
 		mouse_timer.start();
 	}
 
-	public final void mouseReleased(int button) {
+	public void mouseReleased(int button) {
 		GUIObject gui_hit = pick();
 		int local_x = gui_hit.translateXToLocal(LocalInput.getMouseX());
 		int local_y = gui_hit.translateYToLocal(LocalInput.getMouseY());
@@ -124,38 +124,38 @@ public final strictfp class InputState {
 			mouse_timer.stop();
 	}
 
-	public final void mouseDragged(int button, short x, short y) {
+	public void mouseDragged(int button, short x, short y) {
 		if (drag_obj != null)
 			drag_obj.mouseDraggedAll(button, x, y, x - drag_x, y - drag_y, x - absolute_drag_x, y - absolute_drag_y);
 		drag_x = x;
 		drag_y = y;
 	}
 
-	private final boolean clickedSameArea() {
+	private boolean clickedSameArea() {
 		return StrictMath.abs(LocalInput.getMouseX()- clicked_x) < DOUBLE_CLICK_THRESHOLD && StrictMath.abs(LocalInput.getMouseY() - clicked_y) < DOUBLE_CLICK_THRESHOLD;
 	}
 
-	private final void stopDoubleClickTimer() {
+	private void stopDoubleClickTimer() {
 		double_click_timer.stop();
 		double_click_timer.resetTime();
 		clicked_obj = null;
 		click_counter = 0;
 	}
 
-	private final void stopDoubleKeyTimer() {
+	private void stopDoubleKeyTimer() {
 		double_key_timer.stop();
 		double_key_timer.resetTime();
 		key_event = null;
 		key_counter = 0;
 	}
 
-	public final void keyTyped( int key_code, char key_char) {
+	public void keyTyped( int key_code, char key_char) {
 		GUIObject focused = gui_root.getGlobalFocus();
 		KeyboardEvent event = new KeyboardEvent(key_code, key_char, LocalInput.isShiftDownCurrently(), LocalInput.isControlDownCurrently());
 		focused.keyRepeatAll(event);
 	}
 
-	public final void keyPressed(int key_code, char key_char, boolean shift_down, boolean control_down, boolean menu_down, boolean repeat) {
+	public void keyPressed(int key_code, char key_char, boolean shift_down, boolean control_down, boolean menu_down, boolean repeat) {
 		GUIObject focused = gui_root.getGlobalFocus();
 		resetKeyTimer();
 		if (!repeat && (key_event == null 
@@ -179,7 +179,7 @@ public final strictfp class InputState {
 		focused.keyRepeatAll(event);
 	}
 
-	public final void keyReleased(int key_code, char key_char, boolean shift_down, boolean control_down, boolean menu_down) {
+	public void keyReleased(int key_code, char key_char, boolean shift_down, boolean control_down, boolean menu_down) {
 		GUIObject focused = gui_root.getGlobalFocus();
 		resetKeyTimer();
 		KeyboardEvent event = new KeyboardEvent(key_code, key_char, shift_down, control_down);
@@ -188,14 +188,14 @@ public final strictfp class InputState {
 
 	private final strictfp class DoubleClickTimer implements Updatable {
                 @Override
-		public final void update(Object anim) {
+		public void update(Object anim) {
 			stopDoubleClickTimer();
 		}
 	}
 
 	private final strictfp class DoubleKeyTimer implements Updatable {
                 @Override
-		public final void update(Object anim) {
+		public void update(Object anim) {
 			stopDoubleKeyTimer();
 		}
 	}

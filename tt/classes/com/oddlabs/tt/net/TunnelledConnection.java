@@ -22,31 +22,31 @@ public final strictfp class TunnelledConnection extends AbstractConnection {
 		this.address = Network.getMatchmakingClient().registerTunnel(address, this);
 	}
 	
-	public final void tunnelClosed() {
+	public void tunnelClosed() {
 		open = false;
 		notifyError(new IOException("Connection closed"));
 	}
 	
-	public final void connected() {
+	public void connected() {
 		notifyConnected();
 	}
 
-	public final void accept() {
+	public void accept() {
 		Network.getMatchmakingClient().getInterface().acceptTunnel(address);
 	}
 
         @Override
-	public final void handle(ARMIEvent event) {
+	public void handle(ARMIEvent event) {
 		Network.getMatchmakingClient().getInterface().routeEvent(address, event);
 		writeBufferDrained();
 	}
 
-	public final HostSequenceID getAddress() {
+	public HostSequenceID getAddress() {
 		return address;
 	}
 
         @Override
-	protected final void doClose() {
+	protected void doClose() {
 		if (open) {
 			Network.getMatchmakingClient().unregisterTunnel(address, this);
 			open = false;

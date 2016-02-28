@@ -12,7 +12,7 @@ final strictfp class BlockingTask implements Task, Serializable {
 	 }
 
          @Override
-	 public final void cancel() {
+	 public void cancel() {
 		 cancelled = true;
 	 }
  }

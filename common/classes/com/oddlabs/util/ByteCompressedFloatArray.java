@@ -24,7 +24,7 @@ public final strictfp class ByteCompressedFloatArray implements Serializable {
 			compress(split_data[i], i);
 	}
 
-	private final void compress(float[] array, int channel) {
+	private void compress(float[] array, int channel) {
 		float min = array[0];
 		float max = array[0];
 
@@ -44,7 +44,7 @@ public final strictfp class ByteCompressedFloatArray implements Serializable {
 			data[channel][i] = (byte)((array[i] - offset[channel])/scale[channel]);
 	}
 
-	public final float[] getFloatArray() {
+	public float[] getFloatArray() {
 		int channels = data.length;
 		int channel_length = data[0].length;
 		float[] result = new float[channels*channel_length];
@@ -58,7 +58,7 @@ public final strictfp class ByteCompressedFloatArray implements Serializable {
 	}
 
         @Override
-	public final String toString() {
+	public String toString() {
 		float[] array = getFloatArray();
 		String result = "";
 		for (int i = 0; i < array.length; i++)

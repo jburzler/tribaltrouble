@@ -37,43 +37,43 @@ public final strictfp class MultiColumnComboBoxData {
 		this.caption_offset = caption_offset;
 	}
 
-	public final Box getBox() {
+	public Box getBox() {
 		return box;
 	}
 
-	public final Horizontal getButtonPressed() {
+	public Horizontal getButtonPressed() {
 		return button_pressed;
 	}
 
-	public final Horizontal getButtonUnpressed() {
+	public Horizontal getButtonUnpressed() {
 		return button_unpressed;
 	}
 
-	public final Quad[] getDescending() {
+	public Quad[] getDescending() {
 		return descending;
 	}
 
-	public final Quad[] getAscending() {
+	public Quad[] getAscending() {
 		return ascending;
 	}
 
-	public final Color getColor1() {
+	public Color getColor1() {
 		return color1;
 	}
 
-	public final Color getColor2() {
+	public Color getColor2() {
 		return color2;
 	}
 
-	public final Color getColorMarked() {
+	public Color getColorMarked() {
 		return color_marked;
 	}
 
-	public final Font getFont() {
+	public Font getFont() {
 		return font;
 	}
 
-	public final int getCaptionOffset() {
+	public int getCaptionOffset() {
 		return caption_offset;
 	}
 }

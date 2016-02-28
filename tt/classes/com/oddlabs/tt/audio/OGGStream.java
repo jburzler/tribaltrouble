@@ -39,7 +39,7 @@ public final strictfp class OGGStream {
 		prepareStream();
 	}
 
-	private final void getHeaders() {
+	private void getHeaders() {
 		readFromInput();
 
 		if (sync_state.pageout(page) != 1) {
@@ -88,22 +88,22 @@ public final strictfp class OGGStream {
 		}
 	}
 
-	public final int getChannels() {
+	public int getChannels() {
 		return info.channels;
 	}
 
-	public final int getRate() {
+	public int getRate() {
 		return info.rate;
 	}
 
-	private final void prepareStream() {
+	private void prepareStream() {
 		data_size = 4096/info.channels;
 		dsp_state.synthesis_init(info);
 		block.init(dsp_state);
 		indices = new int[info.channels];
 	}
 
-	public final int read(ByteBufferOutputStream output) {
+	public int read(ByteBufferOutputStream output) {
 		int written = 0;
 		while (!eos) {
 			int result = sync_state.pageout(page);
@@ -177,7 +177,7 @@ public final strictfp class OGGStream {
 		return written;
 	}
 
-	private final int readFromInput() {
+	private int readFromInput() {
 		int index = sync_state.buffer(4096);
 		int bytes;
 		sync_buffer = sync_state.data;

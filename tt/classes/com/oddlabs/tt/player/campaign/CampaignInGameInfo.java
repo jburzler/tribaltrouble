@@ -18,22 +18,22 @@ final strictfp class CampaignInGameInfo implements InGameInfo {
 	}
 
         @Override
-	public final boolean isRated() {
+	public boolean isRated() {
 		return false;
 	}
 
         @Override
-	public final boolean isMultiplayer() {
+	public boolean isMultiplayer() {
 		return false;
 	}
 
         @Override
-	public final float getRandomStartPosition() {
+	public float getRandomStartPosition() {
 		return 0f;
 	}
 
         @Override
-	public final void addGUI(WorldViewer viewer, InGameMainMenu menu, Group game_infos) {
+	public void addGUI(WorldViewer viewer, InGameMainMenu menu, Group game_infos) {
 		menu.addAbortButton(Utils.getBundleString(Menu.bundle, "end_game"));
 		LabelBox label_objective = new LabelBox(Utils.getBundleString(Menu.bundle, "objective"), Skin.getSkin().getEditFont(), LocalInput.getViewWidth()/2);
 		LabelBox label_description = new LabelBox(campaign.getCurrentObjective(), Skin.getSkin().getEditFont(), LocalInput.getViewWidth()/2);
@@ -45,7 +45,7 @@ final strictfp class CampaignInGameInfo implements InGameInfo {
 	}
 
         @Override
-	public final void addGameOverGUI(WorldViewer viewer, final GameStatsDelegate delegate, int header_y, Group group) {
+	public void addGameOverGUI(WorldViewer viewer, final GameStatsDelegate delegate, int header_y, Group group) {
 		HorizButton button_ok = new OKButton(150);
 		button_ok.addMouseClickListener((int button, int x, int y, int clicks) -> {
                     delegate.startMenu();
@@ -56,7 +56,7 @@ final strictfp class CampaignInGameInfo implements InGameInfo {
 	}
 
         @Override
-	public final void close(WorldViewer viewer) {
+	public void close(WorldViewer viewer) {
 		if (campaign.getState().getIslandState(0) != CampaignState.ISLAND_COMPLETED) {
 			Renderer.startMenu(viewer.getNetwork(), viewer.getGUIRoot().getGUI());
 		} else {
@@ -66,7 +66,7 @@ final strictfp class CampaignInGameInfo implements InGameInfo {
 	}
 
         @Override
-	public final void abort(WorldViewer viewer) {
+	public void abort(WorldViewer viewer) {
 		viewer.getGUIRoot().pushDelegate(new GameStatsDelegate(viewer, viewer.getGUIRoot().getDelegate().getCamera(), Utils.getBundleString(Menu.bundle, "game_aborted")));
 		campaign.doDefeated();
 	}

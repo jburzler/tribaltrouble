@@ -25,7 +25,7 @@ public final strictfp class SelectTowerTrigger extends TutorialTrigger {
 	}
 
         @Override
-	protected final void run(Tutorial tutorial) {
+	protected void run(Tutorial tutorial) {
 		Building building = tutorial.getViewer().getSelection().getCurrentSelection().getBuilding();
 		if (building != null && building.getAbilities().hasAbilities(Abilities.ATTACK)) {
 			tutorial.next(new UnitInTowerTrigger(building));

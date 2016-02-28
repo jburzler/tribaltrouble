@@ -24,17 +24,17 @@ public final strictfp class RouterClient implements ConnectionInterface {
 		this.game_interface = (GameInterface)ARMIEvent.createProxy(connection, GameInterface.class);
 	}
 
-	public final void connect(SessionID session_id, SessionInfo session_info, int client_id) {
+	public void connect(SessionID session_id, SessionInfo session_info, int client_id) {
 		RouterInterface router_interface = (RouterInterface)ARMIEvent.createProxy(connection, RouterInterface.class);
 		router_interface.login(session_id, session_info, client_id);
 	}
 
-	public final GameInterface getInterface() {
+	public GameInterface getInterface() {
 		return game_interface;
 	}
 	
         @Override
-	public final void handle(Object sender, ARMIEvent armi_event) {
+	public void handle(Object sender, ARMIEvent armi_event) {
 		try {
 			armi_event.execute(interface_methods, router_handler);
 		} catch (IllegalARMIEventException e) {
@@ -44,19 +44,19 @@ public final strictfp class RouterClient implements ConnectionInterface {
 	}
 
         @Override
-	public final void writeBufferDrained(AbstractConnection conn) {
+	public void writeBufferDrained(AbstractConnection conn) {
 	}
 
         @Override
-	public final void connected(AbstractConnection conn) {
+	public void connected(AbstractConnection conn) {
 	}
 
         @Override
-	public final void error(AbstractConnection conn, IOException e) {
+	public void error(AbstractConnection conn, IOException e) {
 		router_handler.routerFailed(e);
 	}
 
-	public final void close() {
+	public void close() {
 		connection.close();
 	}
 }

@@ -44,7 +44,7 @@ public final strictfp class FloatVBO extends VBO {
 		return mapped_buffer;
 	}
 */
-	public final void vertexPointer(int size, int stride, int index) {
+	public void vertexPointer(int size, int stride, int index) {
 		if (!use_vbo) {
 			saved_buffer.position(index);
 			GL11.glVertexPointer(size, stride, saved_buffer);
@@ -54,7 +54,7 @@ public final strictfp class FloatVBO extends VBO {
 		}
 	}
 
-	public final void texCoordPointer(int size, int stride, int index) {
+	public void texCoordPointer(int size, int stride, int index) {
 		if (!use_vbo) {
 			saved_buffer.position(index);
 			GL11.glTexCoordPointer(size, stride, saved_buffer);
@@ -64,7 +64,7 @@ public final strictfp class FloatVBO extends VBO {
 		}
 	}
 
-	public final void normalPointer(int stride, int index) {
+	public void normalPointer(int stride, int index) {
 		if (!use_vbo) {
 			saved_buffer.position(index);
 			GL11.glNormalPointer(stride, saved_buffer);
@@ -74,7 +74,7 @@ public final strictfp class FloatVBO extends VBO {
 		}
 	}
 
-	public final void colorPointer(int size, int stride, int index) {
+	public void colorPointer(int size, int stride, int index) {
 		if (!use_vbo) {
 			saved_buffer.position(index);
 			GL11.glColorPointer(size, stride, saved_buffer);
@@ -84,11 +84,11 @@ public final strictfp class FloatVBO extends VBO {
 		}
 	}
 
-	public final void put(FloatBuffer buffer) {
+	public void put(FloatBuffer buffer) {
 		putSubData(0, buffer);
 	}
 	
-	public final void put(float[] buffer) {
+	public void put(float[] buffer) {
 		putSubData(0, Utils.toBuffer(buffer));
 //		do {
 //			map(ARBBufferObject.GL_WRITE_ONLY_ARB);
@@ -96,7 +96,7 @@ public final strictfp class FloatVBO extends VBO {
 //		} while (!unmap());
 	}
 	
-	public final void putSubData(int index, FloatBuffer buffer) {
+	public void putSubData(int index, FloatBuffer buffer) {
 		if (!use_vbo) {
 			saved_buffer.position(index);
 			saved_buffer.put(buffer);
@@ -108,7 +108,7 @@ public final strictfp class FloatVBO extends VBO {
 	}
 
         @Override
-	public final int capacity() {
+	public int capacity() {
 		return getSize()>>2;
 	}
 }

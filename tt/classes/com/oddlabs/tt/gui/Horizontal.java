@@ -19,14 +19,14 @@ public final strictfp class Horizontal {
 		right_width = right[Skin.NORMAL].getWidth();
 	}
 
-	public final void render(float x, float y, int width, int type) {
+	public void render(float x, float y, int width, int type) {
 		int center_width = width - left_width - right_width;
 		left[type].render(x, y);
 		center[type].render(x + left_width, y, center_width, height);
 		right[type].render(x + left_width + center_width, y);
 	}
 
-	public final int getHeight() {
+	public int getHeight() {
 		return height;
 	}
 }

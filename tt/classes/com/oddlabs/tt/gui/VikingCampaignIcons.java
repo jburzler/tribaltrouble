@@ -21,12 +21,12 @@ public final strictfp class VikingCampaignIcons implements CampaignIcons {
 	private final int width;
 	private final int height;
 
-	public final static void load() {
+	public static void load() {
 		if (icons == null)
 			icons = new VikingCampaignIcons("/gui/viking_campaign.xml");
 	}
 
-	public final static CampaignIcons getIcons() {
+	public static CampaignIcons getIcons() {
 		return icons;
 	}
 
@@ -68,7 +68,7 @@ public final strictfp class VikingCampaignIcons implements CampaignIcons {
 		height = Icons.getInt(map_node, "height");
 	}
 
-	private final MapIslandData loadMapIslandData(Node root, String name, Texture texture) {
+	private MapIslandData loadMapIslandData(Node root, String name, Texture texture) {
 		Node node = Icons.getNodeByName(name, root);
 		IconQuad[] quads = Icons.getNamedIconQuads(node, "island", texture);
 		Node n = Icons.getNodeByName("island", node);
@@ -80,7 +80,7 @@ public final strictfp class VikingCampaignIcons implements CampaignIcons {
 		return new MapIslandData(quads, x, y, flags[pin_index], boats[pin_index], pin_x, pin_y);
 	}
 
-	private final GUIIcon getNamedGUIIcon(Node root, String name, Texture texture) {
+	private GUIIcon getNamedGUIIcon(Node root, String name, Texture texture) {
 		IconQuad temp = Icons.getNamedIconQuad(root, name, texture);
 		Node n = Icons.getNodeByName(name, root);
 		int x = Icons.getInt(n, "x");
@@ -91,43 +91,43 @@ public final strictfp class VikingCampaignIcons implements CampaignIcons {
 	}
 
         @Override
-	public final GUIIcon[] getHiddenRoutes() {
+	public GUIIcon[] getHiddenRoutes() {
 		return hidden;
 	}
 
         @Override
-	public final IconQuad[] getFaces() {
+	public IconQuad[] getFaces() {
 		return faces;
 	}
 
         @Override
-	public final IconQuad getMap() {
+	public IconQuad getMap() {
 		return map;
 	}
 
         @Override
-	public final int getNumIslands() {
+	public int getNumIslands() {
 		return islands.length;
 	}
 
-	public final int getOffsetX() {
+	public int getOffsetX() {
 		return offset_x;
 	}
 
-	public final int getOffsetY() {
+	public int getOffsetY() {
 		return offset_y;
 	}
 
-	public final int getInternalWidth() {
+	public int getInternalWidth() {
 		return width;
 	}
 
-	public final int getInternalHeight() {
+	public int getInternalHeight() {
 		return height;
 	}
 
         @Override
-	public final MapIslandData getMapIslandData(int i) {
+	public MapIslandData getMapIslandData(int i) {
 		return islands[i];
 	}
 }

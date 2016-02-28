@@ -17,17 +17,17 @@ public final strictfp class FindTargetsFilter implements ScanFilter {
 	}
 
         @Override
-	public final int getMinRadius() {
+	public int getMinRadius() {
 		return 0;
 	}
 
         @Override
-	public final int getMaxRadius() {
+	public int getMaxRadius() {
 		return max_radius;
 	}
 
         @Override
-	public final boolean filter(int grid_x, int grid_y, Occupant occupant) {
+	public boolean filter(int grid_x, int grid_y, Occupant occupant) {
 		if ((!grid_targets_only || ((grid_x+grid_y)&1) == 0) && occupant == null) {
 			result[index] = new LandscapeTarget(grid_x, grid_y);
 			index++;
@@ -35,7 +35,7 @@ public final strictfp class FindTargetsFilter implements ScanFilter {
 		return index == result.length;
 	}
 
-	public final Target[] getTargets() {
+	public Target[] getTargets() {
 		return result;
 	}
 }

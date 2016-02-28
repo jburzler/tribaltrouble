@@ -154,7 +154,7 @@ System.out.println("indices.get(i) = " + indices.get(i));
 System.out.println("indices.remaining() = " + indices.remaining());*/
 	}
 
-	public final ShortBuffer getIndices() {
+	public ShortBuffer getIndices() {
 		return indices;
 	}
 
@@ -171,7 +171,7 @@ System.out.println("indices.remaining() = " + indices.remaining());*/
 		indices.position(saved_pos);
 	}
 
-	public final void fillCoverIndices(ShortBuffer buffer, int lod, int border_set, int start_x, int start_y, int end_x, int end_y) {
+	public void fillCoverIndices(ShortBuffer buffer, int lod, int border_set, int start_x, int start_y, int end_x, int end_y) {
 		border_set = adjustBorderSet(lod, border_set);
 		int num_quads_exp = getNumQuadsExp(lod);
 		int quad_size_exp = patch_exp - num_quads_exp;
@@ -255,7 +255,7 @@ System.out.println("height = " + height + " | plane_height = " + plane_height);
 		}
 	}
 */
-	public final Errors computeErrors(int patch_index_x, int patch_index_y) {
+	public Errors computeErrors(int patch_index_x, int patch_index_y) {
 		float[] errors = new float[getNumLOD() - 1];
 		boolean above = false;
 		boolean below = false;
@@ -307,12 +307,12 @@ System.out.println();
 		return (lod&1) == 1 ? border_set : 0;
 	}
 
-	public final int getPatchIndex(int lod, int border_set) {
+	public int getPatchIndex(int lod, int border_set) {
 		int border_offset = adjustBorderSet(lod, border_set);
 		return getNumPatchesAndLinks(lod) + border_offset;
 	}
 
-	public final int getTriangleIndex(int patch_index) {
+	public int getTriangleIndex(int patch_index) {
 		return patch_indices_indices[patch_index];
 	}
 }

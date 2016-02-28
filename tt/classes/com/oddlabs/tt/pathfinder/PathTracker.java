@@ -45,7 +45,7 @@ public final strictfp class PathTracker {
 		tool_tip_box.append(next_unit_grid_y);
 	}
 
-	public final int animate(float speed) {
+	public int animate(float speed) {
 		doAnimate(speed);
 		if (state != SOFTBLOCKED && state != BLOCKED) {
 			current_blocker = null;
@@ -53,7 +53,7 @@ public final strictfp class PathTracker {
 		return state;
 	}
 
-	private final void doAnimate(float speed) {
+	private void doAnimate(float speed) {
 		assert !deadlock_mark;
 		if (bezier_path.isDone()) {
 			if (initial_path) {
@@ -88,11 +88,11 @@ public final strictfp class PathTracker {
 			state = OK;
 	}
 
-	public final Occupant getBlocker() {
+	public Occupant getBlocker() {
 		return current_blocker;
 	}
 
-	private final boolean checkDeadlock() {
+	private boolean checkDeadlock() {
 		PathTracker start = findDeadlock();
 		if (start != null) {
 			start.solveDeadlock();
@@ -101,7 +101,7 @@ public final strictfp class PathTracker {
 			return false;
 	}
 
-	private final PathTracker getNextDeadlocked() {
+	private PathTracker getNextDeadlocked() {
 		Occupant occupant = getNextOccupantUnchecked();
 		if (occupant != null && occupant != unit && occupant instanceof Movable) {
 			Movable next = (Movable)occupant;
@@ -113,7 +113,7 @@ public final strictfp class PathTracker {
 	}
 	
 
-	private final PathTracker findDeadlock() {
+	private PathTracker findDeadlock() {
 		PathTracker current = this;
 		PathTracker result = null;
 		while (current != null) {
@@ -134,7 +134,7 @@ public final strictfp class PathTracker {
 		return result;
 	}
 					
-	private final void solveDeadlock() {
+	private void solveDeadlock() {
 		Movable current = unit;
 		current.free();
 		while (current != null) {
@@ -147,32 +147,32 @@ public final strictfp class PathTracker {
 		}
 	}
 
-	private final void advance() {
+	private void advance() {
 		unit.setGridPosition(next_unit_grid_x, next_unit_grid_y);
 		unit.occupy();
 		findNextDirection();
 	}
 
-	private final Occupant getNextOccupantUnchecked() {
+	private Occupant getNextOccupantUnchecked() {
 		return unit_grid.getOccupant(next_unit_grid_x, next_unit_grid_y);
 	}
 
-	private final Occupant getNextOccupant() {
+	private Occupant getNextOccupant() {
 		Occupant occ = getNextOccupantUnchecked();
 		assert occ != unit: unit.getGridX() + " " + unit.getGridY() + " " + next_unit_grid_x + " " + next_unit_grid_y;
 		return occ;
 	}
 
-	private final void update() {
+	private void update() {
 		unit.setPosition(bezier_path.getCurrentX(), bezier_path.getCurrentY());
 		unit.setDirection(bezier_path.getCurrentDirectionX(), bezier_path.getCurrentDirectionY());
 	}
 
-	private final boolean done(int x, int y) {
+	private boolean done(int x, int y) {
 		return tracker_algorithm.isDone(x, y);
 	}
 
-	private final void findNextDirection() {
+	private void findNextDirection() {
 		if (grid_path == null || done(next_unit_grid_x, next_unit_grid_y)) {
 			bezier_path.endPath();
 			initial_path = true;
@@ -187,7 +187,7 @@ public final strictfp class PathTracker {
 		bezier_path.nextPoint(dir_node.getInvLength(), next_node_x, next_node_y);
 	}
 
-	private final void checkRegionPath(int src_x, int src_y) {
+	private void checkRegionPath(int src_x, int src_y) {
 		Region current_region = unit_grid.getRegion(src_x, src_y);
 		if (target_region != null && tracker_algorithm.acceptRegion(target_region)) {
 			while (region_path != null) {
@@ -204,7 +204,7 @@ public final strictfp class PathTracker {
 			region_path = null;
 	}
 
-	private final GridPathNode findPathToNextRegion(int src_x, int src_y, RegionNode next_region_node, boolean allow_secondary_targets) {
+	private GridPathNode findPathToNextRegion(int src_x, int src_y, RegionNode next_region_node, boolean allow_secondary_targets) {
 		Region next_region = null;
 		Region next_next_region = null;
 		if (next_region_node != null) {
@@ -220,7 +220,7 @@ public final strictfp class PathTracker {
 		return tracker_algorithm.findPathGrid(target_region, next_region, src_x, src_y, allow_secondary_targets);
 	}
 
-	private final int lookAhead() {
+	private int lookAhead() {
 		checkRegionPath(next_unit_grid_x, next_unit_grid_y);
 		if (region_path == null) {
 			return DONE;
@@ -258,7 +258,7 @@ public final strictfp class PathTracker {
 		return OK;
 	}
 
-	private final void initBezierPath(DirectionNode dir_node) {
+	private void initBezierPath(DirectionNode dir_node) {
 		next_unit_grid_x = unit.getGridX() + dir_node.getDirectionX();
 		next_unit_grid_y = unit.getGridY() + dir_node.getDirectionY();
 		float next_node_x = UnitGrid.coordinateFromGrid(next_unit_grid_x);
@@ -266,7 +266,7 @@ public final strictfp class PathTracker {
 		bezier_path.init(dir_node.getInvLength(), unit.getPositionX(), unit.getPositionY(), next_node_x, next_node_y);
 	}
 
-	public final void setTarget(TrackerAlgorithm tracker_algorithm) {
+	public void setTarget(TrackerAlgorithm tracker_algorithm) {
 		this.tracker_algorithm = tracker_algorithm;
 		initial_path = true;
 		region_path = null;
@@ -274,7 +274,7 @@ public final strictfp class PathTracker {
 		target_region = null;
 	}
 
-	private final int initPath() {
+	private int initPath() {
 		checkRegionPath(unit.getGridX(), unit.getGridY());
 		if (region_path == null) {
 			return DONE;
@@ -291,7 +291,7 @@ public final strictfp class PathTracker {
 		return OK;
 	}
 
-	public final void debugRender() {
+	public void debugRender() {
 		HeightMap heightmap = unit_grid.getHeightMap();
 		bezier_path.debugRender(heightmap);
 		final float OFFSET = 2f;

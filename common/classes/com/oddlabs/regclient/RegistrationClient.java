@@ -56,7 +56,7 @@ public strictfp class RegistrationClient {
 			offlineSucceeded();
 	}
 
-	private final void loadRegistrationFileDeterministic() {
+	private void loadRegistrationFileDeterministic() {
 		DeterministicSerializer.load(getDeterministic(), registration_file, new DeterministicSerializerLoopbackInterface() {
                         @Override
 			public final void failed(Exception e) {
@@ -87,7 +87,7 @@ public strictfp class RegistrationClient {
 		});
 	}
 
-	private final void offlineSucceeded() {
+	private void offlineSucceeded() {
 		if (registration_listener != null)
 			registration_listener.registrationCompleted();
 	}
@@ -99,7 +99,7 @@ public strictfp class RegistrationClient {
 	public final void register(boolean online_registering) {
 	}
 
-	private final boolean offlineCheck() {
+	private boolean offlineCheck() {
 		return true;
 	}
 

@@ -29,43 +29,43 @@ public final strictfp class Font {
 		this.height = font_info.getHeight();
 	}
 
-	public final Quad getQuad(char c) {
+	public Quad getQuad(char c) {
 		return key_array[c];
 	}
 
-	public final void setup() {
+	public void setup() {
 		GL11.glEnd();
 		setupQuads();
 	}
 
-	public final void setupQuads() {
+	public void setupQuads() {
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, texture.getHandle());
 		GL11.glBegin(GL11.GL_QUADS);
 	}
 
-	public final void resetQuads() {
+	public void resetQuads() {
 		GL11.glEnd();
 	}
 
-	public final void reset() {
+	public void reset() {
 		resetQuads();
 		Skin.getSkin().bindTexture();
 		GL11.glBegin(GL11.GL_QUADS);
 	}
 
-	public final int getXBorder() {
+	public int getXBorder() {
 		return x_border;
 	}
 
-	public final int getYBorder() {
+	public int getYBorder() {
 		return y_border;
 	}
 
-	public final int getHeight() {
+	public int getHeight() {
 		return height;
 	}
 
-	public final char getWidestChar(CharSequence text) {
+	public char getWidestChar(CharSequence text) {
 		assert text.length() > 0: "Empty CharSequence";
 
 		int widest = 0;
@@ -83,7 +83,7 @@ public final strictfp class Font {
 		return widest_char;
 	}
 
-	public final int getWidth(CharSequence text) {
+	public int getWidth(CharSequence text) {
 		if (text.length() == 0)
 			return 0;
 		int width = 0;

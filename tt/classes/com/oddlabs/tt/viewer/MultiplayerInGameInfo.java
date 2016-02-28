@@ -15,7 +15,7 @@ public final strictfp class MultiplayerInGameInfo extends DefaultInGameInfo {
 	}
 
         @Override
-	public final void addGUI(WorldViewer viewer, InGameMainMenu menu, Group game_infos) {
+	public void addGUI(WorldViewer viewer, InGameMainMenu menu, Group game_infos) {
 		super.addGUI(viewer, menu, game_infos);
 		FreeQuitLabel free_quit_label = new FreeQuitLabel(viewer.getWorld(), viewer.getAnimationManagerLocal());
 		menu.addChild(free_quit_label);
@@ -23,17 +23,17 @@ public final strictfp class MultiplayerInGameInfo extends DefaultInGameInfo {
 	}
 
         @Override
-	public final void addGameOverGUI(WorldViewer viewer, GameStatsDelegate delegate, int header_y, Group buttons) {
+	public void addGameOverGUI(WorldViewer viewer, GameStatsDelegate delegate, int header_y, Group buttons) {
 		addGameOverGUI(viewer, delegate, header_y, buttons, false);
 	}
 
         @Override
-	public final boolean isRated() {
+	public boolean isRated() {
 		return is_rated;
 	}
 
         @Override
-	public final boolean isMultiplayer() {
+	public boolean isMultiplayer() {
 		return true;
 	}
 

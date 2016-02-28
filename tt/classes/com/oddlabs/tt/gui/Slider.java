@@ -35,7 +35,7 @@ public final strictfp class Slider extends GUIObject {
 	}
 
         @Override
-	protected final void renderGeometry() {
+	protected void renderGeometry() {
 		Horizontal slider = Skin.getSkin().getSliderData().getSlider();
 		if (isDisabled())
 			slider.render(0, 0, getWidth(), Skin.DISABLED);
@@ -43,20 +43,20 @@ public final strictfp class Slider extends GUIObject {
 			slider.render(0, 0, getWidth(), Skin.NORMAL);
 	}
 
-	public final int getValue() {
+	public int getValue() {
 		return min + value;
 	}
 
-	private final int valueToOffset(int value) {
+	private int valueToOffset(int value) {
 		return (int)(value*step) + left_offset;
 	}
 
-	private final int offsetToValue(int offset) {
+	private int offsetToValue(int offset) {
 		return (int)(offset/step + .5f);
 	}
 	
         @Override
-	public final void mouseHeld(int button, int x, int y) {
+	public void mouseHeld(int button, int x, int y) {
 		mousePressed(button, x, y);
 	}
 
@@ -72,7 +72,7 @@ public final strictfp class Slider extends GUIObject {
 	}
 
         @Override
-	public final void mousePressed(int button, int x, int y) {
+	public void mousePressed(int button, int x, int y) {
 		if (!isDisabled()) {
 			int dx = x - this.button.getX();
 			if (dx < -step/2)
@@ -83,7 +83,7 @@ public final strictfp class Slider extends GUIObject {
 		}
 	}
 
-	public final void setValue(int value) {
+	public void setValue(int value) {
 		int start_value = this.value;
 		this.value = value - min;
 		cropValue();
@@ -92,7 +92,7 @@ public final strictfp class Slider extends GUIObject {
 			valueSetAll(getValue());
 	}
 
-	private final void cropValue() {
+	private void cropValue() {
 		if (value < 0) {
 			value = 0;
 		} else if (value > cardinality - 1) {
@@ -100,7 +100,7 @@ public final strictfp class Slider extends GUIObject {
 		}
 	}
 
-	public final void valueSetAll(int value) {
+	public void valueSetAll(int value) {
 		valueSet(value);
 		for (int i = 0; i < value_listeners.size(); i++) {
 			ValueListener listener = (ValueListener)value_listeners.get(i);
@@ -117,11 +117,11 @@ public final strictfp class Slider extends GUIObject {
 */
 	}
 
-	public final void addValueListener(ValueListener listener) {
+	public void addValueListener(ValueListener listener) {
 		value_listeners.add(listener);
 	}
 
-	public final void removeValueListener(ValueListener listener) {
+	public void removeValueListener(ValueListener listener) {
 		value_listeners.remove(listener);
 	}
 
@@ -129,28 +129,28 @@ public final strictfp class Slider extends GUIObject {
 		private int start_offset;
 
                 @Override
-		public final void mousePressed(int button, int x, int y) {
+		public void mousePressed(int button, int x, int y) {
 			start_offset = (int)valueToOffset(value);
 		}
 
                 @Override
-		public final void mouseDragged(int button, int x, int y, int rel_x, int rel_y, int abs_x, int abs_y) {
+		public void mouseDragged(int button, int x, int y, int rel_x, int rel_y, int abs_x, int abs_y) {
 			if (!isDisabled()) {
 				setValue(offsetToValue(start_offset + abs_x) + min);
 			}
 		}
 
                 @Override
-		public final void mouseMoved(int x, int y) {}
+		public void mouseMoved(int x, int y) {}
                 @Override
-		public final void mouseEntered() {}
+		public void mouseEntered() {}
                 @Override
-		public final void mouseExited() {}
+		public void mouseExited() {}
                 @Override
-		public final void mouseReleased(int button, int x, int y) {}
+		public void mouseReleased(int button, int x, int y) {}
                 @Override
-		public final void mouseHeld(int button, int x, int y) {}
+		public void mouseHeld(int button, int x, int y) {}
                 @Override
-		public final void mouseClicked(int button, int x, int y, int clicks) {}
+		public void mouseClicked(int button, int x, int y, int clicks) {}
 	}
 }

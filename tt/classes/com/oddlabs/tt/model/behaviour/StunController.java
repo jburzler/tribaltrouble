@@ -15,13 +15,13 @@ public final strictfp class StunController extends Controller {
 		stun_behaviour = new StunBehaviour(this, unit);
 	}
 
-	public final boolean shouldSleep(float t) {
+	public boolean shouldSleep(float t) {
 		time -= t;
 		return time > 0;
 	}
 
         @Override
-	public final void decide() {
+	public void decide() {
 		unit.setBehaviour(stun_behaviour);
 		if (!shouldSleep(0f)) {
 			unit.popController();

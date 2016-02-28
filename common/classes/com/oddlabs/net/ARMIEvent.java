@@ -18,28 +18,28 @@ public final strictfp class ARMIEvent implements Serializable {
 	private final byte method_id;
 	private final byte[] command_stream;
 
-	public static final Object createProxy(ARMIEventWriter broker, Class armi_interface) {
+	public static Object createProxy(ARMIEventWriter broker, Class armi_interface) {
 		return createProxy(broker, default_writer, armi_interface);
 	}
 
-	public static final Object createProxy(ARMIEventWriter broker, ARMIArgumentWriter writer, Class armi_interface) {
+	public static Object createProxy(ARMIEventWriter broker, ARMIArgumentWriter writer, Class armi_interface) {
 		ARMIInterfaceMethods armi_interface_methods = new ARMIInterfaceMethods(armi_interface);
 		ARMIInvocationHandler handler = new ARMIInvocationHandler(broker, writer, armi_interface_methods);
 		return Proxy.newProxyInstance(ARMIEvent.class.getClassLoader(), new Class[]{armi_interface}, handler);
 	}
 
-	public final short getEventSize() {
+	public short getEventSize() {
 		int command_stream_length = command_stream != null ? command_stream.length : 0;
 		return (short)(HEADER_SIZE + command_stream_length);
 	}
 
-	public final void write(ByteBuffer buffer) {
+	public void write(ByteBuffer buffer) {
 		buffer.put(method_id);
 		if (command_stream != null)
 			buffer.put(command_stream);
 	}
 
-	public final static ARMIEvent read(ByteBuffer buffer, short size) {
+	public static ARMIEvent read(ByteBuffer buffer, short size) {
 		byte method_id = buffer.get();
 		int stream_length = size - HEADER_SIZE;
 		byte[] command_stream;
@@ -51,7 +51,7 @@ public final strictfp class ARMIEvent implements Serializable {
 		return new ARMIEvent(method_id, command_stream);
 	}
 
-	private final static byte[] createByteArrayFromCommand(ARMIArgumentWriter writer, Class[] method_parameter_types, Object[] args) {
+	private static byte[] createByteArrayFromCommand(ARMIArgumentWriter writer, Class[] method_parameter_types, Object[] args) {
 		if (args != null) { 
 			try {
 				static_byte_stream.reset();
@@ -92,11 +92,11 @@ public final strictfp class ARMIEvent implements Serializable {
 		return args;
 	}
 
-	public final void execute(ARMIInterfaceMethods interface_methods, Object instance) throws IllegalARMIEventException {
+	public void execute(ARMIInterfaceMethods interface_methods, Object instance) throws IllegalARMIEventException {
 		execute(interface_methods, default_reader, instance);
 	}
 
-	public final void execute(ARMIInterfaceMethods interface_methods, ARMIArgumentReader reader, Object instance) throws IllegalARMIEventException {
+	public void execute(ARMIInterfaceMethods interface_methods, ARMIArgumentReader reader, Object instance) throws IllegalARMIEventException {
 		Method method;
 		try {
 			method = interface_methods.getMethod(method_id);

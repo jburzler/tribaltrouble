@@ -53,11 +53,11 @@ public final strictfp class MultiColumnComboBox extends GUIObject implements Scr
 		scroll_bar.update();
 	}
 
-	public final int getSize() {
+	public int getSize() {
 		return rows.getSize();
 	}
 	
-	public final void clickedRow() {
+	public void clickedRow() {
 		for (int i = 0; i < row_listeners.size(); i++) {
 			RowListener listener = (RowListener)row_listeners.get(i);
 			if (listener != null)
@@ -65,11 +65,11 @@ public final strictfp class MultiColumnComboBox extends GUIObject implements Scr
 		}
 	}
 
-	public final void addRowListener(RowListener listener) {
+	public void addRowListener(RowListener listener) {
 		row_listeners.add(listener);
 	}
 
-	public final void doubleClickedRow() {
+	public void doubleClickedRow() {
 		for (int i = 0; i < row_listeners.size(); i++) {
 			RowListener listener = (RowListener)row_listeners.get(i);
 			if (listener != null)
@@ -77,11 +77,11 @@ public final strictfp class MultiColumnComboBox extends GUIObject implements Scr
 		}
 	}
 
-	public final void setPulldownMenu(PulldownMenu pulldown_menu) {
+	public void setPulldownMenu(PulldownMenu pulldown_menu) {
 		this.pulldown_menu = pulldown_menu;
 	}
 
-	public final void rightClickedRow(int x, int y) {
+	public void rightClickedRow(int x, int y) {
 		if (pulldown_menu != null) {
 			int pulldown_x = StrictMath.max(0, StrictMath.min(LocalInput.getViewWidth() - pulldown_menu.getWidth(), x));
 			int pulldown_y = StrictMath.max(0, StrictMath.min(LocalInput.getViewHeight() - pulldown_menu.getHeight(), y - pulldown_menu.getHeight()));
@@ -93,7 +93,7 @@ public final strictfp class MultiColumnComboBox extends GUIObject implements Scr
 	}
 
         @Override
-	protected final void renderGeometry() {
+	protected void renderGeometry() {
 		MultiColumnComboBoxData data = Skin.getSkin().getMultiColumnComboBoxData();
 		Box box = data.getBox();
 		if (use_buttons)
@@ -103,34 +103,34 @@ public final strictfp class MultiColumnComboBox extends GUIObject implements Scr
 	}
 
         @Override
-	public final void setFocus() {
+	public void setFocus() {
 		focus_group.setGroupFocus(LocalInput.isShiftDownCurrently() ? -1 : 1);
 	}
 
-	public final void clear() {
+	public void clear() {
 		rows.clear();
 	}
 
-	public final void addRow(Row row) {
+	public void addRow(Row row) {
 		row.setColumnInfos(column_infos);
 		rows.addRow(row);
 		scroll_bar.update();
 	}
 
-	public final Object getSelected() {
+	public Object getSelected() {
 		return rows.getSelected();
 	}
 
-	public final Object getRightClickedRowData() {
+	public Object getRightClickedRowData() {
 		return right_clicked_row_data;
 	}
 
-	public final void selectRow(Row row) {
+	public void selectRow(Row row) {
 		rows.selectRow(row);
 	}
 
         @Override
-	protected final void mouseScrolled(int amount) {
+	protected void mouseScrolled(int amount) {
 		if (amount > 0)
 			setOffsetY(offset_y - 3*Skin.getSkin().getMultiColumnComboBoxData().getFont().getHeight());
 		else
@@ -138,7 +138,7 @@ public final strictfp class MultiColumnComboBox extends GUIObject implements Scr
 	}
 
         @Override
-	public final void setOffsetY(int new_offset) {
+	public void setOffsetY(int new_offset) {
 		offset_y = new_offset;
 
 		if (offset_y < 0)
@@ -153,17 +153,17 @@ public final strictfp class MultiColumnComboBox extends GUIObject implements Scr
 	}
 
         @Override
-	public final int getOffsetY() {
+	public int getOffsetY() {
 		return offset_y;
 	}
 
         @Override
-	public final int getStepHeight() {
+	public int getStepHeight() {
 		return Skin.getSkin().getMultiColumnComboBoxData().getFont().getHeight();
 	}
 
         @Override
-	public final void jumpPage(boolean up) {
+	public void jumpPage(boolean up) {
 		if (up)
 			setOffsetY(offset_y - rows.getHeight());
 		else
@@ -171,18 +171,18 @@ public final strictfp class MultiColumnComboBox extends GUIObject implements Scr
 	}
 
         @Override
-	public final float getScrollBarRatio() {
+	public float getScrollBarRatio() {
 		return rows.getHeight()/(float)StrictMath.max(rows.getContentHeight(), offset_y + rows.getHeight());
 	}
 
         @Override
-	public final float getScrollBarOffset() {
+	public float getScrollBarOffset() {
 		int length = StrictMath.max(rows.getContentHeight(), offset_y + rows.getHeight());
 		return offset_y/(float)(length - rows.getHeight());
 	}
 
         @Override
-	public final void setScrollBarOffset(float offset) {
+	public void setScrollBarOffset(float offset) {
 		int length = StrictMath.max(rows.getContentHeight(), offset_y + rows.getHeight());
 		setOffsetY((int)(offset*(length - rows.getHeight())));
 	}

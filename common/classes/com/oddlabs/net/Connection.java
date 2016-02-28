@@ -27,7 +27,7 @@ public final strictfp class Connection extends AbstractConnection implements Han
 	private SelectionKey key;
 	private InetAddress local_address;
 
-	public final static void configureChannel(SocketChannel channel) throws IOException {
+	public static void configureChannel(SocketChannel channel) throws IOException {
 		channel.configureBlocking(false);
 		channel.socket().setTcpNoDelay(true);
 	}
@@ -64,19 +64,19 @@ public final strictfp class Connection extends AbstractConnection implements Han
 		setKey(key);
 	}
 
-	public final void doPing() {
+	public void doPing() {
 		if (isConnected())
 			peer_interface.ping();
 	}
 
         @Override
-	public final void ping() {
+	public void ping() {
 		if (ping_reply)
 			peer_interface.ping();
 		pinged = true;
 	}
 
-	public final void timeout() {
+	public void timeout() {
 		if (!isConnected())
 			return;
 		if (!pinged) {
@@ -87,20 +87,20 @@ public final strictfp class Connection extends AbstractConnection implements Han
 		}
 	}
 
-	public final void connected(InetAddress local_address) {
+	public void connected(InetAddress local_address) {
 		this.local_address = local_address;
 		notifyConnected();
 	}
 
-	public final InetAddress getLocalAddress() {
+	public InetAddress getLocalAddress() {
 		return local_address;
 	}
 
-	public final void error(IOException e) {
+	public void error(IOException e) {
 		notifyError(e);
 	}
 
-	public final void connect(SocketAddress socket_address) {
+	public void connect(SocketAddress socket_address) {
 		IOException exception = null;
 		InetAddress local_address = null;
 		SelectionKey key = null;
@@ -136,38 +136,38 @@ public final strictfp class Connection extends AbstractConnection implements Han
 			connected((InetAddress)network.getDeterministic().log(local_address));
 	}
 
-	public final void dnsError(IOException e) {
+	public void dnsError(IOException e) {
 		error(e);
 	}
 	
-	private final void setKey(SelectionKey key) {
+	private void setKey(SelectionKey key) {
 		assert key != null || network.getDeterministic().isPlayback();
 		this.key = key;
 		network.attachToKey(key, this);
 	}
 
-	private final void doSetWriting() {
+	private void doSetWriting() {
 		if (!network.getDeterministic().isPlayback()) {
 			int new_ops = key.interestOps() | SelectionKey.OP_WRITE;
 			key.interestOps(new_ops);
 		}
 	}
 
-	private final void doResetWriting() {
+	private void doResetWriting() {
 		if (!network.getDeterministic().isPlayback()) {
 			int new_ops = key.interestOps() & ~SelectionKey.OP_WRITE;
 			key.interestOps(new_ops);
 		}
 	}
 
-	private final void resetWriting() {
+	private void resetWriting() {
 		assert writing;
 		if (isKeyValid())
 			doResetWriting();
 		writing = false;
 	}
 
-	private final void setWriting() {
+	private void setWriting() {
 		if (writing)
 		   return;
 		if (isKeyValid())
@@ -176,11 +176,11 @@ public final strictfp class Connection extends AbstractConnection implements Han
 	}
 
         @Override
-	public final void handle(ARMIEvent event) {
+	public void handle(ARMIEvent event) {
 		peer_interface.receiveEvent(event);
 	}
 
-	private final boolean writeNextEvent() {
+	private boolean writeNextEvent() {
 		if (back_log_list.size() == 0)
 			return false;
 		ARMIEvent event = (ARMIEvent)back_log_list.get(0);
@@ -190,7 +190,7 @@ public final strictfp class Connection extends AbstractConnection implements Han
 		return success;
 	}
 
-	private final void writeBackLog() {
+	private void writeBackLog() {
 		while (writeNextEvent())
 			;
 	}
@@ -216,7 +216,7 @@ public final strictfp class Connection extends AbstractConnection implements Han
 		}
 	}
 
-	private final boolean writeEvent(ARMIEvent event) {
+	private boolean writeEvent(ARMIEvent event) {
 		short event_size = (short)event.getEventSize();
 		int total_event_size = event_size + HEADER_SIZE;
 		assert total_event_size <= write_buffer.capacity();
@@ -286,7 +286,7 @@ public final strictfp class Connection extends AbstractConnection implements Han
 	}
 
         @Override
-	public final void handle() throws IOException {
+	public void handle() throws IOException {
 		SocketChannel channel;
 		if (!network.getDeterministic().isPlayback())
 			channel = (SocketChannel)key.channel();
@@ -325,13 +325,13 @@ public final strictfp class Connection extends AbstractConnection implements Han
 		}
 	}
 	
-	private final boolean isKeyValid() {
+	private boolean isKeyValid() {
 		// double negation because we want to the common result to be false, the default logger value
 		return !network.getDeterministic().log(network.getDeterministic().isPlayback() || !(key != null && key.isValid()));
 	}
 
         @Override
-	protected final void doClose() {
+	protected void doClose() {
 		if (isKeyValid()) {
 			network.cancelKey(key, this);
 			if (!network.getDeterministic().isPlayback()) {

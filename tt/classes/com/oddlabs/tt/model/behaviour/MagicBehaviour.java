@@ -26,12 +26,12 @@ public final strictfp class MagicBehaviour implements Behaviour {
 	}
 
         @Override
-	public final boolean isBlocking() {
+	public boolean isBlocking() {
 		return true;
 	}
 
         @Override
-	public final int animate(float t) {
+	public int animate(float t) {
 		anim_time -= t;
 		switch (state) {
 			case PREPARING:
@@ -60,14 +60,14 @@ public final strictfp class MagicBehaviour implements Behaviour {
 		}
 	}
 
-	private final void init() {
+	private void init() {
 		state = PREPARING;
 		anim_time = magic_factory.getSecondsPerInit();
 		unit.switchAnimation(1f/magic_factory.getSecondsPerAnim(), Unit.ANIMATION_MAGIC);
 	}
 
         @Override
-	public final void forceInterrupted() {
+	public void forceInterrupted() {
 		if (magic != null)
 			magic.interrupt();
 	}

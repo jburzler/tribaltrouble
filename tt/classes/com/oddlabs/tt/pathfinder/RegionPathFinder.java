@@ -9,12 +9,12 @@ final strictfp class RegionPathFinder extends AStarAlgorithm {
 	}
 
         @Override
-	public final boolean touchNeighbour(Occupant occ) {
+	public boolean touchNeighbour(Occupant occ) {
 		return false;
 	}
 
         @Override
-	protected final boolean isPathComplete(int dist_squared, Node node) {
+	protected boolean isPathComplete(int dist_squared, Node node) {
 		return node == dst_region;
 	}
 }

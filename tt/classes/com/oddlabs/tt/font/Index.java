@@ -18,20 +18,20 @@ public final strictfp class Index implements Updatable {
 		blink_on = true;
 	}
 
-	public final static void resetBlinking() {
+	public static void resetBlinking() {
 		index.doResetBlinking();
 	}
 
-	private final void doResetBlinking() {
+	private void doResetBlinking() {
 		blink_on = true;
 		timer.resetTime();
 	}
 
-	public final static void renderIndex(int render_x, int render_y, Font font) {
+	public static void renderIndex(int render_x, int render_y, Font font) {
 		index.doRenderIndex(render_x, render_y, font);
 	}
 
-	private final void doRenderIndex(int render_x, int render_y, Font font) {
+	private void doRenderIndex(int render_x, int render_y, Font font) {
 		if (blink_on) {
 			GL11.glEnd();
 			GL11.glColor3f(1f, 1f, 1f);
@@ -49,7 +49,7 @@ public final strictfp class Index implements Updatable {
 	}
 
         @Override
-	public final void update(Object anim) {
+	public void update(Object anim) {
 		blink_on = !blink_on;
 	}
 }

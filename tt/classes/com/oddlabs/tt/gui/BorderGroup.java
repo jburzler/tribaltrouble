@@ -13,7 +13,7 @@ public final strictfp class BorderGroup extends Group {
 	}
 
         @Override
-	public final void compileCanvas() {
+	public void compileCanvas() {
 		GroupData data = Skin.getSkin().getGroupData();
 		Box group = data.getGroup();
 		if (label != null) {
@@ -30,7 +30,7 @@ public final strictfp class BorderGroup extends Group {
 	}
 
         @Override
-	protected final void renderGeometry() {
+	protected void renderGeometry() {
 		Skin.getSkin().getGroupData().getGroup().render(0, 0, getWidth(), getHeight(), Skin.NORMAL);
 	}
 }

@@ -32,7 +32,7 @@ final strictfp class PbufferRenderer extends OffscreenRenderer {
 	}
 
         @Override
-	public final boolean isLost() {
+	public boolean isLost() {
 		boolean is_lost = pbuffer.isBufferLost();
 		if (is_lost)
 			factory.pbufferFailed();
@@ -40,7 +40,7 @@ final strictfp class PbufferRenderer extends OffscreenRenderer {
 	}
 
         @Override
-	protected final void finish() {
+	protected void finish() {
 		pbuffer.destroy();
 		Renderer.makeCurrent();
 	}

@@ -39,7 +39,7 @@ public strictfp class NumberEditLine extends EditLine {
 		setOffsetX(getTextLineRenderer().getWidth() - text_width);
 	}
 */
-	private final void validate() {
+	private void validate() {
 		int value;
 		String str = getText().toString();
 
@@ -52,7 +52,7 @@ public strictfp class NumberEditLine extends EditLine {
 		setValue(value);
 	}
 
-	private final int crop(int value) {
+	private int crop(int value) {
 		if (value > max_value) {
 			return max_value;
 		} else if (value < min_value) {

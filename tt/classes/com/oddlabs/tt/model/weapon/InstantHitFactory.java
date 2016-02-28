@@ -19,7 +19,7 @@ public final strictfp class InstantHitFactory extends WeaponFactory {
 	}
 
         @Override
-	protected final void doAttack(boolean hit, Unit src, Selectable target) {
+	protected void doAttack(boolean hit, Unit src, Selectable target) {
 		int damage = 1;
 		if (target instanceof Building && target.getTemplate().getAbilities().hasAbilities(Abilities.ATTACK))
 			damage = 6;
@@ -41,7 +41,7 @@ public final strictfp class InstantHitFactory extends WeaponFactory {
 	}
 
         @Override
-	public final Class getType() {
+	public Class getType() {
 		return null;
 	}
 }

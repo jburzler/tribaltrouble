@@ -16,7 +16,7 @@ public final strictfp class WatchStatusIcon extends StatusIcon {
 	}
 
         @Override
-	protected final void renderGeometry() {
+	protected void renderGeometry() {
 		super.renderGeometry();
 		if (!building.isDead() && !building.getChieftainContainer().isTraining() && building.getOwner().getUnitCountContainer().getNumSupplies() < building.getOwner().getWorld().getMaxUnitCount()) {
 			// Radeon 9200 problem

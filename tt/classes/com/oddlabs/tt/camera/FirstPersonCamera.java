@@ -20,7 +20,7 @@ public final strictfp class FirstPersonCamera extends Camera {
 	}
 
         @Override
-	public final void doAnimate(float t) {
+	public void doAnimate(float t) {
 		float dir_x = (float)StrictMath.cos(getState().getTargetHorizAngle());
 		float dir_y = (float)StrictMath.sin(getState().getTargetHorizAngle());
 		float left_dir_x = -dir_y;
@@ -50,7 +50,7 @@ public final strictfp class FirstPersonCamera extends Camera {
 	}
 
         @Override
-	public final void mouseMoved(int x, int y) {
+	public void mouseMoved(int x, int y) {
 		int dx = x - last_x;
 		int dy = y - last_y;
 		getState().setTargetHorizAngle(getState().getTargetHorizAngle() - dx*SCALE_HORIZ);

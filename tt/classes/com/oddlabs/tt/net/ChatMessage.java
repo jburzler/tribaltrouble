@@ -19,11 +19,11 @@ public final strictfp class ChatMessage {
 		this.type = type;
 	}
 
-	public final String formatShort() {
+	public String formatShort() {
 		return "<" + nick + "> " + message;
 	}
 
-	public final String formatLong() {
+	public String formatLong() {
 		switch (type) {
 			case CHAT_TEAM:
 				return "(Team) " + formatShort();

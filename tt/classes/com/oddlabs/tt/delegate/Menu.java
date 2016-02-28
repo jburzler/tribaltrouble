@@ -140,7 +140,7 @@ public abstract strictfp class Menu extends CameraDelegate {
 		}
 	}
 
-	private final void disableButtons(boolean disabled) {
+	private void disableButtons(boolean disabled) {
 		Renderable child = getLastChild();
 		while (child != null) {
 			if (child instanceof MenuButton) {
@@ -213,7 +213,7 @@ public abstract strictfp class Menu extends CameraDelegate {
 		current_menu_centered = false;
 	}
 
-	private final void positionMenu() {
+	private void positionMenu() {
 		current_menu.setPos(MENU_X, (LocalInput.getViewHeight() - current_menu.getHeight())*2/3);
 	}
 
@@ -232,7 +232,7 @@ public abstract strictfp class Menu extends CameraDelegate {
 
 	public final static strictfp class DefaultWorldInitAction implements WorldInitAction {
                 @Override
-		public final void run(WorldViewer viewer) {
+		public void run(WorldViewer viewer) {
 			new GameOverTrigger(viewer);
 			completeGameSetupHack(viewer);
 		}
@@ -272,21 +272,21 @@ public abstract strictfp class Menu extends CameraDelegate {
 		}
 
                 @Override
-		public final void mouseClicked(int button, int x, int y, int clicks) {
+		public void mouseClicked(int button, int x, int y, int clicks) {
 			setMenu(factory.create());
 		}
 	}
 
 	private final strictfp class ExitListener implements MouseClickListener {
                 @Override
-		public final void mouseClicked(int button, int x, int y, int clicks) {
+		public void mouseClicked(int button, int x, int y, int clicks) {
 			setMenuCentered(new QuitForm(getGUIRoot()));
 		}
 	}
 
 	private final strictfp class EscapedListener implements CloseListener {
                 @Override
-		public final void closed() {
+		public void closed() {
 			disableButtons(false);
 			current_menu = null;
 		}

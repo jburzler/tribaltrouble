@@ -11,12 +11,12 @@ public final strictfp class NativeChieftainAI extends ChieftainAI {
 	private final static int NUM_UNITS_FOR_POISON = 5;
 
         @Override
-	public final void decide(Unit chieftain) {
+	public void decide(Unit chieftain) {
 		nodeLightningCloud(chieftain);
 		nodePoisonFog(chieftain);
 	}
 
-	private final void nodeLightningCloud(Unit chieftain) {
+	private void nodeLightningCloud(Unit chieftain) {
 		if (chieftain.getMagicProgress(RacesResources.INDEX_MAGIC_LIGHTNING) < 1)
 			return;
 
@@ -30,7 +30,7 @@ public final strictfp class NativeChieftainAI extends ChieftainAI {
 		}
 	}
 
-	private final void nodePoisonFog(Unit chieftain) {
+	private void nodePoisonFog(Unit chieftain) {
 		if (chieftain.getMagicProgress(RacesResources.INDEX_MAGIC_POISON) < 1)
 			return;
 
@@ -46,7 +46,7 @@ public final strictfp class NativeChieftainAI extends ChieftainAI {
 		}
 	}
 
-	private final int getNumEnemyUnitsClose(Unit chieftain, float hit_radius) {
+	private int getNumEnemyUnitsClose(Unit chieftain, float hit_radius) {
 		FindOccupantFilter filter = new FindOccupantFilter(chieftain.getPositionX(), chieftain.getPositionY(), hit_radius, chieftain, Unit.class);
 		chieftain.getUnitGrid().scan(filter, chieftain.getGridX(), chieftain.getGridY());
 		List target_list = filter.getResult();
@@ -66,7 +66,7 @@ public final strictfp class NativeChieftainAI extends ChieftainAI {
 		return num_enemy_units_close;
 	}
 
-	private final int getNumFriendlyUnitsClose(Unit chieftain, float hit_radius) {
+	private int getNumFriendlyUnitsClose(Unit chieftain, float hit_radius) {
 		FindOccupantFilter filter = new FindOccupantFilter(chieftain.getPositionX(), chieftain.getPositionY(), hit_radius, chieftain, Selectable.class);
 		chieftain.getUnitGrid().scan(filter, chieftain.getGridX(), chieftain.getGridY());
 		List target_list = filter.getResult();

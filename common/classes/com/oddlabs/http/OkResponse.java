@@ -8,7 +8,7 @@ strictfp final class OkResponse implements HttpResponse {
 	}
 
         @Override
-	public final void notify(HttpCallback callback) {
+	public void notify(HttpCallback callback) {
 		callback.success(result);
 	}
 }

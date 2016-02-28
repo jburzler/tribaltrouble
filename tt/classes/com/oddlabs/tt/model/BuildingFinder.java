@@ -16,7 +16,7 @@ public final strictfp class BuildingFinder implements FinderFilter {
 	}
 
         @Override
-	public final Occupant getOccupantFromRegion(Region region, boolean one_region) {
+	public Occupant getOccupantFromRegion(Region region, boolean one_region) {
 		List buildings = region.getObjects(Building.class);
 		for (int i = 0; i < buildings.size(); i++) {
 			Building b = (Building)buildings.get(i);
@@ -27,16 +27,16 @@ public final strictfp class BuildingFinder implements FinderFilter {
 	}
 
         @Override
-	public final Occupant getBest() {
+	public Occupant getBest() {
 		return null;
 	}
 
-	private final boolean accept(Building building) {
+	private boolean accept(Building building) {
 		return building.getOwner() == owner && building.getAbilities().hasAbilities(abilities);
 	}
 
         @Override
-	public final boolean acceptOccupant(Occupant occ) {
+	public boolean acceptOccupant(Occupant occ) {
 		if (occ instanceof Building) {
 			Building occ_building = (Building)occ;
 			return accept(occ_building);

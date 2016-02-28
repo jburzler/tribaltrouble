@@ -29,31 +29,31 @@ public final strictfp class RegistrationRequest implements Serializable {
 		this.max_num_games = max_num_games;
 	}
 
-	public final long getKey() {
+	public long getKey() {
 		return key;
 	}
 
-	public final String getAffiliate() {
+	public String getAffiliate() {
 		return affiliate;
 	}
 
-	public final int getDemoRestrictionsVersion() {
+	public int getDemoRestrictionsVersion() {
 		return demo_restrictions_version;
 	}
 
-	public final boolean getUseTimeLimit() {
+	public boolean getUseTimeLimit() {
 		return use_time_limit;
 	}
 
-	public final int getMaxTime() {
+	public int getMaxTime() {
 		return max_time;
 	}
 
-	public final boolean getForceQuit() {
+	public boolean getForceQuit() {
 		return force_quit;
 	}
 
-	public final int getMaxNumGames() {
+	public int getMaxNumGames() {
 		return max_num_games;
 	}
 }

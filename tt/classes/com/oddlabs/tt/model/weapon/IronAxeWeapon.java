@@ -15,17 +15,17 @@ public final strictfp class IronAxeWeapon extends RotatingThrowingWeapon {
 	}
 
         @Override
-	protected final float getAngleVelocity() {
+	protected float getAngleVelocity() {
 		return ANGLE_DELTA;
 	}
 
         @Override
-	protected final float getMetersPerSecond() {
+	protected float getMetersPerSecond() {
 		return METERS_PER_SECOND;
 	}
 
         @Override
-	protected final int getDamage() {
+	protected int getDamage() {
 		return 2;
 	}
 }

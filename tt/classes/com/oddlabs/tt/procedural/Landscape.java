@@ -202,7 +202,7 @@ public final strictfp class Landscape {
 	// **************
 	// * STRUCTURES *
 	// **************
-	private final void generateStructuresNative(Channel voronoi4, Channel voronoi8, Channel voronoi8_hit, Channel voronoi16, Channel voronoi16_hit, Channel voronoi32, Channel voronoi32_hit, Channel noise8, Channel noise256) {
+	private void generateStructuresNative(Channel voronoi4, Channel voronoi8, Channel voronoi8_hit, Channel voronoi16, Channel voronoi16_hit, Channel voronoi32, Channel voronoi32_hit, Channel noise8, Channel noise256) {
 		structures = new GLIntImage[7];
 		ProgressForm.progress(1/8f);
 
@@ -231,7 +231,7 @@ public final strictfp class Landscape {
 		detail = new GLIntImage(structure_detail);
 	}
 	
-	private final void generateStructuresViking(Channel voronoi4, Channel voronoi8, Channel voronoi8_hit, Channel voronoi16, Channel voronoi16_hit, Channel voronoi32, Channel voronoi32_hit, Channel noise8, Channel noise256) {
+	private void generateStructuresViking(Channel voronoi4, Channel voronoi8, Channel voronoi8_hit, Channel voronoi16, Channel voronoi16_hit, Channel voronoi32, Channel voronoi32_hit, Channel noise8, Channel noise256) {
 		structures = new GLIntImage[7];
 		ProgressForm.progress(1/8f);
 
@@ -260,7 +260,7 @@ public final strictfp class Landscape {
 		detail = new GLIntImage(structure_detail);
 	}
 
-	private final Layer genSand(int size, Channel noise8, Channel noise256) {
+	private Layer genSand(int size, Channel noise8, Channel noise256) {
 		Channel empty = new Channel(size, size).fill(1f);
 		Channel sand_bump1 = noise8.brightness(0.75f);
 		Channel sand_bump2 = noise256.brightness(0.25f);
@@ -270,7 +270,7 @@ public final strictfp class Landscape {
 		return sand;
 	}
 	
-	private final Layer genGravel(int size, Channel noise8, Channel noise256) {
+	private Layer genGravel(int size, Channel noise8, Channel noise256) {
 		Channel empty = new Channel(size, size).fill(1f);
 		Channel gravel_bump1 = noise8.brightness(0.5f);
 		Channel gravel_bump2 = noise256.brightness(0.5f);
@@ -280,7 +280,7 @@ public final strictfp class Landscape {
 		return gravel;
 	}
 
-	private final Layer genDirt(int size, Channel noise8, Channel noise256, Channel voronoi32) {
+	private Layer genDirt(int size, Channel noise8, Channel noise256, Channel voronoi32) {
 		Channel empty = new Channel(size, size).fill(1f);
 		Channel dirt_bump1 = noise8.brightness(0.8f);
 		Channel dirt_bump2 = noise256.brightness(0.1f);
@@ -293,7 +293,7 @@ public final strictfp class Landscape {
 		return dirt;
 	}
 	
-	private final Layer genSoil(int size, Channel noise8, Channel noise256, Channel voronoi32) {
+	private Layer genSoil(int size, Channel noise8, Channel noise256, Channel voronoi32) {
 		Channel empty = new Channel(size, size).fill(1f);
 		Channel soil_bump1 = noise8.brightness(0.8f);
 		Channel soil_bump2 = noise256.brightness(0.1f);
@@ -306,7 +306,7 @@ public final strictfp class Landscape {
 		return soil;
 	}
 
-	private final Layer genGrass(int size, Channel noise8, Channel noise256) {
+	private Layer genGrass(int size, Channel noise8, Channel noise256) {
 		Channel empty = new Channel(size, size).fill(1f);
 		Channel grass_bump = noise8.copy().rotate(90).channelAdd(noise256.brightness(0.05f));
 		Layer grass = new Layer(empty.copy().fill(0.2f), empty.copy().fill(0.45f), empty.copy().fill(0f));
@@ -316,7 +316,7 @@ public final strictfp class Landscape {
 		return grass;
 	}
 
-	private final Layer genRubble(int size, Channel noise8, Channel voronoi4, Channel voronoi8, Channel voronoi16, Layer rubble) {
+	private Layer genRubble(int size, Channel noise8, Channel voronoi4, Channel voronoi8, Channel voronoi16, Layer rubble) {
 		Channel rubble_bump1 = voronoi4.multiply(0.4f);
 		Channel rubble_bump2 = voronoi8.multiply(0.3f);
 		Channel rubble_bump3 = voronoi16.multiply(0.2f);
@@ -327,7 +327,7 @@ public final strictfp class Landscape {
 		return rubble;
 	}
 
-	private final Layer genRock(int size, Channel noise8, Channel noise256, Channel voronoi4, Channel voronoi8, Channel voronoi16, Layer rubble, Layer grass) {
+	private Layer genRock(int size, Channel noise8, Channel noise256, Channel voronoi4, Channel voronoi8, Channel voronoi16, Layer rubble, Layer grass) {
 		Channel rock_bump1 = voronoi4.dynamicRange().contrast(1.1f).brightness(2f).gamma2().multiply(0.35f);
 		Channel rock_bump2 = voronoi8.dynamicRange().contrast(1.1f).brightness(2f).gamma2().multiply(0.3f);
 		Channel rock_bump3 = voronoi16.dynamicRange().contrast(1.1f).brightness(2f).gamma2().multiply(0.2f);
@@ -345,7 +345,7 @@ public final strictfp class Landscape {
 		return rock;
 	}
 	
-	private final Layer genCliff(int size, Channel noise8, Channel noise256, Channel voronoi4, Channel voronoi8, Channel voronoi16, Layer rubble, Layer grass) {
+	private Layer genCliff(int size, Channel noise8, Channel noise256, Channel voronoi4, Channel voronoi8, Channel voronoi16, Layer rubble, Layer grass) {
 		Channel cliff_bump1 = voronoi4.dynamicRange().contrast(1.1f).brightness(2f).gamma2().multiply(0.3f);
 		Channel cliff_bump2 = voronoi8.dynamicRange().contrast(1.1f).brightness(2f).gamma2().multiply(0.3f);
 		Channel cliff_bump3 = voronoi16.dynamicRange().contrast(1.1f).brightness(2f).gamma2().multiply(0.25f);
@@ -364,7 +364,7 @@ public final strictfp class Landscape {
 		return cliff;
 	}
 	
-	private final Layer genSnow(int size, Channel noise8, Channel noise256) {
+	private Layer genSnow(int size, Channel noise8, Channel noise256) {
 		Channel empty = new Channel(size, size).fill(.95f);
 		Channel snow_bump1 = noise8.brightness(0.75f);
 		Channel snow_bump2 = noise256.brightness(0.25f);
@@ -374,11 +374,11 @@ public final strictfp class Landscape {
 		return snow;
 	}
 
-	private final Layer genBlack() {
+	private Layer genBlack() {
 		return new Channel(1, 1).fill(0f).toLayer();
 	}
 
-	private final Layer genSeabottom(int size) {
+	private Layer genSeabottom(int size) {
 		Layer seabottom = new Layer(
 			new Channel(size, size).fill(Globals.SEA_BOTTOM_COLOR[terrain_type][0]),
 			new Channel(size, size).fill(Globals.SEA_BOTTOM_COLOR[terrain_type][1]),
@@ -388,7 +388,7 @@ public final strictfp class Landscape {
 		return seabottom;
 	}
 
-	private final Layer genDetail(int size, float detail_alpha_value, int seed, Channel noise8) {
+	private Layer genDetail(int size, float detail_alpha_value, int seed, Channel noise8) {
 		Channel detail_noise = new Midpoint(size, 4, 0.4f, seed).toChannel();
 		detail_noise.perturb(noise8.scale(size, size), 0.05f);
 		Channel detail_grey = new Channel(size, size).fill(0.5f);
@@ -403,7 +403,7 @@ public final strictfp class Landscape {
 	// ***********
 	// * TERRAIN *
 	// ***********
-	private final void generateTerrainNative() {
+	private void generateTerrainNative() {
 		alpha_maps = new GLByteImage[7];
 
 		// generate height map
@@ -450,7 +450,7 @@ public final strictfp class Landscape {
 		build = generateBuildMap(generateThresholdMap(slope, build_threshold).channelMultiply(access));
 	}
 	
-	private final void generateTerrainViking() {
+	private void generateTerrainViking() {
 		alpha_maps = new GLByteImage[7];
 		
 		// generate height map
@@ -509,7 +509,7 @@ public final strictfp class Landscape {
 	}
 	
 	// shape beaches
-	private final Channel beaches(Channel channel) {
+	private Channel beaches(Channel channel) {
 		float sealevel = 1.1f*Globals.SEA_LEVEL;
 		float threshold = 2f*sealevel;
 		for (int y = 0; y < channel.height; y++) {
@@ -528,7 +528,7 @@ public final strictfp class Landscape {
 	}
 	
 	// generate threshold map
-	private final Channel generateThresholdMap(Channel slopemap, float threshold) {
+	private Channel generateThresholdMap(Channel slopemap, float threshold) {
 		Channel channel = slopemap.copy().threshold(0f, threshold).channelSubtract(height.copy().threshold(0f, Globals.SEA_LEVEL));
 		// fix edges
 		for (int y = 0; y < unit_grids_per_world; y += (unit_grids_per_world - 1)) {
@@ -545,7 +545,7 @@ public final strictfp class Landscape {
 	}
 
 	// generate build map
-	private final byte[][] generateBuildMap(Channel thresholdmap) {
+	private byte[][] generateBuildMap(Channel thresholdmap) {
 		if (DEBUG) thresholdmap.toLayer().saveAsPNG("build_tresholdmap");
 		int size = thresholdmap.getWidth();
 		boolean build_grid[][] = new boolean[size][size];
@@ -585,7 +585,7 @@ public final strictfp class Landscape {
 	// **********
 	// * ALPHAS *
 	// **********
-	private final Channel generateAlphas() {
+	private Channel generateAlphas() {
 		int seed = Globals.LANDSCAPE_SEED;
 		Channel alpha0, alpha1, alpha2, alpha3;
 		Channel grass_alpha = new Channel(1, 1);
@@ -686,14 +686,14 @@ public final strictfp class Landscape {
 	}
 	
 	// generate dirt alpha
-	private final Channel generateDirtAlpha() {
+	private Channel generateDirtAlpha() {
 		Channel dirt_alpha = height.copy().dynamicRange(1.1f*Globals.SEA_LEVEL, 2f*Globals.SEA_LEVEL, 0f, 1f);
 		dirt_alpha.channelSubtract(relheight.copy().invert().dynamicRange(0.5f, 0.6f, 0f, 0.5f));
 		return dirt_alpha;
 	}
 
 	// generate rubble alpha
-	private final Channel generateRubbleAlpha() {
+	private Channel generateRubbleAlpha() {
 		Channel rubble_alpha = slope.copy().dynamicRange(build_threshold, access_threshold, 0f, 1f);
 		rubble_alpha.channelSubtract(height.copy().invert().dynamicRange(0.8f, 1f, 0f, 1f));
 		rubble_alpha.channelSubtract(relheight.copy().invert().dynamicRange(0.5f, 0.65f, 0f, 0.5f));
@@ -701,13 +701,13 @@ public final strictfp class Landscape {
 	}
 
 	// generate rock alpha
-	private final Channel generateRockAlpha() {
+	private Channel generateRockAlpha() {
 		Channel rock_alpha = slope.copy().threshold(access_threshold, 1f);
 		return rock_alpha;
 	}
 
 	// generate grass alpha
-	private final Channel generateGrassAlpha(int size, int seed) {
+	private Channel generateGrassAlpha(int size, int seed) {
 		Channel grass_alpha = new Midpoint(size, 4, 0.45f, seed).toChannel().dynamicRange(1f - vegetation_amount, 1f, 0f, 1f).gamma2();
 		grass_alpha.channelBrightest(slope.copy().dynamicRange(0f, access_threshold, 0f, 1f).invert().dynamicRange(1f - vegetation_amount, 1f, 0f, 1f).gamma2());
 		grass_alpha.channelAdd(relheight.copy().invert().add(-0.5f).multiply(2f));
@@ -718,20 +718,20 @@ public final strictfp class Landscape {
 	}
 	
 	// generate soil alpha
-	private final Channel generateSoilAlpha() {
+	private Channel generateSoilAlpha() {
 		Channel soil_alpha = height.copy().dynamicRange(1.1f*Globals.SEA_LEVEL, 2f*Globals.SEA_LEVEL, 0f, 1f);
 		soil_alpha.channelSubtract(relheight.copy().invert().dynamicRange(0.5f, 0.6f, 0f, 0.5f));
 		return soil_alpha;
 	}
 	
 	// generate cliff alpha
-	private final Channel generateCliffAlpha() {
+	private Channel generateCliffAlpha() {
 		Channel cliff_alpha = slope.copy().threshold(access_threshold, 1f);
 		return cliff_alpha;
 	}
 	
 	// generate snow alpha
-	private final Channel generateSnowAlpha(Channel cliff_alpha) {
+	private Channel generateSnowAlpha(Channel cliff_alpha) {
 		Channel snow_alpha = height.copy().dynamicRange(0.5f, 0.6f, 0f, 1f);
 		snow_alpha.channelSubtract(cliff_alpha);
 		snow_alpha.smooth(1).smooth(1);
@@ -740,7 +740,7 @@ public final strictfp class Landscape {
 	}
 
 	// generate seabottom alpha
-	private final Channel generateSeabottomAlpha() {
+	private Channel generateSeabottomAlpha() {
 		Channel seabottom_alpha = height.copy().invert().dynamicRange(1f - Globals.SEA_LEVEL, 1f, 0f, 1f);
 		switch (terrain_type) {
 			case NATIVE:
@@ -759,7 +759,7 @@ public final strictfp class Landscape {
 	// ************
 	// * SUPPLIES *
 	// ************
-	private final void generateSupplies(Channel grass_alpha) {
+	private void generateSupplies(Channel grass_alpha) {
 		// generate overall probability map for rock and iron resources
 		Channel centerprob = new Hill(unit_grids_per_world, Hill.CIRCLE).toChannel().addClip(-.5f).dynamicRange();
 		
@@ -894,7 +894,7 @@ public final strictfp class Landscape {
 	}
 
 	// place supplies on map
-	private final Channel placeSupplies(Channel probability, Channel supplies, int intervals, int max_count, float shadow_alpha_val) {
+	private Channel placeSupplies(Channel probability, Channel supplies, int intervals, int max_count, float shadow_alpha_val) {
 		max_count = StrictMath.min(probability.width*probability.height, max_count);
 		int scaleshift = Utils.powerOf2Log2(unit_grids_per_world*meters_per_height_unit/meters_per_world);
 		int i = 0;
@@ -949,7 +949,7 @@ public final strictfp class Landscape {
 	}
 	
 	// place plants on map
-	private final Channel placePlants(Channel probability, Channel place, int intervals, int max_count, int plant_type) {
+	private Channel placePlants(Channel probability, Channel place, int intervals, int max_count, int plant_type) {
 		max_count = StrictMath.min(probability.width*probability.height, max_count);
 		int i = 0;
 		float interval_size = 1f/intervals;
@@ -993,7 +993,7 @@ public final strictfp class Landscape {
 	// ******************
 	// * UNIT LOCATIONS *
 	// ******************
-	private final void generateUnitLocations(int initial_unit_count, float random_start_pos) {
+	private void generateUnitLocations(int initial_unit_count, float random_start_pos) {
 		// create building placement map
 		Channel buildmap = new Channel(access.width, access.height);
 		Channel buildmap_debug = new Channel(access.width, access.height);
@@ -1068,19 +1068,19 @@ public final strictfp class Landscape {
 		}
 	}
 	
-	public final BlendInfo[] getBlendInfos() {
+	public BlendInfo[] getBlendInfos() {
 		return blend_infos;
 	}
 
-	public final GLIntImage getDetail() {
+	public GLIntImage getDetail() {
 		return detail;
 	}
 
-	public final float[][] getHeight() {
+	public float[][] getHeight() {
 		return height.getPixels();
 	}
 
-	public final boolean[][] getAccessGrid() {
+	public boolean[][] getAccessGrid() {
 		int size = access_exported.getWidth();
 		boolean access_grid[][] = new boolean[size][size];
 		for (int y = 0; y < size; y++) {
@@ -1091,11 +1091,11 @@ public final strictfp class Landscape {
 		return access_grid;
 	}
 
-	public final byte[][] getBuildGrid() {
+	public byte[][] getBuildGrid() {
 		return build;
 	}
 
-	public final List getTrees() {
+	public List getTrees() {
 		List list = new ArrayList();
 		for (int y = 0; y < trees.height; y++) {
 			for (int x = 0; x < trees.width; x++) {
@@ -1107,7 +1107,7 @@ public final strictfp class Landscape {
 		return list;
 	}
 
-	public final List getPalmtrees() {
+	public List getPalmtrees() {
 		List list = new ArrayList();
 		for (int y = 0; y < palmtrees.height; y++) {
 			for (int x = 0; x < palmtrees.width; x++) {
@@ -1119,7 +1119,7 @@ public final strictfp class Landscape {
 		return list;
 	}
 
-	public final List getRock() {
+	public List getRock() {
 		List list = new ArrayList();
 		for (int y = 0; y < rock.height; y++) {
 			for (int x = 0; x < rock.width; x++) {
@@ -1131,7 +1131,7 @@ public final strictfp class Landscape {
 		return list;
 	}
 
-	public final List getIron() {
+	public List getIron() {
 		List list = new ArrayList();
 		for (int y = 0; y < iron.height; y++) {
 			for (int x = 0; x < iron.width; x++) {
@@ -1143,15 +1143,15 @@ public final strictfp class Landscape {
 		return list;
 	}
 	
-	public final float[][] getPlants() {
+	public float[][] getPlants() {
 		return plants;
 	}
 
-	public final float[][] getStartingLocations() {
+	public float[][] getStartingLocations() {
 		return player_locations;
 	}
 
-	public final float getSeaLevelMeters() {
+	public float getSeaLevelMeters() {
 		return sea_level_meters;
 	}
 

@@ -65,7 +65,7 @@ public final strictfp class Sky {
 		this(renderer, terrain_type, (float)(renderer.getHeightMap().getMetersPerWorld()*StrictMath.sqrt(2)/2), 6000f, 20, 20, SKYDOME_OUTER_UTILING, SKYDOME_OUTER_VTILING, SKYDOME_INNER_UTILING, SKYDOME_INNER_VTILING, renderer.getHeightMap().getMetersPerWorld()/2, renderer.getHeightMap().getMetersPerWorld()/2, SKYDOME_HEIGHT);
 	}
 
-	private final void setupSky() {
+	private void setupSky() {
 		float time = LocalEventQueue.getQueue().getTime();
 		float speed_scale = 0.01f;
 		float outer_dx = SKYDOME_SPEED_OUTER[0] * time*speed_scale;
@@ -94,7 +94,7 @@ public final strictfp class Sky {
 		GLState.clientActiveTexture(GL13.GL_TEXTURE0);
 	}
 
-	private final void resetSky() {
+	private void resetSky() {
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		GL11.glLoadIdentity();
 		GL11.glTexEnvf(GL11.GL_TEXTURE_ENV, GL11.GL_TEXTURE_ENV_MODE, GL11.GL_DECAL);
@@ -104,7 +104,7 @@ public final strictfp class Sky {
 		GL11.glMatrixMode(GL11.GL_MODELVIEW);
 	}
 
-	public final void render() {
+	public void render() {
 		setupSky();
 
 		int end = subdiv_axis*(subdiv_height - 1);
@@ -115,7 +115,7 @@ public final strictfp class Sky {
 		resetSky();
 	}
 
-	public final void renderSeaBottom() {
+	public void renderSeaBottom() {
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		GL11.glColor3f(Globals.SEA_BOTTOM_COLOR[terrain_type][0], Globals.SEA_BOTTOM_COLOR[terrain_type][1], Globals.SEA_BOTTOM_COLOR[terrain_type][2]);
 
@@ -216,15 +216,15 @@ public final strictfp class Sky {
 		return new FloatVBO(ARBBufferObject.GL_STATIC_DRAW_ARB, vertex_buffer);
 	}
 
-	public final FloatVBO getWaterVertices() {
+	public FloatVBO getWaterVertices() {
 		return water_vertices;
 	}
 	
-	public final ShortVBO getWaterIndices() {
+	public ShortVBO getWaterIndices() {
 		return water_indices;
 	}
 
-	private final void makeSkyVertices(float radius, float outer_utile, float outer_vtile, float inner_utile, float inner_vtile, float origin_x, float origin_y, float origin_z) {
+	private void makeSkyVertices(float radius, float outer_utile, float outer_vtile, float inner_utile, float inner_vtile, float origin_x, float origin_y, float origin_z) {
 		float r;
 		float x, y, z;
 		float height_coeff;
@@ -298,12 +298,12 @@ public final strictfp class Sky {
 		sky_colors = new FloatVBO(ARBBufferObject.GL_STATIC_DRAW_ARB, colors);
 	}
 
-	private final void putArray(float[] src, int offset, float[] dest) {
+	private void putArray(float[] src, int offset, float[] dest) {
 		for (int i = 0; i < src.length; i++)
 			dest[i + (offset*src.length)] = src[i];
 	}
 
-	private final ShortVBO[] makeSkyStripIndices() {
+	private ShortVBO[] makeSkyStripIndices() {
 		ShortVBO[] strip_indices = new ShortVBO[subdiv_height - 2];
 		for (int i = 0; i < strip_indices.length; i++) {
 			int size = subdiv_axis*2 + 2;
@@ -321,7 +321,7 @@ public final strictfp class Sky {
 		return strip_indices;
 	}
 
-	private final ShortVBO makeSkyFanIndices() {
+	private ShortVBO makeSkyFanIndices() {
 		int size = subdiv_axis + 2;
 		ShortBuffer temp = BufferUtils.createShortBuffer(size);
 		temp.put(0, (short)(sky_vertices.capacity()/3 - 1));
@@ -336,7 +336,7 @@ public final strictfp class Sky {
 		return fan_indices;
 	}
 
-	private final SkyStitchVertex[] makeDomeVertices(HeightMap heightmap, int ring_id, int index_offset, float radius, float origin_x, float origin_y) {
+	private SkyStitchVertex[] makeDomeVertices(HeightMap heightmap, int ring_id, int index_offset, float radius, float origin_x, float origin_y) {
 		int size = subdiv_axis;
 		SkyStitchVertex[] result = new SkyStitchVertex[size];
 		float a_angle_inc = (float)StrictMath.PI*2/subdiv_axis;
@@ -349,7 +349,7 @@ public final strictfp class Sky {
 		return result;
 	}
 
-	private final SkyStitchVertex[] makeLandscapeVertices(HeightMap heightmap) {
+	private SkyStitchVertex[] makeLandscapeVertices(HeightMap heightmap) {
 		int size = 4*heightmap.getPatchesPerWorld();
 		SkyStitchVertex[] result = new SkyStitchVertex[size];
 		

@@ -10,7 +10,7 @@ public final strictfp class MonotoneTimeManager implements TimeManager {
 	}
 
         @Override
-	public final long getMillis() {
+	public long getMillis() {
 		long new_time = source.getMillis();
 		this.last_time = StrictMath.max(last_time, new_time);
 		return last_time;

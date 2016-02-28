@@ -11,12 +11,12 @@ public final strictfp class TargetFinderAlgorithm extends GridPathFinder {
 		this.filter = filter;
 	}
 
-	public final Occupant getOccupant() {
+	public Occupant getOccupant() {
 		return target;
 	}
 
         @Override
-	public final boolean touchNeighbour(Occupant occ) {
+	public boolean touchNeighbour(Occupant occ) {
 		if (filter.acceptOccupant(occ)) {
 			target = occ;
 			return true;

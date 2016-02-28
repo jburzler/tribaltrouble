@@ -17,23 +17,23 @@ public final strictfp class GroupData {
 		this.caption_font = caption_font;
 	}
 
-	public final Box getGroup() {
+	public Box getGroup() {
 		return group;
 	}
 
-	public final int getCaptionLeft() {
+	public int getCaptionLeft() {
 		return caption_left;
 	}
 
-	public final int getCaptionY() {
+	public int getCaptionY() {
 		return caption_y;
 	}
 
-	public final int getCaptionOffset() {
+	public int getCaptionOffset() {
 		return caption_offset;
 	}
 
-	public final Font getCaptionFont() {
+	public Font getCaptionFont() {
 		return caption_font;
 	}
 }

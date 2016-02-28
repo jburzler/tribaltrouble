@@ -16,18 +16,18 @@ public final strictfp class WalkController extends Controller {
 	}
 
         @Override
-	public final void decide() {
+	public void decide() {
 		if (shouldGiveUp(0))
 			unit.popController();
 		else
 			unit.setBehaviour(new WalkBehaviour(unit, target, 0f, scan_attack));
 	}
 
-	public final boolean isAgressive() {
+	public boolean isAgressive() {
 		return scan_attack;
 	}
 	
-	public final Target getTarget() {
+	public Target getTarget() {
 		return target;
 	}
 }

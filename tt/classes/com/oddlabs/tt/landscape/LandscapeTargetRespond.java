@@ -21,7 +21,7 @@ public final strictfp class LandscapeTargetRespond extends Element implements An
 	}
 
         @Override
-	public final void animate(float t) {
+	public void animate(float t) {
 		if (time > 0) {
 			time = StrictMath.max(0, time - t);
 		} else {
@@ -29,12 +29,12 @@ public final strictfp class LandscapeTargetRespond extends Element implements An
 		}
 	}
 
-	public final float getProgress() {
+	public float getProgress() {
 		return time/SECOND_PER_PICK_RESPOND;
 	}
 
         @Override
-	public final void updateChecksum(StateChecksum checksum) {
+	public void updateChecksum(StateChecksum checksum) {
 	}
 
         @Override
@@ -45,12 +45,12 @@ public final strictfp class LandscapeTargetRespond extends Element implements An
 	}
 
         @Override
-	public final void visit(ElementVisitor visitor) {
+	public void visit(ElementVisitor visitor) {
 		visitor.visitRespond(this);
 	}
 
         @Override
-	protected final void remove() {
+	protected void remove() {
 		super.remove();
 		LocalEventQueue.getQueue().getManager().removeAnimation(this);
 	}

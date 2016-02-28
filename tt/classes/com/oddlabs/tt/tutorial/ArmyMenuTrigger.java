@@ -9,7 +9,7 @@ public final strictfp class ArmyMenuTrigger extends TutorialTrigger {
 	}
 
         @Override
-	protected final void run(Tutorial tutorial) {
+	protected void run(Tutorial tutorial) {
 		if (tutorial.getViewer().getPanel().inArmyMenu())
 			tutorial.next(new ArmyTrigger(tutorial.getViewer().getLocalPlayer()));
 	}

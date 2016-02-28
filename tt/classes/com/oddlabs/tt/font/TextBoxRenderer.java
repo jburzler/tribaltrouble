@@ -26,17 +26,17 @@ public final strictfp class TextBoxRenderer {
 		setDim(width, height);
 	}
 
-	public final void setDim(int width, int height) {
+	public void setDim(int width, int height) {
 		this.width = width;
 		this.height = height;
 	}
 
-	public final int jump(int x, int y, int dx, int dy, CharSequence text, int index) {
+	public int jump(int x, int y, int dx, int dy, CharSequence text, int index) {
 		render(x, y, 0, text, index, false);
 		return jumpDirect(x, y, index_render_x + dx, index_render_y + dy, text, index);
 	}
 
-	public final int jumpDirect(int x, int y, int new_x, int new_y, CharSequence text, int index) {
+	public int jumpDirect(int x, int y, int new_x, int new_y, CharSequence text, int index) {
 		target_render_x = new_x;
 		target_render_y = new_y;
 		best_dx = Integer.MAX_VALUE;
@@ -45,34 +45,34 @@ public final strictfp class TextBoxRenderer {
 		return new_index;
 	}
 
-	public final int getIndexRenderY(int x, int y, int offset_y, CharSequence text, int index) {
+	public int getIndexRenderY(int x, int y, int offset_y, CharSequence text, int index) {
 		render(x, y, offset_y, text, index, false);
 		return index_render_y;
 	}
 
-	public final int getTextHeight(CharSequence text) {
+	public int getTextHeight(CharSequence text) {
 		render(0, -height, 0, text, text.length(), false);
 		return -index_render_y;
 	}
 
-	public final int getTotalTextHeight(CharSequence text) {
+	public int getTotalTextHeight(CharSequence text) {
 		render(0, -height, 0, text, text.length(), false);
 		return text_height;
 	}
 
-	public final void render(int x, int y, CharSequence text) {
+	public void render(int x, int y, CharSequence text) {
 		render(x, y, 0, text, -1);
 	}
 
-	public final void render(int x, int y, int offset_y, CharSequence text) {
+	public void render(int x, int y, int offset_y, CharSequence text) {
 		render(x, y, offset_y, text, -1);
 	}
 
-	public final void render(int x, int y, int offset_y, CharSequence text, int index) {
+	public void render(int x, int y, int offset_y, CharSequence text, int index) {
 		render(x, y, offset_y, text, index, true);
 	}
 
-	private final void render(int x, int y, int offset_y, CharSequence text, int index, boolean render) {
+	private void render(int x, int y, int offset_y, CharSequence text, int index, boolean render) {
 		int clip_left = x;
 		int clip_bottom = y;
 		int clip_right = x + width;
@@ -100,14 +100,14 @@ public final strictfp class TextBoxRenderer {
 		}
 	}
 
-	private final void newLine(int clip_left, int clip_bottom, int clip_top) {
+	private void newLine(int clip_left, int clip_bottom, int clip_top) {
 		render_x = clip_left - font.getXBorder()/2;
 		render_y -= font.getHeight() - font.getYBorder();
 		in_view = render_y < clip_top && render_y > clip_bottom - font.getHeight();
 		text_height += font.getHeight() - font.getYBorder();
 	}
 
-	private final int getWordWidth(int render_pos, CharSequence text) {
+	private int getWordWidth(int render_pos, CharSequence text) {
 		int width = 0;
 		while (render_pos < text.length()) {
 			char key = text.charAt(render_pos);
@@ -150,7 +150,7 @@ public final strictfp class TextBoxRenderer {
 		return render_pos;
 	}
 
-	private final int renderSpace(int render_pos, int clip_left, int clip_bottom, int clip_right, int clip_top, CharSequence text, int index, boolean render) {
+	private int renderSpace(int render_pos, int clip_left, int clip_bottom, int clip_right, int clip_top, CharSequence text, int index, boolean render) {
 		if (render_pos < text.length()) {
 			char key = text.charAt(render_pos++);
 
@@ -175,7 +175,7 @@ public final strictfp class TextBoxRenderer {
 		return render_pos;
 	}
 
-	private final void renderIndex(int index, int render_pos, boolean render) {
+	private void renderIndex(int index, int render_pos, boolean render) {
 		if (!render) {
 			int dx = StrictMath.abs(render_x + font.getXBorder()/2 - target_render_x);
 			int dy = StrictMath.abs(render_y - target_render_y);
@@ -196,7 +196,7 @@ public final strictfp class TextBoxRenderer {
 		}
 	}
 
-	public final int getWidth() {
+	public int getWidth() {
 		return width;
 	}
 }

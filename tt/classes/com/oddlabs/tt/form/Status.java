@@ -17,7 +17,7 @@ public final strictfp class Status {
 		this.gui_root = gui_root;
 	}
 
-	public final void render(float clip_left, float clip_right, float clip_bottom, float clip_top) {
+	public void render(float clip_left, float clip_right, float clip_bottom, float clip_top) {
 		long free_mem = Runtime.getRuntime().freeMemory();
 		buf.delete(0, buf.length());
 		if (Settings.getSettings().inDeveloperMode()) {

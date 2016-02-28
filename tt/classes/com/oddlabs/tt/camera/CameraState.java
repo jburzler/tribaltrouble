@@ -32,7 +32,7 @@ public final strictfp class CameraState {
 
 	private boolean no_detail_mode;
 
-	public final void updateChecksum(StateChecksum checksum) {
+	public void updateChecksum(StateChecksum checksum) {
 		//System.out.println("camera_x = " + camera_x + " | camera_y = " + camera_y + " | camera_z = " + camera_z + " | dir_x = " + dir_x + " | dir_y = " + dir_y + " | dir_z = " + dir_z);
 		checksum.update(camera_x); 
 		checksum.update(camera_y);
@@ -41,47 +41,47 @@ public final strictfp class CameraState {
 		checksum.update(horiz_angle);
 	} 
 
-	public final float getTargetX() {
+	public float getTargetX() {
 		return target_camera_x;
 	}
 
-	public final float getCurrentX() {
+	public float getCurrentX() {
 		return camera_x;
 	}
 
-	final void setTargetX(float x) {
+	void setTargetX(float x) {
 		target_camera_x = x;
 	}
 
-	final void setCurrentX(float x) {
+	void setCurrentX(float x) {
 		camera_x = target_camera_x = x;
 	}
 
-	public final float getTargetY() {
+	public float getTargetY() {
 		return target_camera_y;
 	}
 
-	public final float getCurrentY() {
+	public float getCurrentY() {
 		return camera_y;
 	}
 
-	final void setTargetY(float y) {
+	void setTargetY(float y) {
 		target_camera_y = y;
 	}
 
-	final void setCurrentY(float y) {
+	void setCurrentY(float y) {
 		camera_y = target_camera_y = y;
 	}
 
-	public final float getTargetZ() {
+	public float getTargetZ() {
 		return target_camera_z;
 	}
 
-	public final float getCurrentZ() {
+	public float getCurrentZ() {
 		return camera_z;
 	}
 
-	public final void animate(float delta_t, float smoothness_factor) {
+	public void animate(float delta_t, float smoothness_factor) {
 		camera_x = animateValue(delta_t, camera_x, target_camera_x, smoothness_factor);
 		camera_y = animateValue(delta_t, camera_y, target_camera_y, smoothness_factor);
 		camera_z = animateValue(delta_t, camera_z, target_camera_z, smoothness_factor);
@@ -93,27 +93,27 @@ public final strictfp class CameraState {
 		return current + (target - current)*StrictMath.min(delta_t*smoothness_factor, 1f);
 	}
 
-	final void setTargetZ(float z) {
+	void setTargetZ(float z) {
 		target_camera_z = z;
 	}
 
-	final void setCurrentZ(float z) {
+	void setCurrentZ(float z) {
 		camera_z = target_camera_z = z;
 	}
 
-	final void setTargetVertAngle(float angle) {
+	void setTargetVertAngle(float angle) {
 		target_vert_angle = capVertAngle(angle);
 	}
 
-	public final boolean inNoDetailMode() {
+	public boolean inNoDetailMode() {
 		return no_detail_mode;
 	}
 
-	final void setNoDetailMode(boolean s) {
+	void setNoDetailMode(boolean s) {
 		no_detail_mode = s;
 	}
 
-	public final void set(CameraState camera) {
+	public void set(CameraState camera) {
 		setTargetX(camera.getTargetX());
 		setTargetY(camera.getTargetY());
 		setTargetZ(camera.getTargetZ());
@@ -134,11 +134,11 @@ public final strictfp class CameraState {
 		u.set(camera.u);
 	}
 
-	final void setCurrentVertAngle(float angle) {
+	void setCurrentVertAngle(float angle) {
 		vert_angle = target_vert_angle = capVertAngle(angle);
 	}
 
-	private final float capVertAngle(float angle) {
+	private float capVertAngle(float angle) {
 		if (angle < MIN_ANGLE)
 			return MIN_ANGLE;
 		else if (angle > MAX_ANGLE)
@@ -147,31 +147,31 @@ public final strictfp class CameraState {
 			return angle;
 	}
 
-	public final float getTargetVertAngle() {
+	public float getTargetVertAngle() {
 		return target_vert_angle;
 	}
 
-	public final float getCurrentVertAngle() {
+	public float getCurrentVertAngle() {
 		return vert_angle;
 	}
 
-	final void setTargetHorizAngle(float angle) {
+	void setTargetHorizAngle(float angle) {
 		target_horiz_angle = angle;
 	}
 
-	final void setCurrentHorizAngle(float angle) {
+	void setCurrentHorizAngle(float angle) {
 		horiz_angle = target_horiz_angle = angle;
 	}
 
-	public final float getTargetHorizAngle() {
+	public float getTargetHorizAngle() {
 		return target_horiz_angle;
 	}
 
-	public final float getHorizAngle() {
+	public float getHorizAngle() {
 		return horiz_angle;
 	}
 
-	public final void setCamera(float x, float y, float z, float va, float ha) {
+	public void setCamera(float x, float y, float z, float va, float ha) {
 		setCurrentX(x);
 		setCurrentY(y);
 		setCurrentZ(z);
@@ -179,7 +179,7 @@ public final strictfp class CameraState {
 		setCurrentHorizAngle(ha);
 	}
 
-	public final void updateDirectionAndNormal(StrictVector3f f, StrictVector3f u, StrictVector3f s) {
+	public void updateDirectionAndNormal(StrictVector3f f, StrictVector3f u, StrictVector3f s) {
 		updateDirectionAndNormal(horiz_angle, vert_angle, f, u, s);
 	}
 
@@ -199,19 +199,19 @@ public final strictfp class CameraState {
 		u.normalise();
 	}
 
-	public final void setTargetView(StrictMatrix4f proj) {
+	public void setTargetView(StrictMatrix4f proj) {
 		doSetView(target_camera_x, target_camera_y, target_camera_z, target_horiz_angle, target_vert_angle, proj);
 	}
 
-	public final void setView(StrictMatrix4f proj) {
+	public void setView(StrictMatrix4f proj) {
 		doSetView(camera_x, camera_y, camera_z, horiz_angle, vert_angle, proj);
 	}
 
-	public final StrictMatrix4f getModelView() {
+	public StrictMatrix4f getModelView() {
 		return modl;
 	}
 
-	public final StrictMatrix4f getProjectionModelView() {
+	public StrictMatrix4f getProjectionModelView() {
 		return proj_modl;
 	}
 

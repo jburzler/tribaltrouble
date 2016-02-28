@@ -13,12 +13,12 @@ public final strictfp class TargetGridPathFinder extends GridPathFinder {
 	}
 
         @Override
-	public final boolean touchNeighbour(Occupant occ) {
+	public boolean touchNeighbour(Occupant occ) {
 		return occ == target;
 	}
 	
         @Override
-	protected final boolean isPathComplete(int dist_squared, Node node) {
+	protected boolean isPathComplete(int dist_squared, Node node) {
 		return dist_squared <= max_dist_squared || super.isPathComplete(dist_squared, node);
 	}
 }

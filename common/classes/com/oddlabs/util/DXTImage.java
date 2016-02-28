@@ -19,7 +19,7 @@ public final class DXTImage {
 	private final int internal_format;
 	private final ByteBuffer mipmaps;
 
-	private final static ByteBuffer convertToByteBuffer(int internal_format, int width, int height, byte[][] mipmaps) {
+	private static ByteBuffer convertToByteBuffer(int internal_format, int width, int height, byte[][] mipmaps) {
 		int size = 0;
 		int mipmap_width = width;
 		int mipmap_height = height;
@@ -49,30 +49,30 @@ public final class DXTImage {
 		position(0);
 	}
 
-	public final short getWidth() {
+	public short getWidth() {
 		return width;
 	}
 
-	public final short getHeight() {
+	public short getHeight() {
 		return height;
 	}
 
-	public final int getInternalFormat() {
+	public int getInternalFormat() {
 		return internal_format;
 	}
 
-	public final ByteBuffer getMipMap() {
+	public ByteBuffer getMipMap() {
 		return mipmaps;
 	}
 
-	private final static int getMipMapSize(int internal_format, int width, int height) {
+	private static int getMipMapSize(int internal_format, int width, int height) {
 		int blocksize = 16;
 		if (internal_format == EXTTextureCompressionS3TC.GL_COMPRESSED_RGB_S3TC_DXT1_EXT)
 			blocksize = 8;
 		return ((width + 3)/4) * ((height + 3)/4) * blocksize;
 	}
 
-	public final int getNumMipMaps() {
+	public int getNumMipMaps() {
 		int size = mipmaps.capacity();
 		int mipmap_width = width;
 		int mipmap_height = height;
@@ -88,15 +88,15 @@ public final class DXTImage {
 		return num_mipmaps;
 	}
 
-	public final int getWidth(int mipmap_index) {
+	public int getWidth(int mipmap_index) {
 		return width >>> mipmap_index;
 	}
 
-	public final int getHeight(int mipmap_index) {
+	public int getHeight(int mipmap_index) {
 		return height >>> mipmap_index;
 	}
 
-	public final void position(int mipmap_index) {
+	public void position(int mipmap_index) {
 		mipmaps.clear();
 		int mipmap_width = width;
 		int mipmap_height = height;

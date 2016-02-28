@@ -121,11 +121,11 @@ public final strictfp class NewCampaignForm extends Form implements Deterministi
 	}
 	
         @Override
-	public final void setFocus() {
+	public void setFocus() {
 		editline_name.setFocus();
 	}
 
-	private final boolean nameIsUnique(String name) {
+	private boolean nameIsUnique(String name) {
 		if (campaign_states != null) {
                     for (CampaignState campaign_state : campaign_states) {
                         if (campaign_state.getName().equals(name)) {
@@ -136,7 +136,7 @@ public final strictfp class NewCampaignForm extends Form implements Deterministi
 		return true;
 	}
 
-	private final void save() {
+	private void save() {
 		String name = editline_name.getContents().trim();
 		if (name.equals("")) {
 			gui_root.addModalForm(new MessageForm(Utils.getBundleString(bundle, "invalid")));
@@ -185,16 +185,16 @@ public final strictfp class NewCampaignForm extends Form implements Deterministi
 	}
 
         @Override
-	public final void saveSucceeded() {
+	public void saveSucceeded() {
 	}
 
         @Override
-	public final void loadSucceeded(Object object) {
+	public void loadSucceeded(Object object) {
 		campaign_states = (CampaignState[])object;
 	}
 
         @Override
-	public final void failed(Exception e) {
+	public void failed(Exception e) {
 		if (e instanceof FileNotFoundException) {
 		} else if (e instanceof InvalidClassException) {
 		} else {
@@ -205,19 +205,19 @@ public final strictfp class NewCampaignForm extends Form implements Deterministi
 
 	private final strictfp class NameListener implements MouseClickListener, EnterListener {
                 @Override
-		public final void mouseClicked(int button, int x, int y, int clicks) {
+		public void mouseClicked(int button, int x, int y, int clicks) {
 			save();
 		}
 
                 @Override
-		public final void enterPressed(CharSequence text) {
+		public void enterPressed(CharSequence text) {
 			save();
 		}
 	}
 
 	private final strictfp class RaceListener implements ItemChosenListener {
                 @Override
-		public final void itemChosen(PulldownMenu menu, int item_index) {
+		public void itemChosen(PulldownMenu menu, int item_index) {
 			if (item_index == INDEX_NATIVES && (!Settings.getSettings().has_native_campaign || !Renderer.isRegistered())) {
 				menu.chooseItem(INDEX_VIKINGS);
 				gui_root.addModalForm(new MessageForm(Utils.getBundleString(bundle, "native_unavailable")));

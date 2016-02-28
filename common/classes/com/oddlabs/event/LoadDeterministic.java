@@ -31,12 +31,12 @@ public final strictfp class LoadDeterministic extends Deterministic {
 	}
 
         @Override
-	public final boolean isPlayback() {
+	public boolean isPlayback() {
 		return true;
 	}
 
         @Override
-	public final void endLog() {
+	public void endLog() {
 //		assert isEndOfLog();
 		try {
 			channel.close();
@@ -45,7 +45,7 @@ public final strictfp class LoadDeterministic extends Deterministic {
 		}
 	}
 
-	private final boolean isDefault(int num_bytes) {
+	private boolean isDefault(int num_bytes) {
 		if (num_defaults > MIN_DEFAULTS) {
 			num_defaults--;
 			if (isEndOfLog())
@@ -57,18 +57,18 @@ public final strictfp class LoadDeterministic extends Deterministic {
 		}
 	}
 
-	private final void fillBuffer(int num_bytes) {
+	private void fillBuffer(int num_bytes) {
 		while (num_bytes > buffer.remaining()) {
 			fillBuffer();
 		}
 	}
 
-	private final void fillBuffer() {
+	private void fillBuffer() {
 		if (tryFillBuffer())
 			throw new IllegalStateException("End of log reached, bytes read: " + total_bytes_read);
 	}
 
-	private final boolean tryFillBuffer() {
+	private boolean tryFillBuffer() {
 		try {
 			buffer.compact();
 			int bytes_read;
@@ -87,14 +87,14 @@ public final strictfp class LoadDeterministic extends Deterministic {
 		}
 	}
 
-	private final boolean isEndOfLog() {
+	private boolean isEndOfLog() {
 		if (!buffer.hasRemaining() && num_defaults == MIN_DEFAULTS)
 			return tryFillBuffer();
 		else
 			return false;
 	}
 
-	private final void getDefaults() {
+	private void getDefaults() {
 		fillBuffer(DEFAULTS_SIZE);
 		num_defaults = buffer.getShort();
 		if (isEndOfLog())
@@ -102,7 +102,7 @@ public final strictfp class LoadDeterministic extends Deterministic {
 	}
 
         @Override
-	protected final byte log(byte b, byte def) {
+	protected byte log(byte b, byte def) {
 		if (isDefault(1))
 			return def;
 		else {
@@ -113,7 +113,7 @@ public final strictfp class LoadDeterministic extends Deterministic {
 	}
 
         @Override
-	protected final char log(char c, char def) {
+	protected char log(char c, char def) {
 		if (isDefault(2))
 			return def;
 		else {
@@ -124,7 +124,7 @@ public final strictfp class LoadDeterministic extends Deterministic {
 	}
 
         @Override
-	protected final int log(int i, int def) {
+	protected int log(int i, int def) {
 		if (isDefault(4))
 			return def;
 		else {
@@ -135,7 +135,7 @@ public final strictfp class LoadDeterministic extends Deterministic {
 	}
 
         @Override
-	protected final long log(long l, long def) {
+	protected long log(long l, long def) {
 		if (isDefault(8))
 			return def;
 		else {
@@ -146,7 +146,7 @@ public final strictfp class LoadDeterministic extends Deterministic {
 	}
 
         @Override
-	protected final float log(float f, float def) {
+	protected float log(float f, float def) {
 		if (isDefault(4))
 			return def;
 		else {
@@ -157,7 +157,7 @@ public final strictfp class LoadDeterministic extends Deterministic {
 	}
 
         @Override
-	protected final Object logObject(Object o) {
+	protected Object logObject(Object o) {
 		try (ObjectInputStream object_input_stream = new ObjectInputStream(byte_buffer_input_stream)) {
 			o = object_input_stream.readObject();
 		} catch (IOException | ClassNotFoundException e) {
@@ -167,7 +167,7 @@ public final strictfp class LoadDeterministic extends Deterministic {
 	}
 
         @Override
-	protected final void logBuffer(ByteBuffer b) {
+	protected void logBuffer(ByteBuffer b) {
 		boolean isdefault = isDefault(0);
 		assert !isdefault;
 		while (true) {
@@ -184,7 +184,7 @@ public final strictfp class LoadDeterministic extends Deterministic {
 
 	public final strictfp class ByteBufferInputStream extends InputStream {
                 @Override
-		public final int read() throws IOException {
+		public int read() throws IOException {
 			byte b = log((byte)0);
 			return ((int)b) & 0xFF;
 		}

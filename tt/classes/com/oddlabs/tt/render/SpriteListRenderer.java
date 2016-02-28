@@ -25,15 +25,15 @@ final strictfp class SpriteListRenderer {
 		}
 	}
 
-	public final void addToRenderList(ModelState model, int sprite_index, int tex_index) {
+	public void addToRenderList(ModelState model, int sprite_index, int tex_index) {
 		render_lists[sprite_index][tex_index].add(model);
 	}
 
-	public final void addToRespondRenderList(ModelState model, int sprite_index, int tex_index) {
+	public void addToRespondRenderList(ModelState model, int sprite_index, int tex_index) {
 		respond_render_lists[sprite_index][tex_index].add(model);
 	}
 
-	public final void getAllPicks(List pick_list, int sprite_index, int tex_index) {
+	public void getAllPicks(List pick_list, int sprite_index, int tex_index) {
 		List render_list = render_lists[sprite_index][tex_index];
 		pickFromList(render_list, pick_list);
 		render_list.clear();
@@ -43,7 +43,7 @@ final strictfp class SpriteListRenderer {
 		render_list.clear();
 	}
 
-	private final void pickFromList(List render_list, List pick_list) {
+	private void pickFromList(List render_list, List pick_list) {
 		for (int i = 0; i < render_list.size(); i++) {
 			ModelState model = (ModelState)render_list.get(i);
 			render_list.set(i, null);
@@ -51,7 +51,7 @@ final strictfp class SpriteListRenderer {
 		}
 	}
 
-	public final void renderAll(int index, int tex_index) {
+	public void renderAll(int index, int tex_index) {
 		List render_list = render_lists[index][tex_index];
 		Sprite sprite = sprite_list.getSprite(index);
 		sprite.setup(tex_index, false);

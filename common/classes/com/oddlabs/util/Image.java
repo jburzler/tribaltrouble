@@ -28,7 +28,7 @@ public final strictfp class Image implements Serializable {
 		this.data = data;
 	}	
 	
-	public final static Image read(URL url) {
+	public static Image read(URL url) {
 		try {
 			return (Image)(new ObjectInputStream(new BufferedInputStream(url.openStream()))).readObject();
 		} catch (ClassNotFoundException | IOException e) {
@@ -45,11 +45,11 @@ public final strictfp class Image implements Serializable {
 		
 	}
 
-	public final void write(String filename) {
+	public void write(String filename) {
 		write(new File(filename + ".image"));
 	}
 	
-	public final void write(File file) {
+	public void write(File file) {
 		data.rewind();
 		//Utils.saveAsPNG(filename, data, width, height);
 		try {
@@ -81,7 +81,7 @@ public final strictfp class Image implements Serializable {
 		mergePlanes(deltaPlanes);
 	}	
 
-	private final ByteBuffer splitIntoPlanes() {
+	private ByteBuffer splitIntoPlanes() {
 		ByteBuffer buf = ByteBuffer.allocate(data.capacity());
 		
 		buf.position(buf.capacity() / 4);
@@ -121,7 +121,7 @@ public final strictfp class Image implements Serializable {
 		return buf;
 	}
 
-	private final void mergePlanes(ByteBuffer buf) {
+	private void mergePlanes(ByteBuffer buf) {
 		buf.flip();
 		
 		buf.position(buf.capacity() / 4);
@@ -146,20 +146,20 @@ public final strictfp class Image implements Serializable {
 		data.clear();
 	}
 
-	public final ByteBuffer getPixels() {
+	public ByteBuffer getPixels() {
 		return data;
 	}
 
-	public final int getWidth() {
+	public int getWidth() {
 		return width;
 	}
 
-	public final int getHeight() {
+	public int getHeight() {
 		return height;
 	}
 
         @Override
-	public final String toString() {
+	public String toString() {
 		return "Image: width = " + width + " | height = " + height;
 	}
 }

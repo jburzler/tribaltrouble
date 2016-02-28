@@ -24,7 +24,7 @@ public final strictfp class AttackTowerTrigger extends TutorialTrigger {
 	}
 
         @Override
-	public final void run(Tutorial tutorial) {
+	public void run(Tutorial tutorial) {
 		if (ai.getUnitCountContainer().getNumSupplies() == 0) {
 			tutorial.next(new RepairTowerTrigger(tower));
 		}

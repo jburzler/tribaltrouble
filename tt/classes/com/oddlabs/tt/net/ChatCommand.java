@@ -32,11 +32,11 @@ public final strictfp class ChatCommand {
 		}
 	}
 
-	public final static boolean filterCommand(InfoPrinter info_printer, String text) {
+	public static boolean filterCommand(InfoPrinter info_printer, String text) {
 		return filterCommand(info_printer, null, text);
 	}
 
-	public final static boolean filterCommand(InfoPrinter info_printer, Map custom_commands, String text) {
+	public static boolean filterCommand(InfoPrinter info_printer, Map custom_commands, String text) {
 		if (!text.startsWith("/"))
 			return false;
 		int fist_space = firstSpace(text);
@@ -54,7 +54,7 @@ public final strictfp class ChatCommand {
 		return true;
 	}
 
-	private final static int firstSpace(String text) {
+	private static int firstSpace(String text) {
 		int fist_space = text.indexOf(" ");
 		if (fist_space == -1)
 			return text.length();
@@ -62,7 +62,7 @@ public final strictfp class ChatCommand {
 			return fist_space;
 	}
 
-	private final static void sendMessage(InfoPrinter info_printer, String text) {
+	private static void sendMessage(InfoPrinter info_printer, String text) {
 		int first_space = firstSpace(text);
 		String nick = text.substring(0, first_space);
 		String message = text.substring(first_space, text.length()).trim();
@@ -72,7 +72,7 @@ public final strictfp class ChatCommand {
 			Network.getMatchmakingClient().sendPrivateMessage(info_printer.getGUIRoot(), nick, message);
 	}
 
-	private final static void getInfo(InfoPrinter info_printer, String text) {
+	private static void getInfo(InfoPrinter info_printer, String text) {
 		int first_space = firstSpace(text);
 		String nick = text.substring(0, first_space);
 		if (!Network.getMatchmakingClient().isConnected())
@@ -81,7 +81,7 @@ public final strictfp class ChatCommand {
 			Network.getMatchmakingClient().requestInfo(info_printer.getGUIRoot(), nick);
 	}
 
-	public final static void ignore(InfoPrinter info_printer, String text) {
+	public static void ignore(InfoPrinter info_printer, String text) {
 		int first_space = firstSpace(text);
 		String nick = text.substring(0, first_space);
 		boolean result = ignored_nicks.add(nick.toLowerCase());
@@ -91,7 +91,7 @@ public final strictfp class ChatCommand {
 		}
 	}
 
-	public final static void unignore(InfoPrinter info_printer, String text) {
+	public static void unignore(InfoPrinter info_printer, String text) {
 		int first_space = firstSpace(text);
 		String nick = text.substring(0, first_space);
 		boolean result = ignored_nicks.remove(nick.toLowerCase());
@@ -105,7 +105,7 @@ public final strictfp class ChatCommand {
 		return ignored_nicks.contains(nick.toLowerCase());
 	}
 
-	private final static void ignoreList(InfoPrinter info_printer, String text) {
+	private static void ignoreList(InfoPrinter info_printer, String text) {
 		String[] nicks = new String[ignored_nicks.size()];
 		ignored_nicks.toArray(nicks);
 		String result;

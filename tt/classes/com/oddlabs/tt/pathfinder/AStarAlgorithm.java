@@ -30,7 +30,7 @@ abstract strictfp class AStarAlgorithm implements PathFinderAlgorithm {
 
 	protected abstract boolean isPathComplete(int dist_squared, Node node);
 
-	private final NodeResult defaultTouchNode() {
+	private NodeResult defaultTouchNode() {
 		nodes_visited++;
 		if (nodes_visited == RegionBuilder.MAX_EXAMINED_NODES_PER_PATH) {
 			if (allow_second_best) {

@@ -12,7 +12,7 @@ public abstract strictfp class BillboardPainter {
 	private final static FloatBuffer matrix_buf = BufferUtils.createFloatBuffer(16);
 	private final static DoubleBuffer plane_buf = BufferUtils.createDoubleBuffer(4);
 
-	private final static void initClipPlane(int clip_enum, int face_index, int vertex_index1, int vertex_index2, short[] indices, float[] face_tex_coords, float handedness) {
+	private static void initClipPlane(int clip_enum, int face_index, int vertex_index1, int vertex_index2, short[] indices, float[] face_tex_coords, float handedness) {
 		float u1 = getElement(face_index, vertex_index1, 0, 2, indices, face_tex_coords);
 		float v1 = getElement(face_index, vertex_index1, 1, 2, indices, face_tex_coords);
 		float u2 = getElement(face_index, vertex_index2, 0, 2, indices, face_tex_coords);
@@ -41,7 +41,7 @@ public abstract strictfp class BillboardPainter {
 		GL11.glEnable(GL11.GL_CLIP_PLANE2);
 	}
 
-	private final static float getElement(int face_index, int vertex_index, int element_index, int vertex_size, short[] indices, float[] vertices) {
+	private static float getElement(int face_index, int vertex_index, int element_index, int vertex_size, short[] indices, float[] vertices) {
 		int vertices_index = indices[face_index*3 + vertex_index];
 		return vertices[vertices_index*vertex_size + element_index];
 	}

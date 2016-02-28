@@ -21,12 +21,12 @@ public final strictfp class RubberAxeWeapon extends RotatingThrowingWeapon {
 	}
 
         @Override
-	protected final float getAngleVelocity() {
+	protected float getAngleVelocity() {
 		return ANGLE_DELTA;
 	}
 
         @Override
-	protected final void hitTarget(boolean hit, Player owner, Selectable target) {
+	protected void hitTarget(boolean hit, Player owner, Selectable target) {
 		if (hit)
 			damageTarget(target);
 		AttackScanFilter filter = new AttackScanFilter(owner, MAX_BOUNDS_LENGTH);
@@ -40,7 +40,7 @@ public final strictfp class RubberAxeWeapon extends RotatingThrowingWeapon {
 	}
 
         @Override
-	protected final float getMetersPerSecond() {
+	protected float getMetersPerSecond() {
 		if (bouncing)
 			return BOUNCING_METERS_PER_SECOND;
 		else
@@ -48,7 +48,7 @@ public final strictfp class RubberAxeWeapon extends RotatingThrowingWeapon {
 	}
 
         @Override
-	protected final int getDamage() {
+	protected int getDamage() {
 		return 2;
 	}
 }

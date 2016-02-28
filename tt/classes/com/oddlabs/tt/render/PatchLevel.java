@@ -9,26 +9,26 @@ final strictfp class PatchLevel {
 	private PatchLevel bottom_neighbour;
 	private int level;
 
-	public final int getLevel() {
+	public int getLevel() {
 		return level;
 	}
 	
-	public final void setLevel(int level) {
+	public void setLevel(int level) {
 		this.level = level;
 	}
 
-	public final int getBorderSet() {
+	public int getBorderSet() {
 		return addNeighbourBorderBit(right_neighbour, LandscapeTileTriangle.EAST) |
 			addNeighbourBorderBit(left_neighbour, LandscapeTileTriangle.WEST) |
 			addNeighbourBorderBit(top_neighbour, LandscapeTileTriangle.NORTH) |
 			addNeighbourBorderBit(bottom_neighbour, LandscapeTileTriangle.SOUTH);
 	}
 
-	private final int addNeighbourBorderBit(PatchLevel neighbour, int bit) {
+	private int addNeighbourBorderBit(PatchLevel neighbour, int bit) {
 		return neighbour.level > level ? bit : 0;
 	}
 
-	public final void adjustLevel() {
+	public void adjustLevel() {
 		level = getAdjustedLevel();
 		adjustNeighbour(right_neighbour);
 		adjustNeighbour(left_neighbour);
@@ -50,17 +50,17 @@ final strictfp class PatchLevel {
 		return adjusted_level;
 	}
 
-	public final void init(PatchLevel right, PatchLevel top) {
+	public void init(PatchLevel right, PatchLevel top) {
 		initTopNeighbour((PatchLevel)top);
 		initRightNeighbour((PatchLevel)right);
 	}
 
-	private final void initTopNeighbour(PatchLevel top_neighbour) {
+	private void initTopNeighbour(PatchLevel top_neighbour) {
 		this.top_neighbour = top_neighbour;
 		top_neighbour.bottom_neighbour = this;
 	}
 
-	private final void initRightNeighbour(PatchLevel right_neighbour) {
+	private void initRightNeighbour(PatchLevel right_neighbour) {
 		this.right_neighbour = right_neighbour;
 		right_neighbour.left_neighbour = this;
 	}

@@ -19,18 +19,18 @@ public final strictfp class Vertical {
 		width = bottom[Skin.NORMAL].getWidth();
 	}
 
-	public final void render(float x, float y, int height, int type) {
+	public void render(float x, float y, int height, int type) {
 		int center_height = height - bottom_height - top_height;
 		bottom[type].render(x, y);
 		center[type].render(x, y + bottom_height, width, center_height);
 		top[type].render(x, y + bottom_height + center_height);
 	}
 
-	public final int getWidth() {
+	public int getWidth() {
 		return width;
 	}
 
-	public final int getMinHeight() {
+	public int getMinHeight() {
 		return bottom[Skin.NORMAL].getHeight() + top[Skin.NORMAL].getHeight();
 	}
 }

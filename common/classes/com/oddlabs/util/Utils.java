@@ -20,7 +20,7 @@ public final strictfp class Utils {
 
 	public final static String[] LOG_FILES = {STD_OUT, STD_ERR, EVENT_LOG};
 
-	public final static InetAddress getLoopbackAddress() {
+	public static InetAddress getLoopbackAddress() {
 		try {
 			return tryGetLoopbackAddress();
 		} catch (IOException e) {
@@ -28,7 +28,7 @@ public final strictfp class Utils {
 		}
 	}
 
-	public final static InetAddress tryGetLoopbackAddress() throws IOException {
+	public static InetAddress tryGetLoopbackAddress() throws IOException {
 		Enumeration interfaces;
 		interfaces = NetworkInterface.getNetworkInterfaces();
 		InetAddress best_address = null;
@@ -53,11 +53,11 @@ System.out.println("loopback address = " + best_address);
 		throw new IOException("Could not find a loopback address");
 	}
 
-	public final static Object loadObject(URL url) {
+	public static Object loadObject(URL url) {
 		return loadObject(url, false);
 	}
 	
-	public final static int powerOf2Log2(int n) {
+	public static int powerOf2Log2(int n) {
 		assert isPowerOf2(n): n + " is not a power of 2";
 		for (int i = 0; i < 31; i++) {
 			if ((n & 1) == 1) {
@@ -68,11 +68,11 @@ System.out.println("loopback address = " + best_address);
 		return 0;
 	}
 
-	public final static boolean isPowerOf2(int n) {
+	public static boolean isPowerOf2(int n) {
 		return n == 0 || (n > 0 && (n & (n - 1)) == 0);
 	}
 
-	public final static Object loadObject(URL url, boolean zipped) {
+	public static Object loadObject(URL url, boolean zipped) {
 		try {
 			return tryLoadObject(url, zipped);
 		} catch (IOException | ClassNotFoundException e) {
@@ -80,7 +80,7 @@ System.out.println("loopback address = " + best_address);
 		}
 	}
 
-	public final static int nextPowerOf2(int n) {
+	public static int nextPowerOf2(int n) {
 		int x = 1;
 		while (x < n) {
 			x <<= 1;
@@ -88,7 +88,7 @@ System.out.println("loopback address = " + best_address);
 		return x;
 	}
 
-	public final static void flip(byte[] bytes, int width, int height) {
+	public static void flip(byte[] bytes, int width, int height) {
 		byte[] line = new byte[width];
 
 		for (int i = 0; i < height/2; i++) {
@@ -98,7 +98,7 @@ System.out.println("loopback address = " + best_address);
 		}
 	}
 
-	public final static void flip(ByteBuffer bytes, int width, int height) {
+	public static void flip(ByteBuffer bytes, int width, int height) {
 		byte[] line = new byte[width];
 		byte[] line2 = new byte[width];
 
@@ -114,11 +114,11 @@ System.out.println("loopback address = " + best_address);
 		}
 	}
 
-	public final static Object tryLoadObject(URL url) throws IOException, ClassNotFoundException {
+	public static Object tryLoadObject(URL url) throws IOException, ClassNotFoundException {
 		return tryLoadObject(url, false);
 	}
 	
-	public final static Object tryLoadObject(URL url, boolean zipped) throws IOException, ClassNotFoundException {
+	public static Object tryLoadObject(URL url, boolean zipped) throws IOException, ClassNotFoundException {
 		InputStream input_stream = new BufferedInputStream(url.openStream());
 		if (zipped)
 			input_stream = new GZIPInputStream(input_stream);
@@ -130,7 +130,7 @@ System.out.println("loopback address = " + best_address);
 		return obj;
 	}
 
-	public final static URL makeURL(String location) {
+	public static URL makeURL(String location) {
 		try {
 			return tryMakeURL(location);
 		} catch (IOException e) {
@@ -138,7 +138,7 @@ System.out.println("loopback address = " + best_address);
 		}
 	}
 
-	public final static URL tryMakeURL(String location) throws IOException {
+	public static URL tryMakeURL(String location) throws IOException {
 		URL url = Utils.class.getResource(location);
 		if (url == null)
 			throw new IOException(location + " not found");

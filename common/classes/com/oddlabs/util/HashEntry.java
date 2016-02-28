@@ -9,17 +9,17 @@ public final strictfp class HashEntry extends ListElementImpl {
 		this.hash_entry = entry;
 	}
 
-	public final Object getEntry() {
+	public Object getEntry() {
 		return hash_entry;
 	}
 
-	public final Object setEntry(Object entry) {
+	public Object setEntry(Object entry) {
 		Object old = hash_entry;
 		hash_entry = entry;
 		return old;
 	}
 
-	public final int getKey() {
+	public int getKey() {
 		return key;
 	}
 }

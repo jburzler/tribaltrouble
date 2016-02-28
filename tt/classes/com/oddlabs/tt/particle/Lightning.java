@@ -48,15 +48,15 @@ public final strictfp class Lightning extends Element implements Animated {
 		register();
 	}
 
-	public final List getParticles() {
+	public List getParticles() {
 		return particles;
 	}
 
-	public final TextureKey getTexture() {
+	public TextureKey getTexture() {
 		return texture;
 	}
 
-	private final void initParticles() {
+	private void initParticles() {
 		Random random = world.getRandom();
 		random.nextFloat();
 		float x = src.getX();
@@ -91,7 +91,7 @@ public final strictfp class Lightning extends Element implements Animated {
 		}
 	}
 
-	private final void initParticle(StretchParticle particle) {
+	private void initParticle(StretchParticle particle) {
 		particle.setSrcWidth(width);
 		particle.setColor(color.getX(), color.getY(), color.getZ(), color.getW());
 		particle.setDeltaColor(delta_color.getX(), delta_color.getY(), delta_color.getZ(), delta_color.getW());
@@ -101,7 +101,7 @@ public final strictfp class Lightning extends Element implements Animated {
 	}
 
         @Override
-	public final void animate(float t) {
+	public void animate(float t) {
 		float x_min = Float.POSITIVE_INFINITY;
 		float x_max = Float.NEGATIVE_INFINITY;
 		float y_min = Float.POSITIVE_INFINITY;
@@ -143,17 +143,17 @@ public final strictfp class Lightning extends Element implements Animated {
 	}
 
         @Override
-	public final void visit(ElementVisitor visitor) {
+	public void visit(ElementVisitor visitor) {
 		visitor.visitLightning(this);
 	}
 
         @Override
-	protected final void remove() {
+	protected void remove() {
 		super.remove();
 		manager.removeAnimation(this);
 	}
 
         @Override
-	public final void updateChecksum(StateChecksum checksum) {
+	public void updateChecksum(StateChecksum checksum) {
 	}
 }

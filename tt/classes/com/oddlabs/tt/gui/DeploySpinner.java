@@ -28,7 +28,7 @@ public final strictfp class DeploySpinner extends IconSpinner {
 	}
 
         @Override
-	public final int computeCount() {
+	public int computeCount() {
 		if (current_building != null && !current_building.isDead()) {
 			DeployContainer deploy_container = current_building.getDeployContainer(deploy_type);
 			return StrictMath.min(deploy_container.getMaxSupplyCount(),
@@ -38,11 +38,11 @@ public final strictfp class DeploySpinner extends IconSpinner {
 	}
 
         @Override
-	public final boolean renderInfinite() {
+	public boolean renderInfinite() {
 		return false;
 	}
 
-	public final int getOrderDiff() {
+	public int getOrderDiff() {
 		if (current_building != null && !current_building.isDead()) {
 			return num_orders - current_building.getDeployContainer(deploy_type).getNumOrders();
 		} else {
@@ -50,13 +50,13 @@ public final strictfp class DeploySpinner extends IconSpinner {
 		}
 	}
 
-	private final void order(int num) {
+	private void order(int num) {
 		if (!current_building.isDead())
 			player_interface.deployUnits(current_building, deploy_type, num);
 	}
 
         @Override
-	protected final void increase(int amount) {
+	protected void increase(int amount) {
 		if (!current_building.isDead()) {
 			int num_units = current_building.getUnitContainer().getNumSupplies();
 			int num_supplies = Integer.MAX_VALUE;
@@ -78,7 +78,7 @@ public final strictfp class DeploySpinner extends IconSpinner {
 	}
 
         @Override
-	protected final void decrease(int amount) {
+	protected void decrease(int amount) {
 		if (!current_building.isDead() && computeCount() > 0) {
 			int num_units = current_building.getDeployContainer(deploy_type).getNumSupplies();
 
@@ -98,18 +98,18 @@ public final strictfp class DeploySpinner extends IconSpinner {
 	}
 
         @Override
-	protected final void release() {
+	protected void release() {
 		order(order_size);
 		order_size = 0;
 	}
 
         @Override
-	protected final int getOrderSize() {
+	protected int getOrderSize() {
 		return order_size;
 	}
 
         @Override
-	protected final float getProgress() {
+	protected float getProgress() {
 		if (!current_building.isDead())
 			return current_building.getDeployContainer(deploy_type).getBuildProgress();
 		else

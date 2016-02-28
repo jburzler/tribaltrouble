@@ -26,31 +26,31 @@ public final strictfp class SpriteInfo implements Serializable {
 		this.clear_color = clear_color;
 	}
 
-	public final short[] getIndices() {
+	public short[] getIndices() {
 		return indices;
 	}
 
-	public final float[] getVertices() {
+	public float[] getVertices() {
 		return vertices.getFloatArray();
 	}
 
-	public final float[] getNormals() {
+	public float[] getNormals() {
 		return normals.getFloatArray();
 	}
 
-	public final float[] getTexCoords() {
+	public float[] getTexCoords() {
 		return texcoords.getFloatArray();
 	}
 
-	public final byte[][] getSkinNames() {
+	public byte[][] getSkinNames() {
 		return skin_names;
 	}
 
-	public final float[][] getSkinWeights() {
+	public float[][] getSkinWeights() {
 		return skin_weights;
 	}
 
-	public final String[][] getTextures() {
+	public String[][] getTextures() {
 		return textures;
 	}
 
@@ -58,7 +58,7 @@ public final strictfp class SpriteInfo implements Serializable {
 		return bounds;
 	}
 */
-	public final float[] getClearColor() {
+	public float[] getClearColor() {
 		return clear_color;
 	}
 }

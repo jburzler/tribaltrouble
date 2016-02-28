@@ -59,19 +59,19 @@ public final strictfp class Server implements ConnectionListenerInterface {
 		}
 	}
 
-	private final Iterator getClientIterator() {
+	private Iterator getClientIterator() {
 		return connection_to_client.values().iterator();
 	}
 	
-	private final int getNumClients() {
+	private int getNumClients() {
 		return connection_to_client.size();
 	}
 
-	private final ClientConnection getClientFromConnection(AbstractConnection conn) {
+	private ClientConnection getClientFromConnection(AbstractConnection conn) {
 		return (ClientConnection)connection_to_client.get(conn);
 	}
 
-	private final void unregisterGame() {
+	private void unregisterGame() {
 		local_listener.close();
 		if (tunnelled_listener != null)
 			tunnelled_listener.close();
@@ -80,11 +80,11 @@ public final strictfp class Server implements ConnectionListenerInterface {
 		}
 	}
 
-	private final void unregister() {
+	private void unregister() {
 		state = CLOSED;
 	}
 
-	private final void closeConnections() {
+	private void closeConnections() {
 		Iterator it = connection_to_client.keySet().iterator();
 		while (it.hasNext()) {
 			AbstractConnection conn = (AbstractConnection)it.next();
@@ -94,12 +94,12 @@ public final strictfp class Server implements ConnectionListenerInterface {
 		unregister();
 	}
 
-	public final void close() {
+	public void close() {
 		unregisterGame();
 		closeConnections();
 	}
 
-	private final int getNumReady() {
+	private int getNumReady() {
 		int count = 0;
 		Iterator it = getClientIterator();
 		while (it.hasNext()) {
@@ -111,12 +111,12 @@ public final strictfp class Server implements ConnectionListenerInterface {
 	}
 
         @Override
-	public final void error(AbstractConnectionListener listener, IOException e) {
+	public void error(AbstractConnectionListener listener, IOException e) {
 		System.out.println("Listener failed: " + e);
 		close();
 	}
 
-	public final void handleError(AbstractConnection conn, Exception e) {
+	public void handleError(AbstractConnection conn, Exception e) {
 		System.out.println("Disconnecting client because of exception: " + e);
 		ClientConnection client = getClientFromConnection(conn);
 		if (client != null) {
@@ -127,13 +127,13 @@ public final strictfp class Server implements ConnectionListenerInterface {
 		}
 	}
 
-	private final void disconnectClient(ClientConnection client) {
+	private void disconnectClient(ClientConnection client) {
 		assert client != null;
 		client.getConnection().close();
 		connection_to_client.remove(client.getConnection());
 	}
 
-	private final ClientConnection locateClientForSlot(PlayerSlot player_slot) {
+	private ClientConnection locateClientForSlot(PlayerSlot player_slot) {
 		Iterator it = getClientIterator();
 		while (it.hasNext()) {
 			ClientConnection client = (ClientConnection)it.next();
@@ -143,7 +143,7 @@ public final strictfp class Server implements ConnectionListenerInterface {
 		return null;
 	}
 
-	public final void resetSlotState(PlayerSlot client_slot, int slot, boolean open) {
+	public void resetSlotState(PlayerSlot client_slot, int slot, boolean open) {
 		if (!canControlSlot(client_slot, slot))
 			return;
 		resetSlotState(players[slot], open);
@@ -166,7 +166,7 @@ public final strictfp class Server implements ConnectionListenerInterface {
 			((client_slot.getSlot() == 0 || client_slot.getSlot() == slot));
 	}
 
-	public final void startServer(PlayerSlot slot) {
+	public void startServer(PlayerSlot slot) {
 		if (!canControlSlot(slot, 0) || getNumReady() != getNumClients())// || PlayerSlot.getNumTeams(players) < 2)
 			return;
 		state = SYNCHRONIZING;
@@ -174,7 +174,7 @@ public final strictfp class Server implements ConnectionListenerInterface {
 		broadcastInits();
 	}
 
-	public final void setPlayerSlot(PlayerSlot client_slot, int slot, int type, int race, int team, boolean ready, int ai_difficulty) {
+	public void setPlayerSlot(PlayerSlot client_slot, int slot, int type, int race, int team, boolean ready, int ai_difficulty) {
 		if (!PlayerSlot.isValidType(type) || !RacesResources.isValidRace(race))
 			return;
 		if (!canControlSlot(client_slot, slot) || (client_slot.getSlot() == slot && type != PlayerSlot.HUMAN))
@@ -199,7 +199,7 @@ public final strictfp class Server implements ConnectionListenerInterface {
 		broadcastPlayers(reset_ready);
 	}
 
-	private final void resetReady() {
+	private void resetReady() {
 		int num_humans = 0;
             for (PlayerSlot player_slot : players) {
                 if (player_slot.getType() == PlayerSlot.HUMAN)
@@ -213,7 +213,7 @@ public final strictfp class Server implements ConnectionListenerInterface {
 		}
 	}
 
-	private final void broadcastPlayers(boolean reset_ready) {
+	private void broadcastPlayers(boolean reset_ready) {
 		if (reset_ready)
 			resetReady();
 		Iterator it = getClientIterator();
@@ -223,7 +223,7 @@ public final strictfp class Server implements ConnectionListenerInterface {
 		}
 	}
 
-	public final void chat(PlayerSlot player_slot, String chat) {
+	public void chat(PlayerSlot player_slot, String chat) {
 		Iterator it = getClientIterator();
 		while (it.hasNext()) {
 			ClientConnection client = (ClientConnection)it.next();
@@ -231,7 +231,7 @@ public final strictfp class Server implements ConnectionListenerInterface {
 		}
 	}
 	
-	private final void broadcastInits() {
+	private void broadcastInits() {
 		Iterator it = getClientIterator();
 		while (it.hasNext()) {
 			ClientConnection client = (ClientConnection)it.next();
@@ -240,7 +240,7 @@ public final strictfp class Server implements ConnectionListenerInterface {
 		}
 	}
 
-	private final short locateAvailableSlot() {
+	private short locateAvailableSlot() {
 		for (short i = 0; i < players.length; i++) {
 			if (players[i].getType() == PlayerSlot.OPEN)
 				return i;
@@ -249,7 +249,7 @@ public final strictfp class Server implements ConnectionListenerInterface {
 	}
 
         @Override
-	public final void incomingConnection(AbstractConnectionListener connection_listener, Object remote_address) {
+	public void incomingConnection(AbstractConnectionListener connection_listener, Object remote_address) {
 System.out.println("Incoming host connection from " + remote_address);
 		short available_slot = locateAvailableSlot();
 		if (state != NEGOTIATING || available_slot == -1 ||

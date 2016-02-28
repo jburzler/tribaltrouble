@@ -16,14 +16,14 @@ final strictfp class AttackNotification extends Notification {
 		super(local_player.getWorld(), gui_root, center.getPositionX(), center.getPositionY(), manager, 1f, 0f, 0f, local_player.getRace().getAttackNotificationAudio(), false, animation_manager);
 	}
 
-	public final boolean contains(Target target) {
+	public boolean contains(Target target) {
 		float dx = getX() - target.getPositionX();
 		float dy = getY() - target.getPositionY();
 		float dist = dx*dx + dy*dy;
 		return dist <= RADIUS*RADIUS;
 	}
 
-	public final void restartTimer() {
+	public void restartTimer() {
 		if (!active)
 			getTimer().resetTime();
 	}

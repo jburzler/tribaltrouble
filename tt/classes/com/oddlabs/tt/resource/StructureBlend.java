@@ -9,7 +9,7 @@ import org.lwjgl.opengl.GL13;
 public final strictfp class StructureBlend extends BlendInfo {
 	private final Texture structure_map;
 
-	private final Texture createStructureMap(GLIntImage structure_image) {
+	private Texture createStructureMap(GLIntImage structure_image) {
 		return new Texture(new GLIntImage[]{structure_image}, GL11.GL_RGB, GL11.GL_LINEAR, GL11.GL_LINEAR, GL11.GL_REPEAT, GL11.GL_REPEAT);
 	}
 
@@ -18,12 +18,12 @@ public final strictfp class StructureBlend extends BlendInfo {
 		structure_map = createStructureMap(structure_image);
 	}
 
-	private final void bindStructure() {
+	private void bindStructure() {
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, structure_map.getHandle());
 	}
 
         @Override
-	public final void setup() {
+	public void setup() {
 		GLState.activeTexture(GL13.GL_TEXTURE1);
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 		bindAlpha();
@@ -34,7 +34,7 @@ public final strictfp class StructureBlend extends BlendInfo {
 	}
 
         @Override
-	public final void reset() {
+	public void reset() {
 		GLState.activeTexture(GL13.GL_TEXTURE1);
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		GLState.activeTexture(GL13.GL_TEXTURE0);

@@ -61,11 +61,11 @@ public final strictfp class Globals {
 	
 	private static int bounding = BOUNDING_NONE;
 
-	public final static void switchBoundingMode() {
+	public static void switchBoundingMode() {
 		bounding = (bounding + 1)%(BOUNDING_ALL + 1);
 	}
 
-	public final static boolean isBoundsEnabled(int bounding_type) {
+	public static boolean isBoundsEnabled(int bounding_type) {
 		return bounding == bounding_type || bounding == BOUNDING_ALL;
 	}
 
@@ -81,7 +81,7 @@ public final strictfp class Globals {
 	public static int COMPRESSED_LUMINANCE_FORMAT = GL11.GL_LUMINANCE;
 	public static int LOW_DETAIL_TEXTURE_SHIFT = 1;
 
-	public final static void disableTextureCompression() {
+	public static void disableTextureCompression() {
 		System.out.println("Disabling texture compression");
 		COMPRESSED_RGB_FORMAT = GL11.GL_RGB;
 		COMPRESSED_RGBA_FORMAT = GL11.GL_RGBA;

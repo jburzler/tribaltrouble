@@ -12,7 +12,7 @@ public final strictfp class GeneratorSonic extends TextureGenerator {
 	private static final int TEXTURE_SIZE = 128;
 
         @Override
-	public final Texture[] generate() {
+	public Texture[] generate() {
 		Channel sonic_alpha = new Channel(TEXTURE_SIZE>>1, TEXTURE_SIZE>>1);
 		
 		float x_coord;
@@ -43,7 +43,7 @@ public final strictfp class GeneratorSonic extends TextureGenerator {
 	}
 
         @Override
-	public final int hashCode() {
+	public int hashCode() {
 		return TEXTURE_SIZE + 3;
 	}
 }

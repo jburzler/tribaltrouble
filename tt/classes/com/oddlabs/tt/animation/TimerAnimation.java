@@ -11,7 +11,7 @@ public final strictfp class TimerAnimation implements Animated {
 	private boolean running = false;
 
         @Override
-	public final void updateChecksum(StateChecksum checksum) {
+	public void updateChecksum(StateChecksum checksum) {
 		checksum.update(time);
 	}
 
@@ -26,42 +26,42 @@ public final strictfp class TimerAnimation implements Animated {
 	}
 
         @Override
-	public final String toString() {
+	public String toString() {
 		return "TimerAnimation: owner = " + timer_owner; 
 	}
 
-	public final boolean isRunning() {
+	public boolean isRunning() {
 		return running;
 	}
 
-	public final void stop() {
+	public void stop() {
 		running = false;
 		manager.removeAnimation(this);
 	}
 
-	public final void start() {
+	public void start() {
 		running = true;
 		manager.registerAnimation(this);
 	}
 
-	public final void setTimerOwner(Updatable obj) {
+	public void setTimerOwner(Updatable obj) {
 		this.timer_owner = obj;
 	}
 
-	public final Updatable getTimerOwner() {
+	public Updatable getTimerOwner() {
 		return timer_owner;
 	}
 
-	public final void setTimerInterval(float interval) {
+	public void setTimerInterval(float interval) {
 		this.interval = interval;
 	}
 
-	public final void resetTime() {
+	public void resetTime() {
 		time = 0;
 	}
 
         @Override
-	public final void animate(float t) {
+	public void animate(float t) {
 		time += t;
 		while (time > interval) {
 			time -= StrictMath.max(t, interval);

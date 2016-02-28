@@ -15,15 +15,15 @@ public final strictfp class GameHost implements Serializable {
 		this.revision = revision;
 	}
 
-	public final Game getGame() {
+	public Game getGame() {
 		return game;
 	}
 
-	public final int getHostID() {
+	public int getHostID() {
 		return host_id;
 	}
 	
-	public final int getRevision() {
+	public int getRevision() {
 		return revision;
 	}
 }

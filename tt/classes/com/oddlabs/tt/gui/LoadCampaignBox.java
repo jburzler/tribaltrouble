@@ -40,7 +40,7 @@ public final strictfp class LoadCampaignBox extends GUIObject implements Determi
 		refresh();
 	}
 	
-	public final static void saveSavegames(CampaignState[] states, DeterministicSerializerLoopbackInterface callback) {
+	public static void saveSavegames(CampaignState[] states, DeterministicSerializerLoopbackInterface callback) {
 		DeterministicSerializer.save(LocalEventQueue.getQueue().getDeterministic(), states, getSaveSavegamesFile(), callback);
 	}
 
@@ -48,7 +48,7 @@ public final strictfp class LoadCampaignBox extends GUIObject implements Determi
 		return new File(LocalInput.getGameDir(), SAVEGAMES_FILE_NAME);
 	}
 
-	public final static void loadSavegames(DeterministicSerializerLoopbackInterface callback) {
+	public static void loadSavegames(DeterministicSerializerLoopbackInterface callback) {
 		DeterministicSerializer.load(LocalEventQueue.getQueue().getDeterministic(), getLoadSavegamesFile(), callback);
 	}
 
@@ -61,24 +61,24 @@ public final strictfp class LoadCampaignBox extends GUIObject implements Determi
 	}
 
         @Override
-	public final void setFocus() {
+	public void setFocus() {
 		list_box.setFocus();
 	}
 
         @Override
-	protected final void renderGeometry() {
+	protected void renderGeometry() {
 	}
 
-	public final Object getSelected() {
+	public Object getSelected() {
 		return list_box.getSelected();
 	}
 
-	public final void refresh() {
+	public void refresh() {
 		list_box.clear();
 		LoadCampaignBox.loadSavegames(this);
 	}
 
-	private final void fillSlots(CampaignState[] campaign_states) {
+	private void fillSlots(CampaignState[] campaign_states) {
             for (CampaignState campaign_state : campaign_states) {
                 String race;
                 switch (campaign_state.getRace()) {
@@ -111,17 +111,17 @@ public final strictfp class LoadCampaignBox extends GUIObject implements Determi
 	}
 
         @Override
-	public final void loadSucceeded(Object object) {
+	public void loadSucceeded(Object object) {
 		CampaignState[] campaign_states = (CampaignState[])object;
 		fillSlots(campaign_states);
 	}
 
         @Override
-	public final void saveSucceeded() {
+	public void saveSucceeded() {
 	}
 
         @Override
-	public final void failed(Exception e) {
+	public void failed(Exception e) {
 		if (e instanceof FileNotFoundException) {
 		} else if (e instanceof InvalidClassException) {
 			String invalid_message = Utils.getBundleString(bundle, "invalid_message", new Object[]{SAVEGAMES_FILE_NAME});

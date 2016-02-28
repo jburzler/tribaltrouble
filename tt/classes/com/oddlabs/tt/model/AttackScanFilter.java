@@ -26,7 +26,7 @@ public final strictfp class AttackScanFilter implements ScanFilter {
 		this.max_range = max_range;
 	}
 
-	public final Selectable removeTarget() {
+	public Selectable removeTarget() {
 		Selectable result = target;
 		target = null;
 		target_priority = 0;
@@ -34,17 +34,17 @@ public final strictfp class AttackScanFilter implements ScanFilter {
 	}
 
         @Override
-	public final int getMinRadius() {
+	public int getMinRadius() {
 		return 1;
 	}
 
         @Override
-	public final int getMaxRadius() {
+	public int getMaxRadius() {
 		return max_range;
 	}
 
         @Override
-	public final boolean filter(int grid_x, int grid_y, Occupant occ) {
+	public boolean filter(int grid_x, int grid_y, Occupant occ) {
 		if (occ instanceof Selectable) {
 			Selectable s = (Selectable)occ;
 			if (owner.isEnemy(s.getOwner())) {

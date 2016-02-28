@@ -20,7 +20,7 @@ final strictfp class SessionManager {
 		this.time_manager = time_manager;
 	}
 
-	final Session get(SessionID session_id, SessionInfo session_info, int client_id) {
+	Session get(SessionID session_id, SessionInfo session_info, int client_id) {
 		Session session = (Session)id_to_session.get(session_id);
 		if (session == null) {
 			session = new Session(logger, session_id, session_info, this);
@@ -33,7 +33,7 @@ final strictfp class SessionManager {
 		return session;
 	}
 
-	final long getNextTimeout() {
+	long getNextTimeout() {
 		if (timeouts.size() == 0)
 			return 0;
 		Timeout timeout = (Timeout)timeouts.firstKey();
@@ -41,7 +41,7 @@ final strictfp class SessionManager {
 		return StrictMath.max(1, timeout_value);
 	}
 
-	final void process() {
+	void process() {
 		long millis = time_manager.getMillis();
 		while (timeouts.size() > 0) {
 			Timeout timeout = (Timeout)timeouts.firstKey();
@@ -85,7 +85,7 @@ final strictfp class SessionManager {
 		return new Timeout(internal_session_id++, client, millis);
 	}
 
-	final long start(Session session) {
+	long start(Session session) {
 		remove(session);
 		final long initial_time = time_manager.getMillis();
 		session.visit((RouterClient client) -> {
@@ -101,12 +101,12 @@ final strictfp class SessionManager {
 		return timeouts.remove(timeout) != null;
 	}
 
-	final void remove(Session session) {
+	void remove(Session session) {
 		id_to_session.remove(session.session_id);
 		logger.info("Removing session: " + session);
 	}
 
-	final int getNextTick(Session session) {
+	int getNextTick(Session session) {
 		final long millis = time_manager.getMillis();
 		session.visit((RouterClient client) -> {
                     unregister(client.getTimeout());
@@ -114,7 +114,7 @@ final strictfp class SessionManager {
 		return doComputeNextTick(session, millis);
 	}
 
-	public final void startTimeout(RouterClient client) {
+	public void startTimeout(RouterClient client) {
 		unregister(client.getTimeout());
 		long millis = time_manager.getMillis();
 		Timeout timeout = createTimeout(client, millis);
@@ -137,7 +137,7 @@ final strictfp class SessionManager {
 		}
 
                 @Override
-		public final int compareTo(Object other) {
+		public int compareTo(Object other) {
 			Timeout other_session = (Timeout)other;
 			int diff = (int)(next_timeout - other_session.next_timeout);
 			if (diff != 0)
@@ -147,18 +147,18 @@ final strictfp class SessionManager {
 		}
 
                 @Override
-		public final boolean equals(Object other) {
+		public boolean equals(Object other) {
 			Timeout other_session = (Timeout)other;
 			return compareTo(other_session) == 0;
 		}
 
                 @Override
-		public final int hashCode() {
+		public int hashCode() {
 			return (int)(id + next_timeout);
 		}
 
                 @Override
-		public final String toString() {
+		public String toString() {
 			return "Timout: id = " + id + " timeout " + next_timeout;
 		}
 	}

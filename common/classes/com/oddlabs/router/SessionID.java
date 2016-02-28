@@ -12,17 +12,17 @@ public final strictfp class SessionID implements Serializable {
 	}
 
         @Override
-	public final boolean equals(Object other) {
+	public boolean equals(Object other) {
 		return ((SessionID)other).session_id == session_id;
 	}
 
         @Override
-	public final int hashCode() {
+	public int hashCode() {
 		return (int)session_id;
 	}
 
         @Override
-	public final String toString() {
+	public String toString() {
 		return "(SessionID: session_id = " + session_id + ")";
 	}
 }

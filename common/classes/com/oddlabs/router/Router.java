@@ -33,20 +33,20 @@ public final strictfp class Router implements ConnectionListenerInterface {
 		this.port = tmp_listener.getPort();
 	}
 
-	public final int getPort() {
+	public int getPort() {
 		return port;
 	}
 
-	public final long getNextTimeout() {
+	public long getNextTimeout() {
 		return manager.getNextTimeout();
 	}
 
-	public final void process() {
+	public void process() {
 		manager.process();
 	}
 
         @Override
-	public final void incomingConnection(AbstractConnectionListener connection_listener, Object remote_address) {
+	public void incomingConnection(AbstractConnectionListener connection_listener, Object remote_address) {
 		logger.info("Incoming connection from " + remote_address);
 		AbstractConnection conn = connection_listener.acceptConnection(null);
 		RouterClient client = new RouterClient(manager, conn, logger, this);
@@ -54,19 +54,19 @@ public final strictfp class Router implements ConnectionListenerInterface {
 		conn.setConnectionInterface(client);
 	}
 
-	final void removeClient(RouterClient client) {
+	void removeClient(RouterClient client) {
 		clients.remove(client);
 	}
 
         @Override
-	public final void error(AbstractConnectionListener conn_id, IOException e) {
+	public void error(AbstractConnectionListener conn_id, IOException e) {
 		close();
 		logger.severe("Server socket failed: " + e);
 		if (router_listener != null)
 			router_listener.routerFailed(e);
 	}
 
-	public final void close() {
+	public void close() {
 		if (listener != null)
 			listener.close();
 		Iterator it = clients.iterator();

@@ -10,17 +10,17 @@ public final strictfp class TargetRegionFinder implements PathFinderAlgorithm {
 	}
 	
         @Override
-	public final int computeEstimatedCost(Node node) {
+	public int computeEstimatedCost(Node node) {
 		return 0;
 	}
 
         @Override
-	public final boolean touchNeighbour(Occupant occ) {
+	public boolean touchNeighbour(Occupant occ) {
 		return false;
 	}
 
         @Override
-	public final NodeResult touchNode(Node node) {
+	public NodeResult touchNode(Node node) {
 		Region region = (Region)node;
 		Occupant occ = filter.getOccupantFromRegion(region, false);
 		if (occ != null) {
@@ -30,7 +30,7 @@ public final strictfp class TargetRegionFinder implements PathFinderAlgorithm {
 	}
 
         @Override
-	public final NodeResult getBestNode() {
+	public NodeResult getBestNode() {
 		Occupant occ = filter.getBest();
 		if (occ != null) {
 			return new NodeResult(unit_grid.getRegion(occ.getGridX(), occ.getGridY()));

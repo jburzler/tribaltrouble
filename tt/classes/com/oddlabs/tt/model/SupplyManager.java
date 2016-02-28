@@ -28,7 +28,7 @@ public strictfp class SupplyManager implements Animated {
 		return world;
 	}
 
-	private final void resetCounter() {
+	private void resetCounter() {
 		time = getSleepTime();
 	}
 

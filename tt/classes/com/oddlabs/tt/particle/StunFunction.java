@@ -10,17 +10,17 @@ public final strictfp class StunFunction implements ParametricFunction {
 	}
 
         @Override
-	public final float getX(float u, float v) {
+	public float getX(float u, float v) {
 		return radius*(float)StrictMath.cos(u);
 	}
 
         @Override
-	public final float getY(float u, float v) {
+	public float getY(float u, float v) {
 		return radius*(float)StrictMath.sin(u);
 	}
 
         @Override
-	public final float getZ(float u, float v) {
+	public float getZ(float u, float v) {
 		return height*(float)StrictMath.cos(v);
 	}
 }

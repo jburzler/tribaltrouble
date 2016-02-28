@@ -26,15 +26,15 @@ public final strictfp class RegistrationKeyFormatException extends NumberFormatE
 		this.stripped_length = stripped_length;
 	}
 
-	public final int getType() {
+	public int getType() {
 		return type;
 	}
 
-	public final char getInvalidChar() {
+	public char getInvalidChar() {
 		return invalid_char;
 	}
 
-	public final int getStrippedLength() {
+	public int getStrippedLength() {
 		return stripped_length;
 	}
 }

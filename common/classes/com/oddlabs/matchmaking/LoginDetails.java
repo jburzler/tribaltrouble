@@ -15,7 +15,7 @@ public final strictfp class LoginDetails implements Serializable {
 	}
 
         @Override
-	public final boolean equals(Object other) {
+	public boolean equals(Object other) {
 		if (!(other instanceof LoginDetails))
 			return false;
 		LoginDetails other_login = (LoginDetails)other;
@@ -23,15 +23,15 @@ public final strictfp class LoginDetails implements Serializable {
 	}
 
         @Override
-	public final int hashCode() {
+	public int hashCode() {
 		return email.hashCode();
 	}
 
-	public final boolean isValid() {
+	public boolean isValid() {
 		return email != null && email.length() <= MAX_EMAIL_LENGTH && email.matches(Utils.EMAIL_PATTERN);
 	}
 	
-	public final String getEmail() {
+	public String getEmail() {
 		return email;
 	}
 }

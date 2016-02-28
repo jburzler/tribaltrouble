@@ -44,7 +44,7 @@ public final strictfp class PanelGroup extends GUIObject {
 		selectPanel(selected);
 	}
 
-	private final void selectPanel(int index) {
+	private void selectPanel(int index) {
 		focus_group.clearChildren();
 		for (int i = 0; i < panels.length; i++) {
 			if (i != index) {
@@ -61,12 +61,12 @@ public final strictfp class PanelGroup extends GUIObject {
 	}
 
         @Override
-	public final void setFocus() {
+	public void setFocus() {
 		focus_group.setGroupFocus(LocalInput.isShiftDownCurrently() ? -1 : 1);
 	}
 
         @Override
-	protected final void renderGeometry() {}
+	protected void renderGeometry() {}
 
 	private final strictfp class PanelBox extends GUIObject {
 		public PanelBox(int width, int height) {
@@ -75,7 +75,7 @@ public final strictfp class PanelGroup extends GUIObject {
 		}
 
                 @Override
-		protected final void renderGeometry() {
+		protected void renderGeometry() {
 			Skin.getSkin().getPanelData().getBox().render(0, 0, getWidth(), getHeight(), panels[selected].getTab().getRenderState());
 		}
 	}

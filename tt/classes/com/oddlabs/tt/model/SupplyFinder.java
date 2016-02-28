@@ -19,7 +19,7 @@ public final strictfp class SupplyFinder implements FinderFilter {
 	}
 
         @Override
-	public final Occupant getOccupantFromRegion(Region region, boolean one_region) {
+	public Occupant getOccupantFromRegion(Region region, boolean one_region) {
 		List supplies = region.getObjects(supply_class);
 		if (one_region) {
 			if (supplies.size() > 0) {
@@ -50,11 +50,11 @@ public final strictfp class SupplyFinder implements FinderFilter {
 	}
 
         @Override
-	public final Occupant getBest() {
+	public Occupant getBest() {
 		return findClosest();
 	}
 
-	private final Supply findClosest(List supplies) {
+	private Supply findClosest(List supplies) {
 		int min_dist = Integer.MAX_VALUE;
 		Supply closest = null;
 		for (int i = 0; i < supplies.size(); i++) {
@@ -70,7 +70,7 @@ public final strictfp class SupplyFinder implements FinderFilter {
 		return closest;
 	}
 
-	private final Supply findClosest() {
+	private Supply findClosest() {
 		int min_dist = Integer.MAX_VALUE;
 		Supply closest = null;
 		for (int j = 0; j < region_list.size(); j++) {
@@ -91,7 +91,7 @@ public final strictfp class SupplyFinder implements FinderFilter {
 	}
 	
         @Override
-	public final boolean acceptOccupant(Occupant occ) {
+	public boolean acceptOccupant(Occupant occ) {
 		if (supply_class.isInstance(occ)) {
 			Supply supply = (Supply)occ;
 			assert !supply.isEmpty();

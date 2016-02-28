@@ -17,7 +17,7 @@ public final strictfp class GeneratorOcean extends TextureGenerator {
 	}
 	
         @Override
-	public final Texture[] generate() {
+	public Texture[] generate() {
 		int seed = Globals.LANDSCAPE_SEED + 1;
 		
 		// water1
@@ -72,7 +72,7 @@ public final strictfp class GeneratorOcean extends TextureGenerator {
 	}
 	
         @Override
-	public final int hashCode() {
+	public int hashCode() {
 		return TEXTURE_SIZE;
 	}
 

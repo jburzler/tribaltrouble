@@ -44,7 +44,7 @@ public strictfp class CampaignDialogForm extends Form {
 			run();
 	}
 
-	private final void buildForm(CharSequence header, CharSequence text, Quad image, int align, boolean cancel) {
+	private void buildForm(CharSequence header, CharSequence text, Quad image, int align, boolean cancel) {
 		GUIIcon gui_icon = null;
 		if (image != null) {
 			gui_icon = new GUIIcon(image);

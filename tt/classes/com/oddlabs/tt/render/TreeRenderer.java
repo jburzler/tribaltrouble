@@ -19,7 +19,7 @@ public final strictfp class TreeRenderer extends TreePicker {
 		tree_low_detail.build(world.getTreeRoot());
 	}
 
-	public final TreeLowDetail getLowDetail() {
+	public TreeLowDetail getLowDetail() {
 		return tree_low_detail;
 	}
 
@@ -27,7 +27,7 @@ public final strictfp class TreeRenderer extends TreePicker {
 		tree_low_detail.renderLowDetail(group.getLowDetailStart(), group.getLowDetailCount());
 	}
 
-	final void renderAll() {
+	void renderAll() {
 		wave_animation.setTime(LocalEventQueue.getQueue().getTime());
 		List low_detail_render_list = getLowDetailRenderList();
 		tree_low_detail.setupTrees();
@@ -65,7 +65,7 @@ public final strictfp class TreeRenderer extends TreePicker {
 		}
 	}
 
-	private final void renderList(Tree tree, List render_list, boolean respond) {
+	private void renderList(Tree tree, List render_list, boolean respond) {
 		tree.getCrown().getSprite(0).setup(0, respond);
 		for (int i = 0; i < render_list.size(); i++) {
 			TreeSupply group = (TreeSupply)render_list.get(i);
@@ -95,7 +95,7 @@ public final strictfp class TreeRenderer extends TreePicker {
 	}
 
         @Override
-	final boolean isPicking() {
+	 boolean isPicking() {
 		return false;
 	}
 }

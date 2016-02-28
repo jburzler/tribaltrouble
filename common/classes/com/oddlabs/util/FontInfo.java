@@ -20,27 +20,27 @@ public final strictfp class FontInfo implements Serializable {
 		this.font_height = font_height;
 	}
 
-	public final String getTextureName() {
+	public String getTextureName() {
 		return texture_name;
 	}
 
-	public final Quad[] getKeyMap() {
+	public Quad[] getKeyMap() {
 		return key_map;
 	}
 
-	public final int getBorderX() {
+	public int getBorderX() {
 		return x_border;
 	}
 
-	public final int getBorderY() {
+	public int getBorderY() {
 		return y_border;
 	}
 
-	public final int getHeight() {
+	public int getHeight() {
 		return font_height;
 	}
 
-	public final void saveToFile(String file_name) {
+	public void saveToFile(String file_name) {
 		try (ObjectOutputStream os = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(file_name)))) {
 			os.writeObject(this);
 		} catch (IOException e) {
@@ -48,7 +48,7 @@ public final strictfp class FontInfo implements Serializable {
 		}
 	}
 
-	public final static FontInfo loadFromFile(URL url) {
+	public static FontInfo loadFromFile(URL url) {
 		return (FontInfo)Utils.loadObject(url);
 	}
 }

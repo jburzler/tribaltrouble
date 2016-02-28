@@ -12,13 +12,13 @@ public final strictfp class RefillerList {
 	private final Thread refill_thread;
 	private final List players = new ArrayList();
 
-	public final synchronized void registerQueuedPlayer(QueuedAudioPlayer q) {
+	public synchronized void registerQueuedPlayer(QueuedAudioPlayer q) {
 		assert !players.contains(q);
 		players.add(q);
 		refill_thread.interrupt();
 	}
 
-	public final synchronized void removeQueuedPlayer(QueuedAudioPlayer q) {
+	public synchronized void removeQueuedPlayer(QueuedAudioPlayer q) {
 		players.remove(q);
 		assert !players.contains(q);
 	}
@@ -30,7 +30,7 @@ public final strictfp class RefillerList {
 		refill_thread.start();
 	}
 
-	public final void destroy() {
+	public void destroy() {
 		synchronized (this) {
 			finished = true;
 			players.clear();

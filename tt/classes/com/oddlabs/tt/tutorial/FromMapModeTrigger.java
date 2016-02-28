@@ -8,7 +8,7 @@ public final strictfp class FromMapModeTrigger extends TutorialTrigger {
 	}
 
         @Override
-	protected final void run(Tutorial tutorial) {
+	protected void run(Tutorial tutorial) {
 		if (tutorial.getViewer().getDelegate().getCamera() instanceof GameCamera)
 			tutorial.next(new SelectUnitTrigger());
 	}

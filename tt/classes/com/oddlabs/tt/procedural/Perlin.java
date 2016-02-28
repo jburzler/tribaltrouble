@@ -41,7 +41,7 @@ public final strictfp class Perlin {
 	}
 
 	// generate noise octaves
-	private final void generateNoiseChannels(int x_factor, int y_factor, int oct, long seed) {
+	private void generateNoiseChannels(int x_factor, int y_factor, int oct, long seed) {
 		x_factor = StrictMath.max(2, x_factor);
 		y_factor = StrictMath.max(2, y_factor);
 		noise_channels = new Channel[oct];
@@ -59,7 +59,7 @@ public final strictfp class Perlin {
 	}
 
 	// interpolate and sum octave channels
-	private final void mergeNoiseChannels(int width, int height, float pers, int oct, int interpolation_method) {
+	private void mergeNoiseChannels(int width, int height, float pers, int oct, int interpolation_method) {
 		channel = new Channel(width, height);
 		int method_threshold = 0;
 		if (interpolation_method == SMOOTH) {
@@ -188,7 +188,7 @@ public final strictfp class Perlin {
 	}
 
 	// transform image
-	private final void transformImage(int width, int height, int sum_method) {
+	private void transformImage(int width, int height, int sum_method) {
 		float value = 0;
 		switch (sum_method) {
 			case NORMAL:
@@ -265,11 +265,11 @@ public final strictfp class Perlin {
 		}
 	}
 
-	public final Layer toLayer() {
+	public Layer toLayer() {
 		return new Layer(channel, channel.copy(), channel.copy());
 	}
 
-	public final Channel toChannel() {
+	public Channel toChannel() {
 		return channel;
 	}
 

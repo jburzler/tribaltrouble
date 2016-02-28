@@ -19,18 +19,18 @@ public final strictfp class CounterLabel extends Label implements Animated {
 		setTime(initial_seconds);
 	}
 
-	public final void start(AnimationManager manager) {
+	public void start(AnimationManager manager) {
 		this.manager = manager;
 		setTime(initial_seconds);
 		manager.registerAnimation(this);
 	}
 
-	public final void stop() {
+	public void stop() {
 		if (manager != null)
 			manager.removeAnimation(this);
 	}
 
-	private final void setTime(float seconds) {
+	private void setTime(float seconds) {
 		this.seconds = seconds;
 		int rest_seconds = ((int)seconds)%60;
 		int minutes = (((int)seconds)/60)%60;
@@ -57,12 +57,12 @@ public final strictfp class CounterLabel extends Label implements Animated {
 	}
 
         @Override
-	public final void animate(float t) {
+	public void animate(float t) {
 		setTime(seconds - t);
 	}
 
         @Override
-	public final void updateChecksum(StateChecksum check_sum) {
+	public void updateChecksum(StateChecksum check_sum) {
 	}
 }
 

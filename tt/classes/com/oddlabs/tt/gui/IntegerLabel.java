@@ -16,7 +16,7 @@ public final strictfp class IntegerLabel extends Label {
 	}
 
         @Override
-	public final int compareTo(Object o) {
+	public int compareTo(Object o) {
 		if (o instanceof IntegerLabel) {
 			IntegerLabel other = (IntegerLabel)o;
 			return val - other.val;

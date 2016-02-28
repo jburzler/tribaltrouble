@@ -16,32 +16,32 @@ public final strictfp class WaveAnimation {
 	private float rot_angle = 0;
 	private int time = 0;
 
-	public final void mulTranslation() {
+	public void mulTranslation() {
 		GL11.glTranslatef(TRANSLATE_SCALE*x, TRANSLATE_SCALE*y, 0f);
 	}
 
-	public final void mulRotation() {
+	public void mulRotation() {
 		GL11.glRotatef(rot_angle, rot_axis.x, rot_axis.y, rot_axis.z);
 	}
 
-	public final void updateChecksum(StateChecksum checksum) {
+	public void updateChecksum(StateChecksum checksum) {
 		checksum.update(rot_angle);
 	}
 
-	public final void setTime(float t) {
+	public void setTime(float t) {
 		time = (int)(t*1000);
 		initWaveDir();
 		computeRotation();
 	}
 
-	private final void initWaveDir() {
+	private void initWaveDir() {
 		x = TREE_WAVE_SCALE*0.5f*(float)StrictMath.cos(time*0.001f);
 		y = TREE_WAVE_SCALE*(float)StrictMath.sin(time*0.001f);
 		wave_dir.set(x, y, 1);
 		wave_dir.normalise();
 	}
 
-	private final void computeRotation() {
+	private void computeRotation() {
 		Vector3f.cross(wave_dir, up_vec, rot_axis);
 		float length = rot_axis.length();
 		rot_angle = (float)StrictMath.asin(length);

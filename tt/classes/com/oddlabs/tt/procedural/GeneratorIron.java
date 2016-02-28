@@ -11,7 +11,7 @@ public final strictfp class GeneratorIron extends TextureGenerator {
 	private static final int TEXTURE_SIZE = 128;
 
         @Override
-	public final Texture[] generate() {
+	public Texture[] generate() {
 		int seed = Globals.LANDSCAPE_SEED;
 		
 		Channel rock_bump = new Voronoi(TEXTURE_SIZE, 8, 8, 1, 1f, seed).getDistance(-1f, 0f, 0f).multiply(.49f);
@@ -35,7 +35,7 @@ public final strictfp class GeneratorIron extends TextureGenerator {
 	}
 	
         @Override
-	public final int hashCode() {
+	public int hashCode() {
 		return TEXTURE_SIZE;
 	}
 }

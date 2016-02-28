@@ -32,35 +32,35 @@ public final strictfp class UnitInfo {
 		this.num_rubber_warriors = num_rubber_warriors;
 	}
 
-	public final boolean hasQuarters() {
+	public boolean hasQuarters() {
 		return has_quarters;
 	}
 
-	public final boolean hasArmory() {
+	public boolean hasArmory() {
 		return has_armory;
 	}
 
-	public final int getNumTowers() {
+	public int getNumTowers() {
 		return num_towers;
 	}
 
-	public final boolean hasChieftain() {
+	public boolean hasChieftain() {
 		return has_chieftain;
 	}
 
-	public final int getNumPeons() {
+	public int getNumPeons() {
 		return num_peons;
 	}
 
-	public final int getNumRockWarriors() {
+	public int getNumRockWarriors() {
 		return num_rock_warriors;
 	}
 
-	public final int getNumIronWarriors() {
+	public int getNumIronWarriors() {
 		return num_iron_warriors;
 	}
 
-	public final int getNumRubberWarriors() {
+	public int getNumRubberWarriors() {
 		return num_rubber_warriors;
 	}
 }

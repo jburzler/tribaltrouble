@@ -7,7 +7,7 @@ public final strictfp class NodeResult {
 		this.result = node;
 	}
 
-	public final Node get() {
+	public Node get() {
 		return result;
 	}
 }

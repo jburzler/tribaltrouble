@@ -74,11 +74,11 @@ public final strictfp class CampaignForm extends Form implements DeterministicSe
 	}
 
         @Override
-	public final void setFocus() {
+	public void setFocus() {
 		button_vikings.setFocus();
 	}
 
-	public final void load(CampaignState campaign_state) {
+	public void load(CampaignState campaign_state) {
 		Campaign campaign;
 		if (campaign_state.getRace() == CampaignState.RACE_VIKINGS)
 			campaign = new VikingCampaign(network, gui_root, campaign_state);
@@ -92,12 +92,12 @@ public final strictfp class CampaignForm extends Form implements DeterministicSe
 	}
 
         @Override
-	public final void saveSucceeded() {
+	public void saveSucceeded() {
 		load_campaign_box.refresh();
 	}
 
         @Override
-	public final void loadSucceeded(Object object) {
+	public void loadSucceeded(Object object) {
 		CampaignState[] campaign_states = (CampaignState[])object;
 		CampaignState selected = (CampaignState)load_campaign_box.getSelected();
 		if (selected != null) {
@@ -115,7 +115,7 @@ public final strictfp class CampaignForm extends Form implements DeterministicSe
 	}
 
         @Override
-	public final void failed(Exception e) {
+	public void failed(Exception e) {
 		if (e instanceof FileNotFoundException) {
 		} else if (e instanceof InvalidClassException) {
 		} else {
@@ -126,7 +126,7 @@ public final strictfp class CampaignForm extends Form implements DeterministicSe
 
 	private final strictfp class DeleteListener implements MouseClickListener {
                 @Override
-		public final void mouseClicked(int button, int x, int y, int clicks) {
+		public void mouseClicked(int button, int x, int y, int clicks) {
 			CampaignState state = (CampaignState)load_campaign_box.getSelected();
 			if (state != null) {
 				String confirm_str = Utils.getBundleString(bundle, "confirm_delete", new Object[]{state.getName()});
@@ -137,33 +137,33 @@ public final strictfp class CampaignForm extends Form implements DeterministicSe
 
 	private final strictfp class ActionDeleteListener implements MouseClickListener {
                 @Override
-		public final void mouseClicked(int button, int x, int y, int clicks) {
+		public void mouseClicked(int button, int x, int y, int clicks) {
 			LoadCampaignBox.loadSavegames(CampaignForm.this);
 		}
 	}
 
 	private final strictfp class VikingsListener implements MouseClickListener {
                 @Override
-		public final void mouseClicked(int button, int x, int y, int clicks) {
+		public void mouseClicked(int button, int x, int y, int clicks) {
 			main_menu.setMenu(new NewCampaignForm(network, gui_root, main_menu, CampaignForm.this));
 		}
 	}
 
 	private final strictfp class LoadListener implements MouseClickListener, RowListener {
                 @Override
-		public final void mouseClicked(int button, int x, int y, int clicks) {
+		public void mouseClicked(int button, int x, int y, int clicks) {
 			Object selected = load_campaign_box.getSelected();
 			if (selected != null)
 				load((CampaignState)selected);
 		}
 
                 @Override
-		public final void rowDoubleClicked(Object object) {
+		public void rowDoubleClicked(Object object) {
 			load((CampaignState)object);
 		}
 		
                 @Override
-		public final void rowChosen(Object object) {
+		public void rowChosen(Object object) {
 		}
 	}
 }

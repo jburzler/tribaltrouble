@@ -160,7 +160,7 @@ public strictfp class Unit extends Selectable implements Occupant, Movable {
 			return super.toString();
 	}
 
-	private final void findInitialPosition(float x, float y, boolean grid_targets_only) {
+	private void findInitialPosition(float x, float y, boolean grid_targets_only) {
 		UnitGrid unit_grid = getUnitGrid();
 		Target reserved_target = unit_grid.findGridTargets(UnitGrid.toGridCoordinate(x), UnitGrid.toGridCoordinate(y), 1, grid_targets_only)[0];
 		setGridPosition(reserved_target.getGridX(), reserved_target.getGridY());
@@ -420,7 +420,7 @@ public strictfp class Unit extends Selectable implements Occupant, Movable {
 		forceDecide();
 	}
 
-	private final BalancedParametricEmitter createStunStar(float x, float y, float z, float time, float velocity) {
+	private BalancedParametricEmitter createStunStar(float x, float y, float z, float time, float velocity) {
 		int num_particles = 5;
 		return new BalancedParametricEmitter(getOwner().getWorld(), new StunFunction(.4f, .15f), new Vector3f(x, y, z),
 				velocity, 5f, (float)StrictMath.PI*2, (float)StrictMath.PI*2,
@@ -440,18 +440,18 @@ public strictfp class Unit extends Selectable implements Occupant, Movable {
 		return kill_friendly || getOwner().isEnemy(target_player);
 	}
 
-	private final boolean canBuild(Target target) {
+	private boolean canBuild(Target target) {
 		if (!(target instanceof Building) || !getAbilities().hasAbilities(Abilities.BUILD))
 			return false;
 		Building building = (Building)target;
 		return !building.isPlaced();
 	}
 
-	private final boolean canGather(Target target) {
+	private boolean canGather(Target target) {
 		return target instanceof Supply && getAbilities().hasAbilities(Abilities.BUILD);
 	}
 
-	private final boolean canRepair(Target target, boolean action_repair) {
+	private boolean canRepair(Target target, boolean action_repair) {
 		if (!(target instanceof Building) || !getAbilities().hasAbilities(Abilities.BUILD))
 			return false;
 		Building building = (Building)target;
@@ -461,7 +461,7 @@ public strictfp class Unit extends Selectable implements Occupant, Movable {
 		return !getOwner().isEnemy(building.getOwner()) && building.isPlaced() && building.isDamaged();
 	}
 
-	private final boolean canEnter(Target target) {
+	private boolean canEnter(Target target) {
 		if (!(target instanceof Building) || getAbilities().hasAbilities(Abilities.MAGIC))
 			return false;
 		Building building = (Building)target;
@@ -476,7 +476,7 @@ public strictfp class Unit extends Selectable implements Occupant, Movable {
 			return super.getDefenseChance();
 	}
 
-	private final void walkToTarget(Target target, boolean scan_attack) {
+	private void walkToTarget(Target target, boolean scan_attack) {
 		Target walkable_target = getUnitGrid().findGridTargets(target.getGridX(), target.getGridY(), 1, false)[0];
 		pushController(new WalkController(this, walkable_target, scan_attack));
 	}

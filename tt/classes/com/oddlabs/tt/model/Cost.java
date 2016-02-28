@@ -14,15 +14,15 @@ public final strictfp class Cost {
 		assert supply_types.length == supply_amounts.length;
 	}
 	
-	public final Class[] getSupplyTypes() {
+	public Class[] getSupplyTypes() {
 		return supply_types;
 	}
 
-	public final int[] getSupplyAmounts() {
+	public int[] getSupplyAmounts() {
 		return supply_amounts;
 	}
 
-	public final Quad[] toIconArray() {
+	public Quad[] toIconArray() {
 		int size = 0;
 		for (int i = 0; i < supply_amounts.length; i++)
 			size += supply_amounts[i];

@@ -53,7 +53,7 @@ public final strictfp class JumpCamera extends Camera {
 	}
 	
         @Override
-	public final void doAnimate(float t) {
+	public void doAnimate(float t) {
 		if (seconds <= 0f) {
 			getState().setTargetX(dst_x);
 			getState().setTargetY(dst_y);

@@ -9,13 +9,13 @@ public final strictfp class ElementLeaf extends AbstractElementNode {
 	}
 
         @Override
-	protected final AbstractElementNode doInsertElement(Element model) {
+	protected AbstractElementNode doInsertElement(Element model) {
 		incElementCount();
 		return addElement(model);
 	}
 
         @Override
-	public final void visit(ElementNodeVisitor visitor) {
+	public void visit(ElementNodeVisitor visitor) {
 		visitor.visitLeaf(this);
 	}
 }

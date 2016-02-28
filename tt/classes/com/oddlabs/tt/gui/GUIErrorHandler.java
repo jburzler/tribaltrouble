@@ -5,7 +5,7 @@ import org.xml.sax.SAXParseException;
 
 public final strictfp class GUIErrorHandler implements ErrorHandler {
         @Override
-	public final void fatalError(SAXParseException exception) {
+	public void fatalError(SAXParseException exception) {
 		// ignore fatal errors (an exception is guaranteed)
 	}
 
@@ -17,7 +17,7 @@ public final strictfp class GUIErrorHandler implements ErrorHandler {
 
 	// dump warnings too
         @Override
-	public final void warning(SAXParseException err) {
+	public void warning(SAXParseException err) {
 		System.out.println ("** Warning, line " + err.getLineNumber () + ", uri " + err.getSystemId ());
 		System.out.println("   " + err.getMessage ());
 	}

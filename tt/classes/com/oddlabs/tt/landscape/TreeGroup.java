@@ -23,7 +23,7 @@ public final strictfp class TreeGroup extends AbstractTreeGroup {
 		child3 = createChild(level);
 	}
 
-	private final AbstractTreeGroup createChild(int level) {
+	private AbstractTreeGroup createChild(int level) {
 		if (level < LANDSCAPE_TREES_MAX_LEVEL) {
 			return new TreeGroup(this, level + 1);
 		} else {
@@ -32,27 +32,27 @@ public final strictfp class TreeGroup extends AbstractTreeGroup {
 	}
 
         @Override
-	public final void visit(TreeNodeVisitor visitor) {
+	public void visit(TreeNodeVisitor visitor) {
 		visitor.visitNode(this);
 	}
 
-	public final AbstractTreeGroup getChild0() {
+	public AbstractTreeGroup getChild0() {
 		return child0;
 	}
 
-	public final AbstractTreeGroup getChild1() {
+	public AbstractTreeGroup getChild1() {
 		return child1;
 	}
 
-	public final AbstractTreeGroup getChild2() {
+	public AbstractTreeGroup getChild2() {
 		return child2;
 	}
 
-	public final AbstractTreeGroup getChild3() {
+	public AbstractTreeGroup getChild3() {
 		return child3;
 	}
 
-	public final void visitChildren(TreeNodeVisitor visitor) {
+	public void visitChildren(TreeNodeVisitor visitor) {
 		child0.visit(visitor);
 		child1.visit(visitor);
 		child2.visit(visitor);
@@ -60,7 +60,7 @@ public final strictfp class TreeGroup extends AbstractTreeGroup {
 	}
 
         @Override
-	protected final boolean initBounds() {
+	protected boolean initBounds() {
 		boolean child0_bounds = child0.initBounds();
 		boolean child1_bounds = child1.initBounds();
 		boolean child2_bounds = child2.initBounds();
@@ -74,7 +74,7 @@ public final strictfp class TreeGroup extends AbstractTreeGroup {
 		return node_bounds;
 	}
 
-	private final boolean checkBounds(AbstractTreeGroup child, boolean child_bounds, boolean node_bounds) {
+	private boolean checkBounds(AbstractTreeGroup child, boolean child_bounds, boolean node_bounds) {
 		if (!child_bounds)
 			return node_bounds;
 		if (node_bounds)

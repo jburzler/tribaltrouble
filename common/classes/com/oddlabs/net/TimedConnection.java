@@ -9,16 +9,16 @@ public final strictfp class TimedConnection {
 		this.conn = conn;
 	}
 
-	public final long getTimeout() {
+	public long getTimeout() {
 		return timeout;
 	}
 
-	public final Connection getConnection() {
+	public Connection getConnection() {
 		return conn;
 	}
 
         @Override
-	public final boolean equals(Object other) {
+	public boolean equals(Object other) {
 		if (!(other instanceof TimedConnection))
 			return false;
 		TimedConnection other_timed = (TimedConnection)other;
@@ -26,7 +26,7 @@ public final strictfp class TimedConnection {
 	}
 
         @Override
-	public final int hashCode() {
+	public int hashCode() {
 		return conn.hashCode();
 	}
 }

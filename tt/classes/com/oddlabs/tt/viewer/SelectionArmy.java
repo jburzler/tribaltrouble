@@ -19,23 +19,23 @@ public final strictfp class SelectionArmy extends Army {
 		this.local_player = local_player;
 	}
 
-	public final int getNumBuilders() {
+	public int getNumBuilders() {
 		return num_builders;
 	}
 
-	public final int getNumUnits() {
+	public int getNumUnits() {
 		return num_units;
 	}
 
-	public final Unit getChieftain() {
+	public Unit getChieftain() {
 		return chieftain;
 	}
 
-	public final Building getBuilding() {
+	public Building getBuilding() {
 		return building;
 	}
 
-	private final void update() {
+	private void update() {
 		Iterator it = getSet().iterator();
 		num_units = 0;
 		num_builders = 0;
@@ -59,19 +59,19 @@ public final strictfp class SelectionArmy extends Army {
 	}
 
         @Override
-	public final void clear() {
+	public void clear() {
 		super.clear();
 		update();
 	}
 
         @Override
-	public final void remove(Selectable selectable) {
+	public void remove(Selectable selectable) {
 		super.remove(selectable);
 		update();
 	}
 
         @Override
-	public final void add(Selectable selectable) {
+	public void add(Selectable selectable) {
 		super.add(selectable);
 		update();
 	}

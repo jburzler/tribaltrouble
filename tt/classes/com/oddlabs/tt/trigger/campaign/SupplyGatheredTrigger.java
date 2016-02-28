@@ -22,7 +22,7 @@ public final strictfp class SupplyGatheredTrigger extends IntervalTrigger {
 	}
 
         @Override
-	protected final void check() {
+	protected void check() {
 		int count = 0;
 		Selectable[][] selectables = local_player.classifyUnits();
 
@@ -42,7 +42,7 @@ public final strictfp class SupplyGatheredTrigger extends IntervalTrigger {
 	}
 
         @Override
-	protected final void done() {
+	protected void done() {
 		runnable.run();
 	}
 }

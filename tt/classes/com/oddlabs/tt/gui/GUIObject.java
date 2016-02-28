@@ -98,7 +98,7 @@ public abstract strictfp class GUIObject extends Renderable {
 		placed = true;
 	}
 
-	private final int getXFromDirection(int direction, int spacing, int neightbour_x, int neighbour_width) {
+	private int getXFromDirection(int direction, int spacing, int neightbour_x, int neighbour_width) {
 		switch (direction) {
 			case BOTTOM_LEFT:
 			case TOP_LEFT:
@@ -122,7 +122,7 @@ public abstract strictfp class GUIObject extends Renderable {
 		}
 	}
 
-	private final int getYFromDirection(int direction, int spacing, int neighbour_y, int neighbour_height) {
+	private int getYFromDirection(int direction, int spacing, int neighbour_y, int neighbour_height) {
 		switch (direction) {
 			case BOTTOM_LEFT:
 			case BOTTOM_MID:
@@ -267,7 +267,7 @@ public abstract strictfp class GUIObject extends Renderable {
 		super.removeChild(child);
 	}
 
-	private final void switchFocusToFirstChild(int dir) {
+	private void switchFocusToFirstChild(int dir) {
 		GUIObject gui_child = (GUIObject)getFirstChild();
 		GUIObject min_obj = null;
 		while (gui_child != null) {
@@ -281,7 +281,7 @@ public abstract strictfp class GUIObject extends Renderable {
 			((GUIObject)getParent()).switchFocusToNextChild(dir);
 	}
 
-	private final void switchFocusToNextChild(int dir) {
+	private void switchFocusToNextChild(int dir) {
 		int tab_order = focused_child.getTabOrder();
 		GUIObject gui_child = (GUIObject)getFirstChild();
 		GUIObject greater_obj = null;
@@ -308,7 +308,7 @@ public abstract strictfp class GUIObject extends Renderable {
 		}
 	}
 
-	private final void switchFocusToObject(GUIObject obj, int dir) {
+	private void switchFocusToObject(GUIObject obj, int dir) {
 		if (obj instanceof Group) {
 			((Group)obj).setGroupFocus(dir);
 		} else {
@@ -341,7 +341,7 @@ public abstract strictfp class GUIObject extends Renderable {
 		focused_child = null;
 	}
 
-	private final void refocusTree(GUIObject caller_child) {
+	private void refocusTree(GUIObject caller_child) {
 		GUIObject parent = (GUIObject)getParent();
 		if (parent != null) {
 			parent.refocusTree(this);
@@ -383,7 +383,7 @@ public abstract strictfp class GUIObject extends Renderable {
 	protected void focusNotify(boolean focus) {
 	}
 
-	private final boolean modalBlocked(GUIRoot gui_root) {
+	private boolean modalBlocked(GUIRoot gui_root) {
 		ModalDelegate modal_delegate = gui_root.getModalDelegate();
 		if (modal_delegate != null && !modalRelative(modal_delegate)) {
 			return true;
@@ -391,7 +391,7 @@ public abstract strictfp class GUIObject extends Renderable {
 		return false;
 	}
 
-	private final boolean modalRelative(ModalDelegate modal_delegate) {
+	private boolean modalRelative(ModalDelegate modal_delegate) {
 		if (this == modal_delegate) {
 			return true;
 		} else if (getParent() == null) {
