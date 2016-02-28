@@ -15,6 +15,7 @@ import com.oddlabs.tt.model.weapon.RubberSpearWeapon;
 import com.oddlabs.tt.pathfinder.FindOccupantFilter;
 import com.oddlabs.tt.util.Target;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public final strictfp class AdvancedAI extends AI {
@@ -272,9 +273,7 @@ else
 				warriors = new Selectable[num_warriors];
 			}
 
-			for (int i = 0; i < num_warriors; i++) {
-				warriors[i] = getIdleWarriors()[i];
-			}
+                    System.arraycopy(getIdleWarriors(), 0, warriors, 0, num_warriors);
 			Target target = findTarget(warriors[0].getGridX(), warriors[0].getGridY());
 			if (target != null) {
 				getOwner().setLandscapeTarget(warriors, target.getGridX(), target.getGridY(), Target.ACTION_ATTACK, true);
@@ -439,9 +438,7 @@ else
 	private Selectable[] getPeons(int min_num_peons) {
 		ArrayList builders = new ArrayList();
 		if (getIdlePeons() != null) {
-                    for (Selectable idlePeon : getIdlePeons()) {
-                        builders.add(idlePeon);
-                    }
+                    builders.addAll(Arrays.asList(getIdlePeons()));
 		}
 
 		Selectable[][] peon_types = new Selectable[][]{getGatherIronPeons(), getGatherRockPeons(), getGatherTreePeons(), getGatherRubberPeons()};

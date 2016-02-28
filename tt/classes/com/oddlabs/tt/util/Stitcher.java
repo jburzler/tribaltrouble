@@ -55,4 +55,7 @@ public final strictfp class Stitcher {
 			return side;
 		}
 	}
+
+    private Stitcher() {
+    }
 }

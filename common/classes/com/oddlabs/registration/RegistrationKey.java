@@ -110,7 +110,7 @@ public final strictfp class RegistrationKey {
 		key_big = key_big.or(crc.shiftLeft(64));
 		int mask = CHAR_TO_WORD.length() - 1;
 		int shifting = computeShifting();
-		StringBuffer encoded_key = new StringBuffer();
+		StringBuilder encoded_key = new StringBuilder();
 		while (encoded_key.length() < STRIPPED_LENGTH) {
 			int index = key_big.intValue() & mask;
 			char c = CHAR_TO_WORD.charAt(index);

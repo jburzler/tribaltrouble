@@ -8,4 +8,7 @@ public final strictfp class SpamFilter {
 		string = string.replaceAll("\\!+", "!");
 		return string;
 	}
+
+    private SpamFilter() {
+    }
 }

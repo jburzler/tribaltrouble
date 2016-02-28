@@ -24,8 +24,7 @@ dumpEquation(eq_system);*/
 	private static float[][] copyEquation(float[][] orig_eq) {
 		float[][] result = new float[orig_eq.length][orig_eq[0].length];
 		for (int row = 0; row < result.length; row++)
-			for (int column = 0; column < result[0].length; column++)
-				result[row][column] = orig_eq[row][column];
+			System.arraycopy(orig_eq[row], 0, result[row], 0, result[0].length);
 		return result;
 	}
 
@@ -159,4 +158,7 @@ dumpEquation(eq_system);*/
 //		solve(system2, solution2);
 		solve(system3, solution3);
 	}*/
+
+    private LinearSolver() {
+    }
 }

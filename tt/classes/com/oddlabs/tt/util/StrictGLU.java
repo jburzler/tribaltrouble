@@ -86,4 +86,7 @@ public final strictfp class StrictGLU {
 		proj.scale(vector_3f);
 
 	}
+
+    private StrictGLU() {
+    }
 }

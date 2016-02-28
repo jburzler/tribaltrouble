@@ -181,7 +181,7 @@ public final strictfp class Connection extends AbstractConnection implements Han
 	}
 
 	private boolean writeNextEvent() {
-		if (back_log_list.size() == 0)
+		if (back_log_list.isEmpty())
 			return false;
 		ARMIEvent event = (ARMIEvent)back_log_list.get(0);
 		boolean success = writeEvent(event);

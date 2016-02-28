@@ -5,6 +5,7 @@ import com.oddlabs.procedural.Layer;
 import com.oddlabs.tt.render.Texture;
 import com.oddlabs.tt.resource.GLImage;
 import com.oddlabs.tt.resource.GLIntImage;
+import java.util.Arrays;
 import org.lwjgl.opengl.GL11;
 
 public final strictfp class GeneratorHalos extends TextureGenerator {
@@ -40,7 +41,7 @@ public final strictfp class GeneratorHalos extends TextureGenerator {
 	
         @Override
 	public int hashCode() {
-		return size*shadow_parms.hashCode()*ring_parms.hashCode();
+		return size*Arrays.deepHashCode(shadow_parms)*Arrays.deepHashCode(ring_parms);
 	}
 
         @Override
@@ -48,6 +49,6 @@ public final strictfp class GeneratorHalos extends TextureGenerator {
 		if (!super.equals(o))
 			return false;
 		GeneratorHalos other = (GeneratorHalos)o;
-		return size == other.size && shadow_parms.equals(other.shadow_parms) && ring_parms.equals(other.ring_parms);
+		return size == other.size && Arrays.equals(shadow_parms, other.shadow_parms) && Arrays.equals(ring_parms, other.ring_parms);
 	}
 }

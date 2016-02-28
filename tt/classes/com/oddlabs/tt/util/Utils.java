@@ -244,4 +244,7 @@ public final strictfp class Utils {
 		a[3][2] = m.m32;
 		a[3][3] = m.m33;
 	}
+
+    private Utils() {
+    }
 }

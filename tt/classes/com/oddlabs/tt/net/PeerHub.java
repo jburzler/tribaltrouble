@@ -6,7 +6,6 @@ import com.oddlabs.net.ARMIInterfaceMethods;
 import com.oddlabs.net.IllegalARMIEventException;
 import com.oddlabs.net.NetworkSelector;
 import com.oddlabs.router.Router;
-import com.oddlabs.router.RouterListener;
 import com.oddlabs.router.SessionID;
 import com.oddlabs.router.SessionInfo;
 import com.oddlabs.tt.animation.Animated;

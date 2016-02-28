@@ -12,4 +12,7 @@ public final strictfp class FileUtils {
             }
 		dst_channel.close();
 	}
+
+    private FileUtils() {
+    }
 }

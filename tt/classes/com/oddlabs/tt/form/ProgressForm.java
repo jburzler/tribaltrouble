@@ -147,7 +147,7 @@ public final strictfp class ProgressForm {
                         AudioManager.getManager().startSources();
                 };
 
-		boolean show_logo = logo_file != null && !logo_file.equals("") && first_progress;
+		boolean show_logo = logo_file != null && !logo_file.isEmpty() && first_progress;
 		GUIRoot client_root = gui.createRoot();
 		UIRenderer renderer = callback.load(client_root);
 		if (show_logo) {

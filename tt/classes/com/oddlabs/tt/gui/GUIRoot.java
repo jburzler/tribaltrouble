@@ -131,7 +131,7 @@ public final strictfp class GUIRoot extends GUIObject implements Updatable {
 	}
 
 	public CameraDelegate getDelegate() {
-		if (delegate_stack.size() == 0)
+		if (delegate_stack.isEmpty())
 			return null;
 		else
 			return (CameraDelegate)delegate_stack.get(delegate_stack.size() - 1);

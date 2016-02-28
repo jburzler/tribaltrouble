@@ -43,4 +43,7 @@ public final strictfp class DBUtils {
 			stmt.getConnection().close();
 		}
 	}
+
+    private DBUtils() {
+    }
 }

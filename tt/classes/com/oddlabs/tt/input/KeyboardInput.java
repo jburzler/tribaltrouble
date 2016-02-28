@@ -114,11 +114,11 @@ public final strictfp class KeyboardInput {
 			if (checkMagicKey(deterministic, event_key_state, event_key, false, repeat_event))
 				continue;
 			if (event_key == Keyboard.KEY_NONE) {
-				local_input.keyTyped(gui_root, event_key, event_character);
+				LocalInput.keyTyped(gui_root, event_key, event_character);
 			} else if (event_key_state) {
-				local_input.keyPressed(gui_root, event_key, event_character, shift_down, control_down, menu_down, repeat_event);
+				LocalInput.keyPressed(gui_root, event_key, event_character, shift_down, control_down, menu_down, repeat_event);
 			} else {
-				local_input.keyReleased(gui_root, event_key, event_character, shift_down, control_down, menu_down);
+				LocalInput.keyReleased(gui_root, event_key, event_character, shift_down, control_down, menu_down);
 			}
 		}
 		return result;

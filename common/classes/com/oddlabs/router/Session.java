@@ -52,7 +52,7 @@ final strictfp class Session {
 
                         @Override
 			public final void visit(RouterClient client) {
-				if (client.getChecksums().size() == 0) {
+				if (client.getChecksums().isEmpty()) {
 					missing_checksum[0] = true;
 					return;
 				}
@@ -76,7 +76,7 @@ final strictfp class Session {
 		visit((RouterClient client) -> {
                     Integer client_checksum;
                     if (missing_checksum[0]) {
-                        if (client.getChecksums().size() == 0)
+                        if (client.getChecksums().isEmpty())
                             return;
                         client_checksum = (Integer)client.getChecksums().get(0);
                     } else

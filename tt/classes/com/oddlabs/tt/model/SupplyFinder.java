@@ -33,7 +33,7 @@ public final strictfp class SupplyFinder implements FinderFilter {
 			int dy = region.getGridY() - unit.getGridY();
 			int region_dist_sqr =  dx*dx + dy*dy;
 			if (supplies.size() > 0) {
-				if (region_list.size() == 0) {
+				if (region_list.isEmpty()) {
 					int region_dist = (int)StrictMath.sqrt(region_dist_sqr);
 					int max_region_dist = region_dist + RegionBuilder.REGION_PATH_MAX_COST/2;
 					max_region_dist_sqr = max_region_dist*max_region_dist;

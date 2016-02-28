@@ -42,6 +42,7 @@ import com.oddlabs.tt.resource.WorldGenerator;
 import com.oddlabs.tt.util.ServerMessageBundler;
 import com.oddlabs.tt.util.Utils;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -329,15 +330,11 @@ public final strictfp class SelectGameMenu extends Form implements MatchmakingLi
 	public void receivedList(int type, Object[] names) {
 		switch (type) {
 			case MatchmakingServerInterface.TYPE_GAME:
-                for (Object name : names) {
-                    game_hosts.add(name);
-                }
+                            game_hosts.addAll(Arrays.asList(names));
 				updateGameListGUI();
 				break;
 			case MatchmakingServerInterface.TYPE_CHAT_ROOM_LIST:
-                for (Object name : names) {
-                    chat_rooms.add(name);
-                }
+                            chat_rooms.addAll(Arrays.asList(names));
 				updateChatRoomListGUI();
 				break;
 			case MatchmakingServerInterface.TYPE_RANKING_LIST:
@@ -385,7 +382,7 @@ public final strictfp class SelectGameMenu extends Form implements MatchmakingLi
 		for (int i = 0; i < game_hosts.size(); i++) {
 			GameHost game_host = (GameHost)game_hosts.get(i);
 			String rated = ServerMessageBundler.getRatedString(game_host.getGame().isRated());
-			String size = ServerMessageBundler.getSizeString(game_host.getGame().getSize());;
+			String size = ServerMessageBundler.getSizeString(game_host.getGame().getSize());
 			Row row = new Row(new GUIObject[]{
 				new Label(game_host.getGame().getName(), combofont, game_name_size),
 				new Label(rated, combofont),
@@ -543,7 +540,7 @@ public final strictfp class SelectGameMenu extends Form implements MatchmakingLi
                 @Override
 		public void enterPressed(CharSequence text) {
 			String chat = text.toString();
-			if (!chat.equals("")) {
+			if (!chat.isEmpty()) {
 				if (!ChatCommand.filterCommand(gui_root.getInfoPrinter(), chat)) {
 					Network.getMatchmakingClient().getInterface().sendMessageToRoom(chat);
 				}

@@ -134,4 +134,7 @@ System.out.println("actual_num_regions = " + actual_num_regions);
 		}
 		return null;
 	}
+
+    private RegionBuilder() {
+    }
 }

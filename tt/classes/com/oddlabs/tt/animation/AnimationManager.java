@@ -3,7 +3,6 @@ package com.oddlabs.tt.animation;
 import com.oddlabs.event.Deterministic;
 import com.oddlabs.net.MonotoneTimeManager;
 import com.oddlabs.net.NetworkSelector;
-import com.oddlabs.net.TimeManager;
 import com.oddlabs.tt.event.LocalEventQueue;
 import com.oddlabs.tt.form.QuitForm;
 import com.oddlabs.tt.global.Globals;

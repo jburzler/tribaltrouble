@@ -207,4 +207,7 @@ final strictfp class RenderTools {
 		if (Globals.isBoundsEnabled(bound_type))
 			draw(box, r, g, b);
 	}
+
+    private RenderTools() {
+    }
 }

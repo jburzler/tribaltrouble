@@ -385,22 +385,28 @@ public final strictfp class SelectionDelegate extends ControllableCameraDelegate
 	public void mousePressed(int button, int x, int y) {
 		if (!map_mode) {
 			if (!observer) {
-				if (button == LocalInput.LEFT_BUTTON) {
-					if (!LocalInput.isKeyDown(Keyboard.KEY_SPACE)) {
-						selection = true;
-					}
-					selection_x1 = x;
-					selection_y1 = y;
-					selection_x2 = x;
-					selection_y2 = y;
-				} else if (button == LocalInput.RIGHT_BUTTON) {
-					Army selection = getViewer().getSelection().getCurrentSelection();
-					if (selection.size() > 0 && selection.containsAbility(Abilities.TARGET)) {
-						getViewer().getPicker().pickTarget(selection, getViewer().getGUIRoot().getDelegate().getCamera().getState(), getViewer().getPeerHub().getPlayerInterface(), x, y, Target.ACTION_DEFAULT);
-					}
-				} else {
-					super.mousePressed(button, x, y);
-				}
+                            switch (button) {
+                                case LocalInput.LEFT_BUTTON:
+                                    if (!LocalInput.isKeyDown(Keyboard.KEY_SPACE)) {
+                                        selection = true;
+                                    }
+                                    selection_x1 = x;
+                                    selection_y1 = y;
+                                    selection_x2 = x;
+                                    selection_y2 = y;
+                                    break;
+                                case LocalInput.RIGHT_BUTTON:
+                                    {
+                                        Army selection = getViewer().getSelection().getCurrentSelection();
+                                        if (selection.size() > 0 && selection.containsAbility(Abilities.TARGET)) {
+                                            getViewer().getPicker().pickTarget(selection, getViewer().getGUIRoot().getDelegate().getCamera().getState(), getViewer().getPeerHub().getPlayerInterface(), x, y, Target.ACTION_DEFAULT);
+                                        }
+                                        break;
+                                    }
+                                default:
+                                    super.mousePressed(button, x, y);
+                                    break;
+                            }
 			} else {
 				super.mousePressed(button, x, y);
 			}

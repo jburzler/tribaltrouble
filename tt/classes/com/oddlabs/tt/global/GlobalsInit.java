@@ -48,4 +48,7 @@ public final strictfp class GlobalsInit {
 			Globals.TEXTURE_SPLITS[i] = num_splits;
 		}
 	}
+
+    private GlobalsInit() {
+    }
 }

@@ -27,4 +27,7 @@ outer:
 		}
 		return (float)misses*3/indices.remaining();
 	}
+
+    private IndexListACMR() {
+    }
 }

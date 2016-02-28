@@ -124,7 +124,7 @@ public final strictfp class InGameChatForm extends Form implements ChatListener 
                 @Override
 		public void enterPressed(CharSequence text) {
 			String chat = text.toString();
-			if (!chat.equals("")) {
+			if (!chat.isEmpty()) {
 				chat_line.clear();
 				Map commands = new HashMap();
 				ChatMethod cheat = (InfoPrinter info_printer1, String text1) -> {

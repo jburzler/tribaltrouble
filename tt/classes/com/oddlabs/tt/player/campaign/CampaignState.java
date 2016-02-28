@@ -37,9 +37,7 @@ public final strictfp class CampaignState implements Serializable {
 
 	public CampaignState(int[] initial_states) {
 		island_states = new int[initial_states.length];
-		for (int i = 0; i < island_states.length; i++) {
-			island_states[i] = initial_states[i];
-		}
+            System.arraycopy(initial_states, 0, island_states, 0, island_states.length);
 	}
 
 	public void setIslandState(int index, int state) {

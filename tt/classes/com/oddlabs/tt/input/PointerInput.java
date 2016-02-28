@@ -85,7 +85,7 @@ public final strictfp class PointerInput {
 			}
 		}
 		if (dz != 0) 
-			LocalInput.getLocalInput().mouseScrolled(gui_root, dz);
+			LocalInput.mouseScrolled(gui_root, dz);
 	}
 
 	public static void poll(GUIRoot gui_root) {
@@ -109,13 +109,16 @@ public final strictfp class PointerInput {
 					if (drag_button == -1) {
 						drag_button = button;
 					}
-					LocalInput.getLocalInput().mousePressed(gui_root, button);
+					LocalInput.mousePressed(gui_root, button);
 				} else {
 					drag_button = -1;
-					LocalInput.getLocalInput().mouseReleased(gui_root, button);
+					LocalInput.mouseReleased(gui_root, button);
 				}
 			}
 		}
 		updateMouse(gui_root, accum_x, accum_y, accum_dz);
 	}
+
+    private PointerInput() {
+    }
 }

@@ -352,7 +352,7 @@ public abstract strictfp class GUIObject extends Renderable {
 
 		if (!active)
 			focusNotifyAll(true);
-		focused_child = caller_child;;
+		focused_child = caller_child;
 	}
 
 	public void setFocus() {
@@ -385,10 +385,7 @@ public abstract strictfp class GUIObject extends Renderable {
 
 	private boolean modalBlocked(GUIRoot gui_root) {
 		ModalDelegate modal_delegate = gui_root.getModalDelegate();
-		if (modal_delegate != null && !modalRelative(modal_delegate)) {
-			return true;
-		}
-		return false;
+		return modal_delegate != null && !modalRelative(modal_delegate);
 	}
 
 	private boolean modalRelative(ModalDelegate modal_delegate) {

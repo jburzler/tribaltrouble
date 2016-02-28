@@ -55,7 +55,7 @@ public final strictfp class ChatCommand {
 	}
 
 	private static int firstSpace(String text) {
-		int fist_space = text.indexOf(" ");
+		int fist_space = text.indexOf(' ');
 		if (fist_space == -1)
 			return text.length();
 		else
@@ -119,4 +119,7 @@ public final strictfp class ChatCommand {
 		}
 		info_printer.print(result);
 	}
+
+    private ChatCommand() {
+    }
 }

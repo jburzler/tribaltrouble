@@ -53,12 +53,15 @@ public final strictfp class AudioManager implements AudioImplementation {
 		if (sound_play_counter == 0) {
                     for (AudioSource source : sources) {
                         int rank = source.getRank();
-                        if (rank == AudioPlayer.AUDIO_RANK_MUSIC) {
-                            continue;
-                        } else if (rank == AudioPlayer.AUDIO_RANK_AMBIENT) {
-                            AL10.alSourcePause(source.getSource());
-                        } else {
-                            AL10.alSourceStop(source.getSource());
+                        switch (rank) {
+                            case AudioPlayer.AUDIO_RANK_MUSIC:
+                                continue;
+                            case AudioPlayer.AUDIO_RANK_AMBIENT:
+                                AL10.alSourcePause(source.getSource());
+                                break;
+                            default:
+                                AL10.alSourceStop(source.getSource());
+                                break;
                         }
                     }
 		}

@@ -299,8 +299,7 @@ public final strictfp class Sky {
 	}
 
 	private void putArray(float[] src, int offset, float[] dest) {
-		for (int i = 0; i < src.length; i++)
-			dest[i + (offset*src.length)] = src[i];
+            System.arraycopy(src, 0, dest, offset*src.length, src.length);
 	}
 
 	private ShortVBO[] makeSkyStripIndices() {

@@ -150,4 +150,7 @@ public final strictfp class Globals {
 	public final static int BLOCK_SCROLL_AMOUNT = 20;
 
 	public final static float ERROR_TOLERANCE = 10f;
+
+    private Globals() {
+    }
 }

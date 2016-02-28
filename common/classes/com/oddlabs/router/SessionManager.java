@@ -34,7 +34,7 @@ final strictfp class SessionManager {
 	}
 
 	long getNextTimeout() {
-		if (timeouts.size() == 0)
+		if (timeouts.isEmpty())
 			return 0;
 		Timeout timeout = (Timeout)timeouts.firstKey();
 		long timeout_value = timeout.next_timeout - time_manager.getMillis();

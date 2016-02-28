@@ -92,4 +92,7 @@ public final strictfp class PathFinder {
 		}
 		visited_list.clear();
 	}
+
+    private PathFinder() {
+    }
 }

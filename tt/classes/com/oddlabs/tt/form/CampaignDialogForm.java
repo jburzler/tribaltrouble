@@ -1,7 +1,6 @@
 package com.oddlabs.tt.form;
 
 import com.oddlabs.tt.gui.*;
-import com.oddlabs.tt.guievent.*;
 import com.oddlabs.util.Quad;
 
 public strictfp class CampaignDialogForm extends Form {

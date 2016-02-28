@@ -54,7 +54,7 @@ public final strictfp class RefillerList {
 								((QueuedAudioPlayer)players.get(i)).refill();
 							}
 						}
-						while (players.size() == 0 && !finished) {
+						while (players.isEmpty() && !finished) {
 							try {
 								RefillerList.this.wait();
 							} catch (InterruptedException e) {

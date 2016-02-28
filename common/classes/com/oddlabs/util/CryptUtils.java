@@ -6,7 +6,6 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
-import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSession;
@@ -30,7 +29,7 @@ public final strictfp class CryptUtils {
 
 	private static String digest(byte[] message_bytes) {
 		byte[] digest_bytes = digest.digest(message_bytes);
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		for (int i = 0; i < digest_bytes.length; i++) {
 			int b = ((int)digest_bytes[i]) & 0xff;
 			int nibble0 = (b & 0xf0) >> 4;
@@ -85,4 +84,7 @@ System.out.println("		digest(\"xarerenlamer4kasbdvljh\") = " + 		digest("xareren
 //		digest(bla);
 	}
 	*/
+
+    private CryptUtils() {
+    }
 }

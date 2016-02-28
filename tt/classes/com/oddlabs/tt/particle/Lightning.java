@@ -131,7 +131,7 @@ public final strictfp class Lightning extends Element implements Animated {
 		}
 		setBounds(x_min, x_max, y_min, y_max, z_min, z_max);
 		reregister();
-		if (particles.size() == 0) {
+		if (particles.isEmpty()) {
 			remove();
 		}
 	}

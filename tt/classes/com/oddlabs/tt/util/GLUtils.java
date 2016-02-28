@@ -53,7 +53,7 @@ public final strictfp class GLUtils {
 	}
 
 	public static String takeScreenshot(String filename) {
-		if (filename.equals("")) {
+		if (filename.isEmpty()) {
 			int i = 0;
 			File file;
 			do {
@@ -108,4 +108,7 @@ public final strictfp class GLUtils {
 		String renderer = GL11.glGetString(GL11.GL_RENDERER);
 		return os_name.equals("Mac OS X") && renderer.equals("Intel GMA 950 OpenGL Engine");
 	}
+
+    private GLUtils() {
+    }
 }

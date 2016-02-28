@@ -4,7 +4,6 @@ import com.oddlabs.tt.delegate.GameStatsDelegate;
 import com.oddlabs.tt.delegate.InGameMainMenu;
 import com.oddlabs.tt.delegate.Menu;
 import com.oddlabs.tt.gui.*;
-import com.oddlabs.tt.guievent.MouseClickListener;
 import com.oddlabs.tt.render.Renderer;
 import com.oddlabs.tt.util.Utils;
 import com.oddlabs.tt.viewer.InGameInfo;

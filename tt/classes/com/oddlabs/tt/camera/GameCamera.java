@@ -427,25 +427,10 @@ public final strictfp class GameCamera extends Camera {
 			return;
 		}
 
-		if (LocalInput.isKeyDown(Keyboard.KEY_HOME) || LocalInput.isKeyDown(Keyboard.KEY_NUMPAD8))
-			pitch_up = true;
-		else
-			pitch_up = false;
-
-		if (LocalInput.isKeyDown(Keyboard.KEY_END) || LocalInput.isKeyDown(Keyboard.KEY_NUMPAD2))
-			pitch_down = true;
-		else
-			pitch_down = false;
-
-		if (LocalInput.isKeyDown(Keyboard.KEY_INSERT) || LocalInput.isKeyDown(Keyboard.KEY_NUMPAD6))
-			rotate_right = true;
-		else
-			rotate_right = false;
-
-		if (LocalInput.isKeyDown(Keyboard.KEY_DELETE) || LocalInput.isKeyDown(Keyboard.KEY_NUMPAD4))
-			rotate_left = true;
-		else
-			rotate_left = false;
+                pitch_up = LocalInput.isKeyDown(Keyboard.KEY_HOME) || LocalInput.isKeyDown(Keyboard.KEY_NUMPAD8);
+                pitch_down = LocalInput.isKeyDown(Keyboard.KEY_END) || LocalInput.isKeyDown(Keyboard.KEY_NUMPAD2);
+                rotate_right = LocalInput.isKeyDown(Keyboard.KEY_INSERT) || LocalInput.isKeyDown(Keyboard.KEY_NUMPAD6);
+                rotate_left = LocalInput.isKeyDown(Keyboard.KEY_DELETE) || LocalInput.isKeyDown(Keyboard.KEY_NUMPAD4);
 	}
 
         @Override

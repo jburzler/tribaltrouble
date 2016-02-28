@@ -42,11 +42,11 @@ public final strictfp class CreditsForm extends Form {
 
 				about_box.append(info.getName() + "\n");
 				about_box.append(info.getAddress1() + "\n");
-				if (info.getAddress2() != null && !info.getAddress2().trim().equals(""))
+				if (info.getAddress2() != null && !info.getAddress2().trim().isEmpty())
 					about_box.append(info.getAddress2() + "\n");
 				about_box.append(info.getZip() + "\n");
 				about_box.append(info.getCity() + "\n");
-				if (info.getState() != null && !info.getState().trim().equals(""))
+				if (info.getState() != null && !info.getState().trim().isEmpty())
 					about_box.append(info.getState() + "\n");
 				about_box.append(info.getCountry() + "\n");
 				about_box.append("\n");

@@ -197,7 +197,7 @@ public final strictfp class LandscapeTileTriangle {
 	}
 
 	public float getHeight(HeightMap heightmap, float x, float y) {
-		return heightmap.planeHeight(x, y, current_plane);
+		return HeightMap.planeHeight(x, y, current_plane);
 	}
 
         @Override

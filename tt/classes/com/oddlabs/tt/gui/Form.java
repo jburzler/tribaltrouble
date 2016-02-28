@@ -80,7 +80,7 @@ public strictfp class Form extends Group {
 	}
 
         @Override
-	protected final void mousePressed(int button, int x, int y) {;
+	protected final void mousePressed(int button, int x, int y) {
 		if (caption != null && y >= getHeight() - Skin.getSkin().getFormData().getForm().getTopOffset())
 			drag = true;
 	}

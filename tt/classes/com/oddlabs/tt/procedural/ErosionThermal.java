@@ -338,4 +338,7 @@ public final strictfp class ErosionThermal {
 		old = height.copy();
 	}
 
+    private ErosionThermal() {
+    }
+
 }

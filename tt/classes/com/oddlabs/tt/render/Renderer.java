@@ -5,7 +5,6 @@ import com.oddlabs.http.HttpRequestParameters;
 import com.oddlabs.matchmaking.Game;
 import com.oddlabs.net.NetworkSelector;
 import com.oddlabs.net.TaskThread;
-import com.oddlabs.net.TimeManager;
 import com.oddlabs.regclient.RegistrationClient;
 import com.oddlabs.tt.Main;
 import com.oddlabs.tt.animation.AnimationManager;
@@ -20,7 +19,6 @@ import com.oddlabs.tt.camera.MenuCamera;
 import com.oddlabs.tt.delegate.MainMenu;
 import com.oddlabs.tt.delegate.QuitScreen;
 import com.oddlabs.tt.event.LocalEventQueue;
-import com.oddlabs.tt.form.LoadCallback;
 import com.oddlabs.tt.form.MessageForm;
 import com.oddlabs.tt.form.ProgressForm;
 import com.oddlabs.tt.form.RegistrationForm;
@@ -36,7 +34,6 @@ import com.oddlabs.tt.gui.Label;
 import com.oddlabs.tt.gui.Languages;
 import com.oddlabs.tt.gui.LocalInput;
 import com.oddlabs.tt.gui.Skin;
-import com.oddlabs.tt.guievent.MouseClickListener;
 import com.oddlabs.tt.landscape.LandscapeResources;
 import com.oddlabs.tt.landscape.NotificationListener;
 import com.oddlabs.tt.landscape.TreeSupply;
@@ -394,7 +391,7 @@ e.printStackTrace();
 						AL10.alListenerf(AL10.AL_GAIN, 1f);
 					if (reset_keyboard) {
 						reset_keyboard = false;
-						LocalInput.getLocalInput().resetKeyboard();
+						LocalInput.resetKeyboard();
 					}
 					if (!first_frame && !BackBufferRenderer.isBackBufferDirty()) {
 						Display.update();

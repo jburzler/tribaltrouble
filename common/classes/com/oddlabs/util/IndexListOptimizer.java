@@ -204,4 +204,7 @@ dumpBuffer(buffer);*/
 			return result;
 		}
 	}
+
+    private IndexListOptimizer() {
+    }
 }

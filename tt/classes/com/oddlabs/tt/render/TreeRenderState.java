@@ -28,12 +28,14 @@ final strictfp class TreeRenderState implements LODObject {
         @Override
 	public int getTriangleCount(int index) {
 		Tree tree = tree_renderer.getTrees()[tree_supply.getTreeTypeIndex()];
-		if (index == SpriteRenderer.HIGH_POLY) 
-			return tree.getTrunk().getSprite(0).getTriangleCount() + tree.getCrown().getSprite(0).getTriangleCount();
-		else if (index == SpriteRenderer.LOW_POLY)
-			return tree_renderer.getLowDetails()[tree_supply.getTreeTypeIndex()].getPolyCount();
-		else
-			throw new RuntimeException();
+            switch (index) {
+                case SpriteRenderer.HIGH_POLY:
+                    return tree.getTrunk().getSprite(0).getTriangleCount() + tree.getCrown().getSprite(0).getTriangleCount();
+                case SpriteRenderer.LOW_POLY:
+                    return tree_renderer.getLowDetails()[tree_supply.getTreeTypeIndex()].getPolyCount();
+                default:
+                    throw new RuntimeException();
+            }
 	}
 
         @Override

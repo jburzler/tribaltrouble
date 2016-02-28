@@ -551,7 +551,7 @@ public final strictfp class GameMenu extends Panel implements ConfigurationListe
                 @Override
 		public void enterPressed(CharSequence text) {
 			String chat = text.toString();
-			if (!chat.equals("")) {
+			if (!chat.isEmpty()) {
 				chat_line.clear();
 				if (!ChatCommand.filterCommand(gui_root.getInfoPrinter(), chat))
 					game_network.getClient().getServerInterface().chat(chat);

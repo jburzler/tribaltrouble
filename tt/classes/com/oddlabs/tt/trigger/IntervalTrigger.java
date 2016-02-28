@@ -2,7 +2,6 @@ package com.oddlabs.tt.trigger;
 
 import com.oddlabs.tt.animation.AnimationManager;
 import com.oddlabs.tt.animation.TimerAnimation;
-import com.oddlabs.tt.animation.Updatable;
 import com.oddlabs.tt.landscape.World;
 
 public abstract strictfp class IntervalTrigger {

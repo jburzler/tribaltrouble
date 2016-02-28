@@ -14,4 +14,7 @@ public final strictfp class WindowsRegistryInterface {
 		Object result = queryRegistrationKey_method.invoke(null, new Object[]{root_key_enum, subkey, value});
 		return (String)result;
 	}
+
+    private WindowsRegistryInterface() {
+    }
 }

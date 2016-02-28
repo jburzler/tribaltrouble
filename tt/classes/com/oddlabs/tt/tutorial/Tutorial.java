@@ -1,7 +1,6 @@
 package com.oddlabs.tt.tutorial;
 
 import com.oddlabs.tt.animation.TimerAnimation;
-import com.oddlabs.tt.animation.Updatable;
 import com.oddlabs.tt.audio.AudioParameters;
 import com.oddlabs.tt.audio.AudioPlayer;
 import com.oddlabs.tt.delegate.TutorialOverDelegate;

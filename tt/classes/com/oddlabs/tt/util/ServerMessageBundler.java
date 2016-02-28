@@ -79,4 +79,7 @@ public final strictfp class ServerMessageBundler {
 				throw new RuntimeException();
 		}
 	}
+
+    private ServerMessageBundler() {
+    }
 }

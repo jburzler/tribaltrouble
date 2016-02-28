@@ -25,4 +25,7 @@ public final strictfp class Network {
 	public static MatchmakingClient getMatchmakingClient() {
 		return matchmaking_client;
 	}
+
+    private Network() {
+    }
 }

@@ -323,4 +323,7 @@ public final strictfp class ErosionHydraulic {
 		return channel;
 	}
 
+    private ErosionHydraulic() {
+    }
+
 }

@@ -145,4 +145,7 @@ System.out.println("loopback address = " + best_address);
 //		assert url != null: "Could not load file: " + location;
 		return url;
 	}
+
+    private Utils() {
+    }
 }

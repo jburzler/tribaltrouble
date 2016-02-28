@@ -55,7 +55,7 @@ public final strictfp class RubberGroup {
 	public void remove(RubberSupply supply) {
 		boolean in_list = supplies.remove(supply);
 		assert in_list;
-		if (supplies.size() == 0)
+		if (supplies.isEmpty())
 			((RubberSupplyManager)world.getSupplyManager(RubberSupply.class)).emptyGroup();
 	}
 }

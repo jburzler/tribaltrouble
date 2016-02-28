@@ -29,7 +29,7 @@ public final strictfp class GeneratorRing extends TextureGenerator {
 	
         @Override
 	public int hashCode() {
-		return size*ring_parms.hashCode();
+		return size*Arrays.deepHashCode(ring_parms);
 	}
 
 	private static boolean equals(float[][] a1, float[][] a2) {

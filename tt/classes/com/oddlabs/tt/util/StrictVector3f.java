@@ -293,7 +293,7 @@ public strictfp class StrictVector3f {
 	 */
         @Override
 	public String toString() {
-		StringBuffer sb = new StringBuffer(64);
+		StringBuilder sb = new StringBuilder(64);
 
 		sb.append("StrictVector3f[");
 		sb.append(x);

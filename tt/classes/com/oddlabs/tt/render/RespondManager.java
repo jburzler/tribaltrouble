@@ -60,7 +60,7 @@ public final strictfp class RespondManager implements Animated {
 	}
 
 	boolean isResponding(Object target) {
-		if (respond_targets.size() == 0)
+		if (respond_targets.isEmpty())
 			return false; // Quick exit in the common case of no responding targets
 		else
 			return isResponding((Timeout)respond_targets.get(target));

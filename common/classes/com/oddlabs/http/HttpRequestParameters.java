@@ -17,7 +17,7 @@ public final strictfp class HttpRequestParameters {
 	String createQueryString() {
 		if (parameters == null)
 			return "";
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		Iterator parameter_entries = parameters.entrySet().iterator();
 		try {
 			while (parameter_entries.hasNext()) {

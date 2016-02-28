@@ -191,4 +191,7 @@ public final strictfp class Analyzer {
 		return height.copy().lineart().threshold(0f, threshold).squareFit(1f, square_size).count(1f)/(float)(height.width*height.height);
 	}
 
+    private Analyzer() {
+    }
+
 }

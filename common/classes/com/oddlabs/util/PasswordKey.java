@@ -16,4 +16,7 @@ public final strictfp class PasswordKey {
 		byte[] encoded_registration_key = (byte[])sealed_key.getObject(decrypt_cipher);
 		return KeyManager.readPrivateKey(encoded_registration_key, algorithm);
 	}
+
+    private PasswordKey() {
+    }
 }

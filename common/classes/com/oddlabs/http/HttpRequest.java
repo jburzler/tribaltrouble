@@ -176,4 +176,7 @@ System.out.println("response = " + response);
 			NetworkSelector.processTasks();
 		}
 	}*/
+
+    private HttpRequest() {
+    }
 }

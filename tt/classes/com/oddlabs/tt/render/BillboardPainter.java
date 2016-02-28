@@ -134,4 +134,7 @@ public abstract strictfp class BillboardPainter {
 		matrix_buf.rewind();
 		GL11.glLoadMatrix(matrix_buf);
 	}
+
+    private BillboardPainter() {
+    }
 }

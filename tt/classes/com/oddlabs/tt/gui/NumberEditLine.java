@@ -48,7 +48,7 @@ public strictfp class NumberEditLine extends EditLine {
 		} catch (Exception e) {
 			// ignore exception, assume minimum value
 			value = max_value;
-		};
+		}
 		setValue(value);
 	}
 

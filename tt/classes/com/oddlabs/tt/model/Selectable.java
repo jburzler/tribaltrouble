@@ -10,6 +10,7 @@ import com.oddlabs.tt.player.Player;
 import com.oddlabs.tt.util.StateChecksum;
 import com.oddlabs.tt.util.Target;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public abstract class Selectable extends Model implements Target, Animated, ModelToolTip {
@@ -147,9 +148,7 @@ public abstract class Selectable extends Model implements Target, Animated, Mode
 
 	public final void pushControllers(Controller[] controllers) {
 		assert !isDead();
-            for (Controller controller : controllers) {
-                controller_stack.add(controller);
-            }
+                controller_stack.addAll(Arrays.asList(controllers));
 		decide();
 	}
 

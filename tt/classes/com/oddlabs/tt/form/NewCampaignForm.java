@@ -138,7 +138,7 @@ public final strictfp class NewCampaignForm extends Form implements Deterministi
 
 	private void save() {
 		String name = editline_name.getContents().trim();
-		if (name.equals("")) {
+		if (name.isEmpty()) {
 			gui_root.addModalForm(new MessageForm(Utils.getBundleString(bundle, "invalid")));
 			return;
 		}
@@ -150,34 +150,40 @@ public final strictfp class NewCampaignForm extends Form implements Deterministi
 		CampaignState[] new_states;
 		if (campaign_states != null) {
 			new_states = new CampaignState[campaign_states.length + 1];
-			for (int i = 0; i < campaign_states.length; i++) {
-				new_states[i] = campaign_states[i];
-			}
+                    System.arraycopy(campaign_states, 0, new_states, 0, campaign_states.length);
 		} else {
 			new_states = new CampaignState[1];
 		}
 		Campaign campaign;
-		if (race_pulldown.getChosenItemIndex() == 0) {
-			campaign = new VikingCampaign(network, gui_root);
-			campaign.getState().setRace(CampaignState.RACE_VIKINGS);
-		} else if (race_pulldown.getChosenItemIndex() == 1) {
-			campaign = new NativeCampaign(network, gui_root);
-			campaign.getState().setRace(CampaignState.RACE_NATIVES);
-		} else {
-			throw new RuntimeException();
-		}
+            switch (race_pulldown.getChosenItemIndex()) {
+                case 0:
+                    campaign = new VikingCampaign(network, gui_root);
+                    campaign.getState().setRace(CampaignState.RACE_VIKINGS);
+                    break;
+                case 1:
+                    campaign = new NativeCampaign(network, gui_root);
+                    campaign.getState().setRace(CampaignState.RACE_NATIVES);
+                    break;
+                default:
+                    throw new RuntimeException();
+            }
 		campaign.getState().setName(name);
 		campaign.getState().setDate(System.currentTimeMillis());
 
 		int difficulty;
-		if (difficulty_pulldown.getChosenItemIndex() == 0)
-			difficulty = CampaignState.DIFFICULTY_EASY;
-		else if (difficulty_pulldown.getChosenItemIndex() == 1)
-			difficulty = CampaignState.DIFFICULTY_NORMAL;
-		else if (difficulty_pulldown.getChosenItemIndex() == 2)
-			difficulty = CampaignState.DIFFICULTY_HARD;
-		else
-			throw new RuntimeException();
+            switch (difficulty_pulldown.getChosenItemIndex()) {
+                case 0:
+                    difficulty = CampaignState.DIFFICULTY_EASY;
+                    break;
+                case 1:
+                    difficulty = CampaignState.DIFFICULTY_NORMAL;
+                    break;
+                case 2:
+                    difficulty = CampaignState.DIFFICULTY_HARD;
+                    break;
+                default:
+                    throw new RuntimeException();
+            }
 		campaign.getState().setDifficulty(difficulty);
 		new_states[new_states.length - 1] = campaign.getState();
 		LoadCampaignBox.saveSavegames(new_states, this);

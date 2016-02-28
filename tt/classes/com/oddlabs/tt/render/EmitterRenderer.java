@@ -113,4 +113,7 @@ final strictfp class EmitterRenderer {
                     }
 		}
 	}
+
+    private EmitterRenderer() {
+    }
 }

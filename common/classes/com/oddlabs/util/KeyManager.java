@@ -198,4 +198,7 @@ loop:   while (true) {
 		Arrays.fill(buf, ' ');
 		return ret;
 	}
+
+    private KeyManager() {
+    }
 }

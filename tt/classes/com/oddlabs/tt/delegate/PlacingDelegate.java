@@ -86,13 +86,17 @@ public final strictfp class PlacingDelegate extends ControllableCameraDelegate {
 
         @Override
 	public void mousePressed(int button, int x, int y) {
-		if (button == LocalInput.LEFT_BUTTON) {
-			placeObject();
-		} else if (button == LocalInput.RIGHT_BUTTON) {
-			pop();
-		} else {
-			super.mousePressed(button, x, y);
-		}						
+            switch (button) {
+                case LocalInput.LEFT_BUTTON:
+                    placeObject();
+                    break;
+                case LocalInput.RIGHT_BUTTON:
+                    pop();
+                    break;						
+                default:
+                    super.mousePressed(button, x, y);
+                    break;
+            }
 	}
 
         @Override

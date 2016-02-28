@@ -895,7 +895,6 @@ public final strictfp class Layer {
 					if (a.getPixel(x, y) == 0) {
 						putPixel(x, y, layer.r.getPixel(x, y), layer.g.getPixel(x, y), layer.b.getPixel(x, y), layer.a.getPixel(x, y));
 					} else if (layer.a.getPixel(x, y) == 0) {
-						continue;
 					} else {
 						alpha = 1f - (1f - a.getPixel(x, y))*(1f - layer.a.getPixel(x, y));
 						alpha_inv = 1f/alpha;
