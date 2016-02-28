@@ -1,15 +1,11 @@
 package com.oddlabs.tt.gui;
 
-import java.util.ResourceBundle;
-
-import com.oddlabs.tt.form.DemoForm;
-import com.oddlabs.tt.form.InGameDemoForm;
-import com.oddlabs.tt.viewer.WorldViewer;
 import com.oddlabs.tt.guievent.MouseButtonListener;
-import com.oddlabs.tt.render.Renderer;
 import com.oddlabs.tt.util.ToolTip;
-import com.oddlabs.util.Quad;
 import com.oddlabs.tt.util.Utils;
+import com.oddlabs.tt.viewer.WorldViewer;
+import com.oddlabs.util.Quad;
+import java.util.ResourceBundle;
 
 public abstract strictfp class IconSpinner extends GUIObject implements ToolTip {
 	private final IconQuad[] icon_quad;
@@ -58,20 +54,6 @@ public abstract strictfp class IconSpinner extends GUIObject implements ToolTip 
 	public final void setIconDisabler(IconDisabler icon_disabler) {
 		this.icon_disabler = icon_disabler;
 	}
-	
-	public final void setNag(String text) {
-		demo = text;
-	}
-
-	private final boolean showNag() {
-		return demo != null && !Renderer.isRegistered();
-	}
-
-	private final void addDemoForm() {
-		ResourceBundle db = ResourceBundle.getBundle(DemoForm.class.getName());
-		Form demo_form = new InGameDemoForm(viewer, Utils.getBundleString(db, "chicken_weapons_unavailable_header"), new GUIImage(512, 256, 0f, 0f, 1f, 1f, "/textures/gui/demo_chickenweapons"), Utils.getBundleString(db, "chicken_weapons_unavailable"));
-		viewer.getGUIRoot().addModalForm(demo_form);
-	}
 
 	public final void doUpdate() {
 		setCount();
@@ -96,7 +78,7 @@ public abstract strictfp class IconSpinner extends GUIObject implements ToolTip 
 			if (text_count != 0 && !renderInfinite()) {
 				label.append(text_count);
 			}
-		}			
+		}
 	}
 
 	public void appendToolTip(ToolTipBox tool_tip_box) {
@@ -106,9 +88,6 @@ public abstract strictfp class IconSpinner extends GUIObject implements ToolTip 
 
 	public final void shortcutPressed(boolean shift_down, boolean ctrl_down) {
 		if (!isDisabled()) {
-			if (showNag()) {
-				addDemoForm();
-			} else {
 				int mouse_button;
 				if (ctrl_down)
 					mouse_button = LocalInput.RIGHT_BUTTON;
@@ -119,17 +98,12 @@ public abstract strictfp class IconSpinner extends GUIObject implements ToolTip 
 					button_minus.mousePressedAll(mouse_button, 0, 0);
 				else
 					button_plus.mousePressedAll(mouse_button, 0, 0);
-			}
 		}
 	}
 
 	public final void shortcutReleased(boolean shift_down, boolean ctrl_down) {
 		if (!isDisabled()) {
-			if (showNag()) {
-				addDemoForm();
-			} else {
-				release();
-			}
+        		release();
 		}
 	}
 
@@ -171,14 +145,10 @@ public abstract strictfp class IconSpinner extends GUIObject implements ToolTip 
 		}
 
 		public final void mousePressed(int button, int x, int y) {
-			if (showNag()) {
-				addDemoForm();
-			} else {
-				if (button == LocalInput.RIGHT_BUTTON)
+			if (button == LocalInput.RIGHT_BUTTON)
 					increase(10);
 				else
 					increase(1);
-			}
 		}
 
 		public final void mouseReleased(int button, int x, int y) {
@@ -195,14 +165,10 @@ public abstract strictfp class IconSpinner extends GUIObject implements ToolTip 
 		}
 
 		public final void mousePressed(int button, int x, int y) {
-			if (showNag()) {
-				addDemoForm();
-			} else {
-				if (button == LocalInput.RIGHT_BUTTON)
+			if (button == LocalInput.RIGHT_BUTTON)
 					decrease(10);
 				else
 					decrease(1);
-			}
 		}
 
 		public final void mouseReleased(int button, int x, int y) {

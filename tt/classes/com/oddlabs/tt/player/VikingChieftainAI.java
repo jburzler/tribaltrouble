@@ -1,12 +1,10 @@
 package com.oddlabs.tt.player;
 
-import java.util.List;
-
 import com.oddlabs.tt.model.RacesResources;
 import com.oddlabs.tt.model.Selectable;
 import com.oddlabs.tt.model.Unit;
 import com.oddlabs.tt.pathfinder.FindOccupantFilter;
-import com.oddlabs.tt.pathfinder.UnitGrid;
+import java.util.List;
 
 public final strictfp class VikingChieftainAI extends ChieftainAI {
 	private final static int NUM_UNITS_FOR_STUN = 5;

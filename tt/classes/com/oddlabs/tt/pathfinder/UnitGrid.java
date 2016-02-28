@@ -1,18 +1,14 @@
 package com.oddlabs.tt.pathfinder;
 
-import java.util.List;
-
-import org.lwjgl.opengl.GL11;
-
 import com.oddlabs.tt.font.Font;
 import com.oddlabs.tt.font.TextLineRenderer;
 import com.oddlabs.tt.global.Globals;
 import com.oddlabs.tt.gui.Skin;
-import com.oddlabs.tt.landscape.World;
 import com.oddlabs.tt.landscape.HeightMap;
 import com.oddlabs.tt.util.DebugRender;
 import com.oddlabs.tt.util.Target;
-import com.oddlabs.tt.landscape.HeightMap;
+import java.util.List;
+import org.lwjgl.opengl.GL11;
 
 public final strictfp class UnitGrid {
 	private final Region[][] regions;

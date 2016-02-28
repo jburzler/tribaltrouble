@@ -1,8 +1,6 @@
 package com.oddlabs.event;
 
-import java.io.*;
 import java.nio.*;
-import java.nio.channels.*;
 
 public final strictfp class NotDeterministic extends Deterministic {
 	public final boolean isPlayback() {

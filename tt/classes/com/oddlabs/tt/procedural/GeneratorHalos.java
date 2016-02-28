@@ -1,12 +1,11 @@
 package com.oddlabs.tt.procedural;
 
-import org.lwjgl.opengl.GL11;
-
 import com.oddlabs.procedural.Channel;
 import com.oddlabs.procedural.Layer;
 import com.oddlabs.tt.render.Texture;
 import com.oddlabs.tt.resource.GLImage;
 import com.oddlabs.tt.resource.GLIntImage;
+import org.lwjgl.opengl.GL11;
 
 public final strictfp class GeneratorHalos extends TextureGenerator {
 	public static final int SHADOWED = 0;

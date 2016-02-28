@@ -2,7 +2,6 @@ package com.oddlabs.tt.tutorial;
 
 import com.oddlabs.tt.model.Abilities;
 import com.oddlabs.tt.model.Building;
-import com.oddlabs.tt.viewer.WorldViewer;
 
 public final strictfp class SelectQuartersTrigger extends TutorialTrigger {
 	public SelectQuartersTrigger() {

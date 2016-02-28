@@ -1,21 +1,12 @@
 package com.oddlabs.tt.model;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
-import java.util.ResourceBundle;
-
-import org.lwjgl.opengl.GL11;
-
 import com.oddlabs.tt.audio.Audio;
 import com.oddlabs.tt.audio.AudioFile;
 import com.oddlabs.tt.form.ProgressForm;
 import com.oddlabs.tt.global.Globals;
 import com.oddlabs.tt.gui.Icons;
 import com.oddlabs.tt.landscape.AbstractTreeGroup;
-import com.oddlabs.tt.landscape.LandscapeTargetRespond;
 import com.oddlabs.tt.landscape.TreeSupply;
-import com.oddlabs.tt.landscape.World;
 import com.oddlabs.tt.model.weapon.InstantHitFactory;
 import com.oddlabs.tt.model.weapon.IronAxeWeapon;
 import com.oddlabs.tt.model.weapon.IronSpearWeapon;
@@ -33,21 +24,25 @@ import com.oddlabs.tt.model.weapon.WeaponFactory;
 import com.oddlabs.tt.player.NativeChieftainAI;
 import com.oddlabs.tt.player.VikingChieftainAI;
 import com.oddlabs.tt.procedural.GeneratorDamageSmoke;
+import com.oddlabs.tt.procedural.GeneratorHalos;
 import com.oddlabs.tt.procedural.GeneratorLightning;
 import com.oddlabs.tt.procedural.GeneratorPoison;
 import com.oddlabs.tt.procedural.GeneratorSmoke;
 import com.oddlabs.tt.procedural.GeneratorSonic;
+import com.oddlabs.tt.render.RenderQueues;
 import com.oddlabs.tt.render.ShadowListKey;
-import com.oddlabs.tt.render.TargetRespondRenderer;
 import com.oddlabs.tt.render.SpriteKey;
 import com.oddlabs.tt.render.TextureKey;
-import com.oddlabs.tt.render.RenderQueues;
+import com.oddlabs.tt.resource.ResourceDescriptor;
 import com.oddlabs.tt.resource.Resources;
 import com.oddlabs.tt.resource.SpriteFile;
 import com.oddlabs.tt.resource.TextureFile;
 import com.oddlabs.tt.util.Utils;
-import com.oddlabs.tt.resource.ResourceDescriptor;
-import com.oddlabs.tt.procedural.GeneratorHalos;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
+import java.util.ResourceBundle;
+import org.lwjgl.opengl.GL11;
 
 public final strictfp class RacesResources {
 	public final static int QUARTERS_SIZE = 5;

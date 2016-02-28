@@ -1,8 +1,6 @@
 package com.oddlabs.tt.player;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 
 public final strictfp class PlayerInfo implements Serializable {
 	private final static long serialVersionUID = 3;

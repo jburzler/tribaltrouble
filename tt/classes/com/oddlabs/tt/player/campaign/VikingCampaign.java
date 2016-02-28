@@ -1,20 +1,14 @@
 package com.oddlabs.tt.player.campaign;
 
-import java.util.ResourceBundle;
 
+import com.oddlabs.net.NetworkSelector;
 import com.oddlabs.tt.form.CampaignDialogForm;
-import com.oddlabs.tt.form.DemoForm;
 import com.oddlabs.tt.gui.CampaignIcons;
 import com.oddlabs.tt.gui.Form;
-import com.oddlabs.tt.gui.GUIImage;
 import com.oddlabs.tt.gui.GUIRoot;
-import com.oddlabs.tt.gui.LocalInput;
 import com.oddlabs.tt.gui.VikingCampaignIcons;
-import com.oddlabs.tt.guievent.MouseClickListener;
 import com.oddlabs.tt.render.Renderer;
 import com.oddlabs.tt.viewer.WorldViewer;
-import com.oddlabs.tt.util.Utils;
-import com.oddlabs.net.NetworkSelector;
 
 public final strictfp class VikingCampaign extends Campaign {
 	public final static int MAX_UNITS = 46;
@@ -97,10 +91,6 @@ public final strictfp class VikingCampaign extends Campaign {
 					CampaignDialogForm.ALIGN_IMAGE_LEFT,
 					new IslandListener(network, gui_root, number), true);
 			gui_root.addModalForm(dialog);
-		} else {
-			ResourceBundle db = ResourceBundle.getBundle(DemoForm.class.getName());
-			Form demo_form = new DemoForm(gui_root, Utils.getBundleString(db, "limited_campaign_header"), new GUIImage(512, 256, 0f, 0f, 1f, 1f, "/textures/gui/demo_campaign"), Utils.getBundleString(db, "limited_campaign"));
-			gui_root.addModalForm(demo_form);
 		}
 	}
 

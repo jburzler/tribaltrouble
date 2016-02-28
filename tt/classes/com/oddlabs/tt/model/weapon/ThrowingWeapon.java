@@ -1,19 +1,17 @@
 package com.oddlabs.tt.model.weapon;
 
 import com.oddlabs.tt.animation.Animated;
-import com.oddlabs.tt.audio.Audio;
-import com.oddlabs.tt.audio.AudioPlayer;
 import com.oddlabs.tt.audio.AbstractAudioPlayer;
+import com.oddlabs.tt.audio.Audio;
 import com.oddlabs.tt.audio.AudioParameters;
-import com.oddlabs.tt.landscape.World;
+import com.oddlabs.tt.audio.AudioPlayer;
 import com.oddlabs.tt.model.Accessories;
 import com.oddlabs.tt.model.Selectable;
 import com.oddlabs.tt.model.Unit;
 import com.oddlabs.tt.model.UnitTemplate;
 import com.oddlabs.tt.player.Player;
-import com.oddlabs.tt.util.StateChecksum;
-import com.oddlabs.tt.model.AbstractElementNode;
 import com.oddlabs.tt.render.SpriteKey;
+import com.oddlabs.tt.util.StateChecksum;
 
 public abstract strictfp class ThrowingWeapon extends Accessories implements Animated {
 	private final static float GRAVITY = -6*9.82f;

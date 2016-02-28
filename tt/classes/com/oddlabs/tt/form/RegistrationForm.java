@@ -1,10 +1,7 @@
 package com.oddlabs.tt.form;
 
-import java.util.ResourceBundle;
-
-import org.lwjgl.input.Keyboard;
-
 import com.oddlabs.registration.RegistrationKey;
+import com.oddlabs.tt.delegate.MainMenu;
 import com.oddlabs.tt.event.LocalEventQueue;
 import com.oddlabs.tt.global.Globals;
 import com.oddlabs.tt.global.Settings;
@@ -19,15 +16,14 @@ import com.oddlabs.tt.gui.HorizButton;
 import com.oddlabs.tt.gui.KeyboardEvent;
 import com.oddlabs.tt.gui.Label;
 import com.oddlabs.tt.gui.LabelBox;
-import com.oddlabs.tt.gui.LocalInput;
 import com.oddlabs.tt.gui.Skin;
 import com.oddlabs.tt.guievent.EnterListener;
 import com.oddlabs.tt.guievent.MouseClickListener;
 import com.oddlabs.tt.render.Renderer;
 import com.oddlabs.tt.util.Utils;
-import com.oddlabs.tt.delegate.MainMenu;
-
+import java.util.ResourceBundle;
 import org.lwjgl.Sys;
+import org.lwjgl.input.Keyboard;
 
 public final strictfp class RegistrationForm extends Form implements RegisterProgressFormListener {
 	private final static int BUTTON_WIDTH = 100;

@@ -1,9 +1,9 @@
 package com.oddlabs.tt.gui;
 
-import com.oddlabs.tt.viewer.WorldViewer;
 import com.oddlabs.tt.model.Building;
 import com.oddlabs.tt.model.DeployContainer;
 import com.oddlabs.tt.player.PlayerInterface;
+import com.oddlabs.tt.viewer.WorldViewer;
 import com.oddlabs.util.Quad;
 
 public final strictfp class DeploySpinner extends IconSpinner {

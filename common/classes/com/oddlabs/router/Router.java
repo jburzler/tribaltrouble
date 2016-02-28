@@ -1,20 +1,16 @@
 package com.oddlabs.router;
 
-import com.oddlabs.net.ConnectionListenerInterface;
+import com.oddlabs.net.AbstractConnection;
 import com.oddlabs.net.AbstractConnectionListener;
 import com.oddlabs.net.ConnectionListener;
-import com.oddlabs.net.AbstractConnection;
+import com.oddlabs.net.ConnectionListenerInterface;
 import com.oddlabs.net.NetworkSelector;
-import com.oddlabs.net.TimeManager;
-
 import java.io.IOException;
 import java.net.InetAddress;
-import java.util.logging.Logger;
 import java.util.Iterator;
-import java.util.Set;
 import java.util.LinkedHashSet;
-import java.util.Map;
-import java.util.HashMap;
+import java.util.Set;
+import java.util.logging.Logger;
 
 public final strictfp class Router implements ConnectionListenerInterface {
 	private final Logger logger;

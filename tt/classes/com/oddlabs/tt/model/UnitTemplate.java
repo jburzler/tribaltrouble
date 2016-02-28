@@ -1,9 +1,9 @@
 package com.oddlabs.tt.model;
 
 import com.oddlabs.tt.audio.Audio;
-import com.oddlabs.tt.render.SpriteKey;
 import com.oddlabs.tt.model.weapon.WeaponFactory;
 import com.oddlabs.tt.render.ShadowListKey;
+import com.oddlabs.tt.render.SpriteKey;
 
 public final strictfp class UnitTemplate extends Template {
 	private final float meters_per_second;

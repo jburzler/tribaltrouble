@@ -1,9 +1,8 @@
 package com.oddlabs.tt.gui;
 
+import com.oddlabs.tt.font.Font;
 import java.text.DateFormat;
 import java.util.Date;
-
-import com.oddlabs.tt.font.Font;
 
 public final strictfp class DateLabel extends Label {
 	private final long val;

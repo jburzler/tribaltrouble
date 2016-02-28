@@ -1,7 +1,5 @@
 package com.oddlabs.tt.render;
 
-import com.oddlabs.geometry.LowDetailModel;
-
 final strictfp class Tree {
 	private final SpriteList crown;
 	private final SpriteList trunk;

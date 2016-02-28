@@ -1,12 +1,7 @@
 package com.oddlabs.tt.model;
 
-import java.util.ResourceBundle;
-
-import com.oddlabs.tt.gui.Icons;
-import com.oddlabs.tt.gui.ToolTipBox;
-import com.oddlabs.tt.util.Utils;
-import com.oddlabs.tt.render.SpriteKey;
 import com.oddlabs.tt.landscape.World;
+import com.oddlabs.tt.render.SpriteKey;
 
 public final strictfp class IronSupply extends SupplyModel {
 	private final static int INITIAL_SUPPLIES = 10;

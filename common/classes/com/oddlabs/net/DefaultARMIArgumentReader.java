@@ -1,7 +1,6 @@
 package com.oddlabs.net;
 
 import java.io.*;
-import java.lang.reflect.Array;
 
 public strictfp class DefaultARMIArgumentReader implements ARMIArgumentReader {
 	public Object readArgument(Class type, ByteBufferInputStream in) throws IOException, ClassNotFoundException {

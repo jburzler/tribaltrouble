@@ -1,22 +1,16 @@
 package com.oddlabs.tt.resource;
 
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.net.URL;
-import java.net.MalformedURLException;
-import java.nio.ByteBuffer;
-import java.nio.IntBuffer;
-
-import javax.imageio.ImageIO;
-
-import org.lwjgl.opengl.GL11;
-
 import com.oddlabs.tt.global.Globals;
 import com.oddlabs.tt.render.Texture;
-import com.oddlabs.tt.gui.LocalInput;
-import com.oddlabs.util.Image;
 import com.oddlabs.util.DXTImage;
+import com.oddlabs.util.Image;
 import com.oddlabs.util.Utils;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import javax.imageio.ImageIO;
+import org.lwjgl.opengl.GL11;
 
 public final strictfp class TextureFile extends File {
 	private final int internal_format;

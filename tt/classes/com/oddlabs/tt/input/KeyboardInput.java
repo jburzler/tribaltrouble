@@ -1,15 +1,13 @@
 package com.oddlabs.tt.input;
 
-import org.lwjgl.input.Keyboard;
-import org.lwjgl.opengl.Display;
-
-import com.oddlabs.tt.animation.AnimationManager;
 import com.oddlabs.event.Deterministic;
+import com.oddlabs.tt.animation.AnimationManager;
 import com.oddlabs.tt.event.LocalEventQueue;
-import com.oddlabs.tt.gui.LocalInput;
-import com.oddlabs.tt.gui.GUIRoot;
-import com.oddlabs.tt.render.Renderer;
 import com.oddlabs.tt.global.Settings;
+import com.oddlabs.tt.gui.GUIRoot;
+import com.oddlabs.tt.gui.LocalInput;
+import com.oddlabs.tt.render.Renderer;
+import org.lwjgl.input.Keyboard;
 
 public final strictfp class KeyboardInput {
 	private final static int LITTLE_WARP = 1000;

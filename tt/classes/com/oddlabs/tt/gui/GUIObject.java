@@ -1,14 +1,13 @@
 package com.oddlabs.tt.gui;
 
-import org.lwjgl.input.Keyboard;
-
+import com.oddlabs.tt.delegate.ModalDelegate;
 import com.oddlabs.tt.guievent.FocusListener;
 import com.oddlabs.tt.guievent.KeyListener;
 import com.oddlabs.tt.guievent.MouseButtonListener;
 import com.oddlabs.tt.guievent.MouseClickListener;
 import com.oddlabs.tt.guievent.MouseMotionListener;
 import com.oddlabs.tt.guievent.MouseWheelListener;
-import com.oddlabs.tt.delegate.ModalDelegate;
+import org.lwjgl.input.Keyboard;
 
 public abstract strictfp class GUIObject extends Renderable {
 	public final static int TOP_LEFT	 =  1;

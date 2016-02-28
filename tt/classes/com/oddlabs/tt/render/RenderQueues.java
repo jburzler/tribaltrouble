@@ -1,12 +1,12 @@
 package com.oddlabs.tt.render;
 
-import com.oddlabs.tt.resource.SpriteFile;
-import com.oddlabs.tt.resource.Resources;
 import com.oddlabs.tt.resource.ResourceDescriptor;
-import java.util.List;
+import com.oddlabs.tt.resource.Resources;
+import com.oddlabs.tt.resource.SpriteFile;
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public final strictfp class RenderQueues {
 	private final List sprite_renderers = new ArrayList();

@@ -1,14 +1,12 @@
 package com.oddlabs.tt.form;
 
-import java.util.ResourceBundle;
-
 import com.oddlabs.matchmaking.MatchmakingServerInterface;
+import com.oddlabs.tt.delegate.Menu;
 import com.oddlabs.tt.gui.ButtonObject;
 import com.oddlabs.tt.gui.CancelButton;
 import com.oddlabs.tt.gui.CancelListener;
 import com.oddlabs.tt.gui.EditLine;
 import com.oddlabs.tt.gui.Form;
-import com.oddlabs.tt.delegate.Menu;
 import com.oddlabs.tt.gui.GUIRoot;
 import com.oddlabs.tt.gui.Label;
 import com.oddlabs.tt.gui.OKButton;
@@ -17,6 +15,7 @@ import com.oddlabs.tt.guievent.EnterListener;
 import com.oddlabs.tt.guievent.MouseClickListener;
 import com.oddlabs.tt.net.Network;
 import com.oddlabs.tt.util.Utils;
+import java.util.ResourceBundle;
 
 public final strictfp class CreateChatRoomForm extends Form {
 	private final static int BUTTON_WIDTH = 100;

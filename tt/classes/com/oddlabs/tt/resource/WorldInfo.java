@@ -1,7 +1,6 @@
 package com.oddlabs.tt.resource;
 
 import com.oddlabs.tt.render.*;
-
 import java.util.List;
 
 public final strictfp class WorldInfo {

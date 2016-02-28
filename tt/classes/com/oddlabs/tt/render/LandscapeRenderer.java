@@ -1,35 +1,31 @@
 package com.oddlabs.tt.render;
 
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Set;
-
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL13;
-import org.lwjgl.opengl.ARBBufferObject;
-import org.lwjgl.BufferUtils;
-
+import com.oddlabs.tt.animation.Animated;
+import com.oddlabs.tt.animation.AnimationManager;
+import com.oddlabs.tt.camera.CameraState;
 import com.oddlabs.tt.global.Globals;
+import com.oddlabs.tt.gui.GUIRoot;
 import com.oddlabs.tt.landscape.HeightMap;
-import com.oddlabs.tt.landscape.LandscapeTileIndices;
 import com.oddlabs.tt.landscape.LandscapeLeaf;
+import com.oddlabs.tt.landscape.LandscapeTileIndices;
 import com.oddlabs.tt.landscape.PatchGroup;
-import com.oddlabs.tt.landscape.World;
 import com.oddlabs.tt.landscape.PatchGroupVisitor;
-import com.oddlabs.tt.util.GLUtils;
+import com.oddlabs.tt.landscape.World;
+import com.oddlabs.tt.resource.WorldInfo;
 import com.oddlabs.tt.util.GLState;
 import com.oddlabs.tt.util.GLStateStack;
-import com.oddlabs.tt.camera.CameraState;
-import com.oddlabs.tt.animation.AnimationManager;
-import com.oddlabs.tt.animation.Animated;
+import com.oddlabs.tt.util.GLUtils;
 import com.oddlabs.tt.util.StateChecksum;
-import com.oddlabs.tt.util.BoundingBox;
-import com.oddlabs.tt.resource.WorldInfo;
-import com.oddlabs.tt.gui.GUIRoot;
 import com.oddlabs.tt.vbo.ShortVBO;
-
 import java.nio.ShortBuffer;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Set;
+import org.lwjgl.BufferUtils;
+import org.lwjgl.opengl.ARBBufferObject;
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL13;
 
 public final strictfp class LandscapeRenderer implements Animated {
 	private final List[] patch_lists;

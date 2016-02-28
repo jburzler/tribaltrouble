@@ -1,10 +1,10 @@
 package com.oddlabs.tt.delegate;
 
 
-import org.lwjgl.opengl.GL11;
 import com.oddlabs.tt.gui.*;
-import com.oddlabs.tt.render.RenderQueues;
 import com.oddlabs.tt.render.LandscapeRenderer;
+import com.oddlabs.tt.render.RenderQueues;
+import org.lwjgl.opengl.GL11;
 
 public strictfp abstract class Delegate extends GUIObject {
 	public Delegate() {

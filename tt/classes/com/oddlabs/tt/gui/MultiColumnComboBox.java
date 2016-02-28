@@ -1,9 +1,8 @@
 package com.oddlabs.tt.gui;
 
+import com.oddlabs.tt.guievent.RowListener;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.oddlabs.tt.guievent.RowListener;
 
 public final strictfp class MultiColumnComboBox extends GUIObject implements Scrollable {
 	private final ColumnInfo[] column_infos;

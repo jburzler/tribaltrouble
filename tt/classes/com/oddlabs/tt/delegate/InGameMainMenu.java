@@ -1,57 +1,24 @@
 package com.oddlabs.tt.delegate;
 
-import java.net.InetAddress;
-import java.util.ResourceBundle;
 
-import org.lwjgl.input.Keyboard;
-
-import com.oddlabs.matchmaking.Game;
 import com.oddlabs.tt.camera.Camera;
-import com.oddlabs.tt.global.Settings;
-import com.oddlabs.tt.gui.Form;
-import com.oddlabs.tt.gui.FreeQuitLabel;
-import com.oddlabs.tt.gui.GUIImage;
-import com.oddlabs.tt.gui.GUIObject;
-import com.oddlabs.tt.gui.GUIRoot;
-import com.oddlabs.tt.delegate.GameStatsDelegate;
-import com.oddlabs.tt.gui.Group;
-import com.oddlabs.tt.delegate.SelectionDelegate;
-import com.oddlabs.tt.gui.ImageBuyButton;
-import com.oddlabs.tt.gui.KeyboardEvent;
-import com.oddlabs.tt.gui.Label;
-import com.oddlabs.tt.gui.LabelBox;
-import com.oddlabs.tt.gui.LocalInput;
-import com.oddlabs.tt.gui.MenuButton;
-import com.oddlabs.tt.gui.Renderable;
-import com.oddlabs.tt.gui.Skin;
-import com.oddlabs.tt.guievent.CloseListener;
-import com.oddlabs.tt.guievent.MouseClickListener;
-import com.oddlabs.tt.model.RacesResources;
-import com.oddlabs.tt.net.Client;
-import com.oddlabs.tt.net.Network;
-import com.oddlabs.tt.net.PeerHub;
-import com.oddlabs.tt.landscape.World;
-import com.oddlabs.tt.landscape.WorldParameters;
-import com.oddlabs.tt.net.Server;
-import com.oddlabs.tt.player.Player;
-import com.oddlabs.tt.player.PlayerInfo;
-import com.oddlabs.tt.render.Renderer;
-import com.oddlabs.tt.resource.IslandGenerator;
-import com.oddlabs.tt.resource.WorldGenerator;
 import com.oddlabs.tt.form.InGameOptionsMenu;
-import com.oddlabs.tt.form.TerrainMenu;
 import com.oddlabs.tt.form.QuestionForm;
-import com.oddlabs.tt.util.Utils;
+import com.oddlabs.tt.gui.Form;
+import com.oddlabs.tt.gui.Group;
+import com.oddlabs.tt.gui.KeyboardEvent;
+import com.oddlabs.tt.gui.MenuButton;
+import com.oddlabs.tt.guievent.MouseClickListener;
 import com.oddlabs.tt.landscape.WorldParameters;
-import com.oddlabs.tt.global.Globals;
-import com.oddlabs.tt.trigger.GameOverTrigger;
+import com.oddlabs.tt.util.Utils;
 import com.oddlabs.tt.viewer.WorldViewer;
+import org.lwjgl.input.Keyboard;
 
 public final strictfp class InGameMainMenu extends Menu {
 	private final WorldParameters world_params;
 
 	private final WorldViewer viewer;
-	
+
 	private Group game_infos;
 
 	public InGameMainMenu(WorldViewer viewer, Camera camera, WorldParameters world_params) {

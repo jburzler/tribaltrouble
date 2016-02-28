@@ -1,10 +1,9 @@
 package com.oddlabs.tt.gui;
 
-import org.lwjgl.input.Keyboard;
-
 import com.oddlabs.tt.font.Font;
 import com.oddlabs.tt.guievent.CloseListener;
 import com.oddlabs.tt.guievent.MouseMotionListener;
+import org.lwjgl.input.Keyboard;
 
 public strictfp class Form extends Group {
 	private final java.util.List close_listeners = new java.util.ArrayList();

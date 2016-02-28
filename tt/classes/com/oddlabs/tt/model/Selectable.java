@@ -1,28 +1,16 @@
 package com.oddlabs.tt.model;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
-import com.oddlabs.tt.net.DistributableTable;
 import com.oddlabs.tt.animation.Animated;
-import com.oddlabs.tt.camera.CameraState;
-import com.oddlabs.tt.gui.ToolTipBox;
-import com.oddlabs.tt.landscape.World;
 import com.oddlabs.tt.model.behaviour.Behaviour;
 import com.oddlabs.tt.model.behaviour.Controller;
-import com.oddlabs.tt.net.PeerHub;
 import com.oddlabs.tt.pathfinder.Occupant;
 import com.oddlabs.tt.pathfinder.ScanFilter;
 import com.oddlabs.tt.pathfinder.UnitGrid;
 import com.oddlabs.tt.player.Player;
-import com.oddlabs.tt.viewer.Selection;
-import com.oddlabs.tt.render.Picker;
-import com.oddlabs.tt.util.BoundingBox;
 import com.oddlabs.tt.util.StateChecksum;
 import com.oddlabs.tt.util.Target;
-import com.oddlabs.tt.util.ToolTip;
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class Selectable extends Model implements Target, Animated, ModelToolTip {
 	public final static int UNINTERRUPTIBLE = 1;

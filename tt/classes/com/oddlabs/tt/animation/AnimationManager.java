@@ -1,28 +1,22 @@
 package com.oddlabs.tt.animation;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.oddlabs.net.NetworkSelector;
-import com.oddlabs.net.MonotoneTimeManager;
-import com.oddlabs.net.TimeManager;
 import com.oddlabs.event.Deterministic;
+import com.oddlabs.net.MonotoneTimeManager;
+import com.oddlabs.net.NetworkSelector;
+import com.oddlabs.net.TimeManager;
 import com.oddlabs.tt.event.LocalEventQueue;
+import com.oddlabs.tt.form.QuitForm;
 import com.oddlabs.tt.global.Globals;
 import com.oddlabs.tt.global.Settings;
-import com.oddlabs.tt.gui.GUIObject;
-import com.oddlabs.tt.gui.LocalInput;
+import com.oddlabs.tt.gui.GUI;
 import com.oddlabs.tt.input.KeyboardInput;
 import com.oddlabs.tt.input.PointerInput;
 import com.oddlabs.tt.pathfinder.PathFinder;
-import com.oddlabs.tt.render.Picker;
 import com.oddlabs.tt.render.Renderer;
 import com.oddlabs.tt.util.StatCounter;
 import com.oddlabs.tt.util.StateChecksum;
-import com.oddlabs.tt.gui.GUI;
-import com.oddlabs.tt.gui.GUIRoot;
-import com.oddlabs.tt.form.QuitForm;
-import com.oddlabs.tt.camera.CameraState;
+import java.util.ArrayList;
+import java.util.List;
 import org.lwjgl.opengl.Display;
 
 public final strictfp class AnimationManager {

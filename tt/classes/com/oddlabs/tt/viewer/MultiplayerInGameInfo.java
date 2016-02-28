@@ -1,9 +1,9 @@
 package com.oddlabs.tt.viewer;
 
-import com.oddlabs.tt.delegate.InGameMainMenu;
 import com.oddlabs.tt.delegate.GameStatsDelegate;
-import com.oddlabs.tt.gui.Group;
+import com.oddlabs.tt.delegate.InGameMainMenu;
 import com.oddlabs.tt.gui.FreeQuitLabel;
+import com.oddlabs.tt.gui.Group;
 
 public final strictfp class MultiplayerInGameInfo extends DefaultInGameInfo {
 	private final float random_start_position;

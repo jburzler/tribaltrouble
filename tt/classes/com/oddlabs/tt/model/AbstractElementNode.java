@@ -1,16 +1,12 @@
 package com.oddlabs.tt.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.oddlabs.tt.landscape.LandscapeResources;
-import com.oddlabs.tt.landscape.World;
 import com.oddlabs.tt.landscape.HeightMap;
-import com.oddlabs.tt.camera.CameraState;
+import com.oddlabs.tt.landscape.World;
 import com.oddlabs.tt.pathfinder.UnitGrid;
 import com.oddlabs.tt.render.SpriteKey;
 import com.oddlabs.tt.util.BoundingBox;
 import com.oddlabs.util.LinkedList;
+import java.util.List;
 
 public abstract strictfp class AbstractElementNode extends BoundingBox {
 	private final LinkedList models = new LinkedList();

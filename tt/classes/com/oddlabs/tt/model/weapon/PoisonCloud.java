@@ -1,6 +1,5 @@
 package com.oddlabs.tt.model.weapon;
 
-import com.oddlabs.tt.landscape.World;
 import com.oddlabs.tt.particle.ParametricEmitter;
 
 public final strictfp class PoisonCloud {

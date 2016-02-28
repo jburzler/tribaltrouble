@@ -1,7 +1,7 @@
 package com.oddlabs.tt.resource;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 public abstract strictfp class NativeResource {
 	private final static Object list_lock = new Object();

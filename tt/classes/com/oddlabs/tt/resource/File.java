@@ -1,8 +1,7 @@
 package com.oddlabs.tt.resource;
 
-import java.net.*;
-
 import com.oddlabs.util.Utils;
+import java.net.*;
 
 public abstract strictfp class File implements ResourceDescriptor {
 	private final URL url;

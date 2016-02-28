@@ -1,16 +1,15 @@
 package com.oddlabs.tt.tutorial;
 
-import com.oddlabs.tt.viewer.InGameInfo;
+import com.oddlabs.tt.delegate.GameStatsDelegate;
+import com.oddlabs.tt.delegate.InGameMainMenu;
+import com.oddlabs.tt.delegate.Menu;
+import com.oddlabs.tt.form.TutorialForm;
 import com.oddlabs.tt.gui.GUIRoot;
 import com.oddlabs.tt.gui.Group;
-import com.oddlabs.tt.gui.GUIObject;
-import com.oddlabs.tt.form.TutorialForm;
-import com.oddlabs.tt.viewer.WorldViewer;
-import com.oddlabs.tt.delegate.Menu;
-import com.oddlabs.tt.util.Utils;
-import com.oddlabs.tt.delegate.InGameMainMenu;
-import com.oddlabs.tt.delegate.GameStatsDelegate;
 import com.oddlabs.tt.render.Renderer;
+import com.oddlabs.tt.util.Utils;
+import com.oddlabs.tt.viewer.InGameInfo;
+import com.oddlabs.tt.viewer.WorldViewer;
 
 public final strictfp class TutorialInGameInfo implements InGameInfo {
 	private int next_tutorial = -1;

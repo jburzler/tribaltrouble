@@ -1,10 +1,9 @@
 package com.oddlabs.tt.form;
 
+import com.oddlabs.tt.global.Settings;
 import com.oddlabs.tt.gui.*;
 import com.oddlabs.tt.guievent.*;
-import com.oddlabs.tt.global.Settings;
 import com.oddlabs.tt.util.Utils;
-
 import java.util.ResourceBundle;
 
 public final strictfp class WarningForm extends Form {

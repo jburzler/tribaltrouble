@@ -1,14 +1,11 @@
 package com.oddlabs.tt.gui;
 
+import com.oddlabs.tt.guievent.MouseClickListener;
 import java.nio.DoubleBuffer;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
 import org.lwjgl.BufferUtils;
-import org.lwjgl.opengl.GL11;
-
-import com.oddlabs.tt.guievent.MouseClickListener;
 
 public final strictfp class RowCollection extends GUIObject {
 	private final static DoubleBuffer plane_buf = BufferUtils.createDoubleBuffer(4);

@@ -1,35 +1,28 @@
 package com.oddlabs.tt.net;
 
-import java.io.IOException;
-import java.net.InetAddress;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.LinkedHashMap;
-import java.util.Random;
-import java.util.ResourceBundle;
-
 import com.oddlabs.matchmaking.Game;
+import com.oddlabs.matchmaking.GameSession;
 import com.oddlabs.matchmaking.MatchmakingServerInterface;
 import com.oddlabs.matchmaking.Profile;
-import com.oddlabs.matchmaking.GameSession;
-import com.oddlabs.net.ARMIEvent;
-import com.oddlabs.net.ARMIEventBroker;
+import com.oddlabs.matchmaking.TunnelAddress;
 import com.oddlabs.net.AbstractConnection;
 import com.oddlabs.net.AbstractConnectionListener;
-import com.oddlabs.net.ConnectionInterface;
 import com.oddlabs.net.ConnectionListener;
-import com.oddlabs.net.NetworkSelector;
 import com.oddlabs.net.ConnectionListenerInterface;
-import com.oddlabs.net.IllegalARMIEventException;
+import com.oddlabs.net.NetworkSelector;
 import com.oddlabs.tt.event.LocalEventQueue;
 import com.oddlabs.tt.global.Globals;
 import com.oddlabs.tt.model.RacesResources;
 import com.oddlabs.tt.player.PlayerInfo;
 import com.oddlabs.tt.resource.WorldGenerator;
-import com.oddlabs.tt.net.MatchmakingClient;
 import com.oddlabs.tt.util.Utils;
-import com.oddlabs.tt.event.LocalEventQueue;
-import com.oddlabs.matchmaking.TunnelAddress;
+import java.io.IOException;
+import java.net.InetAddress;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Random;
+import java.util.ResourceBundle;
 
 public final strictfp class Server implements ConnectionListenerInterface {
 	private final static int NEGOTIATING = 1;

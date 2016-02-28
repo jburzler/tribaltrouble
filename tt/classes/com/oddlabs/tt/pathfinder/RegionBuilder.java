@@ -1,7 +1,6 @@
 package com.oddlabs.tt.pathfinder;
 
 import com.oddlabs.tt.form.ProgressForm;
-import com.oddlabs.tt.landscape.World;
 import com.oddlabs.tt.util.PocketList;
 
 public final strictfp class RegionBuilder {

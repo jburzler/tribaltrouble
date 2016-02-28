@@ -1,15 +1,11 @@
 package com.oddlabs.tt.model;
 
-import com.oddlabs.tt.net.DistributableTable;
-import com.oddlabs.tt.camera.CameraState;
-import com.oddlabs.tt.render.SpriteKey;
 import com.oddlabs.tt.landscape.World;
 import com.oddlabs.tt.pathfinder.Occupant;
 import com.oddlabs.tt.pathfinder.Region;
 import com.oddlabs.tt.pathfinder.UnitGrid;
+import com.oddlabs.tt.render.SpriteKey;
 import com.oddlabs.tt.util.Target;
-import com.oddlabs.tt.util.ToolTip;
-import com.oddlabs.tt.util.Utils;
 
 public abstract strictfp class SupplyModel extends Model implements Supply, Target, ModelToolTip {
 	private final static float SPAWN_OFFSET_Z = -2f;

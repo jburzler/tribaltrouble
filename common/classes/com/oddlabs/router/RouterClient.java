@@ -1,16 +1,13 @@
 package com.oddlabs.router;
 
+import com.oddlabs.net.ARMIEvent;
+import com.oddlabs.net.ARMIInterfaceMethods;
 import com.oddlabs.net.AbstractConnection;
 import com.oddlabs.net.ConnectionInterface;
-import com.oddlabs.net.ARMIEvent;
-import com.oddlabs.net.ARMIEventBroker;
-import com.oddlabs.net.ARMIInterfaceMethods;
 import com.oddlabs.net.IllegalARMIEventException;
-
 import java.io.IOException;
-import java.util.List;
 import java.util.LinkedList;
-import java.util.Map;
+import java.util.List;
 import java.util.logging.Logger;
 
 final strictfp class RouterClient implements ConnectionInterface {

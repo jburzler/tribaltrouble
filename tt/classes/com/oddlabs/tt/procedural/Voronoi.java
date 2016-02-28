@@ -6,9 +6,8 @@ omskriv if-check ved modulo til (x+n)%n
 
 package com.oddlabs.tt.procedural;
 
-import java.util.Random;
-
 import com.oddlabs.procedural.Channel;
+import java.util.Random;
 
 public final strictfp class Voronoi {
 	// coordinate indexing

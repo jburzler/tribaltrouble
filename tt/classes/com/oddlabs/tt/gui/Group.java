@@ -1,8 +1,7 @@
 package com.oddlabs.tt.gui;
 
-import org.lwjgl.input.Keyboard;
-
 import com.oddlabs.util.ListElement;
+import org.lwjgl.input.Keyboard;
 
 public strictfp class Group extends GUIObject {
 	public Group() {

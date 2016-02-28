@@ -1,9 +1,9 @@
 package com.oddlabs.tt.form;
 
-import java.util.ResourceBundle;
-
 import com.oddlabs.matchmaking.Login;
 import com.oddlabs.matchmaking.LoginDetails;
+import com.oddlabs.net.NetworkSelector;
+import com.oddlabs.tt.delegate.MainMenu;
 import com.oddlabs.tt.global.Settings;
 import com.oddlabs.tt.gui.ButtonObject;
 import com.oddlabs.tt.gui.CancelButton;
@@ -19,8 +19,7 @@ import com.oddlabs.tt.gui.Skin;
 import com.oddlabs.tt.guievent.EnterListener;
 import com.oddlabs.tt.guievent.MouseClickListener;
 import com.oddlabs.tt.util.Utils;
-import com.oddlabs.tt.delegate.MainMenu;
-import com.oddlabs.net.NetworkSelector;
+import java.util.ResourceBundle;
 
 public final strictfp class NewUserForm extends Form {
 	private final static int MIN_PASSWORD_LENGTH = 6;

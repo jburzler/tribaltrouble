@@ -1,7 +1,7 @@
 package com.oddlabs.net;
 
-import java.lang.reflect.Method;
 import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
 
 final strictfp class ARMIInvocationHandler implements InvocationHandler {
 	private final ARMIInterfaceMethods armi_interface_methods;

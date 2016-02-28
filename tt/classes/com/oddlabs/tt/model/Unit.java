@@ -1,18 +1,9 @@
 package com.oddlabs.tt.model;
 
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.util.vector.Vector3f;
-import org.lwjgl.util.vector.Vector4f;
-
 import com.oddlabs.geometry.AnimationInfo;
-import com.oddlabs.tt.audio.AudioPlayer;
 import com.oddlabs.tt.audio.AudioParameters;
-import com.oddlabs.tt.render.SpriteKey;
-import com.oddlabs.tt.gui.Icons;
-import com.oddlabs.tt.gui.ToolTipBox;
-import com.oddlabs.tt.landscape.World;
+import com.oddlabs.tt.audio.AudioPlayer;
 import com.oddlabs.tt.landscape.LandscapeTarget;
-import com.oddlabs.tt.model.behaviour.Controller;
 import com.oddlabs.tt.model.behaviour.DefendController;
 import com.oddlabs.tt.model.behaviour.DieBehaviour;
 import com.oddlabs.tt.model.behaviour.DieController;
@@ -27,7 +18,6 @@ import com.oddlabs.tt.model.behaviour.StunController;
 import com.oddlabs.tt.model.behaviour.WalkBehaviour;
 import com.oddlabs.tt.model.behaviour.WalkController;
 import com.oddlabs.tt.model.weapon.WeaponFactory;
-import com.oddlabs.tt.net.PeerHub;
 import com.oddlabs.tt.particle.BalancedParametricEmitter;
 import com.oddlabs.tt.particle.StunFunction;
 import com.oddlabs.tt.pathfinder.Movable;
@@ -35,13 +25,16 @@ import com.oddlabs.tt.pathfinder.Occupant;
 import com.oddlabs.tt.pathfinder.PathTracker;
 import com.oddlabs.tt.pathfinder.UnitGrid;
 import com.oddlabs.tt.player.Player;
+import com.oddlabs.tt.render.SpriteKey;
 import com.oddlabs.tt.util.Target;
 import com.oddlabs.util.Quad;
-
-import java.util.List;
 import java.util.ArrayList;
-import java.util.Set;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.util.vector.Vector3f;
+import org.lwjgl.util.vector.Vector4f;
 
 public strictfp class Unit extends Selectable implements Occupant, Movable {
 	private final static float IDLE_SPEED = 1f/2.5f;

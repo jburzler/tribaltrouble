@@ -1,22 +1,18 @@
 package com.oddlabs.tt.render;
 
 import com.oddlabs.tt.camera.CameraState;
-import com.oddlabs.tt.particle.Emitter;
-import com.oddlabs.tt.particle.Lightning;
-import com.oddlabs.tt.landscape.LandscapeTargetRespond;
-import com.oddlabs.tt.landscape.World;
-import com.oddlabs.tt.landscape.LandscapeLeaf;
-import com.oddlabs.tt.player.Player;
-import com.oddlabs.tt.net.PeerHub;
 import com.oddlabs.tt.global.Globals;
-import com.oddlabs.tt.procedural.GeneratorRing;
+import com.oddlabs.tt.landscape.LandscapeTargetRespond;
 import com.oddlabs.tt.model.*;
 import com.oddlabs.tt.model.weapon.*;
-import com.oddlabs.tt.viewer.Selection;
+import com.oddlabs.tt.net.PeerHub;
+import com.oddlabs.tt.particle.Emitter;
+import com.oddlabs.tt.particle.Lightning;
+import com.oddlabs.tt.player.Player;
+import com.oddlabs.tt.procedural.GeneratorRing;
 import com.oddlabs.tt.util.*;
-
+import com.oddlabs.tt.viewer.Selection;
 import java.util.*;
-
 import org.lwjgl.opengl.GL11;
 
 public final strictfp class RenderState implements ElementVisitor {

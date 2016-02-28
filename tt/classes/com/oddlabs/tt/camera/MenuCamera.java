@@ -1,8 +1,7 @@
 package com.oddlabs.tt.camera;
 
-import com.oddlabs.tt.landscape.World;
 import com.oddlabs.tt.animation.AnimationManager;
-import com.oddlabs.tt.net.PeerHub;
+import com.oddlabs.tt.landscape.World;
 
 public final strictfp class MenuCamera extends Camera {
 	private final static float ANGLE_DELTA = 0.020f;

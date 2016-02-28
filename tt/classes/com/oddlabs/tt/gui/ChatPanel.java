@@ -1,11 +1,10 @@
 package com.oddlabs.tt.gui;
 
-import com.oddlabs.tt.guievent.*;
-import com.oddlabs.tt.form.*;
-import com.oddlabs.tt.net.*;
 import com.oddlabs.matchmaking.ChatRoomUser;
+import com.oddlabs.tt.form.*;
+import com.oddlabs.tt.guievent.*;
+import com.oddlabs.tt.net.*;
 import com.oddlabs.tt.util.Utils;
-
 import java.util.*;
 
 public strictfp class ChatPanel extends Panel implements ChatListener {

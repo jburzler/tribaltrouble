@@ -1,9 +1,9 @@
 package com.oddlabs.tt.model.weapon;
 
 import com.oddlabs.tt.audio.Audio;
-import com.oddlabs.tt.render.SpriteKey;
 import com.oddlabs.tt.model.Selectable;
 import com.oddlabs.tt.model.Unit;
+import com.oddlabs.tt.render.SpriteKey;
 
 public final strictfp class ThrowingFactory extends WeaponFactory {
 	private final static Class[] types = new Class[]{boolean.class, Unit.class, Selectable.class, SpriteKey.class, Audio.class, Audio[].class};

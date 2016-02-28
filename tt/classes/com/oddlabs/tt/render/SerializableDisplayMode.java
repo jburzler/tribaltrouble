@@ -1,26 +1,16 @@
 package com.oddlabs.tt.render;
 
-import java.io.IOException;
+import com.oddlabs.event.Deterministic;
+import com.oddlabs.tt.event.LocalEventQueue;
+import com.oddlabs.tt.gui.LocalInput;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.SortedSet;
 import java.util.TreeSet;
-
 import org.lwjgl.LWJGLException;
-import org.lwjgl.openal.AL;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.PixelFormat;
-
-import com.oddlabs.net.ARMIEvent;
-import com.oddlabs.net.NetworkSelector;
-import com.oddlabs.tt.event.LocalEventQueue;
-import com.oddlabs.tt.global.Settings;
-import com.oddlabs.tt.gui.LocalInput;
-import com.oddlabs.util.Utils;
-import com.oddlabs.event.Deterministic;
 
 public final strictfp class SerializableDisplayMode implements Serializable {
 	private final static long serialVersionUID = 1;

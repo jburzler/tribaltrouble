@@ -1,8 +1,6 @@
 package com.oddlabs.event;
 
-import java.io.*;
 import java.nio.*;
-import java.nio.channels.*;
 
 public abstract strictfp class Deterministic {
 	protected final static int BUFFER_SIZE = 4096;

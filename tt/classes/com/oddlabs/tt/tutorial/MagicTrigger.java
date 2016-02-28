@@ -1,11 +1,8 @@
 package com.oddlabs.tt.tutorial;
 
 import com.oddlabs.tt.form.TutorialForm;
-import com.oddlabs.tt.gui.GUIRoot;
-import com.oddlabs.tt.delegate.TutorialOverDelegate;
 import com.oddlabs.tt.model.RacesResources;
 import com.oddlabs.tt.model.Unit;
-import com.oddlabs.tt.viewer.WorldViewer;
 
 public final strictfp class MagicTrigger extends TutorialTrigger {
 	private final boolean[] magic_used = new boolean[RacesResources.NUM_MAGIC];

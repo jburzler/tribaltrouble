@@ -2,7 +2,6 @@ package com.oddlabs.tt.util;
 
 import java.nio.ShortBuffer;
 import java.util.Arrays;
-
 import org.lwjgl.BufferUtils;
 
 public final strictfp class Stitcher {

@@ -1,7 +1,6 @@
 package com.oddlabs.tt.model;
 
 import com.oddlabs.tt.render.SpriteKey;
-
 import java.util.Map;
 
 public final strictfp class UnitSupplyContainer extends SupplyContainer {

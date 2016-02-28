@@ -1,25 +1,17 @@
 package com.oddlabs.tt.player.campaign;
 
-import java.util.ResourceBundle;
-
+import com.oddlabs.net.NetworkSelector;
 import com.oddlabs.tt.delegate.CampaignMapForm;
 import com.oddlabs.tt.form.MessageForm;
-import com.oddlabs.tt.trigger.GameOverDelayTrigger;
 import com.oddlabs.tt.gui.CampaignIcons;
-import com.oddlabs.tt.gui.Fadable;
-import com.oddlabs.tt.gui.GUIRoot;
-import com.oddlabs.tt.trigger.GameOverDelayTrigger;
-import com.oddlabs.tt.gui.LoadCampaignBox;
-import com.oddlabs.tt.net.PlayerSlot;
-import com.oddlabs.tt.landscape.World;
-import com.oddlabs.util.DeterministicSerializer;
-import com.oddlabs.util.DeterministicSerializerLoopbackInterface;
-import com.oddlabs.tt.util.Utils;
-import com.oddlabs.net.NetworkSelector;
-
 import com.oddlabs.tt.gui.GUI;
+import com.oddlabs.tt.gui.GUIRoot;
+import com.oddlabs.tt.gui.LoadCampaignBox;
+import com.oddlabs.tt.trigger.GameOverDelayTrigger;
+import com.oddlabs.tt.util.Utils;
 import com.oddlabs.tt.viewer.WorldViewer;
-import com.oddlabs.tt.event.LocalEventQueue;
+import com.oddlabs.util.DeterministicSerializerLoopbackInterface;
+import java.util.ResourceBundle;
 
 public abstract class Campaign {
 	private final ResourceBundle bundle = ResourceBundle.getBundle(Campaign.class.getName());

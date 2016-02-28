@@ -1,11 +1,10 @@
 package com.oddlabs.tt.resource;
 
-import com.oddlabs.tt.render.Texture;
 import com.oddlabs.tt.global.Globals;
+import com.oddlabs.tt.render.Texture;
 import com.oddlabs.tt.util.GLState;
-
-import org.lwjgl.opengl.GL13;
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL13;
 
 public final strictfp class StructureBlend extends BlendInfo {
 	private final Texture structure_map;

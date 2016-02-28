@@ -1,9 +1,7 @@
 package com.oddlabs.tt.resource;
 
-import com.oddlabs.tt.resource.GLByteImage;
 import com.oddlabs.tt.global.Globals;
 import com.oddlabs.tt.util.GLState;
-
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL13;
 

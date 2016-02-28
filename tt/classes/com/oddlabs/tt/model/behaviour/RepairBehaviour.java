@@ -1,11 +1,9 @@
 package com.oddlabs.tt.model.behaviour;
 
-import com.oddlabs.tt.audio.AudioPlayer;
 import com.oddlabs.tt.audio.AudioParameters;
+import com.oddlabs.tt.audio.AudioPlayer;
 import com.oddlabs.tt.landscape.TreeSupply;
-import com.oddlabs.tt.landscape.World;
 import com.oddlabs.tt.model.Building;
-import com.oddlabs.tt.model.RacesResources;
 import com.oddlabs.tt.model.Selectable;
 import com.oddlabs.tt.model.Unit;
 

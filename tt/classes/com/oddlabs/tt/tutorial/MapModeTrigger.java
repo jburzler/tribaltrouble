@@ -1,8 +1,6 @@
 package com.oddlabs.tt.tutorial;
 
 import com.oddlabs.tt.camera.MapCamera;
-import com.oddlabs.tt.viewer.WorldViewer;
-import com.oddlabs.tt.delegate.SelectionDelegate;
 
 public final strictfp class MapModeTrigger extends TutorialTrigger {
 	public MapModeTrigger() {

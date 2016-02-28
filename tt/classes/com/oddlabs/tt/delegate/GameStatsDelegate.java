@@ -1,21 +1,15 @@
 package com.oddlabs.tt.delegate;
 
-import java.util.ResourceBundle;
-
-import org.lwjgl.input.Keyboard;
-
 import com.oddlabs.tt.animation.TimerAnimation;
 import com.oddlabs.tt.animation.Updatable;
 import com.oddlabs.tt.camera.Camera;
 import com.oddlabs.tt.camera.StaticCamera;
-import com.oddlabs.tt.form.TerrainMenu;
-import com.oddlabs.tt.guievent.MouseClickListener;
-import com.oddlabs.tt.net.PeerHub;
-import com.oddlabs.tt.landscape.World;
+import com.oddlabs.tt.gui.*;
 import com.oddlabs.tt.player.Player;
 import com.oddlabs.tt.util.Utils;
 import com.oddlabs.tt.viewer.WorldViewer;
-import com.oddlabs.tt.gui.*;
+import java.util.ResourceBundle;
+import org.lwjgl.input.Keyboard;
 
 public final strictfp class GameStatsDelegate extends CameraDelegate implements Updatable {
 	private final static int PLAYER_COLUMN_WIDTH = 100;

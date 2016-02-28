@@ -1,14 +1,7 @@
 package com.oddlabs.tt.net;
 
-import java.io.IOException;
-import com.oddlabs.net.AbstractConnection;
-import com.oddlabs.net.ConnectionInterface;
 import com.oddlabs.net.ARMIEvent;
-import com.oddlabs.net.IllegalARMIEventException;
-import com.oddlabs.net.ARMIInterfaceMethods;
-import com.oddlabs.net.ConnectionListener;
 import com.oddlabs.net.AbstractConnection;
-import com.oddlabs.tt.player.PlayerInfo;
 
 final strictfp class ClientConnection {
 	private final AbstractConnection connection;

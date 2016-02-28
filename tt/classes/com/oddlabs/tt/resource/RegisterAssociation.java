@@ -1,11 +1,10 @@
 package com.oddlabs.tt.resource;
 
-import com.oddlabs.osutil.OSUtil;
-import com.oddlabs.osutil.MacOSXUtil;
 import com.oddlabs.osutil.Association;
+import com.oddlabs.osutil.MacOSXUtil;
+import com.oddlabs.osutil.OSUtil;
 import com.oddlabs.osutil.URLAssociation;
 
-import org.lwjgl.LWJGLUtil;
 
 public final strictfp class RegisterAssociation {
 	public static void main(String[] args) {

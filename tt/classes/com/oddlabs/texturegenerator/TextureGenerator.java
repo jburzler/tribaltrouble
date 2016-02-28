@@ -1,21 +1,19 @@
 package com.oddlabs.texturegenerator;
 
-import java.io.File;
-
-import org.lwjgl.opengl.*;
-import org.lwjgl.*;
-
 import com.oddlabs.geometry.LowDetailModel;
-import com.oddlabs.tt.render.SpriteList;
 import com.oddlabs.tt.global.Globals;
 import com.oddlabs.tt.global.Settings;
 import com.oddlabs.tt.render.BillboardPainter;
+import com.oddlabs.tt.render.SpriteList;
 import com.oddlabs.tt.resource.Resources;
 import com.oddlabs.tt.resource.SpriteFile;
+import com.oddlabs.tt.util.GLStateStack;
 import com.oddlabs.tt.util.OffscreenRenderer;
 import com.oddlabs.tt.util.OffscreenRendererFactory;
-import com.oddlabs.tt.util.GLStateStack;
 import com.oddlabs.util.Utils;
+import java.io.File;
+import org.lwjgl.*;
+import org.lwjgl.opengl.*;
 
 public final strictfp class TextureGenerator {
 	private final static int LOW_DETAIL_TEX_SIZE = 256;

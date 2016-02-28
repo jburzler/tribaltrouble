@@ -4,10 +4,7 @@ import com.oddlabs.tt.animation.Animated;
 import com.oddlabs.tt.event.LocalEventQueue;
 import com.oddlabs.tt.model.Element;
 import com.oddlabs.tt.model.ElementVisitor;
-import com.oddlabs.tt.model.AbstractElementNode;
-import com.oddlabs.tt.model.RacesResources;
 import com.oddlabs.tt.util.StateChecksum;
-import com.oddlabs.tt.camera.CameraState;
 
 public final strictfp class LandscapeTargetRespond extends Element implements Animated {
 	public final static int SIZE = 128;

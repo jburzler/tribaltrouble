@@ -1,8 +1,5 @@
 package com.oddlabs.tt.form;
 
-import java.util.Random;
-import java.util.ResourceBundle;
-
 import com.oddlabs.matchmaking.Game;
 import com.oddlabs.tt.event.LocalEventQueue;
 import com.oddlabs.tt.gui.CancelButton;
@@ -15,12 +12,12 @@ import com.oddlabs.tt.gui.Skin;
 import com.oddlabs.tt.model.RacesResources;
 import com.oddlabs.tt.net.Client;
 import com.oddlabs.tt.net.ConfigurationListener;
-import com.oddlabs.tt.net.Network;
 import com.oddlabs.tt.net.GameNetwork;
-import com.oddlabs.tt.player.PlayerInfo;
 import com.oddlabs.tt.net.PlayerSlot;
 import com.oddlabs.tt.resource.WorldGenerator;
 import com.oddlabs.tt.util.Utils;
+import java.util.Random;
+import java.util.ResourceBundle;
 
 public final strictfp class ConnectingForm extends Form implements ConfigurationListener {
 	private final SelectGameMenu owner;

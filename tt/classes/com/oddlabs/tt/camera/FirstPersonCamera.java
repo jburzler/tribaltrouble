@@ -1,14 +1,10 @@
 package com.oddlabs.tt.camera;
 
-import org.lwjgl.input.Mouse;
-import org.lwjgl.input.Keyboard;
-
-import com.oddlabs.tt.landscape.HeightMap;
 import com.oddlabs.tt.global.Settings;
-import com.oddlabs.tt.event.LocalEventQueue;
 import com.oddlabs.tt.gui.LocalInput;
-import com.oddlabs.tt.gui.InputState;
 import com.oddlabs.tt.input.PointerInput;
+import com.oddlabs.tt.landscape.HeightMap;
+import org.lwjgl.input.Keyboard;
 
 public final strictfp class FirstPersonCamera extends Camera {
 	private final static float SCALE_HORIZ = .002f;

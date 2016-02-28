@@ -10,8 +10,6 @@ import java.nio.channels.SocketChannel;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.oddlabs.event.Deterministic;
-import com.oddlabs.event.NotDeterministic;
 
 public final strictfp class Connection extends AbstractConnection implements Handler, ConnectionPeerInterface {
 	public final static int BUFFER_SIZE = 16382;

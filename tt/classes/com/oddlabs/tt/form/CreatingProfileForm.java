@@ -1,8 +1,7 @@
 package com.oddlabs.tt.form;
 
-import java.util.ResourceBundle;
-
 import com.oddlabs.matchmaking.MatchmakingClientInterface;
+import com.oddlabs.tt.delegate.Menu;
 import com.oddlabs.tt.gui.CancelButton;
 import com.oddlabs.tt.gui.CancelListener;
 import com.oddlabs.tt.gui.Form;
@@ -13,7 +12,7 @@ import com.oddlabs.tt.gui.Skin;
 import com.oddlabs.tt.net.Network;
 import com.oddlabs.tt.net.ProfileListener;
 import com.oddlabs.tt.util.Utils;
-import com.oddlabs.tt.delegate.Menu;
+import java.util.ResourceBundle;
 
 public final strictfp class CreatingProfileForm extends Form implements ProfileListener {
 	private final Form profiles_form;

@@ -1,7 +1,7 @@
 package com.oddlabs.tt.procedural;
 
-import com.oddlabs.procedural.Layer;
 import com.oddlabs.procedural.Channel;
+import com.oddlabs.procedural.Layer;
 import com.oddlabs.procedural.Tools;
 
 public final strictfp class Ring {

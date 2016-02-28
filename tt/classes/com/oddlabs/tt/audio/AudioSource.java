@@ -1,12 +1,10 @@
 package com.oddlabs.tt.audio;
 
+import com.oddlabs.tt.resource.NativeResource;
 import java.nio.IntBuffer;
-
 import org.lwjgl.BufferUtils;
 import org.lwjgl.openal.AL;
 import org.lwjgl.openal.AL10;
-
-import com.oddlabs.tt.resource.NativeResource;
 
 public final strictfp class AudioSource extends NativeResource {
 	private final IntBuffer source;

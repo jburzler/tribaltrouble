@@ -1,15 +1,14 @@
 package com.oddlabs.util;
 
 import java.nio.ShortBuffer;
-import java.util.List;
 import java.util.ArrayList;
-import java.util.Set;
-import java.util.Map;
-import java.util.LinkedHashSet;
-import java.util.LinkedHashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
-import org.lwjgl.BufferUtils;
 
 /* http://home.comcast.net/~tom_forsyth/papers/fast_vert_cache_opt.html*/
 public final strictfp class IndexListOptimizer {

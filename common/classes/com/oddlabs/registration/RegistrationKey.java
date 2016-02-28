@@ -1,18 +1,16 @@
 package com.oddlabs.registration;
 
+import com.oddlabs.util.KeyManager;
+import com.oddlabs.util.Utils;
 import java.math.BigInteger;
-import java.util.Random;
-import java.util.zip.Checksum;
-import java.util.zip.CRC32;
-
+import java.net.URL;
+import java.security.GeneralSecurityException;
 import java.security.PublicKey;
 import java.security.Signature;
 import java.security.SignedObject;
-import java.security.GeneralSecurityException;
-import java.net.URL;
-
-import com.oddlabs.util.KeyManager;
-import com.oddlabs.util.Utils;
+import java.util.Random;
+import java.util.zip.CRC32;
+import java.util.zip.Checksum;
 
 public final strictfp class RegistrationKey {
 	private final static int STRIPPED_LENGTH = 16;

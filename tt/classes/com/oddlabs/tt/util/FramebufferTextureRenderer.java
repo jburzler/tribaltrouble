@@ -1,20 +1,11 @@
 package com.oddlabs.tt.util;
 
-import org.lwjgl.LWJGLException;
-import org.lwjgl.BufferUtils;
-import org.lwjgl.opengl.Display;
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.Pbuffer;
-import org.lwjgl.opengl.PixelFormat;
-import org.lwjgl.opengl.EXTFramebufferObject;
-
-import java.nio.IntBuffer;
-import java.nio.ByteBuffer;
-
 import com.oddlabs.tt.render.Renderer;
-import com.oddlabs.tt.render.Texture;
-import com.oddlabs.tt.resource.GLImage;
-import com.oddlabs.tt.resource.GLIntImage;
+import java.nio.ByteBuffer;
+import java.nio.IntBuffer;
+import org.lwjgl.BufferUtils;
+import org.lwjgl.opengl.EXTFramebufferObject;
+import org.lwjgl.opengl.GL11;
 
 public final strictfp class FramebufferTextureRenderer extends OffscreenRenderer {
 	private final int fb_id;

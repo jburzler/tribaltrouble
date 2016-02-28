@@ -1,17 +1,13 @@
 package com.oddlabs.tt.render;
 
-import java.nio.ShortBuffer;
-
-import org.lwjgl.BufferUtils;
-import org.lwjgl.opengl.GL11;
-
 import com.oddlabs.tt.landscape.HeightMap;
-import com.oddlabs.tt.landscape.LandscapeLeaf;
-import com.oddlabs.tt.landscape.World;
 import com.oddlabs.tt.util.GLState;
 import com.oddlabs.tt.util.GLStateStack;
 import com.oddlabs.tt.util.GLUtils;
 import com.oddlabs.tt.vbo.VBO;
+import java.nio.ShortBuffer;
+import org.lwjgl.BufferUtils;
+import org.lwjgl.opengl.GL11;
 
 abstract strictfp class ShadowRenderer {
 	private static ShortBuffer shadow_indices = BufferUtils.createShortBuffer(HeightMap.GRID_UNITS_PER_PATCH*HeightMap.GRID_UNITS_PER_PATCH*2*3);

@@ -1,8 +1,6 @@
 package com.oddlabs.tt.player;
 
 import com.oddlabs.tt.model.Unit;
-import com.oddlabs.tt.landscape.World;
-
 import java.util.Set;
 
 public strictfp abstract class ChieftainAI {

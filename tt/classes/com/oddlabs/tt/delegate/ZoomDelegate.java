@@ -1,13 +1,10 @@
 package com.oddlabs.tt.delegate;
 
-import org.lwjgl.input.Keyboard;
-import org.lwjgl.input.Mouse;
-
 import com.oddlabs.tt.camera.GameCamera;
-import com.oddlabs.tt.input.PointerInput;
-import com.oddlabs.tt.net.PeerHub;
-import com.oddlabs.tt.viewer.WorldViewer;
 import com.oddlabs.tt.gui.*;
+import com.oddlabs.tt.input.PointerInput;
+import com.oddlabs.tt.viewer.WorldViewer;
+import org.lwjgl.input.Keyboard;
 
 public strictfp class ZoomDelegate extends InGameDelegate {
 	private final static float ZOOM_FACTOR_CORRECTION = .25f;

@@ -1,8 +1,8 @@
 package com.oddlabs.tt.model.weapon;
 
+import com.oddlabs.tt.audio.Audio;
 import com.oddlabs.tt.model.*;
 import com.oddlabs.tt.render.SpriteKey;
-import com.oddlabs.tt.audio.Audio;
 
 public abstract strictfp class RotatingThrowingWeapon extends ThrowingWeapon {
 	private float angle = 0;

@@ -1,10 +1,8 @@
 package com.oddlabs.tt.landscape;
 
-import java.util.List;
-
-import java.nio.ShortBuffer;
 
 import com.oddlabs.tt.util.StrictVector3f;
+import java.nio.ShortBuffer;
 
 public final strictfp class LandscapeTileTriangle {
 	static final int INNER_EXP = 20;

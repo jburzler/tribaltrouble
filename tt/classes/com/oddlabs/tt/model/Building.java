@@ -1,43 +1,34 @@
 package com.oddlabs.tt.model;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.util.vector.Vector3f;
-import org.lwjgl.util.vector.Vector4f;
-
+import com.oddlabs.tt.audio.AudioParameters;
 import com.oddlabs.tt.audio.AudioPlayer;
-import com.oddlabs.tt.camera.CameraState;
-import com.oddlabs.tt.render.SpriteKey;
 import com.oddlabs.tt.gui.BuildSpinner;
-import com.oddlabs.tt.gui.GUIRoot;
-import com.oddlabs.tt.gui.Icons;
-import com.oddlabs.tt.gui.ToolTipBox;
 import com.oddlabs.tt.landscape.TreeSupply;
 import com.oddlabs.tt.landscape.World;
-import com.oddlabs.tt.audio.AudioParameters;
 import com.oddlabs.tt.model.behaviour.AttackController;
 import com.oddlabs.tt.model.behaviour.GatherController;
 import com.oddlabs.tt.model.behaviour.NullController;
-import com.oddlabs.tt.model.behaviour.TransferUnitController;
 import com.oddlabs.tt.model.behaviour.StunController;
+import com.oddlabs.tt.model.behaviour.TransferUnitController;
 import com.oddlabs.tt.model.weapon.IronAxeWeapon;
 import com.oddlabs.tt.model.weapon.IronSpearWeapon;
 import com.oddlabs.tt.model.weapon.RockAxeWeapon;
 import com.oddlabs.tt.model.weapon.RockSpearWeapon;
 import com.oddlabs.tt.model.weapon.RubberAxeWeapon;
 import com.oddlabs.tt.model.weapon.RubberSpearWeapon;
-import com.oddlabs.tt.net.PeerHub;
-import com.oddlabs.tt.viewer.Selection;
 import com.oddlabs.tt.particle.LinearEmitter;
 import com.oddlabs.tt.particle.RandomAccelerationEmitter;
 import com.oddlabs.tt.particle.RandomVelocityEmitter;
 import com.oddlabs.tt.pathfinder.Occupant;
 import com.oddlabs.tt.pathfinder.UnitGrid;
 import com.oddlabs.tt.player.Player;
+import com.oddlabs.tt.render.SpriteKey;
 import com.oddlabs.tt.util.Target;
-import com.oddlabs.util.Quad;
+import java.util.HashMap;
+import java.util.Map;
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.util.vector.Vector3f;
+import org.lwjgl.util.vector.Vector4f;
 
 public final strictfp class Building extends Selectable implements Occupant {
 	private final static float REMOVE_DELAY = 1f/10f;

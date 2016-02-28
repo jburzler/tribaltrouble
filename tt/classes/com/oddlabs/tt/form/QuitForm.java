@@ -1,12 +1,11 @@
 package com.oddlabs.tt.form;
 
-import java.util.ResourceBundle;
-
+import com.oddlabs.tt.gui.GUIRoot;
 import com.oddlabs.tt.guievent.MouseClickListener;
 import com.oddlabs.tt.net.PeerHub;
 import com.oddlabs.tt.render.Renderer;
 import com.oddlabs.tt.util.Utils;
-import com.oddlabs.tt.gui.GUIRoot;
+import java.util.ResourceBundle;
 
 public final strictfp class QuitForm extends QuestionForm {
 	private final static String getI18N(String key) {

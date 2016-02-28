@@ -1,18 +1,17 @@
 package com.oddlabs.tt.input;
 
+import com.oddlabs.event.Deterministic;
+import com.oddlabs.tt.event.LocalEventQueue;
+import com.oddlabs.tt.gui.GUIRoot;
+import com.oddlabs.tt.gui.LocalInput;
+import com.oddlabs.tt.render.NativeCursor;
+import com.oddlabs.tt.resource.GLIntImage;
+import com.oddlabs.util.Image;
+import com.oddlabs.util.Utils;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Cursor;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
-
-import com.oddlabs.tt.event.LocalEventQueue;
-import com.oddlabs.event.Deterministic;
-import com.oddlabs.tt.gui.LocalInput;
-import com.oddlabs.util.Utils;
-import com.oddlabs.util.Image;
-import com.oddlabs.tt.gui.GUIRoot;
-import com.oddlabs.tt.resource.GLIntImage;
-import com.oddlabs.tt.render.NativeCursor;
 
 public final strictfp class PointerInput {
 	private final static int NUM_BUTTONS = 8;

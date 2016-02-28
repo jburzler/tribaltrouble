@@ -1,24 +1,22 @@
 package com.oddlabs.tt.resource;
 
-import java.nio.FloatBuffer;
-import java.util.List;
-
-import org.lwjgl.BufferUtils;
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
-import org.lwjgl.opengl.GL13;
-import org.lwjgl.opengl.PixelFormat;
-
 import com.oddlabs.tt.form.ProgressForm;
 import com.oddlabs.tt.global.Globals;
 import com.oddlabs.tt.global.Settings;
-import com.oddlabs.tt.procedural.Landscape;
 import com.oddlabs.tt.landscape.HeightMap;
+import com.oddlabs.tt.procedural.Landscape;
 import com.oddlabs.tt.render.Texture;
 import com.oddlabs.tt.util.GLState;
 import com.oddlabs.tt.util.GLStateStack;
 import com.oddlabs.tt.util.OffscreenRenderer;
 import com.oddlabs.tt.util.OffscreenRendererFactory;
+import java.nio.FloatBuffer;
+import java.util.List;
+import org.lwjgl.BufferUtils;
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL12;
+import org.lwjgl.opengl.GL13;
+import org.lwjgl.opengl.PixelFormat;
 
 public final strictfp class IslandGenerator implements WorldGenerator {
 	private final static long serialVersionUID = 1;

@@ -1,8 +1,7 @@
 package com.oddlabs.tt.form;
 
-import java.util.ResourceBundle;
-
 import com.oddlabs.matchmaking.Profile;
+import com.oddlabs.tt.delegate.Menu;
 import com.oddlabs.tt.gui.CancelListener;
 import com.oddlabs.tt.gui.ColumnInfo;
 import com.oddlabs.tt.gui.Form;
@@ -14,11 +13,11 @@ import com.oddlabs.tt.gui.Label;
 import com.oddlabs.tt.gui.MultiColumnComboBox;
 import com.oddlabs.tt.gui.Row;
 import com.oddlabs.tt.gui.Skin;
-import com.oddlabs.tt.delegate.Menu;
 import com.oddlabs.tt.guievent.MouseClickListener;
 import com.oddlabs.tt.guievent.RowListener;
 import com.oddlabs.tt.net.Network;
 import com.oddlabs.tt.util.Utils;
+import java.util.ResourceBundle;
 
 public final strictfp class ProfilesForm extends Form {
 	private final static int NICK_SIZE = 200;

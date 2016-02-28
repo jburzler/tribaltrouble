@@ -1,9 +1,7 @@
 package com.oddlabs.tt.form;
 
-import java.io.FileNotFoundException;
-import java.io.InvalidClassException;
-import java.util.ResourceBundle;
-
+import com.oddlabs.net.NetworkSelector;
+import com.oddlabs.tt.delegate.Menu;
 import com.oddlabs.tt.gui.CancelButton;
 import com.oddlabs.tt.gui.CancelListener;
 import com.oddlabs.tt.gui.Form;
@@ -12,19 +10,17 @@ import com.oddlabs.tt.gui.HorizButton;
 import com.oddlabs.tt.gui.Label;
 import com.oddlabs.tt.gui.LoadCampaignBox;
 import com.oddlabs.tt.gui.Skin;
-import com.oddlabs.tt.delegate.Menu;
 import com.oddlabs.tt.guievent.MouseClickListener;
 import com.oddlabs.tt.guievent.RowListener;
 import com.oddlabs.tt.player.campaign.Campaign;
 import com.oddlabs.tt.player.campaign.CampaignState;
 import com.oddlabs.tt.player.campaign.NativeCampaign;
 import com.oddlabs.tt.player.campaign.VikingCampaign;
-import com.oddlabs.util.DeterministicSerializer;
-import com.oddlabs.util.DeterministicSerializerLoopbackInterface;
-import com.oddlabs.tt.event.LocalEventQueue;
 import com.oddlabs.tt.util.Utils;
-import com.oddlabs.tt.render.Renderer;
-import com.oddlabs.net.NetworkSelector;
+import com.oddlabs.util.DeterministicSerializerLoopbackInterface;
+import java.io.FileNotFoundException;
+import java.io.InvalidClassException;
+import java.util.ResourceBundle;
 
 public final strictfp class CampaignForm extends Form implements DeterministicSerializerLoopbackInterface {
 	private final HorizButton button_vikings;

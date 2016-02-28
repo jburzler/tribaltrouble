@@ -1,16 +1,12 @@
 package com.oddlabs.http;
 
-import com.oddlabs.event.Deterministic;
 import com.oddlabs.net.Callable;
 import com.oddlabs.net.Task;
 import com.oddlabs.net.TaskThread;
 import com.oddlabs.util.CryptUtils;
-
-import javax.net.ssl.HttpsURLConnection;
-import java.net.*;
 import java.io.*;
-import java.util.Map;
-import java.util.Iterator;
+import java.net.*;
+import javax.net.ssl.HttpsURLConnection;
 
 public final strictfp class HttpRequest {
 	public static Task doPost(TaskThread task_thread, HttpRequestParameters parameters, HttpResponseParser parser, HttpCallback callback) {

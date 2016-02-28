@@ -1,7 +1,7 @@
 package com.oddlabs.matchmaking;
 
-import java.net.InetAddress;
 import java.io.Serializable;
+import java.net.InetAddress;
 
 public final strictfp class TunnelAddress implements Serializable {
 	private final static long serialVersionUID = -2854382209354714233l;

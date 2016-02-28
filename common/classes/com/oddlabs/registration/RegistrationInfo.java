@@ -17,7 +17,7 @@ public final strictfp class RegistrationInfo implements Serializable {
 	private final String state;
 	private final String country;
 	private final long time_stamp;
-	
+
 	public RegistrationInfo(long key, String reg_key, String reg_email, String reg_time, String name, String address1, String address2, String zip, String city, String state, String country, long time_stamp) {
 		this.key = key;
 		this.reg_key = reg_key;
@@ -31,20 +31,22 @@ public final strictfp class RegistrationInfo implements Serializable {
 		this.state = state;
 		this.country = country;
 		this.time_stamp = time_stamp;
+
+                System.out.println(this);
 	}
 
 	public final String getRegTime() {
 		return reg_time;
 	}
-	
+
 	public final String getRegEmail() {
 		return reg_email;
 	}
-	
+
 	public final long getTimeStamp() {
 		return time_stamp;
 	}
-	
+
 	public final long getKey() {
 		return key;
 	}

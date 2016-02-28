@@ -1,8 +1,5 @@
 package com.oddlabs.tt.landscape;
 
-import com.oddlabs.tt.camera.CameraState;
-import com.oddlabs.tt.util.StrictMatrix4f;
-
 public final strictfp class TreeLeaf extends AbstractTreeGroup {
 	private TreeSupply[] infos = new TreeSupply[0];
 

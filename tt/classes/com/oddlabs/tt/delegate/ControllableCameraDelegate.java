@@ -1,11 +1,9 @@
 package com.oddlabs.tt.delegate;
 
-import org.lwjgl.input.Keyboard;
-
 import com.oddlabs.tt.camera.GameCamera;
-import com.oddlabs.tt.net.PeerHub;
 import com.oddlabs.tt.gui.*;
 import com.oddlabs.tt.viewer.WorldViewer;
+import org.lwjgl.input.Keyboard;
 
 public strictfp abstract class ControllableCameraDelegate extends InGameDelegate {
 	private final GameCamera game_camera;

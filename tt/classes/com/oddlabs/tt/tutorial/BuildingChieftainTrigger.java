@@ -1,15 +1,12 @@
 package com.oddlabs.tt.tutorial;
 
-import java.util.Iterator;
-import java.util.Set;
-
 import com.oddlabs.tt.model.Building;
 import com.oddlabs.tt.model.ChieftainContainer;
+import com.oddlabs.tt.model.Race;
 import com.oddlabs.tt.model.Selectable;
 import com.oddlabs.tt.player.Player;
-import com.oddlabs.tt.landscape.World;
-import com.oddlabs.tt.viewer.WorldViewer;
-import com.oddlabs.tt.model.Race;
+import java.util.Iterator;
+import java.util.Set;
 
 public final strictfp class BuildingChieftainTrigger extends TutorialTrigger {
 	public BuildingChieftainTrigger(Player player) {

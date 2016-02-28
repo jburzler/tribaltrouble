@@ -1,15 +1,12 @@
 package com.oddlabs.tt.render;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.lwjgl.opengl.GL11;
-
 import com.oddlabs.tt.global.Globals;
 import com.oddlabs.tt.landscape.LandscapeTargetRespond;
-import com.oddlabs.tt.procedural.GeneratorRing;
 import com.oddlabs.tt.resource.ResourceDescriptor;
 import com.oddlabs.tt.resource.Resources;
+import java.util.ArrayList;
+import java.util.List;
+import org.lwjgl.opengl.GL11;
 
 public final strictfp class TargetRespondRenderer extends ShadowListRenderer {
 	private final static float SHADOW_SIZE = 1.6f;

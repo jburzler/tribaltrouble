@@ -1,32 +1,90 @@
 package com.oddlabs.tt.render;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
+import com.oddlabs.event.Deterministic;
+import com.oddlabs.http.HttpRequestParameters;
+import com.oddlabs.matchmaking.Game;
+import com.oddlabs.net.NetworkSelector;
+import com.oddlabs.net.TaskThread;
+import com.oddlabs.net.TimeManager;
+import com.oddlabs.regclient.RegistrationClient;
+import com.oddlabs.tt.Main;
+import com.oddlabs.tt.animation.AnimationManager;
+import com.oddlabs.tt.animation.TimerAnimation;
+import com.oddlabs.tt.animation.Updatable;
+import com.oddlabs.tt.audio.AbstractAudioPlayer;
+import com.oddlabs.tt.audio.AudioManager;
+import com.oddlabs.tt.audio.AudioParameters;
+import com.oddlabs.tt.audio.AudioPlayer;
+import com.oddlabs.tt.camera.CameraState;
+import com.oddlabs.tt.camera.MenuCamera;
+import com.oddlabs.tt.delegate.MainMenu;
+import com.oddlabs.tt.delegate.QuitScreen;
+import com.oddlabs.tt.event.LocalEventQueue;
+import com.oddlabs.tt.form.LoadCallback;
+import com.oddlabs.tt.form.MessageForm;
+import com.oddlabs.tt.form.ProgressForm;
+import com.oddlabs.tt.form.RegistrationForm;
+import com.oddlabs.tt.form.WarningForm;
+import com.oddlabs.tt.form.WelcomeForm;
+import com.oddlabs.tt.global.Globals;
+import com.oddlabs.tt.global.GlobalsInit;
+import com.oddlabs.tt.global.Settings;
+import com.oddlabs.tt.gui.CounterLabel;
+import com.oddlabs.tt.gui.GUI;
+import com.oddlabs.tt.gui.GUIRoot;
+import com.oddlabs.tt.gui.Label;
+import com.oddlabs.tt.gui.Languages;
+import com.oddlabs.tt.gui.LocalInput;
+import com.oddlabs.tt.gui.Skin;
+import com.oddlabs.tt.guievent.MouseClickListener;
+import com.oddlabs.tt.landscape.LandscapeResources;
+import com.oddlabs.tt.landscape.NotificationListener;
+import com.oddlabs.tt.landscape.TreeSupply;
+import com.oddlabs.tt.landscape.World;
+import com.oddlabs.tt.landscape.WorldParameters;
+import com.oddlabs.tt.model.Selectable;
+import com.oddlabs.tt.player.Player;
+import com.oddlabs.tt.player.PlayerInfo;
+import com.oddlabs.tt.procedural.Landscape;
+import com.oddlabs.tt.resource.IslandGenerator;
+import com.oddlabs.tt.resource.NativeResource;
+import com.oddlabs.tt.resource.WorldGenerator;
+import com.oddlabs.tt.resource.WorldInfo;
+import com.oddlabs.tt.util.BackBufferRenderer;
+import com.oddlabs.tt.util.GLState;
+import com.oddlabs.tt.util.GLStateStack;
+import com.oddlabs.tt.util.GLUtils;
+import com.oddlabs.tt.util.LoggerOutputStream;
+import com.oddlabs.tt.util.StatCounter;
+import com.oddlabs.tt.util.StrictGLU;
+import com.oddlabs.tt.util.StrictMatrix4f;
+import com.oddlabs.tt.util.Target;
+import com.oddlabs.tt.util.Utils;
+import com.oddlabs.tt.vbo.VBO;
+import com.oddlabs.tt.viewer.AmbientAudio;
+import com.oddlabs.tt.viewer.Cheat;
+import com.oddlabs.tt.viewer.Selection;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
-import java.net.URL;
+import java.net.URLEncoder;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
+import java.rmi.server.UID;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.prefs.Preferences;
-import java.util.zip.GZIPInputStream;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
-import java.rmi.server.UID;
-import java.net.URLEncoder;
-import java.io.UnsupportedEncodingException;
-
 import org.lwjgl.BufferUtils;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.LWJGLUtil;
+import org.lwjgl.Sys;
+import org.lwjgl.input.Keyboard;
 import org.lwjgl.openal.AL;
 import org.lwjgl.openal.AL10;
 import org.lwjgl.opengl.ARBMultisample;
@@ -34,101 +92,6 @@ import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL13;
 import org.lwjgl.opengl.GLContext;
-import org.lwjgl.input.Keyboard;
-import org.lwjgl.Sys;
-
-import com.oddlabs.net.NetworkSelector;
-import com.oddlabs.regclient.RegistrationClient;
-import com.oddlabs.regclient.TotalgamingRegistrationClient;
-import com.oddlabs.regclient.ReflexiveRegistrationClient;
-import com.oddlabs.regclient.TrymediaRegistrationClient;
-import com.oddlabs.net.TaskThread;
-import com.oddlabs.tt.util.Target;
-import com.oddlabs.tt.Main;
-import com.oddlabs.tt.bugclient.BugClientWindow;
-import com.oddlabs.tt.landscape.NotificationListener;
-import com.oddlabs.event.Deterministic;
-import com.oddlabs.tt.viewer.Cheat;
-import com.oddlabs.tt.animation.AnimationManager;
-import com.oddlabs.tt.animation.TimerAnimation;
-import com.oddlabs.tt.animation.Updatable;
-import com.oddlabs.tt.audio.AudioManager;
-import com.oddlabs.tt.audio.AudioPlayer;
-import com.oddlabs.tt.audio.AbstractAudioPlayer;
-import com.oddlabs.tt.audio.AudioParameters;
-import com.oddlabs.tt.camera.CameraState;
-import com.oddlabs.tt.camera.MenuCamera;
-import com.oddlabs.tt.event.LocalEventQueue;
-import com.oddlabs.tt.render.RenderQueues;
-import com.oddlabs.tt.form.RegistrationForm;
-import com.oddlabs.tt.form.WelcomeForm;
-import com.oddlabs.tt.delegate.MainMenu;
-import com.oddlabs.tt.form.MessageForm;
-import com.oddlabs.tt.form.OptionsMenu;
-import com.oddlabs.tt.form.ProgressForm;
-import com.oddlabs.tt.form.LoadCallback;
-import com.oddlabs.tt.delegate.QuitScreen;
-import com.oddlabs.tt.form.WarningForm;
-import com.oddlabs.tt.global.Globals;
-import com.oddlabs.tt.global.GlobalsInit;
-import com.oddlabs.tt.global.Settings;
-import com.oddlabs.tt.gui.Languages;
-import com.oddlabs.tt.gui.CounterLabel;
-import com.oddlabs.tt.gui.Fadable;
-import com.oddlabs.tt.gui.GUIRoot;
-import com.oddlabs.tt.gui.GUI;
-import com.oddlabs.tt.gui.Label;
-import com.oddlabs.tt.gui.LocalInput;
-import com.oddlabs.tt.gui.Skin;
-import com.oddlabs.tt.guievent.MouseClickListener;
-import com.oddlabs.tt.input.KeyboardInput;
-import com.oddlabs.tt.landscape.AbstractTreeGroup;
-import com.oddlabs.tt.landscape.WorldParameters;
-import com.oddlabs.matchmaking.Game;
-import com.oddlabs.http.HttpRequestParameters;
-import com.oddlabs.tt.landscape.World;
-import com.oddlabs.tt.model.AbstractElementNode;
-import com.oddlabs.tt.model.Building;
-import com.oddlabs.tt.model.Selectable;
-import com.oddlabs.tt.render.LandscapeRenderer;
-import com.oddlabs.tt.landscape.LandscapeResources;
-import com.oddlabs.net.TimeManager;
-import com.oddlabs.tt.net.Network;
-import com.oddlabs.tt.net.PlayerSlot;
-import com.oddlabs.tt.player.Player;
-import com.oddlabs.tt.player.PlayerInfo;
-import com.oddlabs.tt.player.UnitInfo;
-import com.oddlabs.tt.particle.Emitter;
-import com.oddlabs.tt.particle.Lightning;
-import com.oddlabs.tt.pathfinder.UnitGrid;
-import com.oddlabs.tt.procedural.Landscape;
-import com.oddlabs.tt.player.campaign.CampaignState;
-import com.oddlabs.tt.resource.GLImage;
-import com.oddlabs.tt.resource.WorldInfo;
-import com.oddlabs.tt.resource.GLIntImage;
-import com.oddlabs.tt.resource.IslandGenerator;
-import com.oddlabs.tt.resource.WorldGenerator;
-import com.oddlabs.tt.resource.NativeResource;
-import com.oddlabs.tt.scenery.Sky;
-import com.oddlabs.tt.scenery.Water;
-import com.oddlabs.tt.util.GLState;
-import com.oddlabs.tt.util.GLStateStack;
-import com.oddlabs.tt.util.GLUtils;
-import com.oddlabs.tt.util.LoggerOutputStream;
-import com.oddlabs.tt.util.BackBufferRenderer;
-import com.oddlabs.tt.util.StatCounter;
-import com.oddlabs.tt.util.StrictGLU;
-import com.oddlabs.tt.viewer.AmbientAudio;
-import com.oddlabs.tt.util.StrictMatrix4f;
-import com.oddlabs.tt.landscape.TreeSupply;
-import com.oddlabs.tt.viewer.Selection;
-import com.oddlabs.tt.util.StrictVector4f;
-import com.oddlabs.tt.util.Utils;
-import com.oddlabs.tt.vbo.VBO;
-import com.oddlabs.updater.UpdateInfo;
-
-import java.util.Map;
-import java.util.HashMap;
 
 public final strictfp class Renderer {
 	private final static FloatBuffer matrix_buf = BufferUtils.createFloatBuffer(16);
@@ -138,7 +101,7 @@ public final strictfp class Renderer {
 	private final static Renderer renderer_instance = new Renderer();
 	private final static StatCounter fps = new StatCounter(10);
 	private static int num_triangles_rendered;
-	
+
 	private static RegistrationClient registration_client;
 
 	private static boolean grab_frames = false;
@@ -149,7 +112,7 @@ public final strictfp class Renderer {
 	private static AbstractAudioPlayer music;
 	private static String music_path;
 	private static TimerAnimation music_timer;
-	
+
 	private int fallback_val = 0;
 
 	private static boolean finished = false;
@@ -160,7 +123,7 @@ public final strictfp class Renderer {
 	private Label games_left_label;
 	private boolean movie_recording_started = false;
 	private AmbientAudio ambient;
-	
+
 	public final static float getFPS() {
 		return fps.getAveragePerUpdate();
 	}
@@ -168,11 +131,11 @@ public final strictfp class Renderer {
 	public final static RegistrationClient getRegistrationClient() {
 		return registration_client;
 	}
-	
+
 	public final static boolean isRegistered() {
 		return registration_client.isRegistered();
 	}
-	
+
 	public final static void makeCurrent() {
 		try {
 			Display.makeCurrent();
@@ -181,7 +144,7 @@ public final strictfp class Renderer {
 			throw new RuntimeException(e);
 		}
 	}
-	
+
 	public final static void runGame(String[] args) {
 		renderer_instance.run(args);
 	}
@@ -259,7 +222,7 @@ public final strictfp class Renderer {
 		}
 		log.delete();
 	}
-	
+
 	private final static void deleteOldLogs(File last_log_dir, File new_log_dir, File logs_dir) {
 		File[] logs = logs_dir.listFiles();
 		if (logs == null)
@@ -272,13 +235,12 @@ public final strictfp class Renderer {
 			deleteLog(log);
 		}
 	}
-	
+
 	private final void run(String[] args) {
 		long start_time = System.currentTimeMillis();
 		boolean first_frame = true;
 		System.out.println("********** Running tt **********");
 		System.out.flush();
-		UpdateInfo update_info = null;
 		String platform_dir;
 		switch (LWJGLUtil.getPlatform()) {
 			case LWJGLUtil.PLATFORM_MACOSX:
@@ -310,12 +272,6 @@ public final strictfp class Renderer {
 					} else if (args[i].equals("normal")) {
 					} else
 						throw new RuntimeException("Unknown event load mode: " + args[i]);
-				} else if (args[i].equals("--bootstrap")) {
-					String java_cmd = args[++i];
-					settings.load(Utils.getInstallDir());
-					String classpath = args[++i];
-					File data_dir = new File(args[++i]);
-					update_info = new UpdateInfo(java_cmd, classpath, data_dir);
 				} else if (args[i].equals("--silent")) {
 					silent = true;
 				} else {
@@ -340,7 +296,7 @@ System.out.println("last_event_log_path = " + last_event_log_path);
 			LocalEventQueue.getQueue().loadEvents(new File(last_event_log_path), zipped);
 		}
 
-	
+
 		File event_logs_dir = new File(game_dir, "logs");
 		File event_log_dir = new File(event_logs_dir, Long.toString(System.currentTimeMillis()));
 		if (LocalEventQueue.getQueue().getDeterministic() == null && settings.save_event_log) {
@@ -367,7 +323,6 @@ System.out.println("last_event_log_path = " + last_event_log_path);
 			}
 		}
 		Deterministic deterministic = LocalEventQueue.getQueue().getDeterministic();
-		update_info = (UpdateInfo)deterministic.log(update_info);
 		game_dir = (File)deterministic.log(game_dir);
 		event_log_dir = (File)deterministic.log(event_log_dir);
 		settings = (Settings)deterministic.log(settings);
@@ -382,17 +337,6 @@ System.out.println("last_event_log_path = " + last_event_log_path);
 		Settings.setSettings(settings);
 		File last_event_log_dir = new File(settings.last_event_log_dir);
 		boolean crashed = settings.crashed;
-		if (crashed && !settings.hide_bugreporter && !deterministic.isPlayback()) {
-			System.out.println("Starting bug reporter ...");
-			System.out.println("Event log dir: " + last_event_log_dir);
-			try {
-				URL url = new URL("https://" + settings.bugreport_address + "/reportbug.php");
-				BugClientWindow.showReporter(url, settings.last_revision, last_event_log_dir);
-				System.out.println("Bug reporter completed");
-			} catch (Exception e) {
-				System.out.println("Failed to start bug reporter: " + e);
-			}
-		}
 		HttpRequestParameters request_parameters = createRegistrationParameters();
 		File registration_file = new File(game_dir, Globals.REG_FILE_NAME);
 		if (!registration_file.canRead()) {
@@ -400,7 +344,6 @@ System.out.println("last_event_log_path = " + last_event_log_path);
 			if (install_reg_file.canRead())
 				registration_file = install_reg_file;
 		}
-		
 		new LocalInput();
 
 		NetworkSelector network = new NetworkSelector(LocalEventQueue.getQueue().getDeterministic(), new TimeManager() {
@@ -408,7 +351,7 @@ System.out.println("last_event_log_path = " + last_event_log_path);
 				return LocalEventQueue.getQueue().getMillis();
 			}
 		});
-		LocalInput.settings(update_info, game_dir, event_log_dir, settings);
+		LocalInput.settings( game_dir, event_log_dir, settings);
 		try {
 			initNative(crashed, network);
 		} catch (LWJGLException e) {
@@ -416,26 +359,7 @@ System.out.println("last_event_log_path = " + last_event_log_path);
 			throw new RuntimeException(e);
 		}
 		TaskThread task_thread = network.getTaskThread();
-		if (Settings.getSettings().affiliate_id.equals("reflexive")) {
-System.out.println("affiliate_id equals reflexive");
-			registration_client = new ReflexiveRegistrationClient(task_thread, 526, "21658", "Tribal Trouble", "29.95");
-		} else if (Settings.getSettings().affiliate_id.equals("totalgaming")) {
-System.out.println("affiliate_id equals totalgaming");
-			registration_client = new TotalgamingRegistrationClient(task_thread, registration_file, request_parameters);
-		} else if (Settings.getSettings().affiliate_id.equals("garagegames")) {
-System.out.println("affiliate_id equals garagegames");
-			registration_client = new RegistrationClient(task_thread, registration_file, request_parameters, RegistrationClient.CLIENT_TYPE_FOREIGN);
-		} else if (Settings.getSettings().affiliate_id.equals("arcadetown") || !Settings.getSettings().online) {
-System.out.println("affiliate_id equals arcadetown");
-			registration_client = new RegistrationClient(task_thread, registration_file, request_parameters, RegistrationClient.CLIENT_TYPE_OFFLINE);
-			registration_client.setKey(Settings.getSettings().reg_key);
-		} else if (Settings.getSettings().affiliate_id.equals("trymedia")) {
-System.out.println("affiliate_id equals trymedia");
-			registration_client = new TrymediaRegistrationClient(task_thread, registration_file, request_parameters, RegistrationClient.CLIENT_TYPE_OFFLINE);
-			Settings.getSettings().reg_key = registration_client.getPotentialKey();
-		} else {
-			registration_client = new RegistrationClient(task_thread, registration_file, request_parameters, RegistrationClient.CLIENT_TYPE_ONLINE);
-		}
+                registration_client = new RegistrationClient(task_thread, registration_file, request_parameters, RegistrationClient.CLIENT_TYPE_OFFLINE);
 		if (!settings.inDeveloperMode() && !deterministic.isPlayback())
 			deleteOldLogs(last_event_log_dir, event_log_dir, event_logs_dir);
 		Skin.load();
@@ -450,7 +374,7 @@ System.out.println("Init done after " + startup_timei);
 		ambient = new AmbientAudio(AudioManager.getManager());
 
 		setupMainMenu(network, gui, true);
-		
+
 		boolean reset_keyboard = false;
 // Registry hack for mikkel!
 /*try {
@@ -509,7 +433,7 @@ e.printStackTrace();
 		parameters.put("current_affiliate_id", Settings.getSettings().affiliate_id);
 		parameters.put("affiliate_id", affiliate_id);
 		return new HttpRequestParameters("https://" + Settings.getSettings().registration_address + "/oddlabs/registration", parameters);
-	} 
+	}
 
 	public final Locale getDefaultLocale() {
 		return default_locale;
@@ -527,7 +451,7 @@ e.printStackTrace();
 		String title = Utils.getBundleString(bundle, "error_title");
 		String message = Utils.getBundleString(bundle, "opengl_error_message");
 		int choice = JOptionPane.showConfirmDialog(null, message, title, JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-	
+
 		if (choice == JOptionPane.YES_OPTION) {
 			String new_uid = (new UID()).toString();
 			String uid = readOrSetPreference("uid", new_uid);
@@ -558,7 +482,7 @@ e.printStackTrace();
 				uee.printStackTrace();
 			}
 		}
-	
+
 		Main.shutdown();
 	}
 
@@ -566,7 +490,7 @@ e.printStackTrace();
 		String result_string = readOrSetPreference(key, ""+value);
 		return Boolean.valueOf(result_string).booleanValue();
 	}
-	
+
 	private static int readOrSetPreference(String key, int value) {
 		String result_string = readOrSetPreference(key, ""+value);
 		try {
@@ -576,7 +500,7 @@ e.printStackTrace();
 			return 0;
 		}
 	}
-	
+
 	private static String readOrSetPreference(String key, String value) {
 		try {
 			Preferences pref = Preferences.userNodeForPackage(com.oddlabs.tt.render.Renderer.class);
@@ -777,7 +701,7 @@ e.printStackTrace();
 		if (GLUtils.isIntelGMA950() || !Settings.getSettings().useTextureCompression()) {  // Intel mac mini hack
 			Globals.disableTextureCompression();
 		}
-		
+
 		dumpWindowInfo();
 		try {
 			if (!GLContext.getCapabilities().OpenGL13) {
@@ -827,7 +751,7 @@ System.out.println("use_texture_compression = " + Settings.getSettings().useText
 		else
 			AudioManager.getManager().stopSources();
 	}
-	
+
 	public final void toggleMusic() {
 		Settings.getSettings().play_music = !Settings.getSettings().play_music;
 		if (Settings.getSettings().play_music) {
@@ -836,7 +760,7 @@ System.out.println("use_texture_compression = " + Settings.getSettings().useText
 			music.stop(2.5f, Settings.getSettings().music_gain);
 		}
 	}
-	
+
 	private final static void initMusicPlayer() {
 		music = AudioManager.getManager().newAudio(new AudioParameters(music_path, 0f, 0f, 0f, AudioPlayer.AUDIO_RANK_MUSIC, AudioPlayer.AUDIO_DISTANCE_MUSIC, Settings.getSettings().music_gain, 1f, 1f, true, true, true));
 	}
@@ -907,7 +831,7 @@ System.out.println("use_texture_compression = " + Settings.getSettings().useText
 		VBO.releaseAll();
 		GL11.glFrontFace(GL11.GL_CCW);
 		GL11.glCullFace(GL11.GL_BACK);
-		GL11.glEnable(GL11.GL_CULL_FACE); 
+		GL11.glEnable(GL11.GL_CULL_FACE);
 		GL11.glPixelStorei(GL11.GL_PACK_ROW_LENGTH, 0);
 		GL11.glPixelStorei(GL11.GL_PACK_SKIP_PIXELS, 0);
 		GL11.glPixelStorei(GL11.GL_PACK_SKIP_ROWS, 0);

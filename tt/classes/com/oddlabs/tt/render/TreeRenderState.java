@@ -1,8 +1,7 @@
 package com.oddlabs.tt.render;
 
-import com.oddlabs.tt.landscape.TreeSupply;
-import com.oddlabs.tt.landscape.LandscapeResources;
 import com.oddlabs.tt.camera.CameraState;
+import com.oddlabs.tt.landscape.TreeSupply;
 
 final strictfp class TreeRenderState implements LODObject {
 	private final TreePicker tree_renderer;

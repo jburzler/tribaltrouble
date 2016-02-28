@@ -1,14 +1,11 @@
 package com.oddlabs.tt.tutorial;
 
-import java.util.Iterator;
-import java.util.Set;
-
-import com.oddlabs.tt.landscape.World;
-import com.oddlabs.tt.player.Player;
-import com.oddlabs.tt.viewer.WorldViewer;
 import com.oddlabs.tt.model.Abilities;
 import com.oddlabs.tt.model.Building;
 import com.oddlabs.tt.model.Selectable;
+import com.oddlabs.tt.player.Player;
+import java.util.Iterator;
+import java.util.Set;
 
 public final strictfp class WeaponTrigger extends TutorialTrigger {
 	private final static int WEAPONS = 10;

@@ -1,6 +1,5 @@
 package com.oddlabs.tt.model.behaviour;
 
-import com.oddlabs.tt.landscape.World;
 import com.oddlabs.tt.model.Selectable;
 import com.oddlabs.tt.model.Unit;
 import com.oddlabs.tt.model.weapon.Magic;

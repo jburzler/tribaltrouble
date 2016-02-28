@@ -1,10 +1,8 @@
 package com.oddlabs.tt.audio;
 
 import com.oddlabs.tt.Main;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import org.lwjgl.openal.AL;
 
 public final strictfp class RefillerList {

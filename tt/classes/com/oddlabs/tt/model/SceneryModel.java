@@ -1,14 +1,11 @@
 package com.oddlabs.tt.model;
 
-import com.oddlabs.tt.net.DistributableTable;
 import com.oddlabs.tt.animation.Animated;
-import com.oddlabs.tt.gui.ToolTipBox;
 import com.oddlabs.tt.landscape.World;
 import com.oddlabs.tt.pathfinder.Occupant;
 import com.oddlabs.tt.pathfinder.UnitGrid;
 import com.oddlabs.tt.render.SpriteKey;
 import com.oddlabs.tt.util.StateChecksum;
-import com.oddlabs.tt.camera.CameraState;
 
 public strictfp class SceneryModel extends Model implements Occupant, ModelToolTip, Animated {
 	private final SpriteKey sprite_renderer;

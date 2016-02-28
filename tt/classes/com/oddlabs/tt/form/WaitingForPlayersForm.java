@@ -1,20 +1,16 @@
 package com.oddlabs.tt.form;
 
-import java.util.ResourceBundle;
-
-import org.lwjgl.input.Keyboard;
-
 import com.oddlabs.tt.gui.CancelListener;
 import com.oddlabs.tt.gui.Form;
-import com.oddlabs.tt.gui.GUIRoot;
 import com.oddlabs.tt.gui.HorizButton;
 import com.oddlabs.tt.gui.KeyboardEvent;
 import com.oddlabs.tt.gui.Label;
 import com.oddlabs.tt.gui.Skin;
 import com.oddlabs.tt.guievent.MouseClickListener;
-import com.oddlabs.tt.render.Renderer;
 import com.oddlabs.tt.util.Utils;
 import com.oddlabs.tt.viewer.WorldViewer;
+import java.util.ResourceBundle;
+import org.lwjgl.input.Keyboard;
 
 public final strictfp class WaitingForPlayersForm extends Form {
 	private final Label info_label;

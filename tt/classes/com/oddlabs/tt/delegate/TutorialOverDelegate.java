@@ -1,18 +1,16 @@
 package com.oddlabs.tt.delegate;
 
-import java.util.ResourceBundle;
-
 import com.oddlabs.tt.animation.TimerAnimation;
 import com.oddlabs.tt.animation.Updatable;
 import com.oddlabs.tt.camera.Camera;
 import com.oddlabs.tt.camera.StaticCamera;
 import com.oddlabs.tt.form.TutorialForm;
+import com.oddlabs.tt.gui.*;
 import com.oddlabs.tt.guievent.MouseClickListener;
-import com.oddlabs.tt.render.Renderer;
+import com.oddlabs.tt.tutorial.TutorialInGameInfo;
 import com.oddlabs.tt.util.Utils;
 import com.oddlabs.tt.viewer.WorldViewer;
-import com.oddlabs.tt.tutorial.TutorialInGameInfo;
-import com.oddlabs.tt.gui.*;
+import java.util.ResourceBundle;
 
 public final strictfp class TutorialOverDelegate extends CameraDelegate implements Updatable {
 	private final static float DELAY = 1f;

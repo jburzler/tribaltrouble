@@ -1,8 +1,7 @@
 package com.oddlabs.tt.gui;
 
-import org.lwjgl.input.Keyboard;
-
 import com.oddlabs.tt.font.Font;
+import org.lwjgl.input.Keyboard;
 
 public abstract strictfp class TextField extends GUIObject implements CharSequence {
 	private final static StringBuffer digit_buf = new StringBuffer();

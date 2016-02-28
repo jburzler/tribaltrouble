@@ -1,21 +1,12 @@
 package com.oddlabs.tt.audio;
 
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-import java.io.ByteArrayOutputStream;
-import java.net.URL;
-import java.io.IOException;
-import java.io.InputStream;
-
-import org.lwjgl.BufferUtils;
-import org.lwjgl.openal.AL10;
 import com.jcraft.jogg.*;
 import com.jcraft.jorbis.*;
-
-import com.oddlabs.tt.resource.NativeResource;
-import com.oddlabs.tt.util.Utils;
-import com.oddlabs.tt.render.Renderer;
 import com.oddlabs.util.ByteBufferOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.nio.ByteOrder;
 
 public final strictfp class OGGStream {
 	private final URL file;

@@ -1,38 +1,28 @@
 package com.oddlabs.tt.render;
 
-import com.oddlabs.tt.gui.GUIRoot;
-import com.oddlabs.tt.gui.Icons;
 import com.oddlabs.tt.camera.CameraState;
 import com.oddlabs.tt.global.Globals;
-import com.oddlabs.tt.landscape.AbstractTreeGroup;
+import com.oddlabs.tt.gui.GUIRoot;
+import com.oddlabs.tt.gui.Icons;
+import com.oddlabs.tt.gui.LocalInput;
 import com.oddlabs.tt.landscape.World;
-import com.oddlabs.tt.resource.WorldInfo;
-import com.oddlabs.tt.resource.FogInfo;
-import com.oddlabs.tt.scenery.Water;
-import com.oddlabs.tt.scenery.Sky;
-import com.oddlabs.tt.model.AbstractElementNode;
-import com.oddlabs.tt.model.Model;
 import com.oddlabs.tt.model.Building;
 import com.oddlabs.tt.model.Race;
 import com.oddlabs.tt.player.Player;
-import com.oddlabs.tt.particle.Lightning;
-import com.oddlabs.tt.particle.Emitter;
-import com.oddlabs.tt.resource.WorldGenerator;
 import com.oddlabs.tt.procedural.Landscape;
-import com.oddlabs.tt.gui.LocalInput;
+import com.oddlabs.tt.resource.FogInfo;
+import com.oddlabs.tt.resource.WorldGenerator;
+import com.oddlabs.tt.resource.WorldInfo;
+import com.oddlabs.tt.scenery.Sky;
+import com.oddlabs.tt.scenery.Water;
 import com.oddlabs.tt.util.Target;
 import com.oddlabs.tt.util.ToolTip;
-import com.oddlabs.tt.viewer.Selection;
-import com.oddlabs.tt.viewer.Cheat;
 import com.oddlabs.tt.viewer.AmbientAudio;
-import com.oddlabs.tt.util.DebugRender;
-import com.oddlabs.tt.util.BoundingBox;
-
-import java.util.List;
+import com.oddlabs.tt.viewer.Cheat;
+import com.oddlabs.tt.viewer.Selection;
 import java.nio.FloatBuffer;
-
-import org.lwjgl.opengl.GL11;
 import org.lwjgl.BufferUtils;
+import org.lwjgl.opengl.GL11;
 
 public final strictfp class DefaultRenderer implements UIRenderer {
 	private final Picker picker;

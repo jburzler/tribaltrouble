@@ -1,7 +1,5 @@
 package com.oddlabs.tt.form;
 
-import java.util.ResourceBundle;
-
 import com.oddlabs.tt.gui.CancelListener;
 import com.oddlabs.tt.gui.Form;
 import com.oddlabs.tt.gui.GUIRoot;
@@ -13,6 +11,7 @@ import com.oddlabs.tt.gui.TextBox;
 import com.oddlabs.tt.guievent.MouseClickListener;
 import com.oddlabs.tt.render.Renderer;
 import com.oddlabs.tt.util.Utils;
+import java.util.ResourceBundle;
 
 // unicode codes: ae: 00E6 - oe: 00F8 - aa: 00E5 - AE: 00C6 - OE: 00D8 - AA: 00C5 - (C): 00A9
 

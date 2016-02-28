@@ -1,14 +1,12 @@
 package com.oddlabs.tt.resource;
 
-import java.net.URL;
-
-import org.lwjgl.opengl.GL11;
-
+import com.oddlabs.tt.event.LocalEventQueue;
 import com.oddlabs.tt.render.NativeCursor;
 import com.oddlabs.tt.render.Texture;
-import com.oddlabs.tt.event.LocalEventQueue;
 import com.oddlabs.util.Image;
 import com.oddlabs.util.Quad;
+import java.net.URL;
+import org.lwjgl.opengl.GL11;
 
 public final strictfp class Cursor {
 	private final Texture texture;

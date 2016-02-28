@@ -1,15 +1,12 @@
 package com.oddlabs.tt.audio;
 
-import java.net.URL;
-import java.nio.IntBuffer;
-
-import org.lwjgl.BufferUtils;
-import org.lwjgl.openal.AL;
-import org.lwjgl.openal.AL10;
-
 import com.oddlabs.tt.global.Settings;
 import com.oddlabs.util.ByteBufferOutputStream;
 import com.oddlabs.util.Utils;
+import java.net.URL;
+import java.nio.IntBuffer;
+import org.lwjgl.BufferUtils;
+import org.lwjgl.openal.AL10;
 
 final strictfp class QueuedAudioPlayer extends AbstractAudioPlayer {
 	private final static int NUM_BUFFERS = 12;

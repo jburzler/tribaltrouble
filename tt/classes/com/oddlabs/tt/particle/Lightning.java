@@ -1,24 +1,17 @@
 package com.oddlabs.tt.particle;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.util.vector.Vector3f;
-import org.lwjgl.util.vector.Vector4f;
-
 import com.oddlabs.tt.animation.Animated;
 import com.oddlabs.tt.animation.AnimationManager;
-import com.oddlabs.tt.global.Globals;
-import com.oddlabs.tt.camera.CameraState;
 import com.oddlabs.tt.landscape.World;
 import com.oddlabs.tt.model.Element;
 import com.oddlabs.tt.model.ElementVisitor;
-import com.oddlabs.tt.model.AbstractElementNode;
 import com.oddlabs.tt.render.TextureKey;
 import com.oddlabs.tt.util.StateChecksum;
-import com.oddlabs.tt.util.StrictMatrix4f;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import org.lwjgl.util.vector.Vector3f;
+import org.lwjgl.util.vector.Vector4f;
 
 public final strictfp class Lightning extends Element implements Animated {
 	private final static float SQRT_2 = (float)StrictMath.sqrt(2f);

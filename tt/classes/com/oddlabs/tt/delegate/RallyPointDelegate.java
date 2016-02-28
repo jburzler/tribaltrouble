@@ -2,10 +2,8 @@ package com.oddlabs.tt.delegate;
 
 import com.oddlabs.tt.camera.GameCamera;
 import com.oddlabs.tt.model.Building;
-import com.oddlabs.tt.render.Picker;
 import com.oddlabs.tt.util.Target;
 import com.oddlabs.tt.viewer.WorldViewer;
-import com.oddlabs.tt.gui.*;
 
 public final strictfp class RallyPointDelegate extends TargetDelegate {
 	private final Building building;

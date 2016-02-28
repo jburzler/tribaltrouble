@@ -2,7 +2,6 @@ package com.oddlabs.tt.gui;
 
 import com.oddlabs.tt.render.Texture;
 import com.oddlabs.util.Quad;
-
 import org.lwjgl.opengl.*;
 
 public final strictfp class IconQuad extends Quad {

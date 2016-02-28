@@ -1,30 +1,27 @@
 package com.oddlabs.tt.form;
 
-import java.util.ResourceBundle;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.List;
-
-import com.oddlabs.tt.viewer.WorldViewer;
-import com.oddlabs.tt.net.ChatMessage;
-import com.oddlabs.tt.net.ChatMethod;
-import com.oddlabs.tt.net.ChatListener;
-import com.oddlabs.tt.net.Network;
+import com.oddlabs.tt.delegate.SelectionDelegate;
 import com.oddlabs.tt.gui.EditLine;
 import com.oddlabs.tt.gui.Form;
 import com.oddlabs.tt.gui.HorizButton;
 import com.oddlabs.tt.gui.InfoPrinter;
 import com.oddlabs.tt.gui.RadioButton;
 import com.oddlabs.tt.gui.RadioButtonGroup;
-import com.oddlabs.tt.delegate.SelectionDelegate;
 import com.oddlabs.tt.gui.Skin;
-import com.oddlabs.tt.gui.InfoPrinter;
 import com.oddlabs.tt.gui.TextBox;
 import com.oddlabs.tt.guievent.EnterListener;
 import com.oddlabs.tt.guievent.MouseClickListener;
 import com.oddlabs.tt.net.ChatCommand;
-import com.oddlabs.tt.net.PeerHub;
+import com.oddlabs.tt.net.ChatListener;
+import com.oddlabs.tt.net.ChatMessage;
+import com.oddlabs.tt.net.ChatMethod;
+import com.oddlabs.tt.net.Network;
 import com.oddlabs.tt.util.Utils;
+import com.oddlabs.tt.viewer.WorldViewer;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.ResourceBundle;
 
 public final strictfp class InGameChatForm extends Form implements ChatListener {
 	private static final int CHAT_WIDTH = 400;

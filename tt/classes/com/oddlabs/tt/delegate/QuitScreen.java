@@ -1,30 +1,24 @@
 package com.oddlabs.tt.delegate;
 
-import java.util.ResourceBundle;
-
 import com.oddlabs.tt.animation.TimerAnimation;
 import com.oddlabs.tt.animation.Updatable;
 import com.oddlabs.tt.camera.Camera;
-import com.oddlabs.tt.gui.ButtonObject;
-import com.oddlabs.tt.delegate.CameraDelegate;
-import com.oddlabs.tt.gui.Fadable;
 import com.oddlabs.tt.gui.GUIImage;
 import com.oddlabs.tt.gui.GUIRoot;
-import com.oddlabs.tt.gui.ImageBuyButton;
 import com.oddlabs.tt.gui.KeyboardEvent;
 import com.oddlabs.tt.gui.LabelBox;
 import com.oddlabs.tt.gui.LocalInput;
 import com.oddlabs.tt.gui.Skin;
 import com.oddlabs.tt.guievent.MouseClickListener;
-import com.oddlabs.tt.net.PeerHub;
 import com.oddlabs.tt.render.Renderer;
 import com.oddlabs.tt.util.Utils;
+import java.util.ResourceBundle;
 
 public final strictfp class QuitScreen extends CameraDelegate implements Updatable {
 	private final static float DELAY = 5f;
 	private final static int OFFSET = 20;
 	private final static int BUY_OFFSET = 10;
-	
+
 	private final static int overlay_texture_width = 1024;
 	private final static int overlay_texture_height = 1024;
 	private final static int overlay_image_width = 800;
@@ -35,12 +29,12 @@ public final strictfp class QuitScreen extends CameraDelegate implements Updatab
 	private final TimerAnimation delay_timer = new TimerAnimation(this, DELAY);
 	private boolean key_pressed = false;
 	private boolean time_out = false;
-	
+
 	public QuitScreen(GUIRoot gui_root, Camera camera) {
 		super(gui_root, camera);
 		setCanFocus(true);
 		setFocusCycle(true);
-		
+
 		int screen_width = LocalInput.getViewWidth();
 		int screen_height = LocalInput.getViewHeight();
 		overlay = new GUIImage(screen_width, screen_height, 0f, 0f, (float)overlay_image_width/overlay_texture_width, (float)overlay_image_height/overlay_texture_height, overlay_texture_name);
@@ -59,13 +53,8 @@ public final strictfp class QuitScreen extends CameraDelegate implements Updatab
 		LabelBox text_box = new LabelBox(text, Skin.getSkin().getHeadlineFont(), 400);
 		text_box.setPos(OFFSET, screen_height - (text_box.getHeight() + OFFSET));
 		addChild(text_box);
-		
-		GUIRoot quit_root = gui_root.getGUI().newFade();
 
-		ButtonObject button_buy = new ImageBuyButton(quit_root);
-		addChild(button_buy);
-		button_buy.setPos(screen_width - (button_buy.getWidth() + BUY_OFFSET), BUY_OFFSET);
-		button_buy.addMouseClickListener(new ResetListener());
+		GUIRoot quit_root = gui_root.getGUI().newFade();
 
 		delay_timer.start();
 

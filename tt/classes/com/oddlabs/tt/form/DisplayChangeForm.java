@@ -1,7 +1,5 @@
 package com.oddlabs.tt.form;
 
-import java.util.ResourceBundle;
-
 import com.oddlabs.tt.gui.CancelListener;
 import com.oddlabs.tt.gui.DoNowListener;
 import com.oddlabs.tt.gui.Form;
@@ -10,6 +8,7 @@ import com.oddlabs.tt.gui.LabelBox;
 import com.oddlabs.tt.gui.Skin;
 import com.oddlabs.tt.guievent.MouseClickListener;
 import com.oddlabs.tt.util.Utils;
+import java.util.ResourceBundle;
 
 public final strictfp class DisplayChangeForm extends Form {
 	private final DoNowListener donow_listener;

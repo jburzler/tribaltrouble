@@ -1,13 +1,11 @@
 package com.oddlabs.tt.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.oddlabs.tt.audio.AudioPlayer;
 import com.oddlabs.tt.audio.AbstractAudioPlayer;
 import com.oddlabs.tt.audio.AudioParameters;
-import com.oddlabs.tt.landscape.World;
+import com.oddlabs.tt.audio.AudioPlayer;
 import com.oddlabs.tt.particle.LinearEmitter;
+import java.util.ArrayList;
+import java.util.List;
 
 public strictfp class WeaponsProducer {
 	private final static float MAX_BREAK_TIME = .25f;

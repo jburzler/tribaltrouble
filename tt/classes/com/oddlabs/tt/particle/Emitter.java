@@ -1,25 +1,16 @@
 package com.oddlabs.tt.particle;
 
-import java.nio.FloatBuffer;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.lwjgl.BufferUtils;
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.util.vector.Vector3f;
-
 import com.oddlabs.tt.animation.Animated;
 import com.oddlabs.tt.animation.AnimationManager;
-import com.oddlabs.tt.global.Globals;
-import com.oddlabs.tt.camera.CameraState;
+import com.oddlabs.tt.landscape.World;
 import com.oddlabs.tt.model.Element;
 import com.oddlabs.tt.model.ElementVisitor;
-import com.oddlabs.tt.model.AbstractElementNode;
-import com.oddlabs.tt.landscape.World;
-import com.oddlabs.tt.render.TextureKey;
 import com.oddlabs.tt.render.SpriteKey;
+import com.oddlabs.tt.render.TextureKey;
 import com.oddlabs.tt.util.StateChecksum;
-import com.oddlabs.tt.util.StrictMatrix4f;
+import java.util.ArrayList;
+import java.util.List;
+import org.lwjgl.util.vector.Vector3f;
 
 public abstract strictfp class Emitter extends Element implements Animated {
 	private final AnimationManager manager;

@@ -1,14 +1,12 @@
 package com.oddlabs.tt.audio;
 
+import com.oddlabs.tt.resource.NativeResource;
+import com.oddlabs.util.ByteBufferOutputStream;
 import java.net.URL;
 import java.nio.IntBuffer;
-
 import org.lwjgl.BufferUtils;
 import org.lwjgl.openal.AL;
 import org.lwjgl.openal.AL10;
-
-import com.oddlabs.tt.resource.NativeResource;
-import com.oddlabs.util.ByteBufferOutputStream;
 
 public final strictfp class Audio extends NativeResource {
 	private final IntBuffer al_buffers;

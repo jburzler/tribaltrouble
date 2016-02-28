@@ -1,12 +1,11 @@
 package com.oddlabs.tt.util;
 
+import java.nio.ByteBuffer;
+import org.lwjgl.opengl.ARBMultitexture;
+import org.lwjgl.opengl.ARBTextureCompression;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL13;
 import org.lwjgl.opengl.GLContext;
-import org.lwjgl.opengl.ARBMultitexture;
-import org.lwjgl.opengl.ARBTextureCompression;
-
-import java.nio.ByteBuffer;
 
 public final strictfp class GLState implements Cloneable {
 	public final static int VERTEX_ARRAY = 1 << 0;

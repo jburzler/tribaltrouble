@@ -1,11 +1,9 @@
 package com.oddlabs.tt.viewer;
 
 import com.oddlabs.tt.animation.*;
-import com.oddlabs.tt.gui.*;
 import com.oddlabs.tt.audio.*;
-import com.oddlabs.tt.util.Target;
+import com.oddlabs.tt.gui.*;
 import com.oddlabs.tt.landscape.World;
-import com.oddlabs.tt.event.LocalEventQueue;
 
 public strictfp class Notification implements Updatable {
 	private final static float ACTIVE_SECONDS = 5f;

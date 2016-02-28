@@ -1,16 +1,5 @@
 package com.oddlabs.tt.net;
 
-import java.io.IOException;
-import java.net.InetAddress;
-import java.security.SignedObject;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
-import java.util.List;
-import java.util.LinkedHashSet;
-import java.util.ResourceBundle;
-
 import com.oddlabs.matchmaking.ChatRoomUser;
 import com.oddlabs.matchmaking.Login;
 import com.oddlabs.matchmaking.LoginDetails;
@@ -23,23 +12,29 @@ import com.oddlabs.net.ARMIEvent;
 import com.oddlabs.net.ARMIInterfaceMethods;
 import com.oddlabs.net.AbstractConnection;
 import com.oddlabs.net.Connection;
-import com.oddlabs.net.NetworkSelector;
 import com.oddlabs.net.ConnectionInterface;
 import com.oddlabs.net.HostSequenceID;
 import com.oddlabs.net.IllegalARMIEventException;
+import com.oddlabs.net.NetworkSelector;
 import com.oddlabs.net.SecureConnection;
 import com.oddlabs.tt.form.ChatErrorForm;
-import com.oddlabs.tt.form.InGameChatForm;
 import com.oddlabs.tt.form.InfoForm;
 import com.oddlabs.tt.global.Settings;
 import com.oddlabs.tt.gui.ChatRoomInfo;
 import com.oddlabs.tt.gui.GUIRoot;
-import com.oddlabs.tt.gui.InfoPrinter;
 import com.oddlabs.tt.gui.LocalInput;
-import com.oddlabs.tt.delegate.SelectionDelegate;
 import com.oddlabs.tt.render.Renderer;
 import com.oddlabs.tt.util.Utils;
-import com.oddlabs.tt.event.LocalEventQueue;
+import java.io.IOException;
+import java.net.InetAddress;
+import java.security.SignedObject;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.ResourceBundle;
+import java.util.Set;
 
 public final strictfp class MatchmakingClient implements MatchmakingClientInterface, ConnectionInterface {
 	private final static int STATE_NOT_CONNECTED = 1;

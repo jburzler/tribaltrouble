@@ -1,11 +1,7 @@
 package com.oddlabs.tt.gui;
 
 import com.oddlabs.tt.model.*;
-import com.oddlabs.tt.player.Player;
-import com.oddlabs.tt.net.PeerHub;
-import com.oddlabs.tt.landscape.World;
 import com.oddlabs.util.Quad;
-
 import org.lwjgl.opengl.*;
 
 public final strictfp class WatchStatusIcon extends StatusIcon {

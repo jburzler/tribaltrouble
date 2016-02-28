@@ -1,27 +1,25 @@
 package com.oddlabs.tt.procedural;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
-
-import org.lwjgl.opengl.GL11;
-
 import com.oddlabs.procedural.Channel;
 import com.oddlabs.procedural.Layer;
 import com.oddlabs.procedural.Tools;
 import com.oddlabs.tt.form.ProgressForm;
 import com.oddlabs.tt.global.Globals;
+import com.oddlabs.tt.landscape.HeightMap;
 import com.oddlabs.tt.model.RacesResources;
 import com.oddlabs.tt.resource.BlendInfo;
-import com.oddlabs.tt.resource.FogInfo;
 import com.oddlabs.tt.resource.BlendLighting;
+import com.oddlabs.tt.resource.FogInfo;
 import com.oddlabs.tt.resource.GLByteImage;
 import com.oddlabs.tt.resource.GLIntImage;
 import com.oddlabs.tt.resource.StructureBlend;
 import com.oddlabs.util.Utils;
-import com.oddlabs.tt.landscape.HeightMap;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
+import org.lwjgl.opengl.GL11;
 
 public final strictfp class Landscape {
 	public final static boolean DEBUG = false;

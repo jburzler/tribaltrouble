@@ -1,7 +1,6 @@
 package com.oddlabs.tt.tutorial;
 
 import com.oddlabs.tt.model.Building;
-import com.oddlabs.tt.viewer.WorldViewer;
 
 public final strictfp class UnitInTowerTrigger extends TutorialTrigger {
 	private final Building tower;

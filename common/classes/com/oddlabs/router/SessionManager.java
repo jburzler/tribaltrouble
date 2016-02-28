@@ -1,13 +1,11 @@
 package com.oddlabs.router;
 
-import java.util.Map;
+import com.oddlabs.net.MonotoneTimeManager;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.SortedMap;
-import java.util.Iterator;
 import java.util.TreeMap;
 import java.util.logging.Logger;
-
-import com.oddlabs.net.MonotoneTimeManager;
 
 final strictfp class SessionManager {
 	private final Map id_to_session = new HashMap();

@@ -1,11 +1,10 @@
 package com.oddlabs.tt.model;
 
-import java.util.List;
-
 import com.oddlabs.tt.pathfinder.FinderFilter;
 import com.oddlabs.tt.pathfinder.Occupant;
 import com.oddlabs.tt.pathfinder.Region;
 import com.oddlabs.tt.player.Player;
+import java.util.List;
 
 public final strictfp class BuildingFinder implements FinderFilter {
 	private final Player owner;

@@ -1,38 +1,30 @@
 package com.oddlabs.tt.gui;
 
-import java.util.ResourceBundle;
-
-import org.lwjgl.input.Keyboard;
-
 import com.oddlabs.tt.animation.Animated;
 import com.oddlabs.tt.camera.GameCamera;
-import com.oddlabs.tt.form.DemoForm;
-import com.oddlabs.tt.form.InGameDemoForm;
+import com.oddlabs.tt.delegate.*;
 import com.oddlabs.tt.guievent.MouseClickListener;
 import com.oddlabs.tt.landscape.TreeSupply;
-import com.oddlabs.tt.landscape.World;
 import com.oddlabs.tt.model.Abilities;
 import com.oddlabs.tt.model.Building;
 import com.oddlabs.tt.model.IronSupply;
-import com.oddlabs.tt.model.MountUnitContainer;
 import com.oddlabs.tt.model.Race;
 import com.oddlabs.tt.model.RockSupply;
 import com.oddlabs.tt.model.RubberSupply;
 import com.oddlabs.tt.model.SupplyCounter;
 import com.oddlabs.tt.model.Unit;
-import com.oddlabs.tt.model.behaviour.StunController;
 import com.oddlabs.tt.model.weapon.IronAxeWeapon;
 import com.oddlabs.tt.model.weapon.RockAxeWeapon;
 import com.oddlabs.tt.model.weapon.RubberAxeWeapon;
-import com.oddlabs.tt.player.PlayerInterface;
 import com.oddlabs.tt.player.Player;
-import com.oddlabs.tt.render.Renderer;
+import com.oddlabs.tt.player.PlayerInterface;
 import com.oddlabs.tt.util.StateChecksum;
 import com.oddlabs.tt.util.Target;
 import com.oddlabs.tt.util.Utils;
-import com.oddlabs.tt.delegate.*;
-import com.oddlabs.util.Quad;
 import com.oddlabs.tt.viewer.WorldViewer;
+import com.oddlabs.util.Quad;
+import java.util.ResourceBundle;
+import org.lwjgl.input.Keyboard;
 
 public final strictfp class ActionButtonPanel extends GUIObject implements Animated {
 	private final static int GROUP_LEFT_OFFSET = 10;
@@ -51,7 +43,7 @@ public final strictfp class ActionButtonPanel extends GUIObject implements Anima
 	private final Group build_group;
 	private final Group army_group;
 	private final Group transport_group;
-	
+
 	private final NonFocusIconButton tower_attack_button;
 	private final NonFocusIconButton tower_exit_button;
 //	private boolean tower_exit_button_disabled;
@@ -127,7 +119,7 @@ public final strictfp class ActionButtonPanel extends GUIObject implements Anima
 	private final String formatTip(String tip_key, String shortcut_key) {
 		return Utils.getBundleString(bundle, tip_key, new Object[]{shortcut_key});
 	}
-	
+
 	public ActionButtonPanel(WorldViewer viewer, GameCamera camera) {
 		this(viewer, camera, viewer.getGUIRoot().getWidth(), viewer.getGUIRoot().getHeight());
 	}
@@ -352,17 +344,15 @@ public final strictfp class ActionButtonPanel extends GUIObject implements Anima
 		army_warrior_rock_button = new DeploySpinner(viewer, player_interface, race_icons.getWarriorRockIcon(), Utils.getBundleString(bundle, "deploy_rock_tip"),
 				new Quad[]{race_icons.getUnitStatusIcon(), race_icons.getWeaponRockStatusIcon()}, "R");
 		army_group.addChild(army_warrior_rock_button);
-		
+
 		army_warrior_iron_button = new DeploySpinner(viewer, player_interface, race_icons.getWarriorIronIcon(), Utils.getBundleString(bundle, "deploy_iron_tip"),
 				new Quad[]{race_icons.getUnitStatusIcon(), race_icons.getWeaponIronStatusIcon()}, "I");
 		army_group.addChild(army_warrior_iron_button);
-		army_warrior_iron_button.setNag("Iron warriors are unavailable in this demo version of Tribal Trouble.");
-		
+
 		army_warrior_rubber_button = new DeploySpinner(viewer, player_interface, race_icons.getWarriorRubberIcon(), Utils.getBundleString(bundle, "deploy_chicken_tip"),
 				new Quad[]{race_icons.getUnitStatusIcon(), race_icons.getWeaponRubberStatusIcon()}, "C");
 		army_group.addChild(army_warrior_rubber_button);
-		army_warrior_rubber_button.setNag(Utils.getBundleString(bundle, "chicken_unavailable"));
-		
+
 		army_back_button = new NonFocusIconButton(skin.getBackButton(), formatTip("back_tip", "Esc"));
 		army_back_button.addMouseClickListener(new CancelListener());
 		army_group.addChild(army_back_button);
@@ -403,7 +393,7 @@ public final strictfp class ActionButtonPanel extends GUIObject implements Anima
 		super.doAdd();
 		viewer.getAnimationManagerLocal().registerAnimation(this);
 	}
-	
+
 	protected final void doRemove() {
 		super.doRemove();
 		viewer.getAnimationManagerLocal().removeAnimation(this);
@@ -417,14 +407,14 @@ public final strictfp class ActionButtonPanel extends GUIObject implements Anima
 		boolean different_building = new_building != current_building;
 		current_building = new_building;
 		viewer.getRenderer().setSelectedBuilding(new_building);
-		
+
 		Unit new_chieftain = viewer.getSelection().getCurrentSelection().getChieftain();
 		boolean different_chieftain = new_chieftain != current_chieftain;
 		current_chieftain = new_chieftain;
 
 		int current_num_units = viewer.getSelection().getCurrentSelection().getNumUnits();
 		int current_num_peons = viewer.getSelection().getCurrentSelection().getNumBuilders();
-		
+
 		boolean new_quarters = current_building != null && current_building.getAbilities().hasAbilities(Abilities.REPRODUCE);
 		boolean new_armory = current_building != null && current_building.getAbilities().hasAbilities(Abilities.BUILD_ARMIES);
 		boolean new_unit = current_num_units > 0;
@@ -513,7 +503,7 @@ public final strictfp class ActionButtonPanel extends GUIObject implements Anima
 			harvest_button.doUpdate();
 			build_button.doUpdate();
 			army_button.doUpdate();
-			
+
 			harvest_tree_button.doUpdate();
 			harvest_rock_button.doUpdate();
 			harvest_iron_button.doUpdate();
@@ -531,7 +521,7 @@ public final strictfp class ActionButtonPanel extends GUIObject implements Anima
 			transport_rubber_button.doUpdate();
 		} else if (current_building != null && current_building.getAbilities().hasAbilities(Abilities.REPRODUCE)) {
 			quarters_unit_status.doUpdate();
-			
+
 			quarters_peon_button.doUpdate();
 			quarters_chieftain_button.doUpdate();
 		} else if (current_peon) {
@@ -994,7 +984,7 @@ public final strictfp class ActionButtonPanel extends GUIObject implements Anima
 		return current_submenu == transport_group;
 	}
 
-					
+
 	public final void mouseDragged(int button, int x, int y, int relative_x, int relative_y, int absolute_x, int absolute_y) {
 		if (getParent() != null)
 			((GUIObject)getParent()).mouseDragged(button, x, y, relative_x, relative_y, absolute_x, absolute_y);
@@ -1002,11 +992,11 @@ public final strictfp class ActionButtonPanel extends GUIObject implements Anima
 
 	private final strictfp class TargetListener implements MouseClickListener {
 		private final int action;
-		
+
 		public TargetListener(int action) {
 			this.action = action;
 		}
-		
+
 		public final void mouseClicked(int button, int x, int y, int clicks) {
 			viewer.getGUIRoot().pushDelegate(new TargetDelegate(viewer, camera, action));
 		}
@@ -1128,13 +1118,7 @@ public final strictfp class ActionButtonPanel extends GUIObject implements Anima
 
 	private final strictfp class TowerPlaceListener implements MouseClickListener {
 		public final void mouseClicked(int button, int x, int y, int clicks) {
-			if (!Renderer.isRegistered()) {
-				ResourceBundle db = ResourceBundle.getBundle(DemoForm.class.getName());
-				Form demo_form = new InGameDemoForm(viewer, Utils.getBundleString(db, "tower_unavailable_header"), new GUIImage(512, 256, 0f, 0f, 1f, 1f, "/textures/gui/demo_towers"), Utils.getBundleString(db, "tower_unavailable"));
-				viewer.getGUIRoot().addModalForm(demo_form);
-			} else {
-				viewer.getGUIRoot().pushDelegate(new PlacingDelegate(viewer, camera.getState(), Race.BUILDING_TOWER));
-			}
+			viewer.getGUIRoot().pushDelegate(new PlacingDelegate(viewer, camera.getState(), Race.BUILDING_TOWER));
 		}
 	}
 

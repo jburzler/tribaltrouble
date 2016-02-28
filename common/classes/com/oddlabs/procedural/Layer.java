@@ -1,10 +1,10 @@
 package com.oddlabs.procedural;
 
 import java.awt.image.BufferedImage;
-import javax.imageio.ImageIO;
-import java.io.IOException;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 
 public final strictfp class Layer {
 	public final static float GAMMA_EXPONENT = 2.2f;

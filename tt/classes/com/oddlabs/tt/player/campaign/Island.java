@@ -1,35 +1,26 @@
 package com.oddlabs.tt.player.campaign;
 
-import com.oddlabs.tt.animation.Animated;
-import com.oddlabs.tt.event.LocalEventQueue;
-import com.oddlabs.tt.landscape.HeightMap;
-import com.oddlabs.tt.landscape.World;
+import com.oddlabs.matchmaking.Game;
+import com.oddlabs.net.NetworkSelector;
+import com.oddlabs.tt.delegate.Menu;
+import com.oddlabs.tt.gui.Form;
+import com.oddlabs.tt.gui.GUIRoot;
+import com.oddlabs.tt.landscape.WorldParameters;
 import com.oddlabs.tt.model.Building;
 import com.oddlabs.tt.model.Race;
 import com.oddlabs.tt.model.Unit;
 import com.oddlabs.tt.model.UnitTemplate;
 import com.oddlabs.tt.model.weapon.IronAxeWeapon;
-import com.oddlabs.tt.net.PlayerSlot;
-import com.oddlabs.tt.viewer.WorldViewer;
-import com.oddlabs.tt.viewer.InGameInfo;
-import com.oddlabs.tt.landscape.World;
-import com.oddlabs.tt.landscape.WorldParameters;
+import com.oddlabs.tt.net.GameNetwork;
+import com.oddlabs.tt.net.WorldInitAction;
 import com.oddlabs.tt.pathfinder.UnitGrid;
-import com.oddlabs.matchmaking.Game;
-import com.oddlabs.tt.delegate.Menu;
-import com.oddlabs.tt.delegate.GameStatsDelegate;
-import com.oddlabs.tt.gui.Form;
-import com.oddlabs.tt.gui.GUIRoot;
-import com.oddlabs.tt.render.Renderer;
 import com.oddlabs.tt.player.AI;
 import com.oddlabs.tt.player.Player;
 import com.oddlabs.tt.trigger.campaign.DefeatTrigger;
 import com.oddlabs.tt.util.StateChecksum;
 import com.oddlabs.tt.util.Target;
-import com.oddlabs.tt.util.Utils;
-import com.oddlabs.net.NetworkSelector;
-import com.oddlabs.tt.net.WorldInitAction;
-import com.oddlabs.tt.net.GameNetwork;
+import com.oddlabs.tt.viewer.InGameInfo;
+import com.oddlabs.tt.viewer.WorldViewer;
 
 public abstract class Island {
 	private final static float CAMPAIGN_DIFFICULTY_BONUS = .75f;

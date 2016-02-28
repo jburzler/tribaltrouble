@@ -1,9 +1,5 @@
 package com.oddlabs.tt.form;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
-
 import com.oddlabs.matchmaking.ChatRoomEntry;
 import com.oddlabs.matchmaking.Game;
 import com.oddlabs.matchmaking.GameHost;
@@ -11,13 +7,14 @@ import com.oddlabs.matchmaking.GameSession;
 import com.oddlabs.matchmaking.MatchmakingServerInterface;
 import com.oddlabs.matchmaking.Profile;
 import com.oddlabs.matchmaking.RankingEntry;
+import com.oddlabs.net.NetworkSelector;
+import com.oddlabs.tt.delegate.Menu;
 import com.oddlabs.tt.font.Font;
 import com.oddlabs.tt.gui.CancelListener;
 import com.oddlabs.tt.gui.ChatPanel;
 import com.oddlabs.tt.gui.ChatRoomInfo;
 import com.oddlabs.tt.gui.ColumnInfo;
 import com.oddlabs.tt.gui.Form;
-import com.oddlabs.tt.gui.GUIImage;
 import com.oddlabs.tt.gui.GUIObject;
 import com.oddlabs.tt.gui.GUIRoot;
 import com.oddlabs.tt.gui.Group;
@@ -31,22 +28,22 @@ import com.oddlabs.tt.gui.PulldownItem;
 import com.oddlabs.tt.gui.PulldownMenu;
 import com.oddlabs.tt.gui.Row;
 import com.oddlabs.tt.gui.Skin;
-import com.oddlabs.tt.guievent.FocusListener;
 import com.oddlabs.tt.guievent.EnterListener;
+import com.oddlabs.tt.guievent.FocusListener;
 import com.oddlabs.tt.guievent.ItemChosenListener;
 import com.oddlabs.tt.guievent.MouseClickListener;
 import com.oddlabs.tt.guievent.RowListener;
 import com.oddlabs.tt.net.ChatCommand;
+import com.oddlabs.tt.net.GameNetwork;
 import com.oddlabs.tt.net.MatchmakingListener;
 import com.oddlabs.tt.net.Network;
-import com.oddlabs.tt.net.GameNetwork;
-import com.oddlabs.tt.net.PeerHub;
 import com.oddlabs.tt.render.Renderer;
 import com.oddlabs.tt.resource.WorldGenerator;
 import com.oddlabs.tt.util.ServerMessageBundler;
 import com.oddlabs.tt.util.Utils;
-import com.oddlabs.tt.delegate.Menu;
-import com.oddlabs.net.NetworkSelector;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ResourceBundle;
 
 public final strictfp class SelectGameMenu extends Form implements MatchmakingListener, TerrainMenuListener {
 	private static final int BUTTON_WIDTH_SHORT = 60;
@@ -57,7 +54,7 @@ public final strictfp class SelectGameMenu extends Form implements MatchmakingLi
 	private final static int PANEL_INDEX_GAME = 0;
 	private final static int PANEL_INDEX_CHAT = 1;
 	private final static int PANEL_INDEX_HIGHSCORE = 2;
-			
+
 	private final Menu main_menu;
 	private final ProfilesForm profiles_form;
 	private final Panel[] panels = new Panel[3];
@@ -119,11 +116,11 @@ public final strictfp class SelectGameMenu extends Form implements MatchmakingLi
 		HorizButton update_list_button = new HorizButton(Utils.getBundleString(bundle, "update_list"), BUTTON_WIDTH_EXTRA_LONG);
 		game_list_panel.addChild(update_list_button);
 		update_list_button.addMouseClickListener(new UpdateGameListListener());
-		
+
 		HorizButton create_button = new HorizButton(Utils.getBundleString(bundle, "create_game"), BUTTON_WIDTH_LONG);
 		game_list_panel.addChild(create_button);
 		create_button.addMouseClickListener(new CreateGameListener());
-		
+
 		HorizButton join_button = new HorizButton(Utils.getBundleString(bundle, "join_game"), BUTTON_WIDTH);
 		game_list_panel.addChild(join_button);
 		join_button.addMouseClickListener(new JoinGameListener());
@@ -131,11 +128,11 @@ public final strictfp class SelectGameMenu extends Form implements MatchmakingLi
 		// Place game panel objects
 		label_headline.place();
 		game_list_box.place(label_headline, BOTTOM_LEFT);
-		
+
 		update_list_button.place(game_list_box, BOTTOM_LEFT);
 		create_button.place(update_list_button, RIGHT_MID);
 		join_button.place(create_button, RIGHT_MID);
-		
+
 		game_list_panel.compileCanvas();
 		panels[PANEL_INDEX_GAME] = game_list_panel;
 
@@ -157,13 +154,13 @@ public final strictfp class SelectGameMenu extends Form implements MatchmakingLi
 		HorizButton update_scores_button = new HorizButton(Utils.getBundleString(bundle, "update_scores"), BUTTON_WIDTH_EXTRA_LONG);
 		highscore_list_panel.addChild(update_scores_button);
 		update_scores_button.addMouseClickListener(new UpdateScoresListener());
-		
+
 		// Place score panel objects
 		label_headline.place();
 		ranking_list_box.place(label_headline, BOTTOM_LEFT);
-		
+
 		update_scores_button.place(ranking_list_box, BOTTOM_LEFT);
-		
+
 		highscore_list_panel.compileCanvas();
 		panels[PANEL_INDEX_HIGHSCORE] = highscore_list_panel;
 
@@ -183,11 +180,11 @@ public final strictfp class SelectGameMenu extends Form implements MatchmakingLi
 		update_list_button = new HorizButton(Utils.getBundleString(bundle, "update_rooms"), BUTTON_WIDTH_EXTRA_LONG);
 		chat_room_list_panel.addChild(update_list_button);
 		update_list_button.addMouseClickListener(new UpdateRoomListListener());
-		
+
 		create_button = new HorizButton(Utils.getBundleString(bundle, "create_room"), BUTTON_WIDTH_LONG);
 		chat_room_list_panel.addChild(create_button);
 		create_button.addMouseClickListener(new CreateRoomListener());
-		
+
 		join_button = new HorizButton(Utils.getBundleString(bundle, "join_room"), BUTTON_WIDTH);
 		chat_room_list_panel.addChild(join_button);
 		join_button.addMouseClickListener(new JoinRoomListener());
@@ -214,7 +211,7 @@ public final strictfp class SelectGameMenu extends Form implements MatchmakingLi
 		HorizButton logout_button = new HorizButton(Utils.getBundleString(bundle, "logout"), BUTTON_WIDTH);
 		addChild(logout_button);
 		logout_button.addMouseClickListener(new CancelListener(this));
-	
+
 		panel_group.place();
 		logout_button.place(ORIGIN_BOTTOM_RIGHT);
 		compileCanvas();
@@ -230,12 +227,6 @@ public final strictfp class SelectGameMenu extends Form implements MatchmakingLi
 			Network.getMatchmakingClient().requestProfiles();
 		} else {
 			main_menu.setMenuCentered(this);
-			if (Network.getMatchmakingClient().getProfile() == null && !Renderer.isRegistered()) {
-				ResourceBundle db = ResourceBundle.getBundle(DemoForm.class.getName());
-				Form demo_form = new DemoForm(gui_root, Utils.getBundleString(db, "profile_unavailable_header"), new GUIImage(512, 256, 0f, 0f, 1f, 1f, "/textures/gui/demo_multiplayer"), Utils.getBundleString(db, "profile_unavailable"));
-				gui_root.addModalForm(demo_form);
-				Network.getMatchmakingClient().setProfile(null);
-			}
 		}
 	}
 
@@ -264,7 +255,7 @@ public final strictfp class SelectGameMenu extends Form implements MatchmakingLi
 	public final void setFocus() {
 		game_list_panel.setFocus();
 	}
-	
+
 	private final static void updateList(int type) {
 		Network.getMatchmakingClient().requestList(type);
 	}
@@ -284,7 +275,7 @@ public final strictfp class SelectGameMenu extends Form implements MatchmakingLi
 	public final void loginError(int error_code) {
 		assert false;
 	}
-	
+
 	public void terrainMenuCancel() {
 		setPanel(PANEL_INDEX_GAME, game_list_panel);
 	}
@@ -297,11 +288,11 @@ public final strictfp class SelectGameMenu extends Form implements MatchmakingLi
 		updateList(MatchmakingServerInterface.TYPE_GAME);
 		setPanel(PANEL_INDEX_GAME, panel);
 	}
-	
+
 	public void removeGameMenu() {
 		setPanel(PANEL_INDEX_GAME, game_list_panel);
 	}
-	
+
 	public final void joinedChat(ChatRoomInfo info) {
 		if (chat_panel != null) {
 			chat_panel.connectionLost();
@@ -446,7 +437,7 @@ public final strictfp class SelectGameMenu extends Form implements MatchmakingLi
 			ChatRoomEntry chat_room_info = (ChatRoomEntry)context;
 			joinRoom(chat_room_info);
 		}
-		
+
 		public final void rowChosen(Object context) {
 		}
 	}
@@ -463,7 +454,7 @@ public final strictfp class SelectGameMenu extends Form implements MatchmakingLi
 			GameHost selected_game = (GameHost)context;
 			joinGame(selected_game);
 		}
-		
+
 		public final void rowChosen(Object context) {
 		}
 	}
@@ -480,13 +471,13 @@ public final strictfp class SelectGameMenu extends Form implements MatchmakingLi
 			updateList(MatchmakingServerInterface.TYPE_RANKING_LIST);
 		}
 	}
-	
+
 	private final strictfp class UpdateGameListListener implements MouseClickListener {
 		public final void mouseClicked(int button, int x, int y, int clicks) {
 			updateList(MatchmakingServerInterface.TYPE_GAME);
 		}
 	}
-	
+
 	private final strictfp class CreateGameListener implements MouseClickListener {
 		public final void mouseClicked(int button, int x, int y, int clicks) {
 			if (Network.getMatchmakingClient().getProfile() != null) {
@@ -512,7 +503,7 @@ public final strictfp class SelectGameMenu extends Form implements MatchmakingLi
 			updateList(MatchmakingServerInterface.TYPE_CHAT_ROOM_LIST);
 		}
 	}
-	
+
 	private final strictfp class CreateRoomListener implements MouseClickListener {
 		public final void mouseClicked(int button, int x, int y, int clicks) {
 			if (Network.getMatchmakingClient().getProfile() != null) {

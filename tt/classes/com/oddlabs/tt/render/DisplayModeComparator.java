@@ -1,7 +1,6 @@
 package com.oddlabs.tt.render;
 
 import java.util.Comparator;
-
 import org.lwjgl.opengl.DisplayMode;
 
 public final strictfp class DisplayModeComparator implements Comparator {

@@ -1,11 +1,8 @@
 package com.oddlabs.tt.model;
 
-import com.oddlabs.tt.global.Globals;
-import com.oddlabs.tt.global.Settings;
-import com.oddlabs.tt.util.BoundingBox;
-import com.oddlabs.tt.camera.CameraState;
-import com.oddlabs.tt.render.SpriteKey;
 import com.oddlabs.tt.landscape.World;
+import com.oddlabs.tt.render.SpriteKey;
+import com.oddlabs.tt.util.BoundingBox;
 import com.oddlabs.util.ListElement;
 
 public abstract strictfp class Model extends Element implements ListElement {

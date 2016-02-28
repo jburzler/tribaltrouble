@@ -1,13 +1,11 @@
 package com.oddlabs.tt.pathfinder;
 
+import com.oddlabs.tt.landscape.HeightMap;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.lwjgl.opengl.GL11;
-
-import com.oddlabs.tt.landscape.HeightMap;
 
 public final strictfp class Region extends Node {
 	private final Map object_lists = new HashMap();

@@ -1,15 +1,11 @@
 package com.oddlabs.tt.delegate;
 
-import org.lwjgl.input.Keyboard;
-import org.lwjgl.input.Mouse;
-
-import com.oddlabs.tt.camera.FirstPersonCamera;
 import com.oddlabs.tt.camera.CameraState;
+import com.oddlabs.tt.camera.FirstPersonCamera;
 import com.oddlabs.tt.event.LocalEventQueue;
-import com.oddlabs.tt.input.PointerInput;
-import com.oddlabs.tt.net.PeerHub;
-import com.oddlabs.tt.viewer.WorldViewer;
 import com.oddlabs.tt.gui.*;
+import com.oddlabs.tt.viewer.WorldViewer;
+import org.lwjgl.input.Keyboard;
 
 public strictfp class FirstPersonDelegate extends InGameDelegate {
 	private final boolean key_pressed;

@@ -1,33 +1,26 @@
 package com.oddlabs.tt.player.campaign;
 
-import java.util.ResourceBundle;
-
-import com.oddlabs.matchmaking.Game;
-import com.oddlabs.tt.camera.GameCamera;
+import com.oddlabs.net.NetworkSelector;
 import com.oddlabs.tt.form.CampaignDialogForm;
 import com.oddlabs.tt.form.InGameCampaignDialogForm;
 import com.oddlabs.tt.gui.CounterLabel;
 import com.oddlabs.tt.gui.GUIRoot;
 import com.oddlabs.tt.gui.Skin;
 import com.oddlabs.tt.landscape.LandscapeTarget;
-import com.oddlabs.tt.landscape.World;
 import com.oddlabs.tt.model.Building;
 import com.oddlabs.tt.model.Race;
 import com.oddlabs.tt.model.RacesResources;
 import com.oddlabs.tt.model.Unit;
-import com.oddlabs.tt.net.Client;
+import com.oddlabs.tt.net.GameNetwork;
 import com.oddlabs.tt.net.PlayerSlot;
-import com.oddlabs.tt.landscape.World;
 import com.oddlabs.tt.player.Player;
-import com.oddlabs.tt.player.PlayerInfo;
 import com.oddlabs.tt.player.UnitInfo;
 import com.oddlabs.tt.procedural.Landscape;
 import com.oddlabs.tt.trigger.campaign.GameStartedTrigger;
 import com.oddlabs.tt.trigger.campaign.PlayerEleminatedTrigger;
 import com.oddlabs.tt.trigger.campaign.TimeTrigger;
 import com.oddlabs.tt.util.Utils;
-import com.oddlabs.net.NetworkSelector;
-import com.oddlabs.tt.net.GameNetwork;
+import java.util.ResourceBundle;
 
 public final strictfp class NativeIsland4 extends Island {
 	private final ResourceBundle bundle = ResourceBundle.getBundle(NativeIsland4.class.getName());

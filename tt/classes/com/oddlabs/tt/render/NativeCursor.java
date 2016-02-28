@@ -1,15 +1,11 @@
 package com.oddlabs.tt.render;
 
-import org.lwjgl.LWJGLException;
-import org.lwjgl.input.Cursor;
-import org.lwjgl.opengl.GL11;
-
 import com.oddlabs.tt.global.Settings;
 import com.oddlabs.tt.input.PointerInput;
 import com.oddlabs.tt.resource.GLIntImage;
 import com.oddlabs.tt.resource.NativeResource;
-import com.oddlabs.util.Image;
-import com.oddlabs.util.Utils;
+import org.lwjgl.LWJGLException;
+import org.lwjgl.input.Cursor;
 
 public final strictfp class NativeCursor extends NativeResource {
 	private final org.lwjgl.input.Cursor cursor;

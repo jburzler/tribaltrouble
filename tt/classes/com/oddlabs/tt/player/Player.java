@@ -1,20 +1,9 @@
 package com.oddlabs.tt.player;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.ResourceBundle;
-import java.util.Set;
-
-import com.oddlabs.tt.global.Settings;
-import com.oddlabs.tt.gui.ToolTipBox;
 import com.oddlabs.matchmaking.Game;
 import com.oddlabs.tt.landscape.LandscapeTarget;
 import com.oddlabs.tt.landscape.TreeSupply;
 import com.oddlabs.tt.landscape.World;
-import com.oddlabs.tt.landscape.WorldParameters;
 import com.oddlabs.tt.model.Abilities;
 import com.oddlabs.tt.model.Army;
 import com.oddlabs.tt.model.Building;
@@ -30,10 +19,13 @@ import com.oddlabs.tt.model.behaviour.NullController;
 import com.oddlabs.tt.model.weapon.IronAxeWeapon;
 import com.oddlabs.tt.model.weapon.RockAxeWeapon;
 import com.oddlabs.tt.model.weapon.RubberAxeWeapon;
-import com.oddlabs.tt.net.PlayerSlot;
-import com.oddlabs.tt.pathfinder.UnitGrid;
 import com.oddlabs.tt.util.Target;
-import com.oddlabs.tt.util.Utils;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public final strictfp class Player implements PlayerInterface {
 	public final static int INITIAL_UNIT_COUNT = 20;

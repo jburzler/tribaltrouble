@@ -1,14 +1,12 @@
 package com.oddlabs.tt.gui;
 
-import java.util.ResourceBundle;
-
 import com.oddlabs.tt.animation.Animated;
 import com.oddlabs.tt.animation.AnimationManager;
 import com.oddlabs.tt.landscape.World;
-import com.oddlabs.tt.event.LocalEventQueue;
 import com.oddlabs.tt.net.PeerHub;
 import com.oddlabs.tt.util.StateChecksum;
 import com.oddlabs.tt.util.Utils;
+import java.util.ResourceBundle;
 
 public final strictfp class FreeQuitLabel extends Label implements Animated {
 	private final static ResourceBundle bundle = ResourceBundle.getBundle(FreeQuitLabel.class.getName());

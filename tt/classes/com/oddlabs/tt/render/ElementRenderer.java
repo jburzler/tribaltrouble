@@ -1,16 +1,9 @@
 package com.oddlabs.tt.render;
 
 import com.oddlabs.tt.camera.CameraState;
-import com.oddlabs.tt.particle.Emitter;
-import com.oddlabs.tt.particle.Lightning;
-import com.oddlabs.tt.landscape.World;
-import com.oddlabs.tt.viewer.Selection;
-import com.oddlabs.tt.global.Globals;
-import com.oddlabs.tt.player.Player;
 import com.oddlabs.tt.model.*;
-import com.oddlabs.tt.util.*;
-
-import java.util.*;
+import com.oddlabs.tt.player.Player;
+import com.oddlabs.tt.viewer.Selection;
 
 final strictfp class ElementRenderer implements ElementNodeVisitor {
 	private final RenderState render_state;

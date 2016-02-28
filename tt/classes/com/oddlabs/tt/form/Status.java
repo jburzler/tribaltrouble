@@ -1,16 +1,10 @@
 package com.oddlabs.tt.form;
 
-import com.oddlabs.tt.animation.AnimationManager;
-import com.oddlabs.tt.event.LocalEventQueue;
 import com.oddlabs.tt.font.TextLineRenderer;
 import com.oddlabs.tt.global.Settings;
 import com.oddlabs.tt.gui.GUIRoot;
-import com.oddlabs.tt.gui.LocalInput;
 import com.oddlabs.tt.gui.Skin;
 import com.oddlabs.tt.gui.TextField;
-import com.oddlabs.tt.model.Element;
-import com.oddlabs.tt.landscape.World;
-import com.oddlabs.tt.pathfinder.UnitGrid;
 import com.oddlabs.tt.render.Renderer;
 import com.oddlabs.tt.resource.NativeResource;
 

@@ -1,19 +1,13 @@
 package com.oddlabs.tt.net;
 
-import java.io.IOException;
-import java.util.List;
-import java.util.LinkedList;
-
 import com.oddlabs.net.ARMIEvent;
 import com.oddlabs.net.ARMIInterfaceMethods;
-import com.oddlabs.net.ARMIEventWriter;
-import com.oddlabs.net.AbstractConnection;
-import com.oddlabs.net.ConnectionInterface;
 import com.oddlabs.net.IllegalARMIEventException;
 import com.oddlabs.tt.player.Player;
 import com.oddlabs.tt.player.PlayerInfo;
 import com.oddlabs.tt.player.PlayerInterface;
-import com.oddlabs.matchmaking.TunnelAddress;
+import java.util.LinkedList;
+import java.util.List;
 
 public final strictfp class Peer implements PeerHubInterface {
 	private final GameArgumentReader argument_reader;

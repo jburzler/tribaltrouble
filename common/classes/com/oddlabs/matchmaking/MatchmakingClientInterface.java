@@ -1,8 +1,8 @@
 package com.oddlabs.matchmaking;
 
-import java.net.InetAddress;
 import com.oddlabs.net.ARMIEvent;
 import com.oddlabs.net.HostSequenceID;
+import java.net.InetAddress;
 
 public strictfp interface MatchmakingClientInterface {
 	// error codes

@@ -1,10 +1,5 @@
 package com.oddlabs.tt.model;
 
-import java.util.ResourceBundle;
-
-import com.oddlabs.tt.gui.Icons;
-import com.oddlabs.tt.gui.ToolTipBox;
-import com.oddlabs.tt.util.Utils;
 import com.oddlabs.tt.landscape.World;
 import com.oddlabs.tt.render.SpriteKey;
 

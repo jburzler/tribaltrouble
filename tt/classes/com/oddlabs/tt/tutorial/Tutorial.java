@@ -1,21 +1,16 @@
 package com.oddlabs.tt.tutorial;
 
-import java.util.ResourceBundle;
-
 import com.oddlabs.tt.animation.TimerAnimation;
 import com.oddlabs.tt.animation.Updatable;
-import com.oddlabs.tt.audio.AudioPlayer;
 import com.oddlabs.tt.audio.AudioParameters;
-import com.oddlabs.tt.form.TutorialForm;
-import com.oddlabs.tt.gui.GUIObject;
-import com.oddlabs.tt.gui.GUIRoot;
-import com.oddlabs.tt.gui.LabelBox;
-import com.oddlabs.tt.gui.LocalInput;
-import com.oddlabs.tt.gui.Skin;
-import com.oddlabs.tt.landscape.World;
+import com.oddlabs.tt.audio.AudioPlayer;
 import com.oddlabs.tt.delegate.TutorialOverDelegate;
+import com.oddlabs.tt.gui.GUIObject;
+import com.oddlabs.tt.gui.LabelBox;
+import com.oddlabs.tt.gui.Skin;
 import com.oddlabs.tt.util.Utils;
 import com.oddlabs.tt.viewer.WorldViewer;
+import java.util.ResourceBundle;
 
 public final strictfp class Tutorial {
 	private final static int BORDER_OFFSET = 90;

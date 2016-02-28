@@ -1,29 +1,15 @@
 package com.oddlabs.tt.camera;
 
-import java.nio.FloatBuffer;
-
-import org.lwjgl.BufferUtils;
-import org.lwjgl.openal.AL;
-import org.lwjgl.openal.AL10;
 
 import com.oddlabs.tt.animation.Animated;
-import com.oddlabs.tt.audio.Audio;
-import com.oddlabs.tt.audio.AudioFile;
-import com.oddlabs.tt.audio.AbstractAudioPlayer;
 import com.oddlabs.tt.event.LocalEventQueue;
-import com.oddlabs.tt.global.Settings;
+import com.oddlabs.tt.global.Globals;
 import com.oddlabs.tt.gui.KeyboardEvent;
 import com.oddlabs.tt.gui.LocalInput;
-import com.oddlabs.tt.gui.GUIRoot;
-import com.oddlabs.tt.landscape.World;
 import com.oddlabs.tt.landscape.HeightMap;
-import com.oddlabs.tt.render.Renderer;
-import com.oddlabs.tt.resource.Resources;
 import com.oddlabs.tt.util.StateChecksum;
 import com.oddlabs.tt.util.StrictGLU;
 import com.oddlabs.tt.util.StrictMatrix4f;
-import com.oddlabs.tt.global.Globals;
-import com.oddlabs.tt.util.StrictVector3f;
 
 public abstract strictfp class Camera implements Animated {
 	private final static float LANDSCAPE_OFFSET = 5f;

@@ -1,16 +1,16 @@
 package com.oddlabs.util;
 
-import java.io.ObjectInputStream;
 import java.io.BufferedInputStream;
-import java.io.InputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.net.Inet6Address;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
 import java.net.URL;
 import java.nio.ByteBuffer;
-import java.util.zip.*;
-import java.net.InetAddress;
-import java.net.Inet6Address;
-import java.net.NetworkInterface;
 import java.util.Enumeration;
+import java.util.zip.*;
 
 public final strictfp class Utils {
 	public final static String EMAIL_PATTERN = "(.+@.+\\.[a-z]+)?";

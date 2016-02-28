@@ -1,18 +1,15 @@
 package com.oddlabs.tt.camera;
 
-import org.lwjgl.input.Keyboard;
-
+import com.oddlabs.tt.delegate.SelectionDelegate;
 import com.oddlabs.tt.global.Globals;
 import com.oddlabs.tt.global.Settings;
 import com.oddlabs.tt.gui.GUIRoot;
 import com.oddlabs.tt.gui.KeyboardEvent;
 import com.oddlabs.tt.gui.LocalInput;
-import com.oddlabs.tt.delegate.SelectionDelegate;
 import com.oddlabs.tt.landscape.World;
-import com.oddlabs.tt.net.PeerHub;
-import com.oddlabs.tt.render.Picker;
 import com.oddlabs.tt.util.Target;
 import com.oddlabs.tt.viewer.WorldViewer;
+import org.lwjgl.input.Keyboard;
 
 public final strictfp class GameCamera extends Camera {
 	public final static int SCROLL_BUFFER = 5;

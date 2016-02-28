@@ -1,15 +1,12 @@
 package com.oddlabs.tt.render;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.lwjgl.opengl.GL11;
-
 import com.oddlabs.tt.global.Globals;
-import com.oddlabs.tt.model.Model;
 import com.oddlabs.tt.procedural.GeneratorHalos;
 import com.oddlabs.tt.resource.ResourceDescriptor;
 import com.oddlabs.tt.resource.Resources;
+import java.util.ArrayList;
+import java.util.List;
+import org.lwjgl.opengl.GL11;
 
 final strictfp class SelectableShadowRenderer extends ShadowListRenderer {
 	private final Texture[] halos;

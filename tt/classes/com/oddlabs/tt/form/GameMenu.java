@@ -1,23 +1,14 @@
 package com.oddlabs.tt.form;
 
-import java.util.Iterator;
-import java.util.ResourceBundle;
-import java.util.SortedSet;
-import java.util.TreeSet;
-import java.util.Set;
-import java.util.Random;
-import java.util.HashSet;
-
 import com.oddlabs.matchmaking.Game;
 import com.oddlabs.matchmaking.GameSession;
 import com.oddlabs.matchmaking.MatchmakingServerInterface;
+import com.oddlabs.tt.event.LocalEventQueue;
 import com.oddlabs.tt.font.Font;
 import com.oddlabs.tt.gui.Box;
 import com.oddlabs.tt.gui.Diode;
 import com.oddlabs.tt.gui.EditLine;
-import com.oddlabs.tt.gui.Form;
 import com.oddlabs.tt.gui.FormData;
-import com.oddlabs.tt.gui.GUIImage;
 import com.oddlabs.tt.gui.GUIObject;
 import com.oddlabs.tt.gui.GUIRoot;
 import com.oddlabs.tt.gui.Group;
@@ -33,21 +24,25 @@ import com.oddlabs.tt.guievent.EnterListener;
 import com.oddlabs.tt.guievent.ItemChosenListener;
 import com.oddlabs.tt.guievent.MouseClickListener;
 import com.oddlabs.tt.model.RacesResources;
-import com.oddlabs.tt.net.ChatMessage;
 import com.oddlabs.tt.net.ChatCommand;
-import com.oddlabs.tt.net.Client;
 import com.oddlabs.tt.net.ChatListener;
+import com.oddlabs.tt.net.ChatMessage;
+import com.oddlabs.tt.net.Client;
 import com.oddlabs.tt.net.ConfigurationListener;
-import com.oddlabs.tt.net.Network;
 import com.oddlabs.tt.net.GameNetwork;
+import com.oddlabs.tt.net.Network;
 import com.oddlabs.tt.net.PlayerSlot;
-import com.oddlabs.tt.event.LocalEventQueue;
 import com.oddlabs.tt.player.Player;
 import com.oddlabs.tt.player.PlayerInfo;
-import com.oddlabs.tt.net.PlayerSlot;
-import com.oddlabs.tt.render.Renderer;
 import com.oddlabs.tt.resource.WorldGenerator;
 import com.oddlabs.tt.util.Utils;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Random;
+import java.util.ResourceBundle;
+import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 public final strictfp class GameMenu extends Panel implements ConfigurationListener, ChatListener {
 	private final static int OPEN_INDEX = 0;
@@ -114,7 +109,7 @@ public final strictfp class GameMenu extends Panel implements ConfigurationListe
 
 		Box pdata = Skin.getSkin().getPanelData().getBox();
 		FormData fdata = Skin.getSkin().getFormData();
-		
+
 		int width = compare_width - pdata.getLeftOffset() - pdata.getRightOffset();
 		chat_info = new Label(Utils.getBundleString(bundle, "chat"), Skin.getSkin().getEditFont(), width);
 		Group chat_line_group = new Group();
@@ -127,11 +122,11 @@ public final strictfp class GameMenu extends Panel implements ConfigurationListe
 		send_button.place(chat_line, RIGHT_MID);
 		chat_line_group.compileCanvas();
 		addChild(chat_line_group);
-		
+
 		chat_line.addEnterListener(new ChatListener());
 		addChild(game_name_label);
 		addChild(chat_info);
-		
+
 		start_button = new HorizButton(Utils.getBundleString(bundle, "start"), button_width);
 		if (local_player_slot == 0) {
 			addChild(start_button);
@@ -150,7 +145,7 @@ public final strictfp class GameMenu extends Panel implements ConfigurationListe
 		HorizButton info_button = new HorizButton(Utils.getBundleString(bundle, "info"), button_width);
 		addChild(info_button);
 		info_button.addMouseClickListener(new InfoButtonListener());
-		
+
 		game_name_label.place();
 		player_group.place(game_name_label, BOTTOM_LEFT);
 		chat_info.place(player_group, BOTTOM_LEFT);
@@ -175,13 +170,6 @@ public final strictfp class GameMenu extends Panel implements ConfigurationListe
 			return;
 		PlayerSlot player = game_network.getClient().getPlayers()[player_slot];
 		int index = slot_buttons[player_slot].getMenu().getChosenItemIndex();
-		if (index == COMPUTER_HARD_INDEX && !Renderer.isRegistered()) {
-			slot_buttons[player_slot].getMenu().chooseItem(COMPUTER_NORMAL_INDEX);
-			index = COMPUTER_NORMAL_INDEX;
-			ResourceBundle db = ResourceBundle.getBundle(DemoForm.class.getName());
-			Form demo_form = new DemoForm(gui_root, Utils.getBundleString(db, "hard_ai_unavailable_header"), new GUIImage(512, 256, 0f, 0f, 1f, 1f, "/textures/gui/demo_hardai"), Utils.getBundleString(db, "hard_ai_unavailable"));
-			gui_root.addModalForm(demo_form);
-		}
 		int race_index = race_buttons[player_slot].getMenu().getChosenItemIndex();
 		int team_index = team_buttons[player_slot].getMenu().getChosenItemIndex();
 		int difficulty_index = slot_buttons[player_slot].getMenu().getChosenItemIndex() - 1;
@@ -225,7 +213,7 @@ public final strictfp class GameMenu extends Panel implements ConfigurationListe
 				throw new RuntimeException("Invalid item index");
 		}
 	}
-	
+
 	public final void connected(Client client, Game game, WorldGenerator generator, int player_slot) {
 		assert false;
 	}
@@ -465,7 +453,7 @@ public final strictfp class GameMenu extends Panel implements ConfigurationListe
 		chat_box.append(Utils.getBundleString(bundle, "joined_game", new Object[]{name}));
 		finishChatAppend();
 	}
-	
+
 	private final void setReady(boolean r) {
 		if (r != ready) {
 			ready = r;

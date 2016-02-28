@@ -1,13 +1,8 @@
 package com.oddlabs.tt.util;
 
 import org.lwjgl.LWJGLException;
-import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.PixelFormat;
 
-import com.oddlabs.tt.render.Renderer;
-import com.oddlabs.tt.render.Texture;
-import com.oddlabs.tt.resource.GLImage;
-import com.oddlabs.tt.resource.GLIntImage;
 
 public final strictfp class OffscreenRendererFactory {
 	private final static int PBUFFER_FAILURE_MAX = 2;

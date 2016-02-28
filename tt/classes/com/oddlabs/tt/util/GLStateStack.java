@@ -1,8 +1,7 @@
 package com.oddlabs.tt.util;
 
-import java.util.List;
 import java.util.ArrayList;
-
+import java.util.List;
 import org.lwjgl.opengl.GL11;
 
 public final strictfp class GLStateStack {

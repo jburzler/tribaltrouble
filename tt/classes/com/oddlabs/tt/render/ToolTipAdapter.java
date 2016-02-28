@@ -1,16 +1,14 @@
 package com.oddlabs.tt.render;
 
-import com.oddlabs.tt.model.*;
-import com.oddlabs.tt.landscape.TreeSupply;
-import com.oddlabs.tt.util.ToolTip;
-import com.oddlabs.tt.gui.ToolTipBox;
 import com.oddlabs.tt.gui.Icons;
-import com.oddlabs.util.Quad;
-import com.oddlabs.tt.player.Player;
-import com.oddlabs.tt.util.Utils;
+import com.oddlabs.tt.gui.ToolTipBox;
+import com.oddlabs.tt.model.*;
 import com.oddlabs.tt.model.behaviour.Controller;
 import com.oddlabs.tt.model.behaviour.GatherController;
-
+import com.oddlabs.tt.player.Player;
+import com.oddlabs.tt.util.ToolTip;
+import com.oddlabs.tt.util.Utils;
+import com.oddlabs.util.Quad;
 import java.util.ResourceBundle;
 
 final strictfp class ToolTipAdapter implements ToolTipVisitor, ToolTip {

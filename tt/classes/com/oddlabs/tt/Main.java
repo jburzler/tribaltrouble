@@ -1,11 +1,9 @@
 package com.oddlabs.tt;
 
-import com.oddlabs.tt.render.Renderer;
 import com.oddlabs.tt.global.Globals;
+import com.oddlabs.tt.render.Renderer;
 import com.oddlabs.tt.util.Utils;
-
 import java.util.ResourceBundle;
-
 import org.lwjgl.Sys;
 import org.lwjgl.opengl.Display;
 

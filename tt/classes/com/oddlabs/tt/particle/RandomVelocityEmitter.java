@@ -1,13 +1,10 @@
 package com.oddlabs.tt.particle;
 
-import com.oddlabs.tt.render.TextureKey;
 import com.oddlabs.tt.animation.*;
 import com.oddlabs.tt.landscape.World;
 import com.oddlabs.tt.render.SpriteKey;
-import com.oddlabs.tt.model.AbstractElementNode;
-
+import com.oddlabs.tt.render.TextureKey;
 import java.util.*;
-
 import org.lwjgl.util.vector.Vector3f;
 import org.lwjgl.util.vector.Vector4f;
 

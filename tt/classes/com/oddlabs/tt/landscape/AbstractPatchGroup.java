@@ -1,10 +1,8 @@
 package com.oddlabs.tt.landscape;
 
-import java.util.Collection;
 
 import com.oddlabs.tt.gui.LocalInput;
 import com.oddlabs.tt.util.BoundingBox;
-import com.oddlabs.tt.camera.CameraState;
 
 public abstract strictfp class AbstractPatchGroup extends BoundingBox {
 	private final AbstractPatchGroup parent;

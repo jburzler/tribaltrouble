@@ -1,12 +1,10 @@
 package com.oddlabs.tt.particle;
 
+import com.oddlabs.tt.animation.AnimationManager;
+import com.oddlabs.tt.landscape.World;
+import com.oddlabs.tt.render.TextureKey;
 import org.lwjgl.util.vector.Vector3f;
 import org.lwjgl.util.vector.Vector4f;
-
-import com.oddlabs.tt.animation.AnimationManager;
-import com.oddlabs.tt.render.TextureKey;
-import com.oddlabs.tt.landscape.World;
-import com.oddlabs.tt.model.AbstractElementNode;
 
 public final strictfp class RingEmitter extends LinearEmitter {
 	private final int num_particles;

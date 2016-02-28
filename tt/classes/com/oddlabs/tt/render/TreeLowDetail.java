@@ -1,30 +1,27 @@
 package com.oddlabs.tt.render;
 
+import com.oddlabs.geometry.LowDetailModel;
+import com.oddlabs.tt.global.Globals;
+import com.oddlabs.tt.landscape.AbstractTreeGroup;
+import com.oddlabs.tt.landscape.TreeGroup;
+import com.oddlabs.tt.landscape.TreeLeaf;
+import com.oddlabs.tt.landscape.TreeNodeVisitor;
+import com.oddlabs.tt.landscape.TreeSupply;
+import com.oddlabs.tt.landscape.World;
+import com.oddlabs.tt.procedural.Landscape;
+import com.oddlabs.tt.resource.Resources;
+import com.oddlabs.tt.resource.TextureFile;
+import com.oddlabs.tt.util.GLState;
+import com.oddlabs.tt.util.GLStateStack;
+import com.oddlabs.tt.util.StrictMatrix4f;
+import com.oddlabs.tt.util.StrictVector4f;
+import com.oddlabs.tt.vbo.FloatVBO;
+import com.oddlabs.tt.vbo.ShortVBO;
 import java.nio.FloatBuffer;
 import java.util.List;
-
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.ARBBufferObject;
 import org.lwjgl.opengl.GL11;
-
-import com.oddlabs.tt.landscape.World;
-import com.oddlabs.tt.landscape.AbstractTreeGroup;
-import com.oddlabs.tt.landscape.TreeNodeVisitor;
-import com.oddlabs.tt.landscape.TreeSupply;
-import com.oddlabs.tt.landscape.TreeLeaf;
-import com.oddlabs.tt.landscape.TreeGroup;
-import com.oddlabs.tt.landscape.LandscapeResources;
-import com.oddlabs.geometry.LowDetailModel;
-import com.oddlabs.tt.util.StrictVector4f;
-import com.oddlabs.tt.util.StrictMatrix4f;
-import com.oddlabs.tt.util.GLState;
-import com.oddlabs.tt.util.GLStateStack;
-import com.oddlabs.tt.resource.Resources;
-import com.oddlabs.tt.resource.TextureFile;
-import com.oddlabs.tt.global.Globals;
-import com.oddlabs.tt.procedural.Landscape;
-import com.oddlabs.tt.vbo.FloatVBO;
-import com.oddlabs.tt.vbo.ShortVBO;
 
 public final strictfp class TreeLowDetail {
 	private final static StrictVector4f src = new StrictVector4f();

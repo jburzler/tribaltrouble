@@ -1,12 +1,10 @@
 package com.oddlabs.tt.audio;
 
-import org.lwjgl.openal.AL;
-import org.lwjgl.openal.AL10;
-
 import com.oddlabs.tt.animation.Animated;
 import com.oddlabs.tt.event.LocalEventQueue;
 import com.oddlabs.tt.global.Settings;
 import com.oddlabs.tt.util.StateChecksum;
+import org.lwjgl.openal.AL10;
 
 public strictfp class AbstractAudioPlayer implements Animated {
 	protected final static float ROLLOFF_FACTOR = .03f; // was 0.05

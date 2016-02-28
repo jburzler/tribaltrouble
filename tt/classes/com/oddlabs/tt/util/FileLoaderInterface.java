@@ -1,7 +1,7 @@
 package com.oddlabs.tt.util;
 
-import java.io.IOException;
 import java.io.File;
+import java.io.IOException;
 
 public strictfp interface FileLoaderInterface {
 	public void error(IOException e);

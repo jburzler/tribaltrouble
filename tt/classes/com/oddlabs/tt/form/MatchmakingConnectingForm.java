@@ -1,11 +1,10 @@
 package com.oddlabs.tt.form;
 
-import java.util.ResourceBundle;
-
 import com.oddlabs.matchmaking.Login;
 import com.oddlabs.matchmaking.LoginDetails;
 import com.oddlabs.matchmaking.MatchmakingClientInterface;
 import com.oddlabs.matchmaking.Profile;
+import com.oddlabs.net.NetworkSelector;
 import com.oddlabs.tt.delegate.MainMenu;
 import com.oddlabs.tt.gui.CancelButton;
 import com.oddlabs.tt.gui.CancelListener;
@@ -18,7 +17,7 @@ import com.oddlabs.tt.gui.Skin;
 import com.oddlabs.tt.net.MatchmakingListener;
 import com.oddlabs.tt.net.Network;
 import com.oddlabs.tt.util.Utils;
-import com.oddlabs.net.NetworkSelector;
+import java.util.ResourceBundle;
 
 public final strictfp class MatchmakingConnectingForm extends Form implements MatchmakingListener {
 	private final Form parent_form;

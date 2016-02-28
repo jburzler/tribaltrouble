@@ -1,9 +1,8 @@
 package com.oddlabs.tt.landscape;
 
 import com.oddlabs.tt.model.Selectable;
-import com.oddlabs.tt.player.Player;
-import com.oddlabs.tt.util.Target;
 import com.oddlabs.tt.util.StrictMatrix4f;
+import com.oddlabs.tt.util.Target;
 
 public strictfp interface NotificationListener {
 	void newAttackNotification(Selectable target);

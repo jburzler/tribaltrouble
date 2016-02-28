@@ -1,9 +1,7 @@
 package com.oddlabs.tt.form;
 
-import java.io.FileNotFoundException;
-import java.io.InvalidClassException;
-import java.util.ResourceBundle;
-
+import com.oddlabs.net.NetworkSelector;
+import com.oddlabs.tt.delegate.Menu;
 import com.oddlabs.tt.global.Settings;
 import com.oddlabs.tt.gui.ButtonObject;
 import com.oddlabs.tt.gui.CancelButton;
@@ -27,12 +25,11 @@ import com.oddlabs.tt.player.campaign.CampaignState;
 import com.oddlabs.tt.player.campaign.NativeCampaign;
 import com.oddlabs.tt.player.campaign.VikingCampaign;
 import com.oddlabs.tt.render.Renderer;
-import com.oddlabs.tt.event.LocalEventQueue;
 import com.oddlabs.tt.util.Utils;
-import com.oddlabs.tt.delegate.Menu;
-import com.oddlabs.util.DeterministicSerializer;
 import com.oddlabs.util.DeterministicSerializerLoopbackInterface;
-import com.oddlabs.net.NetworkSelector;
+import java.io.FileNotFoundException;
+import java.io.InvalidClassException;
+import java.util.ResourceBundle;
 
 public final strictfp class NewCampaignForm extends Form implements DeterministicSerializerLoopbackInterface {
 	private final static int BUTTON_WIDTH = 100;

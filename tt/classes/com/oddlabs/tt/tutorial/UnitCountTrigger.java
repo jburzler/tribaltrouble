@@ -1,15 +1,10 @@
 package com.oddlabs.tt.tutorial;
 
-import java.util.Iterator;
-import java.util.Set;
-
 import com.oddlabs.tt.form.TutorialForm;
-import com.oddlabs.tt.gui.GUIRoot;
-import com.oddlabs.tt.delegate.TutorialOverDelegate;
 import com.oddlabs.tt.model.Selectable;
 import com.oddlabs.tt.model.Unit;
-import com.oddlabs.tt.landscape.World;
-import com.oddlabs.tt.viewer.WorldViewer;
+import java.util.Iterator;
+import java.util.Set;
 
 public final strictfp class UnitCountTrigger extends TutorialTrigger {
 	private final int target_count;

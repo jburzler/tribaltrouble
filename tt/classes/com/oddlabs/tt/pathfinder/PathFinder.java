@@ -1,10 +1,9 @@
 package com.oddlabs.tt.pathfinder;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.oddlabs.tt.util.PocketList;
 import com.oddlabs.tt.util.Target;
+import java.util.ArrayList;
+import java.util.List;
 
 public final strictfp class PathFinder {
 	private final static PocketList open_list = new PocketList(RegionBuilder.MAX_PATH_COST);

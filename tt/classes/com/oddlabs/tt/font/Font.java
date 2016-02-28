@@ -1,12 +1,11 @@
 package com.oddlabs.tt.font;
 
-import com.oddlabs.util.Quad;
 import com.oddlabs.tt.gui.Skin;
+import com.oddlabs.tt.render.Texture;
 import com.oddlabs.tt.resource.Resources;
 import com.oddlabs.tt.resource.TextureFile;
-import com.oddlabs.tt.render.Texture;
 import com.oddlabs.util.FontInfo;
-
+import com.oddlabs.util.Quad;
 import org.lwjgl.opengl.GL11;
 
 public final strictfp class Font {

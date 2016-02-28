@@ -1,8 +1,7 @@
 package com.oddlabs.matchmaking;
 
-import java.io.Serializable;
-
 import com.oddlabs.util.Utils;
+import java.io.Serializable;
 
 public final strictfp class LoginDetails implements Serializable {
 	private final static long serialVersionUID = 1;

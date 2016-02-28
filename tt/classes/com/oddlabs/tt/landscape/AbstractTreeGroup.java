@@ -1,19 +1,13 @@
 package com.oddlabs.tt.landscape;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.oddlabs.tt.camera.CameraState;
-import com.oddlabs.tt.global.Globals;
 import com.oddlabs.geometry.LowDetailModel;
-import com.oddlabs.tt.net.PeerHub;
-import com.oddlabs.tt.model.Model;
+import com.oddlabs.tt.global.Globals;
 import com.oddlabs.tt.pathfinder.UnitGrid;
 import com.oddlabs.tt.procedural.Landscape;
 import com.oddlabs.tt.util.BoundingBox;
-import com.oddlabs.tt.camera.CameraState;
 import com.oddlabs.tt.util.StrictMatrix4f;
 import com.oddlabs.tt.util.StrictVector3f;
+import java.util.List;
 
 public abstract strictfp class AbstractTreeGroup extends BoundingBox {
 	public final static int TREE_INDEX = 0;

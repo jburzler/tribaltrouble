@@ -1,11 +1,9 @@
 package com.oddlabs.tt.net;
 
-import com.oddlabs.util.Utils;
 import com.oddlabs.net.*;
 import com.oddlabs.router.*;
-
+import com.oddlabs.util.Utils;
 import java.io.IOException;
-import java.net.InetAddress;
 import java.net.InetSocketAddress;
 
 public final strictfp class RouterClient implements ConnectionInterface {

@@ -1,12 +1,11 @@
 package com.oddlabs.tt.procedural;
 
-import com.oddlabs.tt.resource.*;
-import com.oddlabs.tt.render.*;
-import com.oddlabs.tt.global.*;
-import com.oddlabs.procedural.Layer;
 import com.oddlabs.procedural.Channel;
+import com.oddlabs.procedural.Layer;
 import com.oddlabs.procedural.Tools;
-
+import com.oddlabs.tt.global.*;
+import com.oddlabs.tt.render.*;
+import com.oddlabs.tt.resource.*;
 import org.lwjgl.opengl.*;
 
 public final strictfp class GeneratorSonic extends TextureGenerator {

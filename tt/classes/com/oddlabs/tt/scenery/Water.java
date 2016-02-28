@@ -1,13 +1,12 @@
 package com.oddlabs.tt.scenery;
 
 import com.oddlabs.tt.global.*;
-import com.oddlabs.tt.resource.*;
-import com.oddlabs.tt.vbo.*;
-import com.oddlabs.tt.util.*;
 import com.oddlabs.tt.landscape.*;
 import com.oddlabs.tt.procedural.*;
 import com.oddlabs.tt.render.Texture;
-
+import com.oddlabs.tt.resource.*;
+import com.oddlabs.tt.util.*;
+import com.oddlabs.tt.vbo.*;
 import java.nio.*;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.*;

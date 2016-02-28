@@ -1,19 +1,15 @@
 package com.oddlabs.tt.render;
 
-import com.oddlabs.tt.camera.CameraState;
-import com.oddlabs.tt.util.BoundingBox;
-import com.oddlabs.tt.model.Model;
-import com.oddlabs.tt.global.Globals;
-import com.oddlabs.tt.global.Settings;
 import com.oddlabs.geometry.LowDetailModel;
-import com.oddlabs.tt.resource.SpriteFile;
-import com.oddlabs.tt.resource.Resources;
+import com.oddlabs.tt.camera.CameraState;
+import com.oddlabs.tt.global.Globals;
 import com.oddlabs.tt.landscape.*;
-
-import java.util.List;
+import com.oddlabs.tt.resource.Resources;
+import com.oddlabs.tt.resource.SpriteFile;
+import com.oddlabs.tt.util.BoundingBox;
 import java.util.ArrayList;
+import java.util.List;
 
-import org.lwjgl.opengl.GL11;
 
 strictfp class TreePicker implements TreeNodeVisitor {
 	private final static int CROWN_MIPMAP_CUTOFF = Globals.NO_MIPMAP_CUTOFF;

@@ -1,9 +1,5 @@
 package com.oddlabs.tt.form;
 
-import java.math.BigInteger;
-import java.util.Random;
-import java.util.ResourceBundle;
-
 import com.oddlabs.registration.RegistrationKey;
 import com.oddlabs.tt.event.LocalEventQueue;
 import com.oddlabs.tt.gui.CancelButton;
@@ -17,6 +13,9 @@ import com.oddlabs.tt.gui.Skin;
 import com.oddlabs.tt.guievent.EnterListener;
 import com.oddlabs.tt.guievent.MouseClickListener;
 import com.oddlabs.tt.util.Utils;
+import java.math.BigInteger;
+import java.util.Random;
+import java.util.ResourceBundle;
 
 public final strictfp class MapcodeForm extends Form {
 	private final static int BUTTON_WIDTH = 100;

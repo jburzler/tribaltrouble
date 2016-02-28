@@ -1,47 +1,38 @@
 package com.oddlabs.tt.render;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.SortedSet;
-import java.util.TreeSet;
-import java.util.Comparator;
-
-import org.lwjgl.opengl.GL11;
-
-import com.oddlabs.tt.animation.TimerAnimation;
 import com.oddlabs.tt.animation.AnimationManager;
+import com.oddlabs.tt.animation.TimerAnimation;
 import com.oddlabs.tt.animation.Updatable;
 import com.oddlabs.tt.camera.CameraState;
 import com.oddlabs.tt.camera.GameCamera;
 import com.oddlabs.tt.camera.MapCamera;
 import com.oddlabs.tt.global.Settings;
-import com.oddlabs.tt.render.SpriteSorter;
-import com.oddlabs.tt.model.SceneryModel;
-import com.oddlabs.tt.gui.GUIRoot;
 import com.oddlabs.tt.gui.LocalInput;
-import com.oddlabs.tt.landscape.AbstractTreeGroup;
+import com.oddlabs.tt.landscape.LandscapeLeaf;
 import com.oddlabs.tt.landscape.LandscapeTarget;
 import com.oddlabs.tt.landscape.LandscapeTargetRespond;
 import com.oddlabs.tt.landscape.TreeSupply;
-import com.oddlabs.tt.landscape.World;
 import com.oddlabs.tt.model.Abilities;
-import com.oddlabs.tt.model.AbstractElementNode;
-import com.oddlabs.tt.model.Building;
-import com.oddlabs.tt.model.Model;
 import com.oddlabs.tt.model.Army;
+import com.oddlabs.tt.model.Building;
+import com.oddlabs.tt.model.ModelToolTip;
+import com.oddlabs.tt.model.SceneryModel;
 import com.oddlabs.tt.model.Selectable;
-import com.oddlabs.tt.net.PeerHub;
-import com.oddlabs.tt.landscape.LandscapeLeaf;
 import com.oddlabs.tt.pathfinder.UnitGrid;
-import com.oddlabs.tt.player.PlayerInterface;
 import com.oddlabs.tt.player.Player;
+import com.oddlabs.tt.player.PlayerInterface;
 import com.oddlabs.tt.util.BoundingBox;
 import com.oddlabs.tt.util.StrictGLU;
 import com.oddlabs.tt.util.StrictMatrix4f;
 import com.oddlabs.tt.util.Target;
 import com.oddlabs.tt.util.ToolTip;
-import com.oddlabs.tt.model.ModelToolTip;
 import com.oddlabs.tt.viewer.Selection;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.SortedSet;
+import java.util.TreeSet;
+import org.lwjgl.opengl.GL11;
 
 public final strictfp class Picker implements Updatable {
 	private final static int PICK_SIZE = 5;

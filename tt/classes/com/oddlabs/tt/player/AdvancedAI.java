@@ -1,10 +1,6 @@
 package com.oddlabs.tt.player;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.oddlabs.tt.landscape.LandscapeTarget;
-import com.oddlabs.tt.landscape.World;
 import com.oddlabs.tt.model.Abilities;
 import com.oddlabs.tt.model.Building;
 import com.oddlabs.tt.model.Race;
@@ -17,8 +13,9 @@ import com.oddlabs.tt.model.weapon.RockSpearWeapon;
 import com.oddlabs.tt.model.weapon.RubberAxeWeapon;
 import com.oddlabs.tt.model.weapon.RubberSpearWeapon;
 import com.oddlabs.tt.pathfinder.FindOccupantFilter;
-import com.oddlabs.tt.pathfinder.UnitGrid;
 import com.oddlabs.tt.util.Target;
+import java.util.ArrayList;
+import java.util.List;
 
 public final strictfp class AdvancedAI extends AI {
 	public final static int DIFFICULTY_EASY = 0;

@@ -1,10 +1,5 @@
 package com.oddlabs.tt.form;
 
-import java.util.Locale;
-import java.util.ResourceBundle;
-
-import org.lwjgl.input.Cursor;
-
 import com.oddlabs.matchmaking.Game;
 import com.oddlabs.tt.global.Globals;
 import com.oddlabs.tt.global.Settings;
@@ -19,12 +14,10 @@ import com.oddlabs.tt.gui.Group;
 import com.oddlabs.tt.gui.HorizButton;
 import com.oddlabs.tt.gui.IconLabel;
 import com.oddlabs.tt.gui.Label;
-import com.oddlabs.tt.gui.LabelBox;
 import com.oddlabs.tt.gui.LocalInput;
 import com.oddlabs.tt.gui.MultiColumnComboBox;
 import com.oddlabs.tt.gui.Panel;
 import com.oddlabs.tt.gui.PanelGroup;
-import com.oddlabs.tt.gui.Languages;
 import com.oddlabs.tt.gui.PulldownButton;
 import com.oddlabs.tt.gui.PulldownItem;
 import com.oddlabs.tt.gui.PulldownMenu;
@@ -38,14 +31,14 @@ import com.oddlabs.tt.guievent.ItemChosenListener;
 import com.oddlabs.tt.guievent.MouseClickListener;
 import com.oddlabs.tt.guievent.RowListener;
 import com.oddlabs.tt.guievent.ValueListener;
-import com.oddlabs.tt.landscape.World;
-import com.oddlabs.tt.net.PeerHub;
 import com.oddlabs.tt.render.Renderer;
 import com.oddlabs.tt.render.SerializableDisplayMode;
 import com.oddlabs.tt.util.ServerMessageBundler;
 import com.oddlabs.tt.util.Utils;
-import com.oddlabs.tt.global.Settings;
 import com.oddlabs.util.Quad;
+import java.util.Locale;
+import java.util.ResourceBundle;
+import org.lwjgl.input.Cursor;
 
 public abstract strictfp class AbstractOptionsMenu extends Form {
 	private final static int BUTTON_WIDTH = 100;
@@ -55,30 +48,29 @@ public abstract strictfp class AbstractOptionsMenu extends Form {
 
 	private final static boolean TEMPORARILY_DISABLE_MUSIC_CONTROLS = false;
 	private final CheckBox cb_fullscreen;
-	
+
 	private final Slider slider_music;
 	private final Slider slider_sound;
 	private final GUIRoot gui_root;
-	
+
 	private final PulldownMenu pm_detail;
 	private final ResourceBundle bundle = ResourceBundle.getBundle(OptionsMenu.class.getName());
 	private final MultiColumnComboBox language_list_box;
 	private final PulldownMenu pm_gamespeed;
 	private int last_detail_value;
-	
+
 	public AbstractOptionsMenu(GUIRoot gui_root) {
 		super();
 		this.gui_root = gui_root;
 		Label label_headline = new Label(Utils.getBundleString(bundle, "options_caption"), Skin.getSkin().getHeadlineFont());
 		addChild(label_headline);
-		
+
 		Panel general = new Panel(Utils.getBundleString(bundle, "general_settings_caption"));
 		Panel display = new Panel(Utils.getBundleString(bundle, "graphics_caption"));
 		Panel sound = new Panel(Utils.getBundleString(bundle, "sound_caption"));
 		Panel language = new Panel(Utils.getBundleString(bundle, "language_caption"));
-		Panel report_bug = new Panel(Utils.getBundleString(bundle, "report_bug_caption"));
-		
-		// Sound	
+
+		// Sound
 		Group group_music = new Group();
 		sound.addChild(group_music);
 		Label label_music_low = new Label(Utils.getBundleString(bundle, "low"), Skin.getSkin().getEditFont());
@@ -108,7 +100,7 @@ public abstract strictfp class AbstractOptionsMenu extends Form {
 		else
 			group_music.setDisabled(!LocalInput.alIsCreated());
 
-		
+
 		Group group_sound = new Group();
 		sound.addChild(group_sound);
 		Label label_sound_low = new Label(Utils.getBundleString(bundle, "low"), Skin.getSkin().getEditFont());
@@ -159,7 +151,7 @@ public abstract strictfp class AbstractOptionsMenu extends Form {
 		group_invert_camera.addChild(cb_invert_camera);
 		cb_invert_camera.place();
 		group_invert_camera.compileCanvas();
-		
+
 		// Aggressive units
 		Group group_aggressive_units = new Group();
 		general.addChild(group_aggressive_units);
@@ -168,11 +160,11 @@ public abstract strictfp class AbstractOptionsMenu extends Form {
 		group_aggressive_units.addChild(cb_aggressive_units);
 		cb_aggressive_units.place();
 		group_aggressive_units.compileCanvas();
-		
+
 		// gfx detail
 		Group group_detail = new Group();
 		display.addChild(group_detail);
-		
+
 		Label label_detail = new Label(Utils.getBundleString(bundle, "graphical_detail"), Skin.getSkin().getEditFont());
 		group_detail.addChild(label_detail);
 
@@ -182,7 +174,7 @@ public abstract strictfp class AbstractOptionsMenu extends Form {
 		pm_detail.addItem(new PulldownItem(Utils.getBundleString(bundle, "medium")));
 		pm_detail.addItem(new PulldownItem(Utils.getBundleString(bundle, "high")));
 		PulldownButton pb_detail = new PulldownButton(gui_root, pm_detail, last_detail_value, 150);
-		
+
 		group_detail.addChild(pb_detail);
 		addCloseListener(new OptionsCloseListener());
 		label_detail.place();
@@ -228,7 +220,7 @@ public abstract strictfp class AbstractOptionsMenu extends Form {
 		mode_label.place();
 		mode_list_box.place(mode_label, BOTTOM_LEFT);
 		mode_group.compileCanvas();
-		
+
 		// Mapmode delay
 		Group group_mapmode = new Group();
 		general.addChild(group_mapmode);
@@ -246,7 +238,7 @@ public abstract strictfp class AbstractOptionsMenu extends Form {
 		slider_mapmode.place(label_mapmode_none, RIGHT_MID);
 		label_mapmode_high.place(slider_mapmode, RIGHT_MID);
 		group_mapmode.compileCanvas();
-		
+
 		// Tooltip delay
 		Group group_tooltip = new Group();
 		general.addChild(group_tooltip);
@@ -319,14 +311,6 @@ public abstract strictfp class AbstractOptionsMenu extends Form {
 		language_list_box.place(language_label, BOTTOM_LEFT);
 		language_group.compileCanvas();
 
-		// report bug
-		String text = Utils.getBundleString(bundle, "report_bug_text");
-		LabelBox label_box = new LabelBox(text, Skin.getSkin().getEditFont(), 309);
-		report_bug.addChild(label_box);
-		HorizButton button_bug = new HorizButton(Utils.getBundleString(bundle, "report_bug"), 130);
-		button_bug.addMouseClickListener(new BugReportListener());
-		report_bug.addChild(button_bug);
-		
 		// Buttons
 		HorizButton button_close = new HorizButton(Utils.getBundleString(bundle, "close"), BUTTON_WIDTH);
 		button_close.addMouseClickListener(new CancelListener(this));
@@ -343,14 +327,14 @@ public abstract strictfp class AbstractOptionsMenu extends Form {
 		group_invert_camera.place(group_tooltip, BOTTOM_LEFT);
 		group_aggressive_units.place(group_invert_camera, BOTTOM_LEFT);
 		general.compileCanvas();
-		
+
 		// display
 		mode_group.place();
 		group_detail.place(mode_group, RIGHT_TOP);
 		group_fullscreen.place(group_detail, BOTTOM_LEFT);
 		group_hardware_cursor.place(group_fullscreen, BOTTOM_LEFT);
 		display.compileCanvas();
-		
+
 		group_music.place();
 		group_sound.place(group_music, BOTTOM_LEFT);
 		sound.compileCanvas();
@@ -359,16 +343,7 @@ public abstract strictfp class AbstractOptionsMenu extends Form {
 		language_group.place();
 		language.compileCanvas();
 
-		//report bug
-		label_box.place();
-		button_bug.place(label_box, BOTTOM_MID);
-		report_bug.compileCanvas();
-		
-		Panel[] panels;
-		if (Settings.getSettings().hide_bugreporter)
-			panels = new Panel[]{general, display, sound, language};
-		else
-			panels = new Panel[]{general, display, sound, language, report_bug};
+		Panel[] panels = new Panel[]{general, display, sound, language};
 
 		PanelGroup panel_group = new PanelGroup(panels, 0);
 		addChild(panel_group);
@@ -494,7 +469,7 @@ public abstract strictfp class AbstractOptionsMenu extends Form {
 
 	private final strictfp class DisplayModeListener implements RowListener, DoNowListener {
 		private SerializableDisplayMode mode;
-		
+
 		public final void doChange(boolean switch_now) {
 			LocalInput.getLocalInput().switchMode(mode, switch_now);
 			gui_root.displayChanged();
@@ -505,10 +480,10 @@ public abstract strictfp class AbstractOptionsMenu extends Form {
 			DisplayChangeForm display_change_form = new DisplayChangeForm(this);
 			gui_root.addModalForm(display_change_form);
 		}
-		
+
 		public final void rowDoubleClicked(Object o) {
 		}
-	}  
+	}
 
 	private final strictfp class LanguageListener implements RowListener {
 		public final void rowChosen(Object o) {
@@ -519,20 +494,14 @@ public abstract strictfp class AbstractOptionsMenu extends Form {
 				Settings.getSettings().language = locale.getLanguage();
 			gui_root.addModalForm(new MessageForm(Utils.getBundleString(bundle, "language_change_next_run")));
 		}
-		
+
 		public final void rowDoubleClicked(Object o) {
 		}
-	}  
+	}
 
 	private final strictfp class GamespeedListener implements ItemChosenListener {
 		public final void itemChosen(PulldownMenu menu, int item_index) {
 			changeGamespeed(item_index);
-		}
-	}  
-
-	private final strictfp class BugReportListener implements MouseClickListener {
-		public final void mouseClicked(int button, int x, int y, int clicks) {
-			gui_root.addModalForm(new BugReportConfirmForm());
 		}
 	}
 

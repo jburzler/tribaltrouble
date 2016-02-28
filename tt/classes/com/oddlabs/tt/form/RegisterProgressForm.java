@@ -1,7 +1,5 @@
 package com.oddlabs.tt.form;
 
-import java.util.ResourceBundle;
-
 import com.oddlabs.regclient.RegistrationClient;
 import com.oddlabs.regclient.RegistrationListener;
 import com.oddlabs.registration.RegistrationKeyFormatException;
@@ -16,6 +14,7 @@ import com.oddlabs.tt.gui.Skin;
 import com.oddlabs.tt.render.Renderer;
 import com.oddlabs.tt.util.ServerMessageBundler;
 import com.oddlabs.tt.util.Utils;
+import java.util.ResourceBundle;
 
 public final strictfp class RegisterProgressForm extends Form implements RegistrationListener {
 	private final RegisterProgressFormListener parent_form;

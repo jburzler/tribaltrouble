@@ -1,10 +1,8 @@
 package com.oddlabs.tt.delegate;
 
 import com.oddlabs.tt.camera.GameCamera;
-import com.oddlabs.tt.viewer.WorldViewer;
 import com.oddlabs.tt.render.LandscapeLocation;
-import com.oddlabs.tt.render.Picker;
-import com.oddlabs.tt.gui.*;
+import com.oddlabs.tt.viewer.WorldViewer;
 
 public final strictfp class BeaconDelegate extends TargetDelegate {
 	public BeaconDelegate(WorldViewer viewer, GameCamera camera) {

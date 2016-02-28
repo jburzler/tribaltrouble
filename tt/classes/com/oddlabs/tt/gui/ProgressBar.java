@@ -1,15 +1,12 @@
 package com.oddlabs.tt.gui;
 
-import java.util.ResourceBundle;
-
-import org.lwjgl.opengl.Display;
-
 import com.oddlabs.net.NetworkSelector;
 import com.oddlabs.tt.font.TextLineRenderer;
 import com.oddlabs.tt.render.Renderer;
-import com.oddlabs.util.Quad;
-import com.oddlabs.tt.event.LocalEventQueue;
 import com.oddlabs.tt.util.Utils;
+import com.oddlabs.util.Quad;
+import java.util.ResourceBundle;
+import org.lwjgl.opengl.Display;
 
 public final strictfp class ProgressBar extends GUIObject {
 	private final ProgressBarInfo[] info;

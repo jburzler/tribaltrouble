@@ -1,7 +1,5 @@
 package com.oddlabs.tt.landscape;
 
-import com.oddlabs.tt.trigger.GameOverTrigger;
-
 public final strictfp class WorldParameters {
 	private final String map_code;
 	private final int initial_unit_count;

@@ -1,9 +1,8 @@
 package com.oddlabs.tt.gui;
 
+import com.oddlabs.tt.guievent.TabListener;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.oddlabs.tt.guievent.TabListener;
 
 public final strictfp class ChatLine extends EditLine {
 	private final List tab_listeners = new ArrayList();

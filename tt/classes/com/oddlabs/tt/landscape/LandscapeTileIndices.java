@@ -1,12 +1,8 @@
 package com.oddlabs.tt.landscape;
 
+import com.oddlabs.util.IndexListOptimizer;
 import java.nio.ShortBuffer;
 import org.lwjgl.BufferUtils;
-
-import java.util.List;
-import java.util.ArrayList;
-import com.oddlabs.util.IndexListOptimizer;
-import com.oddlabs.tt.landscape.HeightMap;
 
 /* http://www.gamasutra.com/features/20061221/dallaire_03.shtml */
 public final strictfp class LandscapeTileIndices {

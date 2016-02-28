@@ -1,11 +1,9 @@
 package com.oddlabs.tt.trigger;
 
+import com.oddlabs.tt.animation.AnimationManager;
 import com.oddlabs.tt.animation.TimerAnimation;
 import com.oddlabs.tt.animation.Updatable;
-import com.oddlabs.tt.animation.Animated;
-import com.oddlabs.tt.animation.AnimationManager;
 import com.oddlabs.tt.landscape.World;
-import com.oddlabs.tt.util.StateChecksum;
 
 public abstract strictfp class IntervalTrigger {
 	private final float after_done_time;

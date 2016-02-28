@@ -1,17 +1,11 @@
 package com.oddlabs.net;
 
+import com.oddlabs.util.ByteBufferOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.lang.reflect.Array;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.nio.ByteBuffer;
-import java.util.HashMap;
-import java.util.Map;
-
-import com.oddlabs.util.ByteBufferOutputStream;
 
 public final strictfp class ARMIEvent implements Serializable {
 	private final static long serialVersionUID = 1;

@@ -1,6 +1,5 @@
 package com.oddlabs.tt.player;
 
-import com.oddlabs.tt.landscape.World;
 import com.oddlabs.tt.model.Selectable;
 import com.oddlabs.tt.model.behaviour.IdleController;
 import com.oddlabs.tt.util.Target;

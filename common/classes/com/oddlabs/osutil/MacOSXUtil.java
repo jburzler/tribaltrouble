@@ -1,30 +1,20 @@
 package com.oddlabs.osutil;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-
-import java.io.File;
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import org.w3c.dom.Node;
-import org.xml.sax.SAXException;
-import org.xml.sax.EntityResolver;
-import org.xml.sax.InputSource;
-import javax.xml.parsers.ParserConfigurationException;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.FactoryConfigurationError;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.*;
-import javax.xml.transform.dom.*;
 import javax.xml.transform.stream.*;
-import org.w3c.dom.*;
+import org.xml.sax.EntityResolver;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 
 public final strictfp class MacOSXUtil extends OSUtil {
 	private static File locateDir(String app_dir_name) {

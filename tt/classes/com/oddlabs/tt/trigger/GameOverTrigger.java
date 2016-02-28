@@ -1,18 +1,15 @@
 package com.oddlabs.tt.trigger;
 
-import java.util.ResourceBundle;
-
 import com.oddlabs.matchmaking.MatchmakingServerInterface;
 import com.oddlabs.tt.animation.Animated;
 import com.oddlabs.tt.gui.GUIRoot;
-import com.oddlabs.tt.landscape.World;
 import com.oddlabs.tt.net.PeerHub;
 import com.oddlabs.tt.player.Player;
 import com.oddlabs.tt.player.PlayerInfo;
 import com.oddlabs.tt.util.StateChecksum;
 import com.oddlabs.tt.util.Utils;
 import com.oddlabs.tt.viewer.WorldViewer;
-import com.oddlabs.tt.trigger.GameOverDelayTrigger;
+import java.util.ResourceBundle;
 
 public final strictfp class GameOverTrigger implements Animated {
 	private final int[] teams;

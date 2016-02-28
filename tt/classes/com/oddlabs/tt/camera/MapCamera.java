@@ -1,18 +1,14 @@
 package com.oddlabs.tt.camera;
 
-import java.util.ResourceBundle;
-
-import org.lwjgl.input.Keyboard;
-
+import com.oddlabs.tt.delegate.SelectionDelegate;
 import com.oddlabs.tt.global.Settings;
-import com.oddlabs.tt.gui.GUIRoot;
 import com.oddlabs.tt.gui.KeyboardEvent;
 import com.oddlabs.tt.gui.Label;
 import com.oddlabs.tt.gui.LocalInput;
-import com.oddlabs.tt.delegate.SelectionDelegate;
 import com.oddlabs.tt.gui.Skin;
-import com.oddlabs.tt.landscape.World;
 import com.oddlabs.tt.util.Utils;
+import java.util.ResourceBundle;
+import org.lwjgl.input.Keyboard;
 
 public final strictfp class MapCamera extends Camera {
 	private final static float MAP_THRESHOLD = .1f;

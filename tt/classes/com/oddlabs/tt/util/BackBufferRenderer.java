@@ -1,15 +1,6 @@
 package com.oddlabs.tt.util;
 
-import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.Pbuffer;
-import org.lwjgl.opengl.PixelFormat;
-
-import com.oddlabs.tt.render.Renderer;
-import com.oddlabs.tt.render.Texture;
-import com.oddlabs.tt.resource.GLImage;
-import com.oddlabs.tt.resource.GLIntImage;
 
 public final strictfp class BackBufferRenderer extends OffscreenRenderer {
 	private static boolean back_buffer_dirty = false;

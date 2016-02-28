@@ -1,11 +1,8 @@
 package com.oddlabs.tt.util;
 
+import com.oddlabs.tt.landscape.HeightMap;
 import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Vector4f;
-
-import com.oddlabs.tt.global.Globals;
-import com.oddlabs.tt.landscape.World;
-import com.oddlabs.tt.landscape.HeightMap;
 
 public strictfp class BoundingBox {
 	private final static long serialVersionUID = 1;

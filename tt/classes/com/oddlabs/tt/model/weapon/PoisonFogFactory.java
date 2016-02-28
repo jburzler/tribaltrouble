@@ -1,7 +1,6 @@
 package com.oddlabs.tt.model.weapon;
 
 import com.oddlabs.tt.model.Unit;
-import com.oddlabs.tt.landscape.World;
 
 public final strictfp class PoisonFogFactory implements MagicFactory {
 	private final float offset_x;

@@ -1,9 +1,8 @@
 package com.oddlabs.tt.render;
 
-import com.oddlabs.tt.model.Model;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 final strictfp class SpriteListRenderer {
 	private final SpriteList sprite_list;

@@ -1,7 +1,6 @@
 package com.oddlabs.tt.gui;
 
 import com.oddlabs.util.*;
-
 import org.lwjgl.opengl.*;
 
 public abstract strictfp class Renderable extends ListElementImpl {

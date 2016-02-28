@@ -1,9 +1,9 @@
 package com.oddlabs.tt.model;
 
+import com.oddlabs.tt.landscape.LandscapeTargetRespond;
 import com.oddlabs.tt.model.weapon.*;
 import com.oddlabs.tt.particle.Emitter;
 import com.oddlabs.tt.particle.Lightning;
-import com.oddlabs.tt.landscape.LandscapeTargetRespond;
 
 public strictfp interface ElementVisitor {
 	void visitUnit(Unit selectable);

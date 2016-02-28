@@ -1,16 +1,13 @@
 package com.oddlabs.tt.render;
 
-import com.oddlabs.tt.util.*;
 import com.oddlabs.tt.camera.CameraState;
 import com.oddlabs.tt.global.Globals;
 import com.oddlabs.tt.particle.*;
-import com.oddlabs.tt.render.Texture;
-
-import java.util.List;
+import com.oddlabs.tt.util.*;
 import java.nio.FloatBuffer;
-
-import org.lwjgl.opengl.GL11;
+import java.util.List;
 import org.lwjgl.BufferUtils;
+import org.lwjgl.opengl.GL11;
 
 final strictfp class EmitterRenderer {
 	private final static float SQRT_2 = (float)StrictMath.sqrt(2f);

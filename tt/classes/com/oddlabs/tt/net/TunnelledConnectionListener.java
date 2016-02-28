@@ -1,10 +1,5 @@
 package com.oddlabs.tt.net;
 
-import java.net.InetAddress;
-import java.nio.channels.ClosedChannelException;
-import java.util.LinkedList;
-import java.util.List;
-
 import com.oddlabs.matchmaking.Profile;
 import com.oddlabs.matchmaking.TunnelAddress;
 import com.oddlabs.net.AbstractConnection;
@@ -12,6 +7,10 @@ import com.oddlabs.net.AbstractConnectionListener;
 import com.oddlabs.net.ConnectionInterface;
 import com.oddlabs.net.ConnectionListenerInterface;
 import com.oddlabs.net.HostSequenceID;
+import java.net.InetAddress;
+import java.nio.channels.ClosedChannelException;
+import java.util.LinkedList;
+import java.util.List;
 
 public final strictfp class TunnelledConnectionListener extends AbstractConnectionListener {
 	private final List incoming_connections = new LinkedList();

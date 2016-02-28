@@ -1,8 +1,8 @@
 package com.oddlabs.tt.trigger.campaign;
 
-import com.oddlabs.tt.viewer.WorldViewer;
 import com.oddlabs.tt.player.Player;
 import com.oddlabs.tt.trigger.IntervalTrigger;
+import com.oddlabs.tt.viewer.WorldViewer;
 
 public final strictfp class VictoryTrigger extends IntervalTrigger {
 	private final WorldViewer viewer;

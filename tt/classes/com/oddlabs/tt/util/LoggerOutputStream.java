@@ -1,7 +1,7 @@
 package com.oddlabs.tt.util;
 
-import java.io.OutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 
 public final strictfp class LoggerOutputStream extends OutputStream {
 	private final OutputStream[] streams;

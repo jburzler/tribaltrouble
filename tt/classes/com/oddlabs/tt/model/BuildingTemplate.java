@@ -1,7 +1,7 @@
 package com.oddlabs.tt.model;
 
-import com.oddlabs.tt.render.SpriteKey;
 import com.oddlabs.tt.render.ShadowListKey;
+import com.oddlabs.tt.render.SpriteKey;
 
 public final strictfp class BuildingTemplate extends Template {
 	private final int template_id;

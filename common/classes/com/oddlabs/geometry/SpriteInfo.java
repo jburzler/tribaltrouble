@@ -1,7 +1,6 @@
 package com.oddlabs.geometry;
 
 import com.oddlabs.util.*;
-
 import java.io.*;
 
 public final strictfp class SpriteInfo implements Serializable {

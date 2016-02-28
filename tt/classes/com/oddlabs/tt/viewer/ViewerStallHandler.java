@@ -1,7 +1,7 @@
 package com.oddlabs.tt.viewer;
 
-import com.oddlabs.tt.form.WaitingForPlayersForm;
 import com.oddlabs.tt.event.LocalEventQueue;
+import com.oddlabs.tt.form.WaitingForPlayersForm;
 import com.oddlabs.tt.net.StallHandler;
 
 final strictfp class ViewerStallHandler implements StallHandler {

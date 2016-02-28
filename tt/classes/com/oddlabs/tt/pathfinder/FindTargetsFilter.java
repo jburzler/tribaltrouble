@@ -1,7 +1,7 @@
 package com.oddlabs.tt.pathfinder;
 
-import com.oddlabs.tt.util.Target;
 import com.oddlabs.tt.landscape.LandscapeTarget;
+import com.oddlabs.tt.util.Target;
 
 public final strictfp class FindTargetsFilter implements ScanFilter {
 	private final int max_radius;

@@ -1,19 +1,9 @@
 package com.oddlabs.tt.delegate;
 
-import java.nio.FloatBuffer;
-import java.util.List;
-
-import org.lwjgl.BufferUtils;
-import org.lwjgl.input.Keyboard;
-import org.lwjgl.opengl.GL11;
-
-import com.oddlabs.tt.camera.GameCamera;
 import com.oddlabs.tt.camera.CameraState;
-import com.oddlabs.tt.render.RenderQueues;
-import com.oddlabs.tt.render.LandscapeRenderer;
-import com.oddlabs.tt.landscape.World;
+import com.oddlabs.tt.camera.GameCamera;
+import com.oddlabs.tt.gui.*;
 import com.oddlabs.tt.landscape.HeightMap;
-import com.oddlabs.tt.render.SpriteRenderer;
 import com.oddlabs.tt.model.Abilities;
 import com.oddlabs.tt.model.Building;
 import com.oddlabs.tt.model.BuildingTemplate;
@@ -22,9 +12,15 @@ import com.oddlabs.tt.pathfinder.UnitGrid;
 import com.oddlabs.tt.player.BuildingSiteScanFilter;
 import com.oddlabs.tt.render.BuildingSiteRenderer;
 import com.oddlabs.tt.render.LandscapeLocation;
-import com.oddlabs.tt.render.Picker;
+import com.oddlabs.tt.render.LandscapeRenderer;
+import com.oddlabs.tt.render.RenderQueues;
+import com.oddlabs.tt.render.SpriteRenderer;
 import com.oddlabs.tt.viewer.WorldViewer;
-import com.oddlabs.tt.gui.*;
+import java.nio.FloatBuffer;
+import java.util.List;
+import org.lwjgl.BufferUtils;
+import org.lwjgl.input.Keyboard;
+import org.lwjgl.opengl.GL11;
 
 public final strictfp class PlacingDelegate extends ControllableCameraDelegate {
 	private final static int GRID_RADIUS = 20;

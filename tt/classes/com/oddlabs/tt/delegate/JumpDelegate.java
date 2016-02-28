@@ -2,8 +2,8 @@ package com.oddlabs.tt.delegate;
 
 import com.oddlabs.tt.camera.GameCamera;
 import com.oddlabs.tt.camera.JumpCamera;
-import com.oddlabs.tt.viewer.WorldViewer;
 import com.oddlabs.tt.gui.*;
+import com.oddlabs.tt.viewer.WorldViewer;
 
 public final strictfp class JumpDelegate extends InGameDelegate {
 	private final Runnable runnable;

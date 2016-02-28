@@ -1,10 +1,9 @@
 package com.oddlabs.tt.procedural;
 
-import java.util.Random;
-
 import com.oddlabs.procedural.Channel;
 import com.oddlabs.procedural.Layer;
 import com.oddlabs.util.Utils;
+import java.util.Random;
 
 public final strictfp class MidpointFractalizer {
 

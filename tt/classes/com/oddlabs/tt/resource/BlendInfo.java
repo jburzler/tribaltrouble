@@ -1,7 +1,6 @@
 package com.oddlabs.tt.resource;
 
 import com.oddlabs.tt.render.Texture;
-
 import org.lwjgl.opengl.GL11;
 
 public abstract strictfp class BlendInfo {

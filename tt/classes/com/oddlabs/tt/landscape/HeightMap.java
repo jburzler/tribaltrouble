@@ -1,12 +1,8 @@
 package com.oddlabs.tt.landscape;
 
-import java.util.List;
-
-import com.oddlabs.tt.camera.Camera;
 import com.oddlabs.tt.global.Globals;
-import com.oddlabs.tt.render.Renderer;
-import com.oddlabs.tt.procedural.Landscape;
 import com.oddlabs.tt.util.StrictVector3f;
+import java.util.List;
 
 public final strictfp class HeightMap {
 	public final static int METERS_PER_UNIT_GRID = 2;

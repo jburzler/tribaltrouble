@@ -1,36 +1,23 @@
 package com.oddlabs.tt.gui;
 
-import java.io.File;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.util.TreeSet;
-import java.util.SortedSet;
-import java.util.List;
-import java.util.ArrayList;
-
-import org.lwjgl.LWJGLException;
-import org.lwjgl.Sys;
-import org.lwjgl.openal.AL;
-import org.lwjgl.input.Cursor;
-import org.lwjgl.opengl.Display;
-import org.lwjgl.opengl.DisplayMode;
-
 import com.oddlabs.event.Deterministic;
-import com.oddlabs.tt.render.Renderer;
-import com.oddlabs.tt.animation.TimerAnimation;
-import com.oddlabs.tt.animation.Updatable;
 import com.oddlabs.tt.event.LocalEventQueue;
-import com.oddlabs.tt.font.Index;
-import com.oddlabs.tt.form.QuitForm;
 import com.oddlabs.tt.global.Globals;
 import com.oddlabs.tt.global.Settings;
 import com.oddlabs.tt.input.KeyboardInput;
-import com.oddlabs.tt.input.PointerInput;
 import com.oddlabs.tt.render.Renderer;
 import com.oddlabs.tt.render.SerializableDisplayMode;
 import com.oddlabs.tt.render.SerializableDisplayModeComparator;
-import com.oddlabs.updater.UpdateInfo;
-import com.oddlabs.util.Utils;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.SortedSet;
+import java.util.TreeSet;
+import org.lwjgl.LWJGLException;
+import org.lwjgl.input.Cursor;
+import org.lwjgl.openal.AL;
+import org.lwjgl.opengl.Display;
+import org.lwjgl.opengl.DisplayMode;
 
 public final strictfp class LocalInput {
 	public final static int LEFT_BUTTON = 0;
@@ -49,9 +36,8 @@ public final strictfp class LocalInput {
 	private static boolean fullscreen;
 	private static File game_dir;
 	private static int revision;
-	private static UpdateInfo update_info;
 
-	private static LocalInput instance;
+	private final static LocalInput instance = new LocalInput();
 
 	public final static void setKeys(int key_code, boolean state, boolean shift_down, boolean control_down, boolean menu_down) {
 		keys[key_code] = state;
@@ -151,17 +137,8 @@ public final strictfp class LocalInput {
 		return game_dir;
 	}
 
-	public final static UpdateInfo getUpdateInfo() {
-		return update_info;
-	}
-
 	public final static int getRevision() {
 		return revision;
-	}
-
-	public LocalInput() {
-		assert instance == null;
-		instance = this;
 	}
 
 	public final static int getViewWidth() {
@@ -213,27 +190,16 @@ public final strictfp class LocalInput {
 	public final static int getNativeCursorCaps() {
 		return LocalEventQueue.getQueue().getDeterministic().log(Cursor.getCapabilities());
 	}
-	
-	public final static void settings(UpdateInfo update_info, File game_dir, File event_log_dir, Settings settings) {
-		int revision;
-		try {
-			BufferedReader in = new BufferedReader(new InputStreamReader(Utils.tryMakeURL("/revision_number").openStream()));
-			String revision_string = in.readLine();
-			in.close();
-			revision = (new Integer(revision_string)).intValue();
-		} catch (Exception e) {
-			revision = -1;
-		}
-		Deterministic deterministic = LocalEventQueue.getQueue().getDeterministic();
-		instance.setSettings(update_info, game_dir, event_log_dir,
+
+	public final static void settings(File game_dir, File event_log_dir, Settings settings) {
+		instance.setSettings(game_dir, event_log_dir,
 				revision, settings);
 	}
 
-	public final void setSettings(UpdateInfo update_info, File game_dir, File event_log_dir, int revision, Settings settings) {
+	public final void setSettings(File game_dir, File event_log_dir, int revision, Settings settings) {
 		System.out.println("revision = " + revision);
 		LocalInput.game_dir = game_dir;
 		LocalInput.revision = revision;
-		LocalInput.update_info = update_info;
 		settings.last_event_log_dir = event_log_dir.getAbsolutePath();
 		settings.last_revision = revision;
 		settings.crashed = true;

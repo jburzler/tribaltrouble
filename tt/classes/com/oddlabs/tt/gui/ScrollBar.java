@@ -1,10 +1,9 @@
 package com.oddlabs.tt.gui;
 
-import org.lwjgl.input.Keyboard;
-
 import com.oddlabs.tt.guievent.KeyListener;
 import com.oddlabs.tt.guievent.MouseButtonListener;
 import com.oddlabs.tt.guievent.MouseMotionListener;
+import org.lwjgl.input.Keyboard;
 
 public final strictfp class ScrollBar extends GUIObject {
 	private final Group focus_group;

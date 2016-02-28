@@ -1,15 +1,9 @@
 package com.oddlabs.tt.tutorial;
 
+import com.oddlabs.tt.form.TutorialForm;
 import com.oddlabs.tt.model.*;
 import com.oddlabs.tt.model.behaviour.WalkController;
-import com.oddlabs.tt.landscape.World;
 import com.oddlabs.tt.player.Player;
-import com.oddlabs.tt.viewer.WorldViewer;
-import com.oddlabs.tt.delegate.SelectionDelegate;
-import com.oddlabs.tt.delegate.TutorialOverDelegate;
-import com.oddlabs.tt.gui.GUIRoot;
-import com.oddlabs.tt.form.TutorialForm;
-
 import java.util.*;
 
 public final strictfp class MoveUnitTrigger extends TutorialTrigger {

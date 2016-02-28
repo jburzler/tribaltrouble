@@ -1,9 +1,6 @@
 package com.oddlabs.tt.gui;
 
 import com.oddlabs.matchmaking.ChatRoomUser;
-import com.oddlabs.tt.util.Utils;
-
-import java.util.*;
 
 public final strictfp class ChatRoomInfo {
 	private final String name;

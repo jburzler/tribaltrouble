@@ -1,9 +1,8 @@
 package com.oddlabs.tt.net;
 
+import com.oddlabs.net.ARMIEvent;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.oddlabs.net.ARMIEvent;
 
 public final strictfp class ConnectionInfo {
 	private final int priority;

@@ -1,13 +1,11 @@
 package com.oddlabs.tt.gui;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.lwjgl.input.Keyboard;
-
 import com.oddlabs.tt.font.Index;
 import com.oddlabs.tt.font.TextLineRenderer;
 import com.oddlabs.tt.guievent.EnterListener;
+import java.util.ArrayList;
+import java.util.List;
+import org.lwjgl.input.Keyboard;
 
 public strictfp class EditLine extends TextField {
 	public final static int RIGHT_ALIGNED = 1;

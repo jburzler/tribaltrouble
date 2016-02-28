@@ -1,14 +1,13 @@
 package com.oddlabs.util;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.FileOutputStream;
-import java.io.InputStream;
 import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.nio.ByteBuffer;
 import java.nio.channels.WritableByteChannel;
-import java.net.URL;
-
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.EXTTextureCompressionS3TC;
 

@@ -3,11 +3,11 @@ package com.oddlabs.tt.gui;
 import com.oddlabs.tt.model.BuildProductionContainer;
 import com.oddlabs.tt.model.BuildSupplyContainer;
 import com.oddlabs.tt.model.Building;
-import com.oddlabs.tt.viewer.WorldViewer;
 import com.oddlabs.tt.model.weapon.IronAxeWeapon;
 import com.oddlabs.tt.model.weapon.RockAxeWeapon;
 import com.oddlabs.tt.model.weapon.RubberAxeWeapon;
 import com.oddlabs.tt.player.PlayerInterface;
+import com.oddlabs.tt.viewer.WorldViewer;
 import com.oddlabs.util.Quad;
 
 public final strictfp class BuildSpinner extends IconSpinner {

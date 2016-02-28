@@ -1,29 +1,19 @@
 package com.oddlabs.tt.landscape;
 
-import java.util.ResourceBundle;
-
-import com.oddlabs.tt.net.DistributableTable;
 import com.oddlabs.tt.animation.Animated;
-import com.oddlabs.tt.audio.AudioPlayer;
 import com.oddlabs.tt.audio.AudioParameters;
-import com.oddlabs.tt.gui.Icons;
-import com.oddlabs.tt.gui.ToolTipBox;
-import com.oddlabs.tt.camera.CameraState;
-import com.oddlabs.tt.model.RacesResources;
+import com.oddlabs.tt.audio.AudioPlayer;
+import com.oddlabs.tt.model.ModelToolTip;
 import com.oddlabs.tt.model.Supply;
-import com.oddlabs.tt.model.SupplyManager;
+import com.oddlabs.tt.model.ToolTipVisitor;
 import com.oddlabs.tt.pathfinder.Occupant;
 import com.oddlabs.tt.pathfinder.Region;
 import com.oddlabs.tt.pathfinder.UnitGrid;
-import com.oddlabs.tt.util.BoundingBox;
 import com.oddlabs.tt.util.StateChecksum;
-import com.oddlabs.tt.util.Target;
-import com.oddlabs.tt.model.ModelToolTip;
-import com.oddlabs.tt.model.ToolTipVisitor;
-import com.oddlabs.tt.util.Utils;
-import com.oddlabs.tt.util.StrictVector3f;
 import com.oddlabs.tt.util.StrictMatrix4f;
+import com.oddlabs.tt.util.StrictVector3f;
 import com.oddlabs.tt.util.StrictVector4f;
+import com.oddlabs.tt.util.Target;
 
 public final strictfp class TreeSupply extends AbstractTreeGroup implements Supply, Target, Animated, ModelToolTip {
 	private final static int INITIAL_SUPPLIES = 10;

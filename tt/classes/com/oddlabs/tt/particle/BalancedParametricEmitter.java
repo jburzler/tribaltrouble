@@ -1,12 +1,10 @@
 package com.oddlabs.tt.particle;
 
-import org.lwjgl.util.vector.Vector3f;
-import org.lwjgl.util.vector.Vector4f;
-
 import com.oddlabs.tt.animation.AnimationManager;
 import com.oddlabs.tt.landscape.World;
 import com.oddlabs.tt.render.TextureKey;
-import com.oddlabs.tt.model.AbstractElementNode;
+import org.lwjgl.util.vector.Vector3f;
+import org.lwjgl.util.vector.Vector4f;
 
 public strictfp final class BalancedParametricEmitter extends ParametricEmitter {
 	private final int num_particles;

@@ -1,12 +1,10 @@
 package com.oddlabs.tt.gui;
 
-import org.lwjgl.opengl.GL11;
-
 import com.oddlabs.tt.event.LocalEventQueue;
 import com.oddlabs.tt.landscape.HeightMap;
-import com.oddlabs.tt.render.Renderer;
-import com.oddlabs.tt.util.StrictVector4f;
 import com.oddlabs.tt.util.StrictMatrix4f;
+import com.oddlabs.tt.util.StrictVector4f;
+import org.lwjgl.opengl.GL11;
 
 public final strictfp class Arrow extends GUIObject {
 	private final static float SECONDS_PER_FLASH = .5f;

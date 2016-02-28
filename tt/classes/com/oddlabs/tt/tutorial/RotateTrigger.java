@@ -1,8 +1,6 @@
 package com.oddlabs.tt.tutorial;
 
 import com.oddlabs.tt.camera.GameCamera;
-import com.oddlabs.tt.viewer.WorldViewer;
-import com.oddlabs.tt.delegate.SelectionDelegate;
 
 public final strictfp class RotateTrigger extends TutorialTrigger {
 	private final boolean[] rotate_dirs = new boolean[2];

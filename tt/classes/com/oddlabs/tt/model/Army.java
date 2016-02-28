@@ -1,8 +1,8 @@
 package com.oddlabs.tt.model;
 
-import java.util.Set;
-import java.util.LinkedHashSet;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 public strictfp class Army {
 	private final Set selection = new LinkedHashSet();

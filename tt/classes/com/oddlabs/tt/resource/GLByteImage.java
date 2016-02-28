@@ -1,11 +1,9 @@
 package com.oddlabs.tt.resource;
 
+import com.oddlabs.procedural.Channel;
 import java.nio.ByteBuffer;
-
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
-
-import com.oddlabs.procedural.Channel;
 
 public final strictfp class GLByteImage extends GLImage {
 	public final int getPixelSize() {

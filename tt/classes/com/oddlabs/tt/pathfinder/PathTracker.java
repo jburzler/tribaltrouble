@@ -1,12 +1,9 @@
 package com.oddlabs.tt.pathfinder;
 
-import org.lwjgl.opengl.GL11;
-
 import com.oddlabs.tt.gui.ToolTipBox;
-import com.oddlabs.tt.landscape.World;
 import com.oddlabs.tt.landscape.HeightMap;
-import com.oddlabs.tt.model.Unit;
 import com.oddlabs.tt.util.BezierPath;
+import org.lwjgl.opengl.GL11;
 
 public final strictfp class PathTracker {
 	public final static int OK = 1;

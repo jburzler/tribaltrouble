@@ -1,7 +1,7 @@
 package com.oddlabs.net;
 
-import java.net.*;
 import java.io.*;
+import java.net.*;
 
 public final strictfp class DNSTask implements Callable {
 	private final String dns_name;

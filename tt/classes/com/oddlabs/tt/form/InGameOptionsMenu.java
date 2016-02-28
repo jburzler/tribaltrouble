@@ -1,7 +1,7 @@
 package com.oddlabs.tt.form;
 
-import com.oddlabs.tt.landscape.World;
 import com.oddlabs.tt.gui.GUIRoot;
+import com.oddlabs.tt.landscape.World;
 import com.oddlabs.tt.viewer.WorldViewer;
 
 public final strictfp class InGameOptionsMenu extends AbstractOptionsMenu {

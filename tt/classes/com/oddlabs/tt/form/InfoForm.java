@@ -1,7 +1,5 @@
 package com.oddlabs.tt.form;
 
-import java.util.ResourceBundle;
-
 import com.oddlabs.matchmaking.Profile;
 import com.oddlabs.tt.gui.Form;
 import com.oddlabs.tt.gui.Group;
@@ -11,6 +9,7 @@ import com.oddlabs.tt.gui.OKButton;
 import com.oddlabs.tt.gui.OKListener;
 import com.oddlabs.tt.gui.Skin;
 import com.oddlabs.tt.util.Utils;
+import java.util.ResourceBundle;
 
 public final strictfp class InfoForm extends Form {
 	private final HorizButton ok_button;

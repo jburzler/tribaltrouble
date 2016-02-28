@@ -1,35 +1,28 @@
 package com.oddlabs.tt.player.campaign;
 
-import java.util.ResourceBundle;
-
-import com.oddlabs.matchmaking.Game;
-import com.oddlabs.tt.camera.GameCamera;
+import com.oddlabs.net.NetworkSelector;
+import com.oddlabs.tt.delegate.JumpDelegate;
 import com.oddlabs.tt.form.CampaignDialogForm;
 import com.oddlabs.tt.form.InGameCampaignDialogForm;
 import com.oddlabs.tt.gui.GUIRoot;
-import com.oddlabs.tt.delegate.JumpDelegate;
+import com.oddlabs.tt.landscape.HeightMap;
 import com.oddlabs.tt.model.Building;
 import com.oddlabs.tt.model.Race;
 import com.oddlabs.tt.model.RacesResources;
 import com.oddlabs.tt.model.SceneryModel;
 import com.oddlabs.tt.model.Unit;
-import com.oddlabs.tt.net.Client;
 import com.oddlabs.tt.net.GameNetwork;
 import com.oddlabs.tt.net.PlayerSlot;
-import com.oddlabs.tt.landscape.World;
-import com.oddlabs.tt.pathfinder.UnitGrid;
 import com.oddlabs.tt.player.Player;
-import com.oddlabs.tt.player.PlayerInfo;
 import com.oddlabs.tt.player.UnitInfo;
 import com.oddlabs.tt.procedural.Landscape;
-import com.oddlabs.tt.landscape.HeightMap;
 import com.oddlabs.tt.render.SpriteKey;
 import com.oddlabs.tt.trigger.campaign.DeathTrigger;
 import com.oddlabs.tt.trigger.campaign.GameStartedTrigger;
 import com.oddlabs.tt.trigger.campaign.TimeTrigger;
 import com.oddlabs.tt.trigger.campaign.VictoryTrigger;
 import com.oddlabs.tt.util.Utils;
-import com.oddlabs.net.NetworkSelector;
+import java.util.ResourceBundle;
 
 public final strictfp class NativeIsland1 extends Island {
 	private final static int NUM_CAPTIVES = 10;

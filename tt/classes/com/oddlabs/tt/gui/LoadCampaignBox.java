@@ -1,17 +1,16 @@
 package com.oddlabs.tt.gui;
 
+import com.oddlabs.tt.event.LocalEventQueue;
+import com.oddlabs.tt.form.MessageForm;
+import com.oddlabs.tt.guievent.RowListener;
+import com.oddlabs.tt.player.campaign.CampaignState;
+import com.oddlabs.tt.util.Utils;
+import com.oddlabs.util.DeterministicSerializer;
+import com.oddlabs.util.DeterministicSerializerLoopbackInterface;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InvalidClassException;
 import java.util.ResourceBundle;
-
-import com.oddlabs.tt.form.MessageForm;
-import com.oddlabs.tt.guievent.RowListener;
-import com.oddlabs.tt.player.campaign.CampaignState;
-import com.oddlabs.util.DeterministicSerializer;
-import com.oddlabs.util.DeterministicSerializerLoopbackInterface;
-import com.oddlabs.tt.util.Utils;
-import com.oddlabs.tt.event.LocalEventQueue;
 
 public final strictfp class LoadCampaignBox extends GUIObject implements DeterministicSerializerLoopbackInterface {
 	public final static String SAVEGAMES_FILE_NAME = "savegames";

@@ -1,12 +1,10 @@
 package com.oddlabs.tt.util;
 
+import com.oddlabs.tt.render.Renderer;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.Pbuffer;
 import org.lwjgl.opengl.PixelFormat;
-
-import com.oddlabs.tt.render.Renderer;
-import com.oddlabs.tt.render.Texture;
 
 final strictfp class PbufferRenderer extends OffscreenRenderer {
 	private final Pbuffer pbuffer;

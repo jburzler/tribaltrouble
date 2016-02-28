@@ -1,18 +1,10 @@
 package com.oddlabs.tt.render;
 
-import com.oddlabs.tt.viewer.WorldViewer;
-import com.oddlabs.tt.camera.CameraState;
-import com.oddlabs.tt.util.BoundingBox;
-import com.oddlabs.tt.model.Model;
-import com.oddlabs.tt.global.Globals;
-import com.oddlabs.tt.global.Settings;
 import com.oddlabs.tt.event.LocalEventQueue;
-import com.oddlabs.tt.viewer.Cheat;
+import com.oddlabs.tt.global.Globals;
 import com.oddlabs.tt.landscape.*;
-
+import com.oddlabs.tt.viewer.Cheat;
 import java.util.List;
-import java.util.ArrayList;
-
 import org.lwjgl.opengl.GL11;
 
 public final strictfp class TreeRenderer extends TreePicker {

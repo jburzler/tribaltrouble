@@ -2,9 +2,7 @@ package com.oddlabs.tt.render;
 
 import com.oddlabs.tt.model.Model;
 import com.oddlabs.tt.model.Selectable;
-import com.oddlabs.tt.util.BoundingBox;
 import com.oddlabs.tt.player.Player;
-import com.oddlabs.tt.net.PeerHub;
 
 strictfp class SelectableVisitor extends ModelVisitor {
 	private final static float[] COLOR_RED = {1f, 0f, 0f};

@@ -1,6 +1,5 @@
 package com.oddlabs.tt.gui;
 
-import com.oddlabs.tt.global.Settings;
 import com.oddlabs.util.Quad;
 
 public final strictfp class Languages {

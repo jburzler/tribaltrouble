@@ -1,8 +1,7 @@
 package com.oddlabs.tt.model;
 
-import com.oddlabs.tt.camera.CameraState;
-import com.oddlabs.tt.render.SpriteKey;
 import com.oddlabs.tt.landscape.World;
+import com.oddlabs.tt.render.SpriteKey;
 
 public abstract strictfp class Accessories extends Model {
 	private final SpriteKey sprite_renderer;

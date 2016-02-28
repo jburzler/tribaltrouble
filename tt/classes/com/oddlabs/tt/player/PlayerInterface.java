@@ -1,7 +1,7 @@
 package com.oddlabs.tt.player;
 
-import com.oddlabs.tt.model.Selectable;
 import com.oddlabs.tt.model.Building;
+import com.oddlabs.tt.model.Selectable;
 import com.oddlabs.tt.model.Unit;
 import com.oddlabs.tt.util.Target;
 

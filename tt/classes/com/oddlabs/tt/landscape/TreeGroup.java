@@ -1,8 +1,5 @@
 package com.oddlabs.tt.landscape;
 
-import com.oddlabs.tt.camera.CameraState;
-import com.oddlabs.tt.util.StrictMatrix4f;
-
 public final strictfp class TreeGroup extends AbstractTreeGroup {
 	private final static int LANDSCAPE_TREES_MAX_LEVEL = 5;
 

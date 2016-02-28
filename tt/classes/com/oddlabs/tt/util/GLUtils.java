@@ -1,28 +1,14 @@
 package com.oddlabs.tt.util;
 
-import java.awt.image.BufferedImage;
-import java.io.BufferedInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
+import com.oddlabs.tt.resource.GLImage;
+import com.oddlabs.tt.resource.GLIntImage;
+import com.oddlabs.util.Image;
 import java.io.File;
-import java.net.URL;
 import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-import java.nio.DoubleBuffer;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
-import java.nio.ShortBuffer;
-
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.OpenGLException;
-import org.lwjgl.opengl.ARBBufferObject;
-
-import com.oddlabs.tt.resource.GLIntImage;
-import com.oddlabs.tt.resource.GLImage;
-import com.oddlabs.tt.animation.AnimationManager;
-import com.oddlabs.util.Image;
 
 public final strictfp class GLUtils {
 	public final static String SCREENSHOT_DEFAULT = "screenshot";

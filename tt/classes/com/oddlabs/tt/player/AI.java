@@ -1,13 +1,9 @@
 package com.oddlabs.tt.player;
 
-import java.util.List;
-import java.util.Random;
-
 import com.oddlabs.tt.animation.Animated;
 import com.oddlabs.tt.global.Globals;
 import com.oddlabs.tt.gui.BuildSpinner;
 import com.oddlabs.tt.landscape.TreeSupply;
-import com.oddlabs.tt.landscape.World;
 import com.oddlabs.tt.model.Abilities;
 import com.oddlabs.tt.model.Building;
 import com.oddlabs.tt.model.IronSupply;
@@ -25,6 +21,7 @@ import com.oddlabs.tt.model.behaviour.WalkController;
 import com.oddlabs.tt.pathfinder.UnitGrid;
 import com.oddlabs.tt.util.StateChecksum;
 import com.oddlabs.tt.util.Target;
+import java.util.Random;
 
 public abstract strictfp class AI implements Animated {
 	private final static float SLEEP_SECONDS = 2f;

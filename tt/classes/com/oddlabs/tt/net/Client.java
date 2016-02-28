@@ -1,42 +1,26 @@
 package com.oddlabs.tt.net;
 
-import java.io.IOException;
-import java.net.InetSocketAddress;
-import java.util.List;
-import java.util.ArrayList;
-
 import com.oddlabs.matchmaking.Game;
 import com.oddlabs.matchmaking.MatchmakingServerInterface;
-import com.oddlabs.tt.render.Renderer;
-import com.oddlabs.tt.landscape.World;
-import com.oddlabs.tt.landscape.WorldParameters;
 import com.oddlabs.net.ARMIEvent;
-import com.oddlabs.net.ARMIInterfaceMethods;
 import com.oddlabs.net.ARMIEventBroker;
+import com.oddlabs.net.ARMIInterfaceMethods;
 import com.oddlabs.net.AbstractConnection;
 import com.oddlabs.net.Connection;
 import com.oddlabs.net.ConnectionInterface;
 import com.oddlabs.net.IllegalARMIEventException;
 import com.oddlabs.net.NetworkSelector;
-import com.oddlabs.tt.animation.AnimationManager;
 import com.oddlabs.tt.form.ProgressForm;
-import com.oddlabs.tt.form.LoadCallback;
 import com.oddlabs.tt.global.Globals;
-import com.oddlabs.tt.gui.GUIRoot;
-import com.oddlabs.tt.delegate.CameraDelegate;
-import com.oddlabs.tt.delegate.SelectionDelegate;
-import com.oddlabs.tt.gui.Fadable;
-import com.oddlabs.tt.gui.GUIRoot;
 import com.oddlabs.tt.gui.GUI;
+import com.oddlabs.tt.landscape.WorldParameters;
 import com.oddlabs.tt.player.Player;
-import com.oddlabs.tt.player.PlayerInfo;
 import com.oddlabs.tt.player.UnitInfo;
 import com.oddlabs.tt.resource.WorldGenerator;
-import com.oddlabs.util.Utils;
-import com.oddlabs.tt.event.LocalEventQueue;
 import com.oddlabs.tt.viewer.InGameInfo;
-import com.oddlabs.tt.net.Network;
-import com.oddlabs.router.SessionID;
+import com.oddlabs.util.Utils;
+import java.io.IOException;
+import java.net.InetSocketAddress;
 
 public final strictfp class Client implements ARMIEventBroker, GameClientInterface, ConnectionInterface {
 	private final static int CONNECTING = 1;

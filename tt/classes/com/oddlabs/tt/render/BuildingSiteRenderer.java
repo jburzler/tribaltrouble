@@ -1,11 +1,9 @@
 package com.oddlabs.tt.render;
 
-import java.util.List;
-
-import org.lwjgl.opengl.GL11;
-
 import com.oddlabs.tt.resource.GLIntImage;
 import com.oddlabs.tt.util.Target;
+import java.util.List;
+import org.lwjgl.opengl.GL11;
 
 public final strictfp class BuildingSiteRenderer extends ShadowRenderer {
 	private final Texture green;

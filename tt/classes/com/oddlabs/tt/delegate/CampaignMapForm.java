@@ -1,30 +1,25 @@
 package com.oddlabs.tt.delegate;
 
-import java.util.ResourceBundle;
-
-import com.oddlabs.tt.camera.StaticCamera;
+import com.oddlabs.net.NetworkSelector;
 import com.oddlabs.tt.camera.CameraState;
-import com.oddlabs.tt.global.Settings;
-import com.oddlabs.tt.delegate.CameraDelegate;
+import com.oddlabs.tt.camera.StaticCamera;
 import com.oddlabs.tt.form.CampaignDialogForm;
+import com.oddlabs.tt.global.Settings;
+import com.oddlabs.tt.gui.GUI;
 import com.oddlabs.tt.gui.GUIIcon;
 import com.oddlabs.tt.gui.GUIObject;
 import com.oddlabs.tt.gui.GUIRoot;
-import com.oddlabs.tt.gui.GUI;
+import com.oddlabs.tt.gui.KeyboardEvent;
 import com.oddlabs.tt.gui.LocalInput;
 import com.oddlabs.tt.gui.MapIslandData;
 import com.oddlabs.tt.gui.NonFocusIconButton;
-import com.oddlabs.tt.gui.Renderable;
 import com.oddlabs.tt.gui.Skin;
-import com.oddlabs.tt.gui.KeyboardEvent;
 import com.oddlabs.tt.guievent.MouseClickListener;
-import com.oddlabs.tt.landscape.World;
 import com.oddlabs.tt.player.campaign.Campaign;
 import com.oddlabs.tt.player.campaign.CampaignState;
 import com.oddlabs.tt.render.Renderer;
 import com.oddlabs.tt.util.Utils;
-import com.oddlabs.net.NetworkSelector;
-
+import java.util.ResourceBundle;
 import org.lwjgl.input.Keyboard;
 
 public final strictfp class CampaignMapForm extends CameraDelegate {

@@ -1,25 +1,19 @@
 package com.oddlabs.tt.delegate;
 
 import com.oddlabs.tt.camera.Camera;
-import com.oddlabs.tt.model.Unit;
+import com.oddlabs.tt.camera.StaticCamera;
+import com.oddlabs.tt.global.Settings;
+import com.oddlabs.tt.gui.KeyboardEvent;
+import com.oddlabs.tt.model.Abilities;
 import com.oddlabs.tt.model.Building;
 import com.oddlabs.tt.model.Race;
-import com.oddlabs.tt.model.Abilities;
 import com.oddlabs.tt.model.Selectable;
-import com.oddlabs.tt.camera.StaticCamera;
-import com.oddlabs.tt.gui.GUIRoot;
-import com.oddlabs.tt.render.Picker;
+import com.oddlabs.tt.model.Unit;
 import com.oddlabs.tt.render.LandscapeLocation;
-import com.oddlabs.tt.gui.KeyboardEvent;
-import com.oddlabs.tt.delegate.InGameMainMenu;
-import com.oddlabs.tt.landscape.World;
 import com.oddlabs.tt.viewer.Cheat;
 import com.oddlabs.tt.viewer.WorldViewer;
-import com.oddlabs.tt.net.PeerHub;
-import com.oddlabs.tt.global.Settings;
-
-import org.lwjgl.input.Keyboard;
 import java.util.Set;
+import org.lwjgl.input.Keyboard;
 
 public abstract strictfp class InGameDelegate extends CameraDelegate {
 	private final WorldViewer viewer;

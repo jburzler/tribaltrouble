@@ -1,37 +1,32 @@
 package com.oddlabs.tt.form;
 
-import java.io.File;
-import java.util.Random;
-import java.util.ResourceBundle;
-
-import org.lwjgl.openal.AL;
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
-
+import com.oddlabs.net.NetworkSelector;
 import com.oddlabs.tt.audio.AudioManager;
+import com.oddlabs.tt.delegate.CameraDelegate;
+import com.oddlabs.tt.delegate.LogoScreen;
+import com.oddlabs.tt.delegate.NullDelegate;
 import com.oddlabs.tt.event.LocalEventQueue;
+import com.oddlabs.tt.global.Globals;
+import com.oddlabs.tt.global.Settings;
 import com.oddlabs.tt.gui.Fadable;
+import com.oddlabs.tt.gui.GUI;
 import com.oddlabs.tt.gui.GUIImage;
 import com.oddlabs.tt.gui.GUIRoot;
-import com.oddlabs.tt.gui.GUI;
 import com.oddlabs.tt.gui.LabelBox;
 import com.oddlabs.tt.gui.LocalInput;
-import com.oddlabs.tt.delegate.NullDelegate;
 import com.oddlabs.tt.gui.ProgressBar;
 import com.oddlabs.tt.gui.ProgressBarInfo;
 import com.oddlabs.tt.gui.Skin;
-import com.oddlabs.tt.delegate.CameraDelegate;
-import com.oddlabs.tt.global.Settings;
-import com.oddlabs.tt.global.Globals;
-import com.oddlabs.tt.landscape.LandscapeResources;
 import com.oddlabs.tt.render.Texture;
-import com.oddlabs.tt.resource.TextureFile;
-import com.oddlabs.tt.resource.Resources;
-import com.oddlabs.tt.util.Utils;
 import com.oddlabs.tt.render.UIRenderer;
-import com.oddlabs.tt.delegate.LogoScreen;
-import com.oddlabs.util.Image;
-import com.oddlabs.net.NetworkSelector;
+import com.oddlabs.tt.resource.Resources;
+import com.oddlabs.tt.resource.TextureFile;
+import com.oddlabs.tt.util.Utils;
+import java.util.Random;
+import java.util.ResourceBundle;
+import org.lwjgl.openal.AL;
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL12;
 
 public final strictfp class ProgressForm {
 	private final static int PROGRESSBAR_LOADINGTIP_SPACING = 45;

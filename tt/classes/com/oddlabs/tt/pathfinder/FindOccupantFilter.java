@@ -1,7 +1,6 @@
 package com.oddlabs.tt.pathfinder;
 
 import com.oddlabs.tt.model.Selectable;
-
 import java.util.*;
 
 public final strictfp class FindOccupantFilter implements ScanFilter {

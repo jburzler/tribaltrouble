@@ -1,11 +1,7 @@
 package com.oddlabs.tt.gui;
 
-import com.oddlabs.tt.event.*;
-import com.oddlabs.tt.util.*;
-import com.oddlabs.tt.net.PeerHub;
-import com.oddlabs.tt.gui.GUIRoot;
 import com.oddlabs.tt.render.UIRenderer;
-
+import com.oddlabs.tt.util.*;
 import org.lwjgl.opengl.*;
 
 final strictfp class Fade {

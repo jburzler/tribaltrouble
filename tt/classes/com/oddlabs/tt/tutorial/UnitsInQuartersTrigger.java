@@ -1,12 +1,9 @@
 package com.oddlabs.tt.tutorial;
 
-import java.util.Iterator;
-import java.util.Set;
-
 import com.oddlabs.tt.model.Selectable;
 import com.oddlabs.tt.model.Unit;
-import com.oddlabs.tt.landscape.World;
-import com.oddlabs.tt.viewer.WorldViewer;
+import java.util.Iterator;
+import java.util.Set;
 
 public final strictfp class UnitsInQuartersTrigger extends TutorialTrigger {
 	public UnitsInQuartersTrigger() {

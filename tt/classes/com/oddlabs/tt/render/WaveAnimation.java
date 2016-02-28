@@ -1,11 +1,8 @@
 package com.oddlabs.tt.render;
 
+import com.oddlabs.tt.util.StateChecksum;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Vector3f;
-
-import com.oddlabs.tt.animation.Animated;
-import com.oddlabs.tt.event.LocalEventQueue;
-import com.oddlabs.tt.util.StateChecksum;
 
 public final strictfp class WaveAnimation {
 	private final static float TREE_WAVE_SCALE = 2f;

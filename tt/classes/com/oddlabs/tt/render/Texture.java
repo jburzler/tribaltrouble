@@ -1,29 +1,23 @@
 package com.oddlabs.tt.render;
 
-import java.net.URL;
-import java.nio.FloatBuffer;
-import java.nio.IntBuffer;
-import java.nio.ByteBuffer;
-
-import org.lwjgl.BufferUtils;
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
-import org.lwjgl.opengl.GL13;
-import org.lwjgl.opengl.GLContext;
-
 import com.oddlabs.tt.global.Globals;
 import com.oddlabs.tt.global.Settings;
 import com.oddlabs.tt.resource.GLImage;
 import com.oddlabs.tt.resource.NativeResource;
 import com.oddlabs.tt.resource.TextureFile;
 import com.oddlabs.tt.util.GLState;
-import com.oddlabs.tt.util.GLUtils;
-import com.oddlabs.util.Utils;
-import org.lwjgl.opengl.EXTTextureCompressionS3TC;
-
 import com.oddlabs.util.DXTImage;
-
+import com.oddlabs.util.Utils;
 import gr.zdimensions.jsquish.Squish;
+import java.nio.ByteBuffer;
+import java.nio.FloatBuffer;
+import java.nio.IntBuffer;
+import org.lwjgl.BufferUtils;
+import org.lwjgl.opengl.EXTTextureCompressionS3TC;
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL12;
+import org.lwjgl.opengl.GL13;
+import org.lwjgl.opengl.GLContext;
 
 public final strictfp class Texture extends NativeResource {
 	private final static IntBuffer handle_buffer;
@@ -31,13 +25,13 @@ public final strictfp class Texture extends NativeResource {
 	private final static FloatBuffer border_color_buffer;
 
 	public static int global_size = 0;
-	
+
 	private final int texture_handle;
 	private final int width;
 	private final int height;
 
 	private int size;
-	
+
 	static {
 		handle_buffer = BufferUtils.createIntBuffer(1);
 		size_buffer = BufferUtils.createIntBuffer(4);
@@ -50,7 +44,7 @@ public final strictfp class Texture extends NativeResource {
 		} else
 			return wrap;
 	}
-	
+
 	private final static int initTexture(int min_filter, int mag_filter, int wrap_s, int wrap_t, int max_mipmap_level) {
 		wrap_s = bestWrap(wrap_s);
 		wrap_t = bestWrap(wrap_t);

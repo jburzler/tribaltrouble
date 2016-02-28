@@ -1,8 +1,7 @@
 package com.oddlabs.tt.font;
 
-import org.lwjgl.opengl.*;
-
 import com.oddlabs.tt.animation.*;
+import org.lwjgl.opengl.*;
 
 public final strictfp class Index implements Updatable {
 	public final static int INDEX_WIDTH = 1;

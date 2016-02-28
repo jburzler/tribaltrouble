@@ -1,8 +1,8 @@
 package com.oddlabs.tt.viewer;
 
-import com.oddlabs.tt.gui.Group;
-import com.oddlabs.tt.delegate.InGameMainMenu;
 import com.oddlabs.tt.delegate.GameStatsDelegate;
+import com.oddlabs.tt.delegate.InGameMainMenu;
+import com.oddlabs.tt.gui.Group;
 
 public strictfp interface InGameInfo {
 	void addGUI(WorldViewer viewer, InGameMainMenu menu, Group game_infos);

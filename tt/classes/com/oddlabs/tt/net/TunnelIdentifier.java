@@ -1,7 +1,7 @@
 package com.oddlabs.tt.net;
 
-import com.oddlabs.matchmaking.TunnelAddress;
 import com.oddlabs.matchmaking.Profile;
+import com.oddlabs.matchmaking.TunnelAddress;
 
 public final strictfp class TunnelIdentifier {
 	private final Profile profile;

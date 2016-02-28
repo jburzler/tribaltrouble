@@ -1,16 +1,10 @@
 package com.oddlabs.tt.model;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
 import com.oddlabs.tt.animation.Animated;
-import com.oddlabs.tt.landscape.TreeSupply;
 import com.oddlabs.tt.landscape.World;
-import com.oddlabs.tt.pathfinder.UnitGrid;
 import com.oddlabs.tt.util.StateChecksum;
+import java.util.ArrayList;
+import java.util.List;
 
 public strictfp class SupplyManager implements Animated {
 	private final static float SLEEP_TIME = 10f;

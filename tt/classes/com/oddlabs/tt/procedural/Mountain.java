@@ -1,10 +1,9 @@
 package com.oddlabs.tt.procedural;
 
-import java.util.*;
-
-import com.oddlabs.util.*;
-import com.oddlabs.procedural.Layer;
 import com.oddlabs.procedural.Channel;
+import com.oddlabs.procedural.Layer;
+import com.oddlabs.util.*;
+import java.util.*;
 
 public final strictfp class Mountain {
 

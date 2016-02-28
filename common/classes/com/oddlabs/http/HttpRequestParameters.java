@@ -1,9 +1,9 @@
 package com.oddlabs.http;
 
-import java.util.Map;
-import java.util.Iterator;
-import java.net.URLEncoder;
 import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.Iterator;
+import java.util.Map;
 
 public final strictfp class HttpRequestParameters {
 	final String url;

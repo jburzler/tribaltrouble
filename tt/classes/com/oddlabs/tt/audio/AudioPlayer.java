@@ -1,12 +1,7 @@
 package com.oddlabs.tt.audio;
 
-import org.lwjgl.openal.AL;
 import org.lwjgl.openal.AL10;
 
-import com.oddlabs.tt.animation.Animated;
-import com.oddlabs.tt.event.LocalEventQueue;
-import com.oddlabs.tt.global.Settings;
-import com.oddlabs.tt.util.StateChecksum;
 
 public final strictfp class AudioPlayer extends AbstractAudioPlayer {
 	public final static int AUDIO_RANK_AMBIENT = 75;

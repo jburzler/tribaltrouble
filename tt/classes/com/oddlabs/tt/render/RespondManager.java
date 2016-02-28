@@ -1,14 +1,12 @@
 package com.oddlabs.tt.render;
 
+import com.oddlabs.tt.animation.Animated;
+import com.oddlabs.tt.animation.AnimationManager;
+import com.oddlabs.tt.util.StateChecksum;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
-import java.util.Map;
-import java.util.HashMap;
-
-import com.oddlabs.tt.util.StateChecksum;
-import com.oddlabs.tt.util.Target;
-import com.oddlabs.tt.animation.AnimationManager;
-import com.oddlabs.tt.animation.Animated;
 
 public final strictfp class RespondManager implements Animated {
 	private final static float SECONDS_PER_PICK_RESPOND = 1f/3f;

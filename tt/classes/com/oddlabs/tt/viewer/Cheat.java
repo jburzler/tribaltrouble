@@ -1,7 +1,6 @@
 package com.oddlabs.tt.viewer;
 
 import com.oddlabs.tt.render.Renderer;
-import com.oddlabs.tt.landscape.World;
 
 public final strictfp class Cheat {
 	private final boolean can_enable;

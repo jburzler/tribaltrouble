@@ -1,11 +1,8 @@
 package com.oddlabs.tt.viewer;
 
 import com.oddlabs.tt.model.Army;
-import com.oddlabs.tt.model.Unit;
 import com.oddlabs.tt.model.Selectable;
-import com.oddlabs.tt.model.Building;
 import com.oddlabs.tt.player.Player;
-
 import java.util.Iterator;
 
 public final strictfp class Selection {

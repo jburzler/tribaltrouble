@@ -1,8 +1,7 @@
 package com.oddlabs.tt.gui;
 
-import com.oddlabs.tt.font.*;
 import com.oddlabs.tt.event.*;
-
+import com.oddlabs.tt.font.*;
 import org.lwjgl.opengl.*;
 
 public final strictfp class MenuButton extends ButtonObject {

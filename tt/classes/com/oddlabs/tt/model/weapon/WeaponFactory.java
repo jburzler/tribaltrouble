@@ -3,10 +3,6 @@ package com.oddlabs.tt.model.weapon;
 import com.oddlabs.tt.landscape.HeightMap;
 import com.oddlabs.tt.model.Selectable;
 import com.oddlabs.tt.model.Unit;
-import com.oddlabs.tt.net.PeerHub;
-import com.oddlabs.tt.player.Player;
-import com.oddlabs.tt.player.campaign.Campaign;
-import com.oddlabs.tt.player.campaign.CampaignState;
 import com.oddlabs.tt.util.Target;
 
 public abstract strictfp class WeaponFactory {

@@ -1,8 +1,5 @@
 package com.oddlabs.tt.model;
 
-import com.oddlabs.tt.player.Player;
-import com.oddlabs.tt.landscape.World;
-
 public final strictfp class ReproduceUnitContainer extends UnitContainer {
 	private final Building building;
 	

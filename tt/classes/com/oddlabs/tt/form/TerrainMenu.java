@@ -1,21 +1,16 @@
 package com.oddlabs.tt.form;
 
-import java.math.BigInteger;
-import java.util.Random;
-import java.util.ResourceBundle;
-
 import com.oddlabs.matchmaking.Game;
 import com.oddlabs.matchmaking.GameSession;
 import com.oddlabs.matchmaking.MatchmakingServerInterface;
-import com.oddlabs.tt.delegate.Menu;
+import com.oddlabs.net.NetworkSelector;
 import com.oddlabs.registration.RegistrationKey;
+import com.oddlabs.tt.delegate.Menu;
 import com.oddlabs.tt.event.LocalEventQueue;
 import com.oddlabs.tt.global.Globals;
 import com.oddlabs.tt.gui.CancelButton;
 import com.oddlabs.tt.gui.CheckBox;
 import com.oddlabs.tt.gui.EditLine;
-import com.oddlabs.tt.gui.Form;
-import com.oddlabs.tt.gui.GUIImage;
 import com.oddlabs.tt.gui.GUIObject;
 import com.oddlabs.tt.gui.GUIRoot;
 import com.oddlabs.tt.gui.Group;
@@ -23,7 +18,6 @@ import com.oddlabs.tt.gui.HorizButton;
 import com.oddlabs.tt.gui.Label;
 import com.oddlabs.tt.gui.OKButton;
 import com.oddlabs.tt.gui.Panel;
-import com.oddlabs.tt.player.campaign.CampaignState;
 import com.oddlabs.tt.gui.PanelGroup;
 import com.oddlabs.tt.gui.PulldownButton;
 import com.oddlabs.tt.gui.PulldownItem;
@@ -33,24 +27,21 @@ import com.oddlabs.tt.gui.Slider;
 import com.oddlabs.tt.guievent.ItemChosenListener;
 import com.oddlabs.tt.guievent.MouseClickListener;
 import com.oddlabs.tt.guievent.ValueListener;
+import com.oddlabs.tt.landscape.WorldParameters;
 import com.oddlabs.tt.model.RacesResources;
-import com.oddlabs.tt.net.Client;
+import com.oddlabs.tt.net.GameNetwork;
 import com.oddlabs.tt.net.Network;
 import com.oddlabs.tt.net.PlayerSlot;
-import com.oddlabs.tt.net.GameNetwork;
-import com.oddlabs.tt.viewer.WorldViewer;
-import com.oddlabs.tt.viewer.InGameInfo;
-import com.oddlabs.tt.viewer.DefaultInGameInfo;
-import com.oddlabs.tt.viewer.MultiplayerInGameInfo;
 import com.oddlabs.tt.player.Player;
-import com.oddlabs.tt.net.WorldInitAction;
-import com.oddlabs.tt.player.PlayerInfo;
 import com.oddlabs.tt.render.Renderer;
 import com.oddlabs.tt.util.ServerMessageBundler;
 import com.oddlabs.tt.util.Utils;
-import com.oddlabs.tt.landscape.World;
-import com.oddlabs.tt.landscape.WorldParameters;
-import com.oddlabs.net.NetworkSelector;
+import com.oddlabs.tt.viewer.DefaultInGameInfo;
+import com.oddlabs.tt.viewer.InGameInfo;
+import com.oddlabs.tt.viewer.MultiplayerInGameInfo;
+import java.math.BigInteger;
+import java.util.Random;
+import java.util.ResourceBundle;
 
 public final strictfp class TerrainMenu extends Group {
 	public final static byte SMALL = 0;
@@ -60,11 +51,11 @@ public final strictfp class TerrainMenu extends Group {
 	private final static int NORMAL = 2;
 	private final static int HARD = 3;
 	private final static int[] SIZES = new int[]{256, 512, 1024};
-	
+
 	private final static int SLIDER_LENGTH = 250;
 	private final static int BUTTON_WIDTH = 100;
 	private final static int SLIDER_MAX_VALUE = 10;
-	
+
 	private final static String SEED_CARDINALITY = "40000";
 	private final static int SLIDER_CARDINALITY = 11;
 	private final static int TERRAIN_TYPE_CARDINALITY = 2;
@@ -101,7 +92,6 @@ public final strictfp class TerrainMenu extends Group {
 	private final GUIRoot gui_root;
 	private final NetworkSelector network;
 	private int seed;
-	private boolean show_demo = true;
 
 	static {
 		BigInteger max = BigInteger.ONE;
@@ -181,10 +171,10 @@ public final strictfp class TerrainMenu extends Group {
 		}
 		// size
 		Group group_size = new Group();
-		
+
 		Label label_size = new Label(Utils.getBundleString(bundle, "island_size"), Skin.getSkin().getEditFont());
 		group_size.addChild(label_size);
-		
+
 		pulldown_size = new PulldownMenu();
 		pulldown_size.addItem(new PulldownItem(ServerMessageBundler.getSizeString(Game.SIZE_SMALL)));
 		pulldown_size.addItem(new PulldownItem(ServerMessageBundler.getSizeString(Game.SIZE_MEDIUM)));
@@ -201,7 +191,7 @@ public final strictfp class TerrainMenu extends Group {
 		// seed
 		Label label_seed = new Label(Utils.getBundleString(bundle, "map_code"), Skin.getSkin().getEditFont());
 		label_mapcode = new Label("", Skin.getSkin().getHeadlineFont(), 250);
-		
+
 		Group group_seed = new Group();
 		group_seed.addChild(label_seed);
 		group_seed.addChild(label_mapcode);
@@ -224,7 +214,7 @@ public final strictfp class TerrainMenu extends Group {
 		group_terrain_type.compileCanvas();
 		pm_terrain_type.addItemChosenListener(new PulldownUpdateMapcodeListener());
 		group_map_options.addChild(group_terrain_type);
-		
+
 		Group group_sliders = new Group();
 		// hills
 		Label label_hills_low = new Label(Utils.getBundleString(bundle, "min"), Skin.getSkin().getEditFont());
@@ -247,7 +237,7 @@ public final strictfp class TerrainMenu extends Group {
 		slider_vegetation = new Slider(SLIDER_LENGTH, 0, SLIDER_MAX_VALUE, SLIDER_MAX_VALUE/2);
 		slider_vegetation.addValueListener(new SliderUpdateMapcodeListener());
 		group_sliders.addChild(slider_vegetation);
-		
+
 		// supplies
 		Label label_supplies_low = new Label(Utils.getBundleString(bundle, "min"), Skin.getSkin().getEditFont());
 		group_sliders.addChild(label_supplies_low);
@@ -303,7 +293,7 @@ public final strictfp class TerrainMenu extends Group {
 				PulldownItem hard = new PulldownItem(Utils.getBundleString(bundle, "hard_ai"));
 				difficulty_pulldown_menus[i].addItem(hard);
 			}
-				
+
 			difficulty_pulldown_buttons[i] = new PulldownButton(gui_root, difficulty_pulldown_menus[i], 0, 115);
 			group_race_team.addChild(difficulty_pulldown_buttons[i]);
 
@@ -349,7 +339,7 @@ public final strictfp class TerrainMenu extends Group {
 			group_race_team.compileCanvas();
 			standard.addChild(group_race_team);
 		}
-		
+
 		// buttons
 		Group group_buttons = new Group();
 
@@ -359,7 +349,7 @@ public final strictfp class TerrainMenu extends Group {
 		button_cancel.addMouseClickListener(new CancelButtonListener());
 		button_mapcode = new HorizButton(Utils.getBundleString(bundle, "enter_map_code"), 170);
 		button_mapcode.addMouseClickListener(new MapcodeListener());
-		
+
 		group_buttons.addChild(button_mapcode);
 		group_buttons.addChild(button_ok);
 		group_buttons.addChild(button_cancel);
@@ -367,10 +357,10 @@ public final strictfp class TerrainMenu extends Group {
 		button_cancel.place();
 		button_ok.place(button_cancel, LEFT_MID);
 		button_mapcode.place(button_ok, LEFT_MID);
-		
+
 		group_buttons.compileCanvas();
 		addChild(group_buttons);
-		
+
 		// map options
 		if (multiplayer) {
 			group_gamespeed.place();
@@ -396,22 +386,22 @@ public final strictfp class TerrainMenu extends Group {
 			group_race_team.place(group_map_options, BOTTOM_LEFT, Skin.getSkin().getFormData().getSectionSpacing());
 		}
 		standard.compileCanvas();
-		
+
 		// advanced
 		group_sliders.place();
 		group_seed.place(group_sliders, BOTTOM_LEFT, Skin.getSkin().getFormData().getSectionSpacing());
 		advanced.compileCanvas();
-		
+
 		PanelGroup panel_group = new PanelGroup(new Panel[]{standard, advanced}, 0);
 		addChild(panel_group);
-		
+
 		// Place objects
 		label_headline.place();
 		panel_group.place(label_headline, BOTTOM_LEFT);
 
 		// buttons
 		group_buttons.place(ORIGIN_BOTTOM_RIGHT);
-		
+
 		compileCanvas();
 		randomize();
 
@@ -474,7 +464,7 @@ public final strictfp class TerrainMenu extends Group {
 			result = result.add((new BigInteger(new byte[]{(byte)team})).multiply(max_val));
 			max_val = max_val.multiply(new BigInteger(new byte[]{TEAM_CARDINALITY}));
 		}
-		
+
 		String code = RegistrationKey.createString(result);
 		label_mapcode.clear();
 		label_mapcode.append(code);
@@ -483,9 +473,7 @@ public final strictfp class TerrainMenu extends Group {
 	public final void parseMapcode(String text) {
 		String code = text.toUpperCase();
 		BigInteger result = RegistrationKey.parseBits(code);
-		show_demo = false;
 		parseBigInteger(result);
-		show_demo = true;
 		label_mapcode.clear();
 		label_mapcode.append(code);
 	}
@@ -539,12 +527,12 @@ public final strictfp class TerrainMenu extends Group {
 		max_val = max_val.divide(new BigInteger(new byte[]{SLIDER_CARDINALITY}));
 		int vegetation_amount = result.divide(max_val).intValue();
 		slider_vegetation.setValue(vegetation_amount);
-		
+
 		result = result.mod(max_val);
 		max_val = max_val.divide(new BigInteger(new byte[]{SLIDER_CARDINALITY}));
 		int hills = result.divide(max_val).intValue();
 		slider_hills.setValue(hills);
-		
+
 		result = result.mod(max_val);
 		max_val = max_val.divide(new BigInteger(SEED_CARDINALITY));
 		seed = result.divide(max_val).intValue();
@@ -584,7 +572,7 @@ public final strictfp class TerrainMenu extends Group {
 	private final boolean isChosen(PulldownMenu menu) {
 		return menu.getChosenItemIndex() != 0;
 	}
-	
+
 	public final boolean startGame() {
 		int hills = slider_hills.getValue();
 		int vegetation_amount = slider_vegetation.getValue();
@@ -685,52 +673,37 @@ System.out.println("Start server");
 			}
 		}
 	}
-	
+
 	private final strictfp class PulldownUpdateMapcodeListener implements ItemChosenListener {
 		public final void itemChosen(PulldownMenu menu, int item_index) {
 			setMapcode();
 		}
 	}
-	
+
 	private final strictfp class PulldownUpdateSizeListener implements ItemChosenListener {
 		public final void itemChosen(PulldownMenu menu, int item_index) {
 			if (item_index == LARGE && !Renderer.isRegistered()) {
 				menu.chooseItem(MEDIUM);
-				if (show_demo) {
-					ResourceBundle db = ResourceBundle.getBundle(DemoForm.class.getName());
-					Form demo_form = new DemoForm(gui_root, Utils.getBundleString(db, "large_islands_unavailable_header"), new GUIImage(512, 256, 0f, 0f, 1f, 1f, "/textures/gui/demo_hugeislands"), Utils.getBundleString(db, "large_islands_unavailable"));
-					gui_root.addModalForm(demo_form);
-				}
 			}
 		}
 	}
-	
+
 	private final strictfp class PulldownUpdateHardListener implements ItemChosenListener {
 		public final void itemChosen(PulldownMenu menu, int item_index) {
 			if (item_index == HARD && !Renderer.isRegistered()) {
 				menu.chooseItem(NORMAL);
-				if (show_demo) {
-					ResourceBundle db = ResourceBundle.getBundle(DemoForm.class.getName());
-					Form demo_form = new DemoForm(gui_root, Utils.getBundleString(db, "hard_ai_unavailable_header"), new GUIImage(512, 256, 0f, 0f, 1f, 1f, "/textures/gui/demo_hardai"), Utils.getBundleString(db, "hard_ai_unavailable"));
-					gui_root.addModalForm(demo_form);
-				}
 			}
 		}
 	}
-	
+
 	private final strictfp class PulldownUpdateTerrainListener implements ItemChosenListener {
 		public final void itemChosen(PulldownMenu menu, int item_index) {
 			if (item_index == Game.TERRAIN_TYPE_VIKING && !Renderer.isRegistered()) {
 				menu.chooseItem(Game.TERRAIN_TYPE_NATIVE);
-				if (show_demo) {
-					ResourceBundle db = ResourceBundle.getBundle(DemoForm.class.getName());
-					Form demo_form = new DemoForm(gui_root, Utils.getBundleString(db, "viking_islands_unavailable_header"), new GUIImage(512, 256, 0f, 0f, 1f, 1f, "/textures/gui/demo_northernterrain"), Utils.getBundleString(db, "viking_islands_unavailable"));
-					gui_root.addModalForm(demo_form);
-				}
 			}
 		}
 	}
-	
+
 	private final strictfp class SliderUpdateMapcodeListener implements ValueListener {
 		public final void valueSet(int value) {
 			setMapcode();

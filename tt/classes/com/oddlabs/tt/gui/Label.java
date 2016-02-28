@@ -2,7 +2,6 @@ package com.oddlabs.tt.gui;
 
 import com.oddlabs.tt.font.Font;
 import com.oddlabs.tt.font.TextLineRenderer;
-
 import org.lwjgl.opengl.*;
 
 public strictfp class Label extends TextField implements Comparable {

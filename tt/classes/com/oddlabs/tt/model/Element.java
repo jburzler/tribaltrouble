@@ -1,8 +1,6 @@
 package com.oddlabs.tt.model;
 
-import com.oddlabs.tt.landscape.World;
 import com.oddlabs.tt.util.BoundingBox;
-import com.oddlabs.tt.camera.CameraState;
 import com.oddlabs.util.LinkedList;
 import com.oddlabs.util.ListElement;
 

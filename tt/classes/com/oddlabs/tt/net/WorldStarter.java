@@ -1,22 +1,21 @@
 package com.oddlabs.tt.net;
 
-import com.oddlabs.tt.player.Player;
-import com.oddlabs.tt.player.UnitInfo;
-import com.oddlabs.tt.gui.GUIRoot;
-import com.oddlabs.tt.form.LoadCallback;
-import com.oddlabs.tt.animation.AnimationManager;
-import com.oddlabs.tt.viewer.WorldViewer;
-import com.oddlabs.tt.viewer.InGameInfo;
-import com.oddlabs.tt.resource.WorldGenerator;
-import com.oddlabs.tt.landscape.WorldParameters;
-import com.oddlabs.tt.render.UIRenderer;
+import com.oddlabs.matchmaking.GameSession;
+import com.oddlabs.matchmaking.Participant;
 import com.oddlabs.net.NetworkSelector;
 import com.oddlabs.router.SessionID;
-import com.oddlabs.matchmaking.Participant;
-import com.oddlabs.matchmaking.GameSession;
-
-import java.util.List;
+import com.oddlabs.tt.animation.AnimationManager;
+import com.oddlabs.tt.form.LoadCallback;
+import com.oddlabs.tt.gui.GUIRoot;
+import com.oddlabs.tt.landscape.WorldParameters;
+import com.oddlabs.tt.player.Player;
+import com.oddlabs.tt.player.UnitInfo;
+import com.oddlabs.tt.render.UIRenderer;
+import com.oddlabs.tt.resource.WorldGenerator;
+import com.oddlabs.tt.viewer.InGameInfo;
+import com.oddlabs.tt.viewer.WorldViewer;
 import java.util.ArrayList;
+import java.util.List;
 
 final strictfp class WorldStarter implements LoadCallback {
 	private final UnitInfo[] unit_infos;

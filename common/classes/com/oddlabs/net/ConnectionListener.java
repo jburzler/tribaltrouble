@@ -11,7 +11,6 @@ import java.nio.channels.SocketChannel;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.oddlabs.event.Deterministic;
 
 public final strictfp class ConnectionListener extends AbstractConnectionListener implements Handler {
 	private final NetworkSelector network;

@@ -1,9 +1,5 @@
 package com.oddlabs.tt.model;
 
-import com.oddlabs.tt.form.*;
-import com.oddlabs.tt.camera.CameraState;
-import com.oddlabs.tt.landscape.*;
-
 public final strictfp class ElementNode extends AbstractElementNode {
 	private final int MIN_NODE_SIZE = 4;
 	/*

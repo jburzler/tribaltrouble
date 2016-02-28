@@ -2,10 +2,7 @@ package com.oddlabs.tt.net;
 
 import com.oddlabs.tt.gui.InfoPrinter;
 import com.oddlabs.tt.util.Utils;
-import com.oddlabs.tt.landscape.World;
 import java.util.*;
-
-import java.util.ResourceBundle;
 
 public final strictfp class ChatCommand {
 	private final static Map commands = new HashMap();

@@ -1,11 +1,10 @@
 package com.oddlabs.tt.viewer;
 
-import com.oddlabs.tt.landscape.World;
 import com.oddlabs.tt.animation.AnimationManager;
-import com.oddlabs.tt.model.Selectable;
 import com.oddlabs.tt.gui.GUIRoot;
-import com.oddlabs.tt.util.Target;
+import com.oddlabs.tt.model.Selectable;
 import com.oddlabs.tt.player.Player;
+import com.oddlabs.tt.util.Target;
 
 final strictfp class AttackNotification extends Notification {
 	private final static float RADIUS = 30f;

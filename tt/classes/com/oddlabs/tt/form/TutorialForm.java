@@ -1,38 +1,24 @@
 package com.oddlabs.tt.form;
 
+import com.oddlabs.matchmaking.Game;
+import com.oddlabs.net.NetworkSelector;
+import com.oddlabs.tt.delegate.MainMenu;
 import com.oddlabs.tt.gui.*;
 import com.oddlabs.tt.guievent.*;
+import com.oddlabs.tt.landscape.WorldParameters;
+import com.oddlabs.tt.model.Race;
 import com.oddlabs.tt.model.RacesResources;
 import com.oddlabs.tt.model.Unit;
-import com.oddlabs.tt.model.Race;
-import com.oddlabs.tt.delegate.MainMenu;
-import com.oddlabs.tt.player.UnitInfo;
-import com.oddlabs.tt.player.PlayerInfo;
-import com.oddlabs.tt.player.Player;
-import com.oddlabs.tt.player.campaign.CampaignState;
-import com.oddlabs.tt.net.Client;
-import com.oddlabs.tt.net.PeerHub;
-import com.oddlabs.tt.net.WorldInitAction;
-import com.oddlabs.tt.landscape.World;
-import com.oddlabs.tt.landscape.WorldParameters;
-import com.oddlabs.tt.tutorial.*;
-import com.oddlabs.tt.render.Renderer;
-import com.oddlabs.tt.procedural.Landscape;
-import com.oddlabs.matchmaking.Game;
-import com.oddlabs.tt.viewer.WorldViewer;
-import com.oddlabs.tt.viewer.InGameInfo;
-import com.oddlabs.tt.delegate.InGameMainMenu;
-import com.oddlabs.tt.delegate.Menu;
-import com.oddlabs.tt.net.WorldInitAction;
-import com.oddlabs.tt.util.Utils;
-import com.oddlabs.net.NetworkSelector;
 import com.oddlabs.tt.net.GameNetwork;
 import com.oddlabs.tt.net.PlayerSlot;
-
-import java.lang.reflect.InvocationTargetException;
-
-import com.oddlabs.tt.gui.GUIRoot;
-
+import com.oddlabs.tt.net.WorldInitAction;
+import com.oddlabs.tt.player.Player;
+import com.oddlabs.tt.player.UnitInfo;
+import com.oddlabs.tt.procedural.Landscape;
+import com.oddlabs.tt.tutorial.*;
+import com.oddlabs.tt.util.Utils;
+import com.oddlabs.tt.viewer.InGameInfo;
+import com.oddlabs.tt.viewer.WorldViewer;
 import java.util.ResourceBundle;
 
 public final strictfp class TutorialForm extends Form {
@@ -42,64 +28,64 @@ public final strictfp class TutorialForm extends Form {
 	public final static int TUTORIAL_TOWER = 4;
 	public final static int TUTORIAL_CHIEFTAIN = 5;
 	public final static int TUTORIAL_BATTLE = 6;
-	
+
 	public final static int NUM_TUTORIALS = 6;
 
 	private final static ResourceBundle bundle = ResourceBundle.getBundle(TutorialForm.class.getName());
 
 	private final GUIRoot gui_root;
 	private final NetworkSelector network;
-	
+
 	private final static String formatTutorial(int tutorial_number) {
 		return Utils.getBundleString(bundle, "tutorial", new Object[]{Integer.toString(tutorial_number)});
 	}
-	
+
 	public TutorialForm(NetworkSelector network, GUIRoot gui_root) {
 		this.gui_root = gui_root;
 		this.network = network;
 		Label headline = new Label(Utils.getBundleString(bundle, "tutorial_caption"), Skin.getSkin().getHeadlineFont());
 		addChild(headline);
-		
+
 		HorizButton button_tutorial1 = new HorizButton(formatTutorial(TUTORIAL_CAMERA), 120);
 		button_tutorial1.addMouseClickListener(new TutorialListener(TUTORIAL_CAMERA));
 		addChild(button_tutorial1);
 		Label label_tutorial1 = new Label(Utils.getBundleString(bundle, "tutorial1_tip"), Skin.getSkin().getEditFont());
 		addChild(label_tutorial1);
-		
+
 		HorizButton button_tutorial2 = new HorizButton(formatTutorial(TUTORIAL_QUARTERS), 120);
 		button_tutorial2.addMouseClickListener(new TutorialListener(TUTORIAL_QUARTERS));
 		addChild(button_tutorial2);
 		Label label_tutorial2 = new Label(Utils.getBundleString(bundle, "tutorial2_tip"), Skin.getSkin().getEditFont());
 		addChild(label_tutorial2);
-		
-		HorizButton button_tutorial3 = new HorizButton(formatTutorial(TUTORIAL_ARMORY), 120);		
+
+		HorizButton button_tutorial3 = new HorizButton(formatTutorial(TUTORIAL_ARMORY), 120);
 		button_tutorial3.addMouseClickListener(new TutorialListener(TUTORIAL_ARMORY));
 		addChild(button_tutorial3);
 		Label label_tutorial3 = new Label(Utils.getBundleString(bundle, "tutorial3_tip"), Skin.getSkin().getEditFont());
 		addChild(label_tutorial3);
-		
-		HorizButton button_tutorial4 = new HorizButton(formatTutorial(TUTORIAL_TOWER), 120);		
+
+		HorizButton button_tutorial4 = new HorizButton(formatTutorial(TUTORIAL_TOWER), 120);
 		button_tutorial4.addMouseClickListener(new TutorialListener(TUTORIAL_TOWER));
 		addChild(button_tutorial4);
 		Label label_tutorial4 = new Label(Utils.getBundleString(bundle, "tutorial4_tip"), Skin.getSkin().getEditFont());
 		addChild(label_tutorial4);
-		
-		HorizButton button_tutorial5 = new HorizButton(formatTutorial(TUTORIAL_CHIEFTAIN), 120);		
+
+		HorizButton button_tutorial5 = new HorizButton(formatTutorial(TUTORIAL_CHIEFTAIN), 120);
 		button_tutorial5.addMouseClickListener(new TutorialListener(TUTORIAL_CHIEFTAIN));
 		addChild(button_tutorial5);
 		Label label_tutorial5 = new Label(Utils.getBundleString(bundle, "tutorial5_tip"), Skin.getSkin().getEditFont());
 		addChild(label_tutorial5);
-		
-		HorizButton button_tutorial6 = new HorizButton(formatTutorial(TUTORIAL_BATTLE), 120);		
+
+		HorizButton button_tutorial6 = new HorizButton(formatTutorial(TUTORIAL_BATTLE), 120);
 		button_tutorial6.addMouseClickListener(new TutorialListener(TUTORIAL_BATTLE));
 		addChild(button_tutorial6);
 		Label label_tutorial6 = new Label(Utils.getBundleString(bundle, "tutorial6_tip"), Skin.getSkin().getEditFont());
 		addChild(label_tutorial6);
-		
+
 		HorizButton cancel_button = new CancelButton(120);
 		addChild(cancel_button);
 		cancel_button.addMouseClickListener(new CancelListener(this));
-		
+
 		// Place objects
 		headline.place();
 		button_tutorial1.place(headline, BOTTOM_LEFT);
@@ -124,16 +110,16 @@ public final strictfp class TutorialForm extends Form {
 	private final static strictfp class TutorialAction implements WorldInitAction {
 		private final TriggerFactory factory;
 		private final TutorialInGameInfo ingame_info;
-		
+
 		public TutorialAction(TriggerFactory factory, TutorialInGameInfo ingame_info) {
 			this.factory = factory;
 			this.ingame_info = ingame_info;
 		}
-			
+
 		public final void run(WorldViewer viewer) {
 			new Tutorial(viewer, ingame_info, factory.create(viewer));
 		}
-	}	
+	}
 
 	private strictfp interface TriggerFactory {
 		TutorialTrigger create(WorldViewer viewer);
@@ -164,23 +150,6 @@ public final strictfp class TutorialForm extends Form {
 	}
 
 	public final static boolean checkTutorial(GUIRoot gui_root, int tutorial_number) {
-		switch (tutorial_number) {
-			case TUTORIAL_TOWER:
-				if (!Renderer.isRegistered()) {
-					ResourceBundle db = ResourceBundle.getBundle(DemoForm.class.getName());
-					Form demo_form = new DemoForm(gui_root, Utils.getBundleString(db, "tower_unavailable_header"), new GUIImage(512, 256, 0f, 0f, 1f, 1f, "/textures/gui/demo_towers"), Utils.getBundleString(db, "tower_unavailable"));
-					gui_root.addModalForm(demo_form);
-					return false;
-				}
-			case TUTORIAL_CHIEFTAIN:
-				if (!Renderer.isRegistered()) {
-					ResourceBundle db = ResourceBundle.getBundle(DemoForm.class.getName());
-					Form demo_form = new DemoForm(gui_root, Utils.getBundleString(db, "chieftain_unavailable_header"), new GUIImage(512, 256, 0f, 0f, 1f, 1f, "/textures/gui/demo_chieftains"), Utils.getBundleString(db, "chieftain_unavailable"));
-					gui_root.addModalForm(demo_form);
-					return false;
-				}
-			default:
-		}
 		return true;
 	}
 
@@ -253,14 +222,14 @@ public final strictfp class TutorialForm extends Form {
 				throw new RuntimeException();
 		}
 	}
-	
+
 	private final strictfp class TutorialListener implements MouseClickListener {
 		private final int number;
 
 		public TutorialListener(int number) {
 			this.number = number;
 		}
-		
+
 		public final void mouseClicked(int button, int x, int y, int clicks) {
 			if (checkTutorial(gui_root, number)) {
 				startTutorial(network, gui_root, number);

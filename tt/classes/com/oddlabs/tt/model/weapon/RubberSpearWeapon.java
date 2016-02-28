@@ -1,12 +1,9 @@
 package com.oddlabs.tt.model.weapon;
 
 import com.oddlabs.tt.audio.Audio;
-import com.oddlabs.tt.landscape.World;
 import com.oddlabs.tt.model.AttackScanFilter;
 import com.oddlabs.tt.model.Selectable;
 import com.oddlabs.tt.model.Unit;
-import com.oddlabs.tt.model.AbstractElementNode;
-import com.oddlabs.tt.pathfinder.UnitGrid;
 import com.oddlabs.tt.player.Player;
 import com.oddlabs.tt.render.SpriteKey;
 

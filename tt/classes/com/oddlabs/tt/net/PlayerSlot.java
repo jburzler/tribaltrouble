@@ -1,8 +1,7 @@
 package com.oddlabs.tt.net;
 
-import com.oddlabs.tt.player.PlayerInfo;
 import com.oddlabs.matchmaking.TunnelAddress;
-
+import com.oddlabs.tt.player.PlayerInfo;
 import java.io.Serializable;
 
 public final strictfp class PlayerSlot implements Serializable {

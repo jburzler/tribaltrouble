@@ -2,10 +2,8 @@ package com.oddlabs.tt.delegate;
 
 import com.oddlabs.tt.animation.TimerAnimation;
 import com.oddlabs.tt.animation.Updatable;
-import com.oddlabs.tt.camera.Camera;
 import com.oddlabs.tt.camera.CameraState;
 import com.oddlabs.tt.camera.StaticCamera;
-import com.oddlabs.tt.delegate.CameraDelegate;
 import com.oddlabs.tt.gui.Fadable;
 import com.oddlabs.tt.gui.GUIImage;
 import com.oddlabs.tt.gui.GUIRoot;

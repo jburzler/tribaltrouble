@@ -1,9 +1,8 @@
 package com.oddlabs.tt.procedural;
 
-import java.util.Random;
-
 import com.oddlabs.procedural.Channel;
 import com.oddlabs.procedural.Layer;
+import java.util.Random;
 
 public final strictfp class Cellular {
 	// coordinate indexing

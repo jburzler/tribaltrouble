@@ -1,9 +1,8 @@
 package com.oddlabs.net;
 
-import java.util.*;
-import java.io.Serializable;
-
 import com.oddlabs.event.Deterministic;
+import java.io.Serializable;
+import java.util.*;
 
 public final strictfp class TaskThread {
 	private final Map id_to_callable = new HashMap();

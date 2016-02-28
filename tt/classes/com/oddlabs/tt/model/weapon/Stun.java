@@ -1,20 +1,12 @@
 package com.oddlabs.tt.model.weapon;
 
-import java.util.List;
-
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.util.vector.Vector3f;
-import org.lwjgl.util.vector.Vector4f;
-
-import com.oddlabs.tt.audio.AudioPlayer;
 import com.oddlabs.tt.audio.AbstractAudioPlayer;
 import com.oddlabs.tt.audio.AudioParameters;
+import com.oddlabs.tt.audio.AudioPlayer;
 import com.oddlabs.tt.global.Settings;
-import com.oddlabs.tt.landscape.World;
 import com.oddlabs.tt.model.Abilities;
 import com.oddlabs.tt.model.Building;
 import com.oddlabs.tt.model.MountUnitContainer;
-import com.oddlabs.tt.model.RacesResources;
 import com.oddlabs.tt.model.Selectable;
 import com.oddlabs.tt.model.Unit;
 import com.oddlabs.tt.particle.RandomVelocityEmitter;
@@ -22,6 +14,10 @@ import com.oddlabs.tt.pathfinder.FindOccupantFilter;
 import com.oddlabs.tt.pathfinder.UnitGrid;
 import com.oddlabs.tt.player.Player;
 import com.oddlabs.tt.util.StateChecksum;
+import java.util.List;
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.util.vector.Vector3f;
+import org.lwjgl.util.vector.Vector4f;
 
 public final strictfp class Stun implements Magic {
 	private final float hit_radius;

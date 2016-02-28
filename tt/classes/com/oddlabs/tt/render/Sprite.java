@@ -1,22 +1,9 @@
 package com.oddlabs.tt.render;
 
-import java.nio.FloatBuffer;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.lwjgl.BufferUtils;
-import org.lwjgl.opengl.ARBBufferObject;
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL13;
-import org.lwjgl.util.vector.Matrix4f;
-import org.lwjgl.util.vector.Vector4f;
-
 import com.oddlabs.geometry.AnimationInfo;
 import com.oddlabs.geometry.SpriteInfo;
 import com.oddlabs.tt.global.Globals;
-import com.oddlabs.tt.landscape.LandscapeResources;
 import com.oddlabs.tt.procedural.GeneratorRespond;
-import com.oddlabs.tt.model.Model;
 import com.oddlabs.tt.resource.ResourceDescriptor;
 import com.oddlabs.tt.resource.Resources;
 import com.oddlabs.tt.resource.TextureFile;
@@ -25,6 +12,14 @@ import com.oddlabs.tt.util.GLState;
 import com.oddlabs.tt.util.GLStateStack;
 import com.oddlabs.tt.vbo.FloatVBO;
 import com.oddlabs.tt.vbo.ShortVBO;
+import java.nio.FloatBuffer;
+import java.util.List;
+import org.lwjgl.BufferUtils;
+import org.lwjgl.opengl.ARBBufferObject;
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL13;
+import org.lwjgl.util.vector.Matrix4f;
+import org.lwjgl.util.vector.Vector4f;
 
 final strictfp class Sprite {
 	public final static int LOWDETAIL_NORMAL = 1;

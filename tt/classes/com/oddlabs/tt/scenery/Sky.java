@@ -1,29 +1,27 @@
 package com.oddlabs.tt.scenery;
 
-import java.nio.FloatBuffer;
-import java.nio.ShortBuffer;
-import java.util.List;
-import java.util.ArrayList;
-
-import org.lwjgl.BufferUtils;
-import org.lwjgl.opengl.ARBBufferObject;
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL13;
-
 import com.oddlabs.tt.event.LocalEventQueue;
 import com.oddlabs.tt.global.Globals;
 import com.oddlabs.tt.landscape.HeightMap;
 import com.oddlabs.tt.procedural.GeneratorClouds;
+import com.oddlabs.tt.render.LandscapeRenderer;
 import com.oddlabs.tt.render.Texture;
 import com.oddlabs.tt.resource.ResourceDescriptor;
 import com.oddlabs.tt.resource.Resources;
-import com.oddlabs.tt.util.Stitcher;
 import com.oddlabs.tt.util.GLState;
 import com.oddlabs.tt.util.GLStateStack;
+import com.oddlabs.tt.util.GLUtils;
+import com.oddlabs.tt.util.Stitcher;
 import com.oddlabs.tt.vbo.FloatVBO;
 import com.oddlabs.tt.vbo.ShortVBO;
-import com.oddlabs.tt.util.GLUtils;
-import com.oddlabs.tt.render.LandscapeRenderer;
+import java.nio.FloatBuffer;
+import java.nio.ShortBuffer;
+import java.util.ArrayList;
+import java.util.List;
+import org.lwjgl.BufferUtils;
+import org.lwjgl.opengl.ARBBufferObject;
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL13;
 
 public final strictfp class Sky {
 	private final static float[] SKYDOME_SPEED_OUTER = {0.2f, 0f};

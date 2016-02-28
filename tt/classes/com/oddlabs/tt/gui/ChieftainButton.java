@@ -1,15 +1,9 @@
 package com.oddlabs.tt.gui;
 
 import com.oddlabs.tt.model.Building;
-import com.oddlabs.tt.util.ToolTip;
 import com.oddlabs.tt.player.PlayerInterface;
-import com.oddlabs.tt.render.Renderer;
+import com.oddlabs.tt.util.ToolTip;
 import com.oddlabs.tt.viewer.WorldViewer;
-import com.oddlabs.tt.form.InGameDemoForm;
-import com.oddlabs.tt.form.DemoForm;
-import com.oddlabs.tt.util.Utils;
-
-import java.util.ResourceBundle;
 
 public strictfp class ChieftainButton extends NonFocusIconButton implements ToolTip {
 	private final PlayerInterface player_interface;
@@ -29,14 +23,9 @@ public strictfp class ChieftainButton extends NonFocusIconButton implements Tool
 	}
 
 	protected void mouseClicked(int button, int x, int y, int clicks) {
-		if (!Renderer.isRegistered()) {
-			ResourceBundle db = ResourceBundle.getBundle(DemoForm.class.getName());
-			Form demo_form = new InGameDemoForm(viewer, Utils.getBundleString(db, "chieftain_unavailable_header"), new GUIImage(512, 256, 0f, 0f, 1f, 1f, "/textures/gui/demo_chieftains"), Utils.getBundleString(db, "chieftain_unavailable"));
-			viewer.getGUIRoot().addModalForm(demo_form);
-		} else
-			player_interface.trainChieftain(current_building, !current_building.getChieftainContainer().isTraining());
+                player_interface.trainChieftain(current_building, !current_building.getChieftainContainer().isTraining());
 	}
-	
+
 	protected final void postRender() {
 		IconQuad[] watch = Icons.getIcons().getWatch();
 		int index = (int)(getProgress()*(watch.length - 1));

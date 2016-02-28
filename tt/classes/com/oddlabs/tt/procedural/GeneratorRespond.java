@@ -1,11 +1,10 @@
 package com.oddlabs.tt.procedural;
 
-import org.lwjgl.opengl.GL11;
-
 import com.oddlabs.tt.global.Globals;
 import com.oddlabs.tt.render.Texture;
 import com.oddlabs.tt.resource.GLImage;
 import com.oddlabs.tt.resource.GLIntImage;
+import org.lwjgl.opengl.GL11;
 
 public final strictfp class GeneratorRespond extends TextureGenerator {
 	private final static int COLOR = 0x80808080;

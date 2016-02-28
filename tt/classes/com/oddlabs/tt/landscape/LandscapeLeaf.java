@@ -1,12 +1,5 @@
 package com.oddlabs.tt.landscape;
 
-import java.nio.ShortBuffer;
-import java.util.Collection;
-
-import com.oddlabs.tt.camera.CameraState;
-import com.oddlabs.tt.gui.GUIRoot;
-import com.oddlabs.tt.camera.CameraState;
-
 public final strictfp class LandscapeLeaf extends AbstractPatchGroup {
 	private final float[] errors;
 

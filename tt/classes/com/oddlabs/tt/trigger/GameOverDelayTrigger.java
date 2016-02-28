@@ -1,16 +1,11 @@
 package com.oddlabs.tt.trigger;
 
-import java.util.ResourceBundle;
-
-import org.lwjgl.input.Keyboard;
 
 import com.oddlabs.tt.animation.TimerAnimation;
 import com.oddlabs.tt.animation.Updatable;
 import com.oddlabs.tt.camera.Camera;
-import com.oddlabs.tt.viewer.WorldViewer;
-import com.oddlabs.tt.gui.*;
 import com.oddlabs.tt.delegate.GameStatsDelegate;
-import com.oddlabs.tt.landscape.World;
+import com.oddlabs.tt.viewer.WorldViewer;
 
 public final strictfp class GameOverDelayTrigger implements Updatable {
 	private final TimerAnimation delay_timer;

@@ -1,15 +1,14 @@
 package com.oddlabs.net;
 
+import com.oddlabs.event.Deterministic;
 import java.io.IOException;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.HashMap;
-
-import com.oddlabs.event.Deterministic;
 
 public final strictfp class NetworkSelector {
 	private final static long PING_TIMEOUT = 4*60*1000;

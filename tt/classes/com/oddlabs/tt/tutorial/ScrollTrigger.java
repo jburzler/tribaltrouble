@@ -1,11 +1,8 @@
 package com.oddlabs.tt.tutorial;
 
 import com.oddlabs.tt.camera.GameCamera;
-import com.oddlabs.tt.landscape.World;
-import com.oddlabs.tt.viewer.WorldViewer;
-import com.oddlabs.tt.player.Player;
-import com.oddlabs.tt.delegate.SelectionDelegate;
 import com.oddlabs.tt.model.Race;
+import com.oddlabs.tt.player.Player;
 
 public final strictfp class ScrollTrigger extends TutorialTrigger {
 	private final boolean[] scroll_dirs = new boolean[4];

@@ -1,9 +1,9 @@
 package com.oddlabs.procedural;
 
 import com.oddlabs.util.*;
+import java.nio.*;
 import java.util.*;
 import java.util.zip.*;
-import java.nio.*;
 
 public final strictfp class Channel {
 	public float[][] pixels;

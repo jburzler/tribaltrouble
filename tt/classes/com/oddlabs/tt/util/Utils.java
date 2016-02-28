@@ -1,5 +1,6 @@
 package com.oddlabs.tt.util;
 
+import com.oddlabs.tt.global.Globals;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -7,13 +8,9 @@ import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 import java.nio.ShortBuffer;
-
 import java.text.MessageFormat;
 import java.util.ResourceBundle;
-
 import org.lwjgl.BufferUtils;
-
-import com.oddlabs.tt.global.Globals;
 
 public final strictfp class Utils {
 	private static final ByteBuffer sqrtByteBuf = BufferUtils.createByteBuffer(4);

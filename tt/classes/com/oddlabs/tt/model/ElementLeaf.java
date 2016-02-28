@@ -1,6 +1,5 @@
 package com.oddlabs.tt.model;
 
-import com.oddlabs.tt.camera.CameraState;
 import com.oddlabs.tt.landscape.HeightMap;
 
 public final strictfp class ElementLeaf extends AbstractElementNode {

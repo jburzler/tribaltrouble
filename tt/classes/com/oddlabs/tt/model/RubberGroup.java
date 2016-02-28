@@ -1,14 +1,12 @@
 package com.oddlabs.tt.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.oddlabs.tt.landscape.LandscapeResources;
 import com.oddlabs.tt.landscape.TreeSupply;
 import com.oddlabs.tt.landscape.World;
 import com.oddlabs.tt.pathfinder.Occupant;
 import com.oddlabs.tt.pathfinder.UnitGrid;
 import com.oddlabs.tt.util.Target;
+import java.util.ArrayList;
+import java.util.List;
 
 public final strictfp class RubberGroup {
 	private final int MIN_CHICKENS_PER_GROUP = 3;

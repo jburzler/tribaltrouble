@@ -1,8 +1,8 @@
 package com.oddlabs.tt.form;
 
-import com.oddlabs.tt.gui.*;
-import com.oddlabs.tt.delegate.Menu;
 import com.oddlabs.net.NetworkSelector;
+import com.oddlabs.tt.delegate.Menu;
+import com.oddlabs.tt.gui.*;
 
 public final strictfp class TerrainMenuForm extends Form implements TerrainMenuListener {
 	private final TerrainMenu terrain;

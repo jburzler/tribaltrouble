@@ -1,7 +1,5 @@
 package com.oddlabs.tt.gui;
 
-import java.util.ArrayList;
-
 import com.oddlabs.tt.animation.Animated;
 import com.oddlabs.tt.event.LocalEventQueue;
 import com.oddlabs.tt.font.Font;
@@ -9,6 +7,7 @@ import com.oddlabs.tt.net.ChatListener;
 import com.oddlabs.tt.net.ChatMessage;
 import com.oddlabs.tt.net.Network;
 import com.oddlabs.tt.util.StateChecksum;
+import java.util.ArrayList;
 
 public final strictfp class InfoPrinter extends GUIObject implements Animated, ChatListener {
 	private final static float SECONDS_PER_TIMEOUT = 8f;

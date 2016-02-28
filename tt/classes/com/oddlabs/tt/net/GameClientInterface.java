@@ -1,8 +1,7 @@
 package com.oddlabs.tt.net;
 
-import com.oddlabs.tt.player.PlayerInfo;
-import com.oddlabs.tt.resource.WorldGenerator;
 import com.oddlabs.matchmaking.Game;
+import com.oddlabs.tt.resource.WorldGenerator;
 
 public strictfp interface GameClientInterface {
 	public void setWorldGeneratorAndPlayerSlot(Game game, WorldGenerator generator, short player_slot);

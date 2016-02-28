@@ -1,7 +1,7 @@
 package com.oddlabs.net;
 
-import java.io.*;
 import com.oddlabs.util.ByteBufferOutputStream;
+import java.io.*;
 
 public strictfp class DefaultARMIArgumentWriter implements ARMIArgumentWriter {
 	public void writeArgument(Class type, Object arg, ByteBufferOutputStream out) throws IOException {

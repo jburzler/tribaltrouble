@@ -1,52 +1,36 @@
 package com.oddlabs.tt.delegate;
 
-import java.net.InetAddress;
-import java.util.ResourceBundle;
-
-import org.lwjgl.input.Keyboard;
-
 import com.oddlabs.matchmaking.Game;
+import com.oddlabs.net.NetworkSelector;
 import com.oddlabs.tt.camera.Camera;
-import com.oddlabs.tt.global.Settings;
-import com.oddlabs.tt.delegate.CameraDelegate;
-import com.oddlabs.tt.gui.Form;
-import com.oddlabs.tt.gui.FreeQuitLabel;
-import com.oddlabs.tt.gui.GUIImage;
-import com.oddlabs.tt.gui.GUIObject;
-import com.oddlabs.tt.gui.GUIRoot;
-import com.oddlabs.tt.gui.Group;
-import com.oddlabs.tt.delegate.SelectionDelegate;
 import com.oddlabs.tt.form.*;
-import com.oddlabs.tt.gui.ImageBuyButton;
-import com.oddlabs.tt.gui.KeyboardEvent;
+import com.oddlabs.tt.gui.Form;
 import com.oddlabs.tt.gui.GUI;
+import com.oddlabs.tt.gui.GUIImage;
+import com.oddlabs.tt.gui.GUIRoot;
+import com.oddlabs.tt.gui.KeyboardEvent;
 import com.oddlabs.tt.gui.LocalInput;
 import com.oddlabs.tt.gui.MenuButton;
 import com.oddlabs.tt.gui.Renderable;
-import com.oddlabs.tt.gui.Skin;
 import com.oddlabs.tt.guievent.CloseListener;
 import com.oddlabs.tt.guievent.MouseClickListener;
-import com.oddlabs.tt.model.RacesResources;
-import com.oddlabs.tt.net.Client;
-import com.oddlabs.tt.net.Network;
-import com.oddlabs.tt.viewer.WorldViewer;
-import com.oddlabs.tt.viewer.InGameInfo;
-import com.oddlabs.tt.viewer.MultiplayerInGameInfo;
-import com.oddlabs.tt.landscape.World;
 import com.oddlabs.tt.landscape.WorldParameters;
+import com.oddlabs.tt.net.Client;
+import com.oddlabs.tt.net.GameNetwork;
 import com.oddlabs.tt.net.Server;
-import com.oddlabs.net.NetworkSelector;
+import com.oddlabs.tt.net.WorldInitAction;
 import com.oddlabs.tt.player.Player;
-import com.oddlabs.tt.player.PlayerInfo;
-import com.oddlabs.tt.player.campaign.CampaignState;
 import com.oddlabs.tt.render.Renderer;
 import com.oddlabs.tt.resource.IslandGenerator;
 import com.oddlabs.tt.resource.WorldGenerator;
-import com.oddlabs.tt.util.Utils;
-import com.oddlabs.tt.net.WorldInitAction;
-import com.oddlabs.tt.net.GameNetwork;
-import com.oddlabs.tt.global.Globals;
 import com.oddlabs.tt.trigger.GameOverTrigger;
+import com.oddlabs.tt.util.Utils;
+import com.oddlabs.tt.viewer.InGameInfo;
+import com.oddlabs.tt.viewer.MultiplayerInGameInfo;
+import com.oddlabs.tt.viewer.WorldViewer;
+import java.net.InetAddress;
+import java.util.ResourceBundle;
+import org.lwjgl.input.Keyboard;
 
 public abstract strictfp class Menu extends CameraDelegate {
 	protected final static float[] COLOR_NORMAL = new float[]{1f, 1f, 1f};
@@ -57,14 +41,14 @@ public abstract strictfp class Menu extends CameraDelegate {
 	private final static int overlay_image_width = 800;
 	private final static int overlay_image_height = 600;
 	private final static String overlay_texture_name = "/textures/gui/mainmenu";
-	
+
 	public final static ResourceBundle bundle = ResourceBundle.getBundle(MainMenu.class.getName());
 
 	private final NetworkSelector network;
-	
+
 	private Form current_menu = null;
 	private boolean current_menu_centered;
-	
+
 	private GUIImage overlay;
 	private GUIImage logo;
 
@@ -86,7 +70,7 @@ public abstract strictfp class Menu extends CameraDelegate {
 		overlay = new GUIImage(screen_width, screen_height, 0f, 0f, (float)overlay_image_width/overlay_texture_width, (float)overlay_image_height/overlay_texture_height, overlay_texture_name);
 		overlay.setPos(0, 0);
 		addChild(overlay);
-		
+
 		String logo_file = Utils.getBundleString(bundle, "logo_file");
 		logo = new GUIImage((int)((347f/800f)*screen_width), (int)((206f/600f)*screen_height), 0f, 0f, 347f/512f, (float)206f/256f, logo_file);
 		logo.setPos(0, screen_height - logo.getHeight());
@@ -118,7 +102,7 @@ public abstract strictfp class Menu extends CameraDelegate {
 	public final void reload() {
 		init();
 		addButtons();
-		
+
 		displayChangedNotify(LocalInput.getViewWidth(), LocalInput.getViewHeight());
 	}
 
@@ -146,9 +130,6 @@ public abstract strictfp class Menu extends CameraDelegate {
 			if (child instanceof MenuButton) {
 				child.setPos(x, y - child.getHeight());
 				y -= (int)(child.getHeight()*.875);
-			} else if (child instanceof ImageBuyButton) {
-				ImageBuyButton buy_button = (ImageBuyButton)child;
-				buy_button.setPos(width - buy_button.getWidth() - 20, 20);
 			}
 			child = (Renderable)child.getPrior();
 		}
@@ -157,7 +138,7 @@ public abstract strictfp class Menu extends CameraDelegate {
 				current_menu.centerPos();
 			} else {
 				positionMenu();
-			} 
+			}
 		}
 	}
 

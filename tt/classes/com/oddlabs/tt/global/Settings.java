@@ -1,5 +1,9 @@
 package com.oddlabs.tt.global;
 
+import com.oddlabs.tt.event.LocalEventQueue;
+import com.oddlabs.tt.gui.LocalInput;
+import com.oddlabs.tt.render.Renderer;
+import com.oddlabs.tt.util.GLUtils;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -9,14 +13,8 @@ import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.Properties;
-
 import org.lwjgl.opengl.GLContext;
 import org.lwjgl.opengl.Pbuffer;
-
-import com.oddlabs.tt.gui.LocalInput;
-import com.oddlabs.tt.render.Renderer;
-import com.oddlabs.tt.event.LocalEventQueue;
-import com.oddlabs.tt.util.GLUtils;
 
 public final strictfp class Settings implements Serializable {
 	private final static long serialVersionUID = 1l;
@@ -31,7 +29,6 @@ public final strictfp class Settings implements Serializable {
 	// network
 	public String registration_address = "registration.oddlabs.com";
 	public String matchmaking_address = "matchmaking.oddlabs.com";
-	public String bugreport_address = "bugreport.oddlabs.com";
 	public String router_address = "router.oddlabs.com";
 	public String username = "";
 	public String pw_digest = "";
@@ -56,28 +53,28 @@ public final strictfp class Settings implements Serializable {
 	public int new_view_width = view_width;
 	public int new_view_height = view_height;
 	public int new_view_freq = view_freq;
-	
+
 	public boolean fullscreen = true;
 	public boolean vsync = true;
 //	public int view_bpp = 32;
 	public int samples = 0;
-	
+
 	// control
 	public boolean invert_camera_pitch = false;
 	public boolean aggressive_units = false;
 	public boolean use_native_cursor = true;
-	
+
 	public float mapmode_delay = .5f;
 	public float tooltip_delay = .5f;
 	private String developer_mode = "";
 	private String beta_mode = "";
 	public boolean has_native_campaign = false;
-	
+
 	public boolean save_event_log = true;
 	public boolean fullscreen_depth_workaround = true;
 	public boolean generate_dummy_worlds = false;
 	public boolean first_run = true;
-	
+
 	public boolean warning_no_sound = true;
 
 	//affiliate
@@ -118,11 +115,11 @@ public final strictfp class Settings implements Serializable {
 	public final boolean useFBO() {
 		return use_fbo && GLContext.getCapabilities().GL_EXT_framebuffer_object && !GLUtils.isIntelGMA950();
 	}
-	
+
 	public final boolean usePbuffer() {
 		return use_pbuffer && ((Pbuffer.getCapabilities() & Pbuffer.PBUFFER_SUPPORTED) != 0);
 	}
-	
+
 	public final boolean useTextureCompression() {
 		return use_texture_compression && (GLContext.getCapabilities().GL_ARB_texture_compression || GLContext.getCapabilities().OpenGL13);
 	}
@@ -134,11 +131,11 @@ public final strictfp class Settings implements Serializable {
 	public final boolean inDeveloperMode() {
 		return developer_mode.equals("randomgryf") && Renderer.isRegistered();
 	}
-	
+
 	public final boolean inBetaMode() {
 		return beta_mode.equals("mythol");
 	}
-	
+
 	public final void save() {
 		if (LocalEventQueue.getQueue().getDeterministic().isPlayback())
 			return;
@@ -195,7 +192,7 @@ public final strictfp class Settings implements Serializable {
 			System.err.println("Could not read settings from " + settings_file);
 			return;
 		}
-		
+
 		for (int i = 0; i < pref_fields.length; i++) {
 			Field field = pref_fields[i];
 			int mods = field.getModifiers();

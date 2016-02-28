@@ -1,9 +1,5 @@
 package com.oddlabs.tt.landscape;
 
-import java.util.Collection;
-
-import com.oddlabs.tt.camera.CameraState;
-
 public final strictfp class PatchGroup extends AbstractPatchGroup {
 	/*
 	 * child2 | child3

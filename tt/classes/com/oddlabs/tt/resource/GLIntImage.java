@@ -1,12 +1,10 @@
 package com.oddlabs.tt.resource;
 
+import com.oddlabs.procedural.Layer;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
-
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
-
-import com.oddlabs.procedural.Layer;
 
 public final strictfp class GLIntImage extends GLImage {
 	private final IntBuffer pixels;

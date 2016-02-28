@@ -1,57 +1,36 @@
 package com.oddlabs.tt.gui;
 
+import com.oddlabs.tt.animation.TimerAnimation;
+import com.oddlabs.tt.animation.Updatable;
+import com.oddlabs.tt.delegate.*;
+import com.oddlabs.tt.event.LocalEventQueue;
+import com.oddlabs.tt.form.Status;
+import com.oddlabs.tt.global.Globals;
+import com.oddlabs.tt.global.Settings;
+import com.oddlabs.tt.guievent.CloseListener;
+import com.oddlabs.tt.input.PointerInput;
+import com.oddlabs.tt.render.Renderer;
+import com.oddlabs.tt.render.Texture;
+import com.oddlabs.tt.util.GLUtils;
+import com.oddlabs.tt.util.ToolTip;
+import com.oddlabs.util.Utils;
 import java.nio.FloatBuffer;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.Set;
-
 import org.lwjgl.BufferUtils;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.glu.GLU;
+import org.lwjgl.util.glu.GLU;
 import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Vector3f;
-
-import com.oddlabs.tt.animation.TimerAnimation;
-import com.oddlabs.tt.animation.Updatable;
-import com.oddlabs.tt.audio.Audio;
-import com.oddlabs.tt.audio.AudioFile;
-import com.oddlabs.tt.audio.AbstractAudioPlayer;
-import com.oddlabs.tt.camera.StaticCamera;
-import com.oddlabs.tt.event.LocalEventQueue;
-import com.oddlabs.tt.delegate.MainMenu;
-import com.oddlabs.tt.delegate.InGameMainMenu;
-import com.oddlabs.tt.form.MessageForm;
-import com.oddlabs.tt.form.Status;
-import com.oddlabs.tt.form.TerrainMenu;
-import com.oddlabs.tt.global.Globals;
-import com.oddlabs.tt.global.Settings;
-import com.oddlabs.tt.guievent.CloseListener;
-import com.oddlabs.tt.model.Abilities;
-import com.oddlabs.tt.model.Building;
-import com.oddlabs.tt.model.Race;
-import com.oddlabs.tt.model.Selectable;
-import com.oddlabs.tt.model.Unit;
-import com.oddlabs.tt.landscape.World;
-import com.oddlabs.tt.net.PeerHub;
-import com.oddlabs.tt.player.Player;
-import com.oddlabs.tt.render.Picker;
-import com.oddlabs.tt.render.Renderer;
-import com.oddlabs.tt.render.Texture;
-import com.oddlabs.tt.resource.Resources;
-import com.oddlabs.tt.util.ToolTip;
-import com.oddlabs.tt.util.GLUtils;
-import com.oddlabs.tt.input.PointerInput;
-import com.oddlabs.util.Utils;
-import com.oddlabs.tt.delegate.*;
 
 public final strictfp class GUIRoot extends GUIObject implements Updatable {
 	public final static int CURSOR_NORMAL = 0;
 	public final static int CURSOR_TARGET = 1;
 	public final static int CURSOR_TEXT = 2;
 	public final static int CURSOR_NULL = 3;
-	
+
 //	private static int inc_seed = 2;
 	private final ResourceBundle bundle = ResourceBundle.getBundle(GUIRoot.class.getName());
 
@@ -60,7 +39,7 @@ public final strictfp class GUIRoot extends GUIObject implements Updatable {
 		new com.oddlabs.tt.resource.Cursor(Utils.makeURL("/textures/gui/pointer_16_1.image"), 1, 15,
 										   Utils.makeURL("/textures/gui/pointer_32_1.image"), 2, 29,
 										   Utils.makeURL("/textures/gui/pointer_32_8.image"), 2, 29),
-		
+
 		new com.oddlabs.tt.resource.Cursor(Utils.makeURL("/textures/gui/pointer_target_16_1.image"), 7, 8,
 										   Utils.makeURL("/textures/gui/pointer_target_32_1.image"), 14, 17,
 										   Utils.makeURL("/textures/gui/pointer_target_32_8.image"), 14, 17),
@@ -208,7 +187,7 @@ public final strictfp class GUIRoot extends GUIObject implements Updatable {
 		public ModalFormCloseListener(ModalDelegate delegate) {
 			this.delegate = delegate;
 		}
-		
+
 		public final void closed() {
 			popModalDelegate(delegate);
 		}
@@ -260,7 +239,7 @@ public final strictfp class GUIRoot extends GUIObject implements Updatable {
 					info_printer.print(com.oddlabs.tt.util.Utils.getBundleString(bundle, "screenshot_message", new Object[]{filename}));
 				}
 				break;
-				
+
 			case Keyboard.KEY_H:
 				if (event.isControlDown() && (LocalInput.getNativeCursorCaps() & org.lwjgl.input.Cursor.CURSOR_ONE_BIT_TRANSPARENCY) != 0) {
 					Settings.getSettings().use_native_cursor = !Settings.getSettings().use_native_cursor;
@@ -270,7 +249,7 @@ public final strictfp class GUIRoot extends GUIObject implements Updatable {
 						info_printer.print(com.oddlabs.tt.util.Utils.getBundleString(bundle, "hardware_cursor_off"));
 				}
 				break;
-				
+
 			case Keyboard.KEY_A:
 				if (event.isControlDown()) {
 					Settings.getSettings().aggressive_units = !Settings.getSettings().aggressive_units;
@@ -280,7 +259,7 @@ public final strictfp class GUIRoot extends GUIObject implements Updatable {
 						info_printer.print(com.oddlabs.tt.util.Utils.getBundleString(bundle, "aggressive_unites_off"));
 				}
 				break;
-				
+
 			 case Keyboard.KEY_I:
 				if (event.isControlDown()) {
 					Globals.draw_status = !Globals.draw_status;
@@ -482,7 +461,7 @@ System.out.println("GC Forced");
 				break;
 		}
 	}
-	
+
 	public final void mousePick() {
 		mousePick(LocalInput.getMouseX(), LocalInput.getMouseY());
 	}
@@ -545,7 +524,7 @@ System.out.println("GC Forced");
 		GL11.glColor3f(1f, 1f, 1f);
 		GL11.glBegin(GL11.GL_QUADS);
 		// MUST END IN POSTRENDER!
-		
+
 
 		// render forced delegates
 		for (int i = 0; i < delegate_stack.size() - 1; i++) {
@@ -587,7 +566,7 @@ System.out.println("GC Forced");
 		else
 			return null;
 	}
-		
+
 	final void renderToolTip(ToolTip hovered) {
 		if (hovered != null) {
 			tool_tip.clear();

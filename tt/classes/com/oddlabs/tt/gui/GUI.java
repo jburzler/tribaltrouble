@@ -1,21 +1,13 @@
 package com.oddlabs.tt.gui;
 
 import com.oddlabs.tt.animation.Animated;
-import com.oddlabs.tt.viewer.AmbientAudio;
-import com.oddlabs.tt.util.StateChecksum;
-import com.oddlabs.tt.event.LocalEventQueue;
-import com.oddlabs.tt.delegate.NullDelegate;
-import com.oddlabs.tt.render.UIRenderer;
-import com.oddlabs.tt.landscape.World;
-import com.oddlabs.tt.global.Globals;
 import com.oddlabs.tt.camera.CameraState;
-import com.oddlabs.tt.render.Picker;
+import com.oddlabs.tt.event.LocalEventQueue;
+import com.oddlabs.tt.render.UIRenderer;
+import com.oddlabs.tt.util.StateChecksum;
 import com.oddlabs.tt.util.ToolTip;
-
-import java.nio.FloatBuffer;
-
+import com.oddlabs.tt.viewer.AmbientAudio;
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.BufferUtils;
 
 public final strictfp class GUI implements Animated {
 	private final Languages languages;

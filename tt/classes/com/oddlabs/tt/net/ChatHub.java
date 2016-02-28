@@ -1,7 +1,7 @@
 package com.oddlabs.tt.net;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 public final strictfp class ChatHub implements ChatListener {
 	private final List listeners = new ArrayList();

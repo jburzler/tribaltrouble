@@ -1,8 +1,7 @@
 package com.oddlabs.tt.gui;
 
-import org.lwjgl.input.Keyboard;
-
 import com.oddlabs.tt.font.TextBoxRenderer;
+import org.lwjgl.input.Keyboard;
 
 public final strictfp class EditBox extends TextBox {
 	private int index;

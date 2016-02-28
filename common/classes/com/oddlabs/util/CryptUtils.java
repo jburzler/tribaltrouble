@@ -4,17 +4,15 @@ import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
-import javax.net.ssl.SSLSession;
 import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManager;
-import javax.net.ssl.TrustManagerFactory;
-import java.security.cert.X509Certificate;
-import java.security.cert.CertificateException;
 import javax.net.ssl.X509TrustManager;
 
-import java.net.URL;
 
 public final strictfp class CryptUtils {
 	private final static MessageDigest digest;

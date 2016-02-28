@@ -1,39 +1,24 @@
 package com.oddlabs.tt.landscape;
 
-import java.util.Random;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.HashMap;
-
+import com.oddlabs.geometry.LowDetailModel;
 import com.oddlabs.tt.animation.AnimationManager;
 import com.oddlabs.tt.event.LocalEventQueue;
 import com.oddlabs.tt.form.ProgressForm;
-import com.oddlabs.tt.gui.GUIRoot;
 import com.oddlabs.tt.gui.Icons;
 import com.oddlabs.tt.model.AbstractElementNode;
 import com.oddlabs.tt.model.RacesResources;
 import com.oddlabs.tt.model.SupplyManager;
-import com.oddlabs.tt.net.PeerHub;
+import com.oddlabs.tt.model.SupplyManagers;
 import com.oddlabs.tt.pathfinder.RegionBuilder;
 import com.oddlabs.tt.pathfinder.UnitGrid;
-import com.oddlabs.tt.resource.WorldGenerator;
-import com.oddlabs.tt.resource.WorldInfo;
-import com.oddlabs.tt.scenery.Sky;
-import com.oddlabs.tt.scenery.Water;
-import com.oddlabs.tt.trigger.GameOverTrigger;
-import com.oddlabs.tt.render.Renderer;
-import com.oddlabs.tt.render.RenderQueues;
-import com.oddlabs.tt.player.UnitInfo;
-import com.oddlabs.tt.player.PlayerInfo;
 import com.oddlabs.tt.player.Player;
-import com.oddlabs.tt.net.Network;
-import com.oddlabs.tt.global.Globals;
-import com.oddlabs.tt.resource.FogInfo;
-import com.oddlabs.tt.util.Utils;
-import com.oddlabs.tt.model.SupplyManagers;
+import com.oddlabs.tt.player.PlayerInfo;
+import com.oddlabs.tt.render.RenderQueues;
 import com.oddlabs.tt.resource.NativeResource;
-import com.oddlabs.geometry.LowDetailModel;
+import com.oddlabs.tt.resource.WorldInfo;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public final strictfp class World {
 	public final static int GAMESPEED_DONTCARE = -2;

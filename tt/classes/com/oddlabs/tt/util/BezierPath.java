@@ -1,8 +1,7 @@
 package com.oddlabs.tt.util;
 
-import org.lwjgl.opengl.GL11;
-
 import com.oddlabs.tt.landscape.HeightMap;
+import org.lwjgl.opengl.GL11;
 
 public final strictfp class BezierPath {
 	private final static int PREVIOUS = 0;

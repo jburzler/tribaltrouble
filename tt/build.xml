@@ -23,7 +23,7 @@
 	<property name="jar.compress" value="true"/>
 	<property name="dist" location="${build}/dist"/>
 	<property name="svndist" location="svndist"/>
-	
+
 	<!--	<property name="webstartdist" location="webstartdist"/>-->
 
 	<target name="compiledeps" depends="compile-common">
@@ -151,7 +151,7 @@
 	<target name="proceduraltest" depends="compile">
 		<java fork="yes" classpath="../common/build/classes:${build}/classes" classname="com.oddlabs.tt.procedural.Main">
 			<jvmarg value="-ea"/>
-			<jvmarg value="-Xmx200000000"/>
+			<jvmarg value="-Xmx200m"/>
 		</java>
 	</target>
 
@@ -301,7 +301,7 @@
 		</copy>
 		<replace file="${installers.tmp}/BuyNow.html" token="@BUYNOW_URL@" value="${buynow_url}"/>
 	</target>
-	
+
 	<target name="assembleplatforms">
 		<!-- linux -->
 		<mkdir dir="${installers.assembly}/linux-x86/gamedata"/>
@@ -357,7 +357,7 @@
 			</fileset>
 		</copy>
 	</target>
-	
+
 	<target name="assemblecommon" depends="loader">
 		<mkdir dir="${installers.assembly}/common"/>
 		<mkdir dir="${installers.assembly}/common/gamedata"/>

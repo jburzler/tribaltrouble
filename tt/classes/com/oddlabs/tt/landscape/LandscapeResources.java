@@ -4,15 +4,12 @@ import com.oddlabs.geometry.LowDetailModel;
 import com.oddlabs.tt.audio.Audio;
 import com.oddlabs.tt.audio.AudioFile;
 import com.oddlabs.tt.form.ProgressForm;
-import com.oddlabs.tt.render.SpriteKey;
 import com.oddlabs.tt.global.Globals;
-import com.oddlabs.tt.procedural.GeneratorRespond;
 import com.oddlabs.tt.render.RenderQueues;
+import com.oddlabs.tt.render.SpriteKey;
 import com.oddlabs.tt.resource.Resources;
 import com.oddlabs.tt.resource.SpriteFile;
-import com.oddlabs.tt.resource.TextureFile;
 import com.oddlabs.util.Utils;
-
 import java.util.Random;
 
 public final strictfp class LandscapeResources {

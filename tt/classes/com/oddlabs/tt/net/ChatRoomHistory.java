@@ -1,15 +1,13 @@
 package com.oddlabs.tt.net;
 
-import java.util.List;
-import java.util.LinkedList;
-import java.util.Set;
-import java.util.Iterator;
+import com.oddlabs.matchmaking.ChatRoomUser;
+import com.oddlabs.tt.gui.ChatPanel;
+import com.oddlabs.tt.util.Utils;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.ResourceBundle;
-import com.oddlabs.matchmaking.ChatRoomUser;
-import com.oddlabs.tt.util.Utils;
-import com.oddlabs.tt.gui.ChatPanel;
+import java.util.Set;
 
 public final strictfp class ChatRoomHistory extends ChatHistory {
 

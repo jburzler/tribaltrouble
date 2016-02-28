@@ -1,14 +1,12 @@
 package com.oddlabs.tt.procedural;
 
-import org.lwjgl.opengl.GL11;
-
 import com.oddlabs.procedural.Channel;
 import com.oddlabs.procedural.Layer;
 import com.oddlabs.tt.render.Texture;
 import com.oddlabs.tt.resource.GLImage;
 import com.oddlabs.tt.resource.GLIntImage;
-
 import java.util.Arrays;
+import org.lwjgl.opengl.GL11;
 
 public final strictfp class GeneratorRing extends TextureGenerator {
 	private final int size;

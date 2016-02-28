@@ -1,9 +1,9 @@
 package com.oddlabs.tt.net;
 
+import com.oddlabs.net.ByteBufferInputStream;
+import com.oddlabs.net.DefaultARMIArgumentReader;
 import java.io.*;
 import java.lang.reflect.Array;
-import com.oddlabs.net.DefaultARMIArgumentReader;
-import com.oddlabs.net.ByteBufferInputStream;
 
 final strictfp class GameArgumentReader extends DefaultARMIArgumentReader {
 	private final DistributableTable distributable_table;

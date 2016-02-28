@@ -1,11 +1,9 @@
 package com.oddlabs.tt.vbo;
 
 import com.oddlabs.tt.global.*;
-import com.oddlabs.tt.util.*;
 import com.oddlabs.tt.render.Renderer;
-
+import com.oddlabs.tt.util.*;
 import java.nio.*;
-
 import org.lwjgl.opengl.*;
 
 public final strictfp class ShortVBO extends VBO {
