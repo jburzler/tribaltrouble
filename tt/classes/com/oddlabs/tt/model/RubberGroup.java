@@ -11,12 +11,12 @@ import java.util.List;
 public final strictfp class RubberGroup {
 	private final int MIN_CHICKENS_PER_GROUP = 3;
 	private final int MAX_CHICKENS_PER_GROUP = 7;
-	
+
 	private final static float SPAWN_TIME = 2f;
 
 	private final World world;
-	private final List supplies = new ArrayList();
-	
+	private final List<Supply> supplies = new ArrayList<>();
+
 	public RubberGroup(World world) {
 		this.world = world;
 		int[] group_position = getGroupPosition();
@@ -39,7 +39,7 @@ public final strictfp class RubberGroup {
 	}
 
 	private int[] getGroupPosition() {
-		List tree_positions = world.getHeightMap().getTrees();
+		List<int[]> tree_positions = world.getHeightMap().getTrees();
 		int start_index = world.getRandom().nextInt(tree_positions.size());
 		int index = (start_index + 1)%tree_positions.size();
 		while (index != start_index) {

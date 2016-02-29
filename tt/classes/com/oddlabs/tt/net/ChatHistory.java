@@ -6,7 +6,7 @@ import java.util.List;
 public abstract strictfp class ChatHistory implements ChatListener {
 	private final static int MAX_HISTORY = 50;
 
-	private final List messages = new LinkedList();
+	private final List<String> messages = new LinkedList<>();
 
 	public final void clear() {
 		messages.clear();
@@ -21,7 +21,7 @@ public abstract strictfp class ChatHistory implements ChatListener {
 			messages.remove(0);
 	}
 
-	final List getMessages() {
+	final List<String> getMessages() {
 		return messages;
 	}
 }

@@ -16,21 +16,21 @@ public final strictfp class QuitForm extends QuestionForm {
 	public QuitForm(GUIRoot gui_root) {
 		this(gui_root, true);
 	}
-	
+
 	public QuitForm(final GUIRoot gui_root, boolean show_quit_screen) {
 		super(!PeerHub.isWaitingForAck() ? getI18N("confirm_quit") : getI18N("confirm_quit_waiting_for_ack"), show_quit_screen ?
-				(MouseClickListener)new MouseClickListener() {
-                                        @Override
-					public final void mouseClicked(int button, int x, int y, int clicks) {
-						Renderer.shutdownWithQuitScreen(gui_root);
-					}
-				}
+                        new MouseClickListener() {
+                            @Override
+                            public final void mouseClicked(int button, int x, int y, int clicks) {
+                                Renderer.shutdownWithQuitScreen(gui_root);
+                            }
+                        }
 				:
-				(MouseClickListener)new MouseClickListener() {
-                                        @Override
-					public final void mouseClicked(int button, int x, int y, int clicks) {
-						Renderer.shutdown();
-					}
-				});
+                        new MouseClickListener() {
+                            @Override
+                            public final void mouseClicked(int button, int x, int y, int clicks) {
+                                Renderer.shutdown();
+                            }
+                        });
 	}
 }

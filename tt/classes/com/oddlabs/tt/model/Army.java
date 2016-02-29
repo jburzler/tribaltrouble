@@ -5,13 +5,13 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 public strictfp class Army {
-	private final Set selection = new LinkedHashSet();
+	private final Set<Selectable> selection = new LinkedHashSet<>();
 
 	public final Selectable[] filter(int ability_filter) {
 		int count = 0;
-		Iterator it = selection.iterator();
+		Iterator<Selectable> it = selection.iterator();
 		while (it.hasNext()) {
-			Selectable s = (Selectable)it.next();
+			Selectable s = it.next();
 			if (s.getAbilities().hasAbilities(ability_filter))
 				count++;
 		}
@@ -19,7 +19,7 @@ public strictfp class Army {
 		it = selection.iterator();
 		int index = 0;
 		while (it.hasNext()) {
-			Selectable s = (Selectable)it.next();
+			Selectable s = it.next();
 			if (s.getAbilities().hasAbilities(ability_filter))
 				filtered[index++] = s;
 		}
@@ -27,9 +27,9 @@ public strictfp class Army {
 	}
 
 	public final boolean containsAbility(int ability_filter) {
-		Iterator it = selection.iterator();
+		Iterator<Selectable> it = selection.iterator();
 		while (it.hasNext()) {
-			Selectable s = (Selectable)it.next();
+			Selectable s = it.next();
 			if (s.getAbilities().hasAbilities(ability_filter))
 				return true;
 		}
@@ -48,7 +48,7 @@ public strictfp class Army {
 		return selection.contains(selectable);
 	}
 
-	public final Set getSet() {
+	public final Set<Selectable> getSet() {
 		return selection;
 	}
 

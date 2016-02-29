@@ -25,7 +25,7 @@ public final strictfp class MapCamera extends Camera {
 	private float old_x;
 	private float old_y;
 	private float old_z;
-	private float old_vert_angle;
+	private final float old_vert_angle;
 	private final float distance_to_landscape;
 	private final Label label = new Label(Utils.getBundleString(ResourceBundle.getBundle(MapCamera.class.getName()), "map_mode"), Skin.getSkin().getHeadlineFont());
 

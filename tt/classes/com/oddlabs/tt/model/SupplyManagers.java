@@ -3,18 +3,13 @@ package com.oddlabs.tt.model;
 import com.oddlabs.tt.landscape.TreeSupply;
 import com.oddlabs.tt.landscape.World;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 public strictfp class SupplyManagers {
-	private final Map supply_managers = new HashMap();
-	
+	private final Map<Class<? extends Supply>,SupplyManager> supply_managers = new HashMap<>();
+
 	public final void debugSpawn() {
-		Iterator it = supply_managers.keySet().iterator();
-		while (it.hasNext()) {
-			SupplyManager manager = (SupplyManager)supply_managers.get(it.next());
-			manager.debugSpawnSupply();
-		}
+            supply_managers.values().forEach(SupplyManager::debugSpawnSupply);
 	}
 
 	public SupplyManagers(World world) {
@@ -24,7 +19,7 @@ public strictfp class SupplyManagers {
 		supply_managers.put(RubberSupply.class, new RubberSupplyManager(world));
 	}
 
-	public final SupplyManager getSupplyManager(Class type) {
-		return (SupplyManager)supply_managers.get(type);
+	public final SupplyManager getSupplyManager(Class<? extends Supply> type) {
+		return supply_managers.get(type);
 	}
 }

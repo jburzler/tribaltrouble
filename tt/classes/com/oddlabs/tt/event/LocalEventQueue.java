@@ -11,7 +11,7 @@ public final strictfp class LocalEventQueue {
 	private final StateChecksum checksum = new StateChecksum();
 	private final AnimationManager manager = new AnimationManager();
 	private final AnimationManager high_precision_manager = new AnimationManager();
-	private boolean checksum_complain = true;
+	private final boolean checksum_complain = true;
 	private Deterministic deterministic;
 	private float time = 0;
 

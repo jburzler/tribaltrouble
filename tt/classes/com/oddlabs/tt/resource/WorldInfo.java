@@ -7,10 +7,10 @@ public final strictfp class WorldInfo {
 	public final Texture[][] colormaps;
 	public final Texture detail;
 	public final float[][] heightmap;
-	public final List trees;
-	public final List palm_trees;
-	public final List rocks;
-	public final List iron;
+	public final List<int[]> trees;
+	public final List<int[]> palm_trees;
+	public final List<int[]> rocks;
+	public final List<int[]> iron;
 	public final float[][] plants;
 	public final boolean[][] access_grid;
 	public final byte[][] build_grid;
@@ -20,7 +20,7 @@ public final strictfp class WorldInfo {
 	public final int chunks_per_colormap;
 	public final float[][] starting_locations;
 
-	public WorldInfo(int meters_per_world, float sea_level_meters, int texels_per_colormap, int chunks_per_colormap, Texture[][] colormaps, Texture detail, float[][] heightmap, List trees, List palm_trees, List rocks, List iron, float[][] plants, boolean[][] access_grid, byte[][] build_grid, float[][] starting_locations) {
+	public WorldInfo(int meters_per_world, float sea_level_meters, int texels_per_colormap, int chunks_per_colormap, Texture[][] colormaps, Texture detail, float[][] heightmap, List<int[]> trees, List<int[]> palm_trees, List<int[]> rocks, List<int[]> iron, float[][] plants, boolean[][] access_grid, byte[][] build_grid, float[][] starting_locations) {
 		this.texels_per_colormap = texels_per_colormap;
 		this.chunks_per_colormap = chunks_per_colormap;
 		this.sea_level_meters = sea_level_meters;

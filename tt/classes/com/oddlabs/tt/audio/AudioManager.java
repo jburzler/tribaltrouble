@@ -16,7 +16,7 @@ public final strictfp class AudioManager implements AudioImplementation {
 
 	private final static AudioManager singleton;
 
-	private final List ambients = new ArrayList();
+	private final List<AudioSource> ambients = new ArrayList<>();
 	private final RefillerList queued_players = new RefillerList();
 	private AudioSource[] sources;
 
@@ -35,7 +35,7 @@ public final strictfp class AudioManager implements AudioImplementation {
 	}
 
 	private void generateSources(int max) {
-		ArrayList list = new ArrayList();
+		List<AudioSource> list = new ArrayList<>();
 		for (int i = 0; i < max; i++) {
 			try {
 				AudioSource source = new AudioSource();
@@ -88,7 +88,7 @@ public final strictfp class AudioManager implements AudioImplementation {
 	public void startSources() {
 		if (sound_play_counter == 0) {
 			for (int i = 0; i < ambients.size(); i++) {
-				AL10.alSourcePlay(((AudioSource)ambients.get(i)).getSource());
+				AL10.alSourcePlay(ambients.get(i).getSource());
 			}
 		}
 		sound_play_counter++;
@@ -110,7 +110,7 @@ public final strictfp class AudioManager implements AudioImplementation {
 		// Check for free sources
 		int worst_rank = Integer.MAX_VALUE;
             for (AudioSource source1 : sources) {
-                AudioSource source = (AudioSource) source1;
+                AudioSource source = source1;
                 int source_index = source.getSource();
                 if ((AL10.alGetSourcei(source_index, AL10.AL_SOURCE_STATE) == AL10.AL_STOPPED
                         || AL10.alGetSourcei(source_index, AL10.AL_SOURCE_STATE) == AL10.AL_INITIAL) && source.getRank() < AudioPlayer.AUDIO_RANK_AMBIENT) {
@@ -125,7 +125,7 @@ public final strictfp class AudioManager implements AudioImplementation {
 		if (params.rank > worst_rank) {
 			FloatBuffer position = BufferUtils.createFloatBuffer(3);
                 for (AudioSource source1 : sources) {
-                    AudioSource source = (AudioSource) source1;
+                    AudioSource source = source1;
                     if (source.getRank() == worst_rank) {
                         return source;
                     }
@@ -161,11 +161,11 @@ public final strictfp class AudioManager implements AudioImplementation {
 			float max_dist_squared = this_dist_squared;
 			FloatBuffer position = BufferUtils.createFloatBuffer(3);
                     for (AudioSource source1 : sources) {
-                        AudioSource source = (AudioSource) source1;
+                        AudioSource source = source1;
                         if (source.getRank() == params.rank) {
                             int source_index = source.getSource();
                             AL10.alGetSource(source_index, AL10.AL_POSITION, position);
-                            
+
                             float dist_squared = getCamDistSquared(camera_state, position.get(0), position.get(1), position.get(2));
                             if (dist_squared > max_dist_squared) {
                                 max_dist_squared = dist_squared;

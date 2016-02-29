@@ -63,12 +63,12 @@ public final strictfp class SelectGameMenu extends Form implements MatchmakingLi
 	// List of games
 	private final Panel game_list_panel;
 	private final MultiColumnComboBox game_list_box;
-	private final List game_hosts = new ArrayList();
+	private final List<GameHost> game_hosts = new ArrayList<>();
 
 	// List of chat rooms
 	private final Panel chat_room_list_panel;
 	private final MultiColumnComboBox chat_room_list_box;
-	private final List chat_rooms = new ArrayList();
+	private final List<ChatRoomEntry> chat_rooms = new ArrayList<>();
 	private final GUIRoot gui_root;
 	private final NetworkSelector network;
 
@@ -330,11 +330,11 @@ public final strictfp class SelectGameMenu extends Form implements MatchmakingLi
 	public void receivedList(int type, Object[] names) {
 		switch (type) {
 			case MatchmakingServerInterface.TYPE_GAME:
-                            game_hosts.addAll(Arrays.asList(names));
+                            game_hosts.addAll(Arrays.asList((GameHost[])names));
 				updateGameListGUI();
 				break;
 			case MatchmakingServerInterface.TYPE_CHAT_ROOM_LIST:
-                            chat_rooms.addAll(Arrays.asList(names));
+                            chat_rooms.addAll(Arrays.asList((ChatRoomEntry[])names));
 				updateChatRoomListGUI();
 				break;
 			case MatchmakingServerInterface.TYPE_RANKING_LIST:
@@ -380,7 +380,7 @@ public final strictfp class SelectGameMenu extends Form implements MatchmakingLi
 	private void updateGameListGUI() {
 		Font combofont = Skin.getSkin().getMultiColumnComboBoxData().getFont();
 		for (int i = 0; i < game_hosts.size(); i++) {
-			GameHost game_host = (GameHost)game_hosts.get(i);
+			GameHost game_host = game_hosts.get(i);
 			String rated = ServerMessageBundler.getRatedString(game_host.getGame().isRated());
 			String size = ServerMessageBundler.getSizeString(game_host.getGame().getSize());
 			Row row = new Row(new GUIObject[]{
@@ -396,7 +396,7 @@ public final strictfp class SelectGameMenu extends Form implements MatchmakingLi
 	private void updateChatRoomListGUI() {
 		Font combofont = Skin.getSkin().getMultiColumnComboBoxData().getFont();
 		for (int i = 0; i < chat_rooms.size(); i++) {
-			ChatRoomEntry chat_room_info = (ChatRoomEntry)chat_rooms.get(i);
+			ChatRoomEntry chat_room_info = chat_rooms.get(i);
 			String users_and_max = Utils.getBundleString(bundle, "users_and_max", new Object[]{chat_room_info.getNumJoined(), MatchmakingServerInterface.MAX_ROOM_USERS});
 			Row row = new Row(new GUIObject[]{
 				new Label(chat_room_info.getName(), combofont, room_name_size),

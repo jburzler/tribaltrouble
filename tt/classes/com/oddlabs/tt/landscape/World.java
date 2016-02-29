@@ -7,6 +7,7 @@ import com.oddlabs.tt.form.ProgressForm;
 import com.oddlabs.tt.gui.Icons;
 import com.oddlabs.tt.model.AbstractElementNode;
 import com.oddlabs.tt.model.RacesResources;
+import com.oddlabs.tt.model.Supply;
 import com.oddlabs.tt.model.SupplyManager;
 import com.oddlabs.tt.model.SupplyManagers;
 import com.oddlabs.tt.pathfinder.RegionBuilder;
@@ -158,7 +159,7 @@ public final strictfp class World {
 		random = new Random(42);
 
 		List participant_list = new ArrayList();
-		List player_list = new ArrayList();
+		List<Player> player_list = new ArrayList<>();
 		for (short i = 0; i < player_infos.length; i++) {
 //			slot_to_participant_index[i] = -1;
 			Player player = new Player(this, player_infos[i], colors[i]);
@@ -200,7 +201,7 @@ public final strictfp class World {
 		return unit_grid;
 	}
 
-	public SupplyManager getSupplyManager(Class cl) {
+	public SupplyManager getSupplyManager(Class<? extends Supply> cl) {
 		return supply_managers.getSupplyManager(cl);
 	}
 
@@ -219,7 +220,7 @@ public final strictfp class World {
 	public HeightMap getHeightMap() {
 		return world;
 	}
-	
+
 	public AnimationManager getAnimationManagerGameTime() {
 		return animation_manager_game_time;
 	}

@@ -88,9 +88,9 @@ public abstract strictfp class InGameDelegate extends CameraDelegate {
 		switch (event.getKeyCode()) {
 			case Keyboard.KEY_I:
 				if (event.isControlDown()) {
-					Set set = viewer.getSelection().getCurrentSelection().getSet();
+					Set<Selectable> set = viewer.getSelection().getCurrentSelection().getSet();
 					if (set.size() > 0) {
-						Selectable s = (Selectable)set.iterator().next();
+						Selectable s = set.iterator().next();
 						if (s instanceof Building) {
 							Building building = (Building)s;
 							if (!building.isDead() && !building.getAbilities().hasAbilities(Abilities.ATTACK))

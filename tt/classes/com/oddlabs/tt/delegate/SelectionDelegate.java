@@ -39,7 +39,7 @@ public final strictfp class SelectionDelegate extends ControllableCameraDelegate
 	private boolean map_mode = false;
 	private boolean observer = false;
 	private int last_idle_peon_name = -1;
-	
+
 	public SelectionDelegate(WorldViewer viewer, GameCamera camera) {
 		super(viewer, camera);
 		String observer_mode = Utils.getBundleString(ResourceBundle.getBundle(SelectionDelegate.class.getName()), "observer_mode");
@@ -115,9 +115,9 @@ public final strictfp class SelectionDelegate extends ControllableCameraDelegate
 					} else {
 						boolean selected = getViewer().getSelection().enableShortcutArmy(army_number);
 						if (selected && event.getNumClicks() > 1) {
-							Set set = getViewer().getSelection().getCurrentSelection().getSet();
+							Set<Selectable> set = getViewer().getSelection().getCurrentSelection().getSet();
 							if (set.size() > 0) {
-								Selectable s = (Selectable)set.iterator().next();
+								Selectable s = set.iterator().next();
 								getGUIRoot().pushDelegate(new JumpDelegate(getViewer(), (GameCamera)getCamera(), s.getPositionX(), s.getPositionY()));
 							}
 						}
@@ -157,18 +157,18 @@ public final strictfp class SelectionDelegate extends ControllableCameraDelegate
 	}
 
 	private void nextIdlePeon() {
-		Set set = getViewer().getLocalPlayer().getUnits().getSet();
-		Iterator it = set.iterator();
+		Set<Selectable> set = getViewer().getLocalPlayer().getUnits().getSet();
+		Iterator<Selectable> it = set.iterator();
 
 		boolean has_idle_peon = false;
 		int lowest_name = Integer.MAX_VALUE;
 		Selectable lowest_peon = null;
-		
+
 		boolean has_greater_name = false;
 		int lowest_greater_name = Integer.MAX_VALUE;
 		Selectable lowest_greater_peon = null;
 		while (it.hasNext()) {
-			Selectable s = (Selectable)it.next();
+			Selectable s = it.next();
 			if (s.getOwner() != getViewer().getLocalPlayer())
 				continue;
 			Abilities abilities = s.getAbilities();
@@ -269,9 +269,9 @@ public final strictfp class SelectionDelegate extends ControllableCameraDelegate
 		}
 	}
 
-	private void updateSelection(List friendly_units, Selectable friendly_building, Selectable enemy) {
+	private void updateSelection(List<Selectable> friendly_units, Selectable friendly_building, Selectable enemy) {
 		Army current_selection = getViewer().getSelection().getCurrentSelection();
-		Selectable first = (Selectable)current_selection.getSet().iterator().next();
+		Selectable first = current_selection.getSet().iterator().next();
 		if (first instanceof Building || first.getOwner() != getViewer().getLocalPlayer()) {
 			if (first == friendly_building || first == enemy) {
 				current_selection.clear();
@@ -281,14 +281,14 @@ public final strictfp class SelectionDelegate extends ControllableCameraDelegate
 
 		boolean add = false;
 		for (int i = 0; i < friendly_units.size(); i++) {
-			Selectable selectable = (Selectable)friendly_units.get(i);
+			Selectable selectable = friendly_units.get(i);
 			if (!current_selection.contains(selectable)) {
 				add = true;
 				break;
 			}
 		}
 		for (int i = 0; i < friendly_units.size(); i++) {
-			Selectable selectable = (Selectable)friendly_units.get(i);
+			Selectable selectable = friendly_units.get(i);
 			if (add) {
 				if (!current_selection.contains(selectable))
 					current_selection.add(selectable);
@@ -298,12 +298,12 @@ public final strictfp class SelectionDelegate extends ControllableCameraDelegate
 		}
 	}
 
-	private void replaceSelection(List friendly_units, Selectable friendly_building, Selectable enemy) {
+	private void replaceSelection(List<Selectable> friendly_units, Selectable friendly_building, Selectable enemy) {
 		Army current_selection = getViewer().getSelection().getCurrentSelection();
 		current_selection.clear();
 		if (friendly_units.size() > 0) {
 			for (int i = 0; i < friendly_units.size(); i++) {
-				current_selection.add((Selectable)friendly_units.get(i));
+				current_selection.add(friendly_units.get(i));
 			}
 		} else if (friendly_building != null) {
 			current_selection.add(friendly_building);
@@ -318,7 +318,7 @@ public final strictfp class SelectionDelegate extends ControllableCameraDelegate
 			if (selection) {
 				selection = false;
 				Selectable[] picked = getViewer().getPicker().pickBoxed(getViewer().getGUIRoot().getDelegate().getCamera().getState(), selection_x1, selection_y1, selection_x2, selection_y2, clicks);
-				List friendly_units = new ArrayList();
+				List<Selectable> friendly_units = new ArrayList<>();
 				Selectable friendly_building = null;
 				Selectable enemy = null;
                             for (Selectable selectable : picked) {
@@ -411,7 +411,7 @@ public final strictfp class SelectionDelegate extends ControllableCameraDelegate
 				super.mousePressed(button, x, y);
 			}
 		}
-		
+
 	}
 
 	public boolean isSelecting() {

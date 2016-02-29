@@ -73,7 +73,7 @@ public final strictfp class GameMenu extends Panel implements ConfigurationListe
 	private final Game game;
 	private final ResourceBundle bundle = getBundle();
 	private final GameNetwork game_network;
-	private SortedSet human_names = new TreeSet();
+	private SortedSet<String> human_names = new TreeSet<>();
 
 	private boolean updating;
 	private boolean ready;
@@ -242,7 +242,7 @@ public final strictfp class GameMenu extends Panel implements ConfigurationListe
 		int[] player_teams = new int[num_humans];
 		int human_index = 0;
 		updating = true;
-		SortedSet new_human_names = new TreeSet();
+		SortedSet<String> new_human_names = new TreeSet<>();
 		for (int i = 0; i < players.length; i++) {
 			PlayerSlot player = players[i];
 			PulldownButton slot_button = slot_buttons[i];
@@ -288,9 +288,9 @@ public final strictfp class GameMenu extends Panel implements ConfigurationListe
 		}
 		if (rated)
 			updateRatedLabels(player_slots, player_ratings, GameSession.calculateMatchPoints(player_ratings, player_teams));
-		Iterator it = new_human_names.iterator();
+		Iterator<String> it = new_human_names.iterator();
 		while (it.hasNext()) {
-			String name = (String)it.next();
+			String name = it.next();
 			if (human_names.contains(name))
 				human_names.remove(name);
 			else
@@ -298,7 +298,7 @@ public final strictfp class GameMenu extends Panel implements ConfigurationListe
 		}
 		it = human_names.iterator();
 		while (it.hasNext()) {
-			String name = (String)it.next();
+			String name = it.next();
 			playerLeft(name);
 		}
 		human_names = new_human_names;
@@ -511,7 +511,7 @@ public final strictfp class GameMenu extends Panel implements ConfigurationListe
 	}
 
 	private static int getNumTeams(PlayerSlot[] players) {
-		Set teams = new HashSet();
+		Set<Integer> teams = new HashSet<>();
             for (PlayerSlot current : players) {
                 if (current.getInfo() != null)
                     teams.add(new Integer(current.getInfo().getTeam()));

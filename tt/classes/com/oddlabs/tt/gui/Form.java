@@ -6,7 +6,7 @@ import com.oddlabs.tt.guievent.MouseMotionListener;
 import org.lwjgl.input.Keyboard;
 
 public strictfp class Form extends Group {
-	private final java.util.List close_listeners = new java.util.ArrayList();
+	private final java.util.List<CloseListener> close_listeners = new java.util.ArrayList<>();
 
 	private final String caption;
 
@@ -76,7 +76,7 @@ public strictfp class Form extends Group {
 			else
 				Skin.getSkin().getFormData().getSlimForm().render(0, 0, getWidth(), getHeight(), Skin.NORMAL);
 		}
-		
+
 	}
 
         @Override
@@ -147,7 +147,7 @@ public strictfp class Form extends Group {
 	public final void closedAll() {
 		closed();
 		for (int i = 0; i < close_listeners.size(); i++) {
-			CloseListener listener = (CloseListener)close_listeners.get(i);
+			CloseListener listener = close_listeners.get(i);
 			if (listener != null)
 				listener.closed();
 		}
@@ -178,7 +178,7 @@ public strictfp class Form extends Group {
 			closedAll();
 		super.remove();
 	}
-	
+
 	private final strictfp class DragListener implements MouseMotionListener {
 		private final Form owner;
 		public DragListener(Form owner) {

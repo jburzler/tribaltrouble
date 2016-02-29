@@ -13,14 +13,13 @@ public final strictfp class BuildingSiteScanFilter implements ScanFilter {
 	private final BuildingTemplate template;
 	private final int range;
 	private final boolean one_target;
-	private final List result;
+	private final List<LandscapeTarget> result = new ArrayList<>();
 
 	public BuildingSiteScanFilter(UnitGrid unit_grid, BuildingTemplate template, int range, boolean one_target) {
 		this.unit_grid = unit_grid;
 		this.template = template;
 		this.range = range;
 		this.one_target = one_target;
-		result = new ArrayList();
 	}
 
         @Override
@@ -43,7 +42,7 @@ public final strictfp class BuildingSiteScanFilter implements ScanFilter {
 		return false;
 	}
 
-	public List getResult() {
+	public List<LandscapeTarget> getResult() {
 		return result;
 	}
 }

@@ -1,7 +1,5 @@
 package com.oddlabs.tt.form;
 
-import com.oddlabs.registration.RegistrationInfo;
-import com.oddlabs.tt.global.Settings;
 import com.oddlabs.tt.gui.CancelListener;
 import com.oddlabs.tt.gui.Form;
 import com.oddlabs.tt.gui.HorizButton;
@@ -12,7 +10,6 @@ import com.oddlabs.tt.gui.Panel;
 import com.oddlabs.tt.gui.PanelGroup;
 import com.oddlabs.tt.gui.Skin;
 import com.oddlabs.tt.gui.TextBox;
-import com.oddlabs.tt.render.Renderer;
 import com.oddlabs.tt.util.Utils;
 import java.util.ResourceBundle;
 
@@ -24,48 +21,21 @@ public final strictfp class CreditsForm extends Form {
 		Label head_label = new Label(Utils.getBundleString(bundle, "about"), Skin.getSkin().getHeadlineFont());
 		addChild(head_label);
 		head_label.place();
-		
+
 		Panel about = new Panel(Utils.getBundleString(bundle, "about"));
 		Panel credits = new Panel(Utils.getBundleString(bundle, "credits"));
 		Panel thanks = new Panel(Utils.getBundleString(bundle, "thanks_to"));
-		
+
 		// about tab
 		TextBox about_box = new TextBox(400, 300, Skin.getSkin().getEditFont(), 100000);
 		about.addChild(about_box);
 		String about_text = Utils.getBundleString(bundle, "about_text", new Object[]{
 								Integer.toString(LocalInput.getRevision())});
 		about_box.append(about_text);
-		if (Renderer.isRegistered()) {
-			RegistrationInfo info = Renderer.getRegistrationClient().getRegistrationInfo();
-			if (info != null) {
-				about_box.append(Utils.getBundleString(bundle, "registered_to") + "\n");
-
-				about_box.append(info.getName() + "\n");
-				about_box.append(info.getAddress1() + "\n");
-				if (info.getAddress2() != null && !info.getAddress2().trim().isEmpty())
-					about_box.append(info.getAddress2() + "\n");
-				about_box.append(info.getZip() + "\n");
-				about_box.append(info.getCity() + "\n");
-				if (info.getState() != null && !info.getState().trim().isEmpty())
-					about_box.append(info.getState() + "\n");
-				about_box.append(info.getCountry() + "\n");
-				about_box.append("\n");
-			}
-			if (!Settings.getSettings().hide_regkey) {
-				about_box.append(Utils.getBundleString(bundle, "registration_key") + "\n");
-				if (info != null) {
-					about_box.append(info.getRegKey());
-				} else {
-					about_box.append(Settings.getSettings().reg_key);
-				}
-			}
-		} else {
-			about_box.append(Utils.getBundleString(bundle, "unregistered"));
-		}
 
 		about_box.place();
 		about.compileCanvas();
-		
+
 		// credits tab
 		TextBox credits_box = new TextBox(400, 300, Skin.getSkin().getEditFont(), 100000);
 		credits.addChild(credits_box);
@@ -84,7 +54,7 @@ public final strictfp class CreditsForm extends Form {
 		credits_box.append("Herman Witkam");
 		credits_box.place();
 		credits.compileCanvas();
-		
+
 		// thanks tab
 		TextBox thanks_box = new TextBox(400, 300, Skin.getSkin().getEditFont(), 100000);
 		thanks.addChild(thanks_box);
@@ -135,7 +105,7 @@ public final strictfp class CreditsForm extends Form {
 		thanks_box.append("Kxre Schou Gjaldbxk AKA \"hardkxre\"");
 		thanks_box.place();
 		thanks.compileCanvas();
-		
+
 		PanelGroup panel_group = new PanelGroup(new Panel[]{about, credits, thanks}, 0);
 		addChild(panel_group);
 		panel_group.place(head_label, BOTTOM_LEFT);

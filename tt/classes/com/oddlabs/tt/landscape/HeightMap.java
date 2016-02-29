@@ -16,7 +16,7 @@ public final strictfp class HeightMap {
 
 	private final float[][] world;
 	private final LandscapeLeaf[][] landscape_leaves;
-	private final List trees;
+	private final List<int[]> trees;
 	private final boolean[][] access_grid;
 	private final byte[][] build_grid;
 	private final int meters_per_world;
@@ -33,7 +33,7 @@ public final strictfp class HeightMap {
 	private final float chunk_tex_scale;
 	private final World world_instance;
 
-	public HeightMap(World world_instance, int meters_per_world, float sea_level_meters, int texels_per_colormap, int chunks_per_colormap, float[][] world, List trees, boolean[][] access_grid, byte[][] build_grid) {
+	public HeightMap(World world_instance, int meters_per_world, float sea_level_meters, int texels_per_colormap, int chunks_per_colormap, float[][] world, List<int[]> trees, boolean[][] access_grid, byte[][] build_grid) {
 		this.world = world;
 		this.world_instance = world_instance;
 		this.trees = trees;
@@ -120,7 +120,7 @@ public final strictfp class HeightMap {
 		landscape_leaves[y][x] = leaf;
 	}
 
-	public List getTrees() {
+	public List<int[]> getTrees() {
 		return trees;
 	}
 
@@ -199,7 +199,7 @@ public final strictfp class HeightMap {
 			grid_x = 0;
 		if (grid_y < 0 || grid_y >= world.length)
 			grid_y = 0;
-			
+
 		return getHeight(grid_x, grid_y);
 	}
 

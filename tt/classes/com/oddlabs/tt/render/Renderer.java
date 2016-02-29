@@ -1,11 +1,9 @@
 package com.oddlabs.tt.render;
 
 import com.oddlabs.event.Deterministic;
-import com.oddlabs.http.HttpRequestParameters;
 import com.oddlabs.matchmaking.Game;
 import com.oddlabs.net.NetworkSelector;
 import com.oddlabs.net.TaskThread;
-import com.oddlabs.regclient.RegistrationClient;
 import com.oddlabs.tt.Main;
 import com.oddlabs.tt.animation.AnimationManager;
 import com.oddlabs.tt.animation.TimerAnimation;
@@ -21,9 +19,7 @@ import com.oddlabs.tt.delegate.QuitScreen;
 import com.oddlabs.tt.event.LocalEventQueue;
 import com.oddlabs.tt.form.MessageForm;
 import com.oddlabs.tt.form.ProgressForm;
-import com.oddlabs.tt.form.RegistrationForm;
 import com.oddlabs.tt.form.WarningForm;
-import com.oddlabs.tt.form.WelcomeForm;
 import com.oddlabs.tt.global.Globals;
 import com.oddlabs.tt.global.GlobalsInit;
 import com.oddlabs.tt.global.Settings;
@@ -66,22 +62,14 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
-import java.net.URLEncoder;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
-import java.rmi.server.UID;
-import java.util.HashMap;
 import java.util.Locale;
-import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.prefs.Preferences;
-import javax.swing.JOptionPane;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.LWJGLUtil;
-import org.lwjgl.Sys;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.openal.AL;
 import org.lwjgl.openal.AL10;
@@ -99,8 +87,6 @@ public final strictfp class Renderer {
 	private final static Renderer renderer_instance = new Renderer();
 	private final static StatCounter fps = new StatCounter(10);
 	private static int num_triangles_rendered;
-
-	private static RegistrationClient registration_client;
 
 	private static boolean grab_frames = false;
 
@@ -126,12 +112,8 @@ public final strictfp class Renderer {
 		return fps.getAveragePerUpdate();
 	}
 
-	public static RegistrationClient getRegistrationClient() {
-		return registration_client;
-	}
-
 	public static boolean isRegistered() {
-		return registration_client.isRegistered();
+		return true;
 	}
 
 	public static void makeCurrent() {
@@ -341,26 +323,22 @@ System.out.println("last_event_log_path = " + last_event_log_path);
 		Settings.setSettings(settings);
 		File last_event_log_dir = new File(settings.last_event_log_dir);
 		boolean crashed = settings.crashed;
-		HttpRequestParameters request_parameters = createRegistrationParameters();
 		File registration_file = new File(game_dir, Globals.REG_FILE_NAME);
 		if (!registration_file.canRead()) {
 			File install_reg_file = new File(Utils.getInstallDir(), Globals.REG_FILE_NAME);
 			if (install_reg_file.canRead())
 				registration_file = install_reg_file;
 		}
-		new LocalInput();
-
 		NetworkSelector network = new NetworkSelector(LocalEventQueue.getQueue().getDeterministic(), LocalEventQueue.getQueue()::getMillis);
                 initNetwork(network);
 		LocalInput.settings( game_dir, event_log_dir, settings);
 		try {
-			initNative(crashed, network);
+			initNative(crashed);
 		} catch (LWJGLException e) {
 			// Let it propagate
 			throw new RuntimeException(e);
 		}
 		TaskThread task_thread = network.getTaskThread();
-                registration_client = new RegistrationClient(task_thread, registration_file, request_parameters, RegistrationClient.CLIENT_TYPE_OFFLINE);
 		if (!settings.inDeveloperMode() && !deterministic.isPlayback())
 			deleteOldLogs(last_event_log_dir, event_log_dir, event_logs_dir);
 		Skin.load();
@@ -423,66 +401,12 @@ e.printStackTrace();
 		}
 	}
 
-	private HttpRequestParameters createRegistrationParameters() {
-		String affiliate_id = "";
-		try {
-			Preferences pref = Preferences.userNodeForPackage(com.oddlabs.tt.render.Renderer.class);
-			affiliate_id = pref.get(Globals.AFFILIATE_ID_KEY, "");
-		} catch (Exception e) {
-		}
-		Map parameters = new HashMap();
-		parameters.put("current_affiliate_id", Settings.getSettings().affiliate_id);
-		parameters.put("affiliate_id", affiliate_id);
-		return new HttpRequestParameters("https://" + Settings.getSettings().registration_address + "/oddlabs/registration", parameters);
-	}
-
 	public Locale getDefaultLocale() {
 		return default_locale;
 	}
 
 	private static void failedOpenGL(LWJGLException e) {
 		e.printStackTrace();
-		try {
-			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-		} catch(ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException je) {
-			je.printStackTrace();
-		}
-
-		ResourceBundle bundle = ResourceBundle.getBundle(Renderer.class.getName());
-		String title = Utils.getBundleString(bundle, "error_title");
-		String message = Utils.getBundleString(bundle, "opengl_error_message");
-		int choice = JOptionPane.showConfirmDialog(null, message, title, JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-
-		if (choice == JOptionPane.YES_OPTION) {
-			String new_uid = (new UID()).toString();
-			String uid = readOrSetPreference("uid", new_uid);
-			String os_name = System.getProperty("os.name");
-			String os_arch = System.getProperty("os.arch");
-			String os_version = System.getProperty("os.version");
-			String java_version = System.getProperty("java.version");
-			String java_vendor = System.getProperty("java.vendor");
-			long total_mem = Runtime.getRuntime().maxMemory();
-			String adapter_name = Display.getAdapter();
-			String adapter_version = Display.getVersion();
-
-			try {
-				String url = "http://oddlabs.com/driversupport.php?"
-					+ "uid=" + URLEncoder.encode(uid, "UTF-8")
-					+ "&raw_os=" + URLEncoder.encode(os_name, "UTF-8")
-					+ "&os_version=" + URLEncoder.encode(os_version, "UTF-8")
-					+ "&arch=" + URLEncoder.encode(os_arch, "UTF-8")
-					+ "&java_version=" + URLEncoder.encode(java_version, "UTF-8")
-					+ "&java_vendor=" + URLEncoder.encode(java_vendor, "UTF-8")
-					+ "&total_mem=" + URLEncoder.encode("" + total_mem, "UTF-8");
-				if (adapter_name != null)
-					url += "&adapter_name=" + URLEncoder.encode(adapter_name, "UTF-8");
-				if (adapter_version != null)
-					url += "&adapter_version=" + URLEncoder.encode(adapter_version, "UTF-8");
-				Sys.openURL(url);
-			} catch (java.io.UnsupportedEncodingException uee) {
-				uee.printStackTrace();
-			}
-		}
 
 		Main.shutdown();
 	}
@@ -568,16 +492,6 @@ e.printStackTrace();
 		setMusicPath("/music/menu.ogg", 0f);
 		MainMenu main_menu = new MainMenu(network, gui_root, new MenuCamera(world, manager));
 		gui_root.pushDelegate(main_menu);
-		if (!isRegistered()) {
-			if (!Settings.getSettings().online) {
-				main_menu.setMenuCentered(new RegistrationForm(gui_root, false, main_menu));
-			} else if (Settings.getSettings().first_run) {
-				Settings.getSettings().first_run = false;
-				if (!(Settings.getSettings().hide_update || Settings.getSettings().hide_register)) {
-					main_menu.setMenuCentered(new WelcomeForm(gui_root, main_menu));
-				}
-			}
-		}
 		if (first_progress && Settings.getSettings().warning_no_sound && !LocalInput.alIsCreated()) {
 			ResourceBundle bundle = ResourceBundle.getBundle(Renderer.class.getName());
 			gui_root.addModalForm(new WarningForm(Utils.getBundleString(bundle, "sound_not_available_caption"), Utils.getBundleString(bundle, "sound_not_available_message")));
@@ -591,7 +505,7 @@ e.printStackTrace();
                                                     shutdown();
                         }));
 		}
-		// We'll leave out the reporting, since checksum errors can happen when a peer is disconnected halway through it's EOT
+		// We'll leave out the reporting, since checksum errors can happen when a peer is disconnected halfway through it's EOT
 		// broadcast
 		/*		if (Globals.checksum_error_in_last_game) {
 				Globals.checksum_error_in_last_game = false;
@@ -651,7 +565,7 @@ e.printStackTrace();
 		System.out.println("r = " + r + " | g = " + g + " | b = " + b + " | a = " + a + " | depth = " + depth + " | stencil = " + stencil + " | sample_buffers = " + sample_buffers + " | samples = " + samples);
 	}
 
-	private void initNative(boolean crashed, NetworkSelector network) throws LWJGLException {
+	private void initNative(boolean crashed) throws LWJGLException {
 		String os_name = System.getProperty("os.name");
 		System.out.println("os_name = '" + os_name + "'");
 		String os_arch = System.getProperty("os.arch");

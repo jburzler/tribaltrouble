@@ -40,8 +40,8 @@ public final strictfp class MatchmakingClient implements MatchmakingClientInterf
 	private final static int STATE_NOT_CONNECTED = 1;
 	private final static int STATE_AWAITING_OK = 2;
 	private final static int STATE_LOGGED_IN = 4;
-	
-	private final Map tunnels = new HashMap();
+
+	private final Map<HostSequenceID,TunnelledConnection> tunnels = new HashMap<>();
 	private final ARMIInterfaceMethods interface_methods = new ARMIInterfaceMethods(MatchmakingClientInterface.class);
 	private final ChatRoomHistory chat_room_history;
 	private final InGameChatHistory in_game_chat_history;
@@ -56,14 +56,14 @@ public final strictfp class MatchmakingClient implements MatchmakingClientInterf
 	private Profile active_profile = null;
 	private int state = STATE_NOT_CONNECTED;
 	private boolean update_allowed;
-	private Set update_requested_types = new LinkedHashSet();
+	private final Set<Integer> update_requested_types = new LinkedHashSet<>();
 	private int update_key = 0;
 	private ProfileListener create_profile_listener;
 	private ChatRoomInfo chat_room_info;
 
 	private Login login;
 	private LoginDetails login_details;
-	
+
 	MatchmakingClient() {
 		this.chat_room_history = new ChatRoomHistory();
 		this.in_game_chat_history = new InGameChatHistory();
@@ -71,11 +71,11 @@ public final strictfp class MatchmakingClient implements MatchmakingClientInterf
 		Network.getChatHub().addListener(in_game_chat_history);
 	}
 
-	public List getChatRoomHistory() {
+	public List<String> getChatRoomHistory() {
 		return chat_room_history.getMessages();
 	}
 
-	public List getInGameChatHistory() {
+	public List<String> getInGameChatHistory() {
 		return in_game_chat_history.getMessages();
 	}
 
@@ -103,7 +103,7 @@ public final strictfp class MatchmakingClient implements MatchmakingClientInterf
 
 	public void requestProfiles() {
 		matchmaking_interface.requestProfiles();
-		
+
 	}
 
 	public void requestList(int type) {
@@ -185,14 +185,14 @@ public final strictfp class MatchmakingClient implements MatchmakingClientInterf
 		if (listener != null)
 			listener.receivedList(type, names);
 	}
-	
+
         @Override
 	public void updateComplete(int next_update_key) {
 		this.update_key = next_update_key;
 		update_allowed = true;
 		if (!update_requested_types.isEmpty()) {
-			Iterator it = update_requested_types.iterator();
-			int type = ((Integer)it.next());
+			Iterator<Integer> it = update_requested_types.iterator();
+			int type = it.next();
 			it.remove();
 			requestList(type);
 		}
@@ -204,12 +204,12 @@ public final strictfp class MatchmakingClient implements MatchmakingClientInterf
 		if (listener != null)
 			listener.receivedProfiles(profiles, last_profile_nick);
 	}
-	
+
         @Override
 	public void joiningChatRoom(String room_name) {
 		assert chat_room_info == null;
 		chat_room_info = new ChatRoomInfo(room_name);
-		
+
 		chat_room_history.clear();
 		MatchmakingListener listener = Network.getMatchmakingListener();
 		if (listener != null)
@@ -278,7 +278,7 @@ public final strictfp class MatchmakingClient implements MatchmakingClientInterf
 			chat_gui_root = null;
 		}
 	}
-	
+
 	public boolean isConnected() {
 		return state == STATE_LOGGED_IN;
 	}
@@ -302,7 +302,7 @@ public final strictfp class MatchmakingClient implements MatchmakingClientInterf
 		MatchmakingListener listener = Network.getMatchmakingListener();
 		listener.loginError(error_code);
 	}
-	
+
 	public MatchmakingServerLoginInterface getLoginInterface() {
 		assert !isConnected();
 		return matchmaking_login_interface;
@@ -320,7 +320,7 @@ public final strictfp class MatchmakingClient implements MatchmakingClientInterf
 	public String getUsername() {
 		return username;
 	}
-	
+
 	public void registerTunnel(HostSequenceID host_seq, TunnelledConnection conn) {
 		Object old = tunnels.put(host_seq, conn);
 		assert old == null;
@@ -345,7 +345,7 @@ public final strictfp class MatchmakingClient implements MatchmakingClientInterf
 	public void closeTunnel(HostSequenceID host_seq) {
 		matchmaking_interface.closeTunnel(host_seq);
 	}
-	
+
 	public void registerTunnelledListener(TunnelledConnectionListener listener) {
 		assert tunnelled_listener == null;
 		this.tunnelled_listener = listener;
@@ -357,20 +357,20 @@ public final strictfp class MatchmakingClient implements MatchmakingClientInterf
 	}
 
 	private TunnelledConnection removeTunnel(HostSequenceID from) {
-		return (TunnelledConnection)tunnels.remove(from);
+		return tunnels.remove(from);
 	}
-	
+
 	private TunnelledConnection getTunnel(HostSequenceID from) {
-		return (TunnelledConnection)tunnels.get(from);
+		return tunnels.get(from);
 	}
-	
+
         @Override
 	public void tunnelClosed(HostSequenceID from) {
 		TunnelledConnection tunnel = removeTunnel(from);
 		if (tunnel != null)
 			tunnel.tunnelClosed();
 	}
-	
+
         @Override
 	public void tunnelAccepted(HostSequenceID from) {
 		TunnelledConnection tunnel = getTunnel(from);
@@ -412,16 +412,17 @@ public final strictfp class MatchmakingClient implements MatchmakingClientInterf
 		if (listener != null)
 			listener.connectionLost();
 	}
-	
+
         @Override
 	public void connected(AbstractConnection connection) {
-		SignedObject signed_key = Renderer.getRegistrationClient().getSignedRegistrationKey();
+                // FIXME replace registratration key.
+		SignedObject signed_key = null;
 		Connection wrapped_connection = (Connection)conn.getWrappedConnection();
 		matchmaking_login_interface.setLocalRemoteAddress(wrapped_connection.getLocalAddress());
 System.out.println("wrapped_connection.getLocalAddress()	 = " + wrapped_connection.getLocalAddress()	);
 		int revision = LocalInput.getRevision();
 		if (!Renderer.isRegistered())
-			matchmaking_login_interface.loginAsGuest(revision);
+                    matchmaking_login_interface.loginAsGuest(revision);
 		else if (login_details != null)
 			matchmaking_login_interface.createUser(login, login_details, signed_key, revision);
 		else
@@ -432,7 +433,7 @@ System.out.println("wrapped_connection.getLocalAddress()	 = " + wrapped_connecti
 	public void error(AbstractConnection conn, IOException e) {
 		handleError(e);
 	}
-	
+
 	public void close() {
 		//if (state == STATE_NOT_CONNECTED)
 		//	return;
@@ -440,9 +441,9 @@ System.out.println("wrapped_connection.getLocalAddress()	 = " + wrapped_connecti
 			tunnelled_listener.connectionClosed();
 			tunnelled_listener = null;
 		}
-		Iterator it = tunnels.values().iterator();
+		Iterator<TunnelledConnection> it = tunnels.values().iterator();
 		while (it.hasNext()) {
-			TunnelledConnection tunnel = (TunnelledConnection)it.next();
+			TunnelledConnection tunnel = it.next();
 			tunnel.tunnelClosed();
 		}
 		tunnels.clear();

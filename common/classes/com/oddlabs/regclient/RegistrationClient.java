@@ -1,7 +1,6 @@
 package com.oddlabs.regclient;
 
 import com.oddlabs.event.Deterministic;
-import com.oddlabs.http.HttpRequestParameters;
 import com.oddlabs.net.TaskThread;
 import com.oddlabs.registration.*;
 import com.oddlabs.util.DeterministicSerializer;
@@ -21,7 +20,6 @@ public strictfp class RegistrationClient {
 	public final static int CLIENT_TYPE_FOREIGN = 3;
 
 	private final File registration_file;
-	private final HttpRequestParameters parameters;
 	private final int client_type;
 	private final TaskThread task_thread;
 
@@ -34,13 +32,12 @@ public strictfp class RegistrationClient {
 	private RegistrationListener registration_listener;
 
 	protected RegistrationClient(TaskThread task_thread) {
-		this(task_thread, null, null, -1);
+		this(task_thread, null, -1);
 	}
 
-	public RegistrationClient(TaskThread task_thread, File registration_file, HttpRequestParameters parameters, int client_type) {
+	public RegistrationClient(TaskThread task_thread, File registration_file, int client_type) {
 		this.task_thread = task_thread;
 		this.registration_file = registration_file;
-		this.parameters = parameters;
 		this.client_type = client_type;
 
 		loadRegistrationFileDeterministic();

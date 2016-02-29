@@ -10,7 +10,7 @@ public final strictfp class RefillerList {
 
 	private boolean finished = false;
 	private final Thread refill_thread;
-	private final List players = new ArrayList();
+	private final List<QueuedAudioPlayer> players = new ArrayList<>();
 
 	public synchronized void registerQueuedPlayer(QueuedAudioPlayer q) {
 		assert !players.contains(q);
@@ -51,7 +51,7 @@ public final strictfp class RefillerList {
 					synchronized (RefillerList.this) {
 						if (AL.isCreated()) {
 							for (int i = 0; i < players.size(); i++) {
-								((QueuedAudioPlayer)players.get(i)).refill();
+								players.get(i).refill();
 							}
 						}
 						while (players.isEmpty() && !finished) {

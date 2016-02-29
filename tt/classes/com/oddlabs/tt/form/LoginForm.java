@@ -22,7 +22,7 @@ import com.oddlabs.tt.render.Renderer;
 import com.oddlabs.tt.util.Utils;
 import java.util.ResourceBundle;
 
-public final strictfp class LoginForm extends Form implements RegisterProgressFormListener {
+public final strictfp class LoginForm extends Form {
 	private final static int BUTTON_WIDTH = 100;
 	private final static int EDITLINE_WIDTH = 240;
 
@@ -33,7 +33,7 @@ public final strictfp class LoginForm extends Form implements RegisterProgressFo
 	private final PasswordLine editline_password;
 	private final CheckBox remember_checkbox;
 	private final ResourceBundle bundle = ResourceBundle.getBundle(LoginForm.class.getName());
-	
+
 	public LoginForm(NetworkSelector network, GUIRoot gui_root, MainMenu main_menu) {
 		this.main_menu = main_menu;
 		this.gui_root = gui_root;
@@ -80,7 +80,7 @@ public final strictfp class LoginForm extends Form implements RegisterProgressFo
 		addChild(login_group);
 		// buttons
 		Group group_buttons = new Group();
-		
+
 
 		ButtonObject button_newuser = new HorizButton(Utils.getBundleString(bundle, "new_account"), BUTTON_WIDTH);
 		button_newuser.addMouseClickListener(new NewUserListener());
@@ -88,7 +88,7 @@ public final strictfp class LoginForm extends Form implements RegisterProgressFo
 		button_ok.addMouseClickListener(login_listener);
 		ButtonObject button_cancel = new CancelButton(BUTTON_WIDTH);
 		button_cancel.addMouseClickListener(new CancelListener(this));
-		
+
 		group_buttons.addChild(button_newuser);
 		group_buttons.addChild(button_ok);
 		group_buttons.addChild(button_cancel);
@@ -96,10 +96,10 @@ public final strictfp class LoginForm extends Form implements RegisterProgressFo
 		button_cancel.place();
 		button_ok.place(button_cancel, LEFT_MID);
 		button_newuser.place(button_ok, LEFT_MID);
-		
+
 		group_buttons.compileCanvas();
 		addChild(group_buttons);
-		
+
 		// Place objects
 
 		// headline
@@ -111,13 +111,7 @@ public final strictfp class LoginForm extends Form implements RegisterProgressFo
 		compileCanvas();
 
 		if (Renderer.isRegistered()) {
-			if (Renderer.getRegistrationClient().getRegistrationInfo() != null) {
-				main_menu.setMenu(this);
-			} else {
-				RegisterProgressForm form = new RegisterProgressForm(gui_root, this);
-				Renderer.getRegistrationClient().setListener(form);
-				Renderer.getRegistrationClient().register(true);
-			}
+        		main_menu.setMenu(this);
 		} else {
 			Form form = new MatchmakingConnectingForm(network, gui_root, null, main_menu, null, null);
 			main_menu.setMenu(form);
@@ -126,19 +120,10 @@ public final strictfp class LoginForm extends Form implements RegisterProgressFo
 	}
 
         @Override
-	public void registrationFailed() {
-	}
-	
-        @Override
-	public void registrationCompleted() {
-		main_menu.setMenu(this);
-	}
-	
-        @Override
 	public void setFocus() {
 		editline_username.setFocus();
 	}
-	
+
 	private void login() {
 		String username = editline_username.getContents();
 		String password = editline_password.getPasswordDigest();

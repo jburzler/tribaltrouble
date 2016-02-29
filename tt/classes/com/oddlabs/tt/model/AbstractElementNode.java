@@ -67,18 +67,18 @@ public abstract strictfp class AbstractElementNode extends BoundingBox {
 		return root;
 	}
 
-	public static void buildSupplies(World world, List iron_positions, List rock_positions, float[][] plants, int terrain_type) {
+	public static void buildSupplies(World world, List<int[]> iron_positions, List<int[]> rock_positions, float[][] plants, int terrain_type) {
 		buildRockSupplies(world, rock_positions);
 		buildIronSupplies(world, iron_positions);
 		addPlants(world, plants, terrain_type);
 	}
 
-	private static void buildRockSupplies(World world, List positions) {
+	private static void buildRockSupplies(World world, List<int[]> positions) {
 		SpriteKey[] sprite_renderers = world.getLandscapeResources().getRockFragments();
 		int num_supplies = positions.size();
 System.out.println("num_rocks = " + num_supplies);
 		for (int i = 0; i < num_supplies; i++) {
-			int[] coords = (int[])positions.get(i);
+			int[] coords = positions.get(i);
 			int grid_x = coords[0];
 			int grid_y = coords[1];
 			float x = UnitGrid.coordinateFromGrid(grid_x) + (world.getRandom().nextFloat() - .5f);
@@ -88,7 +88,7 @@ System.out.println("num_rocks = " + num_supplies);
 		}
 	}
 
-	private static void buildIronSupplies(World world, List positions) {
+	private static void buildIronSupplies(World world, List<int[]> positions) {
 		SpriteKey[] sprite_renderers = world.getLandscapeResources().getIronFragments();
 		int num_supplies = positions.size();
 System.out.println("num_iron = " + num_supplies);
@@ -124,7 +124,7 @@ System.out.println("num_iron = " + num_supplies);
 		}
 System.out.println("num_plants = " + num_plants);
 	}
-	
+
 	public abstract void visit(ElementNodeVisitor visitor);
 
 	public final void visitElements(ElementNodeVisitor visitor) {

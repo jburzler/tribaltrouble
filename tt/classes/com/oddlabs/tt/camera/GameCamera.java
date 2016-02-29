@@ -35,7 +35,7 @@ public final strictfp class GameCamera extends Camera {
 	private float scroll_start_speed;
 	private boolean scroll_start;
 	private float zoom_time;
-	private float default_rotate_radius;
+	private final float default_rotate_radius;
 	private float last_zoom_factor;
 
 	private Target rotation_point = null;
@@ -65,7 +65,7 @@ public final strictfp class GameCamera extends Camera {
 	public float getScrollX() {
 		return scrolling_x;
 	}
-	
+
 	public float getScrollY() {
 		return scrolling_y;
 	}
@@ -189,7 +189,7 @@ public final strictfp class GameCamera extends Camera {
 //					setScrollSpeed();
 				}
 				checkPosition();
-			} 
+			}
 		}
 	}
 
