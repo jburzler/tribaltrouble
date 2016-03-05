@@ -9,7 +9,7 @@ The source is released "as is", and Oddlabs will not be available for help build
 About this fork
 ---------------
 
-I have been working to restore this enjoyable game to working order with modern Java. This has included updating to more recent LWJGL, removing the need for registration, removing demo mode as well as many Java modernizations and cleanups. The ultimate goal is to produce a jar that can be run simply with `java -jar tt.jar` on MacOS X, Linux and Windows.
+I have been working to restore this enjoyable game to working order with modern Java. This has included updating to more recent LWJGL, JInput and OpenAL, removing the need for registration, removing demo mode, removing updater as well as many Java modernizations and cleanups. The ultimate goal is to produce a jar that can be run simply with `java -jar tt.jar` on MacOS X, Linux and Windows.
 
 Building
 --------
