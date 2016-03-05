@@ -6,30 +6,18 @@ The source is released "as is", and Oddlabs will not be available for help build
 
 **If** you know how to code Java, configure ant, use MySQL, and have a **genuine intention** of actually working on the game, you can create an issue for detailed questions about the source.
 
-Binaries
---------
-If you are simply looking for a working binary version of the game, you can find the latest released installers here:
+About this fork
+---------------
 
-- [Windows](binaries/TribalTroubleSetup.exe)
-- [Mac](binaries/TribalTrouble.dmg)
-- [Linux](binaries/TribalTroubleSetup.sh)
-
-Please note that the multiplayer server referenced in these builds, is no longer available.
-
-You can register the binaries by putting the registration file in the binaries folder into this folder:
-- Windows XP: `C:\Documents and Settings\Username\TribalTrouble\`
-- Windows Vista or newer: `C:\Users\Username\TribalTrouble\`
-- Mac OS X: `Library/Application Support/TribalTrouble/`
-- Linux: `~/.TribalTrouble/`
-
+I have been working to restore this enjoyable game to working order with modern Java. This has included updating to more recent LWJGL, removing the need for registration, removing demo mode as well as many Java modernizations and cleanups. The ultimate goal is to produce a jar that can be run simply with `java -jar tt.jar` on MacOS X, Linux and Windows.
 
 Building
 --------
 Clone the repository:
 ```
-git clone https://github.com/sunenielsen/tribaltrouble.git
+git clone https://github.com/bondolo/tribaltrouble.git
 ```
-Make sure you have Java SDK at least version 6, and Apache Ant.
+Make sure you have Java SDK at least version 8, and Apache Ant.
 
 
 To build the game client, do this:
