@@ -293,15 +293,6 @@
 		</delete>
 	</target>
 
-	<target name="copybuynowfile">
-		<copy todir="${installers.tmp}" >
-			<fileset dir="${installers}" defaultexcludes="false">
-				<include name="BuyNow.html"/>
-			</fileset>
-		</copy>
-		<replace file="${installers.tmp}/BuyNow.html" token="@BUYNOW_URL@" value="${buynow_url}"/>
-	</target>
-
 	<target name="assembleplatforms">
 		<!-- linux -->
 		<mkdir dir="${installers.assembly}/linux-x86/gamedata"/>
@@ -388,8 +379,8 @@
 		</antcall>
 	</target>
 
-	<!--<target name="initinstalltmp" depends="cleaninstallertmp, copybuynowfile"/>-->
-	<target name="initinstalltmp" depends="assembleinstaller, cleaninstallertmp, copybuynowfile"/>
+	<!--<target name="initinstalltmp" depends="cleaninstallertmp"/>-->
+	<target name="initinstalltmp" depends="assembleinstaller, cleaninstallertmp"/>
 
 	<target name="cleaninstallertmp">
 		<delete dir="${installers.tmproot}"/>

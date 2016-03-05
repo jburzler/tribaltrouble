@@ -10,7 +10,7 @@
 	<property name="tools" value="../tools"/>
 	<property name="nativelib" value="../common/lib/native"/>
 	<property name="commonstatic" value="../common/static"/>
-	<property name="java_source_version" value="1.4"/>
+	<property name="java_source_version" value="1.8"/>
 
 	<target name="init">
 		<tstamp/>
@@ -30,7 +30,7 @@
 	<target name="compile-common">
 		<ant inheritAll="false" dir="../common" target="compile"/>
 	</target>
-	
+
 	<target name="compiledeps"/>
 
 	<target name="compile" depends="init,compiledeps">
@@ -44,77 +44,12 @@
 
 	<target name="dorundeps" depends="compile,rundeps"/>
 
-	<target name="eventloadzipped" depends="dorundeps">
-		<java fork="yes" classpath="${classpath}:${res_classpath}:${build}/classes" classname="${main_class}">
-			<jvmarg value="-ea"/>
-			<jvmarg value="-Djava.library.path=${nativelib}"/>
-			<jvmarg value="-Dorg.lwjgl.util.Debug=true"/>
-			<jvmarg value="-Deventload=zipped"/>
-			<arg value="--eventload"/>
-			<arg value="zipped"/>
-		</java>
-	</target>
-
-	<target name="eventload" depends="dorundeps">
-		<java fork="yes" classpath="${classpath}:${res_classpath}:${build}/classes" classname="${main_class}">
-			<jvmarg value="-ea"/>
-			<jvmarg value="-Djava.library.path=${nativelib}"/>
-			<jvmarg value="-Dorg.lwjgl.util.Debug=true"/>
-			<jvmarg value="-Deventload=normal"/>
-			<arg value="--eventload"/>
-			<arg value="normal"/>
-		</java>
-	</target>
-
-	<target name="grabframes" depends="dorundeps">
-		<java fork="yes" classpath="${classpath}:${res_classpath}:${build}/classes" classname="${main_class}">
-			<jvmarg value="-ea"/>
-			<jvmarg value="-Djava.library.path=${nativelib}"/>
-			<jvmarg value="-Dgrabframes=true"/>
-			<arg value="--grabframes"/>
-		</java>
-	</target>
-
-	<target name="profile" depends="dorundeps">
-		<java fork="yes" classpath="${classpath}:${res_classpath}:${build}/classes" classname="${main_class}">
-			<jvmarg value="-ea"/>
-			<jvmarg value="-Xbootclasspath/a:/home/elias/snot/jprofiler4/bin/agent.jar"/>
-			<jvmarg value="-agentlib:jprofilerti"/>
-			<jvmarg value="-Djava.library.path=${nativelib}"/>
-		</java>
-	</target>
-
-	<target name="cpuprofile" depends="dorundeps">
-		<java fork="yes" classpath="${classpath}:${res_classpath}:${build}/classes" classname="${main_class}">
-			<jvmarg value="-ea"/>
-			<jvmarg value="-Djava.library.path=${nativelib}"/>
-			<jvmarg value="-Xrunhprof:cpu=samples"/>
-		</java>
-	</target>
-
-	<target name="memprofile" depends="dorundeps">
-		<java fork="yes" classpath="${classpath}:${res_classpath}:${build}/classes" classname="${main_class}">
-			<jvmarg value="-ea"/>
-			<jvmarg value="-verbose:gc"/>
-			<jvmarg value="-Djava.library.path=${nativelib}"/>
-			<jvmarg value="-Xrunhprof:heap=all,depth=12,doe=y"/>
-		</java>
-	</target>
-
-	<target name="gcprofile" depends="dorundeps">
-		<java fork="yes" classpath="${classpath}:${res_classpath}:${build}/classes" classname="${main_class}">
-			<jvmarg value="-ea"/>
-			<jvmarg value="-Djava.library.path=${nativelib}"/>
-			<jvmarg value="-verbose:gc"/>
-		</java>
-	</target>
-
 	<target name="run" depends="dorundeps">
 		<java fork="yes" classpath="${classpath}:${res_classpath}:${build}/classes" classname="${main_class}">
 			<jvmarg value="-ea"/>
 			<jvmarg value="-Djava.library.path=${nativelib}"/>
 			<jvmarg value="-Dorg.lwjgl.util.Debug=true"/>
-			<jvmarg value="-Xmx80000000"/>
+			<jvmarg value="-Xmx80m"/>
 			<!--<jvmarg value="-Djavax.net.debug=ssl,handshake,trustmanager"/>-->
 			<!--    <jvmarg value="-Dorg.lwjgl.opengl.Window.undecorated=true"/>-->
 		</java>
