@@ -17,8 +17,6 @@ public abstract strictfp class IconSpinner extends GUIObject implements ToolTip 
 	private final WorldViewer viewer;
 	private IconDisabler icon_disabler = null;
 
-	private String demo = null;
-
 	private int text_count = 0;
 
 	public IconSpinner(WorldViewer viewer, IconQuad[] icon_quad, String tool_tip, Quad[] tool_tip_icons, String shortcut_key) {

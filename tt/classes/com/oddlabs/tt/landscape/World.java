@@ -158,7 +158,6 @@ public final strictfp class World {
 		animation_manager_real_time = new AnimationManager();
 		random = new Random(42);
 
-		List participant_list = new ArrayList();
 		List<Player> player_list = new ArrayList<>();
 		for (short i = 0; i < player_infos.length; i++) {
 //			slot_to_participant_index[i] = -1;
