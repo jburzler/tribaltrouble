@@ -23,10 +23,8 @@ import com.oddlabs.tt.form.WarningForm;
 import com.oddlabs.tt.global.Globals;
 import com.oddlabs.tt.global.GlobalsInit;
 import com.oddlabs.tt.global.Settings;
-import com.oddlabs.tt.gui.CounterLabel;
 import com.oddlabs.tt.gui.GUI;
 import com.oddlabs.tt.gui.GUIRoot;
-import com.oddlabs.tt.gui.Label;
 import com.oddlabs.tt.gui.Languages;
 import com.oddlabs.tt.gui.LocalInput;
 import com.oddlabs.tt.gui.Skin;
@@ -97,14 +95,9 @@ public final strictfp class Renderer {
 	private static String music_path;
 	private static TimerAnimation music_timer;
 
-	private int fallback_val = 0;
-
 	private static boolean finished = false;
 
-	private static Label trial_label;
 	private final CameraState frustum_state = new CameraState();
-	private CounterLabel trial_counter = null;
-	private Label games_left_label;
 	private boolean movie_recording_started = false;
 	private AmbientAudio ambient;
 
@@ -321,12 +314,6 @@ System.out.println("last_event_log_path = " + last_event_log_path);
 		Settings.setSettings(settings);
 		File last_event_log_dir = new File(settings.last_event_log_dir);
 		boolean crashed = settings.crashed;
-		File registration_file = new File(game_dir, Globals.REG_FILE_NAME);
-		if (!registration_file.canRead()) {
-			File install_reg_file = new File(Utils.getInstallDir(), Globals.REG_FILE_NAME);
-			if (install_reg_file.canRead())
-				registration_file = install_reg_file;
-		}
 		NetworkSelector network = new NetworkSelector(LocalEventQueue.getQueue().getDeterministic(), LocalEventQueue.getQueue()::getMillis);
                 initNetwork(network);
 		LocalInput.settings( game_dir, event_log_dir, settings);
