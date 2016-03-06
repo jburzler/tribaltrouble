@@ -49,8 +49,8 @@
 			</sourcefiles>
 			<mapper type="regexp" from="^.*${regexp.separator}(.*)\..*$$" to="${dstdir.regexp}\1.${image_ext}"/>
 			<sequential>
-				<foreach list="${targets}" param="image_path" target="convert_image"/>
-			</sequential>
+        		<foreach parallel="true" list="${targets}" maxThreads="${cores.count}" param="image_path" target="convert_image"/>
+        	</sequential>
 		</outofdate>
 	</target>
 
@@ -103,7 +103,7 @@
 			<arg value="-generate"/>
 		</java>
 	</target>
-	
+
 	<target name="changekeyspassword" depends="compile">
 		<input
 			message="Enter old password for private registration key:"
