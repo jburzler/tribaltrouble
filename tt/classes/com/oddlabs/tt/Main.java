@@ -1,6 +1,5 @@
 package com.oddlabs.tt;
 
-import com.oddlabs.tt.global.Globals;
 import com.oddlabs.tt.render.Renderer;
 import com.oddlabs.tt.util.Utils;
 import java.util.ResourceBundle;
@@ -17,7 +16,7 @@ public final strictfp class Main {
 				t = t.getCause();
 			ResourceBundle bundle = ResourceBundle.getBundle(Main.class.getName());
 			String error = Utils.getBundleString(bundle, "error");
-			String error_msg = Utils.getBundleString(bundle, "error_message", new Object[]{t.toString(), Globals.SUPPORT_ADDRESS});
+			String error_msg = Utils.getBundleString(bundle, "error_message", new Object[]{t.toString()});
 			Sys.alert(error, error_msg);
 		} finally {
 			shutdown();

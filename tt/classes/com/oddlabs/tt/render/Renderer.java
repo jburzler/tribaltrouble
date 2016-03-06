@@ -270,8 +270,6 @@ public final strictfp class Renderer {
 		// fetch initial settings
 		settings.load(game_dir);
 
-		readOrSetPreference(Globals.AFFILIATE_ID_KEY, settings.affiliate_id); // setting affiliate id in preferences
-
 		if (eventload || grab_frames) {
 			String last_event_log_path = settings.last_event_log_dir + File.separator + "event.log";
 			if (zipped)

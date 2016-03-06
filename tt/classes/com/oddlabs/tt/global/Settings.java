@@ -77,11 +77,6 @@ public final strictfp class Settings implements Serializable {
 
 	public boolean warning_no_sound = true;
 
-	//affiliate
-	public String affiliate_id = "oddlabs.com";
-	public String affiliate_logo_file = "";
-	public String buy_url = "http://tribaltrouble.com/order";
-
 	//reg key
 	public boolean online = true;
 	public String reg_key = "";

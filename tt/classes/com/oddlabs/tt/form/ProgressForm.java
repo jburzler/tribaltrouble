@@ -3,11 +3,8 @@ package com.oddlabs.tt.form;
 import com.oddlabs.net.NetworkSelector;
 import com.oddlabs.tt.audio.AudioManager;
 import com.oddlabs.tt.delegate.CameraDelegate;
-import com.oddlabs.tt.delegate.LogoScreen;
 import com.oddlabs.tt.delegate.NullDelegate;
 import com.oddlabs.tt.event.LocalEventQueue;
-import com.oddlabs.tt.global.Globals;
-import com.oddlabs.tt.global.Settings;
 import com.oddlabs.tt.gui.Fadable;
 import com.oddlabs.tt.gui.GUI;
 import com.oddlabs.tt.gui.GUIImage;
@@ -17,16 +14,11 @@ import com.oddlabs.tt.gui.LocalInput;
 import com.oddlabs.tt.gui.ProgressBar;
 import com.oddlabs.tt.gui.ProgressBarInfo;
 import com.oddlabs.tt.gui.Skin;
-import com.oddlabs.tt.render.Texture;
 import com.oddlabs.tt.render.UIRenderer;
-import com.oddlabs.tt.resource.Resources;
-import com.oddlabs.tt.resource.TextureFile;
 import com.oddlabs.tt.util.Utils;
 import java.util.Random;
 import java.util.ResourceBundle;
 import org.lwjgl.openal.AL;
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
 
 public final strictfp class ProgressForm {
 	private final static int PROGRESSBAR_LOADINGTIP_SPACING = 45;
@@ -35,10 +27,10 @@ public final strictfp class ProgressForm {
 	private final static String[] LOADING_TIPS;
 
 	private static ProgressForm current_progress = null;
-	
+
 	private final ProgressBar progress_bar;
 	private final GUIImage image;
-	
+
 	static {
 		LOADING_TIPS = new String[NUM_TIPS];
 		ResourceBundle bundle = ResourceBundle.getBundle(ProgressForm.class.getName());
@@ -118,7 +110,7 @@ public final strictfp class ProgressForm {
 
 		image = new GUIImage(screen_width, screen_height, 0f, 0f, (float)image_width/texture_width, (float)image_height/texture_height, texture_name);
 		image.setPos(0, 0);
-		
+
 		progress_bar = new ProgressBar(network, gui, progress_width, info, false);
 		progress_y -= progress_bar.getHeight();
 		progress_bar.setPos(progress_x, progress_y);
@@ -138,33 +130,14 @@ public final strictfp class ProgressForm {
 	}
 
 	private static void callback(GUI gui, LoadCallback callback, boolean first_progress) {
-		String logo_file = Settings.getSettings().affiliate_logo_file;
-		// For backwards compatibility with old affiliate installers
-		logo_file = logo_file.replaceAll("(.*).image", "$1");
-
 		Fadable start_sources_fadable = () -> {
                     if (AL.isCreated())
                         AudioManager.getManager().startSources();
                 };
 
-		boolean show_logo = logo_file != null && !logo_file.isEmpty() && first_progress;
 		GUIRoot client_root = gui.createRoot();
 		UIRenderer renderer = callback.load(client_root);
-		if (show_logo) {
-			GUIRoot logo_root = gui.newFade();
-			Texture logo_texture = loadLogo(logo_file);
-			new LogoScreen(logo_root, logo_texture, start_sources_fadable, client_root, renderer);
-		} else
-			gui.newFade(start_sources_fadable, client_root, renderer);
-	}
-
-	private static Texture loadLogo(String logo_file) {
-		try {
-			return (Texture)Resources.findResource(new TextureFile(logo_file, Globals.COMPRESSED_RGB_FORMAT, GL11.GL_LINEAR, GL11.GL_LINEAR, GL12.GL_CLAMP_TO_EDGE, GL12.GL_CLAMP_TO_EDGE));
-		} catch (Exception e) {
-			System.err.println("ERROR: Could not find logo: " + logo_file);
-			return null;
-		}
+		gui.newFade(start_sources_fadable, client_root, renderer);
 	}
 
 	public static void progress() {
