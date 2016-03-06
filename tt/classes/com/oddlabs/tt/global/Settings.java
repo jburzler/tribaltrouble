@@ -13,6 +13,7 @@ import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.Properties;
+import org.lwjgl.LWJGLUtil;
 import org.lwjgl.opengl.GLContext;
 import org.lwjgl.opengl.Pbuffer;
 
@@ -66,8 +67,8 @@ public final strictfp class Settings implements Serializable {
 
 	public float mapmode_delay = .5f;
 	public float tooltip_delay = .5f;
-	private String developer_mode = "";
-	private String beta_mode = "";
+	private final String developer_mode = "";
+	private final String beta_mode = "";
 	public boolean has_native_campaign = false;
 
 	public boolean save_event_log = true;
@@ -91,11 +92,11 @@ public final strictfp class Settings implements Serializable {
 
 	/* optional extensions */
 	public boolean use_vbo_draw_range_elements = false;
-	private boolean use_vbo = false;
-	private boolean use_pbuffer = true;
-	private boolean use_fbo = true;
+	private final boolean use_vbo = false;
+	private final boolean use_pbuffer = LWJGLUtil.getPlatform() != LWJGLUtil.PLATFORM_MACOSX;
+	private final boolean use_fbo = true;
 	public boolean use_copyteximage = false;
-	private boolean use_texture_compression = true;
+	private final boolean use_texture_compression = true;
 
 	public int frame_grab_milliseconds_per_frame = 40;
 
@@ -142,7 +143,7 @@ public final strictfp class Settings implements Serializable {
                 if (!hasValidModifiers(mods))
                     continue;
                 assert !Modifier.isStatic(mods);
-                Class field_type = field.getType();
+                Class<?> field_type = field.getType();
                 try {
                     if (field_type.equals(boolean.class)) {
                         boolean field_value = field.getBoolean(this);
@@ -195,7 +196,7 @@ public final strictfp class Settings implements Serializable {
                 String value = props.getProperty(field.getName());
                 if (value == null)
                     continue;
-                Class field_type = field.getType();
+                Class<?> field_type = field.getType();
                 try {
                     if (field_type.equals(boolean.class)) {
                         boolean field_value = (Boolean.valueOf(value));
