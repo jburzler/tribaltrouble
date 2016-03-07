@@ -171,13 +171,13 @@ public final strictfp class AdvancedAI extends AI {
 	}
 
 	private int scanForEnemies(Selectable src) {
-		FindOccupantFilter filter = new FindOccupantFilter(src.getPositionX(), src.getPositionY(), 30f, src, Unit.class);
+		FindOccupantFilter<Unit> filter = new FindOccupantFilter<>(src.getPositionX(), src.getPositionY(), 30f, src, Unit.class);
 		getUnitGrid().scan(filter, src.getGridX(), src.getGridY());
-		List target_list = filter.getResult();
+		List<Unit> target_list = filter.getResult();
 		int score = 0;
 		defense_target = null;
 		for (int i = 0; i < target_list.size(); i++) {
-			Unit unit = (Unit)target_list.get(i);
+			Unit unit = target_list.get(i);
 			if (!unit.isDead() && getOwner().isEnemy(unit.getOwner())) {
 				score += getUnitScore(unit);
 				if (defense_target == null)

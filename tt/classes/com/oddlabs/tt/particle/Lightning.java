@@ -17,7 +17,7 @@ public final strictfp class Lightning extends Element implements Animated {
 	private final static float SQRT_2 = (float)StrictMath.sqrt(2f);
 
 	private final AnimationManager manager;
-	private final List particles = new ArrayList();
+	private final List<StretchParticle> particles = new ArrayList<>();
 	private final Vector3f src;
 	private final Vector3f dst;
 	private final float width;
@@ -27,7 +27,7 @@ public final strictfp class Lightning extends Element implements Animated {
 	private final TextureKey texture;
 	private final World world;
 
-	private float energy;
+	private final float energy;
 
 	public Lightning(World world, Vector3f src, Vector3f dst, float width,
 			int num_particles, Vector4f color, Vector4f delta_color,
@@ -48,7 +48,7 @@ public final strictfp class Lightning extends Element implements Animated {
 		register();
 	}
 
-	public List getParticles() {
+	public List<StretchParticle> getParticles() {
 		return particles;
 	}
 
@@ -110,7 +110,7 @@ public final strictfp class Lightning extends Element implements Animated {
 		float z_max = Float.NEGATIVE_INFINITY;
 
 		for (int i = 0; i < particles.size(); i++) {
-			StretchParticle particle = (StretchParticle)particles.get(i);
+			StretchParticle particle = particles.get(i);
 			if (particle.getEnergy() > 0f) {
 				particle.update(t);
 				float x = particle.getSrcX();

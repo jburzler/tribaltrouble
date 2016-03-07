@@ -4,11 +4,11 @@ import com.oddlabs.tt.render.SpriteKey;
 import java.util.Map;
 
 public final strictfp class UnitSupplyContainer extends SupplyContainer {
-	private final Map supply_sprite_renderers;
+	private final Map<Class<? extends Supply>,SpriteKey> supply_sprite_renderers;
 
-	private Class type;
+	private Class<? extends Supply> type;
 
-	public UnitSupplyContainer(int max_resource_count, Map supply_sprite_renderers) {
+	public UnitSupplyContainer(int max_resource_count, Map<Class<? extends Supply>,SpriteKey> supply_sprite_renderers) {
 		super(max_resource_count);
 		this.supply_sprite_renderers = supply_sprite_renderers;
 	}
@@ -18,7 +18,7 @@ public final strictfp class UnitSupplyContainer extends SupplyContainer {
 		throw new RuntimeException();
 	}
 
-	public int increaseSupply(int amount, Class type) {
+	public int increaseSupply(int amount, Class<? extends Supply> type) {
 		if (this.type != type) {
 			this.type = type;
 			super.increaseSupply(-super.getNumSupplies());
@@ -26,11 +26,11 @@ public final strictfp class UnitSupplyContainer extends SupplyContainer {
 		return super.increaseSupply(amount);
 	}
 
-	public Class getSupplyType() {
+	public Class<? extends Supply> getSupplyType() {
 		return type;
 	}
 
-	public SpriteKey getSupplySpriteRenderer(Class key) {
-		return (SpriteKey)supply_sprite_renderers.get(key);
+	public SpriteKey getSupplySpriteRenderer(Class<? extends Supply> key) {
+		return supply_sprite_renderers.get(key);
 	}
 }

@@ -111,7 +111,7 @@ public final strictfp class PathTracker {
 		}
 		return null;
 	}
-	
+
 
 	private PathTracker findDeadlock() {
 		PathTracker current = this;
@@ -133,7 +133,7 @@ public final strictfp class PathTracker {
 
 		return result;
 	}
-					
+
 	private void solveDeadlock() {
 		Movable current = unit;
 		current.free();
@@ -206,7 +206,7 @@ public final strictfp class PathTracker {
 
 	private GridPathNode findPathToNextRegion(int src_x, int src_y, RegionNode next_region_node, boolean allow_secondary_targets) {
 		Region next_region = null;
-		Region next_next_region = null;
+		Region next_next_region;
 		if (next_region_node != null) {
 			next_region = next_region_node.getRegion();
 			RegionNode next_next_region_node = (RegionNode)next_region_node.getParent();

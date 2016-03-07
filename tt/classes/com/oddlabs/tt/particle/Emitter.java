@@ -14,7 +14,7 @@ import org.lwjgl.util.vector.Vector3f;
 
 public abstract strictfp class Emitter extends Element implements Animated {
 	private final AnimationManager manager;
-	private final List[] particles;
+	private final List<Particle>[] particles;
 	private final TextureKey[] textures;
 	private final SpriteKey[] sprite_renderers;
 	private final int src_blend_func;
@@ -27,6 +27,7 @@ public abstract strictfp class Emitter extends Element implements Animated {
 	private float scale_y = 1f;
 	private float scale_z = 1f;
 
+        @SuppressWarnings("unchecked")
 	public Emitter(World world, Vector3f position, int src_blend_func, int dst_blend_func, TextureKey[] textures, SpriteKey[] sprite_renderers, int types, AnimationManager manager) {
 		super(world.getElementRoot());
 		this.world = world;
@@ -37,9 +38,9 @@ public abstract strictfp class Emitter extends Element implements Animated {
 		this.sprite_renderers = sprite_renderers;
 		this.types = types;
 		this.manager = manager;
-		particles = new ArrayList[types];
+		particles = (List<Particle>[])new ArrayList<?>[types];
 		for (int i = 0; i < particles.length; i++) {
-			particles[i] = new ArrayList();
+			particles[i] = new ArrayList<>();
 		}
 		register();
 	}
@@ -52,7 +53,7 @@ public abstract strictfp class Emitter extends Element implements Animated {
 		return sprite_renderers;
 	}
 
-	public final List[] getParticles() {
+	public final List<Particle>[] getParticles() {
 		return particles;
 	}
 
@@ -111,9 +112,9 @@ public abstract strictfp class Emitter extends Element implements Animated {
 	}
 
 	public final void forceColorChange(float dr, float dg, float db, float da) {
-            for (List particle1 : particles) {
+            for (List<Particle> particle1 : particles) {
                 for (int i = 0; i < particle1.size(); i++) {
-                    Particle particle = (Particle) particle1.get(i);
+                    Particle particle = particle1.get(i);
                     particle.setColor(particle.getColorR() + dr, particle.getColorG() + dg, particle.getColorB() + db, particle.getColorA() + da);
                 }
             }

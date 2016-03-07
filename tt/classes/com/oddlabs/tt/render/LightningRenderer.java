@@ -13,7 +13,7 @@ final strictfp class LightningRenderer {
 
 	private final static StrictMatrix4f view_matrix = new StrictMatrix4f();
 	private final static CameraState tmp_camera = new CameraState();
-	public static void render(RenderQueues render_queues, List emitter_queue, CameraState state) {
+	public static void render(RenderQueues render_queues, List<Lightning> emitter_queue, CameraState state) {
 		tmp_camera.set(state);
 		view_matrix.setIdentity();
 		tmp_camera.setView(view_matrix);
@@ -26,7 +26,7 @@ final strictfp class LightningRenderer {
 		GL11.glEnable(GL11.GL_ALPHA_TEST);
 		GL11.glDepthMask(false);
 		for (int i = 0; i < emitter_queue.size(); i++) {
-			Lightning emitter = (Lightning)emitter_queue.get(i);
+			Lightning emitter = emitter_queue.get(i);
 			if (Globals.draw_particles)
 				render(render_queues, emitter);
 		}
@@ -86,9 +86,9 @@ final strictfp class LightningRenderer {
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
 		GL11.glBegin(GL11.GL_QUADS);
 
-		List particles = lightning.getParticles();
+		List<StretchParticle> particles = lightning.getParticles();
 		for (int i = particles.size() - 1; i >= 0; i--) {
-			StretchParticle particle = (StretchParticle)particles.get(i);
+			StretchParticle particle = particles.get(i);
 			render2DParticle(particle);
 		}
 

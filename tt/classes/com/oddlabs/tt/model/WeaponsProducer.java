@@ -11,7 +11,7 @@ public strictfp class WeaponsProducer {
 	private final static float MAX_BREAK_TIME = .25f;
 	private final static float BREAK_PROBABILITY = .2f;
 
-	private final static List build_list = new ArrayList();
+	private final static List<BuildProductionContainer> build_list = new ArrayList<>();
 
 	private final Building building;
 	private final WorkerUnitContainer unit_container;
@@ -47,7 +47,7 @@ public strictfp class WeaponsProducer {
 			startSound();
 			float man_seconds_per_container = unit_container.getNumSupplies()*t/build_list.size();
 			for (int i = 0; i < build_list.size(); i++) {
-				BuildProductionContainer current = (BuildProductionContainer)build_list.get(i);
+				BuildProductionContainer current = build_list.get(i);
 				current.build(man_seconds_per_container);
 			}
 		} else {

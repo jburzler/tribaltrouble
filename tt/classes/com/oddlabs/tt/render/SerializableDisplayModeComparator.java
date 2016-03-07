@@ -2,7 +2,7 @@ package com.oddlabs.tt.render;
 
 import java.util.Comparator;
 
-public final strictfp class SerializableDisplayModeComparator implements Comparator {
+public final strictfp class SerializableDisplayModeComparator implements Comparator<SerializableDisplayMode> {
 	private final SerializableDisplayMode target_mode;
 
 	public SerializableDisplayModeComparator(SerializableDisplayMode target_mode) {
@@ -10,10 +10,7 @@ public final strictfp class SerializableDisplayModeComparator implements Compara
 	}
 
         @Override
-	public int compare(Object o1, Object o2) {
-		SerializableDisplayMode d1 = (SerializableDisplayMode)o1;
-		SerializableDisplayMode d2 = (SerializableDisplayMode)o2;
-
+	public int compare(SerializableDisplayMode d1, SerializableDisplayMode d2) {
 		/*
 		 * Elias: sort after largest bpp first, then lowest freq
 		 * to accomodate broken monitors lying about their

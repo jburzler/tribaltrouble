@@ -10,9 +10,9 @@ import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
 
 abstract strictfp class ShadowRenderer {
-	private static ShortBuffer shadow_indices = BufferUtils.createShortBuffer(HeightMap.GRID_UNITS_PER_PATCH*HeightMap.GRID_UNITS_PER_PATCH*2*3);
+	private static final ShortBuffer shadow_indices = BufferUtils.createShortBuffer(HeightMap.GRID_UNITS_PER_PATCH*HeightMap.GRID_UNITS_PER_PATCH*2*3);
 //	private static int shadow_number = 1;
-	
+
 	protected static void setupShadows() {
 		VBO.releaseIndexVBO();
 		GL11.glEnable(GL11.GL_BLEND);
@@ -21,7 +21,7 @@ abstract strictfp class ShadowRenderer {
 		GLStateStack.switchState(GLState.VERTEX_ARRAY);
 		GL11.glEnable(GL11.GL_TEXTURE_GEN_S);
 		GL11.glEnable(GL11.GL_TEXTURE_GEN_T);
-		
+
 		// Workaround, See comment in renderShadow
 		GL11.glMatrixMode(GL11.GL_TEXTURE);
 	}
@@ -56,9 +56,9 @@ abstract strictfp class ShadowRenderer {
 		int patch_start_y = grid_start_y/grid_units_per_patch;
 		int patch_end_x = grid_end_x/grid_units_per_patch;
 		int patch_end_y = grid_end_y/grid_units_per_patch;
-		
+
 		GLUtils.setupTexGen(texture_scale, texture_scale, -texture_x, -texture_y);
-		
+
 		for (int patch_y = patch_start_y; patch_y <= patch_end_y; patch_y++) {
 			for (int patch_x = patch_start_x; patch_x <= patch_end_x; patch_x++) {
 				int local_start_x = StrictMath.max(grid_start_x, patch_x*grid_units_per_patch)&(grid_units_per_patch - 1);

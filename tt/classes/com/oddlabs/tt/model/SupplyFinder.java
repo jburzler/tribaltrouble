@@ -7,20 +7,20 @@ import com.oddlabs.tt.pathfinder.RegionBuilder;
 import java.util.ArrayList;
 import java.util.List;
 
-public final strictfp class SupplyFinder implements FinderFilter {
+public final strictfp class SupplyFinder<S extends Supply> implements FinderFilter {
 	private final Unit unit;
-	private final Class supply_class;
-	private final List region_list = new ArrayList();
+	private final Class<S> supply_class;
+	private final List<List<S>> region_list = new ArrayList<>();
 	private int max_region_dist_sqr;
 
-	public SupplyFinder(Unit unit, Class supply_class) {
+	public SupplyFinder(Unit unit, Class<S> supply_class) {
 		this.unit = unit;
 		this.supply_class = supply_class;
 	}
 
         @Override
 	public Occupant getOccupantFromRegion(Region region, boolean one_region) {
-		List supplies = region.getObjects(supply_class);
+		List<S> supplies = region.getObjects(supply_class);
 		if (one_region) {
 			if (supplies.size() > 0) {
 				Supply supply = findClosest(supplies);
@@ -89,7 +89,7 @@ public final strictfp class SupplyFinder implements FinderFilter {
 		region_list.clear();
 		return closest;
 	}
-	
+
         @Override
 	public boolean acceptOccupant(Occupant occ) {
 		if (supply_class.isInstance(occ)) {

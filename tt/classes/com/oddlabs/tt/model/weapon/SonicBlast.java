@@ -53,7 +53,7 @@ public final strictfp class SonicBlast implements Magic {
 		start_y = src.getPositionY() + offset_x*src.getDirectionY() + offset_y*src.getDirectionX();
 		start_z = src.getPositionZ() + offset_z;
 
-		FindOccupantFilter filter = new FindOccupantFilter(src.getPositionX(), src.getPositionY(), hit_radius, src, Selectable.class);
+		FindOccupantFilter<Selectable> filter = new FindOccupantFilter<>(src.getPositionX(), src.getPositionY(), hit_radius, src, Selectable.class);
 		UnitGrid unit_grid = owner.getWorld().getUnitGrid();
 		unit_grid.scan(filter, UnitGrid.toGridCoordinate(src.getPositionX()), UnitGrid.toGridCoordinate(src.getPositionY()));
 		target_list = filter.getResult();

@@ -29,13 +29,13 @@ public final strictfp class TreeRenderer extends TreePicker {
 
 	void renderAll() {
 		wave_animation.setTime(LocalEventQueue.getQueue().getTime());
-		List low_detail_render_list = getLowDetailRenderList();
+		List<AbstractTreeGroup> low_detail_render_list = getLowDetailRenderList();
 		tree_low_detail.setupTrees();
 		GL11.glEnable(GL11.GL_ALPHA_TEST);
 		GL11.glAlphaFunc(GL11.GL_GREATER, .3f);
 		GL11.glDisable(GL11.GL_CULL_FACE);
 		for (int i = 0; i < low_detail_render_list.size(); i++) {
-			AbstractTreeGroup group = (AbstractTreeGroup)low_detail_render_list.get(i);
+			AbstractTreeGroup group = low_detail_render_list.get(i);
 			low_detail_render_list.set(i, null);
 			if (Globals.draw_trees && cheat.draw_trees)
 				renderLowDetail(group);
@@ -43,8 +43,8 @@ public final strictfp class TreeRenderer extends TreePicker {
 		GL11.glEnable(GL11.GL_CULL_FACE);
 		GL11.glDisable(GL11.GL_ALPHA_TEST);
 		low_detail_render_list.clear();
-		List[] render_lists = getRenderLists();
-		List[] respond_render_lists = getRespondRenderLists();
+		List<TreeSupply>[] render_lists = getRenderLists();
+		List<TreeSupply>[] respond_render_lists = getRespondRenderLists();
 		for (int i = 0; i < render_lists.length; i++)
 			renderList(tree_low_detail.getTrees()[i], render_lists[i], false);
 		for (int i = 0; i < respond_render_lists.length; i++)
@@ -65,10 +65,10 @@ public final strictfp class TreeRenderer extends TreePicker {
 		}
 	}
 
-	private void renderList(Tree tree, List render_list, boolean respond) {
+	private void renderList(Tree tree, List<TreeSupply> render_list, boolean respond) {
 		tree.getCrown().getSprite(0).setup(0, respond);
 		for (int i = 0; i < render_list.size(); i++) {
-			TreeSupply group = (TreeSupply)render_list.get(i);
+			TreeSupply group = render_list.get(i);
 			if (Globals.isBoundsEnabled(Globals.BOUNDING_PLAYERS))
 				RenderTools.draw(group);
 			if (Globals.draw_trees && cheat.draw_trees) {
@@ -81,7 +81,7 @@ public final strictfp class TreeRenderer extends TreePicker {
 		tree.getCrown().reset(0, respond, false);
 		tree.getTrunk().getSprite(0).setup(0, respond);
 		for (int i = 0; i < render_list.size(); i++) {
-			TreeSupply group = (TreeSupply)render_list.get(i);
+			TreeSupply group = render_list.get(i);
 			render_list.set(i, null);
 			if (Globals.draw_trees && cheat.draw_trees) {
 				GL11.glPushMatrix();

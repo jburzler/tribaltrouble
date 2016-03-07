@@ -8,8 +8,8 @@ import java.util.Map;
 import org.lwjgl.opengl.GL11;
 
 public final strictfp class Region extends Node {
-	private final Map object_lists = new HashMap();
-	private final List neighbours = new ArrayList();
+	private final Map<Class<?>,List<?>> object_lists = new HashMap<>();
+	private final List<Region> neighbours = new ArrayList<>();
 
 	private int center_x;
 	private int center_y;
@@ -28,7 +28,7 @@ public final strictfp class Region extends Node {
 		this.center_x = center_x;
 		this.center_y = center_y;
 	}
-	
+
         @Override
 	public String toString() {
 		return "Region: " + center_x + " " + center_y;
@@ -52,21 +52,24 @@ public final strictfp class Region extends Node {
 		r2.addNeighbour(r1);
 	}
 
-	public List getObjects(Class key) {
-		List list = (List)object_lists.get(key);
+	public <K> List<K> getObjects(Class<? super K> key) {
+                @SuppressWarnings("unchecked")
+		List<K> list = (List<K>) object_lists.get(key);
 		if (list == null) {
-			list = new ArrayList();
+			list = new ArrayList<>();
 			object_lists.put(key, list);
 		}
 		return list;
 	}
 
-	public void registerObject(Class key, Object object) {
+	public <K> void registerObject(Class<? super K> key, K object) {
 		getObjects(key).add(object);
 	}
 
-	public void unregisterObject(Class key, Object object) {
-		List list = (List)object_lists.get(key);
+	public <K> void unregisterObject(Class<? super K> key, K object) {
+                @SuppressWarnings("unchecked")
+		List<K> list = (List<K>) object_lists.get(key);
+                assert list != null : "Unknown key";
 		list.remove(object);
 	}
 
@@ -77,7 +80,7 @@ public final strictfp class Region extends Node {
         @Override
 	public boolean addNeighbours(PathFinderAlgorithm finder, UnitGrid unit_grid) {
 		for (int i = 0; i < neighbours.size(); i++) {
-			Region neighbour = (Region)neighbours.get(i);
+			Region neighbour = neighbours.get(i);
 			if (!neighbour.isVisited())
 				PathFinder.addToOpenList(finder, neighbour, this, estimateCost(neighbour.getGridX(), neighbour.getGridY()));
 		}
@@ -95,7 +98,7 @@ public final strictfp class Region extends Node {
 			return;
 		setVisited(false);
 		for (int i = 0; i < neighbours.size(); i++) {
-			Region neighbour = (Region)neighbours.get(i);
+			Region neighbour = neighbours.get(i);
 			neighbour.debugRenderConnectionsReset();
 		}
 	}
@@ -105,7 +108,7 @@ public final strictfp class Region extends Node {
 			return;
 		setVisited(true);
 		for (int i = 0; i < neighbours.size(); i++) {
-			Region neighbour = (Region)neighbours.get(i);
+			Region neighbour = neighbours.get(i);
 			debugVertex(heightmap);
 			neighbour.debugVertex(heightmap);
 			neighbour.debugRenderConnections(heightmap);

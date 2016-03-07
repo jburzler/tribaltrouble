@@ -12,7 +12,7 @@ final strictfp class PatchLevel {
 	public int getLevel() {
 		return level;
 	}
-	
+
 	public void setLevel(int level) {
 		this.level = level;
 	}
@@ -51,8 +51,8 @@ final strictfp class PatchLevel {
 	}
 
 	public void init(PatchLevel right, PatchLevel top) {
-		initTopNeighbour((PatchLevel)top);
-		initRightNeighbour((PatchLevel)right);
+		initTopNeighbour(top);
+		initRightNeighbour(right);
 	}
 
 	private void initTopNeighbour(PatchLevel top_neighbour) {

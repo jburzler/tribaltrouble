@@ -544,18 +544,16 @@ public final strictfp class Player implements PlayerInterface {
 	public Selectable[][] classifyUnits() {
 		Map map = new HashMap();
 		List lists = new ArrayList();
-		Iterator it = units.getSet().iterator();
-		while (it.hasNext()) {
-			Selectable unit = (Selectable)it.next();
-			String key = unit.getPrimaryController().getKey();
-			List list = (List)map.get(key);
-			if (list == null) {
-				list = new ArrayList();
-				map.put(key, list);
-				lists.add(list);
-			}
-			list.add(unit);
-		}
+            for (Selectable unit : units.getSet()) {
+                String key = unit.getPrimaryController().getKey();
+                List list = (List)map.get(key);
+                if (list == null) {
+                    list = new ArrayList();
+                    map.put(key, list);
+                    lists.add(list);
+                }
+                list.add(unit);
+            }
 		Selectable[][] result = new Selectable[lists.size()][];
 		for (int i = 0; i < result.length; i++) {
 			List list = (List)lists.get(i);

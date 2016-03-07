@@ -44,23 +44,19 @@ public final strictfp class Selection {
 		else
 			shortcut_armies[index] = new Army();
 
-		Iterator it = current_selection.getSet().iterator();
-		while (it.hasNext()) {
-			Selectable s = (Selectable)it.next();
-			shortcut_armies[index].add(s);
-		}
+            for (Selectable s : current_selection.getSet()) {
+                shortcut_armies[index].add(s);
+            }
 	}
 
 	public boolean enableShortcutArmy(int index) {
 		boolean empty = true;
 		if (shortcut_armies[index] != null) {
 			current_selection.clear();
-			Iterator it = shortcut_armies[index].getSet().iterator();
-			while (it.hasNext()) {
-				Selectable s = (Selectable)it.next();
-				current_selection.add(s);
-				empty = false;
-			}
+                    for (Selectable s : shortcut_armies[index].getSet()) {
+                        current_selection.add(s);
+                        empty = false;
+                    }
 		}
 		return !empty;
 	}

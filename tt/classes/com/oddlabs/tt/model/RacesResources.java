@@ -56,14 +56,14 @@ public final strictfp class RacesResources {
 
 	public final static int RACE_NATIVES = 0;
 	public final static int RACE_VIKINGS = 1;
-	
+
 	public final static int NUM_MAGIC = 2;
 	public final static int INDEX_MAGIC_POISON = 0;
 	public final static int INDEX_MAGIC_LIGHTNING = 1;
 	public final static int INDEX_MAGIC_STUN = 0;
 	public final static int INDEX_MAGIC_BLAST = 1;
 	public final static float THROW_RANGE = 6f;
-	
+
 	public final static ResourceDescriptor DEFAULT_SHADOW_DESC = new GeneratorHalos(128, new float[][]{{0f, 0.75f}, {0.5f, 0f}}, new float[][]{{0.40f, 0f}, {0.41f, 1f}, {0.48f, 1f}, {0.49f, 0f}});
 
 	private final static ResourceBundle bundle = ResourceBundle.getBundle(RacesResources.class.getName());
@@ -89,7 +89,7 @@ public final strictfp class RacesResources {
 	private final Audio blast_blast_sound;
 	private final Audio armory_sound;
 	private final Audio building_collapse_sound;
-	private final Map harvest_sounds = new HashMap();
+	private final Map<Class<? extends Supply>,Audio[]> harvest_sounds = new HashMap<>();
 	private final SpriteKey[] wood_fragment_sprites = new SpriteKey[4];
 	private final SpriteKey[] treasure_sprites = new SpriteKey[6];
 	private final Race[] races;
@@ -129,7 +129,7 @@ public final strictfp class RacesResources {
 			float chimney_y,
 			float chimney_z, String name) {
 		assert hit_offset_z.length == 3;
-		
+
 		final float ring_mid = 0.38f;
 		final float fadeout = 0.005f;
 		ResourceDescriptor building_shadow_desc = new GeneratorHalos(256, new float[][]{{0.15f, 0.5f}, {0.5f, 0f}}, new float[][]{{ring_mid - ring_thickness/2 - fadeout, 0f}, {ring_mid - ring_thickness/2, 1f}, {ring_mid + ring_thickness/2, 1f}, {ring_mid + ring_thickness/2 + fadeout, 0f}});
@@ -187,7 +187,7 @@ public final strictfp class RacesResources {
 																						   Globals.NO_MIPMAP_CUTOFF,
 																						   true, true, true, false);
 		ProgressForm.progress(1f/num_progress);
-		Map native_supply_sprite_lists = new HashMap();
+		Map<Class<? extends Supply>,SpriteKey> native_supply_sprite_lists = new HashMap<>();
 		native_supply_sprite_lists.put(TreeSupply.class, queues.register(native_wood_sprite));
 		native_supply_sprite_lists.put(RockSupply.class, queues.register(native_rock_sprite));
 		native_supply_sprite_lists.put(IronSupply.class, queues.register(native_rock_sprite, 1));
@@ -204,7 +204,7 @@ public final strictfp class RacesResources {
 																						   Globals.NO_MIPMAP_CUTOFF,
 																						   true, true, true, false);
 		ProgressForm.progress(1f/num_progress);
-		Map viking_supply_sprite_lists = new HashMap();
+		Map<Class<? extends Supply>, SpriteKey> viking_supply_sprite_lists = new HashMap<>();
 		viking_supply_sprite_lists.put(TreeSupply.class, queues.register(viking_wood_sprite));
 		viking_supply_sprite_lists.put(RockSupply.class, queues.register(viking_rock_sprite));
 		viking_supply_sprite_lists.put(IronSupply.class, queues.register(viking_rock_sprite, 1));
@@ -216,7 +216,7 @@ public final strictfp class RacesResources {
 		poison_textures[0] = queues.registerTexture(new GeneratorPoison(), 0);
 		lightning_texture = queues.registerTexture(new GeneratorLightning(), 0);
 		sonic_textures[0] = queues.registerTexture(new GeneratorSonic(), 0);
-		
+
 		note_textures[0] = queues.registerTexture(new TextureFile("/textures/effects/note1",
 					Globals.COMPRESSED_RGBA_FORMAT,
 					GL11.GL_LINEAR_MIPMAP_NEAREST,
@@ -265,43 +265,43 @@ public final strictfp class RacesResources {
 					GL11.GL_LINEAR,
 					GL11.GL_CLAMP,
 					GL11.GL_CLAMP));
-		
+
 		star_textures[0] = queues.registerTexture(new TextureFile("/textures/effects/star",
 					Globals.COMPRESSED_RGBA_FORMAT,
 					GL11.GL_LINEAR_MIPMAP_NEAREST,
 					GL11.GL_LINEAR,
 					GL11.GL_CLAMP,
 					GL11.GL_CLAMP));
-		
+
 		Audio death_peon_sound = (Audio)Resources.findResource(new AudioFile("/sfx/death_peon.ogg"));
 		Audio death_viking1_sound = (Audio)Resources.findResource(new AudioFile("/sfx/death_viking_warrior1.ogg"));
 		Audio death_viking2_sound = (Audio)Resources.findResource(new AudioFile("/sfx/death_viking_warrior2.ogg"));
 		Audio death_native1_sound = (Audio)Resources.findResource(new AudioFile("/sfx/death_native_warrior1.ogg"));
 		Audio death_native2_sound = (Audio)Resources.findResource(new AudioFile("/sfx/death_native_warrior2.ogg"));
-		
+
 		Audio axe_throw_sound = (Audio)Resources.findResource(new AudioFile("/sfx/weapon_axe.ogg"));
 		Audio spear_throw_sound = (Audio)Resources.findResource(new AudioFile("/sfx/weapon_spear.ogg"));
 
 		tree_fall_sound = new Audio[2];
 		tree_fall_sound[AbstractTreeGroup.TREE_INDEX] = (Audio)Resources.findResource(new AudioFile("/sfx/felling_tree.ogg"));
 		tree_fall_sound[AbstractTreeGroup.PALMTREE_INDEX] = (Audio)Resources.findResource(new AudioFile("/sfx/felling_palmtree.ogg"));
-		
+
 		ProgressForm.progress(1f/num_progress);
-		
+
 		building_hit_sound = new Audio[]{
 			(Audio)Resources.findResource(new AudioFile("/sfx/impact_wood1.ogg")),
 			(Audio)Resources.findResource(new AudioFile("/sfx/impact_wood2.ogg")),
 			(Audio)Resources.findResource(new AudioFile("/sfx/impact_wood3.ogg")),
 			(Audio)Resources.findResource(new AudioFile("/sfx/impact_wood4.ogg"))
 		};
-		
+
 		gas_sound = (Audio)Resources.findResource(new AudioFile("/sfx/gas.ogg"));
 		bubbling_sound = (Audio)Resources.findResource(new AudioFile("/sfx/bubbling.ogg"));
 		lightning_sound = (Audio)Resources.findResource(new AudioFile("/sfx/flash.ogg"));
 		cloud_sound = (Audio)Resources.findResource(new AudioFile("/sfx/crackling_cloud.ogg"));
 
 		armory_sound = (Audio)Resources.findResource(new AudioFile("/sfx/armory.ogg"));
-		
+
 		building_collapse_sound = (Audio)Resources.findResource(new AudioFile("/sfx/building_crash.ogg"));
 
 		stun_sound = new Audio[]{
@@ -317,7 +317,7 @@ public final strictfp class RacesResources {
 		};
 		blast_rumble_sound = (Audio)Resources.findResource(new AudioFile("/sfx/rumble.ogg"));
 		blast_blast_sound = (Audio)Resources.findResource(new AudioFile("/sfx/lurblast.ogg"));
-		
+
 		Audio[] tree_cut_sound = new Audio[]{
 			(Audio)Resources.findResource(new AudioFile("/sfx/axe_cutting_wood1.ogg")),
 			(Audio)Resources.findResource(new AudioFile("/sfx/axe_cutting_wood2.ogg")),
@@ -326,7 +326,7 @@ public final strictfp class RacesResources {
 			(Audio)Resources.findResource(new AudioFile("/sfx/axe_cutting_wood5.ogg")),
 			(Audio)Resources.findResource(new AudioFile("/sfx/axe_cutting_wood6.ogg"))
 		};
-		
+
 		Audio[] rock_cut_sound = new Audio[]{
 			(Audio)Resources.findResource(new AudioFile("/sfx/axe_cutting_stone1.ogg")),
 			(Audio)Resources.findResource(new AudioFile("/sfx/axe_cutting_stone2.ogg")),
@@ -334,7 +334,7 @@ public final strictfp class RacesResources {
 			(Audio)Resources.findResource(new AudioFile("/sfx/axe_cutting_stone4.ogg")),
 			(Audio)Resources.findResource(new AudioFile("/sfx/axe_cutting_stone5.ogg"))
 		};
-		
+
 		Audio[] meat_cut_sound = new Audio[]{
 			(Audio)Resources.findResource(new AudioFile("/sfx/impact_meat1.ogg")),
 			(Audio)Resources.findResource(new AudioFile("/sfx/impact_meat2.ogg")),
@@ -342,7 +342,7 @@ public final strictfp class RacesResources {
 			(Audio)Resources.findResource(new AudioFile("/sfx/impact_meat4.ogg")),
 			(Audio)Resources.findResource(new AudioFile("/sfx/impact_meat5.ogg"))
 		};
-		
+
 		ProgressForm.progress(1f/num_progress);
 		harvest_sounds.put(TreeSupply.class, tree_cut_sound);
 		harvest_sounds.put(RockSupply.class, rock_cut_sound);
@@ -520,7 +520,7 @@ public final strictfp class RacesResources {
 																	   queues.register(native_warrior_spear, Race.UNIT_WARRIOR_RUBBER),
 																	   spear_throw_sound,
 																	   unit_hit_sounds);
-		
+
 		Audio[] native_chieftain_hit_sounds = new Audio[]{
 			(Audio)Resources.findResource(new AudioFile("/sfx/hit3.ogg")),
 			(Audio)Resources.findResource(new AudioFile("/sfx/hit4.ogg")),
@@ -798,7 +798,7 @@ public final strictfp class RacesResources {
 		ProgressForm.progress(1f/num_progress);
 		ProgressForm.progress(1f/num_progress);
 	}
-	
+
 	public TextureKey[] getSmokeTextures() {
 		return smoke_textures;
 	}
@@ -839,7 +839,7 @@ public final strictfp class RacesResources {
 	public Audio getBuildingHitSound(Random random) {
 		return building_hit_sound[random.nextInt(building_hit_sound.length)];
 	}
-	
+
 	public Audio getGasSound() {
 		return gas_sound;
 	}
@@ -883,7 +883,7 @@ public final strictfp class RacesResources {
 	public Race getRace(int i) {
 		return races[i];
 	}
-	
+
 	public static String getRaceName(int i) {
 		return race_names[i];
 	}

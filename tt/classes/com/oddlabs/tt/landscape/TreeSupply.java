@@ -18,7 +18,7 @@ import com.oddlabs.tt.util.Target;
 public final strictfp class TreeSupply extends AbstractTreeGroup implements Supply, Target, Animated, ModelToolTip {
 	private final static int INITIAL_SUPPLIES = 10;
 	private final static float SECOND_PER_TREEFALL = 3f;
-	
+
 	private static final StrictVector3f low_detail_x_axis = new StrictVector3f();
 	private static final StrictVector3f low_detail_translate = new StrictVector3f();
 	private static final StrictVector3f low_detail_scale = new StrictVector3f();
@@ -69,7 +69,7 @@ public final strictfp class TreeSupply extends AbstractTreeGroup implements Supp
 			occupyTree();
 		world.getSupplyManager(getClass()).newSupply();
 	}
-	
+
         @Override
 	public World getWorld() {
 		return world;
@@ -123,11 +123,12 @@ public final strictfp class TreeSupply extends AbstractTreeGroup implements Supp
 		return "Tree at " + grid_x + " " + grid_y + " isEmpty() " + isEmpty();
 	}
 
+        @SuppressWarnings("unchecked")
 	private void occupyTree() {
 		UnitGrid grid = world.getUnitGrid();
 		world.getNotificationListener().registerTarget(this);
 		Region region = grid.getRegion(getGridX(), getGridY());
-		region.registerObject(getClass(), this);
+		region.registerObject((Class<TreeSupply>) getClass(), this);
 		for (int y = 0; y < grid_size; y++) {
 			int occ_y = grid_y + y - (grid_size - 1)/2;
 			for (int x = 0; x < grid_size; x++) {
@@ -140,11 +141,12 @@ public final strictfp class TreeSupply extends AbstractTreeGroup implements Supp
 		grid.occupyGrid(grid_x, grid_y, this);
 	}
 
+        @SuppressWarnings("unchecked")
 	private void unoccupyTree() {
 		UnitGrid grid = world.getUnitGrid();
 		world.getNotificationListener().unregisterTarget(this);
 		Region region = grid.getRegion(grid_x, grid_y);
-		region.unregisterObject(getClass(), this);
+		region.unregisterObject((Class<TreeSupply>) getClass(), this);
 		grid.freeGrid(grid_x, grid_y, this);
 	}
 
@@ -193,12 +195,12 @@ public final strictfp class TreeSupply extends AbstractTreeGroup implements Supp
 		}
 		return false;
 	}
-	
+
         @Override
 	public boolean isDead() {
 		return isEmpty();
 	}
-	
+
 	private void decreaseSupply() {
 		num_supplies --;
 		if (isEmpty()) {

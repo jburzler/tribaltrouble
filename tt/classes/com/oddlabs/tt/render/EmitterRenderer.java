@@ -20,7 +20,7 @@ final strictfp class EmitterRenderer {
 	private final static StrictMatrix4f view_matrix = new StrictMatrix4f();
 	private final static CameraState tmp_camera = new CameraState();
 
-	public static void render(RenderQueues render_queues, List emitter_queue, CameraState state) {
+	public static void render(RenderQueues render_queues, List<Emitter> emitter_queue, CameraState state) {
 		tmp_camera.set(state);
 		view_matrix.setIdentity();
 		tmp_camera.setView(view_matrix);
@@ -34,7 +34,7 @@ final strictfp class EmitterRenderer {
 		GL11.glEnable(GL11.GL_ALPHA_TEST);
 		GL11.glDepthMask(false);
 		for (int i = 0; i < emitter_queue.size(); i++) {
-			Emitter emitter = (Emitter)emitter_queue.get(i);
+			Emitter emitter = emitter_queue.get(i);
 			if (Globals.draw_particles)
 				render(render_queues, emitter);
 		}
@@ -69,7 +69,7 @@ final strictfp class EmitterRenderer {
 		}
 
 		TextureKey[] textures = emitter.getTextures();
-		List[] particles = emitter.getParticles();
+		List<Particle>[] particles = emitter.getParticles();
 		SpriteKey[] sprite_renderers = emitter.getSpriteRenderers();
 		if (textures != null) {
 			GL11.glTexEnvf(GL11.GL_TEXTURE_ENV, GL11.GL_TEXTURE_ENV_MODE, GL11.GL_MODULATE);
@@ -79,7 +79,7 @@ final strictfp class EmitterRenderer {
 				GL11.glBindTexture(GL11.GL_TEXTURE_2D, render_queues.getTexture(textures[j]).getHandle());
 				GL11.glBegin(GL11.GL_QUADS);
 				for (int i = particles[j].size() - 1; i >= 0; i--) {
-					Particle particle = (Particle)particles[j].get(i);
+					Particle particle = particles[j].get(i);
 					render2DParticle(particle, emitter);
 				}
 				GL11.glEnd();
@@ -88,9 +88,9 @@ final strictfp class EmitterRenderer {
 			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 			GL11.glTexEnvf(GL11.GL_TEXTURE_ENV, GL11.GL_TEXTURE_ENV_MODE, GL11.GL_REPLACE);
 		} else if (sprite_renderers != null) {
-                    for (List particle1 : particles) {
+                    for (List<Particle> particle1 : particles) {
                         for (int i = particle1.size() - 1; i >= 0; i--) {
-                            Particle particle = (Particle) particle1.get(i);
+                            Particle particle = particle1.get(i);
                             int index = particle.getType();
                             color_buffer.put(0, particle.getColorR());
                             color_buffer.put(1, particle.getColorG());

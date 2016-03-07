@@ -11,18 +11,19 @@ public abstract strictfp class SupplyModel extends Model implements Supply, Targ
 	private final static float SPAWN_OFFSET_Z = -2f;
 
 	private final SpriteKey sprite_renderer;
-	
+
 	private final float size;
 	private final float rotation;
 
 	private float offset_z = 0;
-	
+
 	private int grid_x;
 	private int grid_y;
 
 	private int num_supplies;
 	private int hit_counter = 0;
 
+        @SuppressWarnings("unchecked")
 	public SupplyModel(World world, SpriteKey sprite_renderer, float size, int grid_x, int grid_y, float x, float y, float rotation, int num_supplies, boolean increase_count) {
 		super(world);
 		this.sprite_renderer = sprite_renderer;
@@ -36,7 +37,7 @@ public abstract strictfp class SupplyModel extends Model implements Supply, Targ
 		UnitGrid unit_grid = world.getUnitGrid();
 		unit_grid.occupyGrid(grid_x, grid_y, this);
 		Region region = unit_grid.getRegion(grid_x, grid_y);
-		region.registerObject(getClass(), this);
+		region.registerObject((Class<SupplyModel>) getClass(), this);
 		register();
 		reinsert();
 		if (increase_count)
@@ -56,7 +57,7 @@ public abstract strictfp class SupplyModel extends Model implements Supply, Targ
 	public void animateSpawn(float t, float progress) {
 		offset_z = SPAWN_OFFSET_Z*(1 - progress);
 		reinsert();
-	} 
+	}
 
         @Override
 	public void spawnComplete() {
@@ -83,6 +84,7 @@ public abstract strictfp class SupplyModel extends Model implements Supply, Targ
 		return isEmpty();
 	}
 
+        @SuppressWarnings("unchecked")
 	private void decreaseSupply() {
 		num_supplies--;
 		if (isEmpty()) {
@@ -90,7 +92,7 @@ public abstract strictfp class SupplyModel extends Model implements Supply, Targ
 			unit_grid.freeGrid(grid_x, grid_y, this);
 			getWorld().getNotificationListener().unregisterTarget(this);
 			Region region = unit_grid.getRegion(grid_x, grid_y);
-			region.unregisterObject(getClass(), this);
+			region.unregisterObject((Class<SupplyModel>) getClass(), this);
 			remove();
 			getWorld().getSupplyManager(getClass()).emptySupply(this);
 		}

@@ -25,7 +25,7 @@ public final strictfp class RubberSupply extends SupplyModel implements Animated
 	private final static int ANIMATION_FLYING = 4;
 
 	private final static float[] ANIMATION_SPEEDS;
-	
+
 	private final static int INITIAL_SUPPLIES = 1;
 	private final static float METERS_PER_SECOND = 8f;
 	private final static int MAX_MOVE_GRIDS = 5;
@@ -52,7 +52,7 @@ public final strictfp class RubberSupply extends SupplyModel implements Animated
 		float SPEED_MOVE = METERS_PER_SECOND;
 		ANIMATION_SPEEDS = new float[]{SPEED_IDLE, SPEED_PECK, SPEED_DIE, SPEED_MOVE, SPEED_MOVE};
 	}
-	
+
 	public RubberSupply(World world, SpriteKey sprite_renderer, float size, int grid_x, int grid_y, float x, float y, float rotation, RubberGroup group, float spawn_x, float spawn_y) {
 		super(world, sprite_renderer, size, grid_x, grid_y, x, y, rotation, INITIAL_SUPPLIES, false);
 		this.path_tracker = new PathTracker(world.getUnitGrid(), this);
@@ -69,7 +69,7 @@ public final strictfp class RubberSupply extends SupplyModel implements Animated
 		setDirection(dx*inv_len, dy*inv_len);
 		setNewAnimation(ANIMATION_FLYING);
 	}
-	
+
         @Override
 	protected float getZError() {
 		return getLandscapeError();
@@ -96,7 +96,7 @@ public final strictfp class RubberSupply extends SupplyModel implements Animated
 		spawning = false;
 		setNewAnimation(ANIMATION_IDLING);
 	}
-	
+
         @Override
 	public Supply respawn() {
 		throw new RuntimeException();
@@ -120,23 +120,24 @@ public final strictfp class RubberSupply extends SupplyModel implements Animated
 	public void free() {
 		getWorld().getUnitGrid().freeGrid(getGridX(), getGridY(), this);
 	}
-	
+
         @Override
 	public void occupy() {
 		getWorld().getUnitGrid().occupyGrid(getGridX(), getGridY(), this);
 	}
 
         @Override
+        @SuppressWarnings("unchecked")
 	public void setGridPosition(int grid_x, int grid_y) {
 		Region current_region = getWorld().getUnitGrid().getRegion(getGridX(), getGridY());
 		Region new_region = getWorld().getUnitGrid().getRegion(grid_x, grid_y);
 		if (current_region != new_region) {
-			current_region.unregisterObject(getClass(), this);
-			new_region.registerObject(getClass(), this);
+			current_region.unregisterObject((Class<RubberSupply>) getClass(), this);
+			new_region.registerObject((Class<RubberSupply>) getClass(), this);
 		}
 		super.setGridPosition(grid_x, grid_y);
 	}
-	
+
         @Override
 	public void markBlocking() {
 	}
@@ -187,7 +188,7 @@ public final strictfp class RubberSupply extends SupplyModel implements Animated
 							AudioPlayer.AUDIO_DISTANCE_CHICKEN,
 							AudioPlayer.AUDIO_GAIN_CHICKEN_PECK,
 							AudioPlayer.AUDIO_RADIUS_CHICKEN_PECK));
-				
+
 			}
 		}
 	}
@@ -212,7 +213,7 @@ public final strictfp class RubberSupply extends SupplyModel implements Animated
 	public float getOffsetZ() {
 		return offset_z;
 	}
-	
+
 	private void setNewAnimation(int animation_index) {
 		anim_time = 0;
 		animation = animation_index;

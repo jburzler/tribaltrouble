@@ -36,10 +36,10 @@ public final strictfp class Building extends Selectable implements Occupant {
 	public final static int RENDER_START = 0;
 	public final static int RENDER_HALFBUILT = 1;
 	public final static int RENDER_BUILT = 2;
-	
+
 	private final static int PLACING_BORDER = 1;
 	private final static int MAX_SUPPLY_COUNT = 200;
-	
+
 	public final static Cost COST_ROCK_WEAPON = new Cost(new Class[]{TreeSupply.class, RockSupply.class}, new int[]{2, 1});
 	public final static Cost COST_IRON_WEAPON = new Cost(new Class[]{TreeSupply.class, IronSupply.class}, new int[]{2, 1});
 	public final static Cost COST_RUBBER_WEAPON = new Cost(new Class[]{TreeSupply.class, RockSupply.class, IronSupply.class, RubberSupply.class}, new int[]{2, 1, 1, 1});
@@ -121,12 +121,12 @@ public final strictfp class Building extends Selectable implements Occupant {
 				owner.getWorld().getAnimationManagerRealTime());
 		production_emitter.stop();
 	}
-	
+
         @Override
 	public float getOffsetZ() {
 		return 0;
 	}
-	
+
         @Override
 	public void visit(ElementVisitor visitor) {
 		visitor.visitBuilding(this);
@@ -488,7 +488,7 @@ public final strictfp class Building extends Selectable implements Occupant {
 	}
 
 	public boolean isPlacingLegal() {
-		return !isDead() && getOwner().canBuild(getBuildingTemplate().getTemplateID()) && 
+		return !isDead() && getOwner().canBuild(getBuildingTemplate().getTemplateID()) &&
 			doIsPlacingLegal(getUnitGrid(), getGridX(), getGridY(), getBuildingTemplate().getPlacingSize() - PLACING_BORDER);
 	}
 
@@ -520,7 +520,7 @@ public final strictfp class Building extends Selectable implements Occupant {
 			}
 		 return true;
 	}
-	
+
         @Override
 	public int getAttackPriority() {
 		if (getAbilities().hasAbilities(Abilities.ATTACK))
@@ -574,7 +574,7 @@ public final strictfp class Building extends Selectable implements Occupant {
 
         @Override
 	protected void removeDying() {
-		
+
 		new RandomVelocityEmitter(getOwner().getWorld(), new Vector3f(getPositionX(), getPositionY(), getPositionZ()), 0f, 0f,
 					getBuildingTemplate().getSmokeRadius(), getBuildingTemplate().getSmokeHeight(), 1f, 1f,
 					30, 400f,
@@ -618,7 +618,7 @@ public final strictfp class Building extends Selectable implements Occupant {
 		Building b = (Building)t;
 		return getOwner() == b.getOwner() && b.getAbilities().hasAbilities(Abilities.RALLY_TO);
 	}
-	
+
 	public void setRallyPoint(Target target) {
 		if (!getOwner().canSetRallyPoints())
 			return;
@@ -688,9 +688,10 @@ public final strictfp class Building extends Selectable implements Occupant {
 				getOwner().getWorld().getHeightMap().editHeight(offset_x + x + PLACING_BORDER, offset_y + y + PLACING_BORDER, old_landscape_heights[y][x]);
 	}
 
+        @SuppressWarnings("unchecked")
 	private void occupy() {
 		UnitGrid grid = getUnitGrid();
-		grid.getRegion(getGridX(), getGridY()).registerObject(getClass(), this);
+		grid.getRegion(getGridX(), getGridY()).registerObject((Class<Building>) getClass(), this);
 		int size = getBuildingTemplate().getPlacingSize()*2 - 1;
 		for (int y = PLACING_BORDER; y < size - PLACING_BORDER; y++)
 			for (int x = PLACING_BORDER; x < size - PLACING_BORDER; x++) {
@@ -698,9 +699,10 @@ public final strictfp class Building extends Selectable implements Occupant {
 			}
 	}
 
+        @SuppressWarnings("unchecked")
 	private void free() {
 		UnitGrid grid = getUnitGrid();
-		grid.getRegion(getGridX(), getGridY()).unregisterObject(getClass(), this);
+		grid.getRegion(getGridX(), getGridY()).unregisterObject((Class<Building>) getClass(), this);
 		int size = getBuildingTemplate().getPlacingSize()*2 - 1;
 		for (int y = PLACING_BORDER; y < size - PLACING_BORDER; y++)
 			for (int x = PLACING_BORDER; x < size - PLACING_BORDER; x++) {

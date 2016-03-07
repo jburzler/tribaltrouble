@@ -3,7 +3,7 @@ package com.oddlabs.tt.render;
 import java.util.Comparator;
 import org.lwjgl.opengl.DisplayMode;
 
-public final strictfp class DisplayModeComparator implements Comparator {
+public final strictfp class DisplayModeComparator implements Comparator<DisplayMode> {
 	private final SerializableDisplayMode target_mode;
 
 	public DisplayModeComparator(SerializableDisplayMode target_mode) {
@@ -11,10 +11,7 @@ public final strictfp class DisplayModeComparator implements Comparator {
 	}
 
         @Override
-	public int compare(Object o1, Object o2) {
-		DisplayMode d1 = (DisplayMode)o1;
-		DisplayMode d2 = (DisplayMode)o2;
-
+	public int compare(DisplayMode d1, DisplayMode d2) {
 		/*
 		 * Elias: sort after largest bpp first, then lowest freq
 		 * to accomodate broken monitors lying about their

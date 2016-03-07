@@ -15,9 +15,9 @@ strictfp class TreePicker implements TreeNodeVisitor {
 	private final static int CROWN_MIPMAP_CUTOFF = Globals.NO_MIPMAP_CUTOFF;
 	private final static float SELECTION_RADIUS = 1.5f;
 
-	private final List[] render_lists;
-	private final List[] respond_render_lists;
-	private final List low_detail_render_list = new ArrayList();
+	private final List<TreeSupply>[] render_lists;
+	private final List<TreeSupply>[] respond_render_lists;
+	private final List<AbstractTreeGroup> low_detail_render_list = new ArrayList<>();
 
 	private final BoundingBox picking_selection_box = new BoundingBox();
 	private final SpriteSorter sprite_sorter;
@@ -31,8 +31,8 @@ strictfp class TreePicker implements TreeNodeVisitor {
 
 	TreePicker(SpriteSorter sprite_sorter, RespondManager respond_manager) {
 		this.respond_manager = respond_manager;
-		this.render_lists = new List[]{new ArrayList(), new ArrayList(), new ArrayList(), new ArrayList()};
-		this.respond_render_lists = new List[]{new ArrayList(), new ArrayList(), new ArrayList(), new ArrayList()};
+		this.render_lists = (List<TreeSupply>[]) new List<?>[]{new ArrayList(), new ArrayList(), new ArrayList(), new ArrayList()};
+		this.respond_render_lists =  (List<TreeSupply>[]) new List<?>[]{new ArrayList(), new ArrayList(), new ArrayList(), new ArrayList()};
 		this.trees = loadTrees();
 		this.tree_low_details = LandscapeResources.loadTreeLowDetails();
 
@@ -43,7 +43,7 @@ strictfp class TreePicker implements TreeNodeVisitor {
 	private static Tree[] loadTrees() {
 		SpriteList jungle_crown = (SpriteList)Resources.findResource(new SpriteFile("/geometry/misc/jungle_tree_crown.binsprite", CROWN_MIPMAP_CUTOFF, false, false, true, false));
 		SpriteList jungle_trunk = (SpriteList)Resources.findResource(new SpriteFile("/geometry/misc/jungle_tree_trunk.binsprite", CROWN_MIPMAP_CUTOFF, true, true, true, false));
-		
+
 		SpriteList palm_crown = (SpriteList)Resources.findResource(new SpriteFile("/geometry/misc/palm_crown.binsprite", CROWN_MIPMAP_CUTOFF, false, false, true, false));
 		SpriteList palm_trunk = (SpriteList)Resources.findResource(new SpriteFile("/geometry/misc/palm_trunk.binsprite", CROWN_MIPMAP_CUTOFF, true, true, true, false));
 
@@ -70,30 +70,30 @@ strictfp class TreePicker implements TreeNodeVisitor {
 		return tree_low_details;
 	}
 
-	protected final List getLowDetailRenderList() {
+	protected final List<AbstractTreeGroup> getLowDetailRenderList() {
 		return low_detail_render_list;
 	}
 
-	protected final List[] getRenderLists() {
+	protected final List<TreeSupply>[] getRenderLists() {
 		return render_lists;
 	}
 
-	protected final List[] getRespondRenderLists() {
+	protected final List<TreeSupply>[] getRespondRenderLists() {
 		return respond_render_lists;
 	}
 
-	public final void getAllPicks(List pick_list) {
-            for (List render_list : render_lists) {
+	public final void getAllPicks(List<TreeSupply> pick_list) {
+            for (List<TreeSupply> render_list : render_lists) {
                 getAllPicksFromRenderList(render_list, pick_list);
             }
-            for (List respond_render_list : respond_render_lists) {
+            for (List<TreeSupply> respond_render_list : respond_render_lists) {
                 getAllPicksFromRenderList(respond_render_list, pick_list);
             }
 	}
 
-	private void getAllPicksFromRenderList(List render_list, List pick_list) {
+	private void getAllPicksFromRenderList(List<TreeSupply> render_list, List<TreeSupply> pick_list) {
 		for (int i = 0; i < render_list.size(); i++) {
-			TreeSupply group = (TreeSupply)render_list.get(i);
+			TreeSupply group = render_list.get(i);
 			render_list.set(i, null);
 			pick_list.add(group);
 		}

@@ -46,13 +46,13 @@ public final strictfp class VikingChieftainAI extends ChieftainAI {
 		}
 	}
 
-	private int getNumEnemyUnitsClose(Unit chieftain, float hit_radius, Class type) {
-		FindOccupantFilter filter = new FindOccupantFilter(chieftain.getPositionX(), chieftain.getPositionY(), hit_radius, chieftain, type);
+	private <S extends Selectable> int getNumEnemyUnitsClose(Unit chieftain, float hit_radius, Class<S> type) {
+		FindOccupantFilter<S> filter = new FindOccupantFilter<>(chieftain.getPositionX(), chieftain.getPositionY(), hit_radius, chieftain, type);
 		chieftain.getUnitGrid().scan(filter, chieftain.getGridX(), chieftain.getGridY());
-		List target_list = filter.getResult();
+		List<S> target_list = filter.getResult();
 		int num_enemy_units_close = 0;
 		for (int i = 0; i < target_list.size(); i++) {
-			Selectable s = (Selectable)target_list.get(i);
+			Selectable s = target_list.get(i);
 			if (s.isDead())
 				continue;
 
@@ -67,12 +67,12 @@ public final strictfp class VikingChieftainAI extends ChieftainAI {
 	}
 
 	private int getNumFriendlyUnitsClose(Unit chieftain, float hit_radius) {
-		FindOccupantFilter filter = new FindOccupantFilter(chieftain.getPositionX(), chieftain.getPositionY(), hit_radius, chieftain, Selectable.class);
+		FindOccupantFilter<Selectable> filter = new FindOccupantFilter<>(chieftain.getPositionX(), chieftain.getPositionY(), hit_radius, chieftain, Selectable.class);
 		chieftain.getUnitGrid().scan(filter, chieftain.getGridX(), chieftain.getGridY());
-		List target_list = filter.getResult();
+		List<Selectable> target_list = filter.getResult();
 		int num_friendly_units_close = 0;
 		for (int i = 0; i < target_list.size(); i++) {
-			Selectable s = (Selectable)target_list.get(i);
+			Selectable s = target_list.get(i);
 			if (s.isDead())
 				continue;
 

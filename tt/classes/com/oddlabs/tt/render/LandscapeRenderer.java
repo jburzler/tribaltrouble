@@ -28,8 +28,8 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL13;
 
 public final strictfp class LandscapeRenderer implements Animated {
-	private final List[] patch_lists;
-	private final List render_list = new ArrayList();
+	private final List<PatchLevel>[] patch_lists;
+	private final List<LandscapeLeaf> render_list = new ArrayList<>();
 	private final GUIRoot gui_root;
 	private final World world;
 	private final Texture[][] colormaps;
@@ -49,6 +49,7 @@ public final strictfp class LandscapeRenderer implements Animated {
 	private int edit_patch_x1;
 	private int edit_patch_y1;
 
+        @SuppressWarnings("unchecked")
 	public LandscapeRenderer(World world, WorldInfo world_info, GUIRoot gui_root, AnimationManager manager) {
 		ShortBuffer indices = world.getLandscapeIndices().getIndices();
 		this.indices_vbo = new ShortVBO(ARBBufferObject.GL_STATIC_DRAW_ARB, indices.remaining());
@@ -73,9 +74,9 @@ public final strictfp class LandscapeRenderer implements Animated {
 		this.world = world;
 		this.manager = manager;
 		int levels = LandscapeTileIndices.getNumLOD(HeightMap.GRID_UNITS_PER_PATCH_EXP);
-		patch_lists = new ArrayList[levels];
+		patch_lists = (List<PatchLevel>[]) new ArrayList<?>[levels];
 		for (int i = 0; i < patch_lists.length; i++)
-			patch_lists[i] = new ArrayList();
+			patch_lists[i] = new ArrayList<>();
 		manager.registerAnimation(this);
 		this.shadow_indices_buffer = BufferUtils.createShortBuffer(LandscapeTileIndices.getNumTriangles(world.getLandscapeIndices().getNumLOD() - 1)*3);
 		resetEditing();
@@ -119,7 +120,7 @@ public final strictfp class LandscapeRenderer implements Animated {
 
 	private void clearRenderList() {
 		for (int i = 0; i < render_list.size(); i++) {
-			LandscapeLeaf patch = (LandscapeLeaf)render_list.get(i);
+			LandscapeLeaf patch = render_list.get(i);
 			render_list.set(i, null);
 		}
 		render_list.clear();
@@ -137,15 +138,15 @@ public final strictfp class LandscapeRenderer implements Animated {
 
 	private void doRenderAll() {
 		for (int i = 0; i < render_list.size(); i++) {
-			LandscapeLeaf patch = (LandscapeLeaf)render_list.get(i);
+			LandscapeLeaf patch = render_list.get(i);
 			RenderTools.draw(patch, Globals.BOUNDING_LANDSCAPE, 1f, 0f, 0f);
 			setupColormap(patch.getColorMapX(), patch.getColorMapY());
 			if (Globals.draw_landscape)
 				renderPatch(patch);
 		}
 	}
-	
-	public void pick(CameraState camera, boolean visible_override, Set set) {
+
+	public void pick(CameraState camera, boolean visible_override, Set<LandscapeLeaf> set) {
 		doPrepareAll(camera, visible_override, set);
 	}
 
@@ -155,7 +156,7 @@ public final strictfp class LandscapeRenderer implements Animated {
 	}
 
 	private final static Visitor patch_visitor = new Visitor();
-	private void doPrepareAll(final CameraState camera, final boolean visible_override, final Collection result) {
+	private void doPrepareAll(final CameraState camera, final boolean visible_override, final Collection<LandscapeLeaf> result) {
 		endEdit();
 		patch_visitor.setup(camera, visible_override, result);
 		world.getPatchRoot().visit(patch_visitor);
@@ -221,9 +222,9 @@ public final strictfp class LandscapeRenderer implements Animated {
 	public void animate(float t) {
 		world.getPatchRoot().visit(level_updater);
 		for (int i = patch_lists.length - 1; i >= 0; i--) {
-			List patches = patch_lists[i];
+			List<PatchLevel> patches = patch_lists[i];
 			for (int j = 0; j < patches.size(); j++) {
-				PatchLevel patch_level = (PatchLevel)patches.get(j);
+				PatchLevel patch_level = patches.get(j);
 				patch_level.setLevel(i);
 				patch_level.adjustLevel();
 				patches.set(j, null);
@@ -297,9 +298,9 @@ public final strictfp class LandscapeRenderer implements Animated {
 	private final static strictfp class Visitor implements PatchGroupVisitor {
 		private CameraState camera;
 		private boolean visible_override;
-		private Collection result;
+		private Collection<LandscapeLeaf> result;
 
-		private void setup(CameraState camera, boolean visible_override, Collection result) {
+		private void setup(CameraState camera, boolean visible_override, Collection<LandscapeLeaf> result) {
 			this.camera = camera;
 			this.visible_override = visible_override;
 			this.result = result;

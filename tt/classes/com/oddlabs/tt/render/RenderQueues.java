@@ -9,13 +9,13 @@ import java.util.List;
 import java.util.Map;
 
 public final strictfp class RenderQueues {
-	private final List sprite_renderers = new ArrayList();
-	private final List blend_sprite_renderers = new ArrayList();
+	private final List<SpriteRenderer> sprite_renderers = new ArrayList<>();
+	private final List<SpriteRenderer> blend_sprite_renderers = new ArrayList<>();
 
-	private final List sprite_list_lookup = new ArrayList();
-	private final List shadow_renderer_lookup = new ArrayList();
-	private final Map desc_to_shadow_key = new HashMap();
-	private final List texture_lookup = new ArrayList();
+	private final List<SpriteRenderer> sprite_list_lookup = new ArrayList<>();
+	private final List<ShadowListRenderer> shadow_renderer_lookup = new ArrayList<>();
+	private final Map<ResourceDescriptor, ShadowListKey> desc_to_shadow_key = new HashMap<>();
+	private final List<Texture> texture_lookup = new ArrayList<>();
 
 	public TextureKey registerTexture(ResourceDescriptor desc, int index) {
 		TextureKey key = new TextureKey(texture_lookup.size());
@@ -31,11 +31,11 @@ public final strictfp class RenderQueues {
 	}
 
 	Texture getTexture(TextureKey key) {
-		return (Texture)texture_lookup.get(key.getKey());
+		return texture_lookup.get(key.getKey());
 	}
 
 	public ShadowListKey registerRespondRenderer(ResourceDescriptor desc) {
-		ShadowListKey key = (ShadowListKey)desc_to_shadow_key.get(desc);
+		ShadowListKey key = desc_to_shadow_key.get(desc);
 		if (key != null)
 			return key;
 		ShadowListRenderer renderer = new TargetRespondRenderer(desc);
@@ -51,7 +51,7 @@ public final strictfp class RenderQueues {
 	}
 
 	public ShadowListKey registerSelectableShadowList(ResourceDescriptor desc) {
-		ShadowListKey key = (ShadowListKey)desc_to_shadow_key.get(desc);
+		ShadowListKey key = desc_to_shadow_key.get(desc);
 		if (key != null)
 			return key;
 		ShadowListRenderer renderer = new SelectableShadowRenderer(desc);
@@ -59,7 +59,7 @@ public final strictfp class RenderQueues {
 	}
 
 	ShadowListRenderer getShadowRenderer(ShadowListKey key) {
-		return (ShadowListRenderer)shadow_renderer_lookup.get(key.getKey());
+		return shadow_renderer_lookup.get(key.getKey());
 	}
 
 	public SpriteKey register(SpriteFile sprite_file) {
@@ -76,7 +76,7 @@ public final strictfp class RenderQueues {
 	}
 
 	public SpriteRenderer getRenderer(SpriteKey key) {
-		return (SpriteRenderer)sprite_list_lookup.get(key.getKey());
+		return sprite_list_lookup.get(key.getKey());
 	}
 
 	private void registerSpriteRenderer(SpriteRenderer sprite_renderer) {
@@ -89,21 +89,21 @@ public final strictfp class RenderQueues {
 
 	void getAllPicks(List pick_list) {
 		for (int j = 0; j < sprite_renderers.size(); j++)
-			((SpriteRenderer)sprite_renderers.get(j)).getAllPicks(pick_list);
+			sprite_renderers.get(j).getAllPicks(pick_list);
 	}
 
 	void renderAll() {
 		for (int j = 0; j < sprite_renderers.size(); j++)
-			((SpriteRenderer)sprite_renderers.get(j)).renderAll();
+			sprite_renderers.get(j).renderAll();
 	}
 
 	void renderBlends() {
 		for (int j = 0; j < blend_sprite_renderers.size(); j++)
-			((SpriteRenderer)blend_sprite_renderers.get(j)).renderAll();
+			blend_sprite_renderers.get(j).renderAll();
 	}
 
 	void renderShadows(LandscapeRenderer renderer) {
 		for (int j = 0; j < shadow_renderer_lookup.size(); j++)
-			((ShadowListRenderer)shadow_renderer_lookup.get(j)).renderShadows(renderer);
+			shadow_renderer_lookup.get(j).renderShadows(renderer);
 	}
 }
