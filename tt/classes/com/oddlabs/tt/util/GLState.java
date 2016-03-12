@@ -21,7 +21,7 @@ public final strictfp class GLState implements Cloneable {
 	private boolean texcoord1_array;
 	private boolean color_array;
 
-        @Override
+    @Override
 	public Object clone() throws CloneNotSupportedException {
 		return super.clone();
 	}
@@ -32,7 +32,7 @@ public final strictfp class GLState implements Cloneable {
 		else
 			GL11.glDisableClientState(gl_flag);
 	}
-	
+
 	public static void activeTexture(int texture) {
 		if (GLContext.getCapabilities().OpenGL13)
 			GL13.glActiveTexture(texture);

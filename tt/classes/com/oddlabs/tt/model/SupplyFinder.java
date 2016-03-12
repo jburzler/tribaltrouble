@@ -74,7 +74,7 @@ public final strictfp class SupplyFinder<S extends Supply> implements FinderFilt
 		int min_dist = Integer.MAX_VALUE;
 		Supply closest = null;
 		for (int j = 0; j < region_list.size(); j++) {
-			List supplies = (List)region_list.get(j);
+			List supplies = region_list.get(j);
 			for (int i = 0; i < supplies.size(); i++) {
 				Supply current = (Supply)supplies.get(i);
 				int dx = current.getGridX() - unit.getGridX();

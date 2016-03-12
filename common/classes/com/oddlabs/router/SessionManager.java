@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 final strictfp class SessionManager {
@@ -25,7 +26,7 @@ final strictfp class SessionManager {
 		if (session == null) {
 			session = new Session(logger, session_id, session_info, this);
 			id_to_session.put(session_id, session);
-			logger.info("Creating session: " + session);
+			logger.log(Level.INFO, "Creating session: {0}", session);
 		} else {
 			if (!session.info.equals(session_info) || session.hasClient(client_id) || client_id >= session_info.num_participants)
 				throw new RuntimeException("SessionInfo mismatch " + session.info + " != " + session_info + " client_id = " + client_id);
@@ -93,7 +94,7 @@ final strictfp class SessionManager {
                     client.setTimeout(timeout);
                     timeouts.put(timeout, client);
                 });
-		logger.info("Started session: " + session);
+		logger.log(Level.INFO, "Started session: {0}", session);
 		return initial_time;
 	}
 
@@ -103,7 +104,7 @@ final strictfp class SessionManager {
 
 	void remove(Session session) {
 		id_to_session.remove(session.session_id);
-		logger.info("Removing session: " + session);
+		logger.log(Level.INFO, "Removing session: {0}", session);
 	}
 
 	int getNextTick(Session session) {

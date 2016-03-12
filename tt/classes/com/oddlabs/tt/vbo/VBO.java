@@ -15,7 +15,7 @@ public abstract strictfp class VBO extends NativeResource {
 	protected final boolean use_vbo;
 	private final static IntBuffer handle_buffer;
 
-	private ByteBuffer saved_buffer;
+	private final ByteBuffer saved_buffer;
 //	private ByteBuffer mapped_buffer;
 
 	static {

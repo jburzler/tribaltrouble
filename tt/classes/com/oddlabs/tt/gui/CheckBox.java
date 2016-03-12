@@ -100,7 +100,7 @@ public final strictfp class CheckBox extends GUIObject implements ToolTip {
 		}
 	}
 
-	protected void checked(boolean marked) {
+	void checked(boolean marked) {
 /*
 		GUIObject parent = (GUIObject)getParent();
 		if (parent != null)

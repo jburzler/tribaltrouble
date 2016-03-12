@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public final strictfp class NotificationManager {
-	private final List attack_notifies = new ArrayList();
-	private final List notifies = new ArrayList();
+	private final List<AttackNotification> attack_notifies = new ArrayList<>();
+	private final List<Notification> notifies = new ArrayList();
 	private final GUIRoot gui_root;
 	private Notification latest_notification = null;
 
@@ -20,10 +20,9 @@ public final strictfp class NotificationManager {
 	public Notification getLatestNotification() {
 		return latest_notification;
 	}
-	
+
 	public void newAttackNotification(AnimationManager manager, Selectable target, Player local_player) {
-		for (int i = 0; i < attack_notifies.size(); i++) {
-			AttackNotification current = (AttackNotification)attack_notifies.get(i);
+		for (AttackNotification current : attack_notifies) {
 			if (current.contains(target)) {
 				current.restartTimer();
 				return;
@@ -43,16 +42,16 @@ public final strictfp class NotificationManager {
 	private void newNotification(AnimationManager manager, Player local_player, float x, float y, float r, float g, float b, boolean show_always) {
 		addNotification(new Notification(local_player.getWorld(), gui_root, x, y, this, r, g, b, local_player.getRace().getBuildingNotificationAudio(), show_always, manager), notifies);
 	}
-	
-	private void addNotification(Notification notification, List list) {
+
+	private <N extends Notification> void addNotification(N notification, List<N> list) {
 		list.add(notification);
 		latest_notification = notification;
 	}
 
-	public void removeAttackNotification(AttackNotification current) {
+	void removeAttackNotification(AttackNotification current) {
 		attack_notifies.remove(current);
 	}
-	
+
 	public void removeNotification(Notification current) {
 		notifies.remove(current);
 	}

@@ -56,6 +56,7 @@ import com.oddlabs.tt.viewer.AmbientAudio;
 import com.oddlabs.tt.viewer.Cheat;
 import com.oddlabs.tt.viewer.Selection;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -295,7 +296,7 @@ System.out.println("last_event_log_path = " + last_event_log_path);
 				}
 				System.setErr(new PrintStream(new_err));
 				System.setOut(new PrintStream(new_out));
-			} catch (IOException e) {
+			} catch (FileNotFoundException e) {
 				System.err.println("Failed to setup logging to " + event_log_dir + " exception: " + e);
 			}
 		}
@@ -391,7 +392,8 @@ e.printStackTrace();
 	}
 
 	private static void failedOpenGL(LWJGLException e) {
-		e.printStackTrace();
+        System.err.println("OpenGL Failure");
+		e.printStackTrace(System.err);
 
 		Main.shutdown();
 	}

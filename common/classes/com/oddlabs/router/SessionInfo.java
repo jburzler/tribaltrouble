@@ -15,7 +15,7 @@ public strictfp class SessionInfo implements Serializable {
 
         @Override
 	public final boolean equals(Object other) {
-		return ((SessionInfo)other).num_participants == num_participants;
+		return other instanceof SessionInfo && ((SessionInfo)other).num_participants == num_participants;
 	}
 
         @Override

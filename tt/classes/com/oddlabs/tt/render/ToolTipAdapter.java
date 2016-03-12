@@ -70,7 +70,7 @@ final strictfp class ToolTipAdapter implements ToolTipVisitor, ToolTip {
 		visitSelectable(building);
 		tool_tip_box.append(building.getTemplate().getName());
 		Quad[] watch = Icons.getIcons().getWatch();
-		icon[0] = watch[(int)((watch.length - 1)*building.getHitPoints()/building.getBuildingTemplate().getMaxHitPoints())];
+		icon[0] = watch[((watch.length - 1)*building.getHitPoints()/building.getBuildingTemplate().getMaxHitPoints())];
 		tool_tip_box.append(icon);
 		//      if (getUnitContainer() != null && Settings.getSettings().developer_mode) {
 		//          tool_tip_box.append(" units_in_building ");
@@ -91,7 +91,7 @@ final strictfp class ToolTipAdapter implements ToolTipVisitor, ToolTip {
 		if (unit.getAbilities().hasAbilities(Abilities.MAGIC)) {
 			Quad[] watch = Icons.getIcons().getWatch();
 			int hit_points = unit.getHitPoints();
-			int index = (int)((watch.length - 1)*hit_points/unit.getUnitTemplate().getMaxHitPoints());
+			int index = ((watch.length - 1)*hit_points/unit.getUnitTemplate().getMaxHitPoints());
 			assert hit_points > 0 && hit_points <= unit.getUnitTemplate().getMaxHitPoints(): "Invalid hit points";
 			icon[0] = watch[index];
 			tool_tip_box.append(icon);

@@ -73,10 +73,10 @@ public final strictfp class Player implements PlayerInterface {
 	private boolean can_build_chieftains = true;
 	private boolean can_repair = true;
 	private boolean can_attack = true;
-	private boolean[] can_build = new boolean[Race.NUM_BUILDINGS];
+	private final boolean[] can_build = new boolean[Race.NUM_BUILDINGS];
 	private boolean can_move = true;
-	private boolean can_build_towers = true;
-	private boolean can_build_quarters = true;
+	private final boolean can_build_towers = true;
+	private final boolean can_build_quarters = true;
 	private boolean can_exit_towers = true;
 	private boolean can_use_rubber = true;
 	private boolean can_set_rally = true;
@@ -84,7 +84,7 @@ public final strictfp class Player implements PlayerInterface {
 	private boolean can_build_armies = true;
 	private boolean can_build_weapons = true;
 	private boolean can_transport = true;
-	private boolean[] can_do_magic = new boolean[RacesResources.NUM_MAGIC];
+	private final boolean[] can_do_magic = new boolean[RacesResources.NUM_MAGIC];
 
 	private float hit_bonus;
 

@@ -15,15 +15,11 @@ public final strictfp class KeyboardInput {
 	public final static int LARGE_WARP = 100000;
 	private final static int GOTO_END_OF_LOG_WARP = Integer.MAX_VALUE/2;
 
-	private final static KeyboardInput instance;
+	private final static KeyboardInput instance = new KeyboardInput();
 
 	private boolean shift_down;
 	private boolean control_down;
 	private boolean menu_down;
-
-	static {
-		instance = new KeyboardInput();
-	}
 
 	public static void reset() {
 		while (Keyboard.isCreated() && Keyboard.next())

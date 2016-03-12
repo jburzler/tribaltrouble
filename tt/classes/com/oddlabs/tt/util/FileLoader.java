@@ -3,6 +3,7 @@ package com.oddlabs.tt.util;
 import com.oddlabs.tt.event.LocalEventQueue;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.ReadableByteChannel;
@@ -20,7 +21,7 @@ public final strictfp class FileLoader implements FileLoaderInterface {
 		try {
 			tmp_channel = new FileInputStream(file).getChannel();
 			exception = null;
-		} catch (IOException e) {
+		} catch (FileNotFoundException e) {
 			tmp_channel = null;
 			exception = e;
 		}

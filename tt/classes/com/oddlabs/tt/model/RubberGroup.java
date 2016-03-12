@@ -43,7 +43,7 @@ public final strictfp class RubberGroup {
 		int start_index = world.getRandom().nextInt(tree_positions.size());
 		int index = (start_index + 1)%tree_positions.size();
 		while (index != start_index) {
-			int[] coords = (int[])tree_positions.get(index);
+			int[] coords = tree_positions.get(index);
 			Occupant occ = world.getUnitGrid().getOccupant(coords[0], coords[1]);
 			if (occ instanceof TreeSupply)
 				return coords;

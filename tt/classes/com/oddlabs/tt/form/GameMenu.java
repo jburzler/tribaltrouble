@@ -514,7 +514,7 @@ public final strictfp class GameMenu extends Panel implements ConfigurationListe
 		Set<Integer> teams = new HashSet<>();
             for (PlayerSlot current : players) {
                 if (current.getInfo() != null)
-                    teams.add(new Integer(current.getInfo().getTeam()));
+                    teams.add(current.getInfo().getTeam());
             }
 		return teams.size();
 	}

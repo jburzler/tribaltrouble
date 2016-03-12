@@ -217,7 +217,7 @@ public final strictfp class Connection extends AbstractConnection implements Han
 	}
 
 	private boolean writeEvent(ARMIEvent event) {
-		short event_size = (short)event.getEventSize();
+		short event_size = event.getEventSize();
 		int total_event_size = event_size + HEADER_SIZE;
 		assert total_event_size <= write_buffer.capacity();
 		boolean fits = total_event_size <= write_buffer.remaining();

@@ -7,7 +7,7 @@ import java.util.Random;
 
 public final strictfp class Midpoint {
 
-	private Random random;
+	private final Random random;
 	public Channel channel;
 
 	public Midpoint(int size, int base_freq, float pers, long seed) {

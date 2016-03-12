@@ -2,11 +2,11 @@ package com.oddlabs.tt.camera;
 
 
 public final strictfp class NullCamera extends Camera {
-	public NullCamera() {
-		super(null, new CameraState());
-	}
+    public NullCamera() {
+            super(null, new CameraState());
+    }
 
-        @Override
-	public void doAnimate(float t) {
-	}
+    @Override
+    public void doAnimate(float t) {
+    }
 }

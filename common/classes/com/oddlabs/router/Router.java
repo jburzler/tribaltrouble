@@ -10,6 +10,7 @@ import java.net.InetAddress;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.Set;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public final strictfp class Router implements ConnectionListenerInterface {
@@ -47,7 +48,7 @@ public final strictfp class Router implements ConnectionListenerInterface {
 
         @Override
 	public void incomingConnection(AbstractConnectionListener connection_listener, Object remote_address) {
-		logger.info("Incoming connection from " + remote_address);
+		logger.log(Level.INFO, "Incoming connection from {0}", remote_address);
 		AbstractConnection conn = connection_listener.acceptConnection(null);
 		RouterClient client = new RouterClient(manager, conn, logger, this);
 		clients.add(client);
@@ -61,7 +62,7 @@ public final strictfp class Router implements ConnectionListenerInterface {
         @Override
 	public void error(AbstractConnectionListener conn_id, IOException e) {
 		close();
-		logger.severe("Server socket failed: " + e);
+		logger.log(Level.SEVERE, "Server socket failed: {0}", e);
 		if (router_listener != null)
 			router_listener.routerFailed(e);
 	}

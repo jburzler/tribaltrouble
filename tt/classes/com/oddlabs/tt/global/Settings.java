@@ -7,6 +7,7 @@ import com.oddlabs.tt.util.GLUtils;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.Serializable;
@@ -171,7 +172,7 @@ public final strictfp class Settings implements Serializable {
 		try {
 			OutputStream out = new FileOutputStream(settings_file);
 			props.store(out, "comment");
-		} catch (Exception e) {
+		} catch (IOException e) {
 			System.err.println("Failed to write settings to " + settings_file + " exception: " + e);
 		}
 	}
@@ -183,7 +184,7 @@ public final strictfp class Settings implements Serializable {
 		try {
 			InputStream in = new FileInputStream(settings_file);
 			props.load(in);
-		} catch (Exception e) {
+		} catch (IOException e) {
 			System.err.println("Could not read settings from " + settings_file);
 			return;
 		}

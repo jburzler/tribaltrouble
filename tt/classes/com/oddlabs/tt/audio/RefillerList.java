@@ -6,71 +6,76 @@ import java.util.List;
 import org.lwjgl.openal.AL;
 
 public final strictfp class RefillerList {
-	private final static int THREAD_SLEEP_MILLIS = 50;
 
-	private boolean finished = false;
-	private final Thread refill_thread;
-	private final List<QueuedAudioPlayer> players = new ArrayList<>();
+    private final static int THREAD_SLEEP_MILLIS = 50;
 
-	public synchronized void registerQueuedPlayer(QueuedAudioPlayer q) {
-		assert !players.contains(q);
-		players.add(q);
-		refill_thread.interrupt();
-	}
+    private boolean finished = false;
+    private final Thread refill_thread;
+    private final List<QueuedAudioPlayer> players = new ArrayList<>();
 
-	public synchronized void removeQueuedPlayer(QueuedAudioPlayer q) {
-		players.remove(q);
-		assert !players.contains(q);
-	}
+    synchronized void registerQueuedPlayer(QueuedAudioPlayer q) {
+        assert !players.contains(q);
+        players.add(q);
+        notify();
+    }
 
-	public RefillerList() {
-		Refiller refiller = new Refiller();
-		refill_thread = new Thread(refiller, "Refiller");
-		refill_thread.setDaemon(true);
-		refill_thread.start();
-	}
+    synchronized void removeQueuedPlayer(QueuedAudioPlayer q) {
+        players.remove(q);
+        assert !players.contains(q);
+    }
 
-	public void destroy() {
-		synchronized (this) {
-			finished = true;
-			players.clear();
-			refill_thread.interrupt();
-		}
-		try {
-			refill_thread.join();
-		} catch (InterruptedException e) {
-			throw new RuntimeException(e);
-		}
-	}
+    public RefillerList() {
+        refill_thread = new Refiller();
+        refill_thread.start();
+    }
 
-	private class Refiller implements Runnable {
-                @Override
-		public void run() {
-			try {
-				while (!finished) {
-					synchronized (RefillerList.this) {
-						if (AL.isCreated()) {
-							for (int i = 0; i < players.size(); i++) {
-								players.get(i).refill();
-							}
-						}
-						while (players.isEmpty() && !finished) {
-							try {
-								RefillerList.this.wait();
-							} catch (InterruptedException e) {
-								// ignore
-							}
-						}
-					}
-					try {
-						Thread.sleep(THREAD_SLEEP_MILLIS);
-					} catch (InterruptedException e) {
-						// ignore
-					}
-				}
-			} catch (Throwable t) {
-				Main.fail(t);
-			}
-		}
-	}
+    public void destroy() {
+        synchronized (this) {
+            finished = true;
+            players.clear();
+            refill_thread.interrupt();
+        }
+        try {
+            refill_thread.join();
+        } catch (InterruptedException e) {
+            Thread.interrupted();
+            throw new RuntimeException(e);
+        }
+    }
+
+    private class Refiller extends Thread {
+
+        public Refiller() {
+            super("Refiller");
+            setDaemon(true);
+        }
+
+        @Override
+        public void run() {
+            try {
+                while (!finished) {
+                    synchronized (RefillerList.this) {
+                        if (AL.isCreated()) {
+                            for (QueuedAudioPlayer player: players) {
+                                player.refill();
+                            }
+                        }
+                        while (players.isEmpty() && !finished) try {
+                                RefillerList.this.wait();
+                            } catch (InterruptedException e) {
+                                Thread.interrupted();
+                            }
+                    }
+                    try {
+                        Thread.sleep(THREAD_SLEEP_MILLIS);
+                    } catch (InterruptedException e) {
+                        Thread.interrupted();
+                        // ignore
+                    }
+                }
+            } catch (Throwable t) {
+                Main.fail(t);
+            }
+        }
+    }
 }

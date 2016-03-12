@@ -40,8 +40,8 @@ public strictfp final class BalancedParametricEmitter extends ParametricEmitter 
 	protected int initParticle(ParametricFunction function, float velocity_u, float velocity_v, Vector4f color, Vector4f delta_color, Vector3f particle_radius, Vector3f growth_rate, float energy) {
 
 		for (int i = 0; i < num_particles; i++) {
-			float u = dist_u*i/(float)num_particles;
-			float v = dist_v*i/(float)num_particles;
+			float u = dist_u*i/num_particles;
+			float v = dist_v*i/num_particles;
 			ParametricParticle particle = new ParametricParticle(function, u, v, 0f, 0f, 0f);
 			Vector3f offset = randomOffset(margin_u, margin_v, 0f);
 			particle.setVelocity(velocity_u + offset.getX(), velocity_v + offset.getY());

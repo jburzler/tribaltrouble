@@ -16,7 +16,7 @@ public final strictfp class DNSTask implements Callable {
 
         @Override
 	public void taskCompleted(Object result) {
-		connection.connect((InetSocketAddress)result);
+		connection.connect((SocketAddress)result);
 	}
 	
         @Override

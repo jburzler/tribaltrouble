@@ -269,7 +269,7 @@ public final strictfp class NativeIsland0 extends Island {
                     }
                     // Remove Vikings
                     Unit[] viking_units = new Unit[enemy.getUnits().getSet().size()];
-                    enemy.getUnits().getSet().toArray(viking_units);
+                    enemy.getUnits().getSet().toArray(new Selectable[enemy.getUnits().getSet().size()]);
                     for (Unit viking_unit : viking_units) {
                         if (!viking_unit.isDead()) {
                             viking_unit.removeNow();

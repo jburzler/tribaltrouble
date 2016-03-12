@@ -5,7 +5,7 @@ import com.oddlabs.tt.font.Font;
 public strictfp class PanelTab extends GUIObject {
 	private final static float[] HIGHLIGHT_COLOR = new float[]{0f, 1f, 0f, 1f};
 	private boolean selected;
-	private Label label;
+	private final Label label;
 
 	public PanelTab(String caption) {
 		PanelData data = Skin.getSkin().getPanelData();

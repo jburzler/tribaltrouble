@@ -114,8 +114,7 @@ public abstract strictfp class InGameDelegate extends CameraDelegate {
 	protected void keyPressed(KeyboardEvent event) {
 		switch (event.getKeyCode()) {
 			case Keyboard.KEY_ESCAPE:
-				getGUIRoot().pushDelegate(new InGameMainMenu(viewer, new StaticCamera(getCamera().getState()),
-							viewer.getParameters()));
+				getGUIRoot().pushDelegate(new InGameMainMenu(viewer, new StaticCamera(getCamera().getState())));
 				break;
 			default:
 				if (!cheat(event))

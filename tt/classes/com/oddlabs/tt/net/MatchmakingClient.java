@@ -111,7 +111,7 @@ public final strictfp class MatchmakingClient implements MatchmakingClientInterf
 			update_allowed = false;
 			matchmaking_interface.requestList(type, update_key);
 		} else
-			update_requested_types.add(new Integer(type));
+			update_requested_types.add(type);
 	}
 
 	public Profile getProfile() {

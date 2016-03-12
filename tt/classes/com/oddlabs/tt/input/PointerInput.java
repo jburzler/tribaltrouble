@@ -16,14 +16,14 @@ import org.lwjgl.opengl.GL11;
 public final strictfp class PointerInput {
 	private final static int NUM_BUTTONS = 8;
 
-	private static boolean[] buttons = new boolean[NUM_BUTTONS];
+	private final static boolean[] buttons = new boolean[NUM_BUTTONS];
 	private static short last_x;
 	private static short last_y;
 	private static Cursor active_cursor;
 	private static int drag_button = -1;
 
 	private final static NativeCursor debug_cursor;
-	
+
 	static {
 		Image image_16_1 = Image.read(Utils.makeURL("/textures/gui/pointer_clientload_16_1.image"));
 		GLIntImage img_16_1 = new GLIntImage(image_16_1.getWidth(), image_16_1.getHeight(), image_16_1.getPixels(), GL11.GL_RGBA);
@@ -57,7 +57,8 @@ public final strictfp class PointerInput {
 	private static void resetCursorPos() {
 		setCursorPosition(LocalInput.getMouseX(), LocalInput.getMouseY());
 		// clear event queue
-		while (Mouse.isCreated() && Mouse.next());
+		while (Mouse.isCreated() && Mouse.next())
+            ;
 	}
 
 	private static void doSetActiveCursor(Cursor cursor) {
@@ -84,7 +85,7 @@ public final strictfp class PointerInput {
 				LocalInput.mouseMoved(gui_root, last_x, last_y);
 			}
 		}
-		if (dz != 0) 
+		if (dz != 0)
 			LocalInput.mouseScrolled(gui_root, dz);
 	}
 

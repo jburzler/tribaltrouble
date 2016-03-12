@@ -39,7 +39,7 @@ public final strictfp class Server implements ConnectionListenerInterface {
 	private AbstractConnectionListener tunnelled_listener;
 
 	private int state = NEGOTIATING;
-	private boolean register_server;
+	private final boolean register_server;
 
 	public Server(NetworkSelector network, Game game, InetAddress ip, WorldGenerator generator, boolean register_server, String[] ai_names) {
 		this.local_listener = new ConnectionListener(network, ip, Globals.NET_PORT, this);

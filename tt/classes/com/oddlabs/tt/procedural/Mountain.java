@@ -7,7 +7,7 @@ import java.util.*;
 
 public final strictfp class Mountain {
 
-	private Random random;
+	private final Random random;
 	public Channel channel;
 
 	public Mountain(int size, int base_freq, float pers, long seed) {

@@ -20,7 +20,7 @@ public final strictfp class SaveDeterministic extends Deterministic {
 			buffer = ByteBuffer.allocateDirect(BUFFER_SIZE);
 			channel = new FileOutputStream(logging_file).getChannel();
 			System.out.println("Logging to " + logging_file);
-		} catch (IOException e) {
+		} catch (FileNotFoundException e) {
 			throw new RuntimeException(e);
 		}
 	}

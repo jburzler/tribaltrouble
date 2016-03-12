@@ -45,7 +45,7 @@ public strictfp class NumberEditLine extends EditLine {
 
 		try {
 			value = crop(Integer.parseInt(str));
-		} catch (Exception e) {
+		} catch (NumberFormatException e) {
 			// ignore exception, assume minimum value
 			value = max_value;
 		}

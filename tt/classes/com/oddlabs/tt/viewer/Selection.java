@@ -3,7 +3,6 @@ package com.oddlabs.tt.viewer;
 import com.oddlabs.tt.model.Army;
 import com.oddlabs.tt.model.Selectable;
 import com.oddlabs.tt.player.Player;
-import java.util.Iterator;
 
 public final strictfp class Selection {
 	private final Army[] shortcut_armies = new Army[10];
@@ -44,9 +43,9 @@ public final strictfp class Selection {
 		else
 			shortcut_armies[index] = new Army();
 
-            for (Selectable s : current_selection.getSet()) {
-                shortcut_armies[index].add(s);
-            }
+        for (Selectable s : current_selection.getSet()) {
+            shortcut_armies[index].add(s);
+        }
 	}
 
 	public boolean enableShortcutArmy(int index) {

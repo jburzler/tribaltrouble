@@ -746,7 +746,7 @@ public final strictfp class Building extends Selectable implements Occupant {
 	public void fillSupplies(Class key, int max) {
 		SupplyContainer container = getSupplyContainer(key);
 		if (container != null) {
-			container.increaseSupply((int)StrictMath.min(container.getMaxSupplyCount() - container.getNumSupplies(), max));
+			container.increaseSupply(StrictMath.min(container.getMaxSupplyCount() - container.getNumSupplies(), max));
 		}
 	}
 

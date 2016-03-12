@@ -86,7 +86,7 @@ public final strictfp class ChatLine extends EditLine {
 		}
 	}
 
-	protected void tabPressed(String[] words) {
+	void tabPressed(String[] words) {
 	}
 
 	public void addTabListener(TabListener listener) {

@@ -7,7 +7,7 @@ import java.util.Random;
 
 public final strictfp class MidpointFractalizer {
 
-	private Random random;
+	private final Random random;
 	public Channel channel;
 
 	public MidpointFractalizer(int size, Channel base, float amplitude, float pers, long seed) {

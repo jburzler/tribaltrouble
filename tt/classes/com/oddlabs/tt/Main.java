@@ -24,6 +24,7 @@ public final strictfp class Main {
 	}
 
 	public static void shutdown() {
+        System.out.println("Exiting");
 		System.exit(0);
 	}
 

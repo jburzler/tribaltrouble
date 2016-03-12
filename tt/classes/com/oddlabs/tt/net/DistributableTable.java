@@ -12,7 +12,7 @@ public final strictfp class DistributableTable {
 		int name = current_name++;
 		Object o = distributables.put(name, distributable);
 		assert o == null: "Error registering distributable.";
-		Object p = names.put(distributable, new Integer(name));
+		Object p = names.put(distributable, name);
 		assert p == null: "Error registering name.";
 		return name;
 	}

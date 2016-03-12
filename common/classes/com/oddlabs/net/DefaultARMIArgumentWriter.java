@@ -22,7 +22,7 @@ public strictfp class DefaultARMIArgumentWriter implements ARMIArgumentWriter {
 			long l = ((Long)arg);
 			out.buffer().putLong(l);
 		} else if (type.equals(float.class)) {
-			float f = ((Float)arg).intValue();
+			float f = ((Number)arg).intValue();
 			out.buffer().putFloat(f);
 		} else if (type.equals(double.class)) {
 			double d = ((Double)arg);

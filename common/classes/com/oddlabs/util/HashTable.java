@@ -6,9 +6,9 @@ public final strictfp class HashTable {
 	private final static float DEFAULT_LOAD_FACTOR = 0.75f;
 
 	private LinkedList[] entries;
-	private float load_factor;
+	private final float load_factor;
 	private int num_entries;
-	private int mul_factor;
+	private final int mul_factor;
 
 	public HashTable() {
 		load_factor = DEFAULT_LOAD_FACTOR;

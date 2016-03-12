@@ -25,6 +25,7 @@ import javax.crypto.KeyAgreement;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
+import javax.crypto.interfaces.DHKey;
 import javax.crypto.interfaces.DHPublicKey;
 import javax.crypto.spec.DHParameterSpec;
 import javax.crypto.spec.PBEKeySpec;
@@ -100,7 +101,7 @@ public final strictfp class KeyManager {
 			throw new InvalidKeyException("Not a public key");
 		try {
 			KeyPairGenerator key_pair_gen = KeyPairGenerator.getInstance(AGREEMENT_ALGORITHM);
-			AlgorithmParameterSpec dh_param_spec = ((DHPublicKey)public_key).getParams();
+			AlgorithmParameterSpec dh_param_spec = ((DHKey)public_key).getParams();
 			key_pair_gen.initialize(dh_param_spec);
 			return key_pair_gen.generateKeyPair();
 		} catch (GeneralSecurityException e) {

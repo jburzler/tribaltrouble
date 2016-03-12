@@ -307,7 +307,7 @@ public abstract strictfp class AI implements Animated {
 		if (towers == null || idle_warriors == null)
 			return;
 
-		int length = (int)StrictMath.min(idle_warriors.length, towers.length);
+		int length = StrictMath.min(idle_warriors.length, towers.length);
 		for (int i = 0; i < length; i++) {
 			owner.setTarget(new Selectable[]{idle_warriors[i]}, towers[i], Target.ACTION_DEFAULT, false);
 		}
@@ -338,7 +338,7 @@ public abstract strictfp class AI implements Animated {
 		Selectable[][] lists = owner.classifyUnits();
             for (Selectable[] list : lists) {
                 Selectable s = list[0];
-                if (s instanceof Unit && ((Unit)s).getAbilities().hasAbilities(Abilities.THROW)) {
+                if (s instanceof Unit && s.getAbilities().hasAbilities(Abilities.THROW)) {
                     return (Unit)s;
                 }
             }

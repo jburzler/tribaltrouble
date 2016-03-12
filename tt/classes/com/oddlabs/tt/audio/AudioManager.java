@@ -191,11 +191,11 @@ public final strictfp class AudioManager implements AudioImplementation {
 		return dx*dx + dy*dy + dz*dz;
 	}
 
-	public void registerQueuedPlayer(QueuedAudioPlayer q) {
+        void registerQueuedPlayer(QueuedAudioPlayer q) {
 		queued_players.registerQueuedPlayer(q);
 	}
 
-	public void removeQueuedPlayer(QueuedAudioPlayer q) {
+	void removeQueuedPlayer(QueuedAudioPlayer q) {
 		queued_players.removeQueuedPlayer(q);
 	}
 

@@ -13,7 +13,7 @@ public final strictfp class SessionID implements Serializable {
 
         @Override
 	public boolean equals(Object other) {
-		return ((SessionID)other).session_id == session_id;
+		return other instanceof SessionID && ((SessionID)other).session_id == session_id;
 	}
 
         @Override

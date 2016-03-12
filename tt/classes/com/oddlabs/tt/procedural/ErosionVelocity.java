@@ -190,7 +190,7 @@ public final strictfp class ErosionVelocity {
 			for (int y = 0; y < channel.height; y++) {
 				for (int x = 0; x < channel.width; x++) {
 					if (w[x][y] > 1) {
-						v.putPixel(x, y, v.getPixel(x, y) / (float)w[x][y]);
+						v.putPixel(x, y, v.getPixel(x, y) / w[x][y]);
 					}
 				}
 			}

@@ -56,7 +56,7 @@ public final strictfp class RowCollection extends GUIObject {
 	}
 
 	public void replaceRows() {
-		int y = getHeight() + ((MultiColumnComboBox)getParent()).getOffsetY();
+		int y = getHeight() + ((Scrollable)getParent()).getOffsetY();
 		for (int i = 0; i < rows.size(); i++) {
 			Row row;
 			if (sorted_descending)
@@ -75,7 +75,7 @@ public final strictfp class RowCollection extends GUIObject {
 	public int getContentHeight() {
 		int height = 0;
 		for (int i = 0; i < rows.size(); i++) {
-			height += ((Row)rows.get(i)).getHeight();
+			height += ((Renderable)rows.get(i)).getHeight();
 		}
 		return height;
 	}

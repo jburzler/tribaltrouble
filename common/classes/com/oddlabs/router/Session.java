@@ -8,6 +8,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 final strictfp class Session {
@@ -82,7 +83,7 @@ final strictfp class Session {
                     } else
                         client_checksum = (Integer)client.getChecksums().remove(0);
                     if (client_checksum != best_checksum[0]) {
-                        logger.warning("Kicking client because of checksum error: " + client_checksum + " != " + best_checksum[0]);
+                        logger.log(Level.WARNING, "Kicking client because of checksum error: {0} != {1}", new Object[]{client_checksum, best_checksum[0]});
                         clients_to_be_kicked.add(client);
                     }
                 });
@@ -97,7 +98,7 @@ final strictfp class Session {
 		if (info.num_participants == players.size())
 			start();
 	}
-	
+
 	int getNextTick() {
 		return manager.getNextTick(this);
 	}
@@ -133,7 +134,7 @@ final strictfp class Session {
 	int getNumPlayers() {
 		return players.size();
 	}
-	
+
         @Override
 	public String toString() {
 		String result = "(Session: info = " + info + " players : (";

@@ -2,7 +2,7 @@ package com.oddlabs.tt.model.behaviour;
 
 public strictfp abstract class Controller {
 	private final static int MAX_TRIES = 1;
-	private int[] give_up_counters;
+	private final int[] give_up_counters;
 
 	protected Controller(int num_states) {
 		give_up_counters = new int[num_states];

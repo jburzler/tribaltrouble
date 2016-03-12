@@ -14,11 +14,11 @@ public abstract strictfp class AbstractTreeGroup extends BoundingBox {
 	public final static int PALMTREE_INDEX = 1;
 	public final static int OAKTREE_INDEX = 2;
 	public final static int PINETREE_INDEX = 3;
-	
-	private AbstractTreeGroup parent;
+
+	private final AbstractTreeGroup parent;
 	private int start;
 	private int count;
-	
+
 	private int num_responding_trees = 0;
 
 	private float group_min_squared;
@@ -42,7 +42,7 @@ public abstract strictfp class AbstractTreeGroup extends BoundingBox {
 	public final boolean hasTrees() {
 		return count > 0;
 	}
-	
+
 	public final void changeRespondingTrees(int delta) {
 		num_responding_trees += delta;
 		if (parent != null)
@@ -68,7 +68,7 @@ public abstract strictfp class AbstractTreeGroup extends BoundingBox {
 			default:
 				throw new RuntimeException();
 		}
-				
+
 		root.initBounds();
 		return root;
 	}

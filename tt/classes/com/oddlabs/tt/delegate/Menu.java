@@ -72,7 +72,7 @@ public abstract strictfp class Menu extends CameraDelegate {
 		addChild(overlay);
 
 		String logo_file = Utils.getBundleString(bundle, "logo_file");
-		logo = new GUIImage((int)((347f/800f)*screen_width), (int)((206f/600f)*screen_height), 0f, 0f, 347f/512f, (float)206f/256f, logo_file);
+		logo = new GUIImage((int)((347f/800f)*screen_width), (int)((206f/600f)*screen_height), 0f, 0f, 347f/512f, 206f/256f, logo_file);
 		logo.setPos(0, screen_height - logo.getHeight());
 		addChild(logo);
 	}

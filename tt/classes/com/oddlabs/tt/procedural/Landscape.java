@@ -30,7 +30,7 @@ public final strictfp class Landscape {
 	public final static int VIKING = 1;
 	
 	private Random random;
-	private BlendInfo[] blend_infos;
+	private final BlendInfo[] blend_infos;
 	private GLIntImage[] structures;
 	private GLIntImage detail;
 	private GLByteImage[] alpha_maps;
@@ -1042,8 +1042,8 @@ public final strictfp class Landscape {
 			for (int u = 0; u < initial_unit_count; u++) {
 				location_unit = access.find((unit_grids_per_world>>1), location_unit_start[0], location_unit_start[1], 1f);
 				access.putPixelWrap(location_unit[0], location_unit[1], 0f);
-				player_locations[i][2*u] = (float)(location_unit[0]*scale);
-				player_locations[i][2*u + 1] = (float)(location_unit[1]*scale);
+				player_locations[i][2*u] = (location_unit[0]*scale);
+				player_locations[i][2*u + 1] = (location_unit[1]*scale);
 			}
 		}
 		

@@ -64,7 +64,7 @@ public abstract strictfp class Renderable extends ListElementImpl {
 
 	public final void clearChildren() {
 		while (children.size() > 0) {
-			((Renderable)getLastChild()).remove();
+			getLastChild().remove();
 		}
 	}
 /*
@@ -91,7 +91,7 @@ public abstract strictfp class Renderable extends ListElementImpl {
 	protected final GUIRoot getParentGUIRoot() {
 		Renderable current = this;
 		while (current != null && !(current instanceof GUIRoot)) {
-			current = (Renderable)current.getParent();
+			current = current.getParent();
 		}
 		return (GUIRoot)current;
 	}

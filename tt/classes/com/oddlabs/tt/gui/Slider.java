@@ -109,7 +109,7 @@ public final strictfp class Slider extends GUIObject {
 		}
 	}
 
-	protected void valueSet(int value) {
+	void valueSet(int value) {
 /*		
 		GUIObject parent = (GUIObject)getParent();
 		if (parent != null)
@@ -130,7 +130,7 @@ public final strictfp class Slider extends GUIObject {
 
                 @Override
 		public void mousePressed(int button, int x, int y) {
-			start_offset = (int)valueToOffset(value);
+			start_offset = valueToOffset(value);
 		}
 
                 @Override

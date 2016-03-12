@@ -338,7 +338,7 @@ com.oddlabs.tt.landscape.LandscapeTileIndices.debug = false;*/
 			}
 			boolean found_t_range = false;
 			for (float t_scan = t_min; t_scan <= t_max; t_scan += PATCH_PICK_STEP) {
-				float t_scan_next = (float)StrictMath.min(t_scan + PATCH_PICK_STEP, t_max);
+				float t_scan_next = StrictMath.min(t_scan + PATCH_PICK_STEP, t_max);
 				float t_scan_x = x + t_scan_next*dx;
 				float t_scan_y = y + t_scan_next*dy;
 				float t_scan_z = z + t_scan_next*dz;
@@ -415,7 +415,7 @@ com.oddlabs.tt.landscape.LandscapeTileIndices.debug = false;*/
 			new_current_hovered = nearest;
 		} else {
 			pickResources();
-			new_current_hovered = (TreeSupply)getNearestPick(tree_pick_list, Target.class);
+			new_current_hovered = getNearestPick(tree_pick_list, Target.class);
 		}
 		if (current_hovered != new_current_hovered) {
 			tool_tip_timer.resetTime();

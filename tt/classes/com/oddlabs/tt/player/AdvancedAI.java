@@ -43,10 +43,10 @@ public final strictfp class AdvancedAI extends AI {
 
 	private final int difficulty;
 
-	private int[] NUM_WARRIORS = new int[]{3, 7, 10};
-	private int[] NUM_WARRIORS_INCREASE = new int[]{1, 3, 5};
-	private int[] NUM_WARRIORS_MAX = new int[]{10, 19, 40};
-	private int[] NUM_WARRIORS_FOR_CHIEFTAIN = new int[]{1000, 1000, 20};
+	private final int[] NUM_WARRIORS = new int[]{3, 7, 10};
+	private final int[] NUM_WARRIORS_INCREASE = new int[]{1, 3, 5};
+	private final int[] NUM_WARRIORS_MAX = new int[]{10, 19, 40};
+	private final int[] NUM_WARRIORS_FOR_CHIEFTAIN = new int[]{1000, 1000, 20};
 
 	private LandscapeTarget defense_target = null;
 
@@ -248,7 +248,7 @@ public final strictfp class AdvancedAI extends AI {
 				getOwner().setTarget(getIdlePeons(), getConstructionSites()[0], Target.ACTION_DEFAULT, false);
 			} else if (towerUnderConstruction() && getConstructionSites() != null) {
 				getOwner().setTarget(getIdlePeons(), getConstructionSites()[0], Target.ACTION_DEFAULT, false);
-			} else if (getQuarters() != null && !((Building)getQuarters()[0]).isDead()) {
+			} else if (getQuarters() != null && !getQuarters()[0].isDead()) {
 				getOwner().setTarget(getIdlePeons(), getQuarters()[0], Target.ACTION_DEFAULT, false);
 			}
 		}
@@ -390,7 +390,7 @@ else
 			if (!quarters.isDead()) {
 				quarters.setRallyPoint(armory);
 				if (quarters.getUnitContainer().getNumSupplies() > MIN_UNITS_REPRODUCING[difficulty]) {
-					int units = (int)StrictMath.min(num_units, quarters.getUnitContainer().getNumSupplies() - MIN_UNITS_REPRODUCING[difficulty]);
+					int units = StrictMath.min(num_units, quarters.getUnitContainer().getNumSupplies() - MIN_UNITS_REPRODUCING[difficulty]);
 					getOwner().deployUnits(quarters, Building.KEY_DEPLOY_PEON, units);
 				}
 			}
@@ -408,7 +408,7 @@ else
 			quarters = (Building)getQuarters()[0];
 		}
 		if (!armoryUnderConstruction() && getArmory() == null
-				&& getQuarters() != null && ((Building)getQuarters()[0]).getAbilities().hasAbilities(Abilities.REPRODUCE)) {
+				&& getQuarters() != null && getQuarters()[0].getAbilities().hasAbilities(Abilities.REPRODUCE)) {
 			Selectable[] builders = getPeons(20);
 			if (builders.length < 20) {
 				if (quarters != null && !quarters.isDead() && quarters.getUnitContainer().getNumSupplies() >= 20)

@@ -37,7 +37,7 @@ final strictfp class Fade {
 	public void updateChecksum(StateChecksum checksum) {
 	}
 
-	protected void render() {
+	void render() {
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		float alpha = (float)StrictMath.sin(StrictMath.PI*time/FADE_TIME);
 		GL11.glColor4f(0f, 0f, 0f, alpha);

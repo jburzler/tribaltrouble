@@ -5,7 +5,6 @@ import com.oddlabs.net.NetworkSelector;
 import com.oddlabs.tt.camera.Camera;
 import com.oddlabs.tt.form.QuestionForm;
 import com.oddlabs.tt.gui.GUIRoot;
-import com.oddlabs.tt.gui.Group;
 import com.oddlabs.tt.gui.KeyboardEvent;
 import com.oddlabs.tt.gui.MenuButton;
 import com.oddlabs.tt.guievent.MouseClickListener;
@@ -13,7 +12,6 @@ import com.oddlabs.tt.util.Utils;
 import org.lwjgl.input.Keyboard;
 
 public final strictfp class CampaignMapMenu extends Menu {
-	private Group game_infos;
 
 	public CampaignMapMenu(NetworkSelector network, GUIRoot gui_root, Camera camera) {
 		super(network, gui_root, camera);

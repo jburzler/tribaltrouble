@@ -32,7 +32,7 @@ System.out.println("Creating renderer = " + renderer);
 		return new BackBufferRenderer(width, height, use_copyteximage);
 	}
 
-	protected void pbufferFailed() {
+	void pbufferFailed() {
 		pbuffer_failures++;
 	}
 }

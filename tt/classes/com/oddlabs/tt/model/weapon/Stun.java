@@ -29,7 +29,7 @@ public final strictfp class Stun implements Magic {
 	private final RandomVelocityEmitter emitter;
 	private final AbstractAudioPlayer sound;
 
-	private List target_list;
+	private final List target_list;
 
 	public Stun(float offset_x, float offset_y, float offset_z, float hit_radius, float stun_time_closest, float stun_time_farthest, Unit src) {
 		this.hit_radius = hit_radius;

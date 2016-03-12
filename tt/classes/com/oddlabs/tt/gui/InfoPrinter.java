@@ -85,7 +85,7 @@ public final strictfp class InfoPrinter extends GUIObject implements Animated, C
 			label_box.setColor(color);
 		addChild(label_box);
 		history.add(label_box);
-		timers.add(new Float(time + SECONDS_PER_TIMEOUT));
+		timers.add(time + SECONDS_PER_TIMEOUT);
 
 		while (history.size() > lines) {
 			removeLine(0);

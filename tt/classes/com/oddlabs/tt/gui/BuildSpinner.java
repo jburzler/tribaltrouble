@@ -78,11 +78,11 @@ public final strictfp class BuildSpinner extends IconSpinner {
 			return 0;
 	}
 
-	protected Building getBuilding() {
+	Building getBuilding() {
 		return current_building;
 	}
 
-	protected int getOrderDiff() {
+	int getOrderDiff() {
 		if (!current_building.isDead())
 			return num_orders - current_building.getBuildSupplyContainer(type).getNumOrders();
 		else

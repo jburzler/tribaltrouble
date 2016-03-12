@@ -230,7 +230,7 @@ public final strictfp class GUIRoot extends GUIObject implements Updatable {
 			matrix_buf.rewind();
 		}
 		for (int i = 0; i < delegate_stack.size(); i++) {
-			((CameraDelegate)delegate_stack.get(i)).displayChanged(width, height);
+			((Renderable)delegate_stack.get(i)).displayChanged(width, height);
 		}
 	}
 

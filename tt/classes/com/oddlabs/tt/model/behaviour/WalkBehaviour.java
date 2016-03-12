@@ -66,9 +66,9 @@ public final strictfp class WalkBehaviour implements Behaviour {
 				break;
 		}
 		tool_tip_box.append(" | retry_delay=");
-		tool_tip_box.append((int)retry_delay);
+		tool_tip_box.append((long)retry_delay);
 		tool_tip_box.append("(");
-		tool_tip_box.append((int)retry_delay);
+		tool_tip_box.append((long)retry_delay);
 		tool_tip_box.append("s)");
 		unit.getTracker().appendToolTip(tool_tip_box);
 	}

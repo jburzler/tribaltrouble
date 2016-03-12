@@ -566,7 +566,7 @@ public final strictfp class TerrainMenu extends Group {
 		setMapcode();
 	}
 
-	protected void doCancel() {
+	void doCancel() {
 		if (multiplayer)
 			new SelectGameMenu(network, gui_root, main_menu);
 	}

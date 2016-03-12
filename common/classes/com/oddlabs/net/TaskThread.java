@@ -91,7 +91,7 @@ public final strictfp class TaskThread {
 		BlockingTask task;
 		synchronized (lock) {
 			int task_id = current_id++;
-			id_to_callable.put(new Integer(task_id), callable);
+			id_to_callable.put(task_id, callable);
 			task = new BlockingTask(task_id);
 			tasks.add(task);
 			lock.notify();

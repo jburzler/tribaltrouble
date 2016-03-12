@@ -11,7 +11,7 @@ public final strictfp class PoisonCloud {
 	private final float dst_y;
 	private final float dx;
 	private final float dy;
-	private float total_time;
+	private final float total_time;
 
 	private float time;
 
@@ -42,7 +42,7 @@ public final strictfp class PoisonCloud {
 		}
 
 		float z = emitter.getWorld().getHeightMap().getNearestHeight(x, y) + PoisonFog.OFFSET_Z;
-		float factor = (float)StrictMath.min(1f, time/total_time);
+		float factor = StrictMath.min(1f, time/total_time);
 		float scale = START_SCALE + (1f - START_SCALE)*factor;
 		emitter.scale(scale, scale, scale);
 		emitter.getPosition().set(x, y, z);

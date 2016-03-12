@@ -8,6 +8,7 @@ import com.oddlabs.net.IllegalARMIEventException;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 final strictfp class RouterClient implements ConnectionInterface {
@@ -89,11 +90,11 @@ final strictfp class RouterClient implements ConnectionInterface {
 			}
 		});
 		session.addPlayer(this);
-		logger.info("Player logged in: session = " + session + " client_id = " + client_id);
+		logger.log(Level.INFO, "Player logged in: session = {0} client_id = {1}", new Object[]{session, client_id});
 	}
 
 	private void doChecksum(int checksum) {
-		checksums.add(new Integer(checksum));
+		checksums.add(checksum);
 		session.checksum();
 /*		if (!session.checksum()) {
 			doError(true, new IOException("Checksum mismatch"));
@@ -141,7 +142,7 @@ final strictfp class RouterClient implements ConnectionInterface {
 	void close(final boolean checksum_error) {
 		connection.close();
 		if (session != null) {
-			logger.info("Removing client: " + this);
+			logger.log(Level.INFO, "Removing client: {0}", this);
 			session.removePlayer(this);
 			session.visit((RouterClient client) -> {
                             client.client_interface.playerDisconnected(client_id, checksum_error);
@@ -152,7 +153,7 @@ final strictfp class RouterClient implements ConnectionInterface {
 	void doError(final boolean checksum_error, Exception e) {
 		close(checksum_error);
 		router.removeClient(this);
-		logger.info("Client disconnected, reason: " + e);
+		logger.log(Level.INFO, "Client disconnected, reason: {0}", e);
 	}
 
 	private static strictfp class Interface {

@@ -828,7 +828,7 @@ public final strictfp class RacesResources {
 	}
 
 	public Audio getHarvestSound(Class key, Random random) {
-		Audio[] sounds = (Audio[])harvest_sounds.get(key);
+		Audio[] sounds = harvest_sounds.get(key);
 		return sounds[random.nextInt(sounds.length)];
 	}
 

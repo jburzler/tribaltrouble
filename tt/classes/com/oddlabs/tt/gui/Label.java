@@ -65,7 +65,7 @@ public strictfp class Label extends TextField implements Comparable {
 
         @Override
 	public int compareTo(Object o) {
-		return getText().toString().compareToIgnoreCase(((Label)o).getText().toString());
+		return getText().toString().compareToIgnoreCase(((TextField)o).getText().toString());
 	}
 }
 

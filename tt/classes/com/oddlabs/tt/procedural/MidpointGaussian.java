@@ -8,7 +8,7 @@ import java.util.Random;
 
 public final strictfp class MidpointGaussian {
 
-	private Random random;
+	private final Random random;
 	public Channel channel;
 
 	public MidpointGaussian(int size, int base_freq, float pers, long seed) {

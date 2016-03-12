@@ -44,7 +44,7 @@ public final strictfp class DieBehaviour implements Behaviour {
 			case LYING:
 				anim_time += MOVING_SECONDS;
 				state = MOVING;
-				dz = (float)MOVING_METERS/MOVING_SECONDS;
+				dz = MOVING_METERS/MOVING_SECONDS;
 				break;
 			case MOVING:
 				unit.remove();

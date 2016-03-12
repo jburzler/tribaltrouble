@@ -116,7 +116,7 @@ public final strictfp class HeightMap {
 		return chunk_tex_scale;
 	}
 
-	protected void registerLeaf(int x, int y, LandscapeLeaf leaf) {
+	void registerLeaf(int x, int y, LandscapeLeaf leaf) {
 		landscape_leaves[y][x] = leaf;
 	}
 

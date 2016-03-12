@@ -7,7 +7,7 @@ import org.lwjgl.BufferUtils;
 public final strictfp class Stitcher {
 	public static ShortBuffer stitch(Vertex[] vertices) {
 		ShortBuffer indices = BufferUtils.createShortBuffer(vertices.length*3);
-		vertices = (Vertex[])vertices.clone();
+		vertices = vertices.clone();
 		Arrays.sort(vertices);
 		int start_index = getStartIndex(vertices);
 		Vertex right_vertex = vertices[start_index];

@@ -1,5 +1,6 @@
 package com.oddlabs.tt.form;
 
+import com.oddlabs.tt.delegate.ControllableCameraDelegate;
 import com.oddlabs.tt.delegate.SelectionDelegate;
 import com.oddlabs.tt.gui.EditLine;
 import com.oddlabs.tt.gui.Form;
@@ -117,7 +118,7 @@ public final strictfp class InGameChatForm extends Form implements ChatListener 
 
         @Override
 	public void mouseMoved(int x, int y) {
-		((SelectionDelegate)getParent()).mouseMoved(x, y);
+		((ControllableCameraDelegate)getParent()).mouseMoved(x, y);
 	}
 
 	private strictfp final class ChatListener implements EnterListener {

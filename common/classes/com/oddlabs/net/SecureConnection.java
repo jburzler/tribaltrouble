@@ -124,7 +124,7 @@ public final strictfp class SecureConnection extends AbstractConnection implemen
 	private void processEvent(ARMIEvent event) {
 		try {
 			event.execute(interface_methods, this);
-		} catch (Exception e) {
+		} catch (IllegalARMIEventException e) {
 			notifyError(new IOException(e.getMessage()));
 		}
 	}

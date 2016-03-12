@@ -159,7 +159,7 @@ public final strictfp class TreeLowDetail {
 		texcoords.texCoordPointer(2, 0, 0);
 	}
 
-	protected void bindTreeTexture() {
+	void bindTreeTexture() {
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, lowdetail_textures[terrain_type].getHandle());
 	}
 

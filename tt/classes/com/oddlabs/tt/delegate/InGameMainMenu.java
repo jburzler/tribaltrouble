@@ -8,22 +8,18 @@ import com.oddlabs.tt.gui.Group;
 import com.oddlabs.tt.gui.KeyboardEvent;
 import com.oddlabs.tt.gui.MenuButton;
 import com.oddlabs.tt.guievent.MouseClickListener;
-import com.oddlabs.tt.landscape.WorldParameters;
 import com.oddlabs.tt.util.Utils;
 import com.oddlabs.tt.viewer.WorldViewer;
 import org.lwjgl.input.Keyboard;
 
 public final strictfp class InGameMainMenu extends Menu {
-	private final WorldParameters world_params;
-
 	private final WorldViewer viewer;
 
 	private Group game_infos;
 
-	public InGameMainMenu(WorldViewer viewer, Camera camera, WorldParameters world_params) {
+	public InGameMainMenu(WorldViewer viewer, Camera camera) {
 		super(viewer.getNetwork(), viewer.getGUIRoot(), camera);
 		this.viewer = viewer;
-		this.world_params = world_params;
 		reload();
 	}
 
