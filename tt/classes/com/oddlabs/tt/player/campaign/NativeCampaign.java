@@ -60,12 +60,12 @@ public final strictfp class NativeCampaign extends Campaign {
 		getState().setHasRubberWeapons(true);
 	}
 
-        @Override
+    @Override
 	public CampaignIcons getIcons() {
 		return NativeCampaignIcons.getIcons();
 	}
 
-        @Override
+    @Override
 	public void islandChosen(NetworkSelector network, GUIRoot gui_root, int number) {
 		if (Renderer.isRegistered()) {
 			Form dialog = new CampaignDialogForm(islands[number].getHeader(),
@@ -77,7 +77,7 @@ public final strictfp class NativeCampaign extends Campaign {
 		}
 	}
 
-        @Override
+    @Override
 	public CharSequence getCurrentObjective() {
 		if (getState().getCurrentIsland() != -1) {
 			return islands[getState().getCurrentIsland()].getCurrentObjective();

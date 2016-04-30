@@ -1,7 +1,6 @@
 package com.oddlabs.tt.form;
 
 import com.oddlabs.tt.gui.GUIRoot;
-import com.oddlabs.tt.guievent.MouseClickListener;
 import com.oddlabs.tt.net.PeerHub;
 import com.oddlabs.tt.render.Renderer;
 import com.oddlabs.tt.util.Utils;
@@ -13,24 +12,8 @@ public final strictfp class QuitForm extends QuestionForm {
 		return Utils.getBundleString(bundle, key);
 	}
 
-	public QuitForm(GUIRoot gui_root) {
-		this(gui_root, true);
-	}
-
-	public QuitForm(final GUIRoot gui_root, boolean show_quit_screen) {
-		super(!PeerHub.isWaitingForAck() ? getI18N("confirm_quit") : getI18N("confirm_quit_waiting_for_ack"), show_quit_screen ?
-                        new MouseClickListener() {
-                            @Override
-                            public final void mouseClicked(int button, int x, int y, int clicks) {
-                                Renderer.shutdownWithQuitScreen(gui_root);
-                            }
-                        }
-				:
-                        new MouseClickListener() {
-                            @Override
-                            public final void mouseClicked(int button, int x, int y, int clicks) {
-                                Renderer.shutdown();
-                            }
-                        });
+	public QuitForm(final GUIRoot gui_root) {
+		super(!PeerHub.isWaitingForAck() ? getI18N("confirm_quit") : getI18N("confirm_quit_waiting_for_ack"),
+                (int button, int x1, int y1, int clicks) -> { Renderer.shutdown(); });
 	}
 }

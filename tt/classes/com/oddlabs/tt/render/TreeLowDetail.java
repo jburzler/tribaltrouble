@@ -36,10 +36,10 @@ public final strictfp class TreeLowDetail {
 	private final LowDetailModel[] low_details;
 
 	private final int terrain_type;
-	
+
 	private int current_vertex_index;
 
-	public TreeLowDetail(World world, Tree[] trees, LowDetailModel[] tree_low_details, List tree_positions, List palm_tree_positions, int terrain_type) {
+	public TreeLowDetail(World world, Tree[] trees, LowDetailModel[] tree_low_details, List<int[]> tree_positions, List<int[]> palm_tree_positions, int terrain_type) {
 		lowdetail_textures = new Texture[]{
 			(Texture)Resources.findResource(new TextureFile("/textures/models/lowdetail_tree", Globals.COMPRESSED_RGBA_FORMAT)),
 				(Texture)Resources.findResource(new TextureFile("/textures/models/viking_lowdetail_tree", Globals.COMPRESSED_RGBA_FORMAT))};
@@ -104,7 +104,7 @@ public final strictfp class TreeLowDetail {
 		vertice_array[index*3] = x;
 		vertice_array[index*3 + 1] = y;
 		vertice_array[index*3 + 2] = z;
-		
+
 		texcoord_array[index*2] = u;
 		texcoord_array[index*2 + 1] = v;
 		return index + 1;

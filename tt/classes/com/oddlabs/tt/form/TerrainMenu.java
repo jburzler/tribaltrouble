@@ -405,7 +405,7 @@ public final strictfp class TerrainMenu extends Group {
 		compileCanvas();
 		randomize();
 
-		// set standart game
+		// set standard game
 		pulldown_size.addItemChosenListener(new PulldownUpdateSizeListener());
 		pm_terrain_type.addItemChosenListener(new PulldownUpdateTerrainListener());
 		for (int i = 0; i < MatchmakingServerInterface.MAX_PLAYERS; i++) {
@@ -689,27 +689,18 @@ System.out.println("Start server");
 	private final strictfp class PulldownUpdateSizeListener implements ItemChosenListener {
                 @Override
 		public void itemChosen(PulldownMenu menu, int item_index) {
-			if (item_index == LARGE && !Renderer.isRegistered()) {
-				menu.chooseItem(MEDIUM);
-			}
 		}
 	}
 
 	private final strictfp class PulldownUpdateHardListener implements ItemChosenListener {
                 @Override
 		public void itemChosen(PulldownMenu menu, int item_index) {
-			if (item_index == HARD && !Renderer.isRegistered()) {
-				menu.chooseItem(NORMAL);
-			}
 		}
 	}
 
 	private final strictfp class PulldownUpdateTerrainListener implements ItemChosenListener {
                 @Override
 		public void itemChosen(PulldownMenu menu, int item_index) {
-			if (item_index == Game.TERRAIN_TYPE_VIKING && !Renderer.isRegistered()) {
-				menu.chooseItem(Game.TERRAIN_TYPE_NATIVE);
-			}
 		}
 	}
 

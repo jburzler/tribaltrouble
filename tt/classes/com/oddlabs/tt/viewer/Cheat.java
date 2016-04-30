@@ -1,7 +1,5 @@
 package com.oddlabs.tt.viewer;
 
-import com.oddlabs.tt.render.Renderer;
-
 public final strictfp class Cheat {
 	private final boolean can_enable;
 	private boolean enabled = false;
@@ -21,7 +19,7 @@ public final strictfp class Cheat {
 	}
 
 	public void enable() {
-		if (Renderer.isRegistered() && can_enable)
+		if (can_enable)
 			enabled = true;
 	}
 }

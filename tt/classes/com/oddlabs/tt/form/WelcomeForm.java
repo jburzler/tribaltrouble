@@ -6,12 +6,9 @@ import com.oddlabs.tt.util.Utils;
 import java.util.ResourceBundle;
 
 public final strictfp class WelcomeForm extends Form {
-	private final MainMenu main_menu;
-	private final GUIRoot gui_root;
+
 
 	public WelcomeForm(GUIRoot gui_root, MainMenu main_menu) {
-		this.main_menu = main_menu;
-		this.gui_root = gui_root;
 		ResourceBundle bundle = ResourceBundle.getBundle(WelcomeForm.class.getName());
 		Label label_headline = new Label(Utils.getBundleString(bundle, "welcome_caption"), Skin.getSkin().getHeadlineFont());
 		addChild(label_headline);

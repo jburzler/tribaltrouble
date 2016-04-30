@@ -10,13 +10,11 @@ import com.oddlabs.tt.viewer.AmbientAudio;
 import org.lwjgl.opengl.GL11;
 
 public final strictfp class GUI implements Animated {
-	private final Languages languages;
 	private GUIRoot current_root = createRoot();
 	private Fade fade;
 	private UIRenderer renderer;
 
-	public GUI(Languages languages) {
-		this.languages = languages;
+	public GUI() {
 	}
 
 	public GUIRoot newFade() {
@@ -40,11 +38,7 @@ public final strictfp class GUI implements Animated {
 		return gui_root;
 	}
 
-	public Languages getLanguages() {
-		return languages;
-	}
-
-        @Override
+    @Override
 	public void animate(float t) {
 		fade.animate(this, t);
 	}
@@ -54,7 +48,7 @@ public final strictfp class GUI implements Animated {
 		LocalEventQueue.getQueue().getManager().removeAnimation(this);
 	}
 
-        @Override
+    @Override
 	public void updateChecksum(StateChecksum checksum) {
 	}
 

@@ -16,6 +16,8 @@ import com.oddlabs.tt.util.StatCounter;
 import com.oddlabs.tt.util.StateChecksum;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+import org.lwjgl.LWJGLUtil;
 import org.lwjgl.opengl.Display;
 
 public final strictfp class AnimationManager {
@@ -81,7 +83,9 @@ public final strictfp class AnimationManager {
 	};
 */
 	static {
-		time_source = new MonotoneTimeManager(System::currentTimeMillis);
+		time_source = new MonotoneTimeManager(LWJGLUtil.getPlatform() == LWJGLUtil.PLATFORM_WINDOWS
+                ? System::currentTimeMillis
+                : () -> TimeUnit.NANOSECONDS.toMillis(System.nanoTime()) );
 		current_time = getSystemTime();
 		last_frame_time = current_time;
 		freezeTime();
@@ -113,7 +117,7 @@ System.out.println("time_stopped = " + time_stopped);
 		time_frozen = false;
 		time_warp -= time_source.getMillis() - frozen_start_time;
 	}
-	
+
 	public static void freezeTime() {
 		if (time_frozen)
 			return;

@@ -476,11 +476,11 @@ public final strictfp class GameMenu extends Panel implements ConfigurationListe
 		start_button.setDisabled(true);
 		if (local_player_slot != 0)
 			return;
-            for (PlayerSlot player : players) {
-                if (!player.isReady()) {
-                    return;
-                }
+        for (PlayerSlot player : players) {
+            if (!player.isReady()) {
+                return;
             }
+        }
 		start_button.setDisabled(false);
 	}
 
@@ -490,21 +490,21 @@ public final strictfp class GameMenu extends Panel implements ConfigurationListe
 	}
 
 	private final strictfp class InfoButtonListener implements MouseClickListener {
-                @Override
+        @Override
 		public void mouseClicked(int button, int x, int y, int clicks) {
 			gui_root.addModalForm(new GameInfoForm(game));
 		}
 	}
 
 	private final strictfp class CancelButtonListener implements MouseClickListener {
-                @Override
+        @Override
 		public void mouseClicked(int button, int x, int y, int clicks) {
 			cancel();
 		}
 	}
 
 	private final strictfp class ReadyListener implements MouseClickListener {
-                @Override
+        @Override
 		public void mouseClicked(int button, int x, int y, int clicks) {
 			setReady(true);
 		}

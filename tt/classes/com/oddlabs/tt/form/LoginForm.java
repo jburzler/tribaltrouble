@@ -119,7 +119,7 @@ public final strictfp class LoginForm extends Form {
 		}
 	}
 
-        @Override
+    @Override
 	public void setFocus() {
 		editline_username.setFocus();
 	}
@@ -145,7 +145,7 @@ public final strictfp class LoginForm extends Form {
 	}
 
 	private final strictfp class NewUserListener implements MouseClickListener {
-                @Override
+        @Override
 		public void mouseClicked(int button, int x, int y, int clicks) {
 			remove();
 			main_menu.setMenu(new NewUserForm(network, gui_root, main_menu));
@@ -153,12 +153,12 @@ public final strictfp class LoginForm extends Form {
 	}
 
 	private final strictfp class LoginListener implements MouseClickListener, EnterListener {
-                @Override
+        @Override
 		public void mouseClicked(int button, int x, int y, int clicks) {
 			login();
 		}
 
-                @Override
+        @Override
 		public void enterPressed(CharSequence text) {
 			login();
 		}

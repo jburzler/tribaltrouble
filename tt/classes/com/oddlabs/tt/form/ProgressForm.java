@@ -78,7 +78,7 @@ public final strictfp class ProgressForm {
 		Fadable load_fadable = () -> {
                     callback(gui, callback, first_progress);
                 };
-		current_progress = new ProgressForm(network, gui, load_fadable, first_progress, new ProgressBarInfo[]{new ProgressBarInfo(""/*"Loading lanscape resources"*/, 10),
+		current_progress = new ProgressForm(network, gui, load_fadable, first_progress, new ProgressBarInfo[]{new ProgressBarInfo(""/*"Loading landscape resources"*/, 10),
 			new ProgressBarInfo(""/*"Loading races resources"*/, 30),
 			new ProgressBarInfo(""/*"Generating textures"*/, 5),
 			new ProgressBarInfo(""/*"Generating terrain"*/, 5),

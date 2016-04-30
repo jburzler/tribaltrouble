@@ -12,7 +12,7 @@ public final strictfp class TreeRenderer extends TreePicker {
 	private final WaveAnimation wave_animation = new WaveAnimation();
 	private final Cheat cheat;
 
-	TreeRenderer(World world, Cheat cheat, int terrain_type, List tree_positions, List palm_tree_positions, SpriteSorter sprite_sorter, RespondManager respond_manager) {
+	TreeRenderer(World world, Cheat cheat, int terrain_type, List<int[]> tree_positions, List<int[]> palm_tree_positions, SpriteSorter sprite_sorter, RespondManager respond_manager) {
 		super(sprite_sorter, respond_manager);
 		this.cheat = cheat;
 		this.tree_low_detail = new TreeLowDetail(world, getTrees(), getLowDetails(), tree_positions, palm_tree_positions, terrain_type);

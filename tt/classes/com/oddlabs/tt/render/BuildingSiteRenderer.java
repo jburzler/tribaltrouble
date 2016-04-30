@@ -16,12 +16,11 @@ public final strictfp class BuildingSiteRenderer extends ShadowRenderer {
 		green = new Texture(new GLIntImage[]{img}, GL11.GL_RGBA, GL11.GL_LINEAR, GL11.GL_LINEAR, GL11.GL_CLAMP, GL11.GL_CLAMP);
 	}
 
-	public void renderSites(LandscapeRenderer renderer, List targets, float center_x, float center_y, float max_radius) {
+	public void renderSites(LandscapeRenderer renderer, List<? extends Target> targets, float center_x, float center_y, float max_radius) {
 		setupShadows();
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, green.getHandle());
 		float radius_sqr = max_radius*max_radius;
-		for (int i = 0; i < targets.size(); i++) {
-			Target target = (Target)targets.get(i);
+		for (Target target : targets) {
 			float dx = target.getPositionX() - center_x;
 			float dy = target.getPositionY() - center_y;
 			float a = (dx*dx + dy*dy)/radius_sqr;

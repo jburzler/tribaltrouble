@@ -10,7 +10,7 @@ public final strictfp class TimerAnimation implements Animated {
 	private Updatable timer_owner = null;
 	private boolean running = false;
 
-        @Override
+    @Override
 	public void updateChecksum(StateChecksum checksum) {
 		checksum.update(time);
 	}
@@ -25,9 +25,9 @@ public final strictfp class TimerAnimation implements Animated {
 		this(LocalEventQueue.getQueue().getManager(), owner, interval);
 	}
 
-        @Override
+    @Override
 	public String toString() {
-		return "TimerAnimation: owner = " + timer_owner; 
+		return "TimerAnimation: owner = " + timer_owner;
 	}
 
 	public boolean isRunning() {

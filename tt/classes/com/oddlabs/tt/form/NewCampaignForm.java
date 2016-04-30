@@ -24,7 +24,6 @@ import com.oddlabs.tt.player.campaign.Campaign;
 import com.oddlabs.tt.player.campaign.CampaignState;
 import com.oddlabs.tt.player.campaign.NativeCampaign;
 import com.oddlabs.tt.player.campaign.VikingCampaign;
-import com.oddlabs.tt.render.Renderer;
 import com.oddlabs.tt.util.Utils;
 import com.oddlabs.util.DeterministicSerializerLoopbackInterface;
 import java.io.FileNotFoundException;
@@ -47,7 +46,7 @@ public final strictfp class NewCampaignForm extends Form implements Deterministi
 	private final GUIRoot gui_root;
 	private final NetworkSelector network;
 	private CampaignState[] campaign_states;
-	
+
 	public NewCampaignForm(NetworkSelector network, GUIRoot gui_root, Menu main_menu, CampaignForm campaign_form) {
 		this.network = network;
 		this.gui_root = gui_root;
@@ -109,7 +108,7 @@ public final strictfp class NewCampaignForm extends Form implements Deterministi
 
 		button_cancel.place(ORIGIN_BOTTOM_RIGHT);
 		button_ok.place(button_cancel, LEFT_MID);
-		
+
 		compileCanvas();
 		centerPos();
 		LoadCampaignBox.loadSavegames(this);
@@ -119,7 +118,7 @@ public final strictfp class NewCampaignForm extends Form implements Deterministi
 	protected void doCancel() {
 		main_menu.setMenu(campaign_form);
 	}
-	
+
         @Override
 	public void setFocus() {
 		editline_name.setFocus();
@@ -224,7 +223,7 @@ public final strictfp class NewCampaignForm extends Form implements Deterministi
 	private final strictfp class RaceListener implements ItemChosenListener {
                 @Override
 		public void itemChosen(PulldownMenu menu, int item_index) {
-			if (item_index == INDEX_NATIVES && (!Settings.getSettings().has_native_campaign || !Renderer.isRegistered())) {
+			if (item_index == INDEX_NATIVES && (!Settings.getSettings().has_native_campaign)) {
 				menu.chooseItem(INDEX_VIKINGS);
 				gui_root.addModalForm(new MessageForm(Utils.getBundleString(bundle, "native_unavailable")));
 			}

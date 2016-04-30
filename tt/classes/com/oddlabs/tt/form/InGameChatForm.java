@@ -1,7 +1,6 @@
 package com.oddlabs.tt.form;
 
 import com.oddlabs.tt.delegate.ControllableCameraDelegate;
-import com.oddlabs.tt.delegate.SelectionDelegate;
 import com.oddlabs.tt.gui.EditLine;
 import com.oddlabs.tt.gui.Form;
 import com.oddlabs.tt.gui.HorizButton;
@@ -41,7 +40,7 @@ public final strictfp class InGameChatForm extends Form implements ChatListener 
 	private static ResourceBundle getBundle() {
 		return ResourceBundle.getBundle(InGameChatForm.class.getName());
 	}
-	
+
 	public InGameChatForm(InfoPrinter info_printer, WorldViewer viewer) {
 		super(Utils.getBundleString(getBundle(), "chat"));
 		this.viewer = viewer;

@@ -14,6 +14,7 @@ import com.oddlabs.tt.gui.Group;
 import com.oddlabs.tt.gui.HorizButton;
 import com.oddlabs.tt.gui.IconLabel;
 import com.oddlabs.tt.gui.Label;
+import com.oddlabs.tt.gui.Languages;
 import com.oddlabs.tt.gui.LocalInput;
 import com.oddlabs.tt.gui.MultiColumnComboBox;
 import com.oddlabs.tt.gui.Panel;
@@ -292,8 +293,8 @@ public abstract strictfp class AbstractOptionsMenu extends Form {
 		language_list_box.addRow(row);
 		if (Settings.getSettings().language.equals("default"))
 			current_row = row;
-		String[][] languages = gui_root.getGUI().getLanguages().getLanguages();
-		Quad[] flags = gui_root.getGUI().getLanguages().getFlags();
+		String[][] languages = Languages.getLanguages();
+		Quad[] flags = Languages.getFlags();
 		for (int i = 0; i < languages.length; i++) {
 			label = new IconLabel(flags[i], new Label(languages[i][1], Skin.getSkin().getMultiColumnComboBoxData().getFont()));
 			row = new Row(new GUIObject[]{label}, new Locale(languages[i][0]));
@@ -364,12 +365,11 @@ public abstract strictfp class AbstractOptionsMenu extends Form {
 		if (Settings.getSettings().language.equals("default"))
 			return;
 
-		String[][] languages = gui_root.getGUI().getLanguages().getLanguages();
-            for (String[] language : languages) {
-                if (Settings.getSettings().language.equals(language[0])) {
-                    return;
-                }
+        for (String[] language : Languages.getLanguages()) {
+            if (Settings.getSettings().language.equals(language[0])) {
+                return;
             }
+        }
 		Settings.getSettings().language = "default";
 	}
 

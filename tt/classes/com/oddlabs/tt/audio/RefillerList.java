@@ -13,17 +13,6 @@ public final strictfp class RefillerList {
     private final Thread refill_thread;
     private final List<QueuedAudioPlayer> players = new ArrayList<>();
 
-    synchronized void registerQueuedPlayer(QueuedAudioPlayer q) {
-        assert !players.contains(q);
-        players.add(q);
-        notify();
-    }
-
-    synchronized void removeQueuedPlayer(QueuedAudioPlayer q) {
-        players.remove(q);
-        assert !players.contains(q);
-    }
-
     public RefillerList() {
         refill_thread = new Refiller();
         refill_thread.start();
@@ -41,6 +30,18 @@ public final strictfp class RefillerList {
             Thread.interrupted();
             throw new RuntimeException(e);
         }
+    }
+
+
+    synchronized void registerQueuedPlayer(QueuedAudioPlayer q) {
+        assert !players.contains(q);
+        players.add(q);
+        notify();
+    }
+
+    synchronized void removeQueuedPlayer(QueuedAudioPlayer q) {
+        players.remove(q);
+        assert !players.contains(q);
     }
 
     private class Refiller extends Thread {

@@ -16,16 +16,16 @@ public final strictfp class Voronoi {
 	public static final int SEED = 2;
 
 	private final int size;
-	private Random random;
-	private Channel dist1;
-	private Channel dist2;
-	private Channel dist3;
-	private Channel hit;
+	private final Random random;
+	private final Channel dist1;
+	private final Channel dist2;
+	private final Channel dist3;
+	private final Channel hit;
 
 	public Voronoi(int size, int x_domains, int y_domains, int checkradius, float randomness, long seed) {
 		this(size, x_domains, y_domains, checkradius, randomness, seed, false);
 	}
-	
+
 	public Voronoi(int size, int x_domains, int y_domains, int checkradius, float randomness, long seed, boolean border) {
 		this.size = size;
 		x_domains = StrictMath.max(1, x_domains);
@@ -36,7 +36,7 @@ public final strictfp class Voronoi {
 		dist2 = new Channel(size, size);
 		dist3 = new Channel(size, size);
 		hit = new Channel(size, size);
-		
+
 		// fill in hitpoints according to distribution
 		float[][][] domains = new float[x_domains][y_domains][3];
 		for (int j = 0; j < y_domains; j++) {
@@ -134,9 +134,9 @@ public final strictfp class Voronoi {
 		}
 		return channel.dynamicRange();
 	}
-	
+
 	public Channel getHitpoint() {
 		return hit;
 	}
-	
+
 }

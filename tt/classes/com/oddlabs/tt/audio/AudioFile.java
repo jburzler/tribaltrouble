@@ -7,15 +7,13 @@ public final strictfp class AudioFile extends File {
 		super(location);
 	}
 
-        @Override
+    @Override
 	public Object newInstance() {
 		return new Audio(this.getURL());
 	}
 
-        @Override
+    @Override
 	public boolean equals(Object o) {
-		if (!(o instanceof AudioFile))
-			return false;
-		return super.equals(o);
+		return o instanceof AudioFile && super.equals(o);
 	}
 }

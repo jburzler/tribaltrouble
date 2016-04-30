@@ -37,7 +37,6 @@ import com.oddlabs.tt.net.ChatCommand;
 import com.oddlabs.tt.net.GameNetwork;
 import com.oddlabs.tt.net.MatchmakingListener;
 import com.oddlabs.tt.net.Network;
-import com.oddlabs.tt.render.Renderer;
 import com.oddlabs.tt.resource.WorldGenerator;
 import com.oddlabs.tt.util.ServerMessageBundler;
 import com.oddlabs.tt.util.Utils;
@@ -223,7 +222,7 @@ public final strictfp class SelectGameMenu extends Form implements MatchmakingLi
 		updateList(MatchmakingServerInterface.TYPE_RANKING_LIST);
 
 		profiles_form = new ProfilesForm(gui_root, main_menu, this);
-		if (Network.getMatchmakingClient().getProfile() == null && Renderer.isRegistered()) {
+		if (Network.getMatchmakingClient().getProfile() == null) {
 			main_menu.setMenuCentered(profiles_form);
 			Network.getMatchmakingClient().requestProfiles();
 		} else {

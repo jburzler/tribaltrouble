@@ -22,7 +22,6 @@ public final strictfp class Globals {
 	public final static boolean[] INSERT_PLANTS = new boolean[]{false, false, true};
 
 	public final static String GAME_NAME = "TribalTrouble";
-	public final static String REG_FILE_NAME = "registration";
 	public final static String SETTINGS_FILE_NAME = "settings";
 
 	public static boolean run_ai = true;

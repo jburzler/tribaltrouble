@@ -2,7 +2,6 @@ package com.oddlabs.tt.global;
 
 import com.oddlabs.tt.event.LocalEventQueue;
 import com.oddlabs.tt.gui.LocalInput;
-import com.oddlabs.tt.render.Renderer;
 import com.oddlabs.tt.util.GLUtils;
 import java.io.File;
 import java.io.FileInputStream;
@@ -68,8 +67,7 @@ public final strictfp class Settings implements Serializable {
 
 	public float mapmode_delay = .5f;
 	public float tooltip_delay = .5f;
-	private final String developer_mode = "";
-	private final String beta_mode = "";
+	private final boolean developer_mode = Boolean.getBoolean("com.oddlabs.tt.developer");
 	public boolean has_native_campaign = false;
 
 	public boolean save_event_log = true;
@@ -126,11 +124,7 @@ public final strictfp class Settings implements Serializable {
 	}
 
 	public boolean inDeveloperMode() {
-		return developer_mode.equals("randomgryf") && Renderer.isRegistered();
-	}
-
-	public boolean inBetaMode() {
-		return beta_mode.equals("mythol");
+		return developer_mode;
 	}
 
 	public void save() {

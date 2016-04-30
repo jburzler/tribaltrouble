@@ -4,6 +4,7 @@ import com.oddlabs.tt.camera.CameraState;
 import com.oddlabs.tt.camera.GameCamera;
 import com.oddlabs.tt.gui.*;
 import com.oddlabs.tt.landscape.HeightMap;
+import com.oddlabs.tt.landscape.LandscapeTarget;
 import com.oddlabs.tt.model.Abilities;
 import com.oddlabs.tt.model.Building;
 import com.oddlabs.tt.model.BuildingTemplate;
@@ -26,7 +27,7 @@ public final strictfp class PlacingDelegate extends ControllableCameraDelegate {
 	private final static int GRID_RADIUS = 20;
 	private final static FloatBuffer color;
 	private final static LandscapeLocation landscape_hit = new LandscapeLocation();
-	
+
 	private final BuildingSiteRenderer site_renderer = new BuildingSiteRenderer();
 	private final int building_index;
 
@@ -92,7 +93,7 @@ public final strictfp class PlacingDelegate extends ControllableCameraDelegate {
                     break;
                 case LocalInput.RIGHT_BUTTON:
                     pop();
-                    break;						
+                    break;
                 default:
                     super.mousePressed(button, x, y);
                     break;
@@ -118,11 +119,11 @@ public final strictfp class PlacingDelegate extends ControllableCameraDelegate {
 
 		BuildingSiteScanFilter filter = new BuildingSiteScanFilter(unit_grid, getTemplate(), GRID_RADIUS, false);
 		unit_grid.scan(filter, placing_center_grid_x, placing_center_grid_y);
-		List target_list = filter.getResult();
+		List<LandscapeTarget> target_list = filter.getResult();
 		site_renderer.renderSites(renderer, target_list, center_x, center_y, 2*GRID_RADIUS);
-		
 
-		
+
+
 	//	GL11.glEnable(GL11.GL_BLEND);
 		//renderPlaceGrid(placing_grid_x, placing_grid_y, getTemplate().getPlacingSize()*2 - 1);
 	//	GL11.glTexEnvf(GL11.GL_TEXTURE_ENV, GL11.GL_TEXTURE_ENV_MODE, GL11.GL_MODULATE);
@@ -130,7 +131,7 @@ public final strictfp class PlacingDelegate extends ControllableCameraDelegate {
 		built_renderer.setupWithColor(0, color, false, true);
 		if (Building.isPlacingLegal(unit_grid, getTemplate(), placing_center_grid_x, placing_center_grid_y))
 			GL11.glColor4f(1f, 1f, 1f, .8f);
-		else 
+		else
 			GL11.glColor4f(1f, 0f, 0f, .8f);
 		float z = getViewer().getWorld().getHeightMap().getNearestHeight(center_x, center_y);
 		GL11.glPushMatrix();

@@ -15,7 +15,6 @@ import com.oddlabs.tt.audio.AudioPlayer;
 import com.oddlabs.tt.camera.CameraState;
 import com.oddlabs.tt.camera.MenuCamera;
 import com.oddlabs.tt.delegate.MainMenu;
-import com.oddlabs.tt.delegate.QuitScreen;
 import com.oddlabs.tt.event.LocalEventQueue;
 import com.oddlabs.tt.form.MessageForm;
 import com.oddlabs.tt.form.ProgressForm;
@@ -175,10 +174,7 @@ public final strictfp class Renderer {
 	}
 
 	public static void shutdownWithQuitScreen(GUIRoot gui_root) {
-		if (!isRegistered()) {
-			new QuitScreen(gui_root, gui_root.getDelegate().getCamera());
-		} else
-			shutdown();
+		shutdown();
 	}
 
 	public static void shutdown() {
@@ -304,12 +300,11 @@ System.out.println("last_event_log_path = " + last_event_log_path);
 		game_dir = (File)deterministic.log(game_dir);
 		event_log_dir = (File)deterministic.log(event_log_dir);
 		settings = (Settings)deterministic.log(settings);
-		Languages languages = new Languages(settings.inBetaMode());
 		String default_language = (String)deterministic.log(Locale.getDefault().getLanguage());
 		String language = settings.language;
 		if (language.equals("default"))
 			language = default_language;
-		if (!languages.hasLanguage(language))
+		if (!Languages.hasLanguage(language))
 			language = "en";
 		Locale.setDefault(new Locale(language));
 		Settings.setSettings(settings);
@@ -328,8 +323,7 @@ System.out.println("last_event_log_path = " + last_event_log_path);
 		if (!settings.inDeveloperMode() && !deterministic.isPlayback())
 			deleteOldLogs(last_event_log_dir, event_log_dir, event_logs_dir);
 		Skin.load();
-//Locale.setDefault(new Locale("da"));
-		GUI gui = new GUI(languages);
+		GUI gui = new GUI();
 
 		GlobalsInit.init();
 		LocalInput.init();

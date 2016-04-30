@@ -6,9 +6,9 @@ import com.oddlabs.procedural.Tools;
 import java.util.Random;
 
 public final strictfp class Bricks {
-	private Random random;
+	private final Random random;
 	public Channel channel;
-	
+
 	public static final int BUMP = 1;
 	public static final int COLOR = 2;
 

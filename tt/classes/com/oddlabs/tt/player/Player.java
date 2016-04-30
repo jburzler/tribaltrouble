@@ -38,7 +38,7 @@ public final strictfp class Player implements PlayerInterface {
 											{0f, 1f, .75f, 1f},
 											{.75f, 0f, 1f, 1f},
 											{.75f, 1f, 0f, 1f}};
-	
+
 	private final World world;
 	private final PlayerInfo player_info;
 	private final Army units = new Army();
@@ -75,8 +75,6 @@ public final strictfp class Player implements PlayerInterface {
 	private boolean can_attack = true;
 	private final boolean[] can_build = new boolean[Race.NUM_BUILDINGS];
 	private boolean can_move = true;
-	private final boolean can_build_towers = true;
-	private final boolean can_build_quarters = true;
 	private boolean can_exit_towers = true;
 	private boolean can_use_rubber = true;
 	private boolean can_set_rally = true;
@@ -303,7 +301,7 @@ public final strictfp class Player implements PlayerInterface {
 		}
 		return status;
 	}
-	
+
 	public Selectable findNearestEnemy(int start_x, int start_y, Selectable target, Class type) {
 		Player[] players = world.getPlayers();
 		int best_dist_squared = Integer.MAX_VALUE;
@@ -341,7 +339,7 @@ public final strictfp class Player implements PlayerInterface {
 	public SupplyContainer getUnitCountContainer() {
 		return unit_count;
 	}
-	
+
 	public SupplyContainer getBuildingCountContainer() {
 		return building_count;
 	}
@@ -377,7 +375,7 @@ public final strictfp class Player implements PlayerInterface {
 		return units > 0 || hasActiveChieftain() || getQuarters() != null;
 	}
 
-	
+
 	public boolean hasActiveChieftain() {
 		return chieftain != null;
 	}
@@ -385,7 +383,7 @@ public final strictfp class Player implements PlayerInterface {
 	public Unit getChieftain() {
 		return chieftain;
 	}
-	
+
 	public void setTrainingChieftain(boolean training_chieftain) {
 		assert this.training_chieftain != training_chieftain;
 		this.training_chieftain = training_chieftain;
@@ -394,7 +392,7 @@ public final strictfp class Player implements PlayerInterface {
 	public boolean isTrainingChieftain() {
 		return training_chieftain;
 	}
-	
+
 	public float[] getColor() {
 		return color;
 	}
@@ -567,59 +565,59 @@ public final strictfp class Player implements PlayerInterface {
 	public void magicCast() {
 		magics++;
 	}
-	
+
 	public int getMagics() {
 		return magics;
 	}
-	
+
 	public void weaponThrown() {
 		weapons_thrown++;
 	}
-	
+
 	public int getWeaponsThrown() {
 		return weapons_thrown;
 	}
-	
+
 	public void unitMoved() {
 		units_moved++;
 	}
-	
+
 	public int getUnitsMoved() {
 		return units_moved;
 	}
-	
+
 	public void unitLost() {
 		units_lost++;
 	}
-	
+
 	public int getUnitsLost() {
 		return units_lost;
 	}
-	
+
 	public void buildingLost() {
 		buildings_lost++;
 	}
-	
+
 	public int getBuildingsLost() {
 		return buildings_lost;
 	}
-	
+
 	public void unitKilled() {
 		units_killed++;
 	}
-	
+
 	public int getUnitsKilled() {
 		return units_killed;
 	}
-	
+
 	public void buildingDestroyed() {
 		buildings_destroyed++;
 	}
-	
+
 	public int getBuildingsDestroyed() {
 		return buildings_destroyed;
 	}
-	
+
 	public void harvested(Class type) {
 		if (type == TreeSupply.class) {
 			tree_harvested++;
@@ -632,19 +630,19 @@ public final strictfp class Player implements PlayerInterface {
 		} else
 			throw new RuntimeException();
 	}
-	
+
 	public int getTreeHarvested() {
 		return tree_harvested;
 	}
-	
+
 	public int getRockHarvested() {
 		return rock_harvested;
 	}
-	
+
 	public int getIronHarvested() {
 		return iron_harvested;
 	}
-	
+
 	public int getRubberHarvested() {
 		return rubber_harvested;
 	}
