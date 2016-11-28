@@ -24,18 +24,18 @@ public final strictfp class HttpRequest {
 	}
 
 	private static Task spawnPostRequest(TaskThread task_thread, final URL url, final HttpRequestParameters parameters, final HttpResponseParser parser, final HttpCallback callback) {
-		return task_thread.addTask(new Callable() {
-                        @Override
-			public Object call() throws IOException {
+		return task_thread.addTask(new Callable<HttpResponse>() {
+            @Override
+			public HttpResponse call() throws IOException {
 				return runPostRequest(url, parameters, parser);
 			}
 
-                        @Override
+            @Override
 			public void taskCompleted(Object result) {
 				((HttpResponse)result).notify(callback);
 			}
 
-                        @Override
+            @Override
 			public void taskFailed(Exception e) {
 				callback.error((IOException)e);
 			}
@@ -43,9 +43,9 @@ public final strictfp class HttpRequest {
 	}
 
 	private static Task spawnGetRequest(TaskThread task_thread, final URL url, final HttpResponseParser parser, final HttpCallback callback) {
-		return task_thread.addTask(new Callable() {
+		return task_thread.addTask(new Callable<HttpResponse>() {
                         @Override
-			public Object call() throws IOException {
+			public HttpResponse call() throws IOException {
 				return runGetRequest(url, parser);
 			}
 
@@ -80,10 +80,10 @@ public final strictfp class HttpRequest {
                 out.write(query_string, 0, query_string.length());
             }
 
-		conn.setRequestProperty("Content-Length", String.valueOf(byte_os.size())); 
-		conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded"); 
+		conn.setRequestProperty("Content-Length", String.valueOf(byte_os.size()));
+		conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
 
-		byte_os.writeTo(conn.getOutputStream()); 
+		byte_os.writeTo(conn.getOutputStream());
 		return readResponse(conn, parser);
 	}
 
@@ -128,7 +128,7 @@ public final strictfp class HttpRequest {
 			throw new RuntimeException(e);
 		}
 	}
-	
+
 /*	private static void testLogin(Deterministic deterministic, HttpResponseParser parser, HttpCallback callback) {
 		Map parameters = new java.util.HashMap();
 		parameters.put("reg_key", "K6AA-Y33X-C7ZT-K4TF");

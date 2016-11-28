@@ -3,7 +3,7 @@ package com.oddlabs.net;
 import java.io.*;
 import java.net.*;
 
-public final strictfp class DNSTask implements Callable {
+public final strictfp class DNSTask implements Callable<InetSocketAddress> {
 	private final String dns_name;
 	private final int port;
 	private final Connection connection;
@@ -18,7 +18,7 @@ public final strictfp class DNSTask implements Callable {
 	public void taskCompleted(Object result) {
 		connection.connect((SocketAddress)result);
 	}
-	
+
         @Override
 	public void taskFailed(Exception e) {
 		connection.dnsError((IOException)e);
@@ -26,7 +26,7 @@ public final strictfp class DNSTask implements Callable {
 
 	/* WARNING: Potentially threaded and not deterministic. See Callable.java for details */
         @Override
-	public Object call() throws Exception {
+	public InetSocketAddress call() throws Exception {
 		InetAddress inet_address = InetAddress.getByName(dns_name);
 		InetSocketAddress address = new InetSocketAddress(inet_address, port);
 		return address;

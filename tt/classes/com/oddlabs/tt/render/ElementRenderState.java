@@ -3,67 +3,68 @@ package com.oddlabs.tt.render;
 import com.oddlabs.tt.model.Model;
 
 final strictfp class ElementRenderState implements ModelState {
-	final RenderState render_state;
-	ModelVisitor visitor;
-	Model model;
-	float f;
 
-	ElementRenderState(RenderState render_state) {
-		this.render_state = render_state;
-	}
+    final RenderState render_state;
+    ModelVisitor visitor;
+    Model model;
+    float f;
 
-        @Override
-	public Model getModel() {
-		return model;
-	}
+    ElementRenderState(RenderState render_state) {
+        this.render_state = render_state;
+    }
 
-        @Override
-	public void transform() {
-		visitor.transform(this);
-	}
+    @Override
+    public Model getModel() {
+        return model;
+    }
 
-        @Override
-	public float[] getTeamColor() {
-		return visitor.getTeamColor(this);
-	}
+    @Override
+    public void transform() {
+        visitor.transform(this);
+    }
 
-        @Override
-	public float[] getSelectionColor() {
-		return visitor.getSelectionColor(this);
-	}
+    @Override
+    public float[] getTeamColor() {
+        return visitor.getTeamColor(this);
+    }
 
-	void setup(ModelVisitor visitor, Model model, float f) {
-		this.visitor = visitor;
-		this.model = model;
-		this.f = f;
-	}
+    @Override
+    public float[] getSelectionColor() {
+        return visitor.getSelectionColor(this);
+    }
 
-	void setup(ModelVisitor visitor, Model model) {
-		this.visitor = visitor;
-		this.model = model;
-	}
+    void setup(ModelVisitor visitor, Model model, float f) {
+        this.visitor = visitor;
+        this.model = model;
+        this.f = f;
+    }
 
-        @Override
-	public void markDetailPoint() {
-		visitor.markDetailPoint(this);
-	}
+    void setup(ModelVisitor visitor, Model model) {
+        this.visitor = visitor;
+        this.model = model;
+    }
 
-        @Override
-	public void markDetailPolygon(int index) {
-		visitor.markDetailPolygon(this, index);
-	}
+    @Override
+    public void markDetailPoint() {
+        visitor.markDetailPoint(this);
+    }
 
-        @Override
-	public int getTriangleCount(int index) {
-		return visitor.getTriangleCount(this, index);
-	}
+    @Override
+    public void markDetailPolygon(int index) {
+        visitor.markDetailPolygon(this, index);
+    }
 
-        @Override
-	public float getEyeDistanceSquared() {
-		return visitor.getEyeDistanceSquared(this);
-	}
+    @Override
+    public int getTriangleCount(int index) {
+        return visitor.getTriangleCount(this, index);
+    }
 
-	SpriteRenderer getRenderer(SpriteKey key) {
-		return render_state.getRenderQueues().getRenderer(key);
-	}
+    @Override
+    public float getEyeDistanceSquared() {
+        return visitor.getEyeDistanceSquared(this);
+    }
+
+    SpriteRenderer getRenderer(SpriteKey key) {
+        return render_state.getRenderQueues().getRenderer(key);
+    }
 }

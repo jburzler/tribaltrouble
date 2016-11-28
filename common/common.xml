@@ -65,7 +65,9 @@
 	<target name="run" depends="dorundeps">
 		<java fork="yes" classpath="${classpath}:${res_classpath}:${build}/classes" classname="${main_class}">
 			<jvmarg value="-ea"/>
+			<jvmarg value="-esa"/>
 			<jvmarg value="-Djava.library.path=${nativelib}"/>
+			<jvmarg value="-Dcom.oddlabs.tt.developer=true"/>
 			<jvmarg value="-Dorg.lwjgl.util.Debug=true"/>
 			<jvmarg value="-Xmx80m"/>
 			<!--<jvmarg value="-Djavax.net.debug=ssl,handshake,trustmanager"/>-->

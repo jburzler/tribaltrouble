@@ -5,9 +5,9 @@ import java.io.Serializable;
 import java.util.*;
 
 public final strictfp class TaskThread {
-	private final Map id_to_callable = new HashMap();
-	private final List tasks = new ArrayList();
-	private final List finished_tasks = new ArrayList();
+	private final Map<Integer,Callable<?>> id_to_callable = new HashMap<>();
+	private final List<BlockingTask> tasks = new ArrayList<>();
+	private final List<BlockingTask> finished_tasks = new ArrayList<>();
 	private final Object lock = new Object();
 	private final Runnable notification_action;
 	private int current_id = 0;
@@ -21,11 +21,11 @@ public final strictfp class TaskThread {
 		this.notification_action = notification_action;
 	}
 
-	static strictfp interface TaskResult extends Serializable {
-		void deliverResult(TaskExecutorLoopbackInterface callback);
+	static strictfp interface TaskResult<T> extends Serializable {
+		void deliverResult(TaskExecutorLoopbackInterface<T> callback);
 	}
 
-	final static strictfp class TaskFailed implements TaskResult {
+	final static strictfp class TaskFailed<T> implements TaskResult<T> {
 		private final Exception result;
 
 		TaskFailed(Exception e) {
@@ -33,20 +33,20 @@ public final strictfp class TaskThread {
 		}
 
                 @Override
-		public void deliverResult(TaskExecutorLoopbackInterface callback) {
+		public void deliverResult(TaskExecutorLoopbackInterface<T> callback) {
 			callback.taskFailed(result);
 		}
 	}
 
-	final static strictfp class TaskSucceeded implements TaskResult {
-		private final Object result;
+	final static strictfp class TaskSucceeded<T> implements TaskResult<T> {
+		private final T result;
 
-		TaskSucceeded(Object result) {
+		TaskSucceeded(T result) {
 			this.result = result;
 		}
 
                 @Override
-		public void deliverResult(TaskExecutorLoopbackInterface callback) {
+		public void deliverResult(TaskExecutorLoopbackInterface<T> callback) {
 			callback.taskCompleted(result);
 		}
 	}
@@ -86,7 +86,7 @@ public final strictfp class TaskThread {
 	public Deterministic getDeterministic() {
 		return deterministic;
 	}
-	
+
 	public Task addTask(Callable callable) {
 		BlockingTask task;
 		synchronized (lock) {

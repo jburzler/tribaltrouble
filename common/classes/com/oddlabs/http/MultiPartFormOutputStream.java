@@ -303,8 +303,8 @@ public class MultiPartFormOutputStream{
 	}
 
 	/**
-	 * Closes the stream.  <br />
-	 * <br />
+	 * Closes the stream.
+     *
 	 * <b>NOTE:</b> This method <b>MUST</b> be called to finalize the
 	 * multipart stream.
 	 *

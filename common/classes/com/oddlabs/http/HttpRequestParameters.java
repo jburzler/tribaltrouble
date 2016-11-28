@@ -7,30 +7,28 @@ import java.util.Map;
 
 public final strictfp class HttpRequestParameters {
 	final String url;
-	public final Map parameters;
+	public final Map<String,String> parameters;
 
-	public HttpRequestParameters(String url, Map parameters) {
+	public HttpRequestParameters(String url, Map<String,String> parameters) {
 		this.url = url;
 		this.parameters = parameters;
 	}
 
 	String createQueryString() {
-		if (parameters == null)
+		if (parameters == null || parameters.isEmpty())
 			return "";
 		StringBuilder buffer = new StringBuilder();
-		Iterator parameter_entries = parameters.entrySet().iterator();
-		try {
-			while (parameter_entries.hasNext()) {
-				Map.Entry parameter = (Map.Entry)parameter_entries.next();
-				buffer.append((String)parameter.getKey());
-				buffer.append('=');
-				buffer.append(URLEncoder.encode((String)parameter.getValue(), "UTF-8"));
-				if (parameter_entries.hasNext())
-					buffer.append('&');
-			}
-			return buffer.toString();
-		} catch (UnsupportedEncodingException e) {
-			throw new RuntimeException(e);
-		}
+		Iterator<Map.Entry<String,String>> parameter_entries = parameters.entrySet().iterator();
+        while (parameter_entries.hasNext()) {
+            Map.Entry<String,String> parameter = parameter_entries.next();
+            buffer.append(parameter.getKey());
+            buffer.append('=');
+            try {
+                buffer.append(URLEncoder.encode(parameter.getValue(), "UTF-8"));
+            } catch (UnsupportedEncodingException never) { }
+            if (parameter_entries.hasNext())
+                buffer.append('&');
+        }
+        return buffer.toString();
 	}
 }

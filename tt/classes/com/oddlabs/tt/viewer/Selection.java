@@ -3,6 +3,7 @@ package com.oddlabs.tt.viewer;
 import com.oddlabs.tt.model.Army;
 import com.oddlabs.tt.model.Selectable;
 import com.oddlabs.tt.player.Player;
+import java.util.Arrays;
 
 public final strictfp class Selection {
 	private final Army[] shortcut_armies = new Army[10];
@@ -23,9 +24,7 @@ public final strictfp class Selection {
 	}
 
 	public void clearShortcutArmies() {
-		for (int i = 0; i < shortcut_armies.length; i++) {
-			shortcut_armies[i] = null;
-		}
+        Arrays.fill(shortcut_armies, null);
 	}
 
 	void removeFromArmies(Selectable selectable) {
