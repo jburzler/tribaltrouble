@@ -24,8 +24,6 @@ public final strictfp class AmbientAudio {
 	private final Audio ambient_beach_buffer;
 	private final Audio ambient_wind_buffer;
 
-	private final AudioImplementation audio_implementation;
-
 	private final AbstractAudioPlayer ambient_forest;
 	private final AbstractAudioPlayer ambient_beach;
 	private final AbstractAudioPlayer ambient_wind;
@@ -35,7 +33,6 @@ public final strictfp class AmbientAudio {
 	private final StrictVector3f u = new StrictVector3f();
 
 	public AmbientAudio(AudioImplementation audio_implementation) {
-		this.audio_implementation = audio_implementation;
 		ambient_forest_buffer = (Audio)Resources.findResource(new AudioFile("/sfx/ambient_forest.ogg"));
 		ambient_beach_buffer = (Audio)Resources.findResource(new AudioFile("/sfx/ambient_beach.ogg"));
 		ambient_wind_buffer = (Audio)Resources.findResource(new AudioFile("/sfx/ambient_wind.ogg"));
@@ -47,18 +44,15 @@ public final strictfp class AmbientAudio {
 		ambient_wind.registerAmbient();
 	}
 
-/*	public final void stop() {
+	public final void stop() {
 		ambient_forest.stop();
 		ambient_beach.stop();
 		ambient_wind.stop();
 		ambient_forest.removeAmbient();
 		ambient_beach.removeAmbient();
 		ambient_wind.removeAmbient();
-		ambient_forest = null;
-		ambient_beach = null;
-		ambient_wind = null;
 	}
-*/
+
 	public void updateSoundListener(CameraState camera, HeightMap heightmap) {
 		if (AL.isCreated() && Settings.getSettings().play_sfx) {
 			AL10.alListener3f(AL10.AL_POSITION, camera.getCurrentX(), camera.getCurrentY(), camera.getCurrentZ());

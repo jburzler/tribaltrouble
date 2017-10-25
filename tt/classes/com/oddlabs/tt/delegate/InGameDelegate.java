@@ -34,6 +34,7 @@ public abstract strictfp class InGameDelegate extends CameraDelegate {
 		float landscape_y = landscape_hit.y;
 		switch (event.getKeyCode()) {
 			case Keyboard.KEY_F1:
+                // F1 creates a peon at the center of the view unless the player already has maximum units.
 				if (viewer.getLocalPlayer().getUnitCountContainer().getNumSupplies() != viewer.getParameters().getMaxUnitCount()) {
 					new Unit(viewer.getLocalPlayer(), landscape_x, landscape_y, null,
 							viewer.getLocalPlayer().getRace().getUnitTemplate(Race.UNIT_PEON));
@@ -41,6 +42,7 @@ public abstract strictfp class InGameDelegate extends CameraDelegate {
 				}
 				break;
 			case Keyboard.KEY_F2:
+                // F2 creates a rock warrior at the center of the view unless the player already has maximum units.
 				if (viewer.getLocalPlayer().getUnitCountContainer().getNumSupplies() != viewer.getParameters().getMaxUnitCount()) {
 					new Unit(viewer.getLocalPlayer(), landscape_x, landscape_y, null,
 							viewer.getLocalPlayer().getRace().getUnitTemplate(Race.UNIT_WARRIOR_ROCK));
@@ -48,6 +50,7 @@ public abstract strictfp class InGameDelegate extends CameraDelegate {
 				}
 				break;
 			case Keyboard.KEY_F3:
+                // F3 creates a iron warrior at the center of the view unless the player already has maximum units.
 				if (viewer.getLocalPlayer().getUnitCountContainer().getNumSupplies() != viewer.getParameters().getMaxUnitCount()) {
 					new Unit(viewer.getLocalPlayer(), landscape_x, landscape_y, null,
 							viewer.getLocalPlayer().getRace().getUnitTemplate(Race.UNIT_WARRIOR_IRON));
@@ -55,6 +58,7 @@ public abstract strictfp class InGameDelegate extends CameraDelegate {
 				}
 				break;
 			case Keyboard.KEY_F4:
+                // F4 creates a chicken warrior at the center of the view unless the player already has maximum units.
 				if (viewer.getLocalPlayer().getUnitCountContainer().getNumSupplies() != viewer.getParameters().getMaxUnitCount()) {
 					new Unit(viewer.getLocalPlayer(), landscape_x, landscape_y, null,
 							viewer.getLocalPlayer().getRace().getUnitTemplate(Race.UNIT_WARRIOR_RUBBER));
@@ -62,6 +66,7 @@ public abstract strictfp class InGameDelegate extends CameraDelegate {
 				}
 				break;
 			case Keyboard.KEY_F5:
+                // F5 creates a chieftan at the center of the view unless the player already has one or is training one
 				if (!viewer.getLocalPlayer().hasActiveChieftain() && !viewer.getLocalPlayer().isTrainingChieftain()) {
 					Unit chieftain = new Unit(viewer.getLocalPlayer(), landscape_x, landscape_y, null,
 							viewer.getLocalPlayer().getRace().getUnitTemplate(Race.UNIT_CHIEFTAIN));
@@ -70,24 +75,29 @@ public abstract strictfp class InGameDelegate extends CameraDelegate {
 				}
 				break;
 			case Keyboard.KEY_F6:
+                // F6 does massive damve on whatever is selected.
 				viewer.getLocalPlayer().killSelection(viewer.getSelection().getCurrentSelection().filter(Abilities.NONE));
 				return true;
 			case Keyboard.KEY_F7:
+                // F7 hides and shows trees
 				cheat.draw_trees = !cheat.draw_trees;
 				return true;
 			case Keyboard.KEY_F8:
+                // F7 hides and shows terrain grid.
 				cheat.line_mode = !cheat.line_mode;
 				return true;
 			default:
 				break;
 		}
 
+        // If in developer mode
 		if (!Settings.getSettings().inDeveloperMode())
 			return false;
 
 		switch (event.getKeyCode()) {
 			case Keyboard.KEY_I:
 				if (event.isControlDown()) {
+                    // Ctrl-I prints building or unit info
 					Set<Selectable> set = viewer.getSelection().getCurrentSelection().getSet();
 					if (set.size() > 0) {
 						Selectable s = set.iterator().next();

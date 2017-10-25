@@ -8,7 +8,7 @@ import org.lwjgl.openal.AL10;
 
 public strictfp class AbstractAudioPlayer implements Animated {
 	protected final static float ROLLOFF_FACTOR = .03f; // was 0.05
-	
+
 	protected final AudioSource source;
 	private final AudioParameters parameters;
 	private boolean playing = false;
@@ -78,7 +78,7 @@ public strictfp class AbstractAudioPlayer implements Animated {
 		LocalEventQueue.getQueue().getManager().registerAnimation(this);
 	}
 
-        @Override
+    @Override
 	public final void animate(float t) {
 		fadeout_gain -= t*(end_gain/fadeout_time);
 		if (fadeout_gain <= 0) {

@@ -199,11 +199,10 @@ public final strictfp class UnitGrid {
 			GL11.glDisable(GL11.GL_BLEND);
 		}
 		GL11.glColor3f(1f, 0f, 0f);
-		List last_path_search = PathFinder.visited_list;
+		List<Node> last_path_search = PathFinder.visited_list;
 		if (last_path_search != null) {
-			for (int i = 0; i < last_path_search.size(); i++) {
+			for (Node node : last_path_search) {
 //				int[] coords = (int[])last_path_search.get(i);
-				Node node = (Node)last_path_search.get(i);
 				GL11.glPushMatrix();
 				GL11.glDisable(GL11.GL_TEXTURE_2D);
 				GL11.glBegin(GL11.GL_LINES);

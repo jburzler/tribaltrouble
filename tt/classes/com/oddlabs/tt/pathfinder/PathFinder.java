@@ -7,7 +7,7 @@ import java.util.List;
 
 public final strictfp class PathFinder {
 	private final static PocketList open_list = new PocketList(RegionBuilder.MAX_PATH_COST);
-	public final static List visited_list = new ArrayList();
+	public final static List<Node> visited_list = new ArrayList<>();
 	public static int stat_pathfinder_per_frame = 0;
 
 	public static Region findPathRegion(UnitGrid unit_grid, Region src_region, Region dst_region) {
@@ -86,8 +86,7 @@ public final strictfp class PathFinder {
 
 	private static void initSearch() {
 		open_list.clear();
-		for (int i = 0; i < visited_list.size(); i++) {
-			Node node = (Node)visited_list.get(i);
+		for (Node node : visited_list) {
 			node.reset();
 		}
 		visited_list.clear();
