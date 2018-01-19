@@ -7,7 +7,6 @@ import com.oddlabs.tt.event.LocalEventQueue;
 import com.oddlabs.tt.form.Status;
 import com.oddlabs.tt.global.Globals;
 import com.oddlabs.tt.global.Settings;
-import com.oddlabs.tt.guievent.CloseListener;
 import com.oddlabs.tt.input.PointerInput;
 import com.oddlabs.tt.render.Renderer;
 import com.oddlabs.tt.render.Texture;
@@ -177,22 +176,9 @@ public final strictfp class GUIRoot extends GUIObject implements Updatable {
 		focus_backup_stack.add(global_focus);
 		ModalDelegate delegate = new ModalDelegate();
 		delegate.addChild(form);
-		form.addCloseListener(new ModalFormCloseListener(delegate));
+		form.addCloseListener(() -> popModalDelegate(delegate));
 		pushModalDelegate(delegate);
 		form.setFocus();
-	}
-
-	private final strictfp class ModalFormCloseListener implements CloseListener {
-		private final ModalDelegate delegate;
-
-		public ModalFormCloseListener(ModalDelegate delegate) {
-			this.delegate = delegate;
-		}
-
-                @Override
-		public void closed() {
-			popModalDelegate(delegate);
-		}
 	}
 
 	public void swapFocusBackup(GUIObject o) {

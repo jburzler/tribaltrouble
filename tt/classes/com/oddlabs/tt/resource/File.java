@@ -4,7 +4,7 @@ import com.oddlabs.util.Utils;
 import java.net.*;
 import java.util.Objects;
 
-public abstract strictfp class File implements ResourceDescriptor {
+public abstract strictfp class File<R> implements ResourceDescriptor<R> {
 
     private final URL url;
 

@@ -14,9 +14,11 @@ import com.oddlabs.tt.pathfinder.PathFinder;
 import com.oddlabs.tt.render.Renderer;
 import com.oddlabs.tt.util.StatCounter;
 import com.oddlabs.tt.util.StateChecksum;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
+import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
 import org.lwjgl.LWJGLUtil;
 import org.lwjgl.opengl.Display;
 
@@ -45,8 +47,8 @@ public final strictfp class AnimationManager {
 	private static long checksum_millisecond_counter;
 	private static boolean checksum_complain = true;
 
-	private final List animations = new ArrayList();
-	private final List deleted_animations = new ArrayList();
+	private final Set<Animated> animations = new CopyOnWriteArraySet<>();
+	private final Set<Animated> deleted_animations = new CopyOnWriteArraySet();
 
 	private int tick;
 /*
@@ -108,7 +110,7 @@ public final strictfp class AnimationManager {
 		else
 			freezeTime();
 		time_stopped = time_frozen;
-System.out.println("time_stopped = " + time_stopped);
+        System.out.println("time_stopped = " + time_stopped);
 	}
 
 	private static void unfreezeTime() {
@@ -147,18 +149,18 @@ System.out.println("time_stopped = " + time_stopped);
 		execution_time_precision += frame_time.getAveragePerUpdate();
 		deterministic.setEnabled(true);
 		while (execution_time_precision >= ANIMATION_MILLISECONDS_PER_PRECISION_TICK && !Renderer.isFinished()) {
-/*
-// Used for replaying warp control in clientload
-int tick = LocalEventQueue.getQueue().getHighPrecisionManager().getTick();
-for (int i = 0; i < big.length; i++) {
-	if (big[i] == tick)
-		warpTime(com.oddlabs.tt.input.KeyboardInput.LARGE_WARP);
-}
-for (int i = 0; i < medium.length; i++) {
-	if (medium[i] == tick)
-		warpTime(com.oddlabs.tt.input.KeyboardInput.MEDIUM_WARP);
-}
-*/
+            /*
+            // Used for replaying warp control in clientload
+            int tick = LocalEventQueue.getQueue().getHighPrecisionManager().getTick();
+            for (int i = 0; i < big.length; i++) {
+                if (big[i] == tick)
+                    warpTime(com.oddlabs.tt.input.KeyboardInput.LARGE_WARP);
+            }
+            for (int i = 0; i < medium.length; i++) {
+                if (medium[i] == tick)
+                    warpTime(com.oddlabs.tt.input.KeyboardInput.MEDIUM_WARP);
+            }
+            */
 			execution_time_precision -= ANIMATION_MILLISECONDS_PER_PRECISION_TICK;
 			execution_time += ANIMATION_MILLISECONDS_PER_PRECISION_TICK;
 			LocalEventQueue.getQueue().tickHighPrecision(ANIMATION_SECONDS_PER_PRECISION_TICK);
@@ -187,8 +189,8 @@ for (int i = 0; i < medium.length; i++) {
 					gui.pickHover();
 				}
 			}
-// Only for debugging
-/*
+            // Only for debugging
+            /*
 			if (LocalEventQueue.getQueue().getHighPrecisionManager().getTick() < 2467619 + 10000)
 			{
 				execution_time_precision += ANIMATION_MILLISECONDS_PER_PRECISION_TICK;
@@ -209,45 +211,37 @@ for (int i = 0; i < medium.length; i++) {
 
 	public void registerAnimation(Animated anim) {
 		deleted_animations.remove(anim);
-		if (!animations.contains(anim)) {
-			animations.add(anim);
-		}
+        animations.add(anim);
 	}
 
 	public void removeAnimation(Animated anim) {
-		if (animations.contains(anim) && !deleted_animations.contains(anim)) {
+		if (animations.contains(anim)) {
 			deleted_animations.add(anim);
 		}
 	}
 
 	private void flushAnimations() {
-		for (int i = 0; i < deleted_animations.size(); i++)
-			animations.remove(deleted_animations.get(i));
+        animations.removeAll(deleted_animations);
 		deleted_animations.clear();
 	}
 
 	public void updateChecksum(StateChecksum checksum) {
 		flushAnimations();
-		for (int i = 0; i < animations.size(); i++) {
-			((Animated)animations.get(i)).updateChecksum(checksum);
-		}
+        animations.forEach(anim -> anim.updateChecksum(checksum));
 	}
 
 	public void runAnimations(float t) {
 		tick++;
 		flushAnimations();
-		for (int i = 0; i < animations.size(); i++) {
-			Animated current = (Animated)animations.get(i);
-			if (deleted_animations.contains(current))
-				continue;
-			current.animate(t);
-		}
+        Predicate notDeleted = ((Predicate) deleted_animations::contains).negate();
+        Consumer<Animated> animate = (Animated anim) -> anim.animate(t);
+        animations.stream()
+                .filter(notDeleted)
+                .forEach(animate);
 	}
 
 	public void debugPrintAnimations() {
 		flushAnimations();
-		for (int i = 0; i < animations.size(); i++) {
-System.out.println("anim = " + animations.get(i));
-		}
+        animations.forEach(anim -> System.out.println("anim = " + anim));
 	}
 }

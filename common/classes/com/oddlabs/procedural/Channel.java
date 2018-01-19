@@ -1099,7 +1099,7 @@ public final strictfp class Channel {
 			return area_total/area_count;
 		}
 	}
-	
+
 	public Channel squareFit(float value, int size) {
 		Channel channel = new Channel(width, height);
 		boolean match;
@@ -1121,7 +1121,7 @@ public final strictfp class Channel {
 		pixels = channel.copy().pixels;
 		return this;
 	}
-	
+
 	public Channel boxFit(float value, int width, int height) {
 		Channel channel = new Channel(this.width, this.height);
 		boolean match;
@@ -1171,7 +1171,7 @@ public final strictfp class Channel {
 		pixels = channel.getPixels();
 		return this;
 	}
-	
+
 	public Channel squareGrow(float value, int size) {
 		Channel channel = this.copy();
 		for (int y = 0; y <= height - size; y++) {
@@ -1216,7 +1216,7 @@ public final strictfp class Channel {
 		}
 		return new int[]{-1, -1};
 	}
-	
+
 	public int[] findNoWrap(int radius, int x_start, int y_start, float value) {
 		if (getPixel(x_start, y_start) == value)
 			return new int[]{x_start, y_start};
@@ -1273,7 +1273,7 @@ public final strictfp class Channel {
 		pixels = channel.getPixels();
 		return this;
 	}
-	
+
 	public Channel bumpSpecular(Channel bumpmap, float lx, float ly, float lz, float shadow, float light, int specular) {
 		assert bumpmap.getWidth() == width && bumpmap.getHeight() == height: "bumpmap size does not match layer size";
 		float lnorm = (float)StrictMath.sqrt(lx*lx + ly*ly + lz*lz);
@@ -1537,7 +1537,7 @@ public final strictfp class Channel {
 		}
 		return this;
 	}
-	
+
 	public Channel erodeThermal(float talus, int iterations) {
 		float h, h1, h2, h3, h4, d1, d2, d3, d4, max_d;
 		int i, j;

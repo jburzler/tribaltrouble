@@ -76,7 +76,7 @@ public final strictfp class AudioPlayer extends AbstractAudioPlayer {
 	public final static float AUDIO_RADIUS_BLAST_BLAST = 1f;
 	public final static float AUDIO_RADIUS_ARMORY = .05f;
 
-	AudioPlayer(AudioSource source, AudioParameters params) {
+	AudioPlayer(AudioSource source, AudioParameters<Audio> params) {
 		super(source, params);
 		if (this.source == null) {
 			return;
@@ -92,7 +92,7 @@ public final strictfp class AudioPlayer extends AbstractAudioPlayer {
 		assert sound.getBuffer() != AL10.AL_NONE;
 		int source_state = AL10.alGetSourcei(source.getSource(), AL10.AL_SOURCE_STATE);
 		assert source_state == AL10.AL_STOPPED || source_state == AL10.AL_INITIAL;
-			
+
 		AL10.alSourcei(source.getSource(), AL10.AL_BUFFER, sound.getBuffer());
 		AL10.alSourcef(source.getSource(), AL10.AL_ROLLOFF_FACTOR, ROLLOFF_FACTOR);
 		AL10.alSourcef(source.getSource(), AL10.AL_REFERENCE_DISTANCE, params.radius);

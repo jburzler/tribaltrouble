@@ -17,7 +17,7 @@ public final strictfp class PlayerInfo implements Serializable {
 		this.name = name;
 	}
 
-        @Override
+    @Override
 	public boolean equals(Object other) {
 		if (!(other instanceof PlayerInfo))
 			return false;

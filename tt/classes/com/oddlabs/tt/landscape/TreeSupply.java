@@ -206,7 +206,7 @@ public final strictfp class TreeSupply extends AbstractTreeGroup implements Supp
 		if (isEmpty()) {
 			unoccupyTree();
 			world.getSupplyManager(getClass()).emptySupply(this);
-			world.getAudio().newAudio(new AudioParameters(world.getRacesResources().getTreeFallSound()[tree_type_index%2]/* reusing native tree sounds*/, getCX(), getCY(), getCZ(), AudioPlayer.AUDIO_RANK_TREE_FALL, AudioPlayer.AUDIO_DISTANCE_TREE_FALL, AudioPlayer.AUDIO_GAIN_TREE_FALL, AudioPlayer.AUDIO_RADIUS_TREE_FALL));
+			world.getAudio().newAudio(new AudioParameters<>(world.getRacesResources().getTreeFallSound()[tree_type_index%2]/* reusing native tree sounds*/, getCX(), getCY(), getCZ(), AudioPlayer.AUDIO_RANK_TREE_FALL, AudioPlayer.AUDIO_DISTANCE_TREE_FALL, AudioPlayer.AUDIO_GAIN_TREE_FALL, AudioPlayer.AUDIO_RADIUS_TREE_FALL));
 			world.getAnimationManagerRealTime().registerAnimation(this);
 			animation_time = 0f;
 		}

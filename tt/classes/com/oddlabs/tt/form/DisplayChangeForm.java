@@ -25,7 +25,7 @@ public final strictfp class DisplayChangeForm extends Form {
 		later_button = new HorizButton(Utils.getBundleString(bundle, "later"), 120);
 		addChild(later_button);
 		later_button.addMouseClickListener(new CancelListener(this));
-		
+
 		// Place objects
 		info_label.place();
 		now_button.place(ORIGIN_BOTTOM_RIGHT);
@@ -35,7 +35,7 @@ public final strictfp class DisplayChangeForm extends Form {
 		centerPos();
 	}
 
-        @Override
+    @Override
 	public void setFocus() {
 		later_button.setFocus();
 	}

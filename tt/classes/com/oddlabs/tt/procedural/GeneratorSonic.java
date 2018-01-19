@@ -11,14 +11,14 @@ import org.lwjgl.opengl.*;
 public final strictfp class GeneratorSonic extends TextureGenerator {
 	private static final int TEXTURE_SIZE = 128;
 
-        @Override
+    @Override
 	public Texture[] generate() {
 		Channel sonic_alpha = new Channel(TEXTURE_SIZE>>1, TEXTURE_SIZE>>1);
-		
+
 		float x_coord;
 		float y_coord;
 		float radius;
-		
+
 		for (int y = 0; y < TEXTURE_SIZE>>1; y++) {
 			y_coord = .5f - (y + .5f)/TEXTURE_SIZE;
 			for (int x = 0; x < TEXTURE_SIZE>>1; x++) {
@@ -31,7 +31,7 @@ public final strictfp class GeneratorSonic extends TextureGenerator {
 		}
 		Channel sonic_alpha_final = new Channel(TEXTURE_SIZE, TEXTURE_SIZE);
 		sonic_alpha_final.quadJoin(sonic_alpha, sonic_alpha.copy().rotate(270), sonic_alpha.copy().rotate(90), sonic_alpha.copy().rotate(180));
-		
+
 		Channel sonic_color = new Channel(TEXTURE_SIZE, TEXTURE_SIZE).fill(.05f);
 		//Channel sonic_color = new Channel(TEXTURE_SIZE, TEXTURE_SIZE).fill(.1f); // screenshot fix
 		Layer sonic = new Layer(sonic_color, sonic_color, sonic_color, sonic_alpha_final);
@@ -42,7 +42,7 @@ public final strictfp class GeneratorSonic extends TextureGenerator {
 		return textures;
 	}
 
-        @Override
+    @Override
 	public int hashCode() {
 		return TEXTURE_SIZE + 3;
 	}

@@ -22,7 +22,7 @@ import java.io.FileNotFoundException;
 import java.io.InvalidClassException;
 import java.util.ResourceBundle;
 
-public final strictfp class CampaignForm extends Form implements DeterministicSerializerLoopbackInterface {
+public final strictfp class CampaignForm extends Form implements DeterministicSerializerLoopbackInterface<CampaignState[]> {
 	private final HorizButton button_vikings;
 	private final LoadCampaignBox load_campaign_box;
 	private final ResourceBundle bundle = ResourceBundle.getBundle(CampaignForm.class.getName());
@@ -36,7 +36,7 @@ public final strictfp class CampaignForm extends Form implements DeterministicSe
 		this.network = network;
 		Label headline = new Label(Utils.getBundleString(bundle, "campaign"), Skin.getSkin().getHeadlineFont());
 		addChild(headline);
-		
+
 		// Combo box
 		RowListener listener = new LoadListener();
 		load_campaign_box = new LoadCampaignBox(gui_root, listener);
@@ -97,8 +97,7 @@ public final strictfp class CampaignForm extends Form implements DeterministicSe
 	}
 
         @Override
-	public void loadSucceeded(Object object) {
-		CampaignState[] campaign_states = (CampaignState[])object;
+	public void loadSucceeded(CampaignState[] campaign_states) {
 		CampaignState selected = (CampaignState)load_campaign_box.getSelected();
 		if (selected != null) {
 			CampaignState[] new_states = new CampaignState[campaign_states.length - 1];
@@ -115,7 +114,7 @@ public final strictfp class CampaignForm extends Form implements DeterministicSe
 	}
 
         @Override
-	public void failed(Exception e) {
+	public void failed(Throwable e) {
 		if (e instanceof FileNotFoundException) {
 		} else if (e instanceof InvalidClassException) {
 		} else {
@@ -161,7 +160,7 @@ public final strictfp class CampaignForm extends Form implements DeterministicSe
 		public void rowDoubleClicked(Object object) {
 			load((CampaignState)object);
 		}
-		
+
                 @Override
 		public void rowChosen(Object object) {
 		}

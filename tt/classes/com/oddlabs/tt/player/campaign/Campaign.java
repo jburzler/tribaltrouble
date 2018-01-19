@@ -16,7 +16,7 @@ import java.util.ResourceBundle;
 public abstract class Campaign {
 	private final ResourceBundle bundle = ResourceBundle.getBundle(Campaign.class.getName());
 	private final CampaignState state;
-	private CampaignState[] campaign_states; // for saving	
+	private CampaignState[] campaign_states; // for saving
 
 	public Campaign(CampaignState state) {
 		this.state = state;
@@ -45,19 +45,19 @@ public abstract class Campaign {
 		GUIRoot gui_root = viewer.getGUIRoot();
 		new GameOverDelayTrigger(viewer, gui_root.getDelegate().getCamera(), Utils.getBundleString(bundle, "island_complete"));
 		LoadCampaignBox.loadSavegames(
-				new DeterministicSerializerLoopbackInterface() {
-                                        @Override
-					public final void loadSucceeded(Object object) {
-						campaign_states = (CampaignState[])object;
+				new DeterministicSerializerLoopbackInterface<CampaignState[]>() {
+                    @Override
+					public final void loadSucceeded(CampaignState[] campaign_states) {
+						Campaign.this.campaign_states = campaign_states;
 						doSave(viewer);
 					}
 
-                                        @Override
+                     @Override
 					public final void saveSucceeded() {
 					}
 
-                                        @Override
-					public final void failed(Exception e) {
+                    @Override
+					public final void failed(Throwable e) {
 						doFailed(e, viewer);
 					}
 				});
@@ -70,23 +70,23 @@ public abstract class Campaign {
 			}
 		}
 		LoadCampaignBox.saveSavegames(campaign_states,
-				new DeterministicSerializerLoopbackInterface() {
-                                        @Override
-					public final void loadSucceeded(Object object) {
+				new DeterministicSerializerLoopbackInterface<CampaignState[]>() {
+                    @Override
+					public final void loadSucceeded(CampaignState[] object) {
 					}
 
-                                        @Override
+                    @Override
 					public final void saveSucceeded() {
 					}
 
-                                        @Override
-					public final void failed(Exception e) {
+                    @Override
+					public final void failed(Throwable e) {
 						doFailed(e, viewer);
 					}
 				});
 	}
 
-	private void doFailed(Exception e, WorldViewer viewer) {
+	private void doFailed(Throwable e, WorldViewer viewer) {
 		String failed_message = Utils.getBundleString(bundle, "failed_message", new Object[]{LoadCampaignBox.SAVEGAMES_FILE_NAME, e.getMessage()});
 		viewer.getGUIRoot().addModalForm(new MessageForm(failed_message));
 	}

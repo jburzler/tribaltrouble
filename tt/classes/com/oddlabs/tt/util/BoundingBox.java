@@ -5,7 +5,6 @@ import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Vector4f;
 
 public strictfp class BoundingBox {
-	private final static long serialVersionUID = 1;
 
 	private final static Vector4f temp_vec = new Vector4f();
 	private final static Vector4f temp_vec2 = new Vector4f();
@@ -20,7 +19,7 @@ public strictfp class BoundingBox {
 	private float cy;
 	private float cz;
 
-        @Override
+    @Override
 	public String toString() {
 		return "bmx " + bmin_x + " bmy " + bmin_y + " bmz " + bmin_z + " bxx " + bmax_x + " bxy " + bmax_y + " bxz " + bmax_z;
 	}

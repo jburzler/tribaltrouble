@@ -1,5 +1,7 @@
 package com.oddlabs.tt.global;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import org.lwjgl.opengl.*;
 
 public final strictfp class Globals {
@@ -22,7 +24,7 @@ public final strictfp class Globals {
 	public final static boolean[] INSERT_PLANTS = new boolean[]{false, false, true};
 
 	public final static String GAME_NAME = "TribalTrouble";
-	public final static String SETTINGS_FILE_NAME = "settings";
+	public final static Path SETTINGS_FILE_NAME = Paths.get("settings");
 
 	public static boolean run_ai = true;
 

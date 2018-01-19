@@ -142,18 +142,18 @@ public final strictfp class Lightning extends Element implements Animated {
 		manager.registerAnimation(this);
 	}
 
-        @Override
+    @Override
 	public void visit(ElementVisitor visitor) {
 		visitor.visitLightning(this);
 	}
 
-        @Override
+    @Override
 	protected void remove() {
 		super.remove();
 		manager.removeAnimation(this);
 	}
 
-        @Override
+    @Override
 	public void updateChecksum(StateChecksum checksum) {
 	}
 }

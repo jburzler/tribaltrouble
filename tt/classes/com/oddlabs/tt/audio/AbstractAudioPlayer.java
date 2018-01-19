@@ -10,21 +10,21 @@ public strictfp class AbstractAudioPlayer implements Animated {
 	protected final static float ROLLOFF_FACTOR = .03f; // was 0.05
 
 	protected final AudioSource source;
-	private final AudioParameters parameters;
+	private final AudioParameters<?> parameters;
 	private boolean playing = false;
 
 	private float fadeout_time;
 	private float end_gain;
 	private float fadeout_gain;
 
-	protected AbstractAudioPlayer(AudioSource source, AudioParameters params) {
+	protected AbstractAudioPlayer(AudioSource source, AudioParameters<?> params) {
 		this.parameters = params;
 		if (source == null || (!params.music && !Settings.getSettings().play_sfx)) {
 			this.source = null;
 			return;
 		}
 		this.source = source;
-		source.setPlayer(this);
+		source.setAudioPlayer(this);
 		playing = true;
 	}
 
@@ -32,7 +32,7 @@ public strictfp class AbstractAudioPlayer implements Animated {
 		return playing;
 	}
 
-	public final AudioParameters getParameters() {
+	public final AudioParameters<?> getParameters() {
 		return parameters;
 	}
 
@@ -89,7 +89,7 @@ public strictfp class AbstractAudioPlayer implements Animated {
 		}
 	}
 
-        @Override
+    @Override
 	public void updateChecksum(StateChecksum checksum) {
 	}
 }

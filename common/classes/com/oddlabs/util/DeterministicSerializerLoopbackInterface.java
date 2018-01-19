@@ -1,7 +1,7 @@
 package com.oddlabs.util;
 
-public strictfp interface DeterministicSerializerLoopbackInterface {
+public strictfp interface DeterministicSerializerLoopbackInterface<T> {
 	public void saveSucceeded();
-	public void loadSucceeded(Object object);
-	public void failed(Exception e);
+	public void loadSucceeded(T object);
+	public void failed(Throwable e);
 }

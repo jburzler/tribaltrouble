@@ -46,11 +46,11 @@ public abstract strictfp class ThrowingWeapon extends Accessories implements Ani
 
 		setPosition(src.getPositionX() + OFFSET_X*src.getDirectionX() - OFFSET_Y*src.getDirectionY(), src.getPositionY() + OFFSET_X*src.getDirectionY() - OFFSET_Y*src.getDirectionX());
 		deterministic_z = OFFSET_Z + src.getMountOffset();
-		
+
 		setTarget(target);
-		
+
 		reinsert();
-		audio_player = target.getOwner().getWorld().getAudio().newAudio(new AudioParameters(
+		audio_player = target.getOwner().getWorld().getAudio().newAudio(new AudioParameters<>(
 			throw_sound,
 			getPositionX(),
 			getPositionY(),
@@ -96,7 +96,7 @@ public abstract strictfp class ThrowingWeapon extends Accessories implements Ani
 		end_x = target.getPositionX();
 		end_y = target.getPositionY();
 	}
-	
+
 	private void updateDirection() {
 		float dx = target.getPositionX() - getPositionX();
 		float dy = target.getPositionY() - getPositionY();
@@ -135,13 +135,13 @@ public abstract strictfp class ThrowingWeapon extends Accessories implements Ani
 			hitTarget(hit, owner, target);
 			return;
 		}
-		
+
 		if (hit) {
 			updateTarget();
 		}
 		time += t;
 		float progress = time/time_limit;
-		
+
 		float x;
 		float y;
 		if (progress < 1f) {
@@ -168,7 +168,7 @@ public abstract strictfp class ThrowingWeapon extends Accessories implements Ani
 
 	protected final void damageTarget(Selectable target) {
 		if (target instanceof Unit) {
-			owner.getWorld().getAudio().newAudio(new AudioParameters(hit_sounds[owner.getWorld().getRandom().nextInt(hit_sounds.length)], target.getPositionX(), target.getPositionY(), target.getPositionZ(),
+			owner.getWorld().getAudio().newAudio(new AudioParameters<>(hit_sounds[owner.getWorld().getRandom().nextInt(hit_sounds.length)], target.getPositionX(), target.getPositionY(), target.getPositionZ(),
 					AudioPlayer.AUDIO_RANK_DEATH,
 					AudioPlayer.AUDIO_DISTANCE_DEATH,
 					AudioPlayer.AUDIO_GAIN_DEATH,

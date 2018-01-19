@@ -9,11 +9,15 @@ import com.oddlabs.util.LinkedList;
 import java.util.List;
 
 public abstract strictfp class AbstractElementNode extends BoundingBox {
-	private final LinkedList models = new LinkedList();
+	private final LinkedList<?> models = new LinkedList<>();
 
 	private int child_count = 0;
 
 	private final AbstractElementNode owner;
+
+	protected AbstractElementNode(AbstractElementNode owner) {
+		this.owner = owner;
+	}
 
 	protected final int getChildCount() {
 		return child_count - models.size();
@@ -50,10 +54,6 @@ public abstract strictfp class AbstractElementNode extends BoundingBox {
 			return 1 + owner.getDepth();
 		else
 			return 0;
-	}
-
-	protected AbstractElementNode(AbstractElementNode owner) {
-		this.owner = owner;
 	}
 
 	protected final AbstractElementNode addElement(Element model) {
@@ -128,7 +128,7 @@ System.out.println("num_plants = " + num_plants);
 	public abstract void visit(ElementNodeVisitor visitor);
 
 	public final void visitElements(ElementNodeVisitor visitor) {
-		Element model = (Element)models.getFirst();
+		Element model = (Element) models.getFirst();
 		while (model != null) {
 			visitor.visit(model);
 			model = (Element)model.getNext();

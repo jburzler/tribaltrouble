@@ -27,7 +27,6 @@ import com.oddlabs.tt.gui.Skin;
 import com.oddlabs.tt.gui.Slider;
 import com.oddlabs.tt.gui.SortedLabel;
 import com.oddlabs.tt.guievent.CheckBoxListener;
-import com.oddlabs.tt.guievent.CloseListener;
 import com.oddlabs.tt.guievent.ItemChosenListener;
 import com.oddlabs.tt.guievent.MouseClickListener;
 import com.oddlabs.tt.guievent.RowListener;
@@ -177,7 +176,7 @@ public abstract strictfp class AbstractOptionsMenu extends Form {
 		PulldownButton pb_detail = new PulldownButton(gui_root, pm_detail, last_detail_value, 150);
 
 		group_detail.addChild(pb_detail);
-		addCloseListener(new OptionsCloseListener());
+		addCloseListener(this::checkDetailChange);
 		label_detail.place();
 		pb_detail.place(label_detail, BOTTOM_LEFT);
 		group_detail.compileCanvas();
@@ -456,13 +455,6 @@ public abstract strictfp class AbstractOptionsMenu extends Form {
                 @Override
 		public void checked(boolean marked) {
 			Settings.getSettings().use_native_cursor = marked;
-		}
-	}
-
-	private final strictfp class OptionsCloseListener implements CloseListener {
-                @Override
-		public void closed() {
-			checkDetailChange();
 		}
 	}
 

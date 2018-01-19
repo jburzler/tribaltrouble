@@ -13,7 +13,7 @@ import org.lwjgl.openal.AL10;
 public final strictfp class Audio extends NativeResource {
 	private final IntBuffer al_buffers;
 
-	public Audio(URL file) {
+	public Audio(URL file) throws IOException {
 		this(1);
 		if (!AL.isCreated())
 			return;
@@ -35,7 +35,7 @@ public final strictfp class Audio extends NativeResource {
 		AL10.alGenBuffers(al_buffers);
 	}
 
-	private Wave loadOGG(URL file) {
+	private Wave loadOGG(URL file) throws IOException {
 		ByteBufferOutputStream output = new ByteBufferOutputStream(true);
 		OGGStream ogg_stream = new OGGStream(file);
 		int channels = ogg_stream.getChannels();
@@ -50,7 +50,7 @@ public final strictfp class Audio extends NativeResource {
 		output.buffer().limit(total_bytes);
 		return new Wave(output.buffer(), channels, 16, rate);
 	}
-		
+
 	public IntBuffer getBuffers() {
 		return al_buffers;
 	}

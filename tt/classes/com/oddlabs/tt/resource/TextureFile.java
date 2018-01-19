@@ -9,10 +9,12 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import javax.imageio.ImageIO;
 import org.lwjgl.opengl.GL11;
 
-public final strictfp class TextureFile extends File {
+public final strictfp class TextureFile extends File<Texture> {
 	private final int internal_format;
 	private final int min_filter;
 	private final int mag_filter;
@@ -39,7 +41,7 @@ public final strictfp class TextureFile extends File {
 	public TextureFile(String location, int internal_format, int min_filter, int mag_filter, int wrap_s, int wrap_t, int max_mipmap_level, int base_fadeout_level, float fadeout_factor) {
 		this(location, internal_format, min_filter, mag_filter, wrap_s, wrap_t, max_mipmap_level, base_fadeout_level, fadeout_factor, false);
 	}
-	
+
 	public TextureFile(String location, int internal_format, int min_filter, int mag_filter, int wrap_s, int wrap_t, int max_mipmap_level, int base_fadeout_level, float fadeout_factor, boolean max_alpha) {
 		super(locateTexture(location));
 		this.is_dxt = locateDXT(location) != null;
@@ -59,9 +61,10 @@ public final strictfp class TextureFile extends File {
 		if (url_classpath != null)
 			return url_classpath;
 		try {
-			java.io.File file =  new java.io.File(com.oddlabs.tt.util.Utils.getInstallDir(), location_with_ext);
-			if (file.exists())
-				return file.toURI().toURL();
+			Path file =  com.oddlabs.tt.util.Utils.getInstallDir().resolve(location_with_ext);
+			if (Files.isRegularFile(file) && Files.isReadable(file)) {
+				return file.toUri().toURL();
+            }
 		} catch (MalformedURLException e) {
 			throw new RuntimeException(e);
 		}
@@ -119,7 +122,7 @@ public final strictfp class TextureFile extends File {
 			int width = bi_rgb.getWidth();
 			int height = bi_rgb.getHeight();
 			byte[] data_rgb = (byte[]) bi_rgb.getRaster().getDataElements(0, 0, width, height, null);
-			
+
 			URL url_png_alpha = Utils.class.getResource(loc + "_a.png");
 			byte[] data_a;
 			if (url_png_alpha != null) {
@@ -143,7 +146,7 @@ public final strictfp class TextureFile extends File {
 					g = r;
 					b = r;
 				}
-				
+
 				int a;
 				if (data_a != null)
 					a = data_a[i] & 0xff;
@@ -160,9 +163,9 @@ public final strictfp class TextureFile extends File {
 //		}
 		return img;
 	}
-	
+
         @Override
-	public Object newInstance() {
+	public Texture newInstance() {
 		return new Texture(this);
 	}
 
@@ -171,7 +174,7 @@ public final strictfp class TextureFile extends File {
 		if (!(o instanceof TextureFile))
 			return false;
 		TextureFile other = (TextureFile)o;
-		if (internal_format != other.internal_format || min_filter != other.min_filter || mag_filter != other.mag_filter || 
+		if (internal_format != other.internal_format || min_filter != other.min_filter || mag_filter != other.mag_filter ||
 			max_mipmap_level != other.max_mipmap_level ||
 			wrap_s != other.wrap_s || wrap_t != other.wrap_t || base_fadeout_level != other.base_fadeout_level || fadeout_factor != other.fadeout_factor)
 			return false;

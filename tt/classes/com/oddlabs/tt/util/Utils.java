@@ -8,6 +8,8 @@ import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 import java.nio.ShortBuffer;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.MessageFormat;
 import java.util.ResourceBundle;
 import org.lwjgl.BufferUtils;
@@ -22,13 +24,13 @@ public final strictfp class Utils {
 	public static String getBundleString(ResourceBundle bundle, String key) {
 		return getBundleString(bundle, key, empty_object_array);
 	}
-	
+
 	public static String getBundleString(ResourceBundle bundle, String key, Object[] object_array) {
 		return MessageFormat.format(bundle.getString(key), object_array);
 	}
- 
-	public static File getInstallDir() {
-		return new File(System.getProperty("user.dir"));
+
+	public static Path getInstallDir() {
+		return Paths.get(System.getProperty("user.dir"));
 	}
 
 	public static FloatBuffer toBuffer(float[] floats) {

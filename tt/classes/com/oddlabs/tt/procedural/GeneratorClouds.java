@@ -19,12 +19,12 @@ public final strictfp class GeneratorClouds extends TextureGenerator {
 		this.terrain_type = terrain_type;
 	}
 
-        @Override
+    @Override
 	public Texture[] generate() {
 		int seed = Globals.LANDSCAPE_SEED;
 		Channel clouds1 = new Midpoint(TEXTURE_SIZE, 3, 0.55f, seed).toChannel();
 		Channel clouds2 = new Midpoint(TEXTURE_SIZE, 2, 0.4f, seed).toChannel();
-		
+
 		switch (terrain_type) {
 			case Landscape.NATIVE:
 				clouds1.dynamicRange(0.5f, 1f, 0f, 1f).gamma(0.75f).brightness(0.5f);
@@ -38,7 +38,7 @@ public final strictfp class GeneratorClouds extends TextureGenerator {
 				assert false : "illegal terrain_type";
 				break;
 		}
-		
+
 		if (Landscape.DEBUG) new GLIntImage(clouds1.toLayer()).saveAsPNG("generator_clouds_1");
 		if (Landscape.DEBUG) new GLIntImage(clouds2.toLayer()).saveAsPNG("generator_clouds_2");
 		GLByteImage cloud_images[] = new GLByteImage[] {new GLByteImage(clouds1, GL11.GL_LUMINANCE), new GLByteImage(clouds2, GL11.GL_LUMINANCE)};
@@ -48,13 +48,13 @@ public final strictfp class GeneratorClouds extends TextureGenerator {
 		}
 		return textures;
 	}
-	
-        @Override
+
+    @Override
 	public int hashCode() {
 		return TEXTURE_SIZE;
 	}
 
-        @Override
+    @Override
 	public boolean equals(Object o) {
 		return super.equals(o) && ((GeneratorClouds)o).terrain_type == terrain_type;
 	}

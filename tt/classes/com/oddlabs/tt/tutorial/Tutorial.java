@@ -13,13 +13,13 @@ import java.util.ResourceBundle;
 
 public final strictfp class Tutorial {
 	private final static int BORDER_OFFSET = 90;
-	
+
 	private final WorldViewer viewer;
 	private final TutorialInGameInfo tutorial_info;
 	private GUIObject info;
 	private TimerAnimation timer;
 	private float old_after_done_time;
-	
+
 	public Tutorial(WorldViewer viewer, TutorialInGameInfo tutorial_info, TutorialTrigger first_trigger) {
 		this.viewer = viewer;
 		this.tutorial_info = tutorial_info;
@@ -64,9 +64,9 @@ public final strictfp class Tutorial {
 	private void next1(final TutorialTrigger trigger) {
 		String text = Utils.getBundleString(ResourceBundle.getBundle(TutorialTrigger.class.getName()), trigger.getTextKey(), trigger.getFormatArgs());
 		info =  new LabelBox(text, Skin.getSkin().getEditFont(), 400);
-		info.setPos(BORDER_OFFSET, viewer.getGUIRoot().getHeight() - BORDER_OFFSET - info.getHeight());	
+		info.setPos(BORDER_OFFSET, viewer.getGUIRoot().getHeight() - BORDER_OFFSET - info.getHeight());
 		viewer.getGUIRoot().addChild(info);
-		viewer.getWorld().getAudio().newAudio(new AudioParameters(viewer.getLocalPlayer().getRace().getBuildingNotificationAudio(), 0f, 0f, 0f, AudioPlayer.AUDIO_RANK_NOTIFICATION, AudioPlayer.AUDIO_DISTANCE_NOTIFICATION, .25f, 1f, 1f, false, true));
+		viewer.getWorld().getAudio().newAudio(new AudioParameters<>(viewer.getLocalPlayer().getRace().getBuildingNotificationAudio(), 0f, 0f, 0f, AudioPlayer.AUDIO_RANK_NOTIFICATION, AudioPlayer.AUDIO_DISTANCE_NOTIFICATION, .25f, 1f, 1f, false, true));
 		timer = new TimerAnimation(viewer.getAnimationManagerLocal(), (Object anim) -> {
                     trigger.run(Tutorial.this);
                 }, trigger.getCheckInterval());

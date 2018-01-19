@@ -3,14 +3,14 @@ package com.oddlabs.tt.model;
 import com.oddlabs.tt.landscape.World;
 import com.oddlabs.tt.render.SpriteKey;
 import com.oddlabs.tt.util.BoundingBox;
-import com.oddlabs.util.ListElement;
+import java.util.Objects;
 
-public abstract strictfp class Model extends Element implements ListElement {
+public abstract strictfp class Model extends Element<Model> {
 	private final World world;
 
 	protected Model(World world) {
-		super(world.getElementRoot());
-		this.world = world;
+		super(Objects.requireNonNull(world, "world").getElementRoot());
+        this.world = world ;
 	}
 
 	public abstract float getShadowDiameter();
@@ -42,7 +42,7 @@ public abstract strictfp class Model extends Element implements ListElement {
 		return world;
 	}
 
-        @Override
+    @Override
 	public final void setPosition(float x, float y) {
 		super.setPosition(x, y);
 		reinsert();

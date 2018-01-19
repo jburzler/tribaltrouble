@@ -12,7 +12,6 @@ import com.oddlabs.tt.gui.KeyboardEvent;
 import com.oddlabs.tt.gui.LocalInput;
 import com.oddlabs.tt.gui.MenuButton;
 import com.oddlabs.tt.gui.Renderable;
-import com.oddlabs.tt.guievent.CloseListener;
 import com.oddlabs.tt.guievent.MouseClickListener;
 import com.oddlabs.tt.landscape.WorldParameters;
 import com.oddlabs.tt.net.Client;
@@ -205,7 +204,10 @@ public abstract strictfp class Menu extends CameraDelegate {
 		if (current_menu != null)
 			current_menu.remove();
 		disableButtons(true);
-		menu.addCloseListener(new EscapedListener());
+		menu.addCloseListener(() -> {
+			disableButtons(false);
+			current_menu = null;
+		});
 		current_menu = menu;
 		addChild(current_menu);
 		current_menu.setFocus();
@@ -281,14 +283,6 @@ public abstract strictfp class Menu extends CameraDelegate {
                 @Override
 		public void mouseClicked(int button, int x, int y, int clicks) {
 			setMenuCentered(new QuitForm(getGUIRoot()));
-		}
-	}
-
-	private final strictfp class EscapedListener implements CloseListener {
-                @Override
-		public void closed() {
-			disableButtons(false);
-			current_menu = null;
 		}
 	}
 }

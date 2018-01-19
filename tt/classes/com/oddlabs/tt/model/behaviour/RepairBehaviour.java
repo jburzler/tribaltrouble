@@ -36,13 +36,13 @@ public final strictfp class RepairBehaviour implements Behaviour {
 		anim_time += t;
 		if (anim_time > unit.getWeaponFactory().getSecondsPerRelease(1f/SECONDS_PER_ANIMATION_CYCLE) && !sound) {
 			sound = true;
-			unit.getOwner().getWorld().getAudio().newAudio(new AudioParameters(unit.getOwner().getWorld().getRacesResources().getHarvestSound(TreeSupply.class, unit.getOwner().getWorld().getRandom()), unit.getPositionX(), unit.getPositionY(), unit.getPositionZ(),
+			unit.getOwner().getWorld().getAudio().newAudio(new AudioParameters<>(unit.getOwner().getWorld().getRacesResources().getHarvestSound(TreeSupply.class, unit.getOwner().getWorld().getRandom()), unit.getPositionX(), unit.getPositionY(), unit.getPositionZ(),
 					AudioPlayer.AUDIO_RANK_HARVEST,
 					AudioPlayer.AUDIO_DISTANCE_HARVEST,
 					AudioPlayer.AUDIO_GAIN_HARVEST,
 					AudioPlayer.AUDIO_RADIUS_HARVEST));
 		}
-		
+
 		if (anim_time > SECONDS_PER_ANIMATION_CYCLE) {
 			restartAnimation();
 			repairs++;

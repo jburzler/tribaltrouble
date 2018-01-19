@@ -3,6 +3,7 @@ package com.oddlabs.tt.audio;
 import com.oddlabs.tt.camera.CameraState;
 import com.oddlabs.tt.global.Settings;
 import com.oddlabs.tt.landscape.AudioImplementation;
+import java.io.IOException;
 import java.nio.FloatBuffer;
 import java.util.ArrayList;
 import java.util.List;
@@ -63,22 +64,28 @@ public final strictfp class AudioManager implements AudioImplementation {
 		}
 	}
 
-	public AbstractAudioPlayer newAudio(CameraState camera_state, AudioParameters params) {
+	public AbstractAudioPlayer newAudio(CameraState camera_state, AudioParameters<?> params) {
 		AudioSource source = getSource(camera_state, params);
 		return doNewAudio(source, params);
 	}
 
         @Override
-	public AbstractAudioPlayer newAudio(AudioParameters params) {
+	public AbstractAudioPlayer newAudio(AudioParameters<?> params) {
 		AudioSource source = getSource(params);
 		return doNewAudio(source, params);
 	}
 
-	private static AbstractAudioPlayer doNewAudio(AudioSource source, AudioParameters params) {
+	private static AbstractAudioPlayer doNewAudio(AudioSource source, AudioParameters<?> params) {
 		if (params.sound instanceof Audio)
-			return new AudioPlayer(source, params);
-		else
-			return new QueuedAudioPlayer(source, params);
+			return new AudioPlayer(source, (AudioParameters<Audio>) params);
+        else if (params.sound instanceof String)
+			try {
+                return new QueuedAudioPlayer(source, (AudioParameters<String>) params);
+        } catch (IOException ex) {
+            throw new IllegalArgumentException("Could not load " + params.sound, ex);
+        }
+        else
+            throw new IllegalArgumentException("Unrecognized audio parameters : " + params.sound.getClass().getSimpleName());
 	}
 
 	public void startSources() {
@@ -102,7 +109,7 @@ public final strictfp class AudioManager implements AudioImplementation {
 		return sound_play_counter > 0;
 	}
 
-	private AudioSource findSource(AudioParameters params) {
+	private AudioSource findSource(AudioParameters<?> params) {
 		// Check for free sources
 		int worst_rank = Integer.MAX_VALUE;
             for (AudioSource source1 : sources) {
@@ -130,7 +137,7 @@ public final strictfp class AudioManager implements AudioImplementation {
 		return null;
 	}
 
-	private AudioSource getSource(AudioParameters params) {
+	private AudioSource getSource(AudioParameters<?> params) {
 		if (!AL.isCreated())
 			return null;
 		AudioSource best_source = findSource(params);
@@ -138,7 +145,7 @@ public final strictfp class AudioManager implements AudioImplementation {
 		return best_source;
 	}
 
-	private AudioSource getSource(CameraState camera_state, AudioParameters params) {
+	private AudioSource getSource(CameraState camera_state, AudioParameters<?> params) {
 		if (!AL.isCreated())
 			return null;
 		float this_dist_squared;

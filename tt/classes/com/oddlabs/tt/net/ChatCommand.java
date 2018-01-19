@@ -5,32 +5,23 @@ import com.oddlabs.tt.util.Utils;
 import java.util.*;
 
 public final strictfp class ChatCommand {
-	private final static Map commands = new HashMap();
-
-	private final static Set ignored_nicks = new HashSet();
-
-	private final static ResourceBundle bundle = ResourceBundle.getBundle(ChatCommand.class.getName());
+	private final static Map<String, ChatMethod> commands = new HashMap<>();
 
 	static {
-		try {
-			ChatMethod send_message = ChatCommand::sendMessage;
-			commands.put("message", send_message);
-			commands.put("msg", send_message);
-			commands.put("tell", send_message);
-			commands.put("whisper", send_message);
-			ChatMethod get_info = ChatCommand::getInfo;
-			commands.put("info", get_info);
-			commands.put("finger", get_info);
-			ChatMethod ignore_nick = ChatCommand::ignore;
-			commands.put("ignore", ignore_nick);
-			ChatMethod unignore_nick = ChatCommand::unignore;
-			commands.put("unignore", unignore_nick);
-			ChatMethod ignore_list = ChatCommand::ignoreList;
-			commands.put("ignorelist", ignore_list);
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
+			commands.put("message", ChatCommand::sendMessage);
+			commands.put("msg", ChatCommand::sendMessage);
+			commands.put("tell", ChatCommand::sendMessage);
+			commands.put("whisper", ChatCommand::sendMessage);
+			commands.put("info", ChatCommand::getInfo);
+			commands.put("finger", ChatCommand::getInfo);
+			commands.put("ignore", ChatCommand::ignore);
+			commands.put("unignore", ChatCommand::unignore);
+			commands.put("ignorelist", ChatCommand::ignoreList);
 	}
+
+    private final static Set ignored_nicks = new HashSet();
+
+	private final static ResourceBundle bundle = ResourceBundle.getBundle(ChatCommand.class.getName());
 
 	public static boolean filterCommand(InfoPrinter info_printer, String text) {
 		return filterCommand(info_printer, null, text);

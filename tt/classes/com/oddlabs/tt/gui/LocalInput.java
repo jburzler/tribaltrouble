@@ -8,7 +8,7 @@ import com.oddlabs.tt.input.KeyboardInput;
 import com.oddlabs.tt.render.Renderer;
 import com.oddlabs.tt.render.SerializableDisplayMode;
 import com.oddlabs.tt.render.SerializableDisplayModeComparator;
-import java.io.File;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.SortedSet;
@@ -34,7 +34,7 @@ public final strictfp class LocalInput {
 	private static int view_width;
 	private static int view_height;
 	private static boolean fullscreen;
-	private static File game_dir;
+	private static Path game_dir;
 	private static int revision;
 
 	private final static LocalInput instance = new LocalInput();
@@ -133,7 +133,7 @@ public final strictfp class LocalInput {
 		return LocalEventQueue.getQueue().getDeterministic().log(AL.isCreated());
 	}
 
-	public static File getGameDir() {
+	public static Path getGameDir() {
 		return game_dir;
 	}
 
@@ -191,16 +191,16 @@ public final strictfp class LocalInput {
 		return LocalEventQueue.getQueue().getDeterministic().log(Cursor.getCapabilities());
 	}
 
-	public static void settings(File game_dir, File event_log_dir, Settings settings) {
+	public static void settings(Path game_dir, Path event_log_dir, Settings settings) {
 		instance.setSettings(game_dir, event_log_dir,
 				revision, settings);
 	}
 
-	public void setSettings(File game_dir, File event_log_dir, int revision, Settings settings) {
+	public void setSettings(Path game_dir, Path event_log_dir, int revision, Settings settings) {
 		System.out.println("revision = " + revision);
 		LocalInput.game_dir = game_dir;
 		LocalInput.revision = revision;
-		settings.last_event_log_dir = event_log_dir.getAbsolutePath();
+		settings.last_event_log_dir = event_log_dir.toAbsolutePath().toUri();
 		settings.last_revision = revision;
 		settings.crashed = true;
 		settings.save();

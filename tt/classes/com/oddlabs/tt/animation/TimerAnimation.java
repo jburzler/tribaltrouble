@@ -60,7 +60,7 @@ public final strictfp class TimerAnimation implements Animated {
 		time = 0;
 	}
 
-        @Override
+    @Override
 	public void animate(float t) {
 		time += t;
 		while (time > interval) {

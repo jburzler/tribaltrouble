@@ -77,7 +77,7 @@ public final strictfp class WorldViewer implements Animated {
         RenderQueues render_queues = new RenderQueues();
         LandscapeResources landscape_resources = World.loadCommon(render_queues);
         RacesResources races_resources = World.loadInGame(render_queues);
-        AudioImplementation audio_impl = (AudioParameters params) -> AudioManager.getManager().newAudio(camera_state, params);
+        AudioImplementation audio_impl = (AudioParameters<?> params) -> AudioManager.getManager().newAudio(camera_state, params);
         this.distributable_table = new DistributableTable();
         NotificationListener listener = new NotificationListener() {
             @Override

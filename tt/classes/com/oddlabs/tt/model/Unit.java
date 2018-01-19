@@ -398,7 +398,7 @@ public strictfp class Unit extends Selectable implements Occupant, Movable {
 						AudioPlayer.AUDIO_RADIUS_DEATH,
 						1f + (World.getRandom().nextFloat() - .5f)*getUnitTemplate().getDeathPitch());
                      */
-                    getOwner().getWorld().getAudio().newAudio(new AudioParameters(getUnitTemplate().getDeathSound(), getPositionX(), getPositionY(), getPositionZ(),
+                    getOwner().getWorld().getAudio().newAudio(new AudioParameters<>(getUnitTemplate().getDeathSound(), getPositionX(), getPositionY(), getPositionZ(),
                             AudioPlayer.AUDIO_RANK_DEATH,
                             AudioPlayer.AUDIO_DISTANCE_DEATH,
                             AudioPlayer.AUDIO_GAIN_DEATH,

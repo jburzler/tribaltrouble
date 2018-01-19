@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.nio.ByteOrder;
+import java.util.Objects;
 
 public final strictfp class OGGStream {
 	private final URL file;
@@ -27,14 +28,11 @@ public final strictfp class OGGStream {
 	private int[] indices;
 	private boolean eos = false;
 
-	public OGGStream(URL file) {
-		this.file = file;
+	public OGGStream(URL file) throws IOException {
+		this.file = Objects.requireNonNull(file, "file");
 		sync_state.init();
-		try {
-			input = file.openStream();
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
+		input = file.openStream();
+
 		getHeaders();
 		prepareStream();
 	}

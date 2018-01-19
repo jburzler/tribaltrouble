@@ -158,7 +158,7 @@ public final strictfp class RubberSupply extends SupplyModel implements Animated
 			if (random < .75) {
 				setNewAnimation(ANIMATION_IDLING);
 				if (random < .05)
-					getWorld().getAudio().newAudio(new AudioParameters(getWorld().getLandscapeResources().getBirdIdleSound(getWorld().getRandom()), getPositionX(), getPositionY(), getPositionZ(),
+					getWorld().getAudio().newAudio(new AudioParameters<>(getWorld().getLandscapeResources().getBirdIdleSound(getWorld().getRandom()), getPositionX(), getPositionY(), getPositionZ(),
 							AudioPlayer.AUDIO_RANK_CHICKEN,
 							AudioPlayer.AUDIO_DISTANCE_CHICKEN,
 							AudioPlayer.AUDIO_GAIN_CHICKEN_IDLE,
@@ -172,7 +172,7 @@ public final strictfp class RubberSupply extends SupplyModel implements Animated
 				float move_random = getWorld().getRandom().nextFloat();
 				if (move_random < .25f) {
 					setNewAnimation(ANIMATION_FLYING);
-					getWorld().getAudio().newAudio(new AudioParameters(getWorld().getLandscapeResources().getBirdPeckSound(), getPositionX(), getPositionY(), getPositionZ(),
+					getWorld().getAudio().newAudio(new AudioParameters<>(getWorld().getLandscapeResources().getBirdPeckSound(), getPositionX(), getPositionY(), getPositionZ(),
 							AudioPlayer.AUDIO_RANK_CHICKEN,
 							AudioPlayer.AUDIO_DISTANCE_CHICKEN,
 							AudioPlayer.AUDIO_GAIN_CHICKEN_PECK,
@@ -183,7 +183,7 @@ public final strictfp class RubberSupply extends SupplyModel implements Animated
 			} else {
 				setNewAnimation(ANIMATION_PECKING);
 				if (random > .98f)
-					getWorld().getAudio().newAudio(new AudioParameters(getWorld().getLandscapeResources().getBirdPeckSound(), getPositionX(), getPositionY(), getPositionZ(),
+					getWorld().getAudio().newAudio(new AudioParameters<>(getWorld().getLandscapeResources().getBirdPeckSound(), getPositionX(), getPositionY(), getPositionZ(),
 							AudioPlayer.AUDIO_RANK_CHICKEN,
 							AudioPlayer.AUDIO_DISTANCE_CHICKEN,
 							AudioPlayer.AUDIO_GAIN_CHICKEN_PECK,
@@ -234,7 +234,7 @@ public final strictfp class RubberSupply extends SupplyModel implements Animated
 		if (!is_hit) {
 			is_hit = true;
 			setNewAnimation(ANIMATION_DYING);
-			getWorld().getAudio().newAudio(new AudioParameters(getWorld().getLandscapeResources().getBirdDeathSound(), getPositionX(), getPositionY(), getPositionZ(),
+			getWorld().getAudio().newAudio(new AudioParameters<>(getWorld().getLandscapeResources().getBirdDeathSound(), getPositionX(), getPositionY(), getPositionZ(),
 					AudioPlayer.AUDIO_RANK_DEATH,
 					AudioPlayer.AUDIO_DISTANCE_DEATH,
 					AudioPlayer.AUDIO_GAIN_CHICKEN_DEATH,

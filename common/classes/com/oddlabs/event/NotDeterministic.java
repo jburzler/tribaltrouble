@@ -1,6 +1,7 @@
 package com.oddlabs.event;
 
 import java.nio.*;
+import java.nio.file.Path;
 
 public final strictfp class NotDeterministic extends Deterministic {
         @Override
@@ -36,14 +37,19 @@ public final strictfp class NotDeterministic extends Deterministic {
 	protected float log(float f, float def) {
 		return f;
 	}
-	
+
         @Override
 	protected Object logObject(Object o) {
 		return o;
 	}
-	
+
         @Override
 	protected void logBuffer(ByteBuffer b) {
 		b.position(b.limit());
 	}
+
+    @Override
+    protected Path log(Path p, Path def) {
+        return p;
+    }
 }

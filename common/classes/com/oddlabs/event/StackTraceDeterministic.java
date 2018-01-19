@@ -1,6 +1,7 @@
 package com.oddlabs.event;
 
 import java.nio.ByteBuffer;
+import java.nio.file.Path;
 
 public final strictfp class StackTraceDeterministic extends Deterministic {
 	private final Deterministic deterministic;
@@ -28,7 +29,7 @@ public final strictfp class StackTraceDeterministic extends Deterministic {
 		if (old_stack_trace_hash != stack_trace_hash)
 			throw new Error("old_stack_trace_hash = " + old_stack_trace_hash + " | stack_trace_hash = " + stack_trace_hash);
 	}
-	
+
         @Override
 	protected byte log(byte b, byte def) {
 		logTrace();
@@ -58,16 +59,22 @@ public final strictfp class StackTraceDeterministic extends Deterministic {
 		logTrace();
 		return deterministic.log(f, def);
 	}
-	
+
         @Override
 	protected Object logObject(Object o) {
 		logTrace();
 		return deterministic.log(o);
 	}
-	
+
         @Override
 	protected void logBuffer(ByteBuffer b) {
 		logTrace();
 		deterministic.log(b);
 	}
+
+    @Override
+    protected Path log(Path p, Path def) {
+        logTrace();
+        return deterministic.log(p);
+    }
 }

@@ -55,7 +55,7 @@ public final strictfp class PoisonFog implements Magic {
 		start_x = src.getPositionX() + offset_x*src.getDirectionX() - offset_y*(-src.getDirectionY());
 		start_y = src.getPositionY() + offset_x*src.getDirectionY() + offset_y*src.getDirectionX();
 
-		bubbling_sound = owner.getWorld().getAudio().newAudio(new AudioParameters(owner.getWorld().getRacesResources().getBubblingSound(), start_x, start_y, owner.getWorld().getHeightMap().getNearestHeight(start_x, start_y),
+		bubbling_sound = owner.getWorld().getAudio().newAudio(new AudioParameters<>(owner.getWorld().getRacesResources().getBubblingSound(), start_x, start_y, owner.getWorld().getHeightMap().getNearestHeight(start_x, start_y),
 				AudioPlayer.AUDIO_RANK_MAGIC,
 				AudioPlayer.AUDIO_DISTANCE_MAGIC,
 				AudioPlayer.AUDIO_GAIN_BUBBLING,
@@ -95,7 +95,7 @@ public final strictfp class PoisonFog implements Magic {
 					owner.getWorld().getAnimationManagerGameTime());
 			if (bursts%next_sound == 0) {
 				next_sound = MIN_BURSTS_PER_SOUND + owner.getWorld().getRandom().nextInt(5);
-				owner.getWorld().getAudio().newAudio(new AudioParameters(owner.getWorld().getRacesResources().getGasSound(), x, y, z,
+				owner.getWorld().getAudio().newAudio(new AudioParameters<>(owner.getWorld().getRacesResources().getGasSound(), x, y, z,
 						AudioPlayer.AUDIO_RANK_GAS,
 						AudioPlayer.AUDIO_DISTANCE_MAGIC,
 						AudioPlayer.AUDIO_GAIN_GAS,

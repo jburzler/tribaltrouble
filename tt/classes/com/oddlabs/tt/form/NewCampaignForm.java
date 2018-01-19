@@ -30,7 +30,7 @@ import java.io.FileNotFoundException;
 import java.io.InvalidClassException;
 import java.util.ResourceBundle;
 
-public final strictfp class NewCampaignForm extends Form implements DeterministicSerializerLoopbackInterface {
+public final strictfp class NewCampaignForm extends Form implements DeterministicSerializerLoopbackInterface<CampaignState[]> {
 	private final static int BUTTON_WIDTH = 100;
 	private final static int EDITLINE_WIDTH = 240;
 
@@ -194,12 +194,12 @@ public final strictfp class NewCampaignForm extends Form implements Deterministi
 	}
 
         @Override
-	public void loadSucceeded(Object object) {
-		campaign_states = (CampaignState[])object;
+	public void loadSucceeded(CampaignState[] campaign_states) {
+		this.campaign_states = campaign_states;
 	}
 
         @Override
-	public void failed(Exception e) {
+	public void failed(Throwable e) {
 		if (e instanceof FileNotFoundException) {
 		} else if (e instanceof InvalidClassException) {
 		} else {

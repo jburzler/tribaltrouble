@@ -2,7 +2,7 @@ package com.oddlabs.tt.resource;
 
 import com.oddlabs.tt.render.SpriteList;
 
-public final strictfp class SpriteFile extends File {
+public final strictfp class SpriteFile extends File<SpriteList> {
 	private final boolean lighting;
 	private final boolean cullface;
 	private final boolean alpha;
@@ -13,7 +13,7 @@ public final strictfp class SpriteFile extends File {
 	public SpriteFile(String location, int mipmap_cutoff, boolean lighting, boolean cullface, boolean alpha, boolean modulate_color) {
 		this(location, mipmap_cutoff, lighting, cullface, alpha, modulate_color, false);
 	}
-	
+
 	public SpriteFile(String location, int mipmap_cutoff, boolean lighting, boolean cullface, boolean alpha, boolean modulate_color, boolean max_alpha) {
 		super(location);
 		this.lighting = lighting;
@@ -24,12 +24,12 @@ public final strictfp class SpriteFile extends File {
 		this.max_alpha = max_alpha;
 	}
 
-        @Override
-	public Object newInstance() {
+    @Override
+	public SpriteList newInstance() {
 		return new SpriteList(this);
 	}
 
-        @Override
+    @Override
 	public boolean equals(Object o) {
 		if (!(o instanceof SpriteFile))
 			return false;
@@ -58,7 +58,7 @@ public final strictfp class SpriteFile extends File {
 	public boolean hasModulateColor() {
 		return modulate_color;
 	}
-	
+
 	public boolean hasMaxAlpha() {
 		return max_alpha;
 	}

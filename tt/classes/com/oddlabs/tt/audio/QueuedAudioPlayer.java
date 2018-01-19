@@ -3,6 +3,7 @@ package com.oddlabs.tt.audio;
 import com.oddlabs.tt.global.Settings;
 import com.oddlabs.util.ByteBufferOutputStream;
 import com.oddlabs.util.Utils;
+import java.io.IOException;
 import java.net.URL;
 import java.nio.IntBuffer;
 import org.lwjgl.BufferUtils;
@@ -19,7 +20,7 @@ final strictfp class QueuedAudioPlayer extends AbstractAudioPlayer {
 	private OGGStream ogg_stream;
 	private int oldest_buffer = 0;
 
-	QueuedAudioPlayer(AudioSource source, AudioParameters params) {
+	QueuedAudioPlayer(AudioSource source, AudioParameters<String> params) throws IOException {
 		super(source, params);
 		this.url = Utils.makeURL((String)params.sound);
 		this.buffer_stream = new ByteBufferOutputStream(true);
@@ -34,7 +35,7 @@ final strictfp class QueuedAudioPlayer extends AbstractAudioPlayer {
 			AL10.alSourcei(source.getSource(), AL10.AL_SOURCE_RELATIVE, AL10.AL_TRUE);
 		else
 			AL10.alSourcei(source.getSource(), AL10.AL_SOURCE_RELATIVE, AL10.AL_FALSE);
-		
+
 		setGain(params.gain);
 		setPos(params.x, params.y, params.z);
 
@@ -70,7 +71,7 @@ final strictfp class QueuedAudioPlayer extends AbstractAudioPlayer {
 		AL10.alBufferData(al_buffer, Wave.getFormat(channels, 16), buffer_stream.buffer(), ogg_stream.getRate());
 	}
 
-	private int fillBuffer(int al_buffer) {
+	private int fillBuffer(int al_buffer) throws IOException {
 		buffer_stream.reset();
 		int bytes = ogg_stream.read(buffer_stream);
 		if (bytes > 0) {
@@ -83,7 +84,7 @@ final strictfp class QueuedAudioPlayer extends AbstractAudioPlayer {
 		return bytes;
 	}
 
-	public void refill() { // Run by the Refiller thread
+	public void refill() throws IOException { // Run by the Refiller thread
 		int processed = AL10.alGetSourcei(source.getSource(), AL10.AL_BUFFERS_PROCESSED);
 //System.out.println("this = " + this + " | processed = " + processed);
 		while (processed > 0) {

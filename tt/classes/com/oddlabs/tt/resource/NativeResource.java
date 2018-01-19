@@ -1,13 +1,22 @@
 package com.oddlabs.tt.resource;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public abstract strictfp class NativeResource  {
 
-    private final static List<NativeResource> finalized_resources = new ArrayList<>();
-    private static AtomicInteger count = new AtomicInteger(0);
+    /**
+     * Resources which have been finalized
+     *
+     * FIXME this should be replaced with reference queues
+     */
+    private final static CopyOnWriteArraySet<NativeResource> finalized_resources = new CopyOnWriteArraySet<>();
+    /**
+     * Count of unfinalized native resources
+     */
+    private static final AtomicInteger count = new AtomicInteger(0);
 
     public NativeResource() {
         count.incrementAndGet();
@@ -16,23 +25,19 @@ public abstract strictfp class NativeResource  {
     @Override
     protected final void finalize() throws Throwable {
         try {
-            synchronized (finalized_resources) {
-                finalized_resources.add(this);
-            }
+            finalized_resources.add(this);
         } finally {
             super.finalize();
         }
     }
 
     public final static void deleteFinalized() {
-        synchronized (finalized_resources) {
-            for (int i = 0; i < finalized_resources.size(); i++) {
-                NativeResource r = finalized_resources.get(i);
-                count.decrementAndGet();
-                r.doDelete();
-            }
-            finalized_resources.clear();
-        }
+        Set<NativeResource> finalized = new HashSet<>(finalized_resources);
+        finalized_resources.removeAll(finalized);
+        finalized.forEach(r -> {
+            count.decrementAndGet();
+            r.doDelete();
+        });
     }
 
     public final static void gc() {

@@ -9,16 +9,18 @@ import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.URL;
 import java.nio.ByteBuffer;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Enumeration;
 import java.util.zip.*;
 
 public final strictfp class Utils {
 	public final static String EMAIL_PATTERN = "(.+@.+\\.[a-z]+)?";
-	public final static String STD_OUT = "std.out";
-	public final static String STD_ERR = "std.err";
-	public final static String EVENT_LOG = "event.log";
+	public final static Path STD_OUT = Paths.get("std.out");
+	public final static Path STD_ERR = Paths.get("std.err");
+	public final static Path EVENT_LOG = Paths.get("event.log");
 
-	public final static String[] LOG_FILES = {STD_OUT, STD_ERR, EVENT_LOG};
+	public final static Path[] LOG_FILES = {STD_OUT, STD_ERR, EVENT_LOG};
 
 	public static InetAddress getLoopbackAddress() {
 		try {
@@ -56,7 +58,7 @@ System.out.println("loopback address = " + best_address);
 	public static Object loadObject(URL url) {
 		return loadObject(url, false);
 	}
-	
+
 	public static int powerOf2Log2(int n) {
 		assert isPowerOf2(n): n + " is not a power of 2";
 		for (int i = 0; i < 31; i++) {
@@ -117,7 +119,7 @@ System.out.println("loopback address = " + best_address);
 	public static Object tryLoadObject(URL url) throws IOException, ClassNotFoundException {
 		return tryLoadObject(url, false);
 	}
-	
+
 	public static Object tryLoadObject(URL url, boolean zipped) throws IOException, ClassNotFoundException {
 		InputStream input_stream = new BufferedInputStream(url.openStream());
 		if (zipped)
@@ -134,7 +136,7 @@ System.out.println("loopback address = " + best_address);
 		try {
 			return tryMakeURL(location);
 		} catch (IOException e) {
-			throw new RuntimeException(e);
+			throw new RuntimeException("Unusable location", e);
 		}
 	}
 

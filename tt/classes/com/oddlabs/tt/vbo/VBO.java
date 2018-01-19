@@ -67,7 +67,7 @@ public abstract strictfp class VBO extends NativeResource {
 		}
 	}
 
-        @Override
+    @Override
 	protected final void doDelete() {
 		if (use_vbo) {
 			handle_buffer.put(0, handle);
@@ -119,6 +119,6 @@ public abstract strictfp class VBO extends NativeResource {
 	protected final int getSize() {
 		return size;
 	}
-	
+
 	public abstract int capacity();
 }

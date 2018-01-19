@@ -586,7 +586,7 @@ public final strictfp class Building extends Selectable implements Occupant {
 					getOwner().getWorld().getAnimationManagerRealTime());
 
 		remove_delay = REMOVE_DELAY;
-		getOwner().getWorld().getAudio().newAudio(new AudioParameters(getOwner().getWorld().getRacesResources().getBuildingCollapseSound(), getPositionX(), getPositionY(), getPositionZ(), AudioPlayer.AUDIO_RANK_BUILDING_COLLAPSE, AudioPlayer.AUDIO_DISTANCE_BUILDING_COLLAPSE, AudioPlayer.AUDIO_GAIN_BUILDING_COLLAPSE, AudioPlayer.AUDIO_RADIUS_BUILDING_COLLAPSE));
+		getOwner().getWorld().getAudio().newAudio(new AudioParameters<>(getOwner().getWorld().getRacesResources().getBuildingCollapseSound(), getPositionX(), getPositionY(), getPositionZ(), AudioPlayer.AUDIO_RANK_BUILDING_COLLAPSE, AudioPlayer.AUDIO_DISTANCE_BUILDING_COLLAPSE, AudioPlayer.AUDIO_GAIN_BUILDING_COLLAPSE, AudioPlayer.AUDIO_RADIUS_BUILDING_COLLAPSE));
 		if (getUnitContainer() != null) {
 			while (getUnitContainer().getNumSupplies() > 0) {
 				Unit unit = getUnitContainer().exit();
@@ -716,7 +716,7 @@ public final strictfp class Building extends Selectable implements Occupant {
 		if (!isDead()) {
 			setHitPoints(hit_points - damage);
 			World world = getOwner().getWorld();
-			world.getAudio().newAudio(new AudioParameters(world.getRacesResources().getBuildingHitSound(world.getRandom()), getPositionX(), getPositionY(), getPositionZ(), AudioPlayer.AUDIO_RANK_WEAPON_HIT, AudioPlayer.AUDIO_DISTANCE_WEAPON_HIT, AudioPlayer.AUDIO_GAIN_WEAPON_HIT, AudioPlayer.AUDIO_RADIUS_WEAPON_HIT));
+			world.getAudio().newAudio(new AudioParameters<>(world.getRacesResources().getBuildingHitSound(world.getRandom()), getPositionX(), getPositionY(), getPositionZ(), AudioPlayer.AUDIO_RANK_WEAPON_HIT, AudioPlayer.AUDIO_DISTANCE_WEAPON_HIT, AudioPlayer.AUDIO_GAIN_WEAPON_HIT, AudioPlayer.AUDIO_RADIUS_WEAPON_HIT));
 			if (hit_points == 0) {
 				// stats
 				getOwner().buildingLost();
@@ -757,7 +757,7 @@ public final strictfp class Building extends Selectable implements Occupant {
 		}
 	}
 
-        @Override
+    @Override
 	public int getStatusValue() {
 		if (getAbilities().hasAbilities(Abilities.REPRODUCE)) {
 			return getUnitContainer().getNumSupplies();

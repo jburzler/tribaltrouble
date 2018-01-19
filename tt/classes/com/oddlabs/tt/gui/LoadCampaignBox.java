@@ -7,13 +7,15 @@ import com.oddlabs.tt.player.campaign.CampaignState;
 import com.oddlabs.tt.util.Utils;
 import com.oddlabs.util.DeterministicSerializer;
 import com.oddlabs.util.DeterministicSerializerLoopbackInterface;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InvalidClassException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ResourceBundle;
 
-public final strictfp class LoadCampaignBox extends GUIObject implements DeterministicSerializerLoopbackInterface {
-	public final static String SAVEGAMES_FILE_NAME = "savegames";
+public final strictfp class LoadCampaignBox extends GUIObject implements DeterministicSerializerLoopbackInterface<CampaignState[]> {
+	public final static Path SAVEGAMES_FILE_NAME = Paths.get("savegames");
 
 	private final static int WIDTH_NAME = 210;
 	private final static int WIDTH_RACE = 70;
@@ -39,23 +41,23 @@ public final strictfp class LoadCampaignBox extends GUIObject implements Determi
 
 		refresh();
 	}
-	
+
 	public static void saveSavegames(CampaignState[] states, DeterministicSerializerLoopbackInterface callback) {
 		DeterministicSerializer.save(LocalEventQueue.getQueue().getDeterministic(), states, getSaveSavegamesFile(), callback);
 	}
 
-	private static File getSaveSavegamesFile() {
-		return new File(LocalInput.getGameDir(), SAVEGAMES_FILE_NAME);
+	private static Path getSaveSavegamesFile() {
+		return LocalInput.getGameDir().resolve(SAVEGAMES_FILE_NAME);
 	}
 
 	public static void loadSavegames(DeterministicSerializerLoopbackInterface callback) {
 		DeterministicSerializer.load(LocalEventQueue.getQueue().getDeterministic(), getLoadSavegamesFile(), callback);
 	}
 
-	private static File getLoadSavegamesFile() {
-		File file = getSaveSavegamesFile();
-		if (!file.canRead())
-			return new File(Utils.getInstallDir(), SAVEGAMES_FILE_NAME);
+	private static Path getLoadSavegamesFile() {
+		Path file = getSaveSavegamesFile();
+		if (!Files.isReadable(file))
+			return Utils.getInstallDir().resolve(SAVEGAMES_FILE_NAME);
 		else
 			return file;
 	}
@@ -111,8 +113,7 @@ public final strictfp class LoadCampaignBox extends GUIObject implements Determi
 	}
 
         @Override
-	public void loadSucceeded(Object object) {
-		CampaignState[] campaign_states = (CampaignState[])object;
+	public void loadSucceeded(CampaignState[] campaign_states) {
 		fillSlots(campaign_states);
 	}
 
@@ -121,7 +122,7 @@ public final strictfp class LoadCampaignBox extends GUIObject implements Determi
 	}
 
         @Override
-	public void failed(Exception e) {
+	public void failed(Throwable e) {
 		if (e instanceof FileNotFoundException) {
 		} else if (e instanceof InvalidClassException) {
 			String invalid_message = Utils.getBundleString(bundle, "invalid_message", new Object[]{SAVEGAMES_FILE_NAME});

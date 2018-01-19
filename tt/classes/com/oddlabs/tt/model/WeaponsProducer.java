@@ -60,7 +60,7 @@ public strictfp class WeaponsProducer {
 
 	private void startSound() {
 		if (production_player == null) {
-			production_player = building.getOwner().getWorld().getAudio().newAudio(new AudioParameters(building.getOwner().getWorld().getRacesResources().getArmorySound(), building.getPositionX(), building.getPositionY(), building.getPositionZ(),
+			production_player = building.getOwner().getWorld().getAudio().newAudio(new AudioParameters<>(building.getOwner().getWorld().getRacesResources().getArmorySound(), building.getPositionX(), building.getPositionY(), building.getPositionZ(),
 					AudioPlayer.AUDIO_RANK_ARMORY,
 					AudioPlayer.AUDIO_DISTANCE_ARMORY,
 					AudioPlayer.AUDIO_GAIN_ARMORY,

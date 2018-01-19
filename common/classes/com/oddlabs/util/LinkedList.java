@@ -1,11 +1,11 @@
 package com.oddlabs.util;
 
-public final strictfp class LinkedList {
-	private ListElement first = null;
-	private ListElement last = null;
+public final strictfp class LinkedList<T> {
+	private ListElement<T> first = null;
+	private ListElement<T> last = null;
 	private int size = 0;
 
-	private boolean checkParent(ListElement elem) {
+	private boolean checkParent(ListElement<T> elem) {
 		if (elem.getListOwner() == null) {
 			elem.setListOwner(this);
 			return false;
@@ -16,7 +16,7 @@ public final strictfp class LinkedList {
 		return false;
 	}
 
-	public void addLast(ListElement elem) {
+	public void addLast(ListElement<T> elem) {
 		if (checkParent(elem)) return;
 		if (last == null) {
 			first = elem;
@@ -32,7 +32,7 @@ public final strictfp class LinkedList {
 		size++;
 	}
 
-	public void addFirst(ListElement elem) {
+	public void addFirst(ListElement<T> elem) {
 		if (checkParent(elem)) return;
 		if (last == null) {
 			first = elem;
@@ -48,7 +48,7 @@ public final strictfp class LinkedList {
 		size++;
 	}
 
-	public void remove(ListElement element) {
+	public void remove(ListElement<T> element) {
 		assert element.getListOwner() == this;
 		element.setListOwner(null);
 		if (last == element && first == element) {
@@ -67,7 +67,7 @@ public final strictfp class LinkedList {
 		size--;
 	}
 
-	public void insert(ListElement element, ListElement next_elem) {
+	public void insert(ListElement<T> element, ListElement<T> next_elem) {
 		if (next_elem == null) {
 			addLast(element);
 			return;
@@ -91,20 +91,20 @@ public final strictfp class LinkedList {
 		return size;
 	}
 
-	public ListElement getFirst() {
+	public ListElement<T> getFirst() {
 		return first;
 	}
 
-	public ListElement getLast() {
+	public ListElement<T> getLast() {
 		return last;
 	}
 
-	public void putLast(ListElement element) {
+	public void putLast(ListElement<T> element) {
 		remove(element);
 		addLast(element);
 	}
 
-	public void putFirst(ListElement element) {
+	public void putFirst(ListElement<T> element) {
 		remove(element);
 		addFirst(element);
 	}

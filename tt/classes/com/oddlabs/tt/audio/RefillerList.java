@@ -1,6 +1,7 @@
 package com.oddlabs.tt.audio;
 
 import com.oddlabs.tt.Main;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import org.lwjgl.openal.AL;
@@ -57,15 +58,17 @@ public final strictfp class RefillerList {
                 while (!finished) {
                     synchronized (RefillerList.this) {
                         if (AL.isCreated()) {
-                            for (QueuedAudioPlayer player: players) {
+                            for (QueuedAudioPlayer player: players) try {
                                 player.refill();
+                            } catch (IOException ioe) {
+                                System.err.println("Refill failed for " + player);
                             }
                         }
                         while (players.isEmpty() && !finished) try {
-                                RefillerList.this.wait();
-                            } catch (InterruptedException e) {
-                                Thread.interrupted();
-                            }
+                            RefillerList.this.wait();
+                        } catch (InterruptedException e) {
+                            Thread.interrupted();
+                        }
                     }
                     try {
                         Thread.sleep(THREAD_SLEEP_MILLIS);

@@ -3,10 +3,13 @@ package com.oddlabs.tt.gui;
 import com.oddlabs.tt.font.Font;
 import com.oddlabs.tt.guievent.CloseListener;
 import com.oddlabs.tt.guievent.MouseMotionListener;
+import java.util.Objects;
+import java.util.Set;
+import java.util.concurrent.CopyOnWriteArraySet;
 import org.lwjgl.input.Keyboard;
 
 public strictfp class Form extends Group {
-	private final java.util.List<CloseListener> close_listeners = new java.util.ArrayList<>();
+	private final Set<CloseListener> close_listeners = new CopyOnWriteArraySet<>();
 
 	private final String caption;
 
@@ -21,7 +24,7 @@ public strictfp class Form extends Group {
 		this(null);
 	}
 
-        @Override
+    @Override
 	public final void compileCanvas() {
 		int spacing = Skin.getSkin().getFormData().getObjectSpacing();
 		Box form;
@@ -79,24 +82,24 @@ public strictfp class Form extends Group {
 
 	}
 
-        @Override
+    @Override
 	protected final void mousePressed(int button, int x, int y) {
 		if (caption != null && y >= getHeight() - Skin.getSkin().getFormData().getForm().getTopOffset())
 			drag = true;
 	}
 
-        @Override
+    @Override
 	protected final void mouseReleased(int button, int x, int y) {
 		drag = false;
 	}
 
-        @Override
+    @Override
 	public final void mouseDragged(int button, int x, int y, int rel_x, int rel_y, int abs_x, int abs_y) {
 		if (drag)
 			setPos(getX() + rel_x, getY() + rel_y);
 	}
 
-        @Override
+    @Override
 	protected final void mouseScrolled(int amount) {
 	}
 
@@ -146,18 +149,14 @@ public strictfp class Form extends Group {
 
 	public final void closedAll() {
 		closed();
-		for (int i = 0; i < close_listeners.size(); i++) {
-			CloseListener listener = close_listeners.get(i);
-			if (listener != null)
-				listener.closed();
-		}
+        close_listeners.forEach(listener -> listener.closed());
 	}
 
 	protected void closed() {
 	}
 
 	public final void addCloseListener(CloseListener listener) {
-		close_listeners.add(listener);
+		close_listeners.add(Objects.requireNonNull(listener, "listener"));
 	}
 
 	public final void removeCloseListener(CloseListener listener) {

@@ -37,7 +37,7 @@ public abstract class Selectable extends Model implements Target, Animated, Mode
 		this.template = template;
 	}
 
-        @Override
+    @Override
 	public final float getShadowDiameter() {
 		return template.getShadowDiameter();
 	}
@@ -50,7 +50,7 @@ public abstract class Selectable extends Model implements Target, Animated, Mode
 		return template.getDefenseChance();
 	}
 
-        @Override
+    @Override
 	public final float getNoDetailSize() {
 		return template.getNoDetailSize();
 	}
@@ -95,7 +95,7 @@ public abstract class Selectable extends Model implements Target, Animated, Mode
 	public final Behaviour getCurrentBehaviour() {
 		return current_behaviour;
 	}
-	
+
 	public final UnitGrid getUnitGrid() {
 		return owner.getWorld().getUnitGrid();
 	}
@@ -121,7 +121,7 @@ public abstract class Selectable extends Model implements Target, Animated, Mode
 		assert dx != 0 || dy != 0: "occ = " + occ;
 		return unit_grid.getOccupant(grid_x + dx, grid_y + dy) == occ;
 	}
-	
+
 	public final boolean isCloseEnough(float max_dist, Target target) {
 		assert !isDead();
 		return isCloseEnough(getUnitGrid(), max_dist, getGridX(), getGridY(), target);

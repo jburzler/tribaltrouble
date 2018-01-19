@@ -58,13 +58,13 @@ public final strictfp class SonicBlast implements Magic {
 		unit_grid.scan(filter, UnitGrid.toGridCoordinate(src.getPositionX()), UnitGrid.toGridCoordinate(src.getPositionY()));
 		target_list = filter.getResult();
 
-		lur = owner.getWorld().getAudio().newAudio(new AudioParameters(owner.getWorld().getRacesResources().getBlastLurSound(owner.getWorld().getRandom()), start_x, start_y, start_z,
+		lur = owner.getWorld().getAudio().newAudio(new AudioParameters<>(owner.getWorld().getRacesResources().getBlastLurSound(owner.getWorld().getRandom()), start_x, start_y, start_z,
 				AudioPlayer.AUDIO_RANK_MAGIC,
 				AudioPlayer.AUDIO_DISTANCE_MAGIC,
 				AudioPlayer.AUDIO_GAIN_BLAST_LUR,
 				AudioPlayer.AUDIO_RADIUS_BLAST_LUR,
 				1f));
-		rumble = owner.getWorld().getAudio().newAudio(new AudioParameters(owner.getWorld().getRacesResources().getBlastRumbleSound(), start_x, start_y, start_z,
+		rumble = owner.getWorld().getAudio().newAudio(new AudioParameters<>(owner.getWorld().getRacesResources().getBlastRumbleSound(), start_x, start_y, start_z,
 				AudioPlayer.AUDIO_RANK_MAGIC,
 				AudioPlayer.AUDIO_DISTANCE_MAGIC,
 				AudioPlayer.AUDIO_GAIN_BLAST_RUMBLE,

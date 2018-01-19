@@ -4,13 +4,13 @@ import com.oddlabs.tt.util.BoundingBox;
 import com.oddlabs.util.LinkedList;
 import com.oddlabs.util.ListElement;
 
-public abstract strictfp class Element extends BoundingBox implements ListElement {
+public abstract strictfp class Element<T> extends BoundingBox implements ListElement<T> {
 	private final AbstractElementNode element_root;
 	private AbstractElementNode node_parent;
 
-	private LinkedList parent;
-	private ListElement next = null;
-	private ListElement prior = null;
+	private LinkedList<T> parent;
+	private ListElement<T> next = null;
+	private ListElement<T> prior = null;
 
 	private float render_pos_z;
 

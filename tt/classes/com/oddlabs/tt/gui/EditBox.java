@@ -25,7 +25,7 @@ public final strictfp class EditBox extends TextBox {
 			text_renderer.render(edit_box.getLeftOffset(), edit_box.getBottomOffset(), getOffsetY(), getText());
 	}
 
-        @Override
+    @Override
 	protected void keyRepeat(KeyboardEvent event) {
 		//char ch = event.getKeyChar();
 		Box edit_box = Skin.getSkin().getEditBox();
@@ -95,7 +95,7 @@ public final strictfp class EditBox extends TextBox {
 				} else {
 					super.keyRepeat(event);
 				}
-				
+
 				break;
 		}
 		correctOffsetY();

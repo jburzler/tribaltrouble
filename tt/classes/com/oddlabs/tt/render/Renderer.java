@@ -44,11 +44,11 @@ import com.oddlabs.tt.util.BackBufferRenderer;
 import com.oddlabs.tt.util.GLState;
 import com.oddlabs.tt.util.GLStateStack;
 import com.oddlabs.tt.util.GLUtils;
-import com.oddlabs.tt.util.LoggerOutputStream;
 import com.oddlabs.tt.util.StatCounter;
 import com.oddlabs.tt.util.StrictGLU;
 import com.oddlabs.tt.util.StrictMatrix4f;
 import com.oddlabs.tt.util.Target;
+import com.oddlabs.tt.util.TeeOutputStream;
 import com.oddlabs.tt.util.Utils;
 import com.oddlabs.tt.vbo.VBO;
 import com.oddlabs.tt.viewer.AmbientAudio;
@@ -56,12 +56,14 @@ import com.oddlabs.tt.viewer.Cheat;
 import com.oddlabs.tt.viewer.Selection;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.prefs.Preferences;
@@ -118,7 +120,7 @@ public final strictfp class Renderer {
 		}
 	}
 
-	public static void runGame(String[] args) {
+	public static void runGame(String[] args) throws IOException {
 		renderer_instance.run(args);
 	}
 
@@ -185,77 +187,82 @@ public final strictfp class Renderer {
 		return finished;
 	}
 
-	private static void deleteLog(File log) {
-            for (String LOG_FILES : com.oddlabs.util.Utils.LOG_FILES) {
-                File log_file = new File(log, LOG_FILES);
-                log_file.delete();
+	private static void deleteLog(Path log) throws IOException {
+            for (Path LOG_FILES : com.oddlabs.util.Utils.LOG_FILES) {
+                Path log_file = log.resolve(LOG_FILES);
+                Files.deleteIfExists(log_file);
             }
-		log.delete();
+		Files.deleteIfExists(log);
 	}
 
 	private static void deleteOldLogs(File last_log_dir, File new_log_dir, File logs_dir) {
 		File[] logs = logs_dir.listFiles();
 		if (logs == null)
 			return;
-            for (File log : logs) {
+            for (File log : logs) try {
                 if (!log.isDirectory() || log.equals(last_log_dir) || log.equals(new_log_dir))
                     continue;
-                deleteLog(log);
+                deleteLog(log.toPath());
+            } catch (IOException ignored) {
+
             }
 	}
 
-	private void run(String[] args) {
+	private void run(String[] args) throws IOException {
 		long start_time = System.currentTimeMillis();
 		boolean first_frame = true;
 		System.out.println("********** Running tt **********");
 		System.out.flush();
-		String platform_dir;
+		String platform_dir_name;
 		switch (LWJGLUtil.getPlatform()) {
 			case LWJGLUtil.PLATFORM_MACOSX:
-				platform_dir = "Library/Application Support" + File.separator;
+				platform_dir_name = "Library/Application Support" + File.separator;
 				break;
 			case LWJGLUtil.PLATFORM_LINUX:
-				platform_dir = ".";
+				platform_dir_name = ".";
 				break;
 			case LWJGLUtil.PLATFORM_WINDOWS:
 			default:
-				platform_dir = "";
+				platform_dir_name = "";
 				break;
 		}
-		String game_dir_path = System.getProperty("user.home") + File.separator + platform_dir + Globals.GAME_NAME;
-		File game_dir = new File(game_dir_path);
+        Path homeDir = Paths.get(System.getProperty("user.home"));
+        if (!Files.isDirectory(homeDir)) {
+            homeDir = Files.createTempDirectory(Globals.GAME_NAME);
+        }
+		Path game_dir = homeDir.resolve(platform_dir_name + Globals.GAME_NAME);
+        Files.createDirectories(game_dir);
 		boolean eventload = false;
 		boolean zipped = false;
 		boolean silent = false;
 		Settings settings = new Settings();
 		if (args != null) {
 			for (int i = 0; i < args.length; i++) {
-                            switch (args[i]) {
-                                case "--grabframes":
-                                    grab_frames = true;
-                                    break;
-                                case "--eventload":
-                                    eventload = true;
-                                    i++;
-                                    switch (args[i]) {
-                                        case "zipped":
-                                            zipped = true;
-                                            break;
-                                        case "normal":
-                                            break;
-                                        default:
-                                            throw new RuntimeException("Unknown event load mode: " + args[i]);
-                                    }
-                                    break;
-                                case "--silent":
-                                    silent = true;
-                                    break;
-                                default:
-                                    throw new RuntimeException("Unknown command line flag: " + args[i]);
-                            }
+                switch (args[i]) {
+                    case "--grabframes":
+                        grab_frames = true;
+                        break;
+                    case "--eventload":
+                        eventload = true;
+                        i++;
+                        switch (args[i]) {
+                            case "zipped":
+                                zipped = true;
+                                break;
+                            case "normal":
+                                break;
+                            default:
+                                throw new RuntimeException("Unknown event load mode: " + args[i]);
+                        }
+                        break;
+                    case "--silent":
+                        silent = true;
+                        break;
+                    default:
+                        throw new RuntimeException("Unknown command line flag: " + args[i]);
+                }
 			}
 		}
-		game_dir.mkdirs();
 
 		// fetch initial settings
 		settings.load(game_dir);
@@ -271,21 +278,21 @@ System.out.println("last_event_log_path = " + last_event_log_path);
 		}
 
 
-		File event_logs_dir = new File(game_dir, "logs");
-		File event_log_dir = new File(event_logs_dir, Long.toString(System.currentTimeMillis()));
+		Path event_logs_dir = game_dir.resolve("logs");
+		Path event_log_dir = event_logs_dir.resolve(Long.toString(System.currentTimeMillis()));
 		if (LocalEventQueue.getQueue().getDeterministic() == null && settings.save_event_log) {
-			event_log_dir.mkdirs();
+			Files.createDirectories(event_log_dir);
 			System.out.println("Writing log files in " + event_log_dir);
 			LocalEventQueue.getQueue().setEventsLogged(new File(event_log_dir + File.separator + com.oddlabs.util.Utils.EVENT_LOG));
 
 			try {
-				OutputStream std_err_file = new FileOutputStream(new File(event_log_dir, com.oddlabs.util.Utils.STD_ERR));
-				OutputStream std_out_file = new FileOutputStream(new File(event_log_dir, com.oddlabs.util.Utils.STD_OUT));
+				OutputStream std_err_file = Files.newOutputStream(event_log_dir.resolve(com.oddlabs.util.Utils.STD_ERR));
+				OutputStream std_out_file = Files.newOutputStream(event_log_dir.resolve(com.oddlabs.util.Utils.STD_OUT));
 				OutputStream new_err;
 				OutputStream new_out;
 				if (!silent) {
-					new_err = new LoggerOutputStream(new OutputStream[]{System.err, std_err_file});
-					new_out = new LoggerOutputStream(new OutputStream[]{System.out, std_out_file});
+					new_err = new TeeOutputStream(System.err, std_err_file);
+					new_out = new TeeOutputStream(System.out, std_out_file);
 				} else {
 					new_err = std_err_file;
 					new_out = std_out_file;
@@ -297,8 +304,8 @@ System.out.println("last_event_log_path = " + last_event_log_path);
 			}
 		}
 		Deterministic deterministic = LocalEventQueue.getQueue().getDeterministic();
-		game_dir = (File)deterministic.log(game_dir);
-		event_log_dir = (File)deterministic.log(event_log_dir);
+		game_dir = deterministic.log(game_dir);
+		event_log_dir = deterministic.log(event_log_dir);
 		settings = (Settings)deterministic.log(settings);
 		String default_language = (String)deterministic.log(Locale.getDefault().getLanguage());
 		String language = settings.language;
@@ -308,7 +315,7 @@ System.out.println("last_event_log_path = " + last_event_log_path);
 			language = "en";
 		Locale.setDefault(new Locale(language));
 		Settings.setSettings(settings);
-		File last_event_log_dir = new File(settings.last_event_log_dir);
+		Path last_event_log_dir = Paths.get(settings.last_event_log_dir);
 		boolean crashed = settings.crashed;
 		NetworkSelector network = new NetworkSelector(LocalEventQueue.getQueue().getDeterministic(), LocalEventQueue.getQueue()::getMillis);
                 initNetwork(network);
@@ -321,7 +328,7 @@ System.out.println("last_event_log_path = " + last_event_log_path);
 		}
 		TaskThread task_thread = network.getTaskThread();
 		if (!settings.inDeveloperMode() && !deterministic.isPlayback())
-			deleteOldLogs(last_event_log_dir, event_log_dir, event_logs_dir);
+			deleteOldLogs(last_event_log_dir.toFile(), event_log_dir.toFile(), event_logs_dir.toFile());
 		Skin.load();
 		GUI gui = new GUI();
 
@@ -659,7 +666,7 @@ System.out.println("use_texture_compression = " + Settings.getSettings().useText
 	}
 
 	private static void initMusicPlayer() {
-		music = AudioManager.getManager().newAudio(new AudioParameters(music_path, 0f, 0f, 0f, AudioPlayer.AUDIO_RANK_MUSIC, AudioPlayer.AUDIO_DISTANCE_MUSIC, Settings.getSettings().music_gain, 1f, 1f, true, true, true));
+		music = AudioManager.getManager().newAudio(new AudioParameters<>(music_path, 0f, 0f, 0f, AudioPlayer.AUDIO_RANK_MUSIC, AudioPlayer.AUDIO_DISTANCE_MUSIC, Settings.getSettings().music_gain, 1f, 1f, true, true, true));
 	}
 
 	public static void setMusicPath(String music_path, float delay) {

@@ -67,7 +67,10 @@ public final strictfp class RacesResources {
 	public final static ResourceDescriptor DEFAULT_SHADOW_DESC = new GeneratorHalos(128, new float[][]{{0f, 0.75f}, {0.5f, 0f}}, new float[][]{{0.40f, 0f}, {0.41f, 1f}, {0.48f, 1f}, {0.49f, 0f}});
 
 	private final static ResourceBundle bundle = ResourceBundle.getBundle(RacesResources.class.getName());
-	private final static String[] race_names = new String[]{Utils.getBundleString(bundle, "natives"), Utils.getBundleString(bundle, "vikings")};
+	private final static String[] race_names = new String[]{
+            Utils.getBundleString(bundle, "natives"),
+            Utils.getBundleString(bundle, "vikings")
+    };
 	private final static int MAX_UNIT_RESOURCES = 1;
 
 	private final TextureKey[] smoke_textures = new TextureKey[1];

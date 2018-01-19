@@ -1,6 +1,8 @@
 package com.oddlabs.event;
 
 import java.nio.*;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public abstract strictfp class Deterministic {
 	protected final static int BUFFER_SIZE = 4096;
@@ -8,7 +10,7 @@ public abstract strictfp class Deterministic {
 	protected final static int MIN_DEFAULTS = Short.MIN_VALUE;
 
 	private final static long CHECKPOINT_SIGNATURE = 0xdeadbabecafebeefL;
-	
+
 	private boolean enabled = true;
 
 	public final boolean log(boolean b) {
@@ -19,26 +21,26 @@ public abstract strictfp class Deterministic {
 		assert enabled;
 		return log(b ? (byte)1 : (byte)0, def ? (byte)1 : (byte)0) != 0;
 	}
-	
+
 	public final byte log(byte b) {
 		assert enabled;
 		return log(b, (byte)0);
 	}
-	
+
 	protected abstract byte log(byte b, byte def);
 
 	public final char log(char c) {
 		assert enabled;
 		return log(c, (char)0);
 	}
-	
+
 	protected abstract char log(char c, char def);
 
 	public final int log(int i) {
 		assert enabled;
 		return log(i, 0);
 	}
-	
+
 	protected abstract int log(int i, int def);
 
 	public final long log(long l) {
@@ -54,13 +56,20 @@ public abstract strictfp class Deterministic {
 	}
 
 	protected abstract float log(float f, float def);
-	
-	public final Object log(Object o) {
+
+    protected abstract Path log(Path p, Path def);
+
+    public final Path log(Path p) {
+        assert enabled;
+        return log(p, Paths.get(""));
+    }
+
+	public final <T> T log(T o) {
 		assert enabled;
 		return logObject(o);
 	}
 
-	protected abstract Object logObject(Object o);
+	protected abstract <T> T logObject(T o);
 
 	public final void log(ByteBuffer o) {
 		assert enabled;

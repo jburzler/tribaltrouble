@@ -1,20 +1,20 @@
 package com.oddlabs.util;
 
-public final strictfp class HashEntry extends ListElementImpl {
-	private Object hash_entry;
+public final strictfp class HashEntry<T> extends ListElementImpl<T> {
+	private T hash_entry;
 	private final int key;
 
-	public HashEntry(int key, Object entry) {
+	public HashEntry(int key, T entry) {
 		this.key = key;
 		this.hash_entry = entry;
 	}
 
-	public Object getEntry() {
+	public T getEntry() {
 		return hash_entry;
 	}
 
-	public Object setEntry(Object entry) {
-		Object old = hash_entry;
+	public T setEntry(T entry) {
+		T old = hash_entry;
 		hash_entry = entry;
 		return old;
 	}

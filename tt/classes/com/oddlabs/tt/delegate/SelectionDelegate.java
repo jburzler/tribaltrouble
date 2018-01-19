@@ -4,7 +4,6 @@ import com.oddlabs.tt.camera.GameCamera;
 import com.oddlabs.tt.camera.MapCamera;
 import com.oddlabs.tt.form.InGameChatForm;
 import com.oddlabs.tt.gui.*;
-import com.oddlabs.tt.guievent.CloseListener;
 import com.oddlabs.tt.model.Abilities;
 import com.oddlabs.tt.model.Army;
 import com.oddlabs.tt.model.Building;
@@ -48,7 +47,12 @@ public final strictfp class SelectionDelegate extends ControllableCameraDelegate
 		displayChangedNotify(LocalInput.getViewWidth(), LocalInput.getViewHeight());
 		addChild(getViewer().getPanel());
 		chat_form = new InGameChatForm(getViewer().getGUIRoot().getInfoPrinter(), getViewer());
-		chat_form.addCloseListener(new ChatCloseListener());
+		chat_form.addCloseListener(() -> {
+			if (LocalInput.isKeyDown(Keyboard.KEY_RETURN)) {
+				close_chat_override = true;
+			}
+			chat_visible = false;
+		});
 		chat_visible = false;
 		((GameCamera)getCamera()).setOwner(this);
 	}
@@ -448,15 +452,5 @@ public final strictfp class SelectionDelegate extends ControllableCameraDelegate
 	public void displayChangedNotify(int width, int height) {
 		super.displayChangedNotify(width, height);
 		observer_label.setPos((width - observer_label.getWidth())/2, height - observer_label.getHeight());
-	}
-
-	private strictfp final class ChatCloseListener implements CloseListener {
-                @Override
-		public void closed() {
-			if (LocalInput.isKeyDown(Keyboard.KEY_RETURN)) {
-				close_chat_override = true;
-			}
-			chat_visible = false;
-		}
 	}
 }

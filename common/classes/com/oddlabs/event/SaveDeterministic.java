@@ -3,10 +3,11 @@ package com.oddlabs.event;
 import java.io.*;
 import java.nio.*;
 import java.nio.channels.*;
+import java.nio.file.Path;
 
 public final strictfp class SaveDeterministic extends Deterministic {
 	private final static short MAX_DEFAULTS = Short.MAX_VALUE;
-	
+
 	private final ByteChannel channel;
 	private final ByteBuffer buffer;
 
@@ -53,7 +54,7 @@ public final strictfp class SaveDeterministic extends Deterministic {
 			throw new RuntimeException(e);
 		}
 	}
-	
+
 	private boolean startLog(int num_bytes, boolean def) {
 		if (def && num_defaults < MAX_DEFAULTS) {
 			num_defaults++;
@@ -104,7 +105,7 @@ public final strictfp class SaveDeterministic extends Deterministic {
 			buffer.putFloat(f);
 		return f;
 	}
-	
+
         @Override
 	protected Object logObject(Object o) {
 		try (ObjectOutputStream object_output_stream = new ObjectOutputStream(byte_buffer_output_stream)) {
@@ -114,7 +115,16 @@ public final strictfp class SaveDeterministic extends Deterministic {
 		}
                 return o;
 	}
-	
+
+    protected Path log(Path p, Path def) {
+        try {
+            logObject(p.toUri());
+            return p;
+        } catch(Throwable all) {
+            return def;
+        }
+    }
+
         @Override
 	protected void logBuffer(ByteBuffer b) {
 		if (startLog(0, false)) {
@@ -135,5 +145,5 @@ public final strictfp class SaveDeterministic extends Deterministic {
 		public void write(int b) throws IOException {
 			log((byte)b);
 		}
-	}   
+	}
 }

@@ -68,7 +68,7 @@ public final strictfp class LightningCloud implements Magic {
 				GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA, world.getRacesResources().getSmokeTextures(),
 				world.getAnimationManagerGameTime());
 
-		bubbling_sound = world.getAudio().newAudio(new AudioParameters(world.getRacesResources().getBubblingSound(), position.getX(), position.getY(), world.getHeightMap().getNearestHeight(position.getX(), position.getY()),
+		bubbling_sound = world.getAudio().newAudio(new AudioParameters<>(world.getRacesResources().getBubblingSound(), position.getX(), position.getY(), world.getHeightMap().getNearestHeight(position.getX(), position.getY()),
 				AudioPlayer.AUDIO_RANK_MAGIC,
 				AudioPlayer.AUDIO_DISTANCE_MAGIC,
 				AudioPlayer.AUDIO_GAIN_BUBBLING,
@@ -79,7 +79,7 @@ public final strictfp class LightningCloud implements Magic {
         @Override
 	public void animate(float t) {
 		if (first_run) {
-			cloud_sound = owner.getWorld().getAudio().newAudio(new AudioParameters(owner.getWorld().getRacesResources().getCloudSound(), position.getX(), position.getY(), position.getZ(),
+			cloud_sound = owner.getWorld().getAudio().newAudio(new AudioParameters<>(owner.getWorld().getRacesResources().getCloudSound(), position.getX(), position.getY(), position.getZ(),
 					AudioPlayer.AUDIO_RANK_MAGIC,
 					AudioPlayer.AUDIO_DISTANCE_MAGIC,
 					AudioPlayer.AUDIO_GAIN_CLOUD,
@@ -125,7 +125,7 @@ public final strictfp class LightningCloud implements Magic {
 				float x = target.getPositionX();
 				float y = target.getPositionY();
 				float z = owner.getWorld().getHeightMap().getNearestHeight(x, y);
-				owner.getWorld().getAudio().newAudio(new AudioParameters(owner.getWorld().getRacesResources().getLightningSound(), x, y, z,
+				owner.getWorld().getAudio().newAudio(new AudioParameters<>(owner.getWorld().getRacesResources().getLightningSound(), x, y, z,
 						AudioPlayer.AUDIO_RANK_MAGIC,
 						AudioPlayer.AUDIO_DISTANCE_MAGIC,
 						AudioPlayer.AUDIO_GAIN_LIGHTNING,

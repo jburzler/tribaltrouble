@@ -3,15 +3,16 @@ package com.oddlabs.tt.global;
 import com.oddlabs.tt.event.LocalEventQueue;
 import com.oddlabs.tt.gui.LocalInput;
 import com.oddlabs.tt.util.GLUtils;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
+import java.net.URI;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Properties;
 import org.lwjgl.LWJGLUtil;
 import org.lwjgl.opengl.GLContext;
@@ -23,7 +24,7 @@ public final strictfp class Settings implements Serializable {
 	private static Settings settings;
 
 	// event logging
-	public String last_event_log_dir = "";
+	public URI last_event_log_dir = Paths.get("").toUri();
 	public int last_revision = -1;
 	public boolean crashed = false;
 
@@ -133,50 +134,53 @@ public final strictfp class Settings implements Serializable {
 		Settings original_settings = new Settings();
 		Properties props = new Properties();
 		Field[] pref_fields = Settings.class.getDeclaredFields();
-            for (Field field : pref_fields) {
-                int mods = field.getModifiers();
-                if (!hasValidModifiers(mods))
-                    continue;
-                assert !Modifier.isStatic(mods);
-                Class<?> field_type = field.getType();
-                try {
-                    if (field_type.equals(boolean.class)) {
-                        boolean field_value = field.getBoolean(this);
-                        if (field_value != field.getBoolean(original_settings))
-                            props.setProperty(field.getName(), ""+field_value);
-                    } else if (field_type.equals(int.class)) {
-                        int field_value = field.getInt(this);
-                        if (field_value != field.getInt(original_settings))
-                            props.setProperty(field.getName(), ""+field_value);
-                    } else if (field_type.equals(float.class)) {
-                        float field_value = field.getFloat(this);
-                        if (field_value != field.getFloat(original_settings))
-                            props.setProperty(field.getName(), ""+field_value);
-                    } else if (field_type.equals(String.class)) {
-                        String field_value = (String)field.get(this);
-                        if (!field_value.equals(field.get(original_settings)))
-                            props.setProperty(field.getName(), ""+field_value);
-                    } else
-                        throw new RuntimeException("Unsupported Settings type " + field_type);
-                } catch (IllegalAccessException e) {
-                    throw new RuntimeException(e);
-                }
+        for (Field field : pref_fields) {
+            int mods = field.getModifiers();
+            if (!hasValidModifiers(mods))
+                continue;
+            assert !Modifier.isStatic(mods);
+            Class<?> field_type = field.getType();
+            try {
+                if (field_type.equals(boolean.class)) {
+                    boolean field_value = field.getBoolean(this);
+                    if (field_value != field.getBoolean(original_settings))
+                        props.setProperty(field.getName(), ""+field_value);
+                } else if (field_type.equals(int.class)) {
+                    int field_value = field.getInt(this);
+                    if (field_value != field.getInt(original_settings))
+                        props.setProperty(field.getName(), ""+field_value);
+                } else if (field_type.equals(float.class)) {
+                    float field_value = field.getFloat(this);
+                    if (field_value != field.getFloat(original_settings))
+                        props.setProperty(field.getName(), ""+field_value);
+                } else if (field_type.equals(String.class)) {
+                    String field_value = (String)field.get(this);
+                    if (!field_value.equals(field.get(original_settings)))
+                        props.setProperty(field.getName(), ""+field_value);
+                } else if (field_type.equals(URI.class)) {
+                    URI field_value = (URI)field.get(this);
+                    if (!field_value.equals(field.get(original_settings)))
+                        props.setProperty(field.getName(), ""+field_value);
+                } else
+                    throw new RuntimeException("Unsupported Settings type " + field_type);
+            } catch (IllegalAccessException e) {
+                throw new RuntimeException(e);
             }
-		File settings_file = new File(LocalInput.getGameDir(), Globals.SETTINGS_FILE_NAME);
-		try {
-			OutputStream out = new FileOutputStream(settings_file);
+        }
+		Path settings_file = LocalInput.getGameDir().resolve(Globals.SETTINGS_FILE_NAME);
+		try (OutputStream out = Files.newOutputStream(settings_file)) {
 			props.store(out, "comment");
 		} catch (IOException e) {
 			System.err.println("Failed to write settings to " + settings_file + " exception: " + e);
 		}
 	}
 
-	public void load(File game_dir) {
+	public void load(Path game_dir) {
 		Field[] pref_fields = getClass().getDeclaredFields();
 		Properties props = new Properties();
-		File settings_file = new File(game_dir, Globals.SETTINGS_FILE_NAME);
+		Path settings_file = game_dir.resolve(Globals.SETTINGS_FILE_NAME);
 		try {
-			InputStream in = new FileInputStream(settings_file);
+			InputStream in = Files.newInputStream(settings_file);
 			props.load(in);
 		} catch (IOException e) {
 			System.err.println("Could not read settings from " + settings_file);
