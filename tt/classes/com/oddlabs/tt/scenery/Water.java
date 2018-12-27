@@ -17,8 +17,8 @@ public final strictfp class Water {
     private final Texture[] ocean;
 
     public Water(HeightMap heightmap, int terrain_type) {
-        ResourceDescriptor ocean_desc = new GeneratorOcean(terrain_type);
-        ocean = ((Texture[]) Resources.findResource(ocean_desc));
+        TextureGenerator ocean_desc = new GeneratorOcean(terrain_type);
+        ocean = Resources.findResource(ocean_desc);
         patch_vertices = makePatchVertices(heightmap);
     }
 

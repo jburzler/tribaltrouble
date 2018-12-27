@@ -28,7 +28,7 @@ public final strictfp class NativeIsland4 extends Island {
 	private final CounterLabel counter = new CounterLabel(minutes*60f, Skin.getSkin().getHeadlineFont(), true);
 
 	private boolean alive;
-	
+
 	public NativeIsland4(Campaign campaign) {
 		super(campaign);
 	}
@@ -318,6 +318,6 @@ public final strictfp class NativeIsland4 extends Island {
 
         @Override
 	public CharSequence getCurrentObjective() {
-		return Utils.getBundleString(bundle, "objective", new Object[]{minutes});
+		return Utils.getBundleString(bundle, "objective", minutes);
 	}
 }

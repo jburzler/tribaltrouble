@@ -11,6 +11,9 @@ import com.oddlabs.tt.util.StateChecksum;
 import com.oddlabs.tt.util.StrictGLU;
 import com.oddlabs.tt.util.StrictMatrix4f;
 
+/**
+ * The View
+ */
 public abstract strictfp class Camera implements Animated {
     private final static float LANDSCAPE_OFFSET = 5f;
     private final static float SMOOTHNESS_FACTOR = 15;

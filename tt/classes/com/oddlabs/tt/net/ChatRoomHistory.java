@@ -16,26 +16,26 @@ public final strictfp class ChatRoomHistory extends ChatHistory {
 	void update(ChatRoomUser[] new_users) {
 		if (old_users == null)
 			return;
-		Set new_users_set = new HashSet(Arrays.asList(new_users));
-		Set old_users_set = new HashSet(Arrays.asList(old_users));
-		Set joined_users = new HashSet(new_users_set);
+		Set<ChatRoomUser> new_users_set = new HashSet<>(Arrays.asList(new_users));
+		Set<ChatRoomUser> old_users_set = new HashSet<>(Arrays.asList(old_users));
+		Set<ChatRoomUser> joined_users = new HashSet<>(new_users_set);
 		joined_users.removeAll(old_users_set);
-		Iterator it = joined_users.iterator();
+		Iterator<ChatRoomUser> it = joined_users.iterator();
 		ResourceBundle bundle = ResourceBundle.getBundle(ChatPanel.class.getName());
 		while (it.hasNext()) {
-			ChatRoomUser user = (ChatRoomUser)it.next();
-			addMessage(Utils.getBundleString(bundle, "user_joined", new Object[]{user.getNick()}));
+			ChatRoomUser user = it.next();
+			addMessage(Utils.getBundleString(bundle, "user_joined", user.getNick()));
 		}
-		Set left_users = new HashSet(old_users_set);
+		Set<ChatRoomUser> left_users = new HashSet(old_users_set);
 		left_users.removeAll(new_users_set);
 		it = left_users.iterator();
 		while (it.hasNext()) {
-			ChatRoomUser user = (ChatRoomUser)it.next();
-			addMessage(Utils.getBundleString(bundle, "user_left", new Object[]{user.getNick()}));
+			ChatRoomUser user = it.next();
+			addMessage(Utils.getBundleString(bundle, "user_left", user.getNick()));
 		}
 	}
 
-        @Override
+    @Override
 	public void chat(ChatMessage message) {
 		if (message.type != ChatMessage.CHAT_PRIVATE && message.type != ChatMessage.CHAT_CHATROOM)
 			return;

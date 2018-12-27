@@ -164,7 +164,7 @@ public final strictfp class CampaignMapForm extends CameraDelegate {
 		public IslandClickListener(int number) {
 			this.number = number;
 		}
-		
+
                 @Override
 		public void mouseClicked(int button, int x, int y, int clicks) {
 			campaign.islandChosen(network, getGUIRoot(), number);

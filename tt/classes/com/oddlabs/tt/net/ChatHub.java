@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public final strictfp class ChatHub implements ChatListener {
-	private final List listeners = new ArrayList();
+	private final List<ChatListener> listeners = new ArrayList<>();
 
 	public void addListener(ChatListener listener) {
 		if (!listeners.contains(listener)) {
@@ -16,13 +16,10 @@ public final strictfp class ChatHub implements ChatListener {
 		listeners.remove(listener);
 	}
 
-        @Override
+    @Override
 	public void chat(ChatMessage message) {
 		if (!ChatCommand.isIgnoring(message.nick)) {
-			for (int i = 0; i < listeners.size(); i++) {
-				ChatListener listener = (ChatListener)listeners.get(i);
-				listener.chat(message);
-			}
+			listeners.forEach(listener -> listener.chat(message));
 		}
 	}
 }

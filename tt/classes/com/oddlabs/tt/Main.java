@@ -18,7 +18,7 @@ public final strictfp class Main {
 				t = t.getCause();
 			ResourceBundle bundle = ResourceBundle.getBundle(Main.class.getName());
 			String error = Utils.getBundleString(bundle, "error");
-			String error_msg = Utils.getBundleString(bundle, "error_message", new Object[]{t.toString()});
+			String error_msg = Utils.getBundleString(bundle, "error_message", t.toString());
 			Sys.alert(error, error_msg);
 		} finally {
 			shutdown();

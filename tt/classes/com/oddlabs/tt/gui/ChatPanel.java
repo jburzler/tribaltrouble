@@ -11,7 +11,7 @@ public strictfp class ChatPanel extends Panel implements ChatListener {
 	private final static int PULLDOWN_INDEX_MESSAGE = 0;
 	private final static int PULLDOWN_INDEX_INFO = 1;
 	private final static int PULLDOWN_INDEX_IGNORE = 2;
-	
+
 	private final MultiColumnComboBox lobby_users_list_box;
 	private final MultiColumnComboBox playing_users_list_box;
 	private final TextBox chat_box;
@@ -21,7 +21,7 @@ public strictfp class ChatPanel extends Panel implements ChatListener {
 	private final GUIRoot gui_root;
 
 	private final int user_list_width;
-	
+
 	private PrivateMessageForm private_message_form;
 
 	private static ResourceBundle getBundle() {
@@ -51,29 +51,29 @@ public strictfp class ChatPanel extends Panel implements ChatListener {
 			new ColumnInfo(getI18N("lobby"), user_list_width)};
 		lobby_users_list_box = new MultiColumnComboBox(gui_root, lobby_infos, user_list_height, true);
 		addChild(lobby_users_list_box);
-		
+
 		ColumnInfo[] playing_infos = new ColumnInfo[]{
 			new ColumnInfo(getI18N("playing"), user_list_width)};
 		playing_users_list_box = new MultiColumnComboBox(gui_root, playing_infos, user_list_height, true);
 		addChild(playing_users_list_box);
-		
+
 		PulldownMenu lobby_pulldown_menu = new PulldownMenu();
 		lobby_pulldown_menu.addItem(new PulldownItem(getI18N("message")));
-		lobby_pulldown_menu.addItem(new PulldownItem(getI18N("info"))); 
-		lobby_pulldown_menu.addItem(new PulldownItem("")); 
+		lobby_pulldown_menu.addItem(new PulldownItem(getI18N("info")));
+		lobby_pulldown_menu.addItem(new PulldownItem(""));
 		lobby_pulldown_menu.addItemChosenListener(new PulldownListener(lobby_users_list_box));
 		lobby_users_list_box.setPulldownMenu(lobby_pulldown_menu);
-		
+
 		ChatRoomUserDoubleClickedListener lobby_double_clicked = new ChatRoomUserDoubleClickedListener(lobby_pulldown_menu);
 		lobby_users_list_box.addRowListener(lobby_double_clicked);
 
 		PulldownMenu playing_pulldown_menu = new PulldownMenu();
 		playing_pulldown_menu.addItem(new PulldownItem(getI18N("message")));
-		playing_pulldown_menu.addItem(new PulldownItem(getI18N("info"))); 
-		playing_pulldown_menu.addItem(new PulldownItem("")); 
+		playing_pulldown_menu.addItem(new PulldownItem(getI18N("info")));
+		playing_pulldown_menu.addItem(new PulldownItem(""));
 		playing_pulldown_menu.addItemChosenListener(new PulldownListener(playing_users_list_box));
 		playing_users_list_box.setPulldownMenu(playing_pulldown_menu);
-		
+
 		ChatRoomUserDoubleClickedListener playing_double_clicked = new ChatRoomUserDoubleClickedListener(playing_pulldown_menu);
 		playing_users_list_box.addRowListener(playing_double_clicked);
 
@@ -84,11 +84,11 @@ public strictfp class ChatPanel extends Panel implements ChatListener {
 		chat_line = new EditLine(width, 256);
 		addChild(chat_line);
 		chat_line.addEnterListener(chat_listener);
-		chat_line.addEnterListener(new ClearListener());
+		chat_line.addEnterListener(text -> { chat_line.clear(); });
 
 		button_send = new HorizButton(getI18N("send"), button_width);
 		addChild(button_send);
-		button_send.addMouseClickListener(new SendListener());
+		button_send.addMouseClickListener((b,x,y,c) -> { chat_line.enterPressedAll(); });
 
 		button_leave = new HorizButton(getI18N("leave"), button_width);
 		addChild(button_leave);
@@ -136,12 +136,12 @@ public strictfp class ChatPanel extends Panel implements ChatListener {
 	}
 
 	private void refreshMessages() {
-		List messages = Network.getMatchmakingClient().getChatRoomHistory();
+		List<String> messages = Network.getMatchmakingClient().getChatRoomHistory();
 		chat_box.clear();
 		for (int i = 0; i < messages.size(); i++) {
 			if (i != 0)
 				chat_box.append("\n");
-			chat_box.append((String)messages.get(i));
+			chat_box.append(messages.get(i));
 		}
 		chat_box.setOffsetY(Integer.MAX_VALUE);
 	}
@@ -156,27 +156,13 @@ public strictfp class ChatPanel extends Panel implements ChatListener {
 			private_message_form.remove();
 	}
 
-	private strictfp final class SendListener implements MouseClickListener {
-                @Override
-		public void mouseClicked(int button, int x, int y, int clicks) {
-			chat_line.enterPressedAll();
-		}
-	}
-
-	private strictfp final class ClearListener implements EnterListener {
-                @Override
-		public void enterPressed(CharSequence text) {
-			chat_line.clear();
-		}
-	}
-
 	private final strictfp class PulldownListener implements ItemChosenListener {
 		private final MultiColumnComboBox box;
 
 		public PulldownListener(MultiColumnComboBox box) {
 			this.box = box;
 		}
-		
+
                 @Override
 		public void itemChosen(PulldownMenu menu, int item_index) {
 			ChatRoomUser user = (ChatRoomUser)box.getRightClickedRowData();
@@ -207,7 +193,7 @@ public strictfp class ChatPanel extends Panel implements ChatListener {
 		public ChatRoomUserDoubleClickedListener(PulldownMenu menu) {
 			this.menu = menu;
 		}
-		
+
                 @Override
 		public void rowDoubleClicked(Object context) {
 			ChatRoomUser user = (ChatRoomUser)context;

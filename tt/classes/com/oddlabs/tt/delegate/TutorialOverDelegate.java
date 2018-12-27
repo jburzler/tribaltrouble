@@ -25,7 +25,7 @@ public final strictfp class TutorialOverDelegate extends CameraDelegate implemen
 		this.tutorial_info = tutorial_info;
 		ResourceBundle bundle = ResourceBundle.getBundle(TutorialOverDelegate.class.getName());
 		setDim(LocalInput.getViewWidth(), LocalInput.getViewHeight());
-		String tutorial_completed_str = Utils.getBundleString(bundle, "tutorial_completed", new Object[]{tutorial_number});
+		String tutorial_completed_str = Utils.getBundleString(bundle, "tutorial_completed", tutorial_number);
 		Label label = new Label(tutorial_completed_str, Skin.getSkin().getHeadlineFont());
 		addChild(label);
 		label.setPos((getWidth() - label.getWidth())/2, (getHeight() - label.getHeight())*2/3);
@@ -48,7 +48,7 @@ public final strictfp class TutorialOverDelegate extends CameraDelegate implemen
 
 		button_end.place();
 		button_restart.place(button_end, LEFT_MID);
-		
+
 		if (tutorial_number < TutorialForm.NUM_TUTORIALS)
 			button_next.place(button_restart, LEFT_MID);
 		group_buttons.compileCanvas();
@@ -67,19 +67,19 @@ public final strictfp class TutorialOverDelegate extends CameraDelegate implemen
 		addChild(group_buttons);
 		delay_timer.stop();
 	}
-	
+
 	private final strictfp class StartTutorialListener implements MouseClickListener {
 		private final int tutorial_number;
-		
+
 		public StartTutorialListener(int tutorial_number) {
 			this.tutorial_number = tutorial_number;
 		}
-		
+
                 @Override
 		public void mouseClicked(int button, int x, int y, int clicks) {
 			if (tutorial_info.setNextTutorial(viewer.getGUIRoot(), tutorial_number))
 				viewer.close();
 		}
 	}
-	
+
 }

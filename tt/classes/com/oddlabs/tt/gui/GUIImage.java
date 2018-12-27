@@ -13,7 +13,7 @@ public final strictfp class GUIImage extends GUIObject {
 	private final Texture texture;
 
 	public GUIImage(int width, int height, float u1, float v1, float u2, float v2, String texture_name) {
-		this(width, height, u1, v1, u2, v2, (Texture)Resources.findResource(new TextureFile(texture_name, GL11.GL_RGBA, GL11.GL_LINEAR, GL11.GL_LINEAR, GL11.GL_REPEAT, GL11.GL_REPEAT)));
+		this(width, height, u1, v1, u2, v2, Resources.findResource(new TextureFile(texture_name, GL11.GL_RGBA, GL11.GL_LINEAR, GL11.GL_LINEAR, GL11.GL_REPEAT, GL11.GL_REPEAT)));
 	}
 
 	public GUIImage(int width, int height, float u1, float v1, float u2, float v2, Texture texture) {

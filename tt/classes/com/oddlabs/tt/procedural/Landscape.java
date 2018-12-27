@@ -24,17 +24,17 @@ import org.lwjgl.opengl.GL11;
 public final strictfp class Landscape {
 	public final static boolean DEBUG = false;
 	private final static int STRUCTURE_SEED = 42; // must be constant; otherwise distinct repeating patterns might appear
-	
+
 	private final static int NUM_PLANT_TYPES = 4;
 	public final static int NATIVE = 0;
 	public final static int VIKING = 1;
-	
+
 	private Random random;
 	private final BlendInfo[] blend_infos;
 	private GLIntImage[] structures;
 	private GLIntImage detail;
 	private GLByteImage[] alpha_maps;
-	
+
 	private Channel height;
 	private Channel slope;
 	private Channel access;
@@ -71,7 +71,7 @@ public final strictfp class Landscape {
 	private final float access_threshold;
 	private final float build_threshold;
 	private final int terrain_type;
-	
+
 	private byte[][] build;
 	private float[][] player_locations;
 	private int[][] supply_locations;
@@ -120,10 +120,10 @@ public final strictfp class Landscape {
 		this.detail_size = Globals.DETAIL_SIZE;
 		this.structure_size = Globals.STRUCTURE_SIZE;
 		this.detail_alpha_value = detail_alpha_value;
-		
+
 		area = size_multiplier*10000f;
 		max_plants = size_multiplier*64;
-		
+
 		if (terrain_type == NATIVE) {
 			max_trees = (int)StrictMath.pow(2, 2*Utils.powerOf2Log2(meters_per_world) - 9);
 			max_palmtrees = max_trees>>1;
@@ -131,7 +131,7 @@ public final strictfp class Landscape {
 			max_trees = (int)(.75f*StrictMath.pow(2, 2*Utils.powerOf2Log2(meters_per_world) - 9));
 			max_palmtrees = max_trees;
 		}
-		
+
 		max_rock = max_trees>>3;
 		max_iron = max_trees>>4;
 		random = new Random(seed);
@@ -169,23 +169,23 @@ public final strictfp class Landscape {
 				assert false : "illegal terrain_type";
 				break;
 		}
-		
+
 		if (DEBUG) height.toLayer().saveAsPNG("height");
 		ProgressForm.progress();
 		Channel grass_alpha = generateAlphas();
 		ProgressForm.progress();
 		generateUnitLocations(initial_unit_count, random_start_pos);
 		generateSupplies(grass_alpha);
-		
+
 		// scale height map vertically
 		for (int y = 0; y < unit_grids_per_world; y++) {
 			for (int x = 0; x < unit_grids_per_world; x++) {
 				height.putPixel(x, y, height_scale*height.getPixel(x, y));
 			}
 		}
-		
+
 		if (DEBUG) access.toLayer().saveAsPNG("access_connected");
-		
+
 		// create blend infos
 		blend_infos = new BlendInfo[]{
 			new StructureBlend(structures[0], new GLByteImage(new Channel(1, 1).fill(1f))),
@@ -230,7 +230,7 @@ public final strictfp class Landscape {
 		Layer structure_detail = genDetail(detail_size, detail_alpha_value, STRUCTURE_SEED, noise8.copy());
 		detail = new GLIntImage(structure_detail);
 	}
-	
+
 	private void generateStructuresViking(Channel voronoi4, Channel voronoi8, Channel voronoi8_hit, Channel voronoi16, Channel voronoi16_hit, Channel voronoi32, Channel voronoi32_hit, Channel noise8, Channel noise256) {
 		structures = new GLIntImage[7];
 		ProgressForm.progress(1/8f);
@@ -243,10 +243,10 @@ public final strictfp class Landscape {
 
 		Layer structure_grass = genGrass(structure_size, noise8.copy(), noise256.copy()).multiply(.75f, .9f, 1.1f);
 		structures[3] = new GLIntImage(structure_grass);
-		
+
 		Layer structure_cliff = genCliff(structure_size, noise8.copy(), noise256.copy(), voronoi4.copy(), voronoi8.copy(), voronoi16.copy(), structure_soil.copy(), structure_grass.copy());
 		structures[2] = new GLIntImage(structure_cliff);
-		
+
 		Layer structure_snow = genSnow(structure_size, noise8.copy(), noise256.copy());
 		structures[4] = new GLIntImage(structure_snow);
 
@@ -269,7 +269,7 @@ public final strictfp class Landscape {
 		if (DEBUG) sand.saveAsPNG("structure_sand");
 		return sand;
 	}
-	
+
 	private Layer genGravel(int size, Channel noise8, Channel noise256) {
 		Channel empty = new Channel(size, size).fill(1f);
 		Channel gravel_bump1 = noise8.brightness(0.5f);
@@ -292,7 +292,7 @@ public final strictfp class Landscape {
 		if (DEBUG) dirt.saveAsPNG("structure_dirt");
 		return dirt;
 	}
-	
+
 	private Layer genSoil(int size, Channel noise8, Channel noise256, Channel voronoi32) {
 		Channel empty = new Channel(size, size).fill(1f);
 		Channel soil_bump1 = noise8.brightness(0.8f);
@@ -344,7 +344,7 @@ public final strictfp class Landscape {
 		if (DEBUG) rock.saveAsPNG("structure_rock");
 		return rock;
 	}
-	
+
 	private Layer genCliff(int size, Channel noise8, Channel noise256, Channel voronoi4, Channel voronoi8, Channel voronoi16, Layer rubble, Layer grass) {
 		Channel cliff_bump1 = voronoi4.dynamicRange().contrast(1.1f).brightness(2f).gamma2().multiply(0.3f);
 		Channel cliff_bump2 = voronoi8.dynamicRange().contrast(1.1f).brightness(2f).gamma2().multiply(0.3f);
@@ -363,7 +363,7 @@ public final strictfp class Landscape {
 		if (DEBUG) cliff.saveAsPNG("structure_cliff");
 		return cliff;
 	}
-	
+
 	private Layer genSnow(int size, Channel noise8, Channel noise256) {
 		Channel empty = new Channel(size, size).fill(.95f);
 		Channel snow_bump1 = noise8.brightness(0.75f);
@@ -411,14 +411,14 @@ public final strictfp class Landscape {
 		Voronoi voronoi = new Voronoi(unit_grids_per_world, features, features, 1, 1f, seed);
 		Channel cliffs = voronoi.getDistance(-1f, 1f, 0f).brightness(1.5f).multiply(0.33f);
 		height.channelAdd(cliffs);
-		
+
 		// Fist of God (tm)
 		if (unit_grids_per_world > 128) {
 			height.channelSubtract(voronoi.getDistance(1f, 0f, 0f).gamma(.5f).flipV().rotate(90));
 		} else {
 			height.channelSubtract(voronoi.getDistance(-1f, 1f, 0f).gamma(.5f).flipV().rotate(90));
 		}
-		
+
 		height.perturb(new Midpoint(unit_grids_per_world, 2, 0.5f, seed).toChannel(), 0.25f);
 		Channel shape = new Hill(unit_grids_per_world, Hill.OVAL).toChannel();
 		height.channelAdd(shape.copy().multiply(0.15f));
@@ -427,7 +427,7 @@ public final strictfp class Landscape {
 		height.channelMultiply(shape.gamma2());
 		height.smooth(1);
 		height = beaches(height);
-		
+
 		// fix edges
 		for (int y = 0; y < unit_grids_per_world; y += (unit_grids_per_world - 1)) {
 			for (int x = 0; x < unit_grids_per_world; x++) {
@@ -449,17 +449,17 @@ public final strictfp class Landscape {
 		if (DEBUG) access.toLayer().saveAsPNG("access");
 		build = generateBuildMap(generateThresholdMap(slope, build_threshold).channelMultiply(access));
 	}
-	
+
 	private void generateTerrainViking() {
 		alpha_maps = new GLByteImage[7];
-		
+
 		// generate height map
 		height = new Mountain(unit_grids_per_world, Utils.powerOf2Log2(unit_grids_per_world) - 6, 0.5f, seed).toChannel().add(.5f).dynamicRange().gamma2().multiply(0.67f);
-		
+
 		Voronoi voronoi = new Voronoi(unit_grids_per_world, 8, 8, 1, 1f, seed, true);
 		Channel cliffs = voronoi.getDistance(-1f, 1f, 0f).brightness(1.25f).multiply(0.33f);
 		height.channelAdd(cliffs).dynamicRange();
-		
+
 		// Fist of God (tm)
 		Voronoi voronoi2 = new Voronoi(unit_grids_per_world, 4, 4, 1, 1f, seed);
 		if (unit_grids_per_world > 128) {
@@ -467,7 +467,7 @@ public final strictfp class Landscape {
 		} else {
 			height.channelSubtract(voronoi2.getDistance(-1f, 1f, 0f).gamma(.5f).multiply(.5f));
 		}
-		
+
 		Channel hitpoint = voronoi.getHitpoint().smooth(1);
 		Channel hitpoint2 = hitpoint.copy().erodeThermal(4f/unit_grids_per_world, unit_grids_per_world>>3);
 		Channel noise = new Midpoint(unit_grids_per_world, 3, 0.25f, seed).toChannel().threshold(0.75f*hills, 1f);
@@ -475,17 +475,17 @@ public final strictfp class Landscape {
 		height.channelMultiply(heightcut);
 		height.perturb(new Midpoint(unit_grids_per_world, 2, 0.5f, seed).toChannel(), 0.25f);
 		height.erode((24f - hills*12f)/unit_grids_per_world, unit_grids_per_world>>2);
-		
+
 		Channel shape = new Hill(unit_grids_per_world, Hill.SQUARE).toChannel().smoothGain().gamma8();
 		height.channelMultiply(shape);
-		
+
 		// add roughness to inaccessible areas
 		slope = height.copy().lineart();
 		Channel peakarea = slope.threshold(0f, access_threshold).largestConnected(1f).invert().channelMultiply(hitpoint2);
 		Channel peaks = new Midpoint(unit_grids_per_world, 4, 0.75f, 42).toChannel().channelMultiply(peakarea).multiply(.1f);
 		height.channelAdd(peaks);
 		height.smooth(1);
-		
+
 		// fix edges
 		for (int y = 0; y < unit_grids_per_world; y += (unit_grids_per_world - 1)) {
 			for (int x = 0; x < unit_grids_per_world; x++) {
@@ -507,7 +507,7 @@ public final strictfp class Landscape {
 		if (DEBUG) access.toLayer().saveAsPNG("access");
 		build = generateBuildMap(generateThresholdMap(slope, build_threshold).channelMultiply(access));
 	}
-	
+
 	// shape beaches
 	private Channel beaches(Channel channel) {
 		float sealevel = 1.1f*Globals.SEA_LEVEL;
@@ -526,7 +526,7 @@ public final strictfp class Landscape {
 		}
 		return channel;
 	}
-	
+
 	// generate threshold map
 	private Channel generateThresholdMap(Channel slopemap, float threshold) {
 		Channel channel = slopemap.copy().threshold(0f, threshold).channelSubtract(height.copy().threshold(0f, Globals.SEA_LEVEL));
@@ -589,7 +589,7 @@ public final strictfp class Landscape {
 		int seed = Globals.LANDSCAPE_SEED;
 		Channel alpha0, alpha1, alpha2, alpha3;
 		Channel grass_alpha = new Channel(1, 1);
-		
+
 		switch (terrain_type) {
 			case NATIVE:
 				alpha0 = generateDirtAlpha();
@@ -679,12 +679,12 @@ public final strictfp class Landscape {
 		if (DEBUG) highlight.toLayer().saveAsPNG("alpha_light");
 		if (DEBUG) shadow.toLayer().saveAsPNG("alpha_shadow");
 		ProgressForm.progress(1/14f);
-		
+
 		alpha_maps[6] = new GLByteImage(seabottom_alpha);
 
 		return grass_alpha;
 	}
-	
+
 	// generate dirt alpha
 	private Channel generateDirtAlpha() {
 		Channel dirt_alpha = height.copy().dynamicRange(1.1f*Globals.SEA_LEVEL, 2f*Globals.SEA_LEVEL, 0f, 1f);
@@ -716,26 +716,26 @@ public final strictfp class Landscape {
 		grass_alpha.channelSubtract(relheight.copy().invert().dynamicRange(0.5f, 0.7f, 0f, 0.5f));
 		return grass_alpha;
 	}
-	
+
 	// generate soil alpha
 	private Channel generateSoilAlpha() {
 		Channel soil_alpha = height.copy().dynamicRange(1.1f*Globals.SEA_LEVEL, 2f*Globals.SEA_LEVEL, 0f, 1f);
 		soil_alpha.channelSubtract(relheight.copy().invert().dynamicRange(0.5f, 0.6f, 0f, 0.5f));
 		return soil_alpha;
 	}
-	
+
 	// generate cliff alpha
 	private Channel generateCliffAlpha() {
 		Channel cliff_alpha = slope.copy().threshold(access_threshold, 1f);
 		return cliff_alpha;
 	}
-	
+
 	// generate snow alpha
 	private Channel generateSnowAlpha(Channel cliff_alpha) {
 		Channel snow_alpha = height.copy().dynamicRange(0.5f, 0.6f, 0f, 1f);
 		snow_alpha.channelSubtract(cliff_alpha);
 		snow_alpha.smooth(1).smooth(1);
-		
+
 		return snow_alpha;
 	}
 
@@ -762,20 +762,20 @@ public final strictfp class Landscape {
 	private void generateSupplies(Channel grass_alpha) {
 		// generate overall probability map for rock and iron resources
 		Channel centerprob = new Hill(unit_grids_per_world, Hill.CIRCLE).toChannel().addClip(-.5f).dynamicRange();
-		
+
 		// generate (oak)tree/palmtree(/pine) maps
 		Channel noise = new Midpoint(unit_grids_per_world, Utils.powerOf2Log2(unit_grids_per_world) - 3, 0.33f, seed).toChannel();
 		Channel tree_channel = grass_alpha.copy();
 		Channel palmtree_channel = height.copy();
 		ProgressForm.progress(1/14f);
-		
+
 		switch (terrain_type) {
 			case NATIVE:
 				tree_channel.threshold(0.5f, 1f);
 				tree_channel.channelAdd(noise.rotate(90).copy().threshold(0.9f, 1f));
 				tree_channel.channelSubtract(slope.copy().threshold(access_threshold, 1f));
 				tree_channel.channelSubtract(noise.copy().dynamicRange(0.1f, 1f));
-				
+
 				palmtree_channel.invert().dynamicRange(0.6f, 0.89f, 0f, 1f);
 				palmtree_channel.channelSubtract(height.copy().invert().dynamicRange(0.89f, 0.9f, 0f, 1f));
 				palmtree_channel.channelSubtract(noise.rotate(90)).channelAdd(noise.rotate(90).copy().threshold(0.9f, 1f)).channelSubtract(slope.copy().threshold(access_threshold, 1f));
@@ -785,7 +785,7 @@ public final strictfp class Landscape {
 				tree_channel.channelMultiply(height.copy().dynamicRange(0.55f, 0.65f, 1f, 0f));
 				tree_channel.channelSubtract(slope.copy().threshold(access_threshold, 1f));
 				tree_channel.channelSubtract(noise.copy());
-				
+
 				palmtree_channel = grass_alpha.copy().channelMultiply(height.copy().dynamicRange(0.5f, 0.6f, 1f, 0f)).invert();
 				palmtree_channel.channelSubtract(height.copy().invert().dynamicRange(0.8f, 0.875f, 0f, 1f));
 				palmtree_channel.channelSubtract(slope.copy().threshold(access_threshold, 1f));
@@ -795,14 +795,14 @@ public final strictfp class Landscape {
 				assert false : "illegal terrain_type";
 				break;
 		}
-		
+
 		if (DEBUG) tree_channel.toLayer().saveAsPNG("supplies_trees");
 		if (DEBUG) palmtree_channel.toLayer().saveAsPNG("supplies_palmtrees");
 		ProgressForm.progress(1/14f);
-		
+
 		// generate rock and iron supplies map
 		Channel rock_channel = relheight.copy();
-		
+
 		switch (terrain_type) {
 			case NATIVE:
 				rock_channel.invert().threshold(0.5f, 1f).channelMultiply(noise.rotate(90).copy().gamma8().invert()).channelMultiply(centerprob);
@@ -814,19 +814,19 @@ public final strictfp class Landscape {
 				assert false : "illegal terrain_type";
 				break;
 		}
-		
+
 		Channel iron_channel = rock_channel.copy().rotate(90).flipV();
 		if (DEBUG) rock_channel.toLayer().saveAsPNG("supplies_rocks");
 		if (DEBUG) iron_channel.toLayer().saveAsPNG("supplies_iron");
-		
+
 		Channel supplies = access.copy();
 		float accessible = supplies.sum();
-		
+
 		// place trees
 		trees = placeSupplies(tree_channel, supplies, 64, (int)(vegetation_amount*max_trees*(accessible/area)), 0.33f);
 		access.channelSubtract(trees);
 		if (DEBUG) trees.toLayer().saveAsPNG("supplies_trees_placed");
-		
+
 		// place palmtrees
 		palmtrees = placeSupplies(palmtree_channel, supplies, 64, (int)(vegetation_amount*max_palmtrees*(accessible/area)), 0.25f);
 		access.channelSubtract(palmtrees);
@@ -850,7 +850,7 @@ public final strictfp class Landscape {
 			System.out.println("Number of rocks placed: " + rock.count(1f));
 			System.out.println("Number of iron ore placed: " + iron.count(1f));
 		}
-		
+
 		// place extra supplies around starting locations
 		int num_rock = 2;
 		int num_iron = 1;
@@ -866,22 +866,22 @@ public final strictfp class Landscape {
 				access.putPixel(location[0], location[1], 0f);
 			}
 		}
-		
+
 		// shadow and highlight are changed by supply placement
 		alpha_maps[4] = new GLByteImage(highlight, GL11.GL_LUMINANCE);
 		alpha_maps[5] = new GLByteImage(shadow);
 		ProgressForm.progress(1/14f);
-		
+
 		// generate plant maps
 		plants = new float[NUM_PLANT_TYPES][max_plants<<1];
 		tree_channel.channelBrightest(palmtree_channel).brightness(.5f);
 		noise.scaleFast(noise.width>>1, noise.height>>1).tileDouble();
-		
+
 		Channel plantsmap = grass_alpha.copy();
 		plantsmap.multiply(0.25f).add(0.75f);
 		plantsmap.channelMultiply(slope.copy().threshold(0f, access_threshold));
 		plantsmap.channelMultiply(height.copy().threshold(Globals.SEA_LEVEL, 1f));
-		
+
 		Channel plants1 = plantsmap.copy().channelMultiply(noise.copy());
 		Channel plants2 = plantsmap.copy().channelMultiply(noise.rotate(90));
 		Channel plants3 = plantsmap.copy().channelMultiply(noise.rotate(90));
@@ -935,7 +935,7 @@ public final strictfp class Landscape {
 									supplies.putPixelWrap(x + k, y + l, 0f);
 								}
 							}
-							
+
 							i++;
 							if (i >= max_count) break out;
 						}
@@ -947,7 +947,7 @@ public final strictfp class Landscape {
 		}
 		return place;
 	}
-	
+
 	// place plants on map
 	private Channel placePlants(Channel probability, Channel place, int intervals, int max_count, int plant_type) {
 		max_count = StrictMath.min(probability.width*probability.height, max_count);
@@ -966,9 +966,9 @@ public final strictfp class Landscape {
 						// place plant
 						plants[plant_type][2*i] = meters_per_height_unit*(x + random.nextFloat());
 						plants[plant_type][2*i+1] = meters_per_height_unit*(y + random.nextFloat());
-						
+
 						place.putPixelWrap(x, y, place.getPixel(x, y) + 1f);
-						
+
 						/*
 						// make node neighbourhood inaccessible
 						for (int k = -1; k <= 1; k++) {
@@ -977,7 +977,7 @@ public final strictfp class Landscape {
 							}
 						}
 						*/
-						
+
 						i++;
 						if (i >= max_count) break out;
 					}
@@ -1046,7 +1046,7 @@ public final strictfp class Landscape {
 				player_locations[i][2*u + 1] = (location_unit[1]*scale);
 			}
 		}
-		
+
 		// shuffle player starting locations
 		List player_locations_list = Arrays.asList(player_locations);
 		Collections.shuffle(player_locations_list, random);
@@ -1067,7 +1067,7 @@ public final strictfp class Landscape {
 				throw new RuntimeException("Unknown terrain type: " + terrain_type);
 		}
 	}
-	
+
 	public BlendInfo[] getBlendInfos() {
 		return blend_infos;
 	}
@@ -1142,7 +1142,7 @@ public final strictfp class Landscape {
 		}
 		return list;
 	}
-	
+
 	public float[][] getPlants() {
 		return plants;
 	}

@@ -23,7 +23,7 @@ public final strictfp class Font {
 										   GL11.GL_LINEAR,
 										   GL11.GL_REPEAT,
 										   GL11.GL_REPEAT);
-		this.texture = (Texture)Resources.findResource(file);
+		this.texture = Resources.findResource(file);
 		this.x_border = font_info.getBorderX();
 		this.y_border = font_info.getBorderY();
 		this.height = font_info.getHeight();

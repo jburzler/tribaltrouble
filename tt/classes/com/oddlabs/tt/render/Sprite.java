@@ -78,10 +78,10 @@ final strictfp class Sprite {
 
 		indices = new ShortVBO(ARBBufferObject.GL_STATIC_DRAW_ARB, tmp_indices.length);
 		indices.put(tmp_indices);
-		
+
 		texcoords = new FloatVBO(ARBBufferObject.GL_STATIC_DRAW_ARB, tmp_texcoords.length);
 		texcoords.put(tmp_texcoords);
-		
+
 		int vert_and_normal_buffer_size = 0;
 		int frame_size = num_vertices*3*2;
 		buffer_indices = new int[tmp_vertices.length];
@@ -93,7 +93,7 @@ final strictfp class Sprite {
 				assert tmp_vertices[j][i].length + tmp_normals[j][i].length == frame_size;
 		}
 		FloatBuffer temp_vertices_and_normals = BufferUtils.createFloatBuffer(vert_and_normal_buffer_size);
-		
+
 		for (int j = 0; j < tmp_vertices.length; j++) {
 			for (int i = 0; i < tmp_vertices[j].length; i++) {
 				temp_vertices_and_normals.put(tmp_vertices[j][i]);
@@ -120,7 +120,7 @@ final strictfp class Sprite {
 			else
 				textures[i][TEXTURE_TEAM] = null;
 		}
-		this.respond_texture = ((Texture[])Resources.findResource(new GeneratorRespond()))[0];
+		this.respond_texture = Resources.findResource(new GeneratorRespond())[0];
 	}
 
 	public boolean modulateColor() {
@@ -256,13 +256,13 @@ final strictfp class Sprite {
 			String generator_class_name = texture_name.substring(GENERATOR_STRING.length());
 			try {
 				Class generator_class = Class.forName(generator_class_name);
-				ResourceDescriptor descriptor = (ResourceDescriptor)generator_class.newInstance();
-				return ((Texture[])Resources.findResource(descriptor))[0];
+				ResourceDescriptor<Texture[]> descriptor = (ResourceDescriptor)generator_class.newInstance();
+				return Resources.findResource(descriptor)[0];
 			} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
 				throw new RuntimeException(e);
 			}
 		} else {
-			return (Texture)Resources.findResource(new TextureFile("/textures/models/" + texture_name, color_format, GL11.GL_LINEAR_MIPMAP_NEAREST, GL11.GL_LINEAR, GL11.GL_REPEAT, GL11.GL_REPEAT, mipmap_cutoff, 100000, 0.1f, max_alpha));
+			return Resources.findResource(new TextureFile("/textures/models/" + texture_name, color_format, GL11.GL_LINEAR_MIPMAP_NEAREST, GL11.GL_LINEAR, GL11.GL_REPEAT, GL11.GL_REPEAT, mipmap_cutoff, 100000, 0.1f, max_alpha));
 		}
 	}
 
@@ -375,7 +375,7 @@ final strictfp class Sprite {
 		int frame_index = frame*2;
 		int vertex_index = buffer_indices[animation] + frame_index*frame_size;
 		int normal_index = vertex_index + frame_size;
-		
+
 		vertices_and_normals.normalPointer(0, normal_index);
 		vertices_and_normals.vertexPointer(3, 0, vertex_index);
 		indices.drawRangeElements(GL11.GL_TRIANGLES, 0, num_vertices - 1, num_triangles*3, 0);

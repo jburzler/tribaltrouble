@@ -8,23 +8,18 @@ import java.util.Iterator;
 import java.util.ArrayList;
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-import javax.imageio.ImageIO;
 import gr.zdimensions.jsquish.Squish;
 import org.lwjgl.opengl.EXTTextureCompressionS3TC;
-import org.lwjgl.opengl.GL11;
-
-import com.oddlabs.util.Utils;
 import com.oddlabs.util.Image;
 import com.oddlabs.util.DXTImage;
 import com.oddlabs.procedural.Channel;
 import com.oddlabs.procedural.Layer;
 
-import com.sixlegs.image.png.*;
+import javax.imageio.ImageIO;
 
 public final class Convert {
 	private static String current_ext;
-	
+
 	public static void main(String[] args) throws IOException {
 		if (args.length < 2) {
 			System.out.println("Usage: Convert <infile> <operations> <outfile>");
@@ -101,12 +96,13 @@ System.out.println("outfile = " + outfile);
 	}
 
 	private static Layer loadFile(File file) throws IOException {
-		PngImage image = new PngImage(file.getPath());
+
+		BufferedImage image = ImageIO.read(file);
 		int width = image.getWidth();
 		int height = image.getHeight();
 //		int channels = image.getRaster().getNumBands() <= 3 ? 3 : 4;
-		assert image.getColorType() == PngImage.COLOR_TYPE_RGB || image.getColorType() == PngImage.COLOR_TYPE_RGB_ALPHA;
-		int channels = image.getColorType() == PngImage.COLOR_TYPE_RGB ? 3 : 4;
+		assert image.getColorModel() == ColorModel.getRGBdefault();
+		int channels = image.getColorModel().getNumColorComponents();
 //		final byte[] bytes = getImageData(image);
 		int[] ints = new int[width*height];
 		try {
@@ -141,7 +137,7 @@ System.out.println("outfile = " + outfile);
 		Image image = new Image(images[0].getWidth(), images[0].getHeight(), ByteBuffer.wrap(bytes));
 		image.write(file);
 	}
-	
+
 	private static void saveDxtn(File file, Layer[] images) throws IOException {
 		int internal_format;
 		Squish.CompressionType type;
@@ -173,7 +169,7 @@ System.out.println("Done");*/
 			throw new IllegalArgumentException("unknown extension: " + file);
 	}
 
-/*	
+/*
 		String filename = new File(infile).getName();
 		filename = filename.substring(0, filename.lastIndexOf("."));
 		System.out.println("Converting " + infile);

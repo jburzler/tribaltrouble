@@ -7,16 +7,18 @@ public final strictfp class DieBehaviour implements Behaviour {
 	private final static float SECONDS_PER_DEATH = 3f;
 	private final static float LYING_SECONDS = 1f;
 	private final static float MOVING_SECONDS = 60f;
-	
+
 	private final static int MOVING_METERS = 3;
 
-	private final static int DYING = 1;
-	private final static int LYING = 2;
-	private final static int MOVING = 3;
+    enum DieState {
+        DYING,
+        LYING,
+        MOVING
+    }
 
 	private final Unit unit;
 	private float anim_time;
-	private int state;
+	private DieState state;
 
 	private float offset_z = 0;
 	private float dz = 0;
@@ -26,7 +28,7 @@ public final strictfp class DieBehaviour implements Behaviour {
 		init();
 	}
 
-        @Override
+    @Override
 	public int animate(float t) {
 		anim_time -= t;
 		offset_z -= dz*t;
@@ -39,11 +41,11 @@ public final strictfp class DieBehaviour implements Behaviour {
 		switch (state) {
 			case DYING:
 				anim_time += LYING_SECONDS;
-				state = LYING;
+				state = DieState.LYING;
 				break;
 			case LYING:
 				anim_time += MOVING_SECONDS;
-				state = MOVING;
+				state = DieState.MOVING;
 				dz = MOVING_METERS/MOVING_SECONDS;
 				break;
 			case MOVING:
@@ -65,7 +67,7 @@ public final strictfp class DieBehaviour implements Behaviour {
 
 	private void init() {
 		anim_time = SECONDS_PER_DEATH;
-		state = DYING;
+		state = DieState.DYING;
 		unit.switchAnimation(1f/anim_time, Unit.ANIMATION_DYING);
 	}
 

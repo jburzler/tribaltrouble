@@ -68,10 +68,10 @@ public strictfp class Icons {
 		rubber_status_icon = getNamedIconQuad(root, "rubber_status_icon", texture);
 		cheat_icon = getNamedIconQuad(root, "cheat_icon", texture);
 		ResourceBundle bundle = ResourceBundle.getBundle(Icons.class.getName());
-		String tt_caption = com.oddlabs.tt.util.Utils.getBundleString(bundle, "terrifying_toot", new Object[]{"S"});
-		String rr_caption = com.oddlabs.tt.util.Utils.getBundleString(bundle, "ravaging_roar", new Object[]{"C"});
-		String ss_caption = com.oddlabs.tt.util.Utils.getBundleString(bundle, "stinking_stew", new Object[]{"S"});
-		String cc_caption = com.oddlabs.tt.util.Utils.getBundleString(bundle, "crackling_cloud", new Object[]{"C"});
+		String tt_caption = com.oddlabs.tt.util.Utils.getBundleString(bundle, "terrifying_toot", "S");
+		String rr_caption = com.oddlabs.tt.util.Utils.getBundleString(bundle, "ravaging_roar", "C");
+		String ss_caption = com.oddlabs.tt.util.Utils.getBundleString(bundle, "stinking_stew", "S");
+		String cc_caption = com.oddlabs.tt.util.Utils.getBundleString(bundle, "crackling_cloud", "C");
 		viking_icons = parseRaceIcons(root, "vikings", tt_caption, rr_caption);
 		native_icons = parseRaceIcons(root, "natives", ss_caption, cc_caption);
 		watch = parseWatch(root);
@@ -145,7 +145,7 @@ public strictfp class Icons {
 	public final IconQuad getRubberStatusIcon() {
 		return rubber_status_icon;
 	}
-	
+
 	public final IconQuad getCheatIcon() {
 		return cheat_icon;
 	}
@@ -232,7 +232,7 @@ public strictfp class Icons {
 										   GL11.GL_LINEAR,
 										   GL11.GL_CLAMP,
 										   GL11.GL_CLAMP);
-		return (Texture)Resources.findResource(file);
+		return Resources.findResource(file);
 	}
 
 	public final static Node getNodeByName(String name, Node n) {

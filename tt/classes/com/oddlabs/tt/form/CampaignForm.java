@@ -118,7 +118,7 @@ public final strictfp class CampaignForm extends Form implements DeterministicSe
 		if (e instanceof FileNotFoundException) {
 		} else if (e instanceof InvalidClassException) {
 		} else {
-			String failed_message = Utils.getBundleString(bundle, "failed_message", new Object[]{LoadCampaignBox.SAVEGAMES_FILE_NAME, e.getMessage()});
+			String failed_message = Utils.getBundleString(bundle, "failed_message", LoadCampaignBox.SAVEGAMES_FILE_NAME, e.getMessage());
 			gui_root.addModalForm(new MessageForm(failed_message));
 		}
 	}
@@ -128,7 +128,7 @@ public final strictfp class CampaignForm extends Form implements DeterministicSe
 		public void mouseClicked(int button, int x, int y, int clicks) {
 			CampaignState state = (CampaignState)load_campaign_box.getSelected();
 			if (state != null) {
-				String confirm_str = Utils.getBundleString(bundle, "confirm_delete", new Object[]{state.getName()});
+				String confirm_str = Utils.getBundleString(bundle, "confirm_delete", state.getName());
 				gui_root.addModalForm(new QuestionForm(confirm_str, new ActionDeleteListener()));
 			}
 		}

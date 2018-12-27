@@ -19,7 +19,7 @@ public final strictfp class CreatingProfileForm extends Form implements ProfileL
 	private final Menu main_menu;
 	private final ResourceBundle bundle = ResourceBundle.getBundle(CreatingProfileForm.class.getName());
 	private final GUIRoot gui_root;
-	
+
 	public CreatingProfileForm(GUIRoot gui_root, Form profiles_form, Menu main_menu, String nick) {
 		this.gui_root = gui_root;
 		this.profiles_form = profiles_form;
@@ -29,7 +29,7 @@ public final strictfp class CreatingProfileForm extends Form implements ProfileL
 		HorizButton cancel_button = new CancelButton(120);
 		addChild(cancel_button);
 		cancel_button.addMouseClickListener(new CancelListener(this));
-		
+
 		// Place objects
 		info_label.place();
 		cancel_button.place(info_label, BOTTOM_MID);
@@ -48,7 +48,7 @@ public final strictfp class CreatingProfileForm extends Form implements ProfileL
 		main_menu.setMenuCentered(profiles_form);
 		Network.getMatchmakingClient().requestProfiles();
 	}
-	
+
         @Override
 	public void error(int error_code) {
 		remove();
@@ -58,7 +58,7 @@ public final strictfp class CreatingProfileForm extends Form implements ProfileL
 				error_message = Utils.getBundleString(bundle, "username_error_too_many");
 				break;
 			case MatchmakingClientInterface.PROFILE_ERROR_GUEST:
-				error_message = Utils.getBundleString(bundle, "profile_error_guest", new Object[]{"Guest"});
+				error_message = Utils.getBundleString(bundle, "profile_error_guest", "Guest");
 				break;
 			case MatchmakingClientInterface.USERNAME_ERROR_ALREADY_EXISTS:
 				error_message = Utils.getBundleString(bundle, "username_error_already_exists");
@@ -77,7 +77,7 @@ public final strictfp class CreatingProfileForm extends Form implements ProfileL
 		}
 		gui_root.addModalForm(new MessageForm(error_message));
 	}
-	
+
         @Override
 	protected void doCancel() {
 	}

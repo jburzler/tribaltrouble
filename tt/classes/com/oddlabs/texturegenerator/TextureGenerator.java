@@ -19,10 +19,10 @@ public final strictfp class TextureGenerator {
 	private final static int LOW_DETAIL_TEX_SIZE = 256;
 	private final static int LOWDETAIL_MIPMAP_CUTOFF = Globals.NO_MIPMAP_CUTOFF;
 	private final static int CROWN_MIPMAP_CUTOFF = Globals.NO_MIPMAP_CUTOFF;
-	
+
 	private SpriteList[] crowns;
 	private SpriteList[] trunks;
-	
+
 	public static void main(String[] args) throws LWJGLException {
 		assert args.length == 1;
 		new TextureGenerator(args[0]);
@@ -40,21 +40,21 @@ public final strictfp class TextureGenerator {
 		Display.create(new PixelFormat(Globals.VIEW_BIT_DEPTH, 1, 16, 0, 0));
 		OffscreenRendererFactory factory = new OffscreenRendererFactory();
 		OffscreenRenderer buffer = factory.createRenderer(LOW_DETAIL_TEX_SIZE, LOW_DETAIL_TEX_SIZE, new PixelFormat(Globals.VIEW_BIT_DEPTH, 1, 16, 0, 0), false, false, true);
-		SpriteList jungle_crown = (SpriteList)Resources.findResource(new SpriteFile("/geometry/misc/jungle_tree_crown.binsprite", CROWN_MIPMAP_CUTOFF, false, false, true, false));
-		SpriteList jungle_trunk = (SpriteList)Resources.findResource(new SpriteFile("/geometry/misc/jungle_tree_trunk.binsprite", CROWN_MIPMAP_CUTOFF, true, true, false, false));
-		SpriteList palm_crown = (SpriteList)Resources.findResource(new SpriteFile("/geometry/misc/palm_crown.binsprite", CROWN_MIPMAP_CUTOFF, false, false, true, false));
-		SpriteList palm_trunk = (SpriteList)Resources.findResource(new SpriteFile("/geometry/misc/palm_trunk.binsprite", CROWN_MIPMAP_CUTOFF, true, true, false, false));
+		SpriteList jungle_crown = Resources.findResource(new SpriteFile("/geometry/misc/jungle_tree_crown.binsprite", CROWN_MIPMAP_CUTOFF, false, false, true, false));
+		SpriteList jungle_trunk = Resources.findResource(new SpriteFile("/geometry/misc/jungle_tree_trunk.binsprite", CROWN_MIPMAP_CUTOFF, true, true, false, false));
+		SpriteList palm_crown = Resources.findResource(new SpriteFile("/geometry/misc/palm_crown.binsprite", CROWN_MIPMAP_CUTOFF, false, false, true, false));
+		SpriteList palm_trunk = Resources.findResource(new SpriteFile("/geometry/misc/palm_trunk.binsprite", CROWN_MIPMAP_CUTOFF, true, true, false, false));
 		crowns = new SpriteList[]{jungle_crown, palm_crown};
 		trunks = new SpriteList[]{jungle_trunk, palm_trunk};
 		LowDetailModel jungle_lowdetail = (LowDetailModel)Utils.loadObject(Utils.makeURL("/geometry/misc/tree_low.binlowdetail"));
 		LowDetailModel palm_lowdetail = (LowDetailModel)Utils.loadObject(Utils.makeURL("/geometry/misc/palm_low.binlowdetail"));
 		generateLowDetailTexture(buffer, new LowDetailModel[]{jungle_lowdetail, palm_lowdetail}, dest + "/lowdetail_tree");
-		
+
 		OffscreenRenderer viking_buffer = factory.createRenderer(LOW_DETAIL_TEX_SIZE, LOW_DETAIL_TEX_SIZE, new PixelFormat(Globals.VIEW_BIT_DEPTH, 1, 16, 0, 0), false, false, true);
-		SpriteList oak_crown = (SpriteList)Resources.findResource(new SpriteFile("/geometry/misc/oak_tree_crown.binsprite", CROWN_MIPMAP_CUTOFF, false, false, true, false));
-		SpriteList oak_trunk = (SpriteList)Resources.findResource(new SpriteFile("/geometry/misc/oak_tree_trunk.binsprite", CROWN_MIPMAP_CUTOFF, true, true, false, false));
-		SpriteList pine_crown = (SpriteList)Resources.findResource(new SpriteFile("/geometry/misc/pine_tree_crown.binsprite", CROWN_MIPMAP_CUTOFF, false, false, true, false));
-		SpriteList pine_trunk = (SpriteList)Resources.findResource(new SpriteFile("/geometry/misc/pine_tree_trunk.binsprite", CROWN_MIPMAP_CUTOFF, true, true, false, false));
+		SpriteList oak_crown = Resources.findResource(new SpriteFile("/geometry/misc/oak_tree_crown.binsprite", CROWN_MIPMAP_CUTOFF, false, false, true, false));
+		SpriteList oak_trunk = Resources.findResource(new SpriteFile("/geometry/misc/oak_tree_trunk.binsprite", CROWN_MIPMAP_CUTOFF, true, true, false, false));
+		SpriteList pine_crown = Resources.findResource(new SpriteFile("/geometry/misc/pine_tree_crown.binsprite", CROWN_MIPMAP_CUTOFF, false, false, true, false));
+		SpriteList pine_trunk = Resources.findResource(new SpriteFile("/geometry/misc/pine_tree_trunk.binsprite", CROWN_MIPMAP_CUTOFF, true, true, false, false));
 		crowns = new SpriteList[]{oak_crown, pine_crown};
 		trunks = new SpriteList[]{oak_trunk, pine_trunk};
 		LowDetailModel oak_lowdetail = (LowDetailModel)Utils.loadObject(Utils.makeURL("/geometry/misc/oak_tree_low.binlowdetail"));

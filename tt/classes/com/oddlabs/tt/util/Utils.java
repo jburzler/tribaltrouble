@@ -1,17 +1,19 @@
 package com.oddlabs.tt.util;
 
 import com.oddlabs.tt.global.Globals;
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 import java.nio.ShortBuffer;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.MessageFormat;
 import java.util.ResourceBundle;
+import java.util.concurrent.TimeUnit;
 import org.lwjgl.BufferUtils;
 
 public final strictfp class Utils {
@@ -19,13 +21,7 @@ public final strictfp class Utils {
 	private static final IntBuffer sqrtIntBuf = sqrtByteBuf.asIntBuffer();
 	private static final FloatBuffer sqrtFloatBuf = sqrtByteBuf.asFloatBuffer();
 
-	private final static Object[] empty_object_array = new Object[0];
-
-	public static String getBundleString(ResourceBundle bundle, String key) {
-		return getBundleString(bundle, key, empty_object_array);
-	}
-
-	public static String getBundleString(ResourceBundle bundle, String key, Object[] object_array) {
+	public static String getBundleString(ResourceBundle bundle, String key, Object... object_array) {
 		return MessageFormat.format(bundle.getString(key), object_array);
 	}
 
@@ -48,7 +44,7 @@ public final strictfp class Utils {
 	}
 
 	public static void saveAsBMP(String filename, ByteBuffer pixel_data, int width, int height) {
-		long before = System.currentTimeMillis();
+		long before = System.nanoTime();
 		int pad = 4 - (width*3)%4;
 		if (pad == 4)
 			pad = 0;
@@ -130,19 +126,18 @@ public final strictfp class Utils {
 
 		}
 		buffer.rewind();
-		File image_file = new File(filename);
-		try (FileOutputStream fout = new FileOutputStream(image_file)) {
+		Path image_file = Paths.get(filename);
+		try (OutputStream fout = Files.newOutputStream(image_file)) {
 			fout.write(buffer.array());
-			fout.flush();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		long after = System.currentTimeMillis();
-		System.out.println("File " + filename + " saved in " + (after - before) + " milliseconds");
+		long after = System.nanoTime();
+		System.out.println("File " + filename + " saved in " + TimeUnit.NANOSECONDS.toMillis(after - before) + " milliseconds");
 	}
 
 	public static void saveAsTGA(String filename, ByteBuffer pixel_data, int width, int height) {
-		long before = System.currentTimeMillis();
+		long before = System.nanoTime();
 		try (FileOutputStream fout = new FileOutputStream(filename + ".tga")) {
 
 			//write TGA header
@@ -175,8 +170,8 @@ public final strictfp class Utils {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		long after = System.currentTimeMillis();
-		System.out.println("File " + filename + " saved in " + (after - before) + " milliseconds");
+		long after = System.nanoTime();
+		System.out.println("File " + filename + " saved in " + TimeUnit.NANOSECONDS.toMillis(after - before) + " milliseconds");
 	}
 
 	public static int numTextureSplits(int size) {

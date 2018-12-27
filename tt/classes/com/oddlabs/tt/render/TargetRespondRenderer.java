@@ -14,8 +14,8 @@ public final strictfp class TargetRespondRenderer extends ShadowListRenderer {
 
 	private final List target_list = new ArrayList();
 
-	public TargetRespondRenderer(ResourceDescriptor desc) {
-		ring = ((Texture[])Resources.findResource(desc))[0];
+	public TargetRespondRenderer(ResourceDescriptor<Texture[]> desc) {
+		ring = Resources.findResource(desc)[0];
 	}
 
 	public void addToTargetList(LandscapeTargetRespond target) {
@@ -23,7 +23,7 @@ public final strictfp class TargetRespondRenderer extends ShadowListRenderer {
 			target_list.add(target);
 	}
 
-        @Override
+    @Override
 	public void renderShadows(LandscapeRenderer renderer) {
 		setupShadows();
 		GL11.glColor3f(0f, 1f, 0f);

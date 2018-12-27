@@ -125,10 +125,10 @@ public final strictfp class LoadCampaignBox extends GUIObject implements Determi
 	public void failed(Throwable e) {
 		if (e instanceof FileNotFoundException) {
 		} else if (e instanceof InvalidClassException) {
-			String invalid_message = Utils.getBundleString(bundle, "invalid_message", new Object[]{SAVEGAMES_FILE_NAME});
+			String invalid_message = Utils.getBundleString(bundle, "invalid_message", SAVEGAMES_FILE_NAME);
 			gui_root.addModalForm(new MessageForm(invalid_message));
 		} else {
-			String failed_message = Utils.getBundleString(bundle, "failed_message", new Object[]{SAVEGAMES_FILE_NAME, e.getMessage()});
+			String failed_message = Utils.getBundleString(bundle, "failed_message", SAVEGAMES_FILE_NAME, e.getMessage());
 			gui_root.addModalForm(new MessageForm(failed_message));
 		}
 	}

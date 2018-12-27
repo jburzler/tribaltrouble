@@ -4,6 +4,7 @@ import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
+import java.io.UncheckedIOException;
 import java.net.Inet6Address;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
@@ -121,22 +122,21 @@ System.out.println("loopback address = " + best_address);
 	}
 
 	public static Object tryLoadObject(URL url, boolean zipped) throws IOException, ClassNotFoundException {
-		InputStream input_stream = new BufferedInputStream(url.openStream());
-		if (zipped)
-			input_stream = new GZIPInputStream(input_stream);
-		ObjectInputStream obj_stream;
-
-		obj_stream = new ObjectInputStream(input_stream);
-		Object obj = obj_stream.readObject();
-		obj_stream.close();
-		return obj;
+        try (InputStream urlStream = url.openStream()) {
+            try (InputStream input_stream = zipped ? new GZIPInputStream(urlStream) : new BufferedInputStream(urlStream)) {
+                try (ObjectInputStream obj_stream = new ObjectInputStream(input_stream)) {
+                    Object obj = obj_stream.readObject();
+                    return obj;
+                }
+            }
+        }
 	}
 
 	public static URL makeURL(String location) {
 		try {
 			return tryMakeURL(location);
 		} catch (IOException e) {
-			throw new RuntimeException("Unusable location", e);
+			throw new UncheckedIOException("Unusable location", e);
 		}
 	}
 
@@ -144,7 +144,6 @@ System.out.println("loopback address = " + best_address);
 		URL url = Utils.class.getResource(location);
 		if (url == null)
 			throw new IOException(location + " not found");
-//		assert url != null: "Could not load file: " + location;
 		return url;
 	}
 

@@ -11,7 +11,7 @@ import com.oddlabs.tt.pathfinder.TargetTrackerAlgorithm;
 public final strictfp class GatherController extends Controller {
 	private final static int HARVEST_STATE = 0;
 	private final static int DROPOFF_STATE = 1;
-	
+
 	private final Unit unit;
 	private final Class supply_type;
 	private Supply supply;
@@ -28,7 +28,7 @@ public final strictfp class GatherController extends Controller {
 		return supply_type;
 	}
 
-        @Override
+    @Override
 	public String getKey() {
 		return super.getKey() + supply_type;
 	}

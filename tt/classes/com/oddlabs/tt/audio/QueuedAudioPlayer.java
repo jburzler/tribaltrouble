@@ -22,7 +22,7 @@ final strictfp class QueuedAudioPlayer extends AbstractAudioPlayer {
 
 	QueuedAudioPlayer(AudioSource source, AudioParameters<String> params) throws IOException {
 		super(source, params);
-		this.url = Utils.makeURL((String)params.sound);
+		this.url = Utils.makeURL(params.sound);
 		this.buffer_stream = new ByteBufferOutputStream(true);
 		if ((!params.music && !Settings.getSettings().play_sfx) || this.source == null) {
 			this.ogg_stream = null;

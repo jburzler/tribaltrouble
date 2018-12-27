@@ -23,7 +23,7 @@ import java.util.ResourceBundle;
 
 public final strictfp class NativeIsland2 extends Island {
 	private final ResourceBundle bundle = ResourceBundle.getBundle(NativeIsland2.class.getName());
-	
+
 	public NativeIsland2(Campaign campaign) {
 		super(campaign);
 	}
@@ -91,7 +91,7 @@ public final strictfp class NativeIsland2 extends Island {
                     getCampaign().victory(getViewer());
                 };
 		runnable = () -> {
-                    String message = Utils.getBundleString(bundle, "dialog1", new Object[]{captives.getUnitCountContainer().getNumSupplies()});
+                    String message = Utils.getBundleString(bundle, "dialog1", captives.getUnitCountContainer().getNumSupplies());
                     CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header1"),
                             message,
                             getCampaign().getIcons().getFaces()[0],

@@ -17,16 +17,16 @@ public final strictfp class RenderQueues {
 	private final Map<ResourceDescriptor, ShadowListKey> desc_to_shadow_key = new HashMap<>();
 	private final List<Texture> texture_lookup = new ArrayList<>();
 
-	public TextureKey registerTexture(ResourceDescriptor desc, int index) {
+	public TextureKey registerTexture(ResourceDescriptor<Texture[]> desc, int index) {
 		TextureKey key = new TextureKey(texture_lookup.size());
-		Texture[] textures = (Texture[])Resources.findResource(desc);
+		Texture[] textures = Resources.findResource(desc);
 		texture_lookup.add(textures[index]);
 		return key;
 	}
 
-	public TextureKey registerTexture(ResourceDescriptor desc) {
+	public TextureKey registerTexture(ResourceDescriptor<Texture> desc) {
 		TextureKey key = new TextureKey(texture_lookup.size());
-		texture_lookup.add((Texture)Resources.findResource(desc));
+		texture_lookup.add(Resources.findResource(desc));
 		return key;
 	}
 

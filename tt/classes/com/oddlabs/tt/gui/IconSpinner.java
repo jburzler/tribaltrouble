@@ -28,13 +28,13 @@ public abstract strictfp class IconSpinner extends GUIObject implements ToolTip 
 		setCanFocus(true);
 		setDim(icon_quad[0].getWidth(), icon_quad[0].getHeight());
 
-		String inc_str = Utils.getBundleString(bundle, "increase", new Object[]{shortcut_key});
+		String inc_str = Utils.getBundleString(bundle, "increase", shortcut_key);
 		button_plus = new IconSpinnerButton(Skin.getSkin().getPlusButton(), inc_str, this);
 		addChild(button_plus);
 		button_plus.setPos(0, 0);
 		button_plus.addMouseButtonListener(new IncreaseListener());
 
-		String dec_str = Utils.getBundleString(bundle, "decrease", new Object[]{shortcut_key});
+		String dec_str = Utils.getBundleString(bundle, "decrease", shortcut_key);
 		button_minus = new IconSpinnerButton(Skin.getSkin().getMinusButton(), dec_str, this);
 		addChild(button_minus);
 		button_minus.setPos(button_plus.getWidth(), 0);

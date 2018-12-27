@@ -29,8 +29,8 @@ public final strictfp class CreditsForm extends Form {
 		// about tab
 		TextBox about_box = new TextBox(400, 300, Skin.getSkin().getEditFont(), 100000);
 		about.addChild(about_box);
-		String about_text = Utils.getBundleString(bundle, "about_text", new Object[]{
-								Integer.toString(LocalInput.getRevision())});
+		String about_text = Utils.getBundleString(bundle, "about_text",
+								Integer.toString(LocalInput.getRevision()));
 		about_box.append(about_text);
 
 		about_box.place();

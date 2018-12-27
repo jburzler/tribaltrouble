@@ -4,7 +4,7 @@ import com.oddlabs.tt.model.Selectable;
 import com.oddlabs.tt.model.Unit;
 
 public final strictfp class AttackController extends Controller {
-	
+
 	private final Selectable target;
 	private final Unit unit;
 
@@ -18,7 +18,7 @@ public final strictfp class AttackController extends Controller {
 		return unit.isCloseEnough(unit.getRange(target), target);
 	}
 
-        @Override
+    @Override
 	public void decide() {
 		if (target.isDead() || !canAttack()) {
 			unit.popController();

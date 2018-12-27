@@ -83,11 +83,9 @@ public final strictfp class TextLineRenderer {
 	}
 
 	private int getQuadWidth(Quad quad) {
-		if (quad != null) {
-			return quad.getWidth() - font.getXBorder();
-		} else {
-			return 0;
-		}
+		return (quad != null)
+            ? quad.getWidth() - font.getXBorder()
+            : 0;
 	}
 
 	private boolean nearEnd(CharSequence text, int render_pos, int available) {

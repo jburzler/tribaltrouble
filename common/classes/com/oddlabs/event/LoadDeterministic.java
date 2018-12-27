@@ -1,11 +1,9 @@
 package com.oddlabs.event;
 
 import java.io.*;
-import java.net.URI;
 import java.nio.*;
 import java.nio.channels.*;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.zip.*;
 
 public final strictfp class LoadDeterministic extends Deterministic {
@@ -161,14 +159,15 @@ public final strictfp class LoadDeterministic extends Deterministic {
 
     protected Path log(Path p, Path def) {
         try {
-            URI path = logObject(def.toUri());
-            return Paths.get(path);
+            // Deserialize from File
+            File file = logObject(def.toFile());
+            return file.toPath();
         } catch(Throwable all) {
             return def;
         }
     }
 
-        @Override
+    @Override
 	protected <T> T logObject(T o) {
 		try (ObjectInputStream object_input_stream = new ObjectInputStream(byte_buffer_input_stream)) {
 			o = (T) object_input_stream.readObject();
@@ -178,7 +177,7 @@ public final strictfp class LoadDeterministic extends Deterministic {
                 return o;
 	}
 
-        @Override
+    @Override
 	protected void logBuffer(ByteBuffer b) {
 		boolean isdefault = isDefault(0);
 		assert !isdefault;

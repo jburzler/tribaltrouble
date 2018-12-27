@@ -134,7 +134,7 @@ public final strictfp class Skin {
 										   GL11.GL_LINEAR,
 										   GL11.GL_CLAMP,
 										   GL11.GL_CLAMP);
-		return (Texture)Resources.findResource(file);
+		return Resources.findResource(file);
 	}
 
 	private static Node getNodeByName(String name, Node n) {
@@ -264,7 +264,7 @@ public final strictfp class Skin {
 	private Font getFont(Node n) {
 		String path = n.getFirstChild().getNodeValue();
 		FontFile font_file = new FontFile(path);
-		return (Font)Resources.findResource(font_file);
+		return Resources.findResource(font_file);
 	}
 
 	public void bindTexture() {
@@ -518,7 +518,7 @@ public final strictfp class Skin {
 	public Quad[] getCancelButton() {
 		return cancel_button;
 	}
-	
+
 	public Quad[] getBackButton() {
 		return back_button;
 	}

@@ -15,7 +15,7 @@ import org.lwjgl.openal.OpenALException;
 public final strictfp class AudioManager implements AudioImplementation {
 	private final static int MAX_NUM_SOURCES = 32;
 
-	private final static AudioManager singleton = new AudioManager();
+	private final static AudioManager SINGLETON = new AudioManager();
 
 	private final List<AudioSource> ambients = new ArrayList<>();
 	private final RefillerList queued_players = new RefillerList();
@@ -24,7 +24,7 @@ public final strictfp class AudioManager implements AudioImplementation {
 	private int sound_play_counter = Settings.getSettings().play_sfx ? 1 : 0;
 
 	public static AudioManager getManager() {
-		return singleton;
+		return SINGLETON;
 	}
 
 	private AudioManager() {

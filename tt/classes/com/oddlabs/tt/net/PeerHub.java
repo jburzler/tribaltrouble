@@ -42,7 +42,7 @@ public final strictfp class PeerHub implements Animated, RouterHandler {
 	private final static int TICKS_PER_CHECKSUM = (int)(10/AnimationManager.ANIMATION_SECONDS_PER_TICK);
 
 	private static boolean waiting_for_ack = false;
-	
+
 	private final ARMIInterfaceMethods interface_methods = new ARMIInterfaceMethods(PeerHubInterface.class);
 	private final StateChecksum checksum = new StateChecksum();
 	private final PeerHubInterface peerhubs_interface;
@@ -205,7 +205,7 @@ public final strictfp class PeerHub implements Animated, RouterHandler {
 	public void start() {
 		is_synchronized = true;
 	}
-	
+
 	private Peer locatePeerFromPlayer(Player player) {
 		return (Peer)player_to_peer.get(player);
 	}
@@ -342,7 +342,7 @@ public final strictfp class PeerHub implements Animated, RouterHandler {
 		player_to_peer.remove(player);
 		int peer_index = peer.getPeerIndex();
 		removePeerFromActiveList(peer);
-		String left_game_message = Utils.getBundleString(bundle, "left_game", new Object[]{peer.getPlayerInfo().getName(), reason});
+		String left_game_message = Utils.getBundleString(bundle, "left_game", peer.getPlayerInfo().getName(), reason);
 		receiveChat(SYSTEM_NAME, left_game_message, false);
 		if (getFreeQuitTicksLeft(local_player.getWorld()) >= 0 && Network.getMatchmakingClient().isConnected())
 			Network.getMatchmakingClient().getInterface().gameQuitNotify(peer.getPlayerInfo().getName());

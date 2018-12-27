@@ -31,18 +31,19 @@ public final strictfp class ActionButtonPanel extends GUIObject implements Anima
 	private final static int GROUP_BOTTOM_OFFSET = 10;
 	private final static int GROUP_RIGHT_OFFSET = 10;
 	private final static int GROUP_TOP_OFFSET = 20;
-	private final Group unit_group;
-	private final Group peon_group;
-	private final Group chieftain_group;
-	private final Group tower_group;
-	private final Group quarters_status_group;
-	private final Group quarters_group;
-	private final Group status_group;
-	private final Group armory_group;
-	private final Group harvest_group;
-	private final Group build_group;
-	private final Group army_group;
-	private final Group transport_group;
+
+	private final Group unit_group = new NonFocusGroup();
+	private final Group peon_group = new NonFocusGroup();
+	private final Group chieftain_group = new NonFocusGroup();
+	private final Group tower_group = new NonFocusGroup();
+	private final Group quarters_status_group = new NonFocusGroup();
+	private final Group quarters_group = new NonFocusGroup();
+	private final Group status_group = new NonFocusGroup();
+	private final Group armory_group = new NonFocusGroup();
+	private final Group harvest_group = new NonFocusGroup();
+	private final Group build_group = new NonFocusGroup();
+	private final Group army_group = new NonFocusGroup();
+	private final Group transport_group = new NonFocusGroup();
 
 	private final NonFocusIconButton tower_attack_button;
 	private final NonFocusIconButton tower_exit_button;
@@ -132,19 +133,6 @@ public final strictfp class ActionButtonPanel extends GUIObject implements Anima
 		Icons icons = Icons.getIcons();
 		String widest_char = "" + skin.getEditFont().getWidestChar("0123456789");
 		int label_width = skin.getEditFont().getWidth(widest_char + widest_char + widest_char);
-
-		unit_group = new NonFocusGroup();
-		peon_group = new NonFocusGroup();
-		chieftain_group = new NonFocusGroup();
-		tower_group = new NonFocusGroup();
-		quarters_status_group = new NonFocusGroup();
-		quarters_group = new NonFocusGroup();
-		status_group = new NonFocusGroup();
-		armory_group = new NonFocusGroup();
-		harvest_group = new NonFocusGroup();
-		build_group = new NonFocusGroup();
-		army_group = new NonFocusGroup();
-		transport_group = new NonFocusGroup();
 
 		move_button = new NonFocusIconButton(race_icons.getMoveIcon(), formatTip("move_tip", "M"));
 		move_button.setIconDisabler(() -> !viewer.getLocalPlayer().canMove());

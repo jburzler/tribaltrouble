@@ -26,7 +26,7 @@ public final strictfp class CreateChatRoomForm extends Form {
 	private final SelectGameMenu menu;
 	private final ResourceBundle bundle = ResourceBundle.getBundle(CreateChatRoomForm.class.getName());
 	private final GUIRoot gui_root;
-	
+
 	public CreateChatRoomForm(GUIRoot gui_root, Menu main_menu, SelectGameMenu menu) {
 		this.gui_root = gui_root;
 		this.main_menu = main_menu;
@@ -41,7 +41,7 @@ public final strictfp class CreateChatRoomForm extends Form {
 				MatchmakingServerInterface.ALLOWED_ROOM_CHARS,
 				EditLine.LEFT_ALIGNED);
 		editline_name.addEnterListener(new OKListener());
-		
+
 		addChild(label_name);
 		addChild(editline_name);
 
@@ -50,7 +50,7 @@ public final strictfp class CreateChatRoomForm extends Form {
 		button_ok.addMouseClickListener(new OKListener());
 		ButtonObject button_cancel = new CancelButton(BUTTON_WIDTH);
 		button_cancel.addMouseClickListener(new CancelListener(this));
-		
+
 		addChild(button_ok);
 		addChild(button_cancel);
 
@@ -62,7 +62,7 @@ public final strictfp class CreateChatRoomForm extends Form {
 		button_ok.place(button_cancel, LEFT_MID);
 		compileCanvas();
 	}
-	
+
         @Override
 	public void setFocus() {
 		editline_name.setFocus();
@@ -76,7 +76,7 @@ public final strictfp class CreateChatRoomForm extends Form {
 	private void create() {
 		String name = editline_name.getContents();
 		if (name.length() < MatchmakingServerInterface.MIN_ROOM_NAME_LENGTH) {
-			String min_name_error = Utils.getBundleString(bundle, "min_name_error", new Object[]{MatchmakingServerInterface.MIN_ROOM_NAME_LENGTH});
+			String min_name_error = Utils.getBundleString(bundle, "min_name_error", MatchmakingServerInterface.MIN_ROOM_NAME_LENGTH);
 			gui_root.addModalForm(new MessageForm(min_name_error));
 		} else {
 			Network.getMatchmakingClient().joinRoom(gui_root, name);

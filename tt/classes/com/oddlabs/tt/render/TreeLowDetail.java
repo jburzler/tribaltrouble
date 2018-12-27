@@ -41,8 +41,8 @@ public final strictfp class TreeLowDetail {
 
 	public TreeLowDetail(World world, Tree[] trees, LowDetailModel[] tree_low_details, List<int[]> tree_positions, List<int[]> palm_tree_positions, int terrain_type) {
 		lowdetail_textures = new Texture[]{
-			(Texture)Resources.findResource(new TextureFile("/textures/models/lowdetail_tree", Globals.COMPRESSED_RGBA_FORMAT)),
-				(Texture)Resources.findResource(new TextureFile("/textures/models/viking_lowdetail_tree", Globals.COMPRESSED_RGBA_FORMAT))};
+			Resources.findResource(new TextureFile("/textures/models/lowdetail_tree", Globals.COMPRESSED_RGBA_FORMAT)),
+				Resources.findResource(new TextureFile("/textures/models/viking_lowdetail_tree", Globals.COMPRESSED_RGBA_FORMAT))};
 		int[] num_trees;
 		switch (terrain_type) {
 			case Landscape.NATIVE:

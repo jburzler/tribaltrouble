@@ -6,13 +6,15 @@ import com.oddlabs.tt.model.Unit;
 public final strictfp class AttackBehaviour implements Behaviour {
 	private final static float SECONDS_PER_ATTACK = 2f;
 
-	private final static int THROWING = 1;
-	private final static int RELEASED = 2;
+    enum AttackState {
+        THROWING,
+        RELEASED
+    }
 
 	private final Selectable target;
 	private final Unit unit;
 	private float anim_time;
-	private int state;
+	private AttackState state;
 
 	public AttackBehaviour(Unit unit, Selectable target) {
 		this.unit = unit;
@@ -20,12 +22,12 @@ public final strictfp class AttackBehaviour implements Behaviour {
 		init();
 	}
 
-        @Override
+    @Override
 	public boolean isBlocking() {
 		return true;
 	}
 
-        @Override
+    @Override
 	public int animate(float t) {
 		switch (state) {
 			case THROWING:
@@ -37,7 +39,7 @@ public final strictfp class AttackBehaviour implements Behaviour {
 						unit.getWeaponFactory().attack(unit, target);
 
 					anim_time += SECONDS_PER_ATTACK - unit.getWeaponFactory().getSecondsPerRelease(1f/SECONDS_PER_ATTACK);
-					state = RELEASED;
+					state = AttackState.RELEASED;
 				}
 				return Selectable.UNINTERRUPTIBLE;
 			case RELEASED:
@@ -57,12 +59,12 @@ public final strictfp class AttackBehaviour implements Behaviour {
 	}
 
 	private void init() {
-		state = THROWING;
+		state = AttackState.THROWING;
 		anim_time += unit.getWeaponFactory().getSecondsPerRelease(1f/SECONDS_PER_ATTACK);
 		unit.switchAnimation(1f/SECONDS_PER_ATTACK, Unit.ANIMATION_THROWING);
 	}
 
-        @Override
+    @Override
 	public void forceInterrupted() {
 	}
 }

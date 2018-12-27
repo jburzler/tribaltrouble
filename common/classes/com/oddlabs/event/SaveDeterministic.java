@@ -118,7 +118,8 @@ public final strictfp class SaveDeterministic extends Deterministic {
 
     protected Path log(Path p, Path def) {
         try {
-            logObject(p.toUri());
+            // For bacwards compatibility we convert to Serializable File
+            logObject((Serializable) p.toFile());
             return p;
         } catch(Throwable all) {
             return def;

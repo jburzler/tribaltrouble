@@ -11,11 +11,11 @@ import org.lwjgl.opengl.GL11;
 final strictfp class SelectableShadowRenderer extends ShadowListRenderer {
 	private final Texture[] halos;
 
-	private final List selection_list = new ArrayList();
-	private final List shadowed_list = new ArrayList();
+	private final List<ModelState> selection_list = new ArrayList<>();
+	private final List<ModelState> shadowed_list = new ArrayList<>();
 
-	public SelectableShadowRenderer(ResourceDescriptor halos_desc) {
-		halos = (Texture[])Resources.findResource(halos_desc);
+	public SelectableShadowRenderer(ResourceDescriptor<Texture[]> halos_desc) {
+		halos = Resources.findResource(halos_desc);
 	}
 
 	public void addToSelectionList(ModelState model) {

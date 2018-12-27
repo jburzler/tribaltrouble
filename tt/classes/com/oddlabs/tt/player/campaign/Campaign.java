@@ -87,7 +87,7 @@ public abstract class Campaign {
 	}
 
 	private void doFailed(Throwable e, WorldViewer viewer) {
-		String failed_message = Utils.getBundleString(bundle, "failed_message", new Object[]{LoadCampaignBox.SAVEGAMES_FILE_NAME, e.getMessage()});
+		String failed_message = Utils.getBundleString(bundle, "failed_message", LoadCampaignBox.SAVEGAMES_FILE_NAME, e.getMessage());
 		viewer.getGUIRoot().addModalForm(new MessageForm(failed_message));
 	}
 

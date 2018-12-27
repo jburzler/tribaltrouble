@@ -3,7 +3,9 @@ package com.oddlabs.tt.global;
 import com.oddlabs.tt.util.GLUtils;
 import org.lwjgl.opengl.GL11;
 
-// Class that initializes all static data in Globals - must be called once before anything else
+/**
+ * Class that initializes all static data in Globals - must be called once before anything else
+ */
 public final strictfp class GlobalsInit {
 	public static void init() {
 		initTextureSize();

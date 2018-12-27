@@ -12,7 +12,7 @@ public strictfp abstract class Controller {
 		for (int i = 0; i < give_up_counters.length; i++)
 			give_up_counters[i] = 0;
 	}
-	
+
 	public final void resetGiveUpCounter(int state_index) {
 		give_up_counters[state_index] = 0;
 	}
@@ -27,7 +27,7 @@ public strictfp abstract class Controller {
 	}
 
 	public String getKey() {
-		return "" + getClass().hashCode();
+		return Integer.toString(getClass().hashCode());
 	}
 
 	public abstract void decide();

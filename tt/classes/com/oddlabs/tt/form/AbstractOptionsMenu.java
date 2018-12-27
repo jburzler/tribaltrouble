@@ -136,7 +136,7 @@ public abstract strictfp class AbstractOptionsMenu extends Form {
 		// Hardware cursor
 		Group group_hardware_cursor = new Group();
 		display.addChild(group_hardware_cursor);
-		CheckBox cb_hardware_cursor = new CheckBox(Settings.getSettings().use_native_cursor, Utils.getBundleString(bundle, "hardware_cursor"), Utils.getBundleString(bundle, "hardware_cursor_tip", new Object[]{"Ctrl-H"}));
+		CheckBox cb_hardware_cursor = new CheckBox(Settings.getSettings().use_native_cursor, Utils.getBundleString(bundle, "hardware_cursor"), Utils.getBundleString(bundle, "hardware_cursor_tip", "Ctrl-H"));
 		cb_hardware_cursor.addCheckBoxListener(new CBHardwareCursor());
 		group_hardware_cursor.addChild(cb_hardware_cursor);
 		cb_hardware_cursor.place();
@@ -155,7 +155,7 @@ public abstract strictfp class AbstractOptionsMenu extends Form {
 		// Aggressive units
 		Group group_aggressive_units = new Group();
 		general.addChild(group_aggressive_units);
-		CheckBox cb_aggressive_units = new CheckBox(Settings.getSettings().aggressive_units, Utils.getBundleString(bundle, "aggressive_units"), Utils.getBundleString(bundle, "aggressive_units_tip", new Object[]{"Ctrl-A"}));
+		CheckBox cb_aggressive_units = new CheckBox(Settings.getSettings().aggressive_units, Utils.getBundleString(bundle, "aggressive_units"), Utils.getBundleString(bundle, "aggressive_units_tip", "Ctrl-A"));
 		cb_aggressive_units.addCheckBoxListener(new CBAggressiveUnits());
 		group_aggressive_units.addChild(cb_aggressive_units);
 		cb_aggressive_units.place();

@@ -10,7 +10,7 @@ public final strictfp class IconSpinnerButton extends NonFocusIconButton {
 		this.owner = owner;
 	}
 
-        @Override
+    @Override
 	public void appendToolTip(ToolTipBox tool_tip_box) {
 		if (isDisabled())
 			owner.appendToolTip(tool_tip_box);

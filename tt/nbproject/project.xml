@@ -5,6 +5,7 @@
         <data xmlns="http://www.netbeans.org/ns/j2se-project/3">
             <name>Tribal Trouble Client</name>
             <source-roots>
+                <root id="src.classes2.dir" name="Tools"/>
                 <root id="src.dir"/>
                 <root id="src.classes.dir" name="Common"/>
             </source-roots>

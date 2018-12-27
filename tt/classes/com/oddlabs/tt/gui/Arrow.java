@@ -9,7 +9,7 @@ import org.lwjgl.opengl.GL11;
 public final strictfp class Arrow extends GUIObject {
 	private final static float SECONDS_PER_FLASH = .5f;
 	private final static float COLOR_DELTA = .5f;
-	
+
 	private final float target_x;
 	private final float target_y;
 	private final float target_z;
@@ -31,7 +31,7 @@ public final strictfp class Arrow extends GUIObject {
 		displayChangedNotify(LocalInput.getViewWidth(), LocalInput.getViewHeight());
 	}
 
-        @Override
+    @Override
 	protected void displayChangedNotify(int width, int height) {
 		setDim(width, height);
 	}
@@ -47,7 +47,7 @@ public final strictfp class Arrow extends GUIObject {
 		return point;
 	}
 
-        @Override
+    @Override
 	protected void renderGeometry() {
 		StrictVector4f result = project3DTo2D(target_x, target_y, target_z);
 		float x = result.x;
