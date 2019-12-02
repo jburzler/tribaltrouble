@@ -181,20 +181,21 @@ System.out.println("indices.remaining() = " + indices.remaining());*/
 		int end_quad_x = end_x>>quad_size_exp;
 		int end_quad_y = end_y>>quad_size_exp;
 		LandscapeTileTriangle[][] quads = quad_to_planes[lod];
-		for (int x = start_quad_x; x <= end_quad_x; x++)
-			for (int y = start_quad_y; y <= end_quad_y; y++) {
-				LandscapeTileTriangle[] quad = quads[getQuadIndex(num_quads_exp, x, y)];
-				LandscapeTileTriangle north = quad[LandscapeTileTriangle.NORTH_EXP];
-				LandscapeTileTriangle south = quad[LandscapeTileTriangle.SOUTH_EXP];
-				LandscapeTileTriangle east = quad[LandscapeTileTriangle.EAST_EXP];
-				LandscapeTileTriangle west = quad[LandscapeTileTriangle.WEST_EXP];
-				north.addIndices(buffer, border_set);
-				south.addIndices(buffer, border_set);
-				if (east != north && east != south) {
-					east.addIndices(buffer, border_set);
-					west.addIndices(buffer, border_set);
-				}
-			}
+		for (int x = start_quad_x; x <= end_quad_x; x++) {
+            for (int y = start_quad_y; y <= end_quad_y; y++) {
+                LandscapeTileTriangle[] quad = quads[getQuadIndex(num_quads_exp, x, y)];
+                LandscapeTileTriangle north = quad[LandscapeTileTriangle.NORTH_EXP];
+                LandscapeTileTriangle south = quad[LandscapeTileTriangle.SOUTH_EXP];
+                LandscapeTileTriangle east = quad[LandscapeTileTriangle.EAST_EXP];
+                LandscapeTileTriangle west = quad[LandscapeTileTriangle.WEST_EXP];
+                north.addIndices(buffer, border_set);
+                south.addIndices(buffer, border_set);
+                if (east != north && east != south) {
+                    east.addIndices(buffer, border_set);
+                    west.addIndices(buffer, border_set);
+                }
+            }
+        }
 	}
 
 	float getHeight(int lod, float x, float y) {

@@ -63,7 +63,7 @@ public strictfp abstract class LinearEmitter extends Emitter {
 	public final void setDeltaColor(Vector4f delta_color) {
 		this.delta_color = delta_color;
 	}
-	
+
 	public final void setEnergy(float energy) {
 		this.energy = energy;
 	}
@@ -100,15 +100,15 @@ public strictfp abstract class LinearEmitter extends Emitter {
 		float z_min = Float.POSITIVE_INFINITY;
 		float z_max = Float.NEGATIVE_INFINITY;
 
-		List[] particles = getParticles();
+		List<Particle>[] particles = getParticles();
 		int size = 0;
 
-            for (List particle1 : particles) {
+            for (List<Particle> particle1 : particles) {
                 for (int i = 0; i < particle1.size(); i++) {
                     LinearParticle particle = (LinearParticle) particle1.get(i);
                     if (particle.getEnergy() > 0f) {
                         particle.update(t);
-                        
+
                         float x = particle.getPosX();
                         float y = particle.getPosY();
                         float z = particle.getPosZ();
@@ -117,7 +117,7 @@ public strictfp abstract class LinearEmitter extends Emitter {
                             particle.setPos(x, y, landscape_z + particle.getRadiusZ() + offset_z);
                             particle.setVelocity(particle.getVelocityX()*friction, particle.getVelocityY()*friction, -particle.getVelocityZ()*friction);
                         }
-                        
+
                         float radius_x = particle.getRadiusX()*SQRT_2;
                         float radius_y = particle.getRadiusY()*SQRT_2;
                         float radius_z = particle.getRadiusZ()*SQRT_2;

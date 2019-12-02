@@ -78,14 +78,13 @@ public final strictfp class AudioManager implements AudioImplementation {
 	private static AbstractAudioPlayer doNewAudio(AudioSource source, AudioParameters<?> params) {
 		if (params.sound instanceof Audio)
 			return new AudioPlayer(source, (AudioParameters<Audio>) params);
-        else if (params.sound instanceof String)
-			try {
-                return new QueuedAudioPlayer(source, (AudioParameters<String>) params);
+        else if (params.sound instanceof String) try {
+            return new QueuedAudioPlayer(source, (AudioParameters<String>) params);
         } catch (IOException ex) {
             throw new IllegalArgumentException("Could not load " + params.sound, ex);
-        }
-        else
+        } else {
             throw new IllegalArgumentException("Unrecognized audio parameters : " + params.sound.getClass().getSimpleName());
+        }
 	}
 
 	public void startSources() {

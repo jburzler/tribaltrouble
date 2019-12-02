@@ -24,23 +24,23 @@ public final strictfp class JumpDelegate extends InGameDelegate {
 		this.runnable = runnable;
 	}
 
-        @Override
+    @Override
 	public void keyPressed(KeyboardEvent event) {
 	}
 
-        @Override
+    @Override
 	public void keyRepeat(KeyboardEvent event) {
 	}
 
-        @Override
+    @Override
 	public void keyReleased(KeyboardEvent event) {
 	}
 
-        @Override
+    @Override
 	public void mouseScrolled(int amount) {
 	}
 
-        @Override
+    @Override
 	public void doRemove() {
 		super.doRemove();
 		if (runnable != null)

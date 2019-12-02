@@ -16,8 +16,9 @@ public final strictfp class SpriteList {
 		SpriteInfo[] sprite_infos = (SpriteInfo[])sprites_and_animations[0];
 		AnimationInfo[] animation_infos = (AnimationInfo[])sprites_and_animations[1];
 		bounds = new BoundingBox[animation_infos.length];
-		for (int i = 0; i < bounds.length; i++)
-			bounds[i] = new BoundingBox();
+		for (int i = 0; i < bounds.length; i++) {
+            bounds[i] = new BoundingBox();
+        }
 		sprites = new Sprite[sprite_infos.length];
 		float[] cpw_array = new float[animation_infos.length];
 		type_array = new int[animation_infos.length];
@@ -27,8 +28,9 @@ public final strictfp class SpriteList {
 			type_array[i] = animation_infos[i].getType();
 			animation_length_array[i] = animation_infos[i].getFrames().length;
 		}
-		for (int i = 0; i < sprites.length; i++)
-			sprites[i] = new Sprite(sprite_infos[i], animation_infos, sprite_file.hasAlpha(), sprite_file.isLighted(), sprite_file.isCulled(), sprite_file.hasModulateColor(), sprite_file.hasMaxAlpha(), sprite_file.getMipmapCutoff(), bounds, cpw_array, type_array, animation_length_array);
+		for (int i = 0; i < sprites.length; i++) {
+            sprites[i] = new Sprite(sprite_infos[i], animation_infos, sprite_file.hasAlpha(), sprite_file.isLighted(), sprite_file.isCulled(), sprite_file.hasModulateColor(), sprite_file.hasMaxAlpha(), sprite_file.getMipmapCutoff(), bounds, cpw_array, type_array, animation_length_array);
+        }
             for (BoundingBox bound : bounds) {
                 bound.maximizeXYPlane();
             }

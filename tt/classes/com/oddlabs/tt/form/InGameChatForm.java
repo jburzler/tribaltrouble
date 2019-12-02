@@ -10,7 +10,6 @@ import com.oddlabs.tt.gui.RadioButtonGroup;
 import com.oddlabs.tt.gui.Skin;
 import com.oddlabs.tt.gui.TextBox;
 import com.oddlabs.tt.guievent.EnterListener;
-import com.oddlabs.tt.guievent.MouseClickListener;
 import com.oddlabs.tt.net.ChatCommand;
 import com.oddlabs.tt.net.ChatListener;
 import com.oddlabs.tt.net.ChatMessage;
@@ -52,7 +51,9 @@ public final strictfp class InGameChatForm extends Form implements ChatListener 
 
 		HorizButton button_send = new HorizButton(Utils.getBundleString(bundle, "send"), BUTTON_WIDTH);
 		addChild(button_send);
-		button_send.addMouseClickListener(new SendListener());
+		button_send.addMouseClickListener((int button, int x, int y, int clicks) -> {
+			chat_line.enterPressedAll();
+		});
 
 		chat_box = new TextBox(CHAT_WIDTH + BUTTON_WIDTH, CHAT_HEIGHT, Skin.getSkin().getEditFont(), -1);
 		addChild(chat_box);
@@ -74,59 +75,56 @@ public final strictfp class InGameChatForm extends Form implements ChatListener 
 		Network.getMatchmakingClient().clearInGameChatHistory();
 	}
 
-        @Override
+    @Override
 	protected void doAdd() {
 		super.doAdd();
 		Network.getChatHub().addListener(this);
 		refreshMessages();
 	}
 
-        @Override
+    @Override
 	protected void doRemove() {
 		super.doRemove();
 		Network.getChatHub().removeListener(this);
 	}
 
 	public void setReceivers(boolean all) {
-		if (all)
-			radio_button_group.mark(radio_all);
-		else
-			radio_button_group.mark(radio_team);
+		radio_button_group.mark(all ? radio_all : radio_team);
 	}
 
-        @Override
+    @Override
 	public void setFocus() {
 		chat_line.setFocus();
 	}
 
-        @Override
+    @Override
 	public void chat(ChatMessage message) {
 		refreshMessages();
 	}
 
 	private void refreshMessages() {
-		List messages = Network.getMatchmakingClient().getInGameChatHistory();
+		List<String> messages = Network.getMatchmakingClient().getInGameChatHistory();
 		chat_box.clear();
 		for (int i = 0; i < messages.size(); i++) {
 			if (i != 0)
 				chat_box.append("\n");
-			chat_box.append((String)messages.get(i));
+			chat_box.append(messages.get(i));
 		}
 		chat_box.setOffsetY(Integer.MAX_VALUE);
 	}
 
-        @Override
+    @Override
 	public void mouseMoved(int x, int y) {
 		((ControllableCameraDelegate)getParent()).mouseMoved(x, y);
 	}
 
 	private strictfp final class ChatListener implements EnterListener {
-                @Override
+        @Override
 		public void enterPressed(CharSequence text) {
 			String chat = text.toString();
 			if (!chat.isEmpty()) {
 				chat_line.clear();
-				Map commands = new HashMap();
+				Map<String,ChatMethod> commands = new HashMap<>();
 				ChatMethod cheat = (InfoPrinter info_printer1, String text1) -> {
                                     viewer.getCheat().enable();
                                 };
@@ -137,13 +135,6 @@ public final strictfp class InGameChatForm extends Form implements ChatListener 
 			} else {
 				cancel();
 			}
-		}
-	}
-
-	private strictfp final class SendListener implements MouseClickListener {
-                @Override
-		public void mouseClicked(int button, int x, int y, int clicks) {
-			chat_line.enterPressedAll();
 		}
 	}
 }

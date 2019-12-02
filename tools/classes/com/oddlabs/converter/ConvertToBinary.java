@@ -2,8 +2,6 @@ package com.oddlabs.converter;
 
 import java.io.*;
 import java.util.*;
-import java.net.*;
-import java.util.zip.*;
 import javax.xml.parsers.*;
 import org.w3c.dom.*;
 import com.oddlabs.geometry.*;
@@ -11,13 +9,12 @@ import com.oddlabs.geometry.*;
 public final strictfp class ConvertToBinary {
 	public final static void main(String[] args) {
 		if (args.length != 3)
-			throw new RuntimeException("Invalid number of argument");
+			throw new RuntimeException("Invalid number of arguments : <xml_file> <src_dir> <build_dir>");
 		String xml_file = args[0];
 		String src_dir = args[1];
 		String build_dir = args[2];
 
-		try {
-			FileInputStream input_stream = new FileInputStream(src_dir + File.separatorChar + xml_file);
+		try (FileInputStream input_stream = new FileInputStream(src_dir + File.separatorChar + xml_file)) {
 			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 			factory.setValidating(true);
 			DocumentBuilder builder = factory.newDocumentBuilder();
@@ -30,16 +27,17 @@ public final strictfp class ConvertToBinary {
 		}
 	}
 
-	private final static void parseGeometry(Node n, String src_dir, String build_dir) {
+	private static void parseGeometry(Node n, String src_dir, String build_dir) {
 		if (n.hasChildNodes()) {
 			NodeList nl = n.getChildNodes();
-			for (int i = 0; i < nl.getLength(); i++)
-				if (nl.item(i).getNodeType() == Node.ELEMENT_NODE)
-					parseGroup(nl.item(i), src_dir, build_dir);
+			for (int i = 0; i < nl.getLength(); i++) {
+                if (nl.item(i).getNodeType() == Node.ELEMENT_NODE)
+                    parseGroup(nl.item(i), src_dir, build_dir);
+            }
 		}
 	}
 
-	private final static void parseGroup(Node n, String src_dir, String build_dir) {
+	private static void parseGroup(Node n, String src_dir, String build_dir) {
 		if (n.hasChildNodes()) {
 			String new_build_dir = build_dir + File.separatorChar + getName(n);
 			NodeList nl = n.getChildNodes();
@@ -56,13 +54,13 @@ public final strictfp class ConvertToBinary {
 		}
 	}
 
-	private final static boolean isModified(File src, File dest) {
+	private static boolean isModified(File src, File dest) {
 		return !dest.exists() || dest.lastModified() < src.lastModified();
 	}
 
-	private final static ModelObjectInfo[] getModelObjectInfos(Node n, String src_dir) {
+	private static ModelObjectInfo[] getModelObjectInfos(Node n, String src_dir) {
 		NodeList nl = n.getChildNodes();
-		List object_infos = new ArrayList();
+		List<ModelObjectInfo> object_infos = new ArrayList<>();
 		for (int i = 0; i < nl.getLength(); i++) {
 			Node item = nl.item(i);
 			if (item.getNodeName().equals("model")) {
@@ -74,13 +72,12 @@ public final strictfp class ConvertToBinary {
 			}
 		}
 		ModelObjectInfo[] infos = new ModelObjectInfo[object_infos.size()];
-		object_infos.toArray(infos);
-		return infos;
+		return object_infos.toArray(infos);
 	}
 
-	private final static AnimObjectInfo[] getAnimObjectInfos(Node n, String src_dir) {
+	private static AnimObjectInfo[] getAnimObjectInfos(Node n, String src_dir) {
 		NodeList nl = n.getChildNodes();
-		List object_infos = new ArrayList();
+		List<AnimObjectInfo> object_infos = new ArrayList<>();
 		for (int i = 0; i < nl.getLength(); i++) {
 			Node item = nl.item(i);
 			if (item.getNodeName().equals("animation")) {
@@ -92,13 +89,12 @@ public final strictfp class ConvertToBinary {
 			}
 		}
 		AnimObjectInfo[] infos = new AnimObjectInfo[object_infos.size()];
-		object_infos.toArray(infos);
-		return infos;
+		return object_infos.toArray(infos);
 	}
 
-	private final static String[][] getTextureInfos(Node n, String src_dir) {
+	private static String[][] getTextureInfos(Node n, String src_dir) {
 		NodeList nl = n.getChildNodes();
-		List object_infos = new ArrayList();
+		List<String[]> object_infos = new ArrayList<>();
 		for (int i = 0; i < nl.getLength(); i++) {
 			Node item = nl.item(i);
 			if (item.getNodeName().equals("texture")) {
@@ -113,29 +109,28 @@ public final strictfp class ConvertToBinary {
 			}
 		}
 		String[][] infos = new String[object_infos.size()][];
-		object_infos.toArray(infos);
-		return infos;
+		return object_infos.toArray(infos);
 	}
 
-	private final static void parseSprite(Node n, String src_dir, String build_dir) {
+	private static void parseSprite(Node n, String src_dir, String build_dir) {
 		String name = getName(n);
 		AnimObjectInfo[] anim_object_infos = getAnimObjectInfos(n, src_dir);
 		ModelObjectInfo[] model_object_infos = getModelObjectInfos(n, src_dir);
 		File build_file = new File(build_dir + File.separatorChar + name + ".binsprite");
 
 		boolean modified = false;
-		for (int i = 0; i < anim_object_infos.length; i++) {
-			if (isModified(anim_object_infos[i].getFile(), build_file)) {
-				modified = true;
-				break;
-			}
-		}
-		for (int i = 0; i < model_object_infos.length; i++) {
-			if (isModified(model_object_infos[i].getFile(), build_file)) {
-				modified = true;
-				break;
-			}
-		}
+        for (AnimObjectInfo anim_object_info : anim_object_infos) {
+            if (isModified(anim_object_info.getFile(), build_file)) {
+                modified = true;
+                break;
+            }
+        }
+        for (ModelObjectInfo model_object_info : model_object_infos) {
+            if (isModified(model_object_info.getFile(), build_file)) {
+                modified = true;
+                break;
+            }
+        }
 		if (modified) {
 			float scale;
 			Node scale_node = n.getAttributes().getNamedItem("scale");
@@ -145,14 +140,14 @@ public final strictfp class ConvertToBinary {
 				scale = 1f;
 			ObjectInfo skeleton_info = getSkeletonObjectInfo(n, src_dir);
 			AnimationInfo[] animations;
-			Map name_to_bone_map;
+			Map<String,Bone> name_to_bone_map;
 			if (skeleton_info != null) {
 				Skeleton skeleton = SkeletonLoader.loadSkeleton(getSkeletonObjectInfo(n, src_dir).getFile());
 				name_to_bone_map = skeleton.getNameToBoneMap();
 				animations = new AnimationInfo[anim_object_infos.length];
 				for (int i = 0; i < anim_object_infos.length; i++) {
 					AnimObjectInfo current = anim_object_infos[i];
-					Map[] animation_map = AnimationLoader.loadAnimation(current.getFile());
+					Map<String,float[]>[] animation_map = AnimationLoader.loadAnimation(current.getFile());
 					assert animations[i] == null;
 					animations[i] = Optimizer.convertToAnimation(skeleton.getBoneRoot(), skeleton.getInitialPose(), animation_map, current.getType(), current.getWPC());
 				}
@@ -172,7 +167,7 @@ public final strictfp class ConvertToBinary {
 		}
 	}
 
-	private final static ObjectInfo getSkeletonObjectInfo(Node n, String src_dir) {
+	private static ObjectInfo getSkeletonObjectInfo(Node n, String src_dir) {
 		NodeList nl = n.getChildNodes();
 		for (int i = 0; i < nl.getLength(); i++) {
 			Node item = nl.item(i);
@@ -183,7 +178,7 @@ public final strictfp class ConvertToBinary {
 		return null;
 	}
 
-	private final static void parseLowDetail(Node n, String src_dir, String build_dir) {
+	private static void parseLowDetail(Node n, String src_dir, String build_dir) {
 		String name = getName(n);
 		ObjectInfo object_info = getModelObjectInfos(n, src_dir)[0];
 		File build_file = new File(build_dir + File.separatorChar + name + ".binlowdetail");
@@ -204,39 +199,40 @@ public final strictfp class ConvertToBinary {
 		throw new RuntimeException("Missing node: " + name);
 	}
 
-	private final static String getName(Node n) {
+	private static String getName(Node n) {
 		return n.getAttributes().getNamedItem("name").getNodeValue();
 	}
 
-	private final static int getInt(Node n, String key) {
+	private static int getInt(Node n, String key) {
 		String string = n.getAttributes().getNamedItem(key).getNodeValue();
 		return Integer.parseInt(string);
 	}
 
-	private final static int getTypeFromString(String str) {
-		if (str.equals("loop"))
-			return AnimationInfo.ANIM_LOOP;
-		else if (str.equals("plain"))
-			return AnimationInfo.ANIM_PLAIN;
-		else
-			throw new RuntimeException("Unknown animation type: " + str);
+	private static int getTypeFromString(String str) {
+        switch (str) {
+            case "loop":
+                return AnimationInfo.ANIM_LOOP;
+            case "plain":
+                return AnimationInfo.ANIM_PLAIN;
+            default:
+                throw new RuntimeException("Unknown animation type: " + str);
+        }
 	}
 
-	private final static String getText(Node n) {
+	private static String getText(Node n) {
 		return n.getFirstChild().getNodeValue().trim();
 	}
 
-	private final static void write(Object output, File file) {
+	private static void write(Object output, File file) {
 		System.err.println("Saving to " + file);
-		FileOutputStream file_stream;
-		ObjectOutputStream obj_stream;
 
 		try {
 			file.getParentFile().mkdirs();
-			file_stream = new FileOutputStream(file);
-			obj_stream = new ObjectOutputStream(new BufferedOutputStream(file_stream));
-			obj_stream.writeObject(output);
-			obj_stream.close();
+			try (FileOutputStream file_stream = new FileOutputStream(file)) {
+                try (ObjectOutputStream obj_stream = new ObjectOutputStream(new BufferedOutputStream(file_stream))) {
+                    obj_stream.writeObject(output);
+                }
+            }
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

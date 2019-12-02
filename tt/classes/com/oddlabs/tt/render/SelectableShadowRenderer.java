@@ -34,13 +34,13 @@ final strictfp class SelectableShadowRenderer extends ShadowListRenderer {
 		GL11.glColor3f(1f, 1f, 1f);
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, halos[GeneratorHalos.SHADOWED].getHandle());
 		for (int i = 0; i < shadowed_list.size(); i++) {
-			ModelState model = (ModelState)shadowed_list.get(i);
+			ModelState model = shadowed_list.get(i);
 			shadowed_list.set(i, null);
 			renderShadow(renderer, model.getModel().getShadowDiameter(), model.getModel().getPositionX(), model.getModel().getPositionY());
 		}
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, halos[GeneratorHalos.SELECTED].getHandle());
 		for (int i = 0; i < selection_list.size(); i++) {
-			ModelState model = (ModelState)selection_list.get(i);
+			ModelState model = selection_list.get(i);
 			selection_list.set(i, null);
 			float[] color = model.getSelectionColor();
 			GL11.glColor3f(color[0], color[1], color[2]);

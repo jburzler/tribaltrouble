@@ -6,7 +6,7 @@ import com.oddlabs.tt.pathfinder.Region;
 import com.oddlabs.tt.player.Player;
 import java.util.List;
 
-public final strictfp class BuildingFinder implements FinderFilter {
+public final strictfp class BuildingFinder implements FinderFilter<Building> {
 	private final Player owner;
 	private final int abilities;
 
@@ -15,19 +15,18 @@ public final strictfp class BuildingFinder implements FinderFilter {
 		this.abilities = abilities;
 	}
 
-        @Override
-	public Occupant getOccupantFromRegion(Region region, boolean one_region) {
-		List buildings = region.getObjects(Building.class);
-		for (int i = 0; i < buildings.size(); i++) {
-			Building b = (Building)buildings.get(i);
+    @Override
+	public Building getOccupantFromRegion(Region region, boolean one_region) {
+		List<Building> buildings = region.getObjects(Building.class);
+		for (Building b : buildings) {
 			if (accept(b))
 				return b;
 		}
 		return null;
 	}
 
-        @Override
-	public Occupant getBest() {
+    @Override
+	public Building getBest() {
 		return null;
 	}
 
@@ -35,11 +34,10 @@ public final strictfp class BuildingFinder implements FinderFilter {
 		return building.getOwner() == owner && building.getAbilities().hasAbilities(abilities);
 	}
 
-        @Override
+    @Override
 	public boolean acceptOccupant(Occupant occ) {
 		if (occ instanceof Building) {
-			Building occ_building = (Building)occ;
-			return accept(occ_building);
+			return accept((Building) occ);
 		} else
 			return false;
 	}

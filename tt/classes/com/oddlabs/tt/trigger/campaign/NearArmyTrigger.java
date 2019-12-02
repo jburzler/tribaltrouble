@@ -1,6 +1,5 @@
 package com.oddlabs.tt.trigger.campaign;
 
-import com.oddlabs.tt.model.Selectable;
 import com.oddlabs.tt.model.Unit;
 import com.oddlabs.tt.pathfinder.FindOccupantFilter;
 import com.oddlabs.tt.player.Player;
@@ -21,17 +20,16 @@ public final strictfp class NearArmyTrigger extends IntervalTrigger {
 		this.runnable = runnable;
 	}
 
-        @Override
+    @Override
 	protected void check() {
             for (Unit src1 : src) {
                 if (src1.isDead()) {
                     continue;
                 }
-                FindOccupantFilter<Selectable> filter = new FindOccupantFilter<>(src1.getPositionX(), src1.getPositionY(), r, src1, Selectable.class);
+                FindOccupantFilter<Unit> filter = new FindOccupantFilter<>(src1.getPositionX(), src1.getPositionY(), r, src1, Unit.class);
                 player.getWorld().getUnitGrid().scan(filter, src1.getGridX(), src1.getGridY());
-                List<Selectable> target_list = filter.getResult();
-                for (int j = 0; j < target_list.size(); j++) {
-                    Unit unit = (Unit)target_list.get(j);
+                List<Unit> target_list = filter.getResult();
+                for (Unit unit : target_list) {
                     if (!unit.isDead() && unit.getOwner() == player) {
                         triggered();
                         return;

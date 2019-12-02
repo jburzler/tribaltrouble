@@ -3,6 +3,7 @@ package com.oddlabs.tt.render;
 import com.oddlabs.tt.event.LocalEventQueue;
 import com.oddlabs.tt.global.Globals;
 import com.oddlabs.tt.landscape.*;
+import com.oddlabs.tt.procedural.Landscape;
 import com.oddlabs.tt.viewer.Cheat;
 import java.util.List;
 import org.lwjgl.opengl.GL11;
@@ -12,10 +13,10 @@ public final strictfp class TreeRenderer extends TreePicker {
 	private final WaveAnimation wave_animation = new WaveAnimation();
 	private final Cheat cheat;
 
-	TreeRenderer(World world, Cheat cheat, int terrain_type, List<int[]> tree_positions, List<int[]> palm_tree_positions, SpriteSorter sprite_sorter, RespondManager respond_manager) {
+	TreeRenderer(World world, Cheat cheat, Landscape.TerrainType terrain, List<int[]> tree_positions, List<int[]> palm_tree_positions, SpriteSorter sprite_sorter, RespondManager respond_manager) {
 		super(sprite_sorter, respond_manager);
 		this.cheat = cheat;
-		this.tree_low_detail = new TreeLowDetail(world, getTrees(), getLowDetails(), tree_positions, palm_tree_positions, terrain_type);
+		this.tree_low_detail = new TreeLowDetail(world, getTrees(), getLowDetails(), tree_positions, palm_tree_positions, terrain);
 		tree_low_detail.build(world.getTreeRoot());
 	}
 
@@ -45,11 +46,13 @@ public final strictfp class TreeRenderer extends TreePicker {
 		low_detail_render_list.clear();
 		List<TreeSupply>[] render_lists = getRenderLists();
 		List<TreeSupply>[] respond_render_lists = getRespondRenderLists();
-		for (int i = 0; i < render_lists.length; i++)
-			renderList(tree_low_detail.getTrees()[i], render_lists[i], false);
-		for (int i = 0; i < respond_render_lists.length; i++)
-			if (respond_render_lists[i].size() > 0)
-				renderList(tree_low_detail.getTrees()[i], respond_render_lists[i], true);
+		for (int i = 0; i < render_lists.length; i++) {
+            renderList(tree_low_detail.getTrees()[i], render_lists[i], false);
+        }
+		for (int i = 0; i < respond_render_lists.length; i++) {
+            if (respond_render_lists[i].size() > 0)
+                renderList(tree_low_detail.getTrees()[i], respond_render_lists[i], true);
+        }
 	}
 
 	private void loadMatrix(TreeSupply tree) {

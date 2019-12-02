@@ -7,7 +7,6 @@ import com.oddlabs.tt.delegate.MainMenu;
 import com.oddlabs.tt.global.Settings;
 import com.oddlabs.tt.gui.ButtonObject;
 import com.oddlabs.tt.gui.CancelButton;
-import com.oddlabs.tt.gui.CancelListener;
 import com.oddlabs.tt.gui.EditLine;
 import com.oddlabs.tt.gui.Form;
 import com.oddlabs.tt.gui.GUIRoot;
@@ -23,7 +22,7 @@ import java.util.ResourceBundle;
 
 public final strictfp class NewUserForm extends Form {
 	private final static int MIN_PASSWORD_LENGTH = 6;
-	
+
 	private final static int BUTTON_WIDTH = 100;
 	private final static int BUTTON_WIDTH_LONG = 150;
 	private final static int EDITLINE_WIDTH = 240;
@@ -36,7 +35,7 @@ public final strictfp class NewUserForm extends Form {
 	private final ResourceBundle bundle = ResourceBundle.getBundle(NewUserForm.class.getName());
 	private final GUIRoot gui_root;
 	private final NetworkSelector network;
-	
+
 	public NewUserForm(NetworkSelector network, GUIRoot gui_root, MainMenu main_menu) {
 		this.main_menu = main_menu;
 		this.gui_root = gui_root;
@@ -89,40 +88,42 @@ public final strictfp class NewUserForm extends Form {
 
 		// buttons
 		Group group_buttons = new Group();
-		
+
 
 		ButtonObject button_create = new HorizButton(Utils.getBundleString(bundle, "create_user"), BUTTON_WIDTH_LONG);
 		button_create.addMouseClickListener(create_listener);
 		ButtonObject button_cancel = new CancelButton(BUTTON_WIDTH);
-		button_cancel.addMouseClickListener(new CancelListener(this));
-		
+		button_cancel.addMouseClickListener((int button, int x, int y, int clicks) -> {
+			this.cancel();
+        });
+
 		group_buttons.addChild(button_create);
 		group_buttons.addChild(button_cancel);
 
 		button_cancel.place();
 		button_create.place(button_cancel, LEFT_MID);
-		
+
 		group_buttons.compileCanvas();
 		addChild(group_buttons);
-		
+
 		// Place objects
 
 		// headline
 		label_headline.place();
 		label_one_user.place(label_headline, BOTTOM_LEFT);
 		login_group.place(label_one_user, BOTTOM_LEFT);
-		
+
 
 		group_buttons.place(ORIGIN_BOTTOM_RIGHT);
 
 		compileCanvas();
 	}
-	
+
         @Override
 	public void setFocus() {
 		editline_username.setFocus();
 	}
-	
+
 	private void createUser() {
 		String username = editline_username.getContents();
 		String password = editline_password.getPasswordDigest();

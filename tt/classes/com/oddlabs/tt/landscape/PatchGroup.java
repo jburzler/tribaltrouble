@@ -31,7 +31,7 @@ public final strictfp class PatchGroup extends AbstractPatchGroup {
 		checkBounds(child3);
 	}
 
-        @Override
+    @Override
 	public void visit(PatchGroupVisitor visitor) {
 		visitor.visitGroup(this);
 	}

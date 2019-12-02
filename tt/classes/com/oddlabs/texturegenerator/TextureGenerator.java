@@ -96,8 +96,9 @@ public final strictfp class TextureGenerator {
 		GL11.glClearColor(clear_color[0], clear_color[1], clear_color[2], 0f);
 		GL11.glEnable(GL11.GL_ALPHA_TEST);
 		GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
-		for (int i = 0; i < lowdetails.length; i++)
-			generateBillboardMip(lowdetails[i], renderer, modes[i], ortho_size, tex_index);
+		for (int i = 0; i < lowdetails.length; i++) {
+            generateBillboardMip(lowdetails[i], renderer, modes[i], ortho_size, tex_index);
+        }
 	}
 
 	public float[] getModelClearColor() {

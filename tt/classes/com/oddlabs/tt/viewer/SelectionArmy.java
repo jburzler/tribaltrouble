@@ -6,7 +6,6 @@ import com.oddlabs.tt.model.Building;
 import com.oddlabs.tt.model.Selectable;
 import com.oddlabs.tt.model.Unit;
 import com.oddlabs.tt.player.Player;
-import java.util.Iterator;
 
 public final strictfp class SelectionArmy extends Army {
 
@@ -37,13 +36,11 @@ public final strictfp class SelectionArmy extends Army {
     }
 
     private void update() {
-        Iterator it = getSet().iterator();
         num_units = 0;
         num_builders = 0;
         chieftain = null;
         building = null;
-        while (it.hasNext()) {
-            Selectable s = (Selectable) it.next();
+        for (Selectable s : getSet()) {
             if (s.getOwner() != local_player)
                 continue;
             Abilities abilities = s.getAbilities();

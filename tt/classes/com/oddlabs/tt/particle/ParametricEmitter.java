@@ -58,7 +58,7 @@ public strictfp class ParametricEmitter extends Emitter {
 	public final void setDeltaColor(Vector4f delta_color) {
 		this.delta_color = delta_color;
 	}
-	
+
 	public final void setEnergy(float energy) {
 		this.energy = energy;
 	}

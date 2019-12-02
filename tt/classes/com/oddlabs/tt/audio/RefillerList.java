@@ -53,6 +53,7 @@ public final strictfp class RefillerList {
         }
 
         @Override
+        @SuppressWarnings("UseOfSystemOutOrSystemErr")
         public void run() {
             try {
                 while (!finished) {

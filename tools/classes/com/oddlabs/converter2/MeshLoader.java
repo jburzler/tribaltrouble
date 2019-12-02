@@ -9,7 +9,7 @@ public final strictfp class MeshLoader {
 	private MeshLoader() {
 	}
 
-	public final static ModelInfo loadMesh(File file, Map name_to_bone_map, float scale) {
+	public final static ModelInfo loadMesh(File file, Map<String,Bone> name_to_bone_map, float scale) {
 		try {
 			FileInputStream input_stream = new FileInputStream(file);
 			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -24,7 +24,7 @@ public final strictfp class MeshLoader {
 		}
 	}
 
-	private final static ModelInfo createModelInfo(Node node, Map name_to_bone_map, float scale) {
+	private static ModelInfo createModelInfo(Node node, Map<String,Bone> name_to_bone_map, float scale) {
 //		String texture_name = cutTextureName(node.getAttributes().getNamedItem("texture").getNodeValue());
 
 		NodeList polygon_list = ConvertToBinary.getNodeByName("polygons", node).getChildNodes();
@@ -70,9 +70,10 @@ public final strictfp class MeshLoader {
 					// skin data
 					NodeList skins = vertex.getChildNodes();
 					int skin_count = 0;
-					for (int skin_index = 0; skin_index < skins.getLength(); skin_index++)
-						if (skins.item(skin_index).getNodeName().equals("skin"))
-							skin_count++;
+					for (int skin_index = 0; skin_index < skins.getLength(); skin_index++) {
+                        if (skins.item(skin_index).getNodeName().equals("skin"))
+                            skin_count++;
+                    }
 					byte[] vertex_skin_names = new byte[skin_count];
 					float[] vertex_skin_weights = new float[skin_count];
 					skin_names[polygon_index*3 + vertex_index] = vertex_skin_names;
@@ -86,7 +87,7 @@ public final strictfp class MeshLoader {
 						float skin_weight = getAttrFloat(skin, "weight");
 						byte bone_index;
 						if (name_to_bone_map != null) {
-							Bone bone = (Bone)name_to_bone_map.get(skin_name);
+							Bone bone = name_to_bone_map.get(skin_name);
 							bone_index = bone.getIndex();
 						} else
 							bone_index = 0;
@@ -104,18 +105,18 @@ public final strictfp class MeshLoader {
 		return Optimizer.optimize(/*texture_name, */num_vertices, vertices, normals, colors, uvs, uvs2, skin_names, skin_weights);
 	}
 
-	private final static String cutTextureName(String name) {
-		if (name.equals(""))
+	private static String cutTextureName(String name) {
+		if (name.isEmpty())
 			return name;
 		String result = name.replaceAll("\\\\", "/");
-		int last_slash = result.lastIndexOf("/");
-		int dot_index = result.lastIndexOf(".");
+		int last_slash = result.lastIndexOf('/');
+		int dot_index = result.lastIndexOf('.');
 		if (dot_index != -1)
 			result = result.substring(last_slash + 1, dot_index);
 		return result;
 	}
 
-	private final static int countPolys(NodeList polygon_list) {
+	private static int countPolys(NodeList polygon_list) {
 		int counter = 0;
 		for (int i = 0; i < polygon_list.getLength(); i++) {
 			Node polygon = polygon_list.item(i);
@@ -125,7 +126,7 @@ public final strictfp class MeshLoader {
 		return counter;
 	}
 
-	private final static float getAttrFloat(Node node, String name) {
+	private static float getAttrFloat(Node node, String name) {
 		return Float.parseFloat(node.getAttributes().getNamedItem(name).getNodeValue());
 	}
 }

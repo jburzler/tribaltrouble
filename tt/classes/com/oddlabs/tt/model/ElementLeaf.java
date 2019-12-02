@@ -8,13 +8,13 @@ public final strictfp class ElementLeaf extends AbstractElementNode {
 		setBounds(x*HeightMap.METERS_PER_UNIT_GRID, (x + size)*HeightMap.METERS_PER_UNIT_GRID, y*HeightMap.METERS_PER_UNIT_GRID, (y + size)*HeightMap.METERS_PER_UNIT_GRID, Float.POSITIVE_INFINITY, Float.NEGATIVE_INFINITY);
 	}
 
-        @Override
+    @Override
 	protected AbstractElementNode doInsertElement(Element model) {
 		incElementCount();
 		return addElement(model);
 	}
 
-        @Override
+    @Override
 	public void visit(ElementNodeVisitor visitor) {
 		visitor.visitLeaf(this);
 	}

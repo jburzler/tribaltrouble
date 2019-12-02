@@ -91,10 +91,12 @@ public final strictfp class Player implements PlayerInterface {
 	public Player(World world, PlayerInfo player_info, float[] color) {
 		this.world = world;
 		this.color = color;
-		for (int i = 0; i < can_do_magic.length; i++)
-			can_do_magic[i] = true;
-		for (int i = 0; i < can_build.length; i++)
-			can_build[i] = true;
+		for (int i = 0; i < can_do_magic.length; i++) {
+            can_do_magic[i] = true;
+        }
+		for (int i = 0; i < can_build.length; i++) {
+            can_build[i] = true;
+        }
 		this.player_info = player_info;
 		this.unit_count = new SupplyContainer(world.getMaxUnitCount());
 //		this.team_tip = Utils.getBundleString(bundle, "team", new Object[]{Integer.toString(player_info.getTeam() + 1)});

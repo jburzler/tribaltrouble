@@ -9,7 +9,7 @@ public final strictfp class BeaconDelegate extends TargetDelegate {
 		super(viewer, camera, 0);
 	}
 
-        @Override
+    @Override
 	public void mousePressed(int button, int x, int y) {
 		LandscapeLocation landscape_hit = new LandscapeLocation();
 		getViewer().getPicker().pickLocation(getCamera().getState(), landscape_hit);

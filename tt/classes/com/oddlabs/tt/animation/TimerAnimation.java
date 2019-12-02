@@ -7,12 +7,11 @@ public final strictfp class TimerAnimation implements Animated {
 	private final AnimationManager manager;
 	private float time = 0;
 	private float interval;
-	private Updatable timer_owner = null;
+	private Updatable timer_owner;
 	private boolean running = false;
 
-    @Override
-	public void updateChecksum(StateChecksum checksum) {
-		checksum.update(time);
+	public TimerAnimation(Updatable owner, float interval) {
+		this(LocalEventQueue.getQueue().getManager(), owner, interval);
 	}
 
 	public TimerAnimation(AnimationManager manager, Updatable owner, float interval) {
@@ -21,16 +20,17 @@ public final strictfp class TimerAnimation implements Animated {
 		this.timer_owner = owner;
 	}
 
-	public TimerAnimation(Updatable owner, float interval) {
-		this(LocalEventQueue.getQueue().getManager(), owner, interval);
+    @Override
+	public String toString() {
+		return "TimerAnimation{owner=" + timer_owner + "}";
 	}
 
     @Override
-	public String toString() {
-		return "TimerAnimation: owner = " + timer_owner;
+	public void updateChecksum(StateChecksum checksum) {
+		checksum.update(time);
 	}
 
-	public boolean isRunning() {
+    public boolean isRunning() {
 		return running;
 	}
 

@@ -47,7 +47,9 @@ public strictfp class Form extends Group {
 			close_button.setPos(getWidth() - close_button.getWidth() - form_data.getCloseRight(),
 								getHeight() - close_button.getHeight() - form_data.getCloseTop());
 			addChild(close_button);
-			close_button.addMouseClickListener(new CancelListener(this));
+			close_button.addMouseClickListener((int button, int x, int y, int clicks) -> {
+                this.cancel();
+            });
 		} else {
 			form = Skin.getSkin().getFormData().getSlimForm();
 			super.compileCanvas(form.getLeftOffset() + spacing,

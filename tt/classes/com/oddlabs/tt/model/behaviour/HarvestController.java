@@ -5,14 +5,14 @@ import com.oddlabs.tt.model.SupplyFinder;
 import com.oddlabs.tt.model.Unit;
 import com.oddlabs.tt.pathfinder.FinderTrackerAlgorithm;
 
-public final strictfp class HarvestController extends Controller {
+public final strictfp class HarvestController<S extends Supply> extends Controller {
 	private final Unit unit;
-	private final Class supply_class;
-	private FinderTrackerAlgorithm tracker;
+	private final Class<S> supply_class;
+	private FinderTrackerAlgorithm<S> tracker;
 
 	private Supply supply;
 
-	public HarvestController(Unit unit, Supply supply, Class supply_class) {
+	public HarvestController(Unit unit, S supply, Class<S> supply_class) {
 		super(1);
 		this.unit = unit;
 		this.supply = supply;
@@ -24,14 +24,14 @@ public final strictfp class HarvestController extends Controller {
 			resetGiveUpCounter(0);
 			unit.setBehaviour(new HarvestBehaviour(unit, supply));
 		} else if (!shouldGiveUp(0)) {
-			tracker = new FinderTrackerAlgorithm(unit.getUnitGrid(), new SupplyFinder(unit, supply_class));
+			tracker = new FinderTrackerAlgorithm<>(unit.getUnitGrid(), new SupplyFinder<>(unit, supply_class));
 			unit.setBehaviour(new WalkBehaviour(unit, tracker, false));
 		} else {
 			unit.popController();
 		}
 	}
 
-        @Override
+    @Override
 	public void decide() {
 		if (unit.getSupplyContainer().getSupplyType() == supply_class && unit.getSupplyContainer().isSupplyFull()) {
 			unit.popController();

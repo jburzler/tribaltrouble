@@ -2,7 +2,7 @@ package com.oddlabs.tt.pathfinder;
 
 import com.oddlabs.tt.util.Target;
 
-public final strictfp class TargetGridPathFinder extends GridPathFinder {
+final strictfp class TargetGridPathFinder extends GridPathFinder {
 	private final float max_dist_squared;
 	private final Target target;
 
@@ -12,12 +12,12 @@ public final strictfp class TargetGridPathFinder extends GridPathFinder {
 		this.target = t;
 	}
 
-        @Override
+     @Override
 	public boolean touchNeighbour(Occupant occ) {
 		return occ == target;
 	}
-	
-        @Override
+
+    @Override
 	protected boolean isPathComplete(int dist_squared, Node node) {
 		return dist_squared <= max_dist_squared || super.isPathComplete(dist_squared, node);
 	}

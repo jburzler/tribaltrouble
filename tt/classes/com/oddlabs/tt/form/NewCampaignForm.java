@@ -5,7 +5,6 @@ import com.oddlabs.tt.delegate.Menu;
 import com.oddlabs.tt.global.Settings;
 import com.oddlabs.tt.gui.ButtonObject;
 import com.oddlabs.tt.gui.CancelButton;
-import com.oddlabs.tt.gui.CancelListener;
 import com.oddlabs.tt.gui.EditLine;
 import com.oddlabs.tt.gui.Form;
 import com.oddlabs.tt.gui.GUIRoot;
@@ -99,7 +98,9 @@ public final strictfp class NewCampaignForm extends Form implements Deterministi
 		button_ok.addMouseClickListener(new NameListener());
 		addChild(button_ok);
 		ButtonObject button_cancel = new CancelButton(BUTTON_WIDTH);
-		button_cancel.addMouseClickListener(new CancelListener(this));
+		button_cancel.addMouseClickListener((int button, int x, int y, int clicks) -> {
+			this.cancel();
+        });
 		addChild(button_cancel);
 
 		// place
@@ -114,12 +115,12 @@ public final strictfp class NewCampaignForm extends Form implements Deterministi
 		LoadCampaignBox.loadSavegames(this);
 	}
 
-        @Override
+    @Override
 	protected void doCancel() {
 		main_menu.setMenu(campaign_form);
 	}
 
-        @Override
+    @Override
 	public void setFocus() {
 		editline_name.setFocus();
 	}

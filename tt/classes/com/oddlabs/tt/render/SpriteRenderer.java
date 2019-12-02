@@ -71,8 +71,9 @@ public final strictfp class SpriteRenderer {
 	}
 
 	public void getAllPicks(List pick_list) {
-		for (int i = 0; i < sprite_list.getNumSprites(); i++)
-			sprite_list_renderer.getAllPicks(pick_list, i, tex_index);
+		for (int i = 0; i < sprite_list.getNumSprites(); i++) {
+            sprite_list_renderer.getAllPicks(pick_list, i, tex_index);
+        }
 		for (int i = 0; i < no_detail_render_list.size(); i++) {
 			ModelState model = (ModelState)no_detail_render_list.get(i);
 			no_detail_render_list.set(i, null);

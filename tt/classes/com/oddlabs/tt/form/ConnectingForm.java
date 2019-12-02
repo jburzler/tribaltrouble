@@ -3,7 +3,6 @@ package com.oddlabs.tt.form;
 import com.oddlabs.matchmaking.Game;
 import com.oddlabs.tt.event.LocalEventQueue;
 import com.oddlabs.tt.gui.CancelButton;
-import com.oddlabs.tt.gui.CancelListener;
 import com.oddlabs.tt.gui.Form;
 import com.oddlabs.tt.gui.GUIRoot;
 import com.oddlabs.tt.gui.HorizButton;
@@ -41,8 +40,10 @@ public final strictfp class ConnectingForm extends Form implements Configuration
 		addChild(info_label);
 		HorizButton cancel_button = new CancelButton(120);
 		addChild(cancel_button);
-		cancel_button.addMouseClickListener(new CancelListener(this));
-		
+		cancel_button.addMouseClickListener((int button, int x, int y, int clicks) -> {
+			this.cancel();
+        });
+
 		// Place objects
 		info_label.place();
 		cancel_button.place(info_label, BOTTOM_MID);
@@ -74,7 +75,7 @@ public final strictfp class ConnectingForm extends Form implements Configuration
 
 	public void chat(int player_slot, String chat) {
 	}
-	
+
         @Override
 	public void setPlayers(PlayerSlot[] players) {
 		assert !multiplayer;

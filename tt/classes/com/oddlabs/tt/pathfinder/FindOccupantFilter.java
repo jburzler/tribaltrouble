@@ -41,6 +41,7 @@ public final strictfp class FindOccupantFilter<S extends Selectable> implements 
             float squared_dist = dx * dx + dy * dy;
             if (!result.contains(s) && squared_dist < radius * radius) {
                 result.add(s);
+                return true;
             }
         }
         return false;

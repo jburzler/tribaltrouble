@@ -3,17 +3,15 @@ package com.oddlabs.tt.net;
 import com.oddlabs.tt.util.SpamFilter;
 
 public final strictfp class ChatMessage {
-	public final static int CHAT_NORMAL = 1;
-	public final static int CHAT_TEAM = 2;
-	public final static int CHAT_PRIVATE = 3;
-	public final static int CHAT_CHATROOM = 4;
-	public final static int CHAT_GAME_MENU = 5;
-	
+    public enum Type {
+        NORMAL, TEAM, PRIVATE,CHATROOM,GAME_MENU
+    }
+
 	public final String nick;
 	public final String message;
-	public final int type;
+	public final Type type;
 
-	public ChatMessage(String nick, String msg, int type) {
+	public ChatMessage(String nick, String msg, Type type) {
 		this.nick = nick;
 		this.message = SpamFilter.scan(msg);
 		this.type = type;
@@ -25,13 +23,13 @@ public final strictfp class ChatMessage {
 
 	public String formatLong() {
 		switch (type) {
-			case CHAT_TEAM:
+			case TEAM:
 				return "(Team) " + formatShort();
-			case CHAT_PRIVATE:
+			case PRIVATE:
 				return "(Private) " + formatShort();
-			case CHAT_NORMAL: /* Fall through */
-			case CHAT_CHATROOM:
-			case CHAT_GAME_MENU:
+			case NORMAL: /* Fall through */
+			case CHATROOM:
+			case GAME_MENU:
 				return formatShort();
 			default:
 				throw new RuntimeException();

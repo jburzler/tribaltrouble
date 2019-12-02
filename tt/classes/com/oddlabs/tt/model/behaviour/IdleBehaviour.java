@@ -12,21 +12,20 @@ public final strictfp class IdleBehaviour implements Behaviour {
 		this.unit = unit;
 	}
 
-        @Override
+    @Override
 	public int animate(float t) {
 		unit.switchToIdleAnimation();
-		if (!controller.shouldSleep(t))
-			return Selectable.DONE;
-		else
-			return Selectable.INTERRUPTIBLE;
+		return controller.shouldSleep(t)
+                ? Selectable.INTERRUPTIBLE
+                : Selectable.DONE;
 	}
 
-        @Override
+    @Override
 	public boolean isBlocking() {
 		return true;
 	}
 
-        @Override
+    @Override
 	public void forceInterrupted() {
 	}
 }

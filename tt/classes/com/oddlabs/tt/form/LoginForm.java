@@ -6,7 +6,6 @@ import com.oddlabs.tt.delegate.MainMenu;
 import com.oddlabs.tt.global.Settings;
 import com.oddlabs.tt.gui.ButtonObject;
 import com.oddlabs.tt.gui.CancelButton;
-import com.oddlabs.tt.gui.CancelListener;
 import com.oddlabs.tt.gui.CheckBox;
 import com.oddlabs.tt.gui.EditLine;
 import com.oddlabs.tt.gui.Form;
@@ -87,7 +86,9 @@ public final strictfp class LoginForm extends Form {
 		ButtonObject button_ok = new HorizButton(Utils.getBundleString(bundle, "login"), BUTTON_WIDTH);
 		button_ok.addMouseClickListener(login_listener);
 		ButtonObject button_cancel = new CancelButton(BUTTON_WIDTH);
-		button_cancel.addMouseClickListener(new CancelListener(this));
+		button_cancel.addMouseClickListener((int button, int x, int y, int clicks) -> {
+			this.cancel();
+        });
 
 		group_buttons.addChild(button_newuser);
 		group_buttons.addChild(button_ok);

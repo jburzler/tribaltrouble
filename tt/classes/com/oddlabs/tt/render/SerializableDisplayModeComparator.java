@@ -41,9 +41,4 @@ public final strictfp class SerializableDisplayModeComparator implements Compara
 		int dy = StrictMath.abs(target_mode.getHeight() - mode.getHeight());
 		return dx + dy;
 	}
-
-        @Override
-	public boolean equals(Object obj) {
-		return this == obj;
-	}
 }

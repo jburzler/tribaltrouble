@@ -49,5 +49,5 @@ public abstract strictfp class WeaponFactory {
 
 	protected abstract void doAttack(boolean hit, Unit src, Selectable target);
 
-	public abstract Class getType();
+	public abstract Class<? extends ThrowingWeapon> getType();
 }

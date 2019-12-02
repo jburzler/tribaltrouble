@@ -1,24 +1,24 @@
 package com.oddlabs.tt.pathfinder;
 
 
-public final strictfp class TargetFinderAlgorithm extends GridPathFinder {
-	private final FinderFilter filter;
-	
-	private Occupant target;
+public final strictfp class TargetFinderAlgorithm<O extends Occupant> extends GridPathFinder {
+	private final FinderFilter<O> filter;
 
-	public TargetFinderAlgorithm(UnitGrid unit_grid, FinderFilter filter, Node dst_region, int dst_x, int dst_y, boolean allow_second_best) {
+	private O target;
+
+	public TargetFinderAlgorithm(UnitGrid unit_grid, FinderFilter<O> filter, Node dst_region, int dst_x, int dst_y, boolean allow_second_best) {
 		super(unit_grid, dst_region, null, dst_x, dst_y, allow_second_best);
 		this.filter = filter;
 	}
 
-	public Occupant getOccupant() {
+	public O getOccupant() {
 		return target;
 	}
 
-        @Override
+    @Override
 	public boolean touchNeighbour(Occupant occ) {
 		if (filter.acceptOccupant(occ)) {
-			target = occ;
+			target = (O) occ;
 			return true;
 		} else
 			return false;

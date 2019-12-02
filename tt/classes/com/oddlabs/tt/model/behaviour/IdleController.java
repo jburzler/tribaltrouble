@@ -29,7 +29,7 @@ public final strictfp class IdleController extends Controller {
 		return redecide_time > 0;
 	}
 
-        @Override
+    @Override
 	public void decide() {
 		unit.setBehaviour(idle_behaviour);
 		if (shouldSleep(0f))
@@ -37,16 +37,16 @@ public final strictfp class IdleController extends Controller {
 		redecide_time = MIN_SCAN_DELAY + unit.getOwner().getWorld().getRandom().nextFloat()*(MAX_SCAN_DELAY - MIN_SCAN_DELAY);
 		if (unit.getAbilities().hasAbilities(Abilities.ATTACK))
 			unit.scanVicinity(scan_filter);
-			Selectable s = scan_filter.removeTarget();
-			if (s != null) {
-				if (can_move)
-					unit.pushControllers(new Controller[]{new WalkController(unit, new LandscapeTarget(unit.getGridX(), unit.getGridY()), true), new HuntController(unit, s)});
-				else
-					unit.pushController(new AttackController(unit, s));
-			}
+        Selectable s = scan_filter.removeTarget();
+        if (s != null) {
+            if (can_move)
+                unit.pushControllers(new Controller[]{new WalkController(unit, new LandscapeTarget(unit.getGridX(), unit.getGridY()), true), new HuntController(unit, s)});
+            else
+                unit.pushController(new AttackController(unit, s));
+        }
 	}
 
-        @Override
+    @Override
 	public String getKey() {
 		return super.getKey() + unit.getAbilities().hasAbilities(Abilities.BUILD) + unit.getAbilities().hasAbilities(Abilities.MAGIC);
 	}

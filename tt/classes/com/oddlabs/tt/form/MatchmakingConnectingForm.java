@@ -7,7 +7,6 @@ import com.oddlabs.matchmaking.Profile;
 import com.oddlabs.net.NetworkSelector;
 import com.oddlabs.tt.delegate.MainMenu;
 import com.oddlabs.tt.gui.CancelButton;
-import com.oddlabs.tt.gui.CancelListener;
 import com.oddlabs.tt.gui.ChatRoomInfo;
 import com.oddlabs.tt.gui.Form;
 import com.oddlabs.tt.gui.GUIRoot;
@@ -25,7 +24,7 @@ public final strictfp class MatchmakingConnectingForm extends Form implements Ma
 	private final ResourceBundle bundle = ResourceBundle.getBundle(MatchmakingConnectingForm.class.getName());
 	private final GUIRoot gui_root;
 	private final NetworkSelector network;
-	
+
 	public MatchmakingConnectingForm(NetworkSelector network, GUIRoot gui_root, Form parent_form, MainMenu main_menu, Login login, LoginDetails login_details) {
 		this.parent_form = parent_form;
 		this.main_menu = main_menu;
@@ -35,8 +34,10 @@ public final strictfp class MatchmakingConnectingForm extends Form implements Ma
 		addChild(info_label);
 		HorizButton cancel_button = new CancelButton(120);
 		addChild(cancel_button);
-		cancel_button.addMouseClickListener(new CancelListener(this));
-		
+		cancel_button.addMouseClickListener((int button, int x, int y, int clicks) -> {
+			this.cancel();
+        });
+
 		// Place objects
 		info_label.place();
 		cancel_button.place(info_label, BOTTOM_MID);
@@ -62,7 +63,7 @@ public final strictfp class MatchmakingConnectingForm extends Form implements Ma
 	public void joinedChat(ChatRoomInfo info) {
 		assert false;
 	}
-	
+
         @Override
 	public void updateChatRoom(ChatRoomInfo info) {
 		assert false;
@@ -119,7 +120,7 @@ public final strictfp class MatchmakingConnectingForm extends Form implements Ma
 		}
 		gui_root.addModalForm(new MessageForm(error_message));
 	}
-	
+
         @Override
 	public void loggedIn() {
 		remove();

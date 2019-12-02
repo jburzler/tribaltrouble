@@ -26,7 +26,7 @@ public final strictfp class WalkBehaviour implements Behaviour {
 	private float retry_delay_counter;
 	private float retry_delay;
 
-	private int state;
+	private PathTracker.State state;
 
 	public WalkBehaviour(Unit unit, TrackerAlgorithm tracker_algorithm, boolean scan_attack) {
 		this.unit = unit;
@@ -41,30 +41,14 @@ public final strictfp class WalkBehaviour implements Behaviour {
 		this(unit, new TargetTrackerAlgorithm(unit.getUnitGrid(), range, t), scan_attack);
 	}
 
-        @Override
+    @Override
 	public boolean isBlocking() {
-		return state == PathTracker.BLOCKED;
+		return state == PathTracker.State.BLOCKED;
 	}
-	
+
 	public void appendToolTip(ToolTipBox tool_tip_box) {
 		tool_tip_box.append("WalkBehaviour: state=");
-		switch (state) {
-			case PathTracker.OK:
-				tool_tip_box.append("OK");
-				break;
-			case PathTracker.OK_INTERRUPTIBLE:
-				tool_tip_box.append("OK_INTERRUPTIBLE");
-				break;
-			case PathTracker.DONE:
-				tool_tip_box.append("DONE");
-				break;
-			case PathTracker.BLOCKED:
-				tool_tip_box.append("BLOCKED");
-				break;
-			case PathTracker.SOFTBLOCKED:
-				tool_tip_box.append("SOFTBLOCKED");
-				break;
-		}
+        tool_tip_box.append(state.toString());
 		tool_tip_box.append(" | retry_delay=");
 		tool_tip_box.append((long)retry_delay);
 		tool_tip_box.append("(");
@@ -77,7 +61,7 @@ public final strictfp class WalkBehaviour implements Behaviour {
 		unit.switchAnimation(unit.getMetersPerSecond(), Unit.ANIMATION_MOVING);
 	}
 
-        @Override
+    @Override
 	public int animate(float t) {
 		retry_delay_counter -= t;
 		boolean blocker_moved = blocking_movable != null && (blocking_movable.getGridX() != blocker_x || blocking_movable.getGridY() != blocker_y);
@@ -89,18 +73,18 @@ public final strictfp class WalkBehaviour implements Behaviour {
 		PathTracker tracker = unit.getTracker();
 		state = tracker.animate(unit.getMetersPerSecond()*t);
 		switch (state) {
-			case PathTracker.OK:
+			case OK:
 				switchToMoving();
 				return Selectable.UNINTERRUPTIBLE;
-			case PathTracker.OK_INTERRUPTIBLE:
+			case OK_INTERRUPTIBLE:
 				retry_delay = WAIT_RETRY_DELAY;
 				switchToMoving();
 				scan();
 				return Selectable.INTERRUPTIBLE;
-			case PathTracker.DONE:
+			case DONE:
 				return Selectable.DONE;
-			case PathTracker.BLOCKED: /* fall through */
-			case PathTracker.SOFTBLOCKED:
+			case BLOCKED: /* fall through */
+			case SOFTBLOCKED:
 				Occupant blocker = tracker.getBlocker();
 				if (blocker instanceof Movable) {
 					blocking_movable = (Movable)blocker;
@@ -116,7 +100,7 @@ public final strictfp class WalkBehaviour implements Behaviour {
 				retry_delay = StrictMath.min(2*retry_delay, MAX_WAIT_RETRY_DELAY);
 				return doRetry();
 			default:
-				throw new RuntimeException("Invalid tracker state: " + state);
+				throw new IllegalStateException("Invalid tracker state: " + state);
 		}
 	}
 

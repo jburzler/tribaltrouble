@@ -19,23 +19,21 @@ public final strictfp class ChatCommand {
 			commands.put("ignorelist", ChatCommand::ignoreList);
 	}
 
-    private final static Set ignored_nicks = new HashSet();
+    private final static Set<String> ignored_nicks = new HashSet<>();
 
 	private final static ResourceBundle bundle = ResourceBundle.getBundle(ChatCommand.class.getName());
 
 	public static boolean filterCommand(InfoPrinter info_printer, String text) {
-		return filterCommand(info_printer, null, text);
+		return filterCommand(info_printer, Collections.emptyMap(), text);
 	}
 
-	public static boolean filterCommand(InfoPrinter info_printer, Map custom_commands, String text) {
+	public static boolean filterCommand(InfoPrinter info_printer, Map<String,ChatMethod> custom_commands, String text) {
 		if (!text.startsWith("/"))
 			return false;
 		int fist_space = firstSpace(text);
 		String cmd = text.substring(1, fist_space);
 		String args = text.substring(fist_space, text.length()).trim();
-		ChatMethod method = custom_commands != null ? (ChatMethod)custom_commands.get(cmd) : null;
-		if (method == null)
-			method = (ChatMethod)commands.get(cmd);
+		ChatMethod method = custom_commands.getOrDefault(cmd, commands.get(cmd));
 		if (method != null) {
 			method.execute(info_printer, args);
 		} else {
@@ -46,11 +44,8 @@ public final strictfp class ChatCommand {
 	}
 
 	private static int firstSpace(String text) {
-		int fist_space = text.indexOf(' ');
-		if (fist_space == -1)
-			return text.length();
-		else
-			return fist_space;
+		int first_space = text.indexOf(' ');
+		return first_space == -1 ? text.length() : first_space;
 	}
 
 	private static void sendMessage(InfoPrinter info_printer, String text) {

@@ -2,7 +2,6 @@ package com.oddlabs.tt.form;
 
 import com.oddlabs.tt.global.Settings;
 import com.oddlabs.tt.gui.*;
-import com.oddlabs.tt.guievent.*;
 import com.oddlabs.tt.util.Utils;
 import java.util.ResourceBundle;
 
@@ -33,7 +32,10 @@ public final strictfp class WarningForm extends Form {
 
 		HorizButton ok_button = new OKButton(70);
 		addChild(ok_button);
-		ok_button.addMouseClickListener(new OKListener());
+		ok_button.addMouseClickListener((button,x,y,clicks) -> {
+            Settings.getSettings().warning_no_sound = !show_next_time.isMarked();
+			remove();
+        });
 		// Place objects
 		group.place();
 		ok_button.place(group, BOTTOM_MID);
@@ -41,13 +43,5 @@ public final strictfp class WarningForm extends Form {
 		// headline
 		compileCanvas();
 		centerPos();
-	}
-
-	private final strictfp class OKListener implements MouseClickListener {
-        @Override
-		public void mouseClicked(int button, int x, int y, int clicks) {
-			Settings.getSettings().warning_no_sound = !show_next_time.isMarked();
-			remove();
-		}
 	}
 }

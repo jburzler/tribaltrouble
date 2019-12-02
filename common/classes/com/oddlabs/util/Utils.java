@@ -13,10 +13,11 @@ import java.nio.ByteBuffer;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Enumeration;
+import java.util.regex.Pattern;
 import java.util.zip.*;
 
 public final strictfp class Utils {
-	public final static String EMAIL_PATTERN = "(.+@.+\\.[a-z]+)?";
+	public final static Pattern EMAIL_PATTERN = Pattern.compile("(.+@.+\\.[a-z]+)?");
 	public final static Path STD_OUT = Paths.get("std.out");
 	public final static Path STD_ERR = Paths.get("std.err");
 	public final static Path EVENT_LOG = Paths.get("event.log");
@@ -56,10 +57,6 @@ System.out.println("loopback address = " + best_address);
 		throw new IOException("Could not find a loopback address");
 	}
 
-	public static Object loadObject(URL url) {
-		return loadObject(url, false);
-	}
-
 	public static int powerOf2Log2(int n) {
 		assert isPowerOf2(n): n + " is not a power of 2";
 		for (int i = 0; i < 31; i++) {
@@ -73,14 +70,6 @@ System.out.println("loopback address = " + best_address);
 
 	public static boolean isPowerOf2(int n) {
 		return n == 0 || (n > 0 && (n & (n - 1)) == 0);
-	}
-
-	public static Object loadObject(URL url, boolean zipped) {
-		try {
-			return tryLoadObject(url, zipped);
-		} catch (IOException | ClassNotFoundException e) {
-			throw new RuntimeException(e);
-		}
 	}
 
 	public static int nextPowerOf2(int n) {
@@ -117,15 +106,29 @@ System.out.println("loopback address = " + best_address);
 		}
 	}
 
-	public static Object tryLoadObject(URL url) throws IOException, ClassNotFoundException {
+	public static <T> T loadObject(URL url) {
+		return loadObject(url, false);
+	}
+
+	public static <T> T loadObject(URL url, boolean zipped) {
+		try {
+			return tryLoadObject(url, zipped);
+		} catch (IOException ioe) {
+            throw new UncheckedIOException(ioe);
+        } catch (ClassNotFoundException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	public static <T> T tryLoadObject(URL url) throws IOException, ClassNotFoundException {
 		return tryLoadObject(url, false);
 	}
 
-	public static Object tryLoadObject(URL url, boolean zipped) throws IOException, ClassNotFoundException {
+	public static <T> T tryLoadObject(URL url, boolean zipped) throws IOException, ClassNotFoundException {
         try (InputStream urlStream = url.openStream()) {
             try (InputStream input_stream = zipped ? new GZIPInputStream(urlStream) : new BufferedInputStream(urlStream)) {
                 try (ObjectInputStream obj_stream = new ObjectInputStream(input_stream)) {
-                    Object obj = obj_stream.readObject();
+                    T obj = (T) obj_stream.readObject();
                     return obj;
                 }
             }

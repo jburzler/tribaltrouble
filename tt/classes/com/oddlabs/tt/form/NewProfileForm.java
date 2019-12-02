@@ -3,7 +3,6 @@ package com.oddlabs.tt.form;
 import com.oddlabs.tt.delegate.Menu;
 import com.oddlabs.tt.gui.ButtonObject;
 import com.oddlabs.tt.gui.CancelButton;
-import com.oddlabs.tt.gui.CancelListener;
 import com.oddlabs.tt.gui.EditLine;
 import com.oddlabs.tt.gui.Form;
 import com.oddlabs.tt.gui.GUIRoot;
@@ -25,7 +24,7 @@ public final strictfp class NewProfileForm extends Form {
 	private final ProfilesForm profiles_form;
 	private final EditLine editline_nick;
 	private final GUIRoot gui_root;
-	
+
 	public NewProfileForm(GUIRoot gui_root, Menu main_menu, ProfilesForm profiles_form) {
 		this.gui_root = gui_root;
 		this.main_menu = main_menu;
@@ -51,22 +50,24 @@ public final strictfp class NewProfileForm extends Form {
 		ButtonObject button_create = new HorizButton(Utils.getBundleString(bundle, "create_profile"), BUTTON_WIDTH_LONG);
 		button_create.addMouseClickListener(new CreateProfileListener());
 		ButtonObject button_cancel = new CancelButton(BUTTON_WIDTH);
-		button_cancel.addMouseClickListener(new CancelListener(this));
-		
+		button_cancel.addMouseClickListener((int button, int x, int y, int clicks) -> {
+			this.cancel();
+        });
+
 		group_buttons.addChild(button_create);
 		group_buttons.addChild(button_cancel);
 
 		button_cancel.place();
 		button_create.place(button_cancel, LEFT_MID);
-		
+
 		group_buttons.compileCanvas();
 		addChild(group_buttons);
-		
+
 		group_buttons.place(ORIGIN_BOTTOM_RIGHT);
 
 		compileCanvas();
 	}
-	
+
         @Override
 	public void setFocus() {
 		editline_nick.setFocus();
@@ -80,7 +81,7 @@ public final strictfp class NewProfileForm extends Form {
 	private void done() {
 		main_menu.setMenuCentered(profiles_form);
 	}
-	
+
 	private void createProfile() {
 		String nick = editline_nick.getContents();
 		gui_root.addModalForm(new CreatingProfileForm(gui_root, profiles_form, main_menu, nick));

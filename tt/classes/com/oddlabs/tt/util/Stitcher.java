@@ -29,10 +29,11 @@ public final strictfp class Stitcher {
 
 	private static int getStartIndex(Vertex[] vertices) {
 		int vertex_index;
-		for (vertex_index = 0; vertex_index < vertices.length; vertex_index++)
-			if (vertices[vertex_index%vertices.length].side >
-					vertices[(vertex_index + 1)%vertices.length].side)
-				break;
+		for (vertex_index = 0; vertex_index < vertices.length; vertex_index++) {
+            if (vertices[vertex_index%vertices.length].side >
+                    vertices[(vertex_index + 1)%vertices.length].side)
+                break;
+        }
 		if (vertex_index >= vertices.length)
 			throw new RuntimeException("All vertices are on one side");
 		return vertex_index;

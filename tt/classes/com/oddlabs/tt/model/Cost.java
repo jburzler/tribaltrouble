@@ -24,8 +24,9 @@ public final strictfp class Cost {
 
 	public Quad[] toIconArray() {
 		int size = 0;
-		for (int i = 0; i < supply_amounts.length; i++)
-			size += supply_amounts[i];
+		for (int i = 0; i < supply_amounts.length; i++) {
+            size += supply_amounts[i];
+        }
 		Quad[] result = new Quad[size];
 		int index = 0;
 		for (int i = 0; i < supply_types.length; i++) {
@@ -42,8 +43,9 @@ public final strictfp class Cost {
 			} else {
 				throw new RuntimeException("Wrong supply_type");
 			}
-			for (int j = 0; j < supply_amounts[i]; j++)
-				result[index++] = icon;
+			for (int j = 0; j < supply_amounts[i]; j++) {
+                result[index++] = icon;
+            }
 		}
 		assert index == result.length;
 		return result;

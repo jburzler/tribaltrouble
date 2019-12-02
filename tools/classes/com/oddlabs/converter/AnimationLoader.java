@@ -9,7 +9,7 @@ public final strictfp class AnimationLoader {
 	private AnimationLoader() {
 	}
 
-	public final static Map[] loadAnimation(File file) {
+	public final static Map<String,float[]>[] loadAnimation(File file) {
 		try {
 			FileInputStream input_stream = new FileInputStream(file);
 			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -24,22 +24,22 @@ public final strictfp class AnimationLoader {
 		}
 	}
 
-	private final static Map[] parseAnimation(Node node) {
+	private static Map<String,float[]>[] parseAnimation(Node node) {
 		NodeList frames = node.getChildNodes();
-		Map anim_infos_map = new HashMap();
+		Map<Integer,Map<String,float[]>> anim_infos_map = new HashMap<>();
 		for (int i = 0; i < frames.getLength(); i++) {
 			Node frame = frames.item(i);
 			if (frame.getNodeName().equals("frame")) {
 				int frame_index = getAttrInt(frame, "index");
 				assert frame_index >= 0;
-				anim_infos_map.put(new Integer(frame_index), parseFrame(frame));
+				anim_infos_map.put(frame_index, parseFrame(frame));
 			}
 		}
-		Map[] anim_infos = new Map[anim_infos_map.size()];
-		Iterator it = anim_infos_map.keySet().iterator();
+		Map<String,float[]>[] anim_infos = new Map[anim_infos_map.size()];
+		Iterator<Integer> it = anim_infos_map.keySet().iterator();
 		while (it.hasNext()) {
-			Integer frame_index_obj = (Integer)it.next();
-			Map frame = (Map)anim_infos_map.get(frame_index_obj);
+			Integer frame_index_obj = it.next();
+			Map<String,float[]> frame = anim_infos_map.get(frame_index_obj);
 			int index = frame_index_obj.intValue();
 			assert anim_infos[index] == null;
 			anim_infos[index] = frame;
@@ -47,9 +47,9 @@ public final strictfp class AnimationLoader {
 		return anim_infos;
 	}
 
-	public final static Map parseFrame(Node node) {
+	public final static Map<String,float[]> parseFrame(Node node) {
 		NodeList bones = node.getChildNodes();
-		Map bone_infos = new HashMap();
+		Map<String,float[]> bone_infos = new HashMap<>();
 		for (int i = 0; i < bones.getLength(); i++) {
 			Node bone = bones.item(i);
 			if (bone.getNodeName().equals("transform")) {
@@ -77,11 +77,11 @@ public final strictfp class AnimationLoader {
 		return bone_infos;
 	}
 
-	private final static int getAttrInt(Node node, String name) {
+	private static int getAttrInt(Node node, String name) {
 		return Integer.parseInt(node.getAttributes().getNamedItem(name).getNodeValue());
 	}
 
-	private final static float getAttrFloat(Node node, String name) {
+	private static float getAttrFloat(Node node, String name) {
 		return Float.parseFloat(node.getAttributes().getNamedItem(name).getNodeValue());
 	}
 }

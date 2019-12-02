@@ -372,9 +372,9 @@ public final strictfp class PeerHub implements Animated, RouterHandler {
 
 	public void receiveChat(String name, String text, boolean team) {
 		if (team)
-			Network.getChatHub().chat(new ChatMessage(name, text, ChatMessage.CHAT_TEAM));
+			Network.getChatHub().chat(new ChatMessage(name, text, ChatMessage.Type.TEAM));
 		else
-			Network.getChatHub().chat(new ChatMessage(name, text, ChatMessage.CHAT_NORMAL));
+			Network.getChatHub().chat(new ChatMessage(name, text, ChatMessage.Type.NORMAL));
 	}
 
 	public void receiveBeacon(float x, float y, String owner) {

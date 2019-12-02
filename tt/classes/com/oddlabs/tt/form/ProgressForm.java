@@ -34,8 +34,9 @@ public final strictfp class ProgressForm {
 	static {
 		LOADING_TIPS = new String[NUM_TIPS];
 		ResourceBundle bundle = ResourceBundle.getBundle(ProgressForm.class.getName());
-		for (int i = 0; i < LOADING_TIPS.length; i++)
-			LOADING_TIPS[i] = Utils.getBundleString(bundle, TIP_PREFIX + i);
+		for (int i = 0; i < LOADING_TIPS.length; i++) {
+            LOADING_TIPS[i] = Utils.getBundleString(bundle, TIP_PREFIX + i);
+        }
 	}
 
 	public static void setProgressForm(NetworkSelector network, GUI gui, LoadCallback callback) {

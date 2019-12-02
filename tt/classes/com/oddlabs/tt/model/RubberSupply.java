@@ -80,7 +80,7 @@ public final strictfp class RubberSupply extends SupplyModel implements Animated
 		return 1.2f;
 	}
 
-        @Override
+    @Override
 	public void animateSpawn(float t, float progress) {
 		anim_time += ANIMATION_SPEEDS[animation]*t;
 		float x = spawn_x + (UnitGrid.coordinateFromGrid(getGridX()) - spawn_x)*progress;
@@ -90,7 +90,7 @@ public final strictfp class RubberSupply extends SupplyModel implements Animated
 		reinsert();
 	}
 
-        @Override
+    @Override
 	public void spawnComplete() {
 		offset_z = 0;
 		spawning = false;
@@ -116,18 +116,18 @@ public final strictfp class RubberSupply extends SupplyModel implements Animated
 		throw new RuntimeException("Chickens should not rotate.");
 	}
 */
-        @Override
+    @Override
 	public void free() {
 		getWorld().getUnitGrid().freeGrid(getGridX(), getGridY(), this);
 	}
 
-        @Override
+    @Override
 	public void occupy() {
 		getWorld().getUnitGrid().occupyGrid(getGridX(), getGridY(), this);
 	}
 
-        @Override
-        @SuppressWarnings("unchecked")
+    @Override
+    @SuppressWarnings("unchecked")
 	public void setGridPosition(int grid_x, int grid_y) {
 		Region current_region = getWorld().getUnitGrid().getRegion(getGridX(), getGridY());
 		Region new_region = getWorld().getUnitGrid().getRegion(grid_x, grid_y);
@@ -138,7 +138,7 @@ public final strictfp class RubberSupply extends SupplyModel implements Animated
 		super.setGridPosition(grid_x, grid_y);
 	}
 
-        @Override
+    @Override
 	public void markBlocking() {
 	}
 
@@ -146,7 +146,7 @@ public final strictfp class RubberSupply extends SupplyModel implements Animated
 		return is_hit;
 	}
 
-        @Override
+    @Override
 	public void animate(float t) {
 		if (spawning)
 			return;
@@ -194,14 +194,14 @@ public final strictfp class RubberSupply extends SupplyModel implements Animated
 	}
 
 	private void fly(float t) {
-		int state = path_tracker.animate(METERS_PER_SECOND*t);
+		PathTracker.State state = path_tracker.animate(METERS_PER_SECOND*t);
 		switch (state) {
-			case PathTracker.OK:
-			case PathTracker.OK_INTERRUPTIBLE:
+			case OK:
+			case OK_INTERRUPTIBLE:
 				return;
-			case PathTracker.DONE:
-			case PathTracker.BLOCKED:
-			case PathTracker.SOFTBLOCKED:
+			case DONE:
+			case BLOCKED:
+			case SOFTBLOCKED:
 				setNewAnimation(ANIMATION_IDLING);
 				return;
 			default:
@@ -209,7 +209,7 @@ public final strictfp class RubberSupply extends SupplyModel implements Animated
 		}
 	}
 
-        @Override
+    @Override
 	public float getOffsetZ() {
 		return offset_z;
 	}
@@ -219,17 +219,17 @@ public final strictfp class RubberSupply extends SupplyModel implements Animated
 		animation = animation_index;
 	}
 
-        @Override
+    @Override
 	public int getAnimation() {
 		return animation;
 	}
 
-        @Override
+    @Override
 	public float getAnimationTicks() {
 		return anim_time;
 	}
 
-        @Override
+     @Override
 	public boolean hit() {
 		if (!is_hit) {
 			is_hit = true;
@@ -244,24 +244,24 @@ public final strictfp class RubberSupply extends SupplyModel implements Animated
 		return super.hit();
 	}
 
-        @Override
+    @Override
 	protected void register() {
 		super.register();
 		getWorld().getAnimationManagerGameTime().registerAnimation(this);
 	}
 
-        @Override
+    @Override
 	protected void remove() {
 		getWorld().getAnimationManagerGameTime().removeAnimation(this);
 		super.remove();
 	}
 
-        @Override
+    @Override
 	public void visit(ElementVisitor visitor) {
 		visitor.visitRubberSupply(this);
 	}
 
-        @Override
+    @Override
 	public void updateChecksum(StateChecksum checksum) {
 	}
 }

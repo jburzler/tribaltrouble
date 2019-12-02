@@ -38,13 +38,13 @@ public final strictfp class GeneratorHalos extends TextureGenerator {
 		}
 		return textures;
 	}
-	
+
         @Override
 	public int hashCode() {
 		return size*Arrays.deepHashCode(shadow_parms)*Arrays.deepHashCode(ring_parms);
 	}
 
-        @Override
+    @Override
 	public boolean equals(Object o) {
 		if (!super.equals(o))
 			return false;

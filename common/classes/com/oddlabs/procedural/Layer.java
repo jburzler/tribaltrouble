@@ -57,42 +57,45 @@ public final strictfp class Layer {
 	public void loadFromBytes(byte[] data) {
 		float inv_255 = 1f/255f;
 		int index = 0;
-		for (int y = 0; y < getHeight(); y++)
-			for (int x = 0; x < getWidth(); x++) {
-				int br = ((int)data[index++]) & 0xff;
-				int bg = ((int)data[index++]) & 0xff;
-				int bb = ((int)data[index++]) & 0xff;
-				float fr = br*inv_255;
-				float fg = bg*inv_255;
-				float fb = bb*inv_255;
-				float fa = (((int)data[index++]) & 0xff)*inv_255;
-				r.putPixel(x, y, fr);
-				g.putPixel(x, y, fg);
-				b.putPixel(x, y, fb);
-				if (a != null)
-					a.putPixel(x, y, fa);
-			}
+		for (int y = 0; y < getHeight(); y++) {
+            for (int x = 0; x < getWidth(); x++) {
+                int br = Byte.toUnsignedInt(data[index++]);
+                int bg = Byte.toUnsignedInt(data[index++]);
+                int bb = Byte.toUnsignedInt(data[index++]);
+                int ba = Byte.toUnsignedInt(data[index++]);
+                float fr = br*inv_255;
+                float fg = bg*inv_255;
+                float fb = bb*inv_255;
+                float fa = ba*inv_255;
+                r.putPixel(x, y, fr);
+                g.putPixel(x, y, fg);
+                b.putPixel(x, y, fb);
+                if (a != null)
+                    a.putPixel(x, y, fa);
+            }
+        }
 	}
 
 	public byte[] convertToBytes() {
 		byte[] byte_pixel_data = new byte[getWidth()*getHeight()*4];
-		for (int y = 0; y < getHeight(); y++)
-			for (int x = 0; x < getWidth(); x++) {
-				int ri = ((int)(r.getPixel(x, y)*255 + .5f)) & 0xff;
-				int gi = ((int)(g.getPixel(x, y)*255 + .5f)) & 0xff;
-				int bi = ((int)(b.getPixel(x, y)*255 + .5f)) & 0xff;
-				int ai;
-				if (a != null) {
-					ai = ((int)(a.getPixel(x, y)*255 + .5f)) & 0xff;
-				} else {
-					ai = 255;
-				}
-				int index = y*getWidth() + x;
-				byte_pixel_data[index*4] = (byte)ri;
-				byte_pixel_data[index*4 + 1] = (byte)gi;
-				byte_pixel_data[index*4 + 2] = (byte)bi;
-				byte_pixel_data[index*4 + 3] = (byte)ai;
-			}
+		for (int y = 0; y < getHeight(); y++) {
+            for (int x = 0; x < getWidth(); x++) {
+                int ri = ((int)(r.getPixel(x, y)*255 + .5f)) & 0xff;
+                int gi = ((int)(g.getPixel(x, y)*255 + .5f)) & 0xff;
+                int bi = ((int)(b.getPixel(x, y)*255 + .5f)) & 0xff;
+                int ai;
+                if (a != null) {
+                    ai = ((int)(a.getPixel(x, y)*255 + .5f)) & 0xff;
+                } else {
+                    ai = 255;
+                }
+                int index = y*getWidth() + x;
+                byte_pixel_data[index*4] = (byte)ri;
+                byte_pixel_data[index*4 + 1] = (byte)gi;
+                byte_pixel_data[index*4 + 2] = (byte)bi;
+                byte_pixel_data[index*4 + 3] = (byte)ai;
+            }
+        }
 		return byte_pixel_data;
 	}
 
@@ -106,7 +109,7 @@ public final strictfp class Layer {
 	public void saveAsPNG(String filename) {
 		saveAsPNG(new File(filename + ".png"));
 	}
-	
+
 	public void saveAsPNG(File file) {
 		BufferedImage image = convertToImage();
 		try (FileOutputStream fos = new FileOutputStream(file)) {
@@ -119,7 +122,7 @@ public final strictfp class Layer {
 	public void addAlpha() {
 		a = new Channel(width, height);
 	}
-	
+
 	public void addAlpha(Channel alpha) {
 		a = alpha;
 	}
@@ -377,7 +380,7 @@ public final strictfp class Layer {
 		this.b.multiply(b);
 		return this;
 	}
-	
+
 	public Layer multiply(float r, float g, float b, float a) {
 		this.r.multiply(r);
 		this.g.multiply(g);
@@ -401,14 +404,14 @@ public final strictfp class Layer {
 		this.b.add(b);
 		return this;
 	}
-	
+
 	public Layer addClip(float r, float g, float b) {
 		this.r.addClip(r);
 		this.g.addClip(g);
 		this.b.addClip(b);
 		return this;
 	}
-	
+
 	public Layer addClip(float r, float g, float b, float a) {
 		this.r.addClip(r);
 		this.g.addClip(g);

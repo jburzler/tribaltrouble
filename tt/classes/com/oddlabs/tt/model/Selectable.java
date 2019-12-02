@@ -22,7 +22,7 @@ public abstract class Selectable extends Model implements Target, Animated, Mode
 	private Behaviour current_behaviour;
 	private final Abilities abilities = new Abilities(Abilities.NONE);
 	private final Template template;
-	private final List controller_stack = new ArrayList();
+	private final List<Controller> controller_stack = new ArrayList<>();
 
 	private boolean dead;
 	private boolean should_decide;
@@ -62,10 +62,10 @@ public abstract class Selectable extends Model implements Target, Animated, Mode
 	}
 
 	public final Controller getCurrentController() {
-		return (Controller)controller_stack.get(controller_stack.size() - 1);
+		return controller_stack.get(controller_stack.size() - 1);
 	}
 
-        @Override
+    @Override
 	public final void animate(float t) {
 		last_behaviour_state = current_behaviour.animate(t);
 		switch (last_behaviour_state) {
@@ -139,7 +139,7 @@ public abstract class Selectable extends Model implements Target, Animated, Mode
 		}
 	}
 
-        @Override
+    @Override
 	protected final void register() {
 		super.register();
 		owner.getWorld().getAnimationManagerGameTime().registerAnimation(this);
@@ -148,7 +148,7 @@ public abstract class Selectable extends Model implements Target, Animated, Mode
 
 	public final void pushControllers(Controller[] controllers) {
 		assert !isDead();
-                controller_stack.addAll(Arrays.asList(controllers));
+        controller_stack.addAll(Arrays.asList(controllers));
 		decide();
 	}
 
@@ -199,13 +199,13 @@ public abstract class Selectable extends Model implements Target, Animated, Mode
 	public final Controller getPrimaryController() {
 		assert !isDead();
 		if (controller_stack.size() > 1)
-			return (Controller)controller_stack.get(1); // Jump over the default controller
+			return controller_stack.get(1); // Jump over the default controller
 		else
-			return (Controller)controller_stack.get(0);
+			return controller_stack.get(0);
 	}
 
 	protected final void clearControllerStack() {
-		Controller default_controller = (Controller)controller_stack.get(0);
+		Controller default_controller = controller_stack.get(0);
 		controller_stack.clear();
 		controller_stack.add(default_controller);
 	}

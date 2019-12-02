@@ -44,7 +44,7 @@ public final strictfp class FontInfo implements Serializable {
 		try (ObjectOutputStream os = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(file_name)))) {
 			os.writeObject(this);
 		} catch (IOException e) {
-			throw new RuntimeException(e);
+			throw new UncheckedIOException(e);
 		}
 	}
 

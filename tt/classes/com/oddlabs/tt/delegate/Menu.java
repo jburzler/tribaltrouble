@@ -19,6 +19,7 @@ import com.oddlabs.tt.net.GameNetwork;
 import com.oddlabs.tt.net.Server;
 import com.oddlabs.tt.net.WorldInitAction;
 import com.oddlabs.tt.player.Player;
+import com.oddlabs.tt.procedural.Landscape;
 import com.oddlabs.tt.render.Renderer;
 import com.oddlabs.tt.resource.IslandGenerator;
 import com.oddlabs.tt.resource.WorldGenerator;
@@ -253,9 +254,9 @@ public abstract strictfp class Menu extends CameraDelegate {
 		return game_network;
 	}
 
-	public final static GameNetwork startNewGame(NetworkSelector network, GUIRoot gui_root, SelectGameMenu owner, WorldParameters world_params, InGameInfo ingame_info, WorldInitAction init_action, Game game, int meters_per_world, int terrain_type, float hills, float vegetation_amount, float supplies_amount, int seed, String[] ai_names) {
+	public final static GameNetwork startNewGame(NetworkSelector network, GUIRoot gui_root, SelectGameMenu owner, WorldParameters world_params, InGameInfo ingame_info, WorldInitAction init_action, Game game, int meters_per_world, Landscape.TerrainType terrain, float hills, float vegetation_amount, float supplies_amount, int seed, String[] ai_names) {
 		boolean multiplayer = ingame_info.isMultiplayer();
-		WorldGenerator generator = new IslandGenerator(meters_per_world, terrain_type, hills, vegetation_amount, supplies_amount, seed);
+		WorldGenerator generator = new IslandGenerator(meters_per_world, terrain, hills, vegetation_amount, supplies_amount, seed);
 		InetAddress address = multiplayer ? null : com.oddlabs.util.Utils.getLoopbackAddress();
 		final Server server = new Server(network, game, address, generator, multiplayer, ai_names);
 		Client client = new Client(server::close, network, gui_root.getGUI(), -1, world_params, ingame_info, init_action);

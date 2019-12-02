@@ -9,17 +9,17 @@ public final strictfp class CloudFunction implements ParametricFunction {
 		this.radius_z = radius_z;
 	}
 
-        @Override
+    @Override
 	public float getX(float u, float v) {
 		return radius_xy*(float)StrictMath.sin(u)*(float)StrictMath.cos(v);
 	}
 
-        @Override
+    @Override
 	public float getY(float u, float v) {
 		return radius_xy*(float)StrictMath.sin(u)*(float)StrictMath.sin(v);
 	}
 
-        @Override
+    @Override
 	public float getZ(float u, float v) {
 		return radius_z*(float)StrictMath.cos(u);
 	}

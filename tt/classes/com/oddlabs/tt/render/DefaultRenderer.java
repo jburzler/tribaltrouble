@@ -68,7 +68,7 @@ public final strictfp class DefaultRenderer implements UIRenderer {
         }
     }
 
-    public DefaultRenderer(Cheat cheat, Player local_player, RenderQueues render_queues, int terrain_type, WorldInfo world_info, LandscapeRenderer landscape_renderer, Picker picker, Selection selection, WorldGenerator generator) {
+    public DefaultRenderer(Cheat cheat, Player local_player, RenderQueues render_queues, Landscape.TerrainType terrain, WorldInfo world_info, LandscapeRenderer landscape_renderer, Picker picker, Selection selection, WorldGenerator generator) {
         this.world = local_player.getWorld();
         this.cheat = cheat;
         this.light_array = BufferUtils.createByteBuffer(4 * 4).asFloatBuffer();
@@ -78,7 +78,7 @@ public final strictfp class DefaultRenderer implements UIRenderer {
         this.sprite_sorter = new SpriteSorter();
         this.picker = picker;
         this.element_renderer = new ElementRenderer(local_player, landscape_renderer, render_queues, picker, false, sprite_sorter, selection);
-        this.tree_renderer = new TreeRenderer(world, cheat, terrain_type, world_info.trees, world_info.palm_trees, sprite_sorter, picker.getRespondManager());
+        this.tree_renderer = new TreeRenderer(world, cheat, terrain, world_info.trees, world_info.palm_trees, sprite_sorter, picker.getRespondManager());
         this.landscape_renderer = landscape_renderer;
         this.fog_info = Landscape.getFogInfo(generator.getTerrainType(), generator.getMetersPerWorld());
         this.water = new Water(world.getHeightMap(), generator.getTerrainType());

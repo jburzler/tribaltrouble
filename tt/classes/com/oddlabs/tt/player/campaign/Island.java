@@ -16,6 +16,7 @@ import com.oddlabs.tt.net.WorldInitAction;
 import com.oddlabs.tt.pathfinder.UnitGrid;
 import com.oddlabs.tt.player.AI;
 import com.oddlabs.tt.player.Player;
+import com.oddlabs.tt.procedural.Landscape;
 import com.oddlabs.tt.trigger.campaign.DefeatTrigger;
 import com.oddlabs.tt.util.StateChecksum;
 import com.oddlabs.tt.util.Target;
@@ -45,7 +46,7 @@ public abstract class Island {
 		world_viewer.getGUIRoot().addModalForm(form);
 	}
 
-	protected final GameNetwork startNewGame(NetworkSelector network, GUIRoot gui_root, int meters_per_world, int terrain_type, float hills, float vegetation_amount, float supplies_amount, int seed, int campaign_num, int initial_units, String[] ai_names) {
+	protected final GameNetwork startNewGame(NetworkSelector network, GUIRoot gui_root, int meters_per_world, Landscape.TerrainType terrain, float hills, float vegetation_amount, float supplies_amount, int seed, int campaign_num, int initial_units, String[] ai_names) {
 		InGameInfo ingame_info = new CampaignInGameInfo(campaign);
 		WorldInitAction init_action = (WorldViewer viewer) -> {
                     world_viewer = viewer;
@@ -89,7 +90,7 @@ public abstract class Island {
 					Player.DEFAULT_MAX_UNIT_COUNT),
 					ingame_info,
 					init_action,
-					null, meters_per_world, terrain_type, hills, vegetation_amount, supplies_amount, seed, ai_names);
+					null, meters_per_world, terrain, hills, vegetation_amount, supplies_amount, seed, ai_names);
 	}
 
 	protected final WorldViewer getViewer() {

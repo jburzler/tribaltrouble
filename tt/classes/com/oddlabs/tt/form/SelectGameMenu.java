@@ -10,7 +10,6 @@ import com.oddlabs.matchmaking.RankingEntry;
 import com.oddlabs.net.NetworkSelector;
 import com.oddlabs.tt.delegate.Menu;
 import com.oddlabs.tt.font.Font;
-import com.oddlabs.tt.gui.CancelListener;
 import com.oddlabs.tt.gui.ChatPanel;
 import com.oddlabs.tt.gui.ChatRoomInfo;
 import com.oddlabs.tt.gui.ColumnInfo;
@@ -210,7 +209,9 @@ public final strictfp class SelectGameMenu extends Form implements MatchmakingLi
 
 		HorizButton logout_button = new HorizButton(Utils.getBundleString(bundle, "logout"), BUTTON_WIDTH);
 		addChild(logout_button);
-		logout_button.addMouseClickListener(new CancelListener(this));
+		logout_button.addMouseClickListener((int button, int x, int y, int clicks) -> {
+			this.cancel();
+        });
 
 		panel_group.place();
 		logout_button.place(ORIGIN_BOTTOM_RIGHT);

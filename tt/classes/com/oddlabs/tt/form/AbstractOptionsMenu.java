@@ -488,13 +488,13 @@ public abstract strictfp class AbstractOptionsMenu extends Form {
 			gui_root.addModalForm(display_change_form);
 		}
 
-                @Override
+        @Override
 		public void rowDoubleClicked(Object o) {
 		}
 	}
 
 	private final strictfp class LanguageListener implements RowListener {
-                @Override
+        @Override
 		public void rowChosen(Object o) {
 			Locale locale = (Locale)o;
 			if (locale.getVariant().equals("default"))
@@ -504,20 +504,20 @@ public abstract strictfp class AbstractOptionsMenu extends Form {
 			gui_root.addModalForm(new MessageForm(Utils.getBundleString(bundle, "language_change_next_run")));
 		}
 
-                @Override
+        @Override
 		public void rowDoubleClicked(Object o) {
 		}
 	}
 
 	private final strictfp class GamespeedListener implements ItemChosenListener {
-                @Override
+        @Override
 		public void itemChosen(PulldownMenu menu, int item_index) {
 			changeGamespeed(item_index);
 		}
 	}
 
 	private final strictfp class AboutListener implements MouseClickListener {
-                @Override
+        @Override
 		public void mouseClicked(int button, int x, int y, int clicks) {
 			gui_root.addModalForm(new CreditsForm());
 		}

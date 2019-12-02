@@ -99,9 +99,11 @@ public abstract strictfp class GLImage {
 			start_y /= height_div;
 			width = (int)StrictMath.ceil((float)width/width_div);
 			height = (int)StrictMath.ceil((float)height/height_div);
-			for (int y = start_y; y < start_y + height; y++)
-				for (int x = start_x; x < start_x + width; x++)
-					mipmaps[i].putPixel(x, y, averagePixel(mipmaps[i - 1], width_div*x, height_div*y, height_div, width_div, base_fadeout_level, fadeout_factor, i, max_alpha));
+			for (int y = start_y; y < start_y + height; y++) {
+                for (int x = start_x; x < start_x + width; x++) {
+                    mipmaps[i].putPixel(x, y, averagePixel(mipmaps[i - 1], width_div*x, height_div*y, height_div, width_div, base_fadeout_level, fadeout_factor, i, max_alpha));
+                }
+            }
 		}
 	}
 
@@ -164,14 +166,15 @@ public abstract strictfp class GLImage {
 		int col2 = 0;
 		int col3 = 0;
 		int col4 = 0;
-		for (int offset_y = 0; offset_y < height_div; offset_y++)
-			for (int offset_x = 0; offset_x < width_div; offset_x++) {
-				int pixel = last_img.getPixel(x + offset_x, y + offset_y);
-				col1 += (pixel >>> 24);
-				col2 += (pixel >>> 16) & 0xff;
-				col3 += (pixel >>> 8) & 0xff;
-				col4 += pixel & 0xff;
-			}
+		for (int offset_y = 0; offset_y < height_div; offset_y++) {
+            for (int offset_x = 0; offset_x < width_div; offset_x++) {
+                int pixel = last_img.getPixel(x + offset_x, y + offset_y);
+                col1 += (pixel >>> 24);
+                col2 += (pixel >>> 16) & 0xff;
+                col3 += (pixel >>> 8) & 0xff;
+                col4 += pixel & 0xff;
+            }
+        }
 		if (current_level >= base_fadeout_level) {
 			col1 = (int)(col1*fadeout_factor);
 			col2 = (int)(col2*fadeout_factor);
@@ -190,16 +193,19 @@ public abstract strictfp class GLImage {
 	}
 
 	public final void clearAll(int color) {
-		for (int y = 0; y < height; y++)
-			for (int x = 0; x < width; x++)
-				putPixel(x, y, color);
+		for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                putPixel(x, y, color);
+            }
+        }
 	}
 
 	public final void clear(int x, int y, int width, int height, int color) {
 		int yy = y;
 		for (; yy < y + height; yy++) {
-			for (int xx = x; xx < x + width; xx++)
-				putPixel(yy, xx, color);
+			for (int xx = x; xx < x + width; xx++) {
+                putPixel(yy, xx, color);
+            }
 		}
 	}
 

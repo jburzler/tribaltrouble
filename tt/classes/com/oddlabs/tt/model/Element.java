@@ -79,33 +79,33 @@ public abstract strictfp class Element<T> extends BoundingBox implements ListEle
 		return render_pos_z;
 	}
 
-        @Override
-	public final void setListOwner(LinkedList parent) {
+    @Override
+	public final void setListOwner(LinkedList<T> parent) {
 		this.parent = parent;
 	}
 
-        @Override
-	public final LinkedList getListOwner() {
+    @Override
+	public final LinkedList<T> getListOwner() {
 		return parent;
 	}
 
-        @Override
-	public final void setPrior(ListElement prior) {
+    @Override
+	public final void setPrior(ListElement<T> prior) {
 		this.prior = prior;
 	}
 
-        @Override
-	public final void setNext(ListElement next) {
+    @Override
+	public final void setNext(ListElement<T> next) {
 		this.next = next;
 	}
 
-        @Override
-	public final ListElement getPrior() {
+    @Override
+	public final ListElement<T> getPrior() {
 		return prior;
 	}
 
-        @Override
-	public final ListElement getNext() {
+    @Override
+	public final ListElement<T> getNext() {
 		return next;
 	}
 }

@@ -230,12 +230,12 @@ public final strictfp class MatchmakingClient implements MatchmakingClientInterf
 
         @Override
 	public void receiveChatRoomMessage(String owner, String msg) {
-		Network.getChatHub().chat(new ChatMessage(owner, msg, ChatMessage.CHAT_CHATROOM));
+		Network.getChatHub().chat(new ChatMessage(owner, msg, ChatMessage.Type.CHATROOM));
 	}
 
         @Override
 	public void receivePrivateMessage(String nick, String msg) {
-		Network.getChatHub().chat(new ChatMessage(nick, msg, ChatMessage.CHAT_PRIVATE));
+		Network.getChatHub().chat(new ChatMessage(nick, msg, ChatMessage.Type.PRIVATE));
 	}
 
 	public void sendPrivateMessage(GUIRoot gui_root, String nick, String message) {

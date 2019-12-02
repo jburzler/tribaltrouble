@@ -48,28 +48,29 @@ public final strictfp class GLIntImage extends GLImage {
 
 	public GLIntImage(Layer layer) {
 		this(layer.getWidth(), layer.getHeight(), GL11.GL_RGBA);
-		for (int y = 0; y < getHeight(); y++)
-			for (int x = 0; x < getWidth(); x++) {
-				int ri = ((int)(layer.r.getPixel(x, y)*255 + .5f)) & 0xff;
-				int gi = ((int)(layer.g.getPixel(x, y)*255 + .5f)) & 0xff;
-				int bi = ((int)(layer.b.getPixel(x, y)*255 + .5f)) & 0xff;
-				int ai;
-				if (layer.a != null) {
-					ai = ((int)(layer.a.getPixel(x, y)*255 + .5f)) & 0xff;
-				} else {
-					ai = 255;
-				}
-/*				if (ri < 0) ri = 0;
-				if (gi < 0) gi = 0;
-				if (bi < 0) bi = 0;
-				if (ai < 0) ai = 0;
-				if (ri > 255) ri = 255;
-				if (gi > 255) gi = 255;
-				if (bi > 255) bi = 255;
-				if (ai > 255) ai = 255;*/
-				int pixel = (ri << 24) | (gi << 16) | (bi << 8) | ai;
-				putPixel(x, y, pixel);
-			}
+		for (int y = 0; y < getHeight(); y++) {
+            for (int x = 0; x < getWidth(); x++) {
+                int ri = ((int)(layer.r.getPixel(x, y)*255 + .5f)) & 0xff;
+                int gi = ((int)(layer.g.getPixel(x, y)*255 + .5f)) & 0xff;
+                int bi = ((int)(layer.b.getPixel(x, y)*255 + .5f)) & 0xff;
+                int ai;
+                if (layer.a != null) {
+                    ai = ((int)(layer.a.getPixel(x, y)*255 + .5f)) & 0xff;
+                } else {
+                    ai = 255;
+                }
+                /*				if (ri < 0) ri = 0;
+                if (gi < 0) gi = 0;
+                if (bi < 0) bi = 0;
+                if (ai < 0) ai = 0;
+                if (ri > 255) ri = 255;
+                if (gi > 255) gi = 255;
+                if (bi > 255) bi = 255;
+                if (ai > 255) ai = 255;*/
+                int pixel = (ri << 24) | (gi << 16) | (bi << 8) | ai;
+                putPixel(x, y, pixel);
+            }
+        }
 	}
 
         @Override

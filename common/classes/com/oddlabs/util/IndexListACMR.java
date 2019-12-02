@@ -14,12 +14,14 @@ public final strictfp class IndexListACMR {
 outer:
 		for (int i = 0; i < indices.remaining(); i++) {
 			short index = indices.get(indices.position() + i);
-			for (int j = 0; j < current_fifo_size; j++)
-				if (fifo[j] == index)
-					continue outer;
+			for (int j = 0; j < current_fifo_size; j++) {
+                if (fifo[j] == index)
+                    continue outer;
+            }
 			if (current_fifo_size == fifo.length) {
-				for (int j = 1; j < current_fifo_size; j++)
-					fifo[j - 1] = fifo[j];
+				for (int j = 1; j < current_fifo_size; j++) {
+                    fifo[j - 1] = fifo[j];
+                }
 			} else
 				current_fifo_size++;
 			fifo[current_fifo_size - 1] = index;

@@ -112,8 +112,9 @@ dumpBuffer(buffer);*/
 	}
 
 	private static void dumpBuffer(ShortBuffer buffer) {
-		for (int i = 0; i < buffer.remaining(); i++)
-			System.out.print(buffer.get(buffer.position() + i) + " ");
+		for (int i = 0; i < buffer.remaining(); i++) {
+            System.out.print(buffer.get(buffer.position() + i) + " ");
+        }
 		System.out.println();
 	}
 

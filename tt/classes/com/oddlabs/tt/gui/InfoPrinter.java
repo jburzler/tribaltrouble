@@ -58,15 +58,15 @@ public final strictfp class InfoPrinter extends GUIObject implements Animated, C
 		chat(message.formatShort(), message.type);
 	}
 
-	public void chat(String text, int type) {
+	public void chat(String text, ChatMessage.Type type) {
 		switch (type) {
-			case ChatMessage.CHAT_NORMAL:
+			case NORMAL:
 				print(text);
 				break;
-			case ChatMessage.CHAT_TEAM:
+			case TEAM:
 				print(text, TEAM_COLOR);
 				break;
-			case ChatMessage.CHAT_PRIVATE:
+			case PRIVATE:
 				print(text, PRIVATE_COLOR);
 				break;
 			default:

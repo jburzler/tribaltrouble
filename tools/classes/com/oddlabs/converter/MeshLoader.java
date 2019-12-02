@@ -67,9 +67,10 @@ public final strictfp class MeshLoader {
 					// skin data
 					NodeList skins = vertex.getChildNodes();
 					int skin_count = 0;
-					for (int skin_index = 0; skin_index < skins.getLength(); skin_index++)
-						if (skins.item(skin_index).getNodeName().equals("skin"))
-							skin_count++;
+					for (int skin_index = 0; skin_index < skins.getLength(); skin_index++) {
+                        if (skins.item(skin_index).getNodeName().equals("skin"))
+                            skin_count++;
+                    }
 					byte[] vertex_skin_names = new byte[skin_count];
 					float[] vertex_skin_weights = new float[skin_count];
 					skin_names[polygon_index*3 + vertex_index] = vertex_skin_names;

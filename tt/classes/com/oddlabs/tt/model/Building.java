@@ -16,6 +16,7 @@ import com.oddlabs.tt.model.weapon.RockAxeWeapon;
 import com.oddlabs.tt.model.weapon.RockSpearWeapon;
 import com.oddlabs.tt.model.weapon.RubberAxeWeapon;
 import com.oddlabs.tt.model.weapon.RubberSpearWeapon;
+import com.oddlabs.tt.model.weapon.ThrowingWeapon;
 import com.oddlabs.tt.particle.LinearEmitter;
 import com.oddlabs.tt.particle.RandomAccelerationEmitter;
 import com.oddlabs.tt.particle.RandomVelocityEmitter;
@@ -33,16 +34,16 @@ import org.lwjgl.util.vector.Vector4f;
 public final strictfp class Building extends Selectable implements Occupant {
 	private final static float REMOVE_DELAY = 1f/10f;
 
-	public final static int RENDER_START = 0;
-	public final static int RENDER_HALFBUILT = 1;
-	public final static int RENDER_BUILT = 2;
+    public enum BuildState {
+        START, HALFBUILT, BUILT
+    };
 
 	private final static int PLACING_BORDER = 1;
 	private final static int MAX_SUPPLY_COUNT = 200;
 
-	public final static Cost COST_ROCK_WEAPON = new Cost(new Class[]{TreeSupply.class, RockSupply.class}, new int[]{2, 1});
-	public final static Cost COST_IRON_WEAPON = new Cost(new Class[]{TreeSupply.class, IronSupply.class}, new int[]{2, 1});
-	public final static Cost COST_RUBBER_WEAPON = new Cost(new Class[]{TreeSupply.class, RockSupply.class, IronSupply.class, RubberSupply.class}, new int[]{2, 1, 1, 1});
+	public final static Cost COST_ROCK_WEAPON = new Cost(new Class<?>[]{TreeSupply.class, RockSupply.class}, new int[]{2, 1});
+	public final static Cost COST_IRON_WEAPON = new Cost(new Class<?>[]{TreeSupply.class, IronSupply.class}, new int[]{2, 1});
+	public final static Cost COST_RUBBER_WEAPON = new Cost(new Class<?>[]{TreeSupply.class, RockSupply.class, IronSupply.class, RubberSupply.class}, new int[]{2, 1, 1, 1});
 
 	public final static int KEY_DEPLOY_ROCK_WARRIOR = 0;
 	public final static int KEY_DEPLOY_IRON_WARRIOR = 1;
@@ -59,8 +60,8 @@ public final strictfp class Building extends Selectable implements Occupant {
 
 	private final static float DAMAGED_PARTICLE_ALPHA = 3f;
 
-	private final Map supply_containers = new HashMap();
-	private final Map build_containers = new HashMap();
+	private final Map<Class<?>, SupplyContainer> supply_containers = new HashMap<>();
+	private final Map<Class<?>, BuildProductionContainer> build_containers = new HashMap<>();
 	private final DeployContainer[] deploy_containers = new DeployContainer[12];
 	private final LinearEmitter damaged_emitter;
 	private final LinearEmitter production_emitter;
@@ -197,9 +198,9 @@ public final strictfp class Building extends Selectable implements Occupant {
 		return (UnitContainer)supply_containers.get(Unit.class);
 	}
 
-	public SupplyContainer getSupplyContainer(Class key) {
+	public SupplyContainer getSupplyContainer(Class<?> key) {
 		assert !isDead();
-		return (SupplyContainer)supply_containers.get(key);
+		return supply_containers.get(key);
 	}
 
 	public BuildSupplyContainer getBuildSupplyContainer(Class key) {
@@ -217,7 +218,7 @@ public final strictfp class Building extends Selectable implements Occupant {
 		return chieftain_container;
 	}
 
-        @Override
+    @Override
 	public boolean isEnabled() {
 		return !isDead();
 	}
@@ -260,17 +261,17 @@ public final strictfp class Building extends Selectable implements Occupant {
 		createHarvesters(RubberSupply.class, num_rubber);
 	}
 
-	private void createHarvesters(Class supply_type, int amount) {
+	private void createHarvesters(Class<? extends Supply> supply_type, int amount) {
 		Race race = getOwner().getRace();
 		for (int i = 0; i < amount; i++) {
 			getUnitContainer().prepareDeploy(-1);
 			getUnitContainer().exit();
 			Unit unit = createUnit(null, race.getUnitTemplate(Race.UNIT_PEON));
-			unit.pushController(new GatherController(unit, null, supply_type));
+			unit.pushController(new GatherController<>(unit, null, supply_type));
 		}
 	}
 
-	public void buildWeapons(Class type, int num_weapons, boolean infinite) {
+	public void buildWeapons(Class<? extends ThrowingWeapon> type, int num_weapons, boolean infinite) {
 		assert !isDead();
 		if (infinite)
 			getOwner().getWorld().updateGlobalChecksum(num_weapons);
@@ -501,23 +502,24 @@ public final strictfp class Building extends Selectable implements Occupant {
 		return build_points == getBuildingTemplate().getMaxHitPoints();
 	}
 
-        @Override
+    @Override
 	public float getHitOffsetZ() {
-		return getTemplate().getHitOffsetZ(getRenderLevel());
+		return getTemplate().getHitOffsetZ(getRenderLevel().ordinal());
 	}
 
 	public static boolean doIsPlacingLegal(UnitGrid unit_grid, int grid_x, int grid_y, int size) {
 		if (!unit_grid.getHeightMap().canBuild(grid_x, grid_y, size))
 			return false;
 
-		for (int y = 0; y < size*2 - 1; y++)
-			for (int x = 0; x < size*2 - 1; x++) {
-				int current_grid_x = grid_x + x - (size - 1);
-				int current_grid_y = grid_y + y - (size - 1);
-				if (current_grid_x >= unit_grid.getGridSize() || current_grid_y >= unit_grid.getGridSize() ||
-					current_grid_x < 0 || current_grid_y < 0 || unit_grid.isGridOccupied(current_grid_x, current_grid_y))
-					return false;
-			}
+		for (int y = 0; y < size*2 - 1; y++) {
+            for (int x = 0; x < size*2 - 1; x++) {
+                int current_grid_x = grid_x + x - (size - 1);
+                int current_grid_y = grid_y + y - (size - 1);
+                if (current_grid_x >= unit_grid.getGridSize() || current_grid_y >= unit_grid.getGridSize() ||
+                        current_grid_x < 0 || current_grid_y < 0 || unit_grid.isGridOccupied(current_grid_x, current_grid_y))
+                    return false;
+            }
+        }
 		 return true;
 	}
 
@@ -629,31 +631,31 @@ public final strictfp class Building extends Selectable implements Occupant {
 		}
 	}
 
-	public int getRenderLevel() {
+	public BuildState getRenderLevel() {
 		if (build_points == getBuildingTemplate().getMaxHitPoints())
-			return RENDER_BUILT;
+			return BuildState.BUILT;
 		else if ((float)build_points/getBuildingTemplate().getMaxHitPoints() < .5)
-			return RENDER_START;
+			return BuildState.START;
 		else
-			return RENDER_HALFBUILT;
+			return BuildState.HALFBUILT;
 	}
 
         @Override
 	public SpriteKey getSpriteRenderer() {
-		int render_level = getRenderLevel();
+		BuildState render_level = getRenderLevel();
 		switch (render_level) {
-			case RENDER_START:
+			case START:
 				return getBuildingTemplate().getStartRenderer();
-			case RENDER_HALFBUILT:
+			case HALFBUILT:
 				return getBuildingTemplate().getHalfbuiltRenderer();
-			case RENDER_BUILT:
+			case BUILT:
 				return getBuildingTemplate().getBuiltRenderer();
 			default:
-				throw new RuntimeException();
+				throw new IllegalStateException();
 		}
 	}
 
-        @Override
+    @Override
 	public void visit(ToolTipVisitor visitor) {
 		visitor.visitBuilding(this);
 	}
@@ -665,49 +667,55 @@ public final strictfp class Building extends Selectable implements Occupant {
 		int offset_y = getGridY() - (size - 1);
 		float total_height = 0;
 		old_landscape_heights = new float[height_points][height_points];
-		for (int y = 0; y < height_points; y++)
-			for (int x = 0; x < height_points; x++) {
-				float old_height = getOwner().getWorld().getHeightMap().getWrappedHeight(offset_x + x + PLACING_BORDER, offset_y + y + PLACING_BORDER);
-				old_landscape_heights[y][x] = old_height;
-				total_height += old_height;
-			}
+		for (int y = 0; y < height_points; y++) {
+            for (int x = 0; x < height_points; x++) {
+                float old_height = getOwner().getWorld().getHeightMap().getWrappedHeight(offset_x + x + PLACING_BORDER, offset_y + y + PLACING_BORDER);
+                old_landscape_heights[y][x] = old_height;
+                total_height += old_height;
+            }
+        }
 
 		float new_height = total_height/(height_points*height_points);
-		for (int y = 0; y < height_points; y++)
-			for (int x = 0; x < height_points; x++) {
-				getOwner().getWorld().getHeightMap().editHeight(offset_x + x + PLACING_BORDER, offset_y + y + PLACING_BORDER, new_height);
-			}
+		for (int y = 0; y < height_points; y++) {
+            for (int x = 0; x < height_points; x++) {
+                getOwner().getWorld().getHeightMap().editHeight(offset_x + x + PLACING_BORDER, offset_y + y + PLACING_BORDER, new_height);
+            }
+        }
 	}
 
 	private void undoLandscape() {
 		int size = getBuildingTemplate().getPlacingSize();
 		int offset_x = getGridX() - (size - 1);
 		int offset_y = getGridY() - (size - 1);
-		for (int y = 0; y < old_landscape_heights.length; y++)
-			for (int x = 0; x < old_landscape_heights[y].length; x++)
-				getOwner().getWorld().getHeightMap().editHeight(offset_x + x + PLACING_BORDER, offset_y + y + PLACING_BORDER, old_landscape_heights[y][x]);
+		for (int y = 0; y < old_landscape_heights.length; y++) {
+            for (int x = 0; x < old_landscape_heights[y].length; x++) {
+                getOwner().getWorld().getHeightMap().editHeight(offset_x + x + PLACING_BORDER, offset_y + y + PLACING_BORDER, old_landscape_heights[y][x]);
+            }
+        }
 	}
 
-        @SuppressWarnings("unchecked")
+    @SuppressWarnings("unchecked")
 	private void occupy() {
 		UnitGrid grid = getUnitGrid();
 		grid.getRegion(getGridX(), getGridY()).registerObject((Class<Building>) getClass(), this);
 		int size = getBuildingTemplate().getPlacingSize()*2 - 1;
-		for (int y = PLACING_BORDER; y < size - PLACING_BORDER; y++)
-			for (int x = PLACING_BORDER; x < size - PLACING_BORDER; x++) {
-				grid.occupyGrid(getGridX() - size/2 + x, getGridY() - size/2 + y, this);
-			}
+		for (int y = PLACING_BORDER; y < size - PLACING_BORDER; y++) {
+            for (int x = PLACING_BORDER; x < size - PLACING_BORDER; x++) {
+                grid.occupyGrid(getGridX() - size/2 + x, getGridY() - size/2 + y, this);
+            }
+        }
 	}
 
-        @SuppressWarnings("unchecked")
+    @SuppressWarnings("unchecked")
 	private void free() {
 		UnitGrid grid = getUnitGrid();
 		grid.getRegion(getGridX(), getGridY()).unregisterObject((Class<Building>) getClass(), this);
 		int size = getBuildingTemplate().getPlacingSize()*2 - 1;
-		for (int y = PLACING_BORDER; y < size - PLACING_BORDER; y++)
-			for (int x = PLACING_BORDER; x < size - PLACING_BORDER; x++) {
-				grid.freeGrid(getGridX() - size/2 + x, getGridY() - size/2 + y, this);
-			}
+		for (int y = PLACING_BORDER; y < size - PLACING_BORDER; y++) {
+            for (int x = PLACING_BORDER; x < size - PLACING_BORDER; x++) {
+                grid.freeGrid(getGridX() - size/2 + x, getGridY() - size/2 + y, this);
+            }
+        }
 	}
 
         @Override

@@ -4,6 +4,7 @@ import com.oddlabs.tt.event.LocalEventQueue;
 import com.oddlabs.tt.global.Globals;
 import com.oddlabs.tt.landscape.HeightMap;
 import com.oddlabs.tt.procedural.GeneratorClouds;
+import com.oddlabs.tt.procedural.Landscape;
 import com.oddlabs.tt.procedural.TextureGenerator;
 import com.oddlabs.tt.render.LandscapeRenderer;
 import com.oddlabs.tt.render.Texture;
@@ -60,10 +61,10 @@ public final strictfp class Sky {
     private final Texture[] clouds;
     private final int subdiv_axis;
     private final int subdiv_height;
-    private final int terrain_type;
+    private final Landscape.TerrainType terrain;
 
-    public Sky(LandscapeRenderer renderer, int terrain_type) {
-        this(renderer, terrain_type, (float) (renderer.getHeightMap().getMetersPerWorld() * StrictMath.sqrt(2) / 2), 6000f, 20, 20, SKYDOME_OUTER_UTILING, SKYDOME_OUTER_VTILING, SKYDOME_INNER_UTILING, SKYDOME_INNER_VTILING, renderer.getHeightMap().getMetersPerWorld() / 2, renderer.getHeightMap().getMetersPerWorld() / 2, SKYDOME_HEIGHT);
+    public Sky(LandscapeRenderer renderer, Landscape.TerrainType terrain) {
+        this(renderer, terrain, (float) (renderer.getHeightMap().getMetersPerWorld() * StrictMath.sqrt(2) / 2), 6000f, 20, 20, SKYDOME_OUTER_UTILING, SKYDOME_OUTER_VTILING, SKYDOME_INNER_UTILING, SKYDOME_INNER_VTILING, renderer.getHeightMap().getMetersPerWorld() / 2, renderer.getHeightMap().getMetersPerWorld() / 2, SKYDOME_HEIGHT);
     }
 
     private void setupSky() {
@@ -117,7 +118,7 @@ public final strictfp class Sky {
 
     public void renderSeaBottom() {
         GL11.glDisable(GL11.GL_TEXTURE_2D);
-        GL11.glColor3f(Globals.SEA_BOTTOM_COLOR[terrain_type][0], Globals.SEA_BOTTOM_COLOR[terrain_type][1], Globals.SEA_BOTTOM_COLOR[terrain_type][2]);
+        GL11.glColor3f(Globals.SEA_BOTTOM_COLOR[terrain.ordinal()][0], Globals.SEA_BOTTOM_COLOR[terrain.ordinal()][1], Globals.SEA_BOTTOM_COLOR[terrain.ordinal()][2]);
 
         GLStateStack.switchState(GLState.VERTEX_ARRAY);
         if (Globals.draw_detail) {
@@ -147,20 +148,20 @@ public final strictfp class Sky {
         GL11.glEnable(GL11.GL_TEXTURE_2D);
     }
 
-    private Sky(LandscapeRenderer landscape_renderer, int terrain_type, float inner_radius, float radius, int subdiv_axis, int subdiv_height, float outer_utile, float outer_vtile, float inner_utile, float inner_vtile, float origin_x, float origin_y, float origin_z) {
+    private Sky(LandscapeRenderer landscape_renderer, Landscape.TerrainType terrain, float inner_radius, float radius, int subdiv_axis, int subdiv_height, float outer_utile, float outer_vtile, float inner_utile, float inner_vtile, float origin_x, float origin_y, float origin_z) {
         this.landscape_renderer = landscape_renderer;
-        this.terrain_type = terrain_type;
+        this.terrain = terrain;
         this.subdiv_axis = subdiv_axis;
         this.subdiv_height = subdiv_height;
-        this.color = BufferUtils.createFloatBuffer(4).put(tex_env_color[terrain_type]);
+        this.color = BufferUtils.createFloatBuffer(4).put(tex_env_color[terrain.ordinal()]);
         color.rewind();
-        TextureGenerator clouds_desc = new GeneratorClouds(terrain_type);
+        TextureGenerator clouds_desc = new GeneratorClouds(terrain);
         clouds = Resources.findResource(clouds_desc);
         makeSkyVertices(radius, outer_utile, outer_vtile, inner_utile, inner_vtile, origin_x, origin_y, origin_z);
         strip_indices = makeSkyStripIndices();
         fan_indices = makeSkyFanIndices();
-        List vertices_stitch_list = new ArrayList();
-        List stitch_indices_list = new ArrayList();
+        List<SkyStitchVertex[]> vertices_stitch_list = new ArrayList<>();
+        List<ShortBuffer> stitch_indices_list = new ArrayList<>();
         int num_vertices = 0;
         int num_indices = 0;
         SkyStitchVertex[] previous_vertices = makeLandscapeVertices(landscape_renderer.getHeightMap());
@@ -183,14 +184,14 @@ public final strictfp class Sky {
         SkyStitchVertex[] all_vertices = new SkyStitchVertex[num_vertices];
         int index = 0;
         for (int i = 0; i < vertices_stitch_list.size(); i++) {
-            SkyStitchVertex[] vertices = (SkyStitchVertex[]) vertices_stitch_list.get(i);
+            SkyStitchVertex[] vertices = vertices_stitch_list.get(i);
             System.arraycopy(vertices, 0, all_vertices, index, vertices.length);
             index += vertices.length;
         }
         assert index == all_vertices.length;
         ShortBuffer all_indices = BufferUtils.createShortBuffer(num_indices);
         for (int i = 0; i < stitch_indices_list.size(); i++) {
-            ShortBuffer indices = (ShortBuffer) stitch_indices_list.get(i);
+            ShortBuffer indices = stitch_indices_list.get(i);
             all_indices.put(indices);
         }
         assert !all_indices.hasRemaining();
@@ -241,20 +242,20 @@ public final strictfp class Sky {
 
         // calculate skydome gradient colors
         float[] skydome_default_color = new float[]{
-            (float) StrictMath.pow(SKYDOME_GRADIENT[terrain_type][0], SKYDOME_DEFAULT_COLOR),
-            (float) StrictMath.pow(SKYDOME_GRADIENT[terrain_type][1], SKYDOME_DEFAULT_COLOR),
-            (float) StrictMath.pow(SKYDOME_GRADIENT[terrain_type][2], SKYDOME_DEFAULT_COLOR)
+            (float) StrictMath.pow(SKYDOME_GRADIENT[terrain.ordinal()][0], SKYDOME_DEFAULT_COLOR),
+            (float) StrictMath.pow(SKYDOME_GRADIENT[terrain.ordinal()][1], SKYDOME_DEFAULT_COLOR),
+            (float) StrictMath.pow(SKYDOME_GRADIENT[terrain.ordinal()][2], SKYDOME_DEFAULT_COLOR)
         };
         float[][] skydome_gradient = new float[SKYDOME_GRADIENT_LENGTH][3];
-        skydome_gradient[0] = SKYDOME_INITCOLOR[terrain_type];
+        skydome_gradient[0] = SKYDOME_INITCOLOR[terrain.ordinal()];
 
         float alpha;
         for (int i = 1; i < SKYDOME_GRADIENT_LENGTH; i++) {
             alpha = (float) i / (SKYDOME_GRADIENT_LENGTH - 1);
             skydome_gradient[i] = new float[]{
-                alpha * skydome_default_color[0] + (1f - alpha) * skydome_gradient[i - 1][0] * SKYDOME_GRADIENT[terrain_type][0],
-                alpha * skydome_default_color[1] + (1f - alpha) * skydome_gradient[i - 1][1] * SKYDOME_GRADIENT[terrain_type][1],
-                alpha * skydome_default_color[2] + (1f - alpha) * skydome_gradient[i - 1][2] * SKYDOME_GRADIENT[terrain_type][2]
+                alpha * skydome_default_color[0] + (1f - alpha) * skydome_gradient[i - 1][0] * SKYDOME_GRADIENT[terrain.ordinal()][0],
+                alpha * skydome_default_color[1] + (1f - alpha) * skydome_gradient[i - 1][1] * SKYDOME_GRADIENT[terrain.ordinal()][1],
+                alpha * skydome_default_color[2] + (1f - alpha) * skydome_gradient[i - 1][2] * SKYDOME_GRADIENT[terrain.ordinal()][2]
             };
         }
 

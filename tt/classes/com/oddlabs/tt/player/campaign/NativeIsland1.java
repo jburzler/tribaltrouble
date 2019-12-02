@@ -29,7 +29,7 @@ public final strictfp class NativeIsland1 extends Island {
 	private final ResourceBundle bundle = ResourceBundle.getBundle(NativeIsland1.class.getName());
 
 	private int objective = 0;
-	
+
 	public NativeIsland1(Campaign campaign) {
 		super(campaign);
 	}
@@ -42,7 +42,7 @@ public final strictfp class NativeIsland1 extends Island {
 			Utils.getBundleString(bundle, "name3"),
 			Utils.getBundleString(bundle, "name4"),
 			Utils.getBundleString(bundle, "name5")};
-		GameNetwork game_network = startNewGame(network, gui_root, 256, Landscape.VIKING, .75f, 1f, .5f, 1, 1, NativeCampaign.MAX_UNITS, ai_names);
+		GameNetwork game_network = startNewGame(network, gui_root, 256, Landscape.TerrainType.VIKING, .75f, 1f, .5f, 1, 1, NativeCampaign.MAX_UNITS, ai_names);
 		game_network.getClient().getServerInterface().setPlayerSlot(0,
 				PlayerSlot.HUMAN,
 				RacesResources.RACE_NATIVES,
@@ -107,8 +107,9 @@ public final strictfp class NativeIsland1 extends Island {
 		local_player.setActiveChieftain(new Unit(local_player, start_x, start_y, null, local_player.getRace().getUnitTemplate(Race.UNIT_CHIEFTAIN), Utils.getBundleString(player_bundle, "native_chieftain_name"), false));
 		local_player.getChieftain().increaseMagicEnergy(0, 1000);
 		local_player.getChieftain().increaseMagicEnergy(1, 1000);
-		for (int i = 0; i < getCampaign().getState().getNumPeons(); i++)
-			new Unit(local_player, start_x, start_y, null, local_player.getRace().getUnitTemplate(Race.UNIT_WARRIOR_ROCK));
+		for (int i = 0; i < getCampaign().getState().getNumPeons(); i++) {
+            new Unit(local_player, start_x, start_y, null, local_player.getRace().getUnitTemplate(Race.UNIT_WARRIOR_ROCK));
+        }
 
 		// insert slaves
 		final int captive_start_x = 48*2;

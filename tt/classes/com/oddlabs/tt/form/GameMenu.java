@@ -102,8 +102,9 @@ public final strictfp class GameMenu extends Panel implements ConfigurationListe
 		ratings = new Label[MatchmakingServerInterface.MAX_PLAYERS];
 		Group player_group = new Group();
 		GUIObject previous = null;
-		for (int i = 0; i < MatchmakingServerInterface.MAX_PLAYERS; i++)
-			previous = createPlayerPulldown(gui_root, player_group, previous, slot_buttons, race_buttons, team_buttons, ready_marks, ratings, i, MatchmakingServerInterface.MAX_PLAYERS);
+		for (int i = 0; i < MatchmakingServerInterface.MAX_PLAYERS; i++) {
+            previous = createPlayerPulldown(gui_root, player_group, previous, slot_buttons, race_buttons, team_buttons, ready_marks, ratings, i, MatchmakingServerInterface.MAX_PLAYERS);
+        }
 		player_group.compileCanvas();
 		addChild(player_group);
 
@@ -439,7 +440,7 @@ public final strictfp class GameMenu extends Panel implements ConfigurationListe
 
         @Override
 	public void chat(ChatMessage message) {
-		if (message.type != ChatMessage.CHAT_GAME_MENU)
+		if (message.type != ChatMessage.Type.GAME_MENU)
 			return;
 		if (chat_box.length() > 0)
 			chat_box.append("\n");

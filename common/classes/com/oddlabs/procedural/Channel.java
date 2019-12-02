@@ -104,9 +104,11 @@ public final strictfp class Channel {
 	}
 
 	public Channel fill(float value) {
-		for (int y = 0; y < height; y++)
-			for (int x = 0; x < width; x++)
-				pixels[y][x] = value;
+		for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                pixels[y][x] = value;
+            }
+        }
 		return this;
 	}
 

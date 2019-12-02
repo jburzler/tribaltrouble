@@ -45,9 +45,10 @@ public final strictfp class ARMIInterfaceMethods {
 	}
 
 	byte getMethodIndex(Method method) {
-		for (byte i = 0; i < methods.length; i++)
-			if (methods[i].equals(method))
-				return i;
+		for (byte i = 0; i < methods.length; i++) {
+            if (methods[i].equals(method))
+                return i;
+        }
 		throw new RuntimeException("Unknown method: " + method);
 	}
 }

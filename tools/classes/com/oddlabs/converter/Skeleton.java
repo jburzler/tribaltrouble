@@ -4,16 +4,16 @@ import java.util.Map;
 
 public final strictfp class Skeleton {
 	private final Bone bone_root;
-	private final Map initial_pose;
-	private final Map name_to_bone_map;
+	private final Map<String,float[]> initial_pose;
+	private final Map<String,Bone>  name_to_bone_map;
 
-	public Skeleton(Bone bone_root, Map initial_pose, Map name_to_bone_map) {
+	public Skeleton(Bone bone_root, Map<String,float[]> initial_pose, Map<String,Bone>  name_to_bone_map) {
 		this.bone_root = bone_root;
 		this.initial_pose = initial_pose;
 		this.name_to_bone_map = name_to_bone_map;
 	}
 
-	public final Map getNameToBoneMap() {
+	public final Map<String,Bone> getNameToBoneMap() {
 		return name_to_bone_map;
 	}
 
@@ -21,7 +21,7 @@ public final strictfp class Skeleton {
 		return bone_root;
 	}
 
-	public final Map getInitialPose() {
+	public final Map<String,float[]> getInitialPose() {
 		return initial_pose;
 	}
 }

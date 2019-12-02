@@ -7,6 +7,7 @@ import com.oddlabs.tt.guievent.MouseButtonListener;
 import com.oddlabs.tt.guievent.MouseClickListener;
 import com.oddlabs.tt.guievent.MouseMotionListener;
 import com.oddlabs.tt.guievent.MouseWheelListener;
+import java.util.Objects;
 import org.lwjgl.input.Keyboard;
 
 public abstract strictfp class GUIObject extends Renderable {
@@ -37,12 +38,12 @@ public abstract strictfp class GUIObject extends Renderable {
 	private GUIObject focused_child = null;
 	private GUIObject next_hover = null;
 
-	private final java.util.List mouse_click_listeners = new java.util.ArrayList();
-	private final java.util.List mouse_button_listeners = new java.util.ArrayList();
-	private final java.util.List mouse_motion_listeners = new java.util.ArrayList();
-	private final java.util.List mouse_wheel_listeners = new java.util.ArrayList();
-	private final java.util.List key_listeners = new java.util.ArrayList();
-	private final java.util.List focus_listeners = new java.util.ArrayList();
+	private final java.util.List<MouseClickListener> mouse_click_listeners = new java.util.ArrayList<>();
+	private final java.util.List<MouseButtonListener> mouse_button_listeners = new java.util.ArrayList<>();
+	private final java.util.List<MouseMotionListener> mouse_motion_listeners = new java.util.ArrayList<>();
+	private final java.util.List<MouseWheelListener> mouse_wheel_listeners = new java.util.ArrayList<>();
+	private final java.util.List<KeyListener> key_listeners = new java.util.ArrayList<>();
+	private final java.util.List<FocusListener> focus_listeners = new java.util.ArrayList<>();
 
 	private boolean placed = false;
 	private int origin;
@@ -259,8 +260,9 @@ public abstract strictfp class GUIObject extends Renderable {
 			focused_child = null;
 			// If child is in the current focused path, select new current focus
 			current = (GUIObject)child;
-			while (current.getFocusedChild() != null)
-				current = current.getFocusedChild();
+			while (current.getFocusedChild() != null) {
+                current = current.getFocusedChild();
+            }
 			if (current.isFocused())
 				setGlobalFocus();
 		}
@@ -373,10 +375,8 @@ public abstract strictfp class GUIObject extends Renderable {
 	protected final void focusNotifyAll(boolean focus) {
 		active = focus;
 		focusNotify(focus);
-		for (int i = 0; i < focus_listeners.size(); i++) {
-			FocusListener listener = (FocusListener)focus_listeners.get(i);
-			if (listener != null)
-				listener.activated(focus);
+		for (FocusListener listener : focus_listeners) {
+			listener.activated(focus);
 		}
 	}
 
@@ -412,10 +412,8 @@ public abstract strictfp class GUIObject extends Renderable {
 		if (disabled)
 			return;
 		mouseScrolled(amount);
-		for (int i = 0; i < mouse_wheel_listeners.size(); i++) {
-			MouseWheelListener listener = (MouseWheelListener)mouse_wheel_listeners.get(i);
-			if (listener != null)
-				listener.mouseScrolled(amount);
+		for (MouseWheelListener listener : mouse_wheel_listeners) {
+			listener.mouseScrolled(amount);
 		}
 	}
 
@@ -429,10 +427,8 @@ public abstract strictfp class GUIObject extends Renderable {
 		if (disabled)
 			return;
 		mouseDragged(button, x, y, relative_x, relative_y, absolute_x, absolute_y);
-		for (int i = 0; i < mouse_motion_listeners.size(); i++) {
-			MouseMotionListener listener = (MouseMotionListener)mouse_motion_listeners.get(i);
-			if (listener != null)
-				listener.mouseDragged(button, x, y, relative_x, relative_y, absolute_x, absolute_y);
+		for (MouseMotionListener listener : mouse_motion_listeners) {
+			listener.mouseDragged(button, x, y, relative_x, relative_y, absolute_x, absolute_y);
 		}
 	}
 
@@ -444,10 +440,8 @@ public abstract strictfp class GUIObject extends Renderable {
 		if (disabled)
 			return;
 		mouseMoved(x, y);
-		for (int i = 0; i < mouse_motion_listeners.size(); i++) {
-			MouseMotionListener listener = (MouseMotionListener)mouse_motion_listeners.get(i);
-			if (listener != null)
-				listener.mouseMoved(x, y);
+		for (MouseMotionListener listener : mouse_motion_listeners) {
+			listener.mouseMoved(x, y);
 		}
 	}
 
@@ -460,10 +454,8 @@ public abstract strictfp class GUIObject extends Renderable {
 	public final void mouseExitedAll() {
 		hovered = false;
 		mouseExited();
-		for (int i = 0; i < mouse_motion_listeners.size(); i++) {
-			MouseMotionListener listener = (MouseMotionListener)mouse_motion_listeners.get(i);
-			if (listener != null)
-				listener.mouseExited();
+		for (MouseMotionListener listener : mouse_motion_listeners) {
+			listener.mouseExited();
 		}
 	}
 
@@ -476,11 +468,9 @@ public abstract strictfp class GUIObject extends Renderable {
 	public final void mouseEnteredAll() {
 		hovered = true;
 		mouseEntered();
-		for (int i = 0; i < mouse_motion_listeners.size(); i++) {
-			MouseMotionListener listener = (MouseMotionListener)mouse_motion_listeners.get(i);
-			if (listener != null)
-				listener.mouseEntered();
-		}
+		for (MouseMotionListener listener : mouse_motion_listeners) {
+			listener.mouseEntered();
+        }
 	}
 
 	protected void mouseEntered() {
@@ -493,11 +483,9 @@ public abstract strictfp class GUIObject extends Renderable {
 		if (disabled)
 			return;
 		mouseClicked(button, x, y, clicks);
-		for (int i = 0; i < mouse_click_listeners.size(); i++) {
-			MouseClickListener listener = (MouseClickListener)mouse_click_listeners.get(i);
-			if (listener != null)
-				listener.mouseClicked(button, x, y, clicks);
-		}
+		for (MouseClickListener listener : mouse_click_listeners) {
+    		listener.mouseClicked(button, x, y, clicks);
+        }
 	}
 
 	protected void mouseClicked(int button, int x, int y, int clicks) {
@@ -510,11 +498,9 @@ public abstract strictfp class GUIObject extends Renderable {
 		if (disabled)
 			return;
 		mouseReleased(button, x, y);
-		for (int i = 0; i < mouse_button_listeners.size(); i++) {
-			MouseButtonListener listener = (MouseButtonListener)mouse_button_listeners.get(i);
-			if (listener  != null)
-				listener.mouseReleased(button, x, y);
-		}
+		for (MouseButtonListener listener : mouse_button_listeners) {
+			listener.mouseReleased(button, x, y);
+        }
 	}
 
 	protected void mouseReleased(int button, int x, int y) {
@@ -527,10 +513,8 @@ public abstract strictfp class GUIObject extends Renderable {
 		if (disabled)
 			return;
 		mousePressed(button, x, y);
-		for (int i = 0; i < mouse_button_listeners.size(); i++) {
-			MouseButtonListener listener = (MouseButtonListener)mouse_button_listeners.get(i);
-			if (listener  != null)
-				listener.mousePressed(button, x, y);
+		for (MouseButtonListener listener : mouse_button_listeners) {
+			listener.mousePressed(button, x, y);
 		}
 	}
 
@@ -544,10 +528,8 @@ public abstract strictfp class GUIObject extends Renderable {
 		if (disabled)
 			return;
 		mouseHeld(button, x, y);
-		for (int i = 0; i < mouse_button_listeners.size(); i++) {
-			MouseButtonListener listener = (MouseButtonListener)mouse_button_listeners.get(i);
-			if (listener  != null)
-				listener.mouseHeld(button, x, y);
+		for (MouseButtonListener listener : mouse_button_listeners) {
+    		listener.mouseHeld(button, x, y);
 		}
 	}
 
@@ -560,10 +542,9 @@ public abstract strictfp class GUIObject extends Renderable {
 	public final void keyPressedAll(KeyboardEvent event) {
 		keyPressed(event);
 		for (int i = 0; i < key_listeners.size(); i++) {
-			KeyListener listener = (KeyListener)key_listeners.get(i);
-			if (listener != null)
-				listener.keyPressed(event);
-		}
+			KeyListener listener = key_listeners.get(i);
+			listener.keyPressed(event);
+        }
 	}
 
 	protected void keyPressed(KeyboardEvent event) {
@@ -578,11 +559,9 @@ public abstract strictfp class GUIObject extends Renderable {
 
 	public final void keyReleasedAll(KeyboardEvent event) {
 		keyReleased(event);
-		for (int i = 0; i < key_listeners.size(); i++) {
-			KeyListener listener = (KeyListener)key_listeners.get(i);
-			if (listener != null)
-				listener.keyReleased(event);
-		}
+		for (KeyListener listener : key_listeners) {
+			listener.keyReleased(event);
+        }
 	}
 
 	protected void keyReleased(KeyboardEvent event) {
@@ -598,10 +577,8 @@ public abstract strictfp class GUIObject extends Renderable {
 
 	public final void keyRepeatAll(KeyboardEvent event) {
 		keyRepeat(event);
-		for (int i = 0; i < key_listeners.size(); i++) {
-			KeyListener listener = (KeyListener)key_listeners.get(i);
-			if (listener != null)
-				listener.keyRepeat(event);
+		for (KeyListener listener : key_listeners) {
+			listener.keyRepeat(event);
 		}
 	}
 
@@ -612,26 +589,26 @@ public abstract strictfp class GUIObject extends Renderable {
 	}
 
 	public final void addMouseClickListener(MouseClickListener listener) {
-		mouse_click_listeners.add(listener);
+		mouse_click_listeners.add(Objects.requireNonNull(listener, "listener"));
 	}
 
 	public final void addMouseButtonListener(MouseButtonListener listener) {
-		mouse_button_listeners.add(listener);
+		mouse_button_listeners.add(Objects.requireNonNull(listener, "listener"));
 	}
 
 	public final void addMouseMotionListener(MouseMotionListener listener) {
-		mouse_motion_listeners.add(listener);
+		mouse_motion_listeners.add(Objects.requireNonNull(listener, "listener"));
 	}
 
 	public final void addMouseWheelListener(MouseWheelListener listener) {
-		mouse_wheel_listeners.add(listener);
+		mouse_wheel_listeners.add(Objects.requireNonNull(listener, "listener"));
 	}
 
 	public final void addKeyListener(KeyListener listener) {
-		key_listeners.add(listener);
+		key_listeners.add(Objects.requireNonNull(listener, "listener"));
 	}
 
 	public final void addFocusListener(FocusListener listener) {
-		focus_listeners.add(listener);
+		focus_listeners.add(Objects.requireNonNull(listener, "listener"));
 	}
 }

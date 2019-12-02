@@ -5,14 +5,14 @@ import com.oddlabs.tt.animation.AnimationManager;
 import com.oddlabs.tt.util.StateChecksum;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.SortedMap;
+import java.util.NavigableMap;
 import java.util.TreeMap;
 
 public final strictfp class RespondManager implements Animated {
 	private final static float SECONDS_PER_PICK_RESPOND = 1f/3f;
 
-	private final SortedMap respond_timeouts = new TreeMap();
-	private final Map respond_targets = new HashMap();
+	private final NavigableMap<Timeout,Object> respond_timeouts = new TreeMap<>();
+	private final Map<Object,Timeout> respond_targets = new HashMap<>();
 
 	private int current_id;
 
@@ -30,7 +30,7 @@ public final strictfp class RespondManager implements Animated {
 
 	private void timeout() {
 		Timeout head_timeout;
-		while (!respond_timeouts.isEmpty() && (head_timeout = (Timeout)respond_timeouts.firstKey()).timeout <= time) {
+		while (!respond_timeouts.isEmpty() && (head_timeout = respond_timeouts.firstKey()).timeout <= time) {
 			removeResponder(head_timeout.target);
 		}
 	}
@@ -51,7 +51,7 @@ public final strictfp class RespondManager implements Animated {
 	}
 
 	private void removeResponder(Object target) {
-		Timeout timeout = (Timeout)respond_targets.remove(target);
+		Timeout timeout = respond_targets.remove(target);
 		if (timeout != null) {
 			respond_timeouts.remove(timeout);
 			if (timeout.stop_action != null)
@@ -63,7 +63,7 @@ public final strictfp class RespondManager implements Animated {
 		if (respond_targets.isEmpty())
 			return false; // Quick exit in the common case of no responding targets
 		else
-			return isResponding((Timeout)respond_targets.get(target));
+			return isResponding(respond_targets.get(target));
 	}
 
 	private boolean isResponding(Timeout timeout) {
@@ -74,11 +74,11 @@ public final strictfp class RespondManager implements Animated {
 		return time_diff > 0 && (time_diff >= SECONDS_PER_PICK_RESPOND - blink || time_diff <= blink);
 	}
 
-        @Override
+    @Override
 	public void updateChecksum(StateChecksum checksum) {
 	}
 
-	private final static strictfp class Timeout implements Comparable {
+	private final static strictfp class Timeout implements Comparable<Timeout> {
 		private final float timeout;
 		private final int id;
 		private final Object target;
@@ -91,20 +91,30 @@ public final strictfp class RespondManager implements Animated {
 			this.stop_action = stop_action;
 		}
 
-                @Override
+        @Override
 		public boolean equals(Object other) {
-			Timeout timeout_obj = (Timeout)other;
-			return timeout_obj.timeout == timeout && timeout_obj.id == id;
+            if (other instanceof Timeout) {
+                Timeout timeout_obj = (Timeout)other;
+                return timeout_obj.timeout == timeout && timeout_obj.id == id;
+            }
+            return false;
 		}
 
-                @Override
-		public int compareTo(Object other) {
-			Timeout timeout_obj = (Timeout)other;
-			float diff = timeout - timeout_obj.timeout;
+        @Override
+        public int hashCode() {
+            int hash = 3;
+            hash = 59 * hash + Float.floatToIntBits(this.timeout);
+            hash = 59 * hash + this.id;
+            return hash;
+        }
+
+        @Override
+		public int compareTo(Timeout other) {
+			float diff = timeout - other.timeout;
 			if (diff != 0f)
 				return (int)diff;
 			else
-				return id - timeout_obj.id;
+				return id - other.id;
 		}
 	}
 }

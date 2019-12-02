@@ -57,8 +57,9 @@ public final strictfp class ChatLine extends EditLine {
 			setIndex(new_index);
 		} else if (num_hits > 1) {
 			String[] tab_words = new String[new_words.size()];
-			for (int i = 0; i < new_words.size(); i++)
-				tab_words[i] = (String)new_words.get(i);
+			for (int i = 0; i < new_words.size(); i++) {
+                tab_words[i] = (String)new_words.get(i);
+            }
 			tabPressedAll(tab_words);
 		}
 	}

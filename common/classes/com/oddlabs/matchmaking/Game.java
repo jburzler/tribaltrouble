@@ -23,7 +23,7 @@ public final strictfp class Game implements Serializable {
 	
 	private final String game_name;
 	private final byte size;
-	private final byte terrain_type;
+	private final byte terrain;
 	private final byte hills;
 	private final byte trees;
 	private final byte supplies;
@@ -35,10 +35,10 @@ public final strictfp class Game implements Serializable {
 	
 	private int database_id;
 
-	public Game(String game_name, byte size, byte terrain_type, byte hills, byte trees, byte supplies, boolean rated, byte gamespeed, String mapcode, float random_start_pos, int max_unit_count) {
+	public Game(String game_name, byte size, byte terrain, byte hills, byte trees, byte supplies, boolean rated, byte gamespeed, String mapcode, float random_start_pos, int max_unit_count) {
 		this.game_name = game_name;
 		this.size = size;
-		this.terrain_type = terrain_type;
+		this.terrain = terrain;
 		this.hills = hills;
 		this.trees = trees;
 		this.supplies = supplies;
@@ -67,7 +67,7 @@ public final strictfp class Game implements Serializable {
 	}
 
 	public byte getTerrainType() {
-		return terrain_type;
+		return terrain;
 	}
 	
 	public byte getHills() {

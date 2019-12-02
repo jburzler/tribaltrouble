@@ -2,7 +2,6 @@ package com.oddlabs.tt.form;
 
 import com.oddlabs.matchmaking.Profile;
 import com.oddlabs.tt.delegate.Menu;
-import com.oddlabs.tt.gui.CancelListener;
 import com.oddlabs.tt.gui.ColumnInfo;
 import com.oddlabs.tt.gui.Form;
 import com.oddlabs.tt.gui.GUIObject;
@@ -32,7 +31,7 @@ public final strictfp class ProfilesForm extends Form {
 	// to be removed if connection lost
 	private NewProfileForm new_profile_form;
 	private QuestionForm confirm_delete_form;
-	
+
 	public ProfilesForm(GUIRoot gui_root, Menu main_menu, SelectGameMenu game_menu) {
 		this.gui_root = gui_root;
 		this.main_menu = main_menu;
@@ -64,7 +63,9 @@ public final strictfp class ProfilesForm extends Form {
 
 		HorizButton logout_button = new HorizButton(Utils.getBundleString(bundle, "logout"), 100);
 		addChild(logout_button);
-		logout_button.addMouseClickListener(new CancelListener(this));
+		logout_button.addMouseClickListener((int button, int x, int y, int clicks) -> {
+			this.cancel();
+        });
 
 		label_headline.place();
 		profile_list_box.place(label_headline, BOTTOM_LEFT);
@@ -75,7 +76,7 @@ public final strictfp class ProfilesForm extends Form {
 
 		compileCanvas();
 	}
-	
+
         @Override
 	public void setFocus() {
 		join_button.setFocus();
@@ -83,7 +84,7 @@ public final strictfp class ProfilesForm extends Form {
 
         @Override
 	protected void doCancel() {
-		Network.getMatchmakingClient().close(); 
+		Network.getMatchmakingClient().close();
 	}
 
 	public void receivedProfiles(Profile[] profiles, String last_nick) {
@@ -170,7 +171,7 @@ public final strictfp class ProfilesForm extends Form {
 			if (nick != null)
 				join(nick);
 		}
-		
+
                 @Override
 		public void rowChosen(Object row_context) {
 		}

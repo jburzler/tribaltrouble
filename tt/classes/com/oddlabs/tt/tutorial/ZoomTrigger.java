@@ -19,9 +19,10 @@ public final strictfp class ZoomTrigger extends TutorialTrigger {
 		} else if (camera.getLastZoomFactor() < 0f) {
 			zoom_dirs[1] = true;
 		}
-		for (int i = 0; i < zoom_dirs.length; i++)
-			if (!zoom_dirs[i])
-				return;
+		for (int i = 0; i < zoom_dirs.length; i++) {
+            if (!zoom_dirs[i])
+                return;
+        }
 		tutorial.next(new RotateTrigger());
 	}
 }

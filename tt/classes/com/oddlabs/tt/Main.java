@@ -14,8 +14,9 @@ public final strictfp class Main {
 			Logger.getLogger(Main.class.getName()).log(Level.SEVERE, "Critical Failure", t);
 			if (Display.isCreated())
 				Display.destroy();
-			while (t.getCause() != null)
-				t = t.getCause();
+			while (t.getCause() != null) {
+                t = t.getCause();
+            }
 			ResourceBundle bundle = ResourceBundle.getBundle(Main.class.getName());
 			String error = Utils.getBundleString(bundle, "error");
 			String error_msg = Utils.getBundleString(bundle, "error_message", t.toString());

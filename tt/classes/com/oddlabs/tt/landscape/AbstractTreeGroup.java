@@ -53,15 +53,15 @@ public abstract strictfp class AbstractTreeGroup extends BoundingBox {
 		return num_responding_trees > 0;
 	}
 
-	public final static AbstractTreeGroup newRoot(World world, LowDetailModel[] tree_low_details, List tree_positions, List palm_tree_positions, int terrain_type) {
+	public final static AbstractTreeGroup newRoot(World world, LowDetailModel[] tree_low_details, List<int[]> tree_positions, List<int[]> palm_tree_positions, Landscape.TerrainType terrain) {
 		AbstractTreeGroup root = new TreeGroup(null, 0);
 
-		switch (terrain_type) {
-			case Landscape.NATIVE:
+		switch (terrain) {
+			case NATIVE:
 				root.buildTrees(world, tree_low_details, TREE_INDEX, 3, 2.3f, tree_positions, 0.25f, 0.75f);
 				root.buildTrees(world, tree_low_details, PALMTREE_INDEX, 1, 1.6f, palm_tree_positions, 0.5f, 1f);
 				break;
-			case Landscape.VIKING:
+			case VIKING:
 				root.buildTrees(world, tree_low_details, OAKTREE_INDEX, 3, 2.3f, tree_positions, 0.5f, 1f);
 				root.buildTrees(world, tree_low_details, PINETREE_INDEX, 1, 1.6f, palm_tree_positions, 0.5f, 1f);
 				break;
@@ -73,13 +73,12 @@ public abstract strictfp class AbstractTreeGroup extends BoundingBox {
 		return root;
 	}
 
-	private void buildTrees(final World world, LowDetailModel[] tree_low_details, final int tree_type_index, final int grid_size, final float radius, List tree_positions, float scale_factor, float min_size) {
+	private void buildTrees(final World world, LowDetailModel[] tree_low_details, final int tree_type_index, final int grid_size, final float radius, List<int[]> tree_positions, float scale_factor, float min_size) {
 		StrictMatrix4f matrix2 = new StrictMatrix4f();
 		StrictVector3f vector = new StrictVector3f();
 		final float[] tree_low_vertices = tree_low_details[tree_type_index].getVertices();
-		for (int i = 0; i < tree_positions.size(); i++) {
+		for (int[] coords : tree_positions) {
 			final StrictMatrix4f matrix = new StrictMatrix4f();
-			int[] coords = (int[])tree_positions.get(i);
 			final int center_grid_x = coords[0];
 			final int center_grid_y = coords[1];
 			final float tree_x = UnitGrid.coordinateFromGrid(center_grid_x);
@@ -103,12 +102,12 @@ public abstract strictfp class AbstractTreeGroup extends BoundingBox {
 				private int x;
 				private int y;
 
-                                @Override
+                @Override
 				public final void visitLeaf(TreeLeaf tree_leaf) {
 					TreeSupply tree = new TreeSupply(world, tree_leaf, tree_x, tree_y, center_grid_x, center_grid_y, grid_size, radius, matrix, tree_type_index, tree_low_vertices);
 					tree_leaf.insertTree(tree);
 				}
-                                @Override
+                @Override
 				public final void visitNode(TreeGroup tree_group) {
 					int old_x = x;
 					int old_y = y;
@@ -135,7 +134,7 @@ public abstract strictfp class AbstractTreeGroup extends BoundingBox {
 					y = old_y;
 					child_size = old_size;
 				}
-                                @Override
+                @Override
 				public final void visitTree(TreeSupply tree_supply) {
 					throw new RuntimeException();
 				}

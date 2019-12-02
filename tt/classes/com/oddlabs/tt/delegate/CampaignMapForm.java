@@ -123,7 +123,7 @@ public final strictfp class CampaignMapForm extends CameraDelegate {
 		}
 	}
 
-        @Override
+    @Override
 	protected void keyPressed(KeyboardEvent event) {
 		switch (event.getKeyCode()) {
 			case Keyboard.KEY_ESCAPE:
@@ -139,12 +139,12 @@ public final strictfp class CampaignMapForm extends CameraDelegate {
 		Renderer.startMenu(network, gui);
 	}
 
-        @Override
+    @Override
 	public boolean forceRender() {
 		return true;
 	}
 
-        @Override
+    @Override
 	protected void renderGeometry() {
 		campaign.getIcons().getMap().render(0, 0);
 //		campaign.extraRender();

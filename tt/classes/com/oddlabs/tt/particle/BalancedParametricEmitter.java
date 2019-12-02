@@ -36,7 +36,7 @@ public strictfp final class BalancedParametricEmitter extends ParametricEmitter 
 //		register();
 	}
 
-        @Override
+    @Override
 	protected int initParticle(ParametricFunction function, float velocity_u, float velocity_v, Vector4f color, Vector4f delta_color, Vector3f particle_radius, Vector3f growth_rate, float energy) {
 
 		for (int i = 0; i < num_particles; i++) {

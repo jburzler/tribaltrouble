@@ -3,7 +3,6 @@ package com.oddlabs.tt.form;
 import com.oddlabs.net.NetworkSelector;
 import com.oddlabs.tt.delegate.Menu;
 import com.oddlabs.tt.gui.CancelButton;
-import com.oddlabs.tt.gui.CancelListener;
 import com.oddlabs.tt.gui.Form;
 import com.oddlabs.tt.gui.GUIRoot;
 import com.oddlabs.tt.gui.HorizButton;
@@ -51,7 +50,9 @@ public final strictfp class CampaignForm extends Form implements DeterministicSe
 		button_load.addMouseClickListener((MouseClickListener)listener);
 
 		HorizButton button_cancel = new CancelButton(120);
-		button_cancel.addMouseClickListener(new CancelListener(this));
+		button_cancel.addMouseClickListener((int button, int x, int y, int clicks) -> {
+			this.cancel();
+        });
 
 		// Add objects
 		addChild(button_delete);
@@ -73,7 +74,7 @@ public final strictfp class CampaignForm extends Form implements DeterministicSe
 		centerPos();
 	}
 
-        @Override
+    @Override
 	public void setFocus() {
 		button_vikings.setFocus();
 	}
@@ -91,7 +92,7 @@ public final strictfp class CampaignForm extends Form implements DeterministicSe
 			campaign.startIsland(network, gui_root, 0);
 	}
 
-        @Override
+    @Override
 	public void saveSucceeded() {
 		load_campaign_box.refresh();
 	}

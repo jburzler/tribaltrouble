@@ -11,7 +11,7 @@ public final strictfp class ShortVBO extends VBO {
 //	private ShortBuffer mapped_buffer = null;
 
 	public ShortVBO(int usage, int size) {
-		super(ARBVertexBufferObject.GL_ELEMENT_ARRAY_BUFFER_ARB, usage, size<<1);
+		super(ARBVertexBufferObject.GL_ELEMENT_ARRAY_BUFFER_ARB, usage, size * Short.BYTES);
 		ByteBuffer buffer = getSavedBuffer();
 		if (buffer != null)
 			saved_buffer = buffer.asShortBuffer();
@@ -124,6 +124,6 @@ public final strictfp class ShortVBO extends VBO {
 
         @Override
 	public int capacity() {
-		return getSize()>>1;
+		return getSize() / Short.BYTES;
 	}
 }

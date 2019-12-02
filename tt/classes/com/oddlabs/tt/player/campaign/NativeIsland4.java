@@ -42,7 +42,7 @@ public final strictfp class NativeIsland4 extends Island {
 			Utils.getBundleString(bundle, "name4"),
 			Utils.getBundleString(bundle, "name5")};
 		// gametype, owner, game, meters_per_world, hills, vegetation_amount, supplies_amount, seed, speed, map_code
-		GameNetwork game_network = startNewGame(network, gui_root, 512, Landscape.VIKING, .8f, .8f, .8f, 19*19, 4, NativeCampaign.MAX_UNITS, ai_names);
+		GameNetwork game_network = startNewGame(network, gui_root, 512, Landscape.TerrainType.VIKING, .8f, .8f, .8f, 19*19, 4, NativeCampaign.MAX_UNITS, ai_names);
 		game_network.getClient().getServerInterface().setPlayerSlot(0,
 				PlayerSlot.HUMAN,
 				RacesResources.RACE_NATIVES,
@@ -110,21 +110,26 @@ public final strictfp class NativeIsland4 extends Island {
 		local_player.setActiveChieftain(new Unit(local_player, start_x, start_y, null, local_player.getRace().getUnitTemplate(Race.UNIT_CHIEFTAIN), Utils.getBundleString(player_bundle, "native_chieftain_name"), false));
 		local_player.getChieftain().increaseMagicEnergy(0, 1000);
 		local_player.getChieftain().increaseMagicEnergy(1, 1000);
-		for (int i = 0; i < getCampaign().getState().getNumPeons(); i++)
-			new Unit(local_player, start_x, start_y, null, local_player.getRace().getUnitTemplate(Race.UNIT_PEON));
-		for (int i = 0; i < getCampaign().getState().getNumRockWarriors(); i++)
-			new Unit(local_player, start_x, start_y, null, local_player.getRace().getUnitTemplate(Race.UNIT_WARRIOR_ROCK));
-		for (int i = 0; i < getCampaign().getState().getNumIronWarriors(); i++)
-			new Unit(local_player, start_x, start_y, null, local_player.getRace().getUnitTemplate(Race.UNIT_WARRIOR_IRON));
-		for (int i = 0; i < getCampaign().getState().getNumRubberWarriors(); i++)
-			new Unit(local_player, start_x, start_y, null, local_player.getRace().getUnitTemplate(Race.UNIT_WARRIOR_RUBBER));
+		for (int i = 0; i < getCampaign().getState().getNumPeons(); i++) {
+            new Unit(local_player, start_x, start_y, null, local_player.getRace().getUnitTemplate(Race.UNIT_PEON));
+        }
+		for (int i = 0; i < getCampaign().getState().getNumRockWarriors(); i++) {
+            new Unit(local_player, start_x, start_y, null, local_player.getRace().getUnitTemplate(Race.UNIT_WARRIOR_ROCK));
+        }
+		for (int i = 0; i < getCampaign().getState().getNumIronWarriors(); i++) {
+            new Unit(local_player, start_x, start_y, null, local_player.getRace().getUnitTemplate(Race.UNIT_WARRIOR_IRON));
+        }
+		for (int i = 0; i < getCampaign().getState().getNumRubberWarriors(); i++) {
+            new Unit(local_player, start_x, start_y, null, local_player.getRace().getUnitTemplate(Race.UNIT_WARRIOR_RUBBER));
+        }
 
 
 		// Insert captives
 		final int captive_x = 39;
 		final int captive_y = 38;
-		for (int i = 0; i < 10; i++)
-			new Unit(captives, captive_x*2, captive_y*2, null, captives.getRace().getUnitTemplate(Race.UNIT_PEON));
+		for (int i = 0; i < 10; i++) {
+            new Unit(captives, captive_x*2, captive_y*2, null, captives.getRace().getUnitTemplate(Race.UNIT_PEON));
+        }
 
 		// Winner prize
 		runnable = () -> {

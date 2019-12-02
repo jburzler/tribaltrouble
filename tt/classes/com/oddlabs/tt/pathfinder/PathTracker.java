@@ -6,11 +6,9 @@ import com.oddlabs.tt.util.BezierPath;
 import org.lwjgl.opengl.GL11;
 
 public final strictfp class PathTracker {
-	public final static int OK = 1;
-	public final static int OK_INTERRUPTIBLE = 2;
-	public final static int DONE = 3;
-	public final static int SOFTBLOCKED = 4;
-	public final static int BLOCKED = 5;
+    public enum State {
+        OK,OK_INTERRUPTIBLE,DONE,SOFTBLOCKED,BLOCKED
+    };
 
 	private final static int REGION_SEARCH_TRIES = 4;
 
@@ -30,7 +28,7 @@ public final strictfp class PathTracker {
 	private TrackerAlgorithm tracker_algorithm;
 
 	private boolean initial_path;
-	private int state = DONE;
+	private State state = State.DONE;
 
 	public PathTracker(UnitGrid unit_grid, Movable unit) {
 		this.unit_grid = unit_grid;
@@ -45,9 +43,9 @@ public final strictfp class PathTracker {
 		tool_tip_box.append(next_unit_grid_y);
 	}
 
-	public int animate(float speed) {
+	public State animate(float speed) {
 		doAnimate(speed);
-		if (state != SOFTBLOCKED && state != BLOCKED) {
+		if (state != State.SOFTBLOCKED && state != State.BLOCKED) {
 			current_blocker = null;
 		}
 		return state;
@@ -58,20 +56,20 @@ public final strictfp class PathTracker {
 		if (bezier_path.isDone()) {
 			if (initial_path) {
 				state = initPath();
-				if (state != OK) {
+				if (state != State.OK) {
 					return;
 				}
 				initial_path = false;
 			}
 			if (done(unit.getGridX(), unit.getGridY())) {
-				state = DONE;
+				state = State.DONE;
 				return;
 			}
 			state = lookAhead();
-			if (state != OK) {
-				if (state == SOFTBLOCKED || state == BLOCKED)
+			if (state != State.OK) {
+				if (state == State.SOFTBLOCKED || state == State.BLOCKED)
 					if (checkDeadlock()) {
-						state = OK;
+						state = State.OK;
 						return;
 					}
 				return;
@@ -82,10 +80,9 @@ public final strictfp class PathTracker {
 		}
 		bezier_path.computeCurvePoint(speed);
 		update();
-		if (bezier_path.isDone())
-			state = OK_INTERRUPTIBLE;
-		else
-			state = OK;
+		state = bezier_path.isDone()
+                ? State.OK_INTERRUPTIBLE
+                : State.OK;
 	}
 
 	public Occupant getBlocker() {
@@ -105,7 +102,7 @@ public final strictfp class PathTracker {
 		Occupant occupant = getNextOccupantUnchecked();
 		if (occupant != null && occupant != unit && occupant instanceof Movable) {
 			Movable next = (Movable)occupant;
-			if (next.isMoving() && (next.getTracker().state == SOFTBLOCKED || next.getTracker().state == BLOCKED)) {
+			if (next.isMoving() && (next.getTracker().state == State.SOFTBLOCKED || next.getTracker().state == State.BLOCKED)) {
 				return next.getTracker();
 			}
 		}
@@ -220,10 +217,10 @@ public final strictfp class PathTracker {
 		return tracker_algorithm.findPathGrid(target_region, next_region, src_x, src_y, allow_secondary_targets);
 	}
 
-	private int lookAhead() {
+	private State lookAhead() {
 		checkRegionPath(next_unit_grid_x, next_unit_grid_y);
 		if (region_path == null) {
-			return DONE;
+			return State.DONE;
 		}
 		RegionNode next_region_node = (RegionNode)region_path.getParent();
 		Occupant occupant = getNextOccupant();
@@ -233,7 +230,7 @@ public final strictfp class PathTracker {
 			for (int i = 0; i < REGION_SEARCH_TRIES; i++) {
 				patch_path = findPathToNextRegion(unit.getGridX(), unit.getGridY(), search_next_region_node, false);
 				if (done(unit.getGridX(), unit.getGridY()))
-					return DONE;
+					return State.DONE;
 				if (patch_path != null || search_next_region_node == null)
 					break;
 				search_next_region_node = (RegionNode)search_next_region_node.getParent();
@@ -248,14 +245,14 @@ public final strictfp class PathTracker {
 			if (occupant != null) {
 				current_blocker = occupant;
 				if (occupant.getPenalty() < Occupant.STATIC)
-					return SOFTBLOCKED;
+					return State.SOFTBLOCKED;
 				else
-					return BLOCKED;
+					return State.BLOCKED;
 			}
 		} else if (grid_path == null && !done(next_unit_grid_x, next_unit_grid_y)) {
 			grid_path = findPathToNextRegion(next_unit_grid_x, next_unit_grid_y, next_region_node, true);
 		}
-		return OK;
+		return State.OK;
 	}
 
 	private void initBezierPath(DirectionNode dir_node) {
@@ -274,21 +271,21 @@ public final strictfp class PathTracker {
 		target_region = null;
 	}
 
-	private int initPath() {
+	private State initPath() {
 		checkRegionPath(unit.getGridX(), unit.getGridY());
 		if (region_path == null) {
-			return DONE;
+			return State.DONE;
 		}
 		RegionNode next_region_node = (RegionNode)region_path.getParent();
 		GridPathNode init_path = findPathToNextRegion(unit.getGridX(), unit.getGridY(), next_region_node, true);
 		if (done(unit.getGridX(), unit.getGridY()))
-			return DONE;
+			return State.DONE;
 		if (init_path == null) {
-			return BLOCKED;
+			return State.BLOCKED;
 		}
 		initBezierPath(init_path.getDirection());
 		grid_path = (GridPathNode)init_path.getParent();
-		return OK;
+		return State.OK;
 	}
 
 	public void debugRender() {

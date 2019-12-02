@@ -6,7 +6,7 @@ import com.oddlabs.tt.model.Element;
 import com.oddlabs.tt.model.ElementVisitor;
 import com.oddlabs.tt.util.StateChecksum;
 
-public final strictfp class LandscapeTargetRespond extends Element implements Animated {
+public final strictfp class LandscapeTargetRespond extends Element<LandscapeTargetRespond> implements Animated {
 	public final static int SIZE = 128;
 	private final static float SECOND_PER_PICK_RESPOND = 1f/3f;
 
@@ -20,7 +20,7 @@ public final strictfp class LandscapeTargetRespond extends Element implements An
 		register();
 	}
 
-        @Override
+    @Override
 	public void animate(float t) {
 		if (time > 0) {
 			time = StrictMath.max(0, time - t);
@@ -33,23 +33,23 @@ public final strictfp class LandscapeTargetRespond extends Element implements An
 		return time/SECOND_PER_PICK_RESPOND;
 	}
 
-        @Override
+    @Override
 	public void updateChecksum(StateChecksum checksum) {
 	}
 
-        @Override
+    @Override
 	protected void register() {
 		super.register();
 		time = SECOND_PER_PICK_RESPOND;
 		LocalEventQueue.getQueue().getManager().registerAnimation(this);
 	}
 
-        @Override
+    @Override
 	public void visit(ElementVisitor visitor) {
 		visitor.visitRespond(this);
 	}
 
-        @Override
+    @Override
 	protected void remove() {
 		super.remove();
 		LocalEventQueue.getQueue().getManager().removeAnimation(this);

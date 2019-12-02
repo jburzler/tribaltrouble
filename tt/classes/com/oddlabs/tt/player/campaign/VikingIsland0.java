@@ -26,7 +26,7 @@ import java.util.ResourceBundle;
 
 public final strictfp class VikingIsland0 extends Island {
 	private final ResourceBundle bundle = ResourceBundle.getBundle(VikingIsland0.class.getName());
-	
+
 	public VikingIsland0(Campaign campaign) {
 		super(campaign);
 	}
@@ -40,7 +40,7 @@ public final strictfp class VikingIsland0 extends Island {
 			Utils.getBundleString(bundle, "name4"),
 			Utils.getBundleString(bundle, "name5")};
 		// gametype, owner, game, meters_per_world, hills, vegetation_amount, supplies_amount, seed, speed, map_code
-		GameNetwork game_network = startNewGame(network, gui_root, 256, Landscape.NATIVE, .5f, 1f, .1f, 45363, 0, VikingCampaign.MAX_UNITS, ai_names);
+		GameNetwork game_network = startNewGame(network, gui_root, 256, Landscape.TerrainType.NATIVE, .5f, 1f, .1f, 45363, 0, VikingCampaign.MAX_UNITS, ai_names);
 		game_network.getClient().getServerInterface().setPlayerSlot(0,
 				PlayerSlot.HUMAN,
 				RacesResources.RACE_VIKINGS,
@@ -72,22 +72,21 @@ public final strictfp class VikingIsland0 extends Island {
 		game_network.getClient().getServerInterface().startServer();
 	}
 
-        @Override
+    @Override
 	protected void start() {
-		Runnable runnable;
 		final Player local_player = getViewer().getLocalPlayer();
 		final Player chieftain = getViewer().getWorld().getPlayers()[1];
 		final Player enemy = getViewer().getWorld().getPlayers()[2];
 
 		// Introduction
-		runnable = () -> {
+		new GameStartedTrigger(getViewer().getWorld(),
+                () -> {
                     CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header0"),
                             Utils.getBundleString(bundle, "dialog0"),
                             getCampaign().getIcons().getFaces()[1],
                             CampaignDialogForm.ALIGN_IMAGE_LEFT);
                     addModalForm(dialog);
-                };
-		new GameStartedTrigger(getViewer().getWorld(), runnable);
+                });
 
 		// Disable Chieftain
 		getViewer().getLocalPlayer().enableChieftains(false);
@@ -100,15 +99,15 @@ public final strictfp class VikingIsland0 extends Island {
                     getCampaign().victory(getViewer());
                 };
 		// Winning condition
-		runnable = () -> {
+		new VictoryTrigger(getViewer(),
+                () -> {
                     CampaignDialogForm dialog = new InGameCampaignDialogForm(getViewer(), Utils.getBundleString(bundle, "header1"),
                             Utils.getBundleString(bundle, "dialog1"),
                             getCampaign().getIcons().getFaces()[0],
                             CampaignDialogForm.ALIGN_IMAGE_LEFT,
                             prize);
                     addModalForm(dialog);
-                };
-		new VictoryTrigger(getViewer(), runnable);
+                });
 
 		// Place prisoners
 		placePrisoners(chieftain, enemy, 0, 0, 0, 0, true);
@@ -121,7 +120,7 @@ public final strictfp class VikingIsland0 extends Island {
 			enemy.getArmory().getUnitContainer().increaseSupply(num_units*3);
 
 		// Deploy and attack mid-game
-		runnable = () -> {
+		Runnable runnable = () -> {
                     Building armory = local_player.getArmory();
                     if (armory != null && !armory.isDead()) {
                         if (enemy.getArmory() != null && !enemy.getArmory().isDead()) {
@@ -140,24 +139,23 @@ public final strictfp class VikingIsland0 extends Island {
 			new SupplyGatheredTrigger(getViewer().getLocalPlayer(), runnable, IronSupply.class, 15);
 		}
 
-		// Defeat if netrauls eleminated
-		runnable = () -> {
-                    getCampaign().defeated(getViewer(), Utils.getBundleString(bundle, "game_over"));
-                };
-		new PlayerEleminatedTrigger(runnable, chieftain);
+		// Defeat if neutrals eliminated
+		new PlayerEleminatedTrigger(() -> {
+            getCampaign().defeated(getViewer(), Utils.getBundleString(bundle, "game_over"));
+        }, chieftain);
 	}
 
-        @Override
+    @Override
 	public CharSequence getHeader() {
 		return Utils.getBundleString(bundle, "header");
 	}
 
-        @Override
+    @Override
 	public CharSequence getDescription() {
 		return Utils.getBundleString(bundle, "description");
 	}
 
-        @Override
+    @Override
 	public CharSequence getCurrentObjective() {
 		return Utils.getBundleString(bundle, "objective");
 	}

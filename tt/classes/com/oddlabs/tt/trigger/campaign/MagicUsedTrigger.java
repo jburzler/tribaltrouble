@@ -24,7 +24,7 @@ public final strictfp class MagicUsedTrigger extends IntervalTrigger {
 		this.runnable = runnable;
 	}
 
-        @Override
+    @Override
 	protected void check() {
 		float dx = chieftain.getPositionX() - x;
 		float dy = chieftain.getPositionY() - y;
@@ -38,7 +38,7 @@ public final strictfp class MagicUsedTrigger extends IntervalTrigger {
 		}
 	}
 
-        @Override
+    @Override
 	protected void done() {
 		runnable.run();
 	}

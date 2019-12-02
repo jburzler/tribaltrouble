@@ -40,7 +40,7 @@ public final strictfp class Client implements ARMIEventBroker, GameClientInterfa
 	private final Runnable cleanup_action;
 	private int state = CONNECTING;
 	private int session_id;
-	
+
 	private WorldGenerator generator = null;
 
 	private PlayerSlot[] player_slots;
@@ -63,8 +63,9 @@ public final strictfp class Client implements ARMIEventBroker, GameClientInterfa
 		gameserver_interface = (GameServerInterface)ARMIEvent.createProxy(connection, GameServerInterface.class);
 
 		this.unit_infos = new UnitInfo[MatchmakingServerInterface.MAX_PLAYERS];
-		for (int i = 0; i < unit_infos.length; i++)
-			unit_infos[i] = new UnitInfo(false, false, 0, false, Player.INITIAL_UNIT_COUNT, 0, 0, 0);
+		for (int i = 0; i < unit_infos.length; i++) {
+            unit_infos[i] = new UnitInfo(false, false, 0, false, Player.INITIAL_UNIT_COUNT, 0, 0, 0);
+        }
 	}
 
 	private ConfigurationListener getConfigurationListener() {
@@ -86,9 +87,9 @@ public final strictfp class Client implements ARMIEventBroker, GameClientInterfa
         @Override
 	public void chat(int player_slot, String chat) {
 		if (chat != null && player_slot >= 0 && player_slot < player_slots.length)
-			Network.getChatHub().chat(new ChatMessage(player_slots[player_slot].getInfo().getName(), chat, ChatMessage.CHAT_GAME_MENU));
+			Network.getChatHub().chat(new ChatMessage(player_slots[player_slot].getInfo().getName(), chat, ChatMessage.Type.GAME_MENU));
 	}
-	
+
         @Override
 	public void setWorldGeneratorAndPlayerSlot(Game game, WorldGenerator generator, short player_slot) {
 		if (state != CONNECTING)

@@ -28,9 +28,9 @@ public final strictfp class LoginDetails implements Serializable {
 	}
 
 	public boolean isValid() {
-		return email != null && email.length() <= MAX_EMAIL_LENGTH && email.matches(Utils.EMAIL_PATTERN);
+		return email != null && email.length() <= MAX_EMAIL_LENGTH && Utils.EMAIL_PATTERN.matcher(email).matches();
 	}
-	
+
 	public String getEmail() {
 		return email;
 	}

@@ -1,12 +1,10 @@
 package com.oddlabs.tt.form;
 
-import com.oddlabs.tt.gui.CancelListener;
 import com.oddlabs.tt.gui.DoNowListener;
 import com.oddlabs.tt.gui.Form;
 import com.oddlabs.tt.gui.HorizButton;
 import com.oddlabs.tt.gui.LabelBox;
 import com.oddlabs.tt.gui.Skin;
-import com.oddlabs.tt.guievent.MouseClickListener;
 import com.oddlabs.tt.util.Utils;
 import java.util.ResourceBundle;
 
@@ -21,10 +19,15 @@ public final strictfp class DisplayChangeForm extends Form {
 		addChild(info_label);
 		HorizButton now_button = new HorizButton(Utils.getBundleString(bundle, "now"), 120);
 		addChild(now_button);
-		now_button.addMouseClickListener(new NowListener());
+		now_button.addMouseClickListener((int button, int x, int y, int clicks) -> {
+			remove();
+			donow_listener.doChange(true);
+        });
 		later_button = new HorizButton(Utils.getBundleString(bundle, "later"), 120);
 		addChild(later_button);
-		later_button.addMouseClickListener(new CancelListener(this));
+		later_button.addMouseClickListener((int button, int x, int y, int clicks) -> {
+			this.cancel();
+        });
 
 		// Place objects
 		info_label.place();
@@ -40,15 +43,7 @@ public final strictfp class DisplayChangeForm extends Form {
 		later_button.setFocus();
 	}
 
-	private final strictfp class NowListener implements MouseClickListener {
-                @Override
-		public void mouseClicked(int button, int x, int y, int clicks) {
-			remove();
-			donow_listener.doChange(true);
-		}
-	}
-
-        @Override
+    @Override
 	protected void doCancel() {
 		donow_listener.doChange(false);
 	}

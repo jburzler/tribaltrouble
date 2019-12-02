@@ -33,6 +33,7 @@ import com.oddlabs.tt.net.GameNetwork;
 import com.oddlabs.tt.net.Network;
 import com.oddlabs.tt.net.PlayerSlot;
 import com.oddlabs.tt.player.Player;
+import com.oddlabs.tt.procedural.Landscape;
 import com.oddlabs.tt.render.Renderer;
 import com.oddlabs.tt.util.ServerMessageBundler;
 import com.oddlabs.tt.util.Utils;
@@ -579,7 +580,7 @@ public final strictfp class TerrainMenu extends Group {
 		int hills = slider_hills.getValue();
 		int vegetation_amount = slider_vegetation.getValue();
 		int supplies_amount = slider_supplies.getValue();
-		int terrain_type = pm_terrain_type.getChosenItemIndex();
+		Landscape.TerrainType terrain_type = Landscape.TerrainType.values()[pm_terrain_type.getChosenItemIndex()];
 		Game game;
 		boolean rated = cb_rated.isMarked();
 		if (rated)
@@ -592,12 +593,13 @@ public final strictfp class TerrainMenu extends Group {
 				return false;
 			}
 			float random_start_pos = LocalEventQueue.getQueue().getTime()%1f;
-			game = new Game(game_name, (byte)pulldown_size.getChosenItemIndex(), (byte)terrain_type, (byte)hills, (byte)vegetation_amount, (byte)supplies_amount, rated, (byte)(pm_gamespeed.getChosenItemIndex() + 1), label_mapcode.getContents(), random_start_pos, Player.DEFAULT_MAX_UNIT_COUNT);
+			game = new Game(game_name, (byte)pulldown_size.getChosenItemIndex(), (byte)terrain_type.ordinal(), (byte)hills, (byte)vegetation_amount, (byte)supplies_amount, rated, (byte)(pm_gamespeed.getChosenItemIndex() + 1), label_mapcode.getContents(), random_start_pos, Player.DEFAULT_MAX_UNIT_COUNT);
 		} else {
 			boolean has_enemy = false;
-			for (int i = 1; i < race_pulldown_menus.length; i++)
-				if (isChosen(difficulty_pulldown_menus[i]) && team_pulldown_menus[i].getChosenItemIndex() != team_pulldown_menus[0].getChosenItemIndex())
-					has_enemy = true;
+			for (int i = 1; i < race_pulldown_menus.length; i++) {
+                if (isChosen(difficulty_pulldown_menus[i]) && team_pulldown_menus[i].getChosenItemIndex() != team_pulldown_menus[0].getChosenItemIndex())
+                    has_enemy = true;
+            }
 			if (!has_enemy) {
 				String min_name = Utils.getBundleString(bundle, "min_num_teams", new Object[]{2});
 				gui_root.addModalForm(new MessageForm(min_name));

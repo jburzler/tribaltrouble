@@ -7,12 +7,10 @@ import com.oddlabs.tt.gui.GUIImage;
 import com.oddlabs.tt.gui.GUIRoot;
 import com.oddlabs.tt.gui.KeyboardEvent;
 import com.oddlabs.tt.gui.LocalInput;
-import com.oddlabs.tt.guievent.MouseClickListener;
 import com.oddlabs.tt.render.Renderer;
 
 public final strictfp class QuitScreen extends CameraDelegate implements Updatable {
 	private final static float DELAY = 5f;
-	private final static int OFFSET = 20;
 
 	private final static int overlay_texture_width = 1024;
 	private final static int overlay_texture_height = 1024;
@@ -43,13 +41,13 @@ public final strictfp class QuitScreen extends CameraDelegate implements Updatab
 		quit_root.pushDelegate(this);
 	}
 
-        @Override
+    @Override
 	public void displayChangedNotify(int width, int height) {
 		setDim(width, height);
 		overlay.setDim(width, height);
 	}
 
-        @Override
+    @Override
 	public void update(Object anim) {
 		delay_timer.stop();
 		time_out = true;
@@ -61,22 +59,15 @@ public final strictfp class QuitScreen extends CameraDelegate implements Updatab
 			Renderer.shutdown();
 	}
 
-        @Override
+    @Override
 	protected void keyPressed(KeyboardEvent event) {
 		key_pressed = true;
 		quit();
 	}
 
-        @Override
+    @Override
 	protected void mouseClicked(int button, int x, int y, int clicks) {
 		key_pressed = true;
 		quit();
-	}
-
-	private final strictfp class ResetListener implements MouseClickListener {
-                @Override
-		public void mouseClicked(int button, int x, int y, int clicks) {
-			key_pressed = false;
-		}
 	}
 }

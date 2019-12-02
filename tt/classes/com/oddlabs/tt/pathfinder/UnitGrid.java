@@ -116,19 +116,20 @@ public final strictfp class UnitGrid {
 		GL11.glPointSize(3f);
 		GL11.glBegin(GL11.GL_POINTS);
 		Region last_region = null;
-		for (int y = start_y; y < end_y; y++)
-			for (int x = start_x; x < end_x; x++) {
-				float xf = coordinateFromGrid(x);
-				float yf = coordinateFromGrid(y);
-				Region region = getRegion(x, y);
-				if (region == null) {
-					GL11.glColor3f(1f, 0f, 0f);
-				} else {
-					last_region = region;
-					DebugRender.setColor(region.hashCode());
-				}
-				GL11.glVertex3f(xf, yf, heightmap.getNearestHeight(xf, yf) + 2f);
-			}
+		for (int y = start_y; y < end_y; y++) {
+            for (int x = start_x; x < end_x; x++) {
+                float xf = coordinateFromGrid(x);
+                float yf = coordinateFromGrid(y);
+                Region region = getRegion(x, y);
+                if (region == null) {
+                    GL11.glColor3f(1f, 0f, 0f);
+                } else {
+                    last_region = region;
+                    DebugRender.setColor(region.hashCode());
+                }
+                GL11.glVertex3f(xf, yf, heightmap.getNearestHeight(xf, yf) + 2f);
+            }
+        }
 		GL11.glEnd();
 		GL11.glBegin(GL11.GL_LINES);
 		GL11.glColor3f(1f, 0f, 0f);
@@ -168,11 +169,13 @@ public final strictfp class UnitGrid {
 		int end_x = StrictMath.min(occupants.length - 0, center_x + RADIUS);
 		int start_y = StrictMath.max(0, center_y - RADIUS);
 		int end_y = StrictMath.min(occupants.length - 0, center_y + RADIUS);
-		for (int y = start_y; y < end_y; y++)
-			for (int x = start_x; x < end_x; x++)
-				if (isGridOccupied(x, y)) {
-					debugRenderQuad(x, y);
-				}
+		for (int y = start_y; y < end_y; y++) {
+            for (int x = start_x; x < end_x; x++) {
+                if (isGridOccupied(x, y)) {
+                    debugRenderQuad(x, y);
+                }
+            }
+        }
 		GL11.glEnd();
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 		Font font = Skin.getSkin().getEditFont();
@@ -182,20 +185,22 @@ public final strictfp class UnitGrid {
 		if (Globals.draw_axes) {
 			GL11.glColor3f(1f, 1f, 1f);
 			GL11.glEnable(GL11.GL_BLEND);
-			for (int y = start_y; y < end_y; y++)
-				for (int x = start_x; x < end_x; x++)
-					if (!isGridOccupied(x, y)) {
-						float xf = (x + .5f)*s;
-						float yf = (y + .5f)*s;
-						float z = heightmap.getNearestHeight(xf, yf) + OFFSET;
-						GL11.glPushMatrix();
-						GL11.glTranslatef(xf, yf, z);
-						GL11.glScalef(.08f, .08f, .08f);
-						font.setupQuads();
-						renderer.render(4, 4, Float.NEGATIVE_INFINITY, Float.POSITIVE_INFINITY, Float.NEGATIVE_INFINITY, Float.POSITIVE_INFINITY, "" + heightmap.getBuildValue(x, y));
-						font.resetQuads();
-						GL11.glPopMatrix();
-					}
+			for (int y = start_y; y < end_y; y++) {
+                for (int x = start_x; x < end_x; x++) {
+                    if (!isGridOccupied(x, y)) {
+                        float xf = (x + .5f)*s;
+                        float yf = (y + .5f)*s;
+                        float z = heightmap.getNearestHeight(xf, yf) + OFFSET;
+                        GL11.glPushMatrix();
+                        GL11.glTranslatef(xf, yf, z);
+                        GL11.glScalef(.08f, .08f, .08f);
+                        font.setupQuads();
+                        renderer.render(4, 4, Float.NEGATIVE_INFINITY, Float.POSITIVE_INFINITY, Float.NEGATIVE_INFINITY, Float.POSITIVE_INFINITY, "" + heightmap.getBuildValue(x, y));
+                        font.resetQuads();
+                        GL11.glPopMatrix();
+                    }
+                }
+            }
 			GL11.glDisable(GL11.GL_BLEND);
 		}
 		GL11.glColor3f(1f, 0f, 0f);

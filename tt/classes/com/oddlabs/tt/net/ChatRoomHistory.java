@@ -26,7 +26,7 @@ public final strictfp class ChatRoomHistory extends ChatHistory {
 			ChatRoomUser user = it.next();
 			addMessage(Utils.getBundleString(bundle, "user_joined", user.getNick()));
 		}
-		Set<ChatRoomUser> left_users = new HashSet(old_users_set);
+		Set<ChatRoomUser> left_users = new HashSet<>(old_users_set);
 		left_users.removeAll(new_users_set);
 		it = left_users.iterator();
 		while (it.hasNext()) {
@@ -37,7 +37,7 @@ public final strictfp class ChatRoomHistory extends ChatHistory {
 
     @Override
 	public void chat(ChatMessage message) {
-		if (message.type != ChatMessage.CHAT_PRIVATE && message.type != ChatMessage.CHAT_CHATROOM)
+		if (message.type != ChatMessage.Type.PRIVATE && message.type != ChatMessage.Type.CHATROOM)
 			return;
 		addMessage(message.formatLong());
 	}

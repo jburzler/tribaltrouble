@@ -10,8 +10,9 @@ public final strictfp class PocketList {
 
 	public PocketList(int num_pockets) {
 		pockets = new List[num_pockets];
-		for (int i = 0; i < pockets.length; i++)
-			pockets[i] = new ArrayList();
+		for (int i = 0; i < pockets.length; i++) {
+            pockets[i] = new ArrayList();
+        }
 		reset();
 	}
 
@@ -38,8 +39,9 @@ public final strictfp class PocketList {
 	}
 
 	public void clear() {
-		for (int i = min_list_index; i <= max_list_index; i++)
-			pockets[i].clear();
+		for (int i = min_list_index; i <= max_list_index; i++) {
+            pockets[i].clear();
+        }
 //		check();
 		reset();
 	}

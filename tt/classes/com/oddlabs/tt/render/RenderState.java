@@ -16,8 +16,8 @@ import java.util.*;
 import org.lwjgl.opengl.GL11;
 
 public final strictfp class RenderState implements ElementVisitor {
-	private final List emitter_queue = new ArrayList();
-	private final List lightning_queue = new ArrayList();
+	private final List<Emitter> emitter_queue = new ArrayList<>();
+	private final List<Lightning> lightning_queue = new ArrayList<>();
 	private final SpriteSorter sprite_sorter;
 	private final RenderStateCache render_state_cache;
 	private final RenderQueues render_queues;
@@ -59,7 +59,7 @@ public final strictfp class RenderState implements ElementVisitor {
 	}
 
 	public void setVisibleOverride(boolean override) {
-		this.visible_override = visible_override;
+		this.visible_override = override;
 	}
 
 	public void setup(boolean picking, CameraState camera_state) {
@@ -154,30 +154,30 @@ public final strictfp class RenderState implements ElementVisitor {
 	}
 
 	private static float getBuildingSelectionRadius(Building building) {
-		int render_level = building.getRenderLevel();
+		Building.BuildState render_level = building.getRenderLevel();
 		switch (render_level) {
-			case Building.RENDER_START:
+			case START:
 				return building.getBuildingTemplate().getStartSelectionRadius();
-			case Building.RENDER_HALFBUILT:
+			case HALFBUILT:
 				return building.getBuildingTemplate().getHalfbuiltSelectionRadius();
-			case Building.RENDER_BUILT:
+			case BUILT:
 				return building.getBuildingTemplate().getBuiltSelectionRadius();
 			default:
-				throw new RuntimeException();
+				throw new IllegalStateException();
 		}
 	}
 
 	private static float getBuildingSelectionHeight(Building building) {
-		int render_level = building.getRenderLevel();
+		Building.BuildState render_level = building.getRenderLevel();
 		switch (render_level) {
-			case Building.RENDER_START:
+            case START:
 				return building.getBuildingTemplate().getStartSelectionHeight();
-			case Building.RENDER_HALFBUILT:
+			case HALFBUILT:
 				return building.getBuildingTemplate().getHalfbuiltSelectionHeight();
-			case Building.RENDER_BUILT:
+			case BUILT:
 				return building.getBuildingTemplate().getBuiltSelectionHeight();
 			default:
-				throw new RuntimeException();
+				throw new IllegalStateException();
 		}
 	}
 
@@ -195,19 +195,19 @@ public final strictfp class RenderState implements ElementVisitor {
 		return sprite_sorter.add(model, camera, point_on_map);
 	}
 
-        @Override
+    @Override
 	public void visitEmitter(final Emitter emitter) {
 		if (!picking)
 			emitter_queue.add(emitter);
 	}
 
-        @Override
+    @Override
 	public void visitLightning(final Lightning lightning) {
 		if (!picking)
 			lightning_queue.add(lightning);
 	}
 
-        @Override
+    @Override
 	public void visitRespond(final LandscapeTargetRespond respond) {
 		if (!picking)
 			target_respond_renderer.addToTargetList(respond);
@@ -314,11 +314,11 @@ public final strictfp class RenderState implements ElementVisitor {
 		}
 	}
 
-	public List getEmitterQueue() {
+	public List<Emitter> getEmitterQueue() {
 		return emitter_queue;
 	}
 
-	public List getLightningQueue() {
+	public List<Lightning> getLightningQueue() {
 		return lightning_queue;
 	}
 }

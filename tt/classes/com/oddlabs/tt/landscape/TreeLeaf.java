@@ -14,7 +14,7 @@ public final strictfp class TreeLeaf extends AbstractTreeGroup {
 		infos = new_infos;
 	}
 
-        @Override
+    @Override
 	protected boolean initBounds() {
 		if (infos.length != 0) {
 			TreeSupply info = infos[0];
@@ -31,14 +31,14 @@ public final strictfp class TreeLeaf extends AbstractTreeGroup {
 		return false;
 	}
 
-        @Override
+    @Override
 	public void visit(TreeNodeVisitor visitor) {
 		visitor.visitLeaf(this);
 	}
 
 	public void visitTrees(TreeNodeVisitor visitor) {
-            for (TreeSupply info : infos) {
-                visitor.visitTree(info);
-            }
+        for (TreeSupply info : infos) {
+            visitor.visitTree(info);
+        }
 	}
 }

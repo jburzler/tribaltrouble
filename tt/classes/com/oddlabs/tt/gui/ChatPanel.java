@@ -127,9 +127,9 @@ public strictfp class ChatPanel extends Panel implements ChatListener {
 
         @Override
 	public final void chat(ChatMessage message) {
-		if (message.type != ChatMessage.CHAT_PRIVATE && message.type != ChatMessage.CHAT_CHATROOM)
+		if (message.type != ChatMessage.Type.PRIVATE && message.type != ChatMessage.Type.CHATROOM)
 			return;
-		if (message.type != ChatMessage.CHAT_PRIVATE) {
+		if (message.type != ChatMessage.Type.PRIVATE) {
 			getTab().updateNotify();
 		}
 		refreshMessages();

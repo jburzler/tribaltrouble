@@ -4,7 +4,6 @@ import com.oddlabs.geometry.*;
 import com.oddlabs.util.IndexListOptimizer;
 
 import org.lwjgl.util.vector.Matrix4f;
-import org.lwjgl.util.vector.Vector4f;
 import java.util.Map;
 import java.nio.FloatBuffer;
 import java.nio.ShortBuffer;
@@ -12,7 +11,7 @@ import java.nio.ShortBuffer;
 public final strictfp class Optimizer {
 	private final static float VERTEX_TRESHOLD = 0.000001f;
 
-	private final static boolean shortsEquals(int index1, int index2, int size, short[] array1, short[] array2) {
+	private static boolean shortsEquals(int index1, int index2, int size, short[] array1, short[] array2) {
 		for (int i = 0; i < size; i++) {
 			if (array1[index1*size + i] != array2[index2*size + i]) {
 				return false;
@@ -21,7 +20,7 @@ public final strictfp class Optimizer {
 		return true;
 	}
 
-	private final static boolean floatsEquals(int index1, int index2, int size, float[] array1, float[] array2) {
+	private static boolean floatsEquals(int index1, int index2, int size, float[] array1, float[] array2) {
 		for (int i = 0; i < size; i++) {
 			if (StrictMath.abs(array1[index1*size + i] - array2[index2*size + i]) > VERTEX_TRESHOLD)
 				return false;
@@ -29,7 +28,7 @@ public final strictfp class Optimizer {
 		return true;
 	}
 
-	private final static boolean bytesEquals(int index1, int index2, int size, byte[] array1, byte[] array2) {
+	private static boolean bytesEquals(int index1, int index2, int size, byte[] array1, byte[] array2) {
 		for (int i = 0; i < size; i++) {
 			if (array1[index1*size + i] != array2[index2*size + i])
 				return false;
@@ -37,21 +36,23 @@ public final strictfp class Optimizer {
 		return true;
 	}
 
-	private final static void copyFloats(int index1, int index2, int size, float[] array1, float[] array2) {
-		for (int i = 0; i < size; i++)
-			array2[index2*size + i] = array1[index1*size + i];
+	private static void copyFloats(int index1, int index2, int size, float[] array1, float[] array2) {
+		for (int i = 0; i < size; i++) {
+            array2[index2*size + i] = array1[index1*size + i];
+        }
 	}
 
-	private final static void copyObjects(int index1, int index2, int size, Object[] array1, Object[] array2) {
-		for (int i = 0; i < size; i++)
-			array2[index2*size + i] = array1[index1*size + i];
+	private static void copyObjects(int index1, int index2, int size, Object[] array1, Object[] array2) {
+		for (int i = 0; i < size; i++) {
+            array2[index2*size + i] = array1[index1*size + i];
+        }
 	}
 
-	private final static boolean floatArrayEquals(int index1, int index2, float[][] array1, float[][] array2) {
+	private static boolean floatArrayEquals(int index1, int index2, float[][] array1, float[][] array2) {
 		return floatsEquals(0, 0, array1[index1].length, array1[index1], array2[index2]);
 	}
 
-	private final static boolean byteArrayEquals(int index1, int index2, byte[][] array1, byte[][] array2) {
+	private static boolean byteArrayEquals(int index1, int index2, byte[][] array1, byte[][] array2) {
 		return bytesEquals(0, 0, array1[index1].length, array1[index1], array2[index2]);
 	}
 
@@ -103,24 +104,27 @@ public final strictfp class Optimizer {
 		return new ModelInfo(/*tex_name,*/ indices, r_vertices, r_normals, r_colors, r_uvs, r_skin_names, r_skin_weights);
 	}
 
-	private final static float[][] stripArray(int length, float[][] array) {
+	private static float[][] stripArray(int length, float[][] array) {
 		float[][] copy = new float[length][];
-		for (int i = 0; i < length; i++)
-			copy[i] = array[i];
+		for (int i = 0; i < length; i++) {
+            copy[i] = array[i];
+        }
 		return copy;
 	}
 
-	private final static byte[][] stripArray(int length, byte[][] array) {
+	private static byte[][] stripArray(int length, byte[][] array) {
 		byte[][] copy = new byte[length][];
-		for (int i = 0; i < length; i++)
-			copy[i] = array[i];
+		for (int i = 0; i < length; i++) {
+            copy[i] = array[i];
+        }
 		return copy;
 	}
 
-	private final static float[] stripArray(int length, float[] array) {
+	private static float[] stripArray(int length, float[] array) {
 		float[] copy = new float[length];
-		for (int i = 0; i < length; i++)
-			copy[i] = array[i];
+		for (int i = 0; i < length; i++) {
+            copy[i] = array[i];
+        }
 		return copy;
 	}
 
@@ -140,7 +144,7 @@ public final strictfp class Optimizer {
 		return new AnimationInfo(frames, type, wpc);
 	}
 
-	private final static void normalizeSkeleton(/*float[] parent_bone_vertex, float[] skeleton_vertices,*/ float[] bones, Bone current_bone, Map initial_pose_map, Map frame_map) {
+	private static void normalizeSkeleton(/*float[] parent_bone_vertex, float[] skeleton_vertices,*/ float[] bones, Bone current_bone, Map initial_pose_map, Map frame_map) {
 		assert initial_pose_map.size() == bones.length/12;
 		assert frame_map.size() == bones.length/12;
 		String bone_name = current_bone.getName();
@@ -177,9 +181,8 @@ skeleton_vertices[current_bone.getIndex()*6 + 4] = bone_point_transformed.y;
 skeleton_vertices[current_bone.getIndex()*6 + 5] = bone_point_transformed.z;
 System.out.println("bone_point_transformed.x = " + bone_point_transformed.x + " | bone_point_transformed.y = " + bone_point_transformed.y + " | bone_point_transformed.z = " + bone_point_transformed.z);
 System.out.println(absolute_frame_matrix);*/
-		for (int i = 0; i < current_bone.getChildren().length; i++) {
-			Bone child_bone = current_bone.getChildren()[i];
-			normalizeSkeleton(/*new float[]{bone_point_transformed.x, bone_point_transformed.y, bone_point_transformed.z}, skeleton_vertices,*/ bones, child_bone, initial_pose_map, frame_map);
-		}
+        for (Bone child_bone : current_bone.getChildren()) {
+            normalizeSkeleton(/*new float[]{bone_point_transformed.x, bone_point_transformed.y, bone_point_transformed.z}, skeleton_vertices,*/ bones, child_bone, initial_pose_map, frame_map);
+        }
 	}
 }

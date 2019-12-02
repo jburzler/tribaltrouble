@@ -89,8 +89,9 @@ final strictfp class Sprite {
 			int num_frames = tmp_vertices[j].length;
 			buffer_indices[j] = vert_and_normal_buffer_size;
 			vert_and_normal_buffer_size += num_frames*frame_size;
-			for (int i = 1; i < tmp_vertices[j].length; i++)
-				assert tmp_vertices[j][i].length + tmp_normals[j][i].length == frame_size;
+			for (int i = 1; i < tmp_vertices[j].length; i++) {
+                assert tmp_vertices[j][i].length + tmp_normals[j][i].length == frame_size;
+            }
 		}
 		FloatBuffer temp_vertices_and_normals = BufferUtils.createFloatBuffer(vert_and_normal_buffer_size);
 
@@ -166,8 +167,9 @@ final strictfp class Sprite {
 	private void expandAnimation(AnimationInfo[] animations, float[][][] tmp_vertices, float[][][] tmp_normals, float[] initial_pose_vertices, float[] initial_pose_normals, byte[][] skin_names, float[][] skin_weights, BoundingBox[] bounding_boxes) {
 		int num_bones = animations[0].getFrames()[0].length/12;
 		Matrix4f[] frame_bones = new Matrix4f[num_bones];
-		for (int bone = 0; bone < frame_bones.length; bone++)
-			frame_bones[bone] = new Matrix4f();
+		for (int bone = 0; bone < frame_bones.length; bone++) {
+            frame_bones[bone] = new Matrix4f();
+        }
 		Vector4f v = new Vector4f();
 		Vector4f n = new Vector4f();
 		Vector4f temp = new Vector4f();

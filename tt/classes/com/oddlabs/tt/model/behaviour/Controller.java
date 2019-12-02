@@ -9,8 +9,9 @@ public strictfp abstract class Controller {
 	}
 
 	public final void resetGiveUpCounters() {
-		for (int i = 0; i < give_up_counters.length; i++)
-			give_up_counters[i] = 0;
+		for (int i = 0; i < give_up_counters.length; i++) {
+            give_up_counters[i] = 0;
+        }
 	}
 
 	public final void resetGiveUpCounter(int state_index) {

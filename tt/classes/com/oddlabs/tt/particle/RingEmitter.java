@@ -40,7 +40,7 @@ public final strictfp class RingEmitter extends LinearEmitter {
 		this.num_particles = num_particles;
 	}
 
-        @Override
+    @Override
 	protected int initParticle(Vector3f position, Vector3f velocity, Vector3f acceleration, Vector4f color, Vector4f delta_color, Vector3f particle_radius, Vector3f growth_rate, float energy) {
 		float angle = 2*(float)StrictMath.PI/num_particles;
 		for (int i = 0; i < num_particles; i++) {

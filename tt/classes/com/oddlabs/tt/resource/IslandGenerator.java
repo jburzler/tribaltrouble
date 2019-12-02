@@ -26,7 +26,7 @@ public final strictfp class IslandGenerator implements WorldGenerator {
 	private final static float IDEAL_DETAIL_ALPHA = .15f;
 
 	private final int meters_per_world;
-	private final int terrain_type;
+	private final Landscape.TerrainType terrain;
 	private final int grid_units;
 
 	private final float hills;
@@ -34,14 +34,14 @@ public final strictfp class IslandGenerator implements WorldGenerator {
 	private final float supplies_amount;
 	private final int seed;
 
-	public IslandGenerator(int meters_per_world, int terrain_type, float hills, float vegetation_amount, float supplies_amount, int seed) {
+	public IslandGenerator(int meters_per_world, Landscape.TerrainType terrain, float hills, float vegetation_amount, float supplies_amount, int seed) {
 		this.hills = hills;
 		this.vegetation_amount = vegetation_amount;
 		this.supplies_amount = supplies_amount;
 		this.seed = seed;
 		this.grid_units = meters_per_world/HeightMap.METERS_PER_UNIT_GRID;
 		this.meters_per_world = meters_per_world;
-		this.terrain_type = terrain_type;
+		this.terrain = terrain;
 	}
 
 	private Texture createDetail(GLImage detail_image, int base_level) {
@@ -57,18 +57,18 @@ public final strictfp class IslandGenerator implements WorldGenerator {
 		return texels_per_grid_unit;
 	}
 
-        @Override
-	public int getTerrainType() {
-		return terrain_type;
+    @Override
+	public Landscape.TerrainType getTerrainType() {
+		return terrain;
 	}
-	
+
         @Override
 	public int getMetersPerWorld() {
 		return meters_per_world;
 	}
 
 	public FogInfo createFogInfo() {
-		return Landscape.getFogInfo(terrain_type, meters_per_world);
+		return Landscape.getFogInfo(terrain, meters_per_world);
 	}
 
         @Override
@@ -87,7 +87,7 @@ public final strictfp class IslandGenerator implements WorldGenerator {
 		base_level -= detail_mip_level;
 		if (base_level < 1)
 			base_level = 1;
-		Landscape landscape = new Landscape(num_players, meters_per_world, terrain_type, detail_prefade, hills, vegetation_amount, supplies_amount, seed, initial_unit_count, random_start_pos);
+		Landscape landscape = new Landscape(num_players, meters_per_world, terrain, detail_prefade, hills, vegetation_amount, supplies_amount, seed, initial_unit_count, random_start_pos);
 		long time_after = System.currentTimeMillis();
 System.out.println("Landscape created in = " + (time_after-time_before));
 		BlendInfo[] blend_infos = landscape.getBlendInfos();

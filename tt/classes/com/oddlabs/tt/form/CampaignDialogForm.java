@@ -13,7 +13,7 @@ public strictfp class CampaignDialogForm extends Form {
 	private final boolean cancel;
 
 	private HorizButton ok_button;
-	
+
 	public CampaignDialogForm(CharSequence header, CharSequence text, Quad image, int align) {
 		this(header, text, image, align, null);
 	}
@@ -72,7 +72,9 @@ public strictfp class CampaignDialogForm extends Form {
 			HorizButton cancel_button = new CancelButton(80);
 			addChild(cancel_button);
 			cancel_button.place(ok_button, RIGHT_MID);
-			cancel_button.addMouseClickListener(new CancelListener(this));
+			cancel_button.addMouseClickListener((int button, int x, int y, int clicks) -> {
+			this.cancel();
+        });
 		}
 
 		compileCanvas();

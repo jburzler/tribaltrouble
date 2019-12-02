@@ -19,9 +19,10 @@ public final strictfp class MagicTrigger extends TutorialTrigger {
 		int last = chieftain.getLastMagicIndex();
 		if (last != -1)
 			magic_used[last] = true;
-		for (int i = 0; i < magic_used.length; i++)
-			if (!magic_used[i])
-				return;
+		for (int i = 0; i < magic_used.length; i++) {
+            if (!magic_used[i])
+                return;
+        }
 		tutorial.done(TutorialForm.TUTORIAL_CHIEFTAIN);
 	}
 }

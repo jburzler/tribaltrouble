@@ -47,8 +47,9 @@ public final strictfp class Race {
 		buildings[BUILDING_QUARTERS] = quarters;
 		buildings[BUILDING_ARMORY] = armory;
 		buildings[BUILDING_TOWER] = tower;
-		for (int i = 0; i < buildings.length; i++)
-			assert buildings[i].getTemplateID() == i;
+		for (int i = 0; i < buildings.length; i++) {
+            assert buildings[i].getTemplateID() == i;
+        }
 		units[UNIT_WARRIOR_ROCK] = warrior_rock;
 		units[UNIT_WARRIOR_IRON] = warrior_iron;
 		units[UNIT_WARRIOR_RUBBER] = warrior_rubber;

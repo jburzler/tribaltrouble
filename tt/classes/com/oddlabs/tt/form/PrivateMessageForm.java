@@ -2,7 +2,6 @@ package com.oddlabs.tt.form;
 
 import com.oddlabs.tt.gui.ButtonObject;
 import com.oddlabs.tt.gui.CancelButton;
-import com.oddlabs.tt.gui.CancelListener;
 import com.oddlabs.tt.gui.EditLine;
 import com.oddlabs.tt.gui.Form;
 import com.oddlabs.tt.gui.GUIRoot;
@@ -22,7 +21,7 @@ public final strictfp class PrivateMessageForm extends Form {
 	private final EditLine editline_name;
 	private final String nick;
 	private final GUIRoot gui_root;
-	
+
 	public PrivateMessageForm(GUIRoot gui_root, String nick) {
 		this.gui_root = gui_root;
 		this.nick = nick;
@@ -34,7 +33,7 @@ public final strictfp class PrivateMessageForm extends Form {
 		Label label_name = new Label(Utils.getBundleString(bundle, "to", new Object[]{nick}), Skin.getSkin().getEditFont());
 		editline_name = new EditLine(EDITLINE_WIDTH, 256);
 		editline_name.addEnterListener(new OKListener());
-		
+
 		addChild(label_name);
 		addChild(editline_name);
 
@@ -42,8 +41,10 @@ public final strictfp class PrivateMessageForm extends Form {
 		ButtonObject button_ok = new OKButton(BUTTON_WIDTH);
 		button_ok.addMouseClickListener(new OKListener());
 		ButtonObject button_cancel = new CancelButton(BUTTON_WIDTH);
-		button_cancel.addMouseClickListener(new CancelListener(this));
-		
+		button_cancel.addMouseClickListener((int button, int x, int y, int clicks) -> {
+			this.cancel();
+        });
+
 		addChild(button_ok);
 		addChild(button_cancel);
 
@@ -56,7 +57,7 @@ public final strictfp class PrivateMessageForm extends Form {
 		compileCanvas();
 		centerPos();
 	}
-	
+
         @Override
 	public void setFocus() {
 		editline_name.setFocus();

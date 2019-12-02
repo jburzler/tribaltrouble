@@ -1,12 +1,12 @@
 package com.oddlabs.tt.model;
 
-public strictfp class SupplyCounter {
+public strictfp class SupplyCounter<S extends Supply> {
 	private final Building building;
-	private final Class supply_type;
+	private final Class<S> supply_type;
 
 	private int delta;
 
-	public SupplyCounter(Building building, Class supply_type) {
+	public SupplyCounter(Building building, Class<S> supply_type) {
 		this.building = building;
 		this.supply_type = supply_type;
 		delta = 0;
@@ -28,7 +28,7 @@ public strictfp class SupplyCounter {
 		return building;
 	}
 
-	protected final Class getSupplyType() {
+	protected final Class<S> getSupplyType() {
 		return supply_type;
 	}
 	public final int getDelta() {

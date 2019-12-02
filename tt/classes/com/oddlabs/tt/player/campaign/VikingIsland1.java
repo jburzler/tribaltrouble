@@ -35,7 +35,7 @@ public final strictfp class VikingIsland1 extends Island {
 			Utils.getBundleString(bundle, "name3"),
 			Utils.getBundleString(bundle, "name4"),
 			Utils.getBundleString(bundle, "name5")};
-		GameNetwork game_network = startNewGame(network, gui_root, 256, Landscape.NATIVE, .75f, 1f, .5f, 97455, 1, VikingCampaign.MAX_UNITS, ai_names);
+		GameNetwork game_network = startNewGame(network, gui_root, 256, Landscape.TerrainType.NATIVE, .75f, 1f, .5f, 97455, 1, VikingCampaign.MAX_UNITS, ai_names);
 		game_network.getClient().getServerInterface().setPlayerSlot(0,
 				PlayerSlot.HUMAN,
 				RacesResources.RACE_VIKINGS,

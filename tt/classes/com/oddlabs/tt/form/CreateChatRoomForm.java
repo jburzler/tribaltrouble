@@ -4,7 +4,6 @@ import com.oddlabs.matchmaking.MatchmakingServerInterface;
 import com.oddlabs.tt.delegate.Menu;
 import com.oddlabs.tt.gui.ButtonObject;
 import com.oddlabs.tt.gui.CancelButton;
-import com.oddlabs.tt.gui.CancelListener;
 import com.oddlabs.tt.gui.EditLine;
 import com.oddlabs.tt.gui.Form;
 import com.oddlabs.tt.gui.GUIRoot;
@@ -49,7 +48,9 @@ public final strictfp class CreateChatRoomForm extends Form {
 		ButtonObject button_ok = new OKButton(BUTTON_WIDTH);
 		button_ok.addMouseClickListener(new OKListener());
 		ButtonObject button_cancel = new CancelButton(BUTTON_WIDTH);
-		button_cancel.addMouseClickListener(new CancelListener(this));
+		button_cancel.addMouseClickListener((int button, int x, int y, int clicks) -> {
+			this.cancel();
+        });
 
 		addChild(button_ok);
 		addChild(button_cancel);

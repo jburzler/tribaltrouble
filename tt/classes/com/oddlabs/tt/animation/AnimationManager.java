@@ -48,7 +48,7 @@ public final strictfp class AnimationManager {
 	private static boolean checksum_complain = true;
 
 	private final Set<Animated> animations = new CopyOnWriteArraySet<>();
-	private final Set<Animated> deleted_animations = new CopyOnWriteArraySet();
+	private final Set<Animated> deleted_animations = new CopyOnWriteArraySet<>();
 
 	private int tick;
 /*
@@ -128,6 +128,7 @@ public final strictfp class AnimationManager {
 		frozen_start_time = time_source.getMillis();
 	}
 
+    @SuppressWarnings("UseOfSystemOutOrSystemErr")
 	public static void runGameLoop(NetworkSelector network, GUI gui, boolean grab_frames) {
 		KeyboardInput.checkMagicKeys();
 		if (time_frozen && !time_stopped)
@@ -233,7 +234,7 @@ public final strictfp class AnimationManager {
 	public void runAnimations(float t) {
 		tick++;
 		flushAnimations();
-        Predicate notDeleted = ((Predicate) deleted_animations::contains).negate();
+        Predicate<Animated> notDeleted = ((Predicate<Animated>) deleted_animations::contains).negate();
         Consumer<Animated> animate = (Animated anim) -> anim.animate(t);
         animations.stream()
                 .filter(notDeleted)

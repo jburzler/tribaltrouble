@@ -18,9 +18,10 @@ public final strictfp class RotateTrigger extends TutorialTrigger {
 		if (camera.rotateLeft()) {
 			rotate_dirs[1] = true;
 		}
-		for (int i = 0; i < rotate_dirs.length; i++)
-			if (!rotate_dirs[i])
-				return;
+		for (int i = 0; i < rotate_dirs.length; i++) {
+            if (!rotate_dirs[i])
+                return;
+        }
 		tutorial.next(new PitchTrigger());
 	}
 }

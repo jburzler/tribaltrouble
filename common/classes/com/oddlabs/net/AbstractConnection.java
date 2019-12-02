@@ -16,8 +16,9 @@ public abstract strictfp class AbstractConnection implements ARMIEventWriter {
 		if (connection_interface != null) {
 			if (connected_flag)
 				signalConnected();
-			for (int i = 0; i < event_backlog.size(); i++)
-				connection_interface.handle(this, (ARMIEvent)event_backlog.get(i));
+			for (int i = 0; i < event_backlog.size(); i++) {
+                connection_interface.handle(this, (ARMIEvent)event_backlog.get(i));
+            }
 			event_backlog.clear();
 			if (error_flag != null)
 				connection_interface.error(this, error_flag);

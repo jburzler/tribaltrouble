@@ -18,8 +18,9 @@ public final strictfp class AttackTowerTrigger extends TutorialTrigger {
 		this.ai = tower.getOwner().getWorld().getPlayers()[1];
 		this.tower = tower;
 		Selectable[] units = new Selectable[NUM_UNITS];
-		for (int i = 0; i < units.length; i++)
-			units[i] = new Unit(ai, tower.getPositionX() - 50, tower.getPositionY() - 50, null, ai.getRace().getUnitTemplate(Race.UNIT_WARRIOR_ROCK));
+		for (int i = 0; i < units.length; i++) {
+            units[i] = new Unit(ai, tower.getPositionX() - 50, tower.getPositionY() - 50, null, ai.getRace().getUnitTemplate(Race.UNIT_WARRIOR_ROCK));
+        }
 		ai.setTarget(units, tower, Target.ACTION_ATTACK, false);
 	}
 

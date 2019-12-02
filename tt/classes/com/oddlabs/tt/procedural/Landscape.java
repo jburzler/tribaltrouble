@@ -26,8 +26,7 @@ public final strictfp class Landscape {
 	private final static int STRUCTURE_SEED = 42; // must be constant; otherwise distinct repeating patterns might appear
 
 	private final static int NUM_PLANT_TYPES = 4;
-	public final static int NATIVE = 0;
-	public final static int VIKING = 1;
+	public enum TerrainType { NATIVE, VIKING };
 
 	private Random random;
 	private final BlendInfo[] blend_infos;
@@ -70,16 +69,16 @@ public final strictfp class Landscape {
 	private final int max_plants;
 	private final float access_threshold;
 	private final float build_threshold;
-	private final int terrain_type;
+	private final TerrainType terrain;
 
 	private byte[][] build;
 	private float[][] player_locations;
 	private int[][] supply_locations;
 	private float[][] plants;
 
-	public Landscape(int num_players, int meters_per_world, int terrain_type, float detail_alpha_value, float hills, float vegetation_amount, float supplies_amount, int seed, int initial_unit_count, float random_start_pos) {
+	public Landscape(int num_players, int meters_per_world, TerrainType terrain, float detail_alpha_value, float hills, float vegetation_amount, float supplies_amount, int seed, int initial_unit_count, float random_start_pos) {
 
-		this.terrain_type = terrain_type;
+		this.terrain = terrain;
 		hills = (float)StrictMath.sqrt(hills);
 		this.num_players = num_players;
 		this.features = 4;
@@ -124,7 +123,7 @@ public final strictfp class Landscape {
 		area = size_multiplier*10000f;
 		max_plants = size_multiplier*64;
 
-		if (terrain_type == NATIVE) {
+		if (terrain == TerrainType.NATIVE) {
 			max_trees = (int)StrictMath.pow(2, 2*Utils.powerOf2Log2(meters_per_world) - 9);
 			max_palmtrees = max_trees>>1;
 		} else {
@@ -154,7 +153,7 @@ public final strictfp class Landscape {
 		Channel noise8 = new Midpoint(structure_size, 3, 0.45f, STRUCTURE_SEED).toChannel();
 		Channel noise256 = new Midpoint(structure_size, 8, 1f, STRUCTURE_SEED).toChannel();
 
-		switch (terrain_type) {
+		switch (terrain) {
 			case NATIVE:
 				generateStructuresNative(voronoi4, voronoi8, voronoi8_hit, voronoi16, voronoi16_hit, voronoi32, voronoi32_hit, noise8, noise256);
 				ProgressForm.progress();
@@ -166,7 +165,7 @@ public final strictfp class Landscape {
 				generateTerrainViking();
 				break;
 			default:
-				assert false : "illegal terrain_type";
+				assert false : "illegal terrain";
 				break;
 		}
 
@@ -380,9 +379,9 @@ public final strictfp class Landscape {
 
 	private Layer genSeabottom(int size) {
 		Layer seabottom = new Layer(
-			new Channel(size, size).fill(Globals.SEA_BOTTOM_COLOR[terrain_type][0]),
-			new Channel(size, size).fill(Globals.SEA_BOTTOM_COLOR[terrain_type][1]),
-			new Channel(size, size).fill(Globals.SEA_BOTTOM_COLOR[terrain_type][2])
+			new Channel(size, size).fill(Globals.SEA_BOTTOM_COLOR[terrain.ordinal()][0]),
+			new Channel(size, size).fill(Globals.SEA_BOTTOM_COLOR[terrain.ordinal()][1]),
+			new Channel(size, size).fill(Globals.SEA_BOTTOM_COLOR[terrain.ordinal()][2])
 		);
 		if (DEBUG) seabottom.saveAsPNG("structure_seabottom");
 		return seabottom;
@@ -590,7 +589,7 @@ public final strictfp class Landscape {
 		Channel alpha0, alpha1, alpha2, alpha3;
 		Channel grass_alpha = new Channel(1, 1);
 
-		switch (terrain_type) {
+		switch (terrain) {
 			case NATIVE:
 				alpha0 = generateDirtAlpha();
 				if (DEBUG) alpha0.toLayer().saveAsPNG("alpha_dirt");
@@ -622,7 +621,7 @@ public final strictfp class Landscape {
 				grass_alpha = alpha2;
 				break;
 			default:
-				assert false : "illegal terrain_type";
+				assert false : "illegal terrain";
 				break;
 		}
 		Channel seabottom_alpha = generateSeabottomAlpha();
@@ -742,7 +741,7 @@ public final strictfp class Landscape {
 	// generate seabottom alpha
 	private Channel generateSeabottomAlpha() {
 		Channel seabottom_alpha = height.copy().invert().dynamicRange(1f - Globals.SEA_LEVEL, 1f, 0f, 1f);
-		switch (terrain_type) {
+		switch (terrain) {
 			case NATIVE:
 				seabottom_alpha.grow(0f, 1).gamma(0.5f);
 				break;
@@ -750,7 +749,7 @@ public final strictfp class Landscape {
 				seabottom_alpha.gamma(0.5f);
 				break;
 			default:
-				assert false : "illegal terrain_type";
+				assert false : "illegal terrain";
 				break;
 		}
 		return seabottom_alpha;
@@ -769,7 +768,7 @@ public final strictfp class Landscape {
 		Channel palmtree_channel = height.copy();
 		ProgressForm.progress(1/14f);
 
-		switch (terrain_type) {
+		switch (terrain) {
 			case NATIVE:
 				tree_channel.threshold(0.5f, 1f);
 				tree_channel.channelAdd(noise.rotate(90).copy().threshold(0.9f, 1f));
@@ -792,7 +791,7 @@ public final strictfp class Landscape {
 				palmtree_channel.channelSubtract(noise.rotate(90));
 				break;
 			default:
-				assert false : "illegal terrain_type";
+				assert false : "illegal terrain";
 				break;
 		}
 
@@ -803,7 +802,7 @@ public final strictfp class Landscape {
 		// generate rock and iron supplies map
 		Channel rock_channel = relheight.copy();
 
-		switch (terrain_type) {
+		switch (terrain) {
 			case NATIVE:
 				rock_channel.invert().threshold(0.5f, 1f).channelMultiply(noise.rotate(90).copy().gamma8().invert()).channelMultiply(centerprob);
 				break;
@@ -811,7 +810,7 @@ public final strictfp class Landscape {
 				rock_channel.threshold(0f, 0.5f).channelMultiply(noise.rotate(90).copy().gamma8().invert());
 				break;
 			default:
-				assert false : "illegal terrain_type";
+				assert false : "illegal terrain";
 				break;
 		}
 
@@ -1048,7 +1047,7 @@ public final strictfp class Landscape {
 		}
 
 		// shuffle player starting locations
-		List player_locations_list = Arrays.asList(player_locations);
+		List<float[]> player_locations_list = Arrays.asList(player_locations);
 		Collections.shuffle(player_locations_list, random);
 	}
 
@@ -1057,14 +1056,14 @@ public final strictfp class Landscape {
 	// * GET METHODS *
 	// ***************
 
-	public static FogInfo getFogInfo(int terrain_type, int meters_per_world) {
-		switch (terrain_type) {
+	public static FogInfo getFogInfo(TerrainType terrain, int meters_per_world) {
+		switch (terrain) {
 			case NATIVE:
 				return new FogInfo(new float[] {.65f, .75f, 1f, 1f}, GL11.GL_EXP2, 1.3f*meters_per_world, .0015f, 0f, meters_per_world>>2);
 			case VIKING:
 				return new FogInfo(new float[] {.2f, .4f, .55f, 1f}, GL11.GL_EXP2, 1.3f*meters_per_world, .0015f, 0f, meters_per_world>>2);
 			default:
-				throw new RuntimeException("Unknown terrain type: " + terrain_type);
+				throw new RuntimeException("Unknown terrain type: " + terrain);
 		}
 	}
 
@@ -1095,8 +1094,8 @@ public final strictfp class Landscape {
 		return build;
 	}
 
-	public List getTrees() {
-		List list = new ArrayList();
+	public List<int[]> getTrees() {
+		List<int[]> list = new ArrayList<>();
 		for (int y = 0; y < trees.height; y++) {
 			for (int x = 0; x < trees.width; x++) {
 				if (trees.getPixel(x, y) == 1f) {
@@ -1107,8 +1106,8 @@ public final strictfp class Landscape {
 		return list;
 	}
 
-	public List getPalmtrees() {
-		List list = new ArrayList();
+	public List<int[]> getPalmtrees() {
+		List<int[]> list = new ArrayList<>();
 		for (int y = 0; y < palmtrees.height; y++) {
 			for (int x = 0; x < palmtrees.width; x++) {
 				if (palmtrees.getPixel(x, y) == 1f) {
@@ -1119,8 +1118,8 @@ public final strictfp class Landscape {
 		return list;
 	}
 
-	public List getRock() {
-		List list = new ArrayList();
+	public List<int[]> getRock() {
+		List<int[]> list = new ArrayList<>();
 		for (int y = 0; y < rock.height; y++) {
 			for (int x = 0; x < rock.width; x++) {
 				if (rock.getPixel(x, y) == 1f) {
@@ -1131,8 +1130,8 @@ public final strictfp class Landscape {
 		return list;
 	}
 
-	public List getIron() {
-		List list = new ArrayList();
+	public List<int[]> getIron() {
+		List<int[]> list = new ArrayList<>();
 		for (int y = 0; y < iron.height; y++) {
 			for (int x = 0; x < iron.width; x++) {
 				if (iron.getPixel(x, y) == 1f) {

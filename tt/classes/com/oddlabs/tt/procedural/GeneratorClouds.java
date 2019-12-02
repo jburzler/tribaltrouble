@@ -13,10 +13,10 @@ public final strictfp class GeneratorClouds extends TextureGenerator {
 	public static final int INNER = 0;
 	public static final int OUTER = 1;
 
-	private final int terrain_type;
+	private final Landscape.TerrainType terrain;
 
-	public GeneratorClouds(int terrain_type) {
-		this.terrain_type = terrain_type;
+	public GeneratorClouds(Landscape.TerrainType terrain) {
+		this.terrain = terrain;
 	}
 
     @Override
@@ -25,17 +25,17 @@ public final strictfp class GeneratorClouds extends TextureGenerator {
 		Channel clouds1 = new Midpoint(TEXTURE_SIZE, 3, 0.55f, seed).toChannel();
 		Channel clouds2 = new Midpoint(TEXTURE_SIZE, 2, 0.4f, seed).toChannel();
 
-		switch (terrain_type) {
-			case Landscape.NATIVE:
+		switch (terrain) {
+			case NATIVE:
 				clouds1.dynamicRange(0.5f, 1f, 0f, 1f).gamma(0.75f).brightness(0.5f);
 				clouds2.dynamicRange(0.25f, 1f, 0f, 1f).gamma(0.5f).brightness(0.33f);
 				break;
-			case Landscape.VIKING:
+			case VIKING:
 				clouds1.dynamicRange(0.5f, 1f, 0f, 0.75f);
 				clouds2.dynamicRange(0.5f, 1f, 0f, 0.75f);
 				break;
 			default:
-				assert false : "illegal terrain_type";
+				assert false : "illegal terrain";
 				break;
 		}
 
@@ -56,6 +56,6 @@ public final strictfp class GeneratorClouds extends TextureGenerator {
 
     @Override
 	public boolean equals(Object o) {
-		return super.equals(o) && ((GeneratorClouds)o).terrain_type == terrain_type;
+		return super.equals(o) && ((GeneratorClouds)o).terrain == terrain;
 	}
 }

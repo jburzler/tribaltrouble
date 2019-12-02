@@ -12,9 +12,11 @@ final strictfp class GridNode extends Node {
 
 	static {
 		pathfinder_grid = new GridNode[RegionBuilder.GRID_SIZE][RegionBuilder.GRID_SIZE];
-		for (int y = 0; y < pathfinder_grid.length; y++)
-			 for (int x = 0; x < pathfinder_grid.length; x++)
-				 pathfinder_grid[y][x] = new GridNode(x, y);
+		for (int y = 0; y < pathfinder_grid.length; y++) {
+            for (int x = 0; x < pathfinder_grid.length; x++) {
+                pathfinder_grid[y][x] = new GridNode(x, y);
+            }
+        }
 		int unit = HeightMap.METERS_PER_UNIT_GRID;
 		float inv_unit = 1f/HeightMap.METERS_PER_UNIT_GRID;
 		float inv_sqrt_2 = 1f/(float)StrictMath.sqrt(unit*unit + unit*unit);

@@ -14,6 +14,7 @@ import com.oddlabs.tt.pathfinder.RegionBuilder;
 import com.oddlabs.tt.pathfinder.UnitGrid;
 import com.oddlabs.tt.player.Player;
 import com.oddlabs.tt.player.PlayerInfo;
+import com.oddlabs.tt.procedural.Landscape;
 import com.oddlabs.tt.render.RenderQueues;
 import com.oddlabs.tt.resource.NativeResource;
 import com.oddlabs.tt.resource.WorldInfo;
@@ -64,10 +65,10 @@ public final strictfp class World {
 		return new RacesResources(queues);
 	}
 
-	public static World newWorld(AudioImplementation audio_implementation, LandscapeResources landscape_resources, RacesResources races_resources, LowDetailModel[] tree_low_details, NotificationListener notification_listener, WorldParameters world_params, WorldInfo world_info, int terrain_type, PlayerInfo[] player_infos, float[][] colors) {
+	public static World newWorld(AudioImplementation audio_implementation, LandscapeResources landscape_resources, RacesResources races_resources, LowDetailModel[] tree_low_details, NotificationListener notification_listener, WorldParameters world_params, WorldInfo world_info, Landscape.TerrainType terrain, PlayerInfo[] player_infos, float[][] colors) {
 		NativeResource.gc();
 		ProgressForm.progress();
-		World world = new World(audio_implementation, landscape_resources, races_resources, tree_low_details, notification_listener, world_params, world_info, terrain_type, player_infos, colors);
+		World world = new World(audio_implementation, landscape_resources, races_resources, tree_low_details, notification_listener, world_params, world_info, terrain, player_infos, colors);
 		ProgressForm.progress();
 		ProgressForm.progress(1/5f);
 		ProgressForm.progress();
@@ -141,7 +142,7 @@ public final strictfp class World {
 		return getAnimationManagerRealTime().getTick();
 	}
 
-	private World(AudioImplementation audio_implementation, LandscapeResources landscape_resources, RacesResources races_resources, LowDetailModel[] tree_low_details, NotificationListener notification_listener, WorldParameters world_params, WorldInfo world_info, int terrain_type, PlayerInfo[] player_infos, float[][] colors) {
+	private World(AudioImplementation audio_implementation, LandscapeResources landscape_resources, RacesResources races_resources, LowDetailModel[] tree_low_details, NotificationListener notification_listener, WorldParameters world_params, WorldInfo world_info, Landscape.TerrainType terrain, PlayerInfo[] player_infos, float[][] colors) {
 		System.out.println("****************** Generating landscape at tick " + LocalEventQueue.getQueue().getHighPrecisionManager().getTick() + " ********************");
 		this.landscape_resources = landscape_resources;
 		this.races_resources = races_resources;
@@ -175,9 +176,9 @@ public final strictfp class World {
 		RegionBuilder.buildRegions(unit_grid, world_info.starting_locations[0][0], world_info.starting_locations[0][1]);
 		this.landscape_indices = new LandscapeTileIndices(world, HeightMap.GRID_UNITS_PER_PATCH_EXP);
 		this.patch_root = new PatchGroup(this);
-		this.tree_root = AbstractTreeGroup.newRoot(this, tree_low_details, world_info.trees, world_info.palm_trees, terrain_type);
+		this.tree_root = AbstractTreeGroup.newRoot(this, tree_low_details, world_info.trees, world_info.palm_trees, terrain);
 		this.element_root = AbstractElementNode.newRoot(world);
-		AbstractElementNode.buildSupplies(this, world_info.iron, world_info.rocks, world_info.plants, terrain_type);
+		AbstractElementNode.buildSupplies(this, world_info.iron, world_info.rocks, world_info.plants, terrain);
 	}
 
 	public AbstractElementNode getElementRoot() {

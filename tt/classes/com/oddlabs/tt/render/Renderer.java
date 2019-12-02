@@ -306,8 +306,8 @@ System.out.println("last_event_log_path = " + last_event_log_path);
 		Deterministic deterministic = LocalEventQueue.getQueue().getDeterministic();
 		game_dir = deterministic.log(game_dir);
 		event_log_dir = deterministic.log(event_log_dir);
-		settings = (Settings)deterministic.log(settings);
-		String default_language = (String)deterministic.log(Locale.getDefault().getLanguage());
+		settings = deterministic.log(settings);
+		String default_language = deterministic.log(Locale.getDefault().getLanguage());
 		String language = settings.language;
 		if (language.equals("default"))
 			language = default_language;
@@ -434,7 +434,7 @@ e.printStackTrace();
 	}
 
 	private static void setupMainMenu(final NetworkSelector network, GUI gui, final boolean first_progress) {
-		final WorldGenerator generator = new IslandGenerator(256, Landscape.NATIVE, Globals.LANDSCAPE_HILLS, Globals.LANDSCAPE_VEGETATION, Globals.LANDSCAPE_RESOURCES, Globals.LANDSCAPE_SEED);
+		final WorldGenerator generator = new IslandGenerator(256, Landscape.TerrainType.NATIVE, Globals.LANDSCAPE_HILLS, Globals.LANDSCAPE_VEGETATION, Globals.LANDSCAPE_RESOURCES, Globals.LANDSCAPE_SEED);
 		ProgressForm.setProgressForm(network, gui, (GUIRoot gui_root) -> finishMainMenu(network, gui_root, first_progress, generator), first_progress);
 	}
 

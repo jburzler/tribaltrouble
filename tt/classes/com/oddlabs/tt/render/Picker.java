@@ -166,8 +166,9 @@ public final strictfp class Picker implements Updatable {
 	private boolean isNewOrder(Selectable[] selection, int action, boolean aggressive) {
 		boolean new_order = false;
 		if (selection.length == old_target_selection.length) {
-			for (int i = 0; i < selection.length; i++)
-				new_order |= selection[i] != old_target_selection[i];
+			for (int i = 0; i < selection.length; i++) {
+                new_order |= selection[i] != old_target_selection[i];
+            }
 		} else {
 			new_order = true;
 		}

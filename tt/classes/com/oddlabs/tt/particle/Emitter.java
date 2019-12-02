@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.lwjgl.util.vector.Vector3f;
 
-public abstract strictfp class Emitter extends Element implements Animated {
+public abstract strictfp class Emitter extends Element<Emitter> implements Animated {
 	private final AnimationManager manager;
 	private final List<Particle>[] particles;
 	private final TextureKey[] textures;
@@ -27,7 +27,7 @@ public abstract strictfp class Emitter extends Element implements Animated {
 	private float scale_y = 1f;
 	private float scale_z = 1f;
 
-        @SuppressWarnings("unchecked")
+    @SuppressWarnings("unchecked")
 	public Emitter(World world, Vector3f position, int src_blend_func, int dst_blend_func, TextureKey[] textures, SpriteKey[] sprite_renderers, int types, AnimationManager manager) {
 		super(world.getElementRoot());
 		this.world = world;
@@ -124,24 +124,24 @@ public abstract strictfp class Emitter extends Element implements Animated {
 		return types;
 	}
 
-        @Override
+    @Override
 	protected void register() {
 		super.register();
 		manager.registerAnimation(this);
 	}
 
-        @Override
+    @Override
 	public final void visit(ElementVisitor visitor) {
 		visitor.visitEmitter(this);
 	}
 
-        @Override
+    @Override
 	protected final void remove() {
 		super.remove();
 		manager.removeAnimation(this);
 	}
 
-        @Override
+    @Override
 	public final void updateChecksum(StateChecksum checksum) {
 	}
 }

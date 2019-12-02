@@ -12,7 +12,7 @@ public final strictfp class FloatVBO extends VBO {
 //	private FloatBuffer mapped_buffer = null;
 
 	public FloatVBO(int usage, int size) {
-		super(ARBVertexBufferObject.GL_ARRAY_BUFFER_ARB, usage, size<<2);
+		super(ARBVertexBufferObject.GL_ARRAY_BUFFER_ARB, usage, size * Float.BYTES);
 		ByteBuffer buffer = getSavedBuffer();
 		if (buffer != null)
 			saved_buffer = buffer.asFloatBuffer();
@@ -87,7 +87,7 @@ public final strictfp class FloatVBO extends VBO {
 	public void put(FloatBuffer buffer) {
 		putSubData(0, buffer);
 	}
-	
+
 	public void put(float[] buffer) {
 		putSubData(0, Utils.toBuffer(buffer));
 //		do {
@@ -95,7 +95,7 @@ public final strictfp class FloatVBO extends VBO {
 //			buffer().put(buffer);
 //		} while (!unmap());
 	}
-	
+
 	public void putSubData(int index, FloatBuffer buffer) {
 		if (!use_vbo) {
 			saved_buffer.position(index);
@@ -107,8 +107,8 @@ public final strictfp class FloatVBO extends VBO {
 		}
 	}
 
-        @Override
+    @Override
 	public int capacity() {
-		return getSize()>>2;
+		return getSize() / Float.BYTES;
 	}
 }

@@ -3,6 +3,7 @@ package com.oddlabs.tt.model;
 import com.oddlabs.tt.landscape.HeightMap;
 import com.oddlabs.tt.landscape.World;
 import com.oddlabs.tt.pathfinder.UnitGrid;
+import com.oddlabs.tt.procedural.Landscape;
 import com.oddlabs.tt.render.SpriteKey;
 import com.oddlabs.tt.util.BoundingBox;
 import com.oddlabs.util.LinkedList;
@@ -67,10 +68,10 @@ public abstract strictfp class AbstractElementNode extends BoundingBox {
 		return root;
 	}
 
-	public static void buildSupplies(World world, List<int[]> iron_positions, List<int[]> rock_positions, float[][] plants, int terrain_type) {
+	public static void buildSupplies(World world, List<int[]> iron_positions, List<int[]> rock_positions, float[][] plants, Landscape.TerrainType terrain) {
 		buildRockSupplies(world, rock_positions);
 		buildIronSupplies(world, iron_positions);
-		addPlants(world, plants, terrain_type);
+		addPlants(world, plants, terrain);
 	}
 
 	private static void buildRockSupplies(World world, List<int[]> positions) {
@@ -103,7 +104,7 @@ System.out.println("num_iron = " + num_supplies);
 		}
 	}
 
-	private static void addPlants(World world, float[][] plants, int terrain_type) {
+	private static void addPlants(World world, float[][] plants, Landscape.TerrainType terrain) {
 		int num_plants = 0;
 		for (int t = 0; t < plants.length; t++) {
 			num_plants += plants[t].length/2;
@@ -119,7 +120,7 @@ System.out.println("num_iron = " + num_supplies);
 					dir_x *= inv_len;
 					dir_y *= inv_len;
 				}
-				new Plants(world, plants[t][2*p], plants[t][2*p+1], dir_x, dir_y, world.getLandscapeResources().getPlants()[terrain_type][t]);
+				new Plants(world, plants[t][2*p], plants[t][2*p+1], dir_x, dir_y, world.getLandscapeResources().getPlants()[terrain.ordinal()][t]);
 			}
 		}
 System.out.println("num_plants = " + num_plants);
@@ -128,7 +129,7 @@ System.out.println("num_plants = " + num_plants);
 	public abstract void visit(ElementNodeVisitor visitor);
 
 	public final void visitElements(ElementNodeVisitor visitor) {
-		Element model = (Element) models.getFirst();
+		Element<?> model = (Element) models.getFirst();
 		while (model != null) {
 			visitor.visit(model);
 			model = (Element)model.getNext();

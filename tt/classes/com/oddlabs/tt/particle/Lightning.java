@@ -13,7 +13,7 @@ import java.util.Random;
 import org.lwjgl.util.vector.Vector3f;
 import org.lwjgl.util.vector.Vector4f;
 
-public final strictfp class Lightning extends Element implements Animated {
+public final strictfp class Lightning extends Element<Lightning> implements Animated {
 	private final static float SQRT_2 = (float)StrictMath.sqrt(2f);
 
 	private final AnimationManager manager;
@@ -100,7 +100,7 @@ public final strictfp class Lightning extends Element implements Animated {
 		particle.setEnergy(energy);
 	}
 
-        @Override
+    @Override
 	public void animate(float t) {
 		float x_min = Float.POSITIVE_INFINITY;
 		float x_max = Float.NEGATIVE_INFINITY;
@@ -136,7 +136,7 @@ public final strictfp class Lightning extends Element implements Animated {
 		}
 	}
 
-        @Override
+    @Override
 	protected void register() {
 		super.register();
 		manager.registerAnimation(this);

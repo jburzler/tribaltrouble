@@ -16,7 +16,7 @@ public final strictfp class WaitingForPlayersForm extends Form {
 	private final Label info_label;
 	private final ResourceBundle bundle = ResourceBundle.getBundle(WaitingForPlayersForm.class.getName());
 	private final WorldViewer viewer;
-	
+
 	public WaitingForPlayersForm(WorldViewer viewer) {
 		this.viewer = viewer;
 		info_label = new Label(Utils.getBundleString(bundle, "waiting"), Skin.getSkin().getHeadlineFont());
@@ -31,19 +31,19 @@ public final strictfp class WaitingForPlayersForm extends Form {
 		centerPos();
 	}
 
-        @Override
+    @Override
 	protected void keyRepeat(KeyboardEvent event) {
 		if (event.getKeyCode() != Keyboard.KEY_ESCAPE) // KEY_ESCAPE should not close this form
 			super.keyRepeat(event);
 	}
 
-        @Override
+    @Override
 	protected void doCancel() {
 		viewer.close();
 	}
 
 	private final strictfp class AbortListener implements MouseClickListener {
-                @Override
+        @Override
 		public void mouseClicked(int button, int x, int y, int clicks) {
 			viewer.getGUIRoot().addModalForm(new QuestionForm(Utils.getBundleString(bundle, "confirm_abort"), new CancelListener(WaitingForPlayersForm.this)));
 		}

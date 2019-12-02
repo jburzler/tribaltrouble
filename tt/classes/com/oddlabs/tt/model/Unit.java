@@ -29,7 +29,6 @@ import com.oddlabs.tt.render.SpriteKey;
 import com.oddlabs.tt.util.Target;
 import com.oddlabs.util.Quad;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import org.lwjgl.opengl.GL11;
@@ -110,11 +109,9 @@ public strictfp class Unit extends Selectable implements Occupant, Movable {
             Target unit_target;
             if (rally_point instanceof LandscapeTarget) {
                 UnitGrid grid = getUnitGrid();
-                List temp_occupants = new ArrayList();
-                Set units = getOwner().getUnits().getSet();
-                Iterator it = units.iterator();
-                while (it.hasNext()) {
-                    Selectable s = (Selectable) it.next();
+                List<Target> temp_occupants = new ArrayList<>();
+                Set<Selectable> units = getOwner().getUnits().getSet();
+                for (Selectable s : units) {
                     if (s.getCurrentController() instanceof WalkController) {
                         Target target = ((WalkController) s.getCurrentController()).getTarget();
                         if (!grid.isGridOccupied(target.getGridX(), target.getGridY())) {
@@ -124,8 +121,7 @@ public strictfp class Unit extends Selectable implements Occupant, Movable {
                     }
                 }
                 unit_target = grid.findGridTargets(rally_point.getGridX(), rally_point.getGridY(), 1, true)[0];
-                for (int i = 0; i < temp_occupants.size(); i++) {
-                    Target target = (Target) temp_occupants.get(i);
+                for (Target target : temp_occupants) {
                     grid.freeGrid(target.getGridX(), target.getGridY(), this);
                 }
             } else

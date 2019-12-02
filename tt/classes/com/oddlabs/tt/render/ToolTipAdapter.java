@@ -46,26 +46,26 @@ final strictfp class ToolTipAdapter implements ToolTipVisitor, ToolTip {
 		//}
 	}
 
-        @Override
+    @Override
 	public void appendToolTip(ToolTipBox tool_tip) {
 		tool_tip_box = tool_tip;
 		model.visit(this);
 	}
 
-        @Override
+    @Override
 	public void visitSceneryModel(SceneryModel model) {
 		String name = model.getName();
 		if (name != null)
 			tool_tip_box.append(name);
 	}
 
-        @Override
+    @Override
 	public void visitSupply(Supply model) {
 		tool_tip_box.append(Utils.getBundleString(ResourceBundle.getBundle(model.getClass().getName()), "name"));
 		tool_tip_box.append(Icons.getIcons().getToolTipIcon(model.getClass()));
 	}
 
-        @Override
+    @Override
 	public void visitBuilding(Building building) {
 		visitSelectable(building);
 		tool_tip_box.append(building.getTemplate().getName());
@@ -79,7 +79,7 @@ final strictfp class ToolTipAdapter implements ToolTipVisitor, ToolTip {
 
 	}
 
-        @Override
+    @Override
 	public void visitUnit(Unit unit) {
 		visitSelectable(unit);
 		String name = unit.getName();

@@ -10,14 +10,14 @@ public final strictfp class AttackScanFilter implements ScanFilter {
 	public final static int PRIORITY_TOWER = 2;
 	public final static int PRIORITY_PEON = 3;
 	public final static int PRIORITY_WARRIOR = 4;
-	
+
 	public final static int UNIT_RANGE = 8;
 	public final static int TOWER_RANGE = (int)(RacesResources.THROW_RANGE + MountUnitContainer.ATTACK_RANGE_INCREASE);
-	
+
 	private final int max_range;
-	
+
 	private final Player owner;
-	
+
 	private Selectable target = null;
 	private int target_priority = 0;
 
@@ -33,17 +33,17 @@ public final strictfp class AttackScanFilter implements ScanFilter {
 		return result;
 	}
 
-        @Override
+    @Override
 	public int getMinRadius() {
 		return 1;
 	}
 
-        @Override
+    @Override
 	public int getMaxRadius() {
 		return max_range;
 	}
 
-        @Override
+    @Override
 	public boolean filter(int grid_x, int grid_y, Occupant occ) {
 		if (occ instanceof Selectable) {
 			Selectable s = (Selectable)occ;

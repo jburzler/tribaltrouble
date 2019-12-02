@@ -127,8 +127,9 @@ public final strictfp class CameraState {
 		horiz_angle = camera.horiz_angle;
 		modl.load(camera.modl);
 		proj_modl.load(camera.proj_modl);
-		for (int i = 0; i < frustum.length; i++)
-			System.arraycopy(camera.frustum[i], 0, frustum[i], 0, frustum[i].length);
+		for (int i = 0; i < frustum.length; i++) {
+            System.arraycopy(camera.frustum[i], 0, frustum[i], 0, frustum[i].length);
+        }
 		f.set(camera.f);
 		s.set(camera.s);
 		u.set(camera.u);

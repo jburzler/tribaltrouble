@@ -97,8 +97,9 @@ public final strictfp class LocalInput {
 	public static void resetKeys() {
 		// Clear event queue
 		KeyboardInput.reset();
-		for (int i = 0; i < keys.length; i++)
-			keys[i] = false;
+		for (int i = 0; i < keys.length; i++) {
+            keys[i] = false;
+        }
 	}
 
 	public static boolean isKeyDown(int key_code) {

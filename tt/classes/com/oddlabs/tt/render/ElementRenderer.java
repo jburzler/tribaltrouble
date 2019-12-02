@@ -51,7 +51,7 @@ final strictfp class ElementRenderer implements ElementNodeVisitor {
     }
 
     @Override
-    public void visit(Element element) {
+    public void visit(Element<?> element) {
         int frustum_state = RenderTools.NOT_IN_FRUSTUM;
         if (visible_override || (frustum_state = RenderTools.inFrustum(element, camera.getFrustum())) >= RenderTools.IN_FRUSTUM) {
             boolean old_override = visible_override;

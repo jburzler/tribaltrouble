@@ -10,7 +10,7 @@ public final strictfp class FileLister implements FileListerInterface {
 
 	public FileLister(File dir, String pattern, FileListerListener listener) {
 		this.listener = listener;
-		newFiles((File[])LocalEventQueue.getQueue().getDeterministic().log(dir.listFiles(new PatternFilenameFilter(pattern))));
+		newFiles(LocalEventQueue.getQueue().getDeterministic().log(dir.listFiles(new PatternFilenameFilter(pattern))));
 	}
 
         @Override

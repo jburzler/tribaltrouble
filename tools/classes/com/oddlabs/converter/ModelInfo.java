@@ -1,7 +1,5 @@
 package com.oddlabs.converter;
 
-import java.util.Map;
-
 public final strictfp class ModelInfo {
 	public final short[] indices;
 	public final float[] normals;

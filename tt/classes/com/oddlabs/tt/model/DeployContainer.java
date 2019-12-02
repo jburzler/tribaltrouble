@@ -1,16 +1,16 @@
 package com.oddlabs.tt.model;
 
-public strictfp class DeployContainer extends SupplyContainer {
+public strictfp class DeployContainer<S extends Supply> extends SupplyContainer {
 	private final Building building;
 	private final int deploy_type;
-	private final Class supply_type;
+	private final Class<S> supply_type;
 	private final float seconds_per_deploy;
 
 	private float time = 0;
 	private int num_orders = 0;
 
 
-	public DeployContainer(Building building, float seconds_per_deploy, int deploy_type, Class supply_type) {
+	public DeployContainer(Building building, float seconds_per_deploy, int deploy_type, Class<S> supply_type) {
 		super(Integer.MAX_VALUE);
 		this.building = building;
 		this.seconds_per_deploy = seconds_per_deploy;
@@ -98,7 +98,7 @@ public strictfp class DeployContainer extends SupplyContainer {
 		}
 	}
 
-        @Override
+    @Override
 	public int increaseSupply(int amount) {
 		int result = building.getOwner().getUnitCountContainer().increaseSupply(amount);
 		assert result == amount;

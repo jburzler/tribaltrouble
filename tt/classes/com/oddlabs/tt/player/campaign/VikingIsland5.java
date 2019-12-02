@@ -32,7 +32,7 @@ public final strictfp class VikingIsland5 extends Island {
 			Utils.getBundleString(bundle, "name4"),
 			Utils.getBundleString(bundle, "name5")};
 		// gametype, owner, game, meters_per_world, hills, vegetation_amount, supplies_amount, seed, speed, map_code
-		GameNetwork game_network = startNewGame(network, gui_root, 512, Landscape.NATIVE, .85f, 1f, .9f, 89864, 5, VikingCampaign.MAX_UNITS, ai_names);
+		GameNetwork game_network = startNewGame(network, gui_root, 512, Landscape.TerrainType.NATIVE, .85f, 1f, .9f, 89864, 5, VikingCampaign.MAX_UNITS, ai_names);
 		game_network.getClient().getServerInterface().setPlayerSlot(0,
 				PlayerSlot.HUMAN,
 				RacesResources.RACE_VIKINGS,

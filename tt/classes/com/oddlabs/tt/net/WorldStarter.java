@@ -40,12 +40,12 @@ final strictfp class WorldStarter implements LoadCallback {
 		this.network = network;
 	}
 
-        @Override
+    @Override
 	public UIRenderer load(GUIRoot gui_root) {
 		AnimationManager.freezeTime();
-		List player_slot_list = new ArrayList();
-		List unit_info_list = new ArrayList();
-		List color_list = new ArrayList();
+		List<PlayerSlot> player_slot_list = new ArrayList<>();
+		List<UnitInfo> unit_info_list = new ArrayList<>();
+		List<float[]> color_list = new ArrayList<>();
 		short corrected_player_slot = -1;
 		for (short i = 0; i < player_slots.length; i++) {
 			if (player_slots[i].getInfo() != null) {
@@ -57,13 +57,13 @@ final strictfp class WorldStarter implements LoadCallback {
 			}
 		}
 		assert corrected_player_slot != -1;
-		PlayerSlot[] player_slots = (PlayerSlot[])player_slot_list.toArray(new PlayerSlot[player_slot_list.size()]);
-		UnitInfo[] corrected_unit_infos = (UnitInfo[])unit_info_list.toArray(new UnitInfo[unit_info_list.size()]);
-		float[][] corrected_colors = (float[][])color_list.toArray(new float[color_list.size()][]);
+		PlayerSlot[] player_slots = player_slot_list.toArray(new PlayerSlot[player_slot_list.size()]);
+		UnitInfo[] corrected_unit_infos = unit_info_list.toArray(new UnitInfo[unit_info_list.size()]);
+		float[][] corrected_colors = color_list.toArray(new float[color_list.size()][]);
 		WorldViewer viewer = new WorldViewer(network, gui_root, world_params, ingame_info, generator, player_slots, corrected_unit_infos, corrected_colors, corrected_player_slot, new SessionID(session_id));
 		if (initial_action != null)
 			initial_action.run(viewer);
-		List participant_list = new ArrayList();
+		List<Participant> participant_list = new ArrayList<>();
 		Player[] players = viewer.getWorld().getPlayers();
 		for (short i = 0; i < players.length; i++) {
 			Player player = players[i];

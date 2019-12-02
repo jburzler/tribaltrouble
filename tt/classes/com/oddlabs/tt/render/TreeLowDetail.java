@@ -35,20 +35,20 @@ public final strictfp class TreeLowDetail {
 	private final Tree[] trees;
 	private final LowDetailModel[] low_details;
 
-	private final int terrain_type;
+	private final Landscape.TerrainType terrain;
 
 	private int current_vertex_index;
 
-	public TreeLowDetail(World world, Tree[] trees, LowDetailModel[] tree_low_details, List<int[]> tree_positions, List<int[]> palm_tree_positions, int terrain_type) {
+	public TreeLowDetail(World world, Tree[] trees, LowDetailModel[] tree_low_details, List<int[]> tree_positions, List<int[]> palm_tree_positions, Landscape.TerrainType terrain) {
 		lowdetail_textures = new Texture[]{
 			Resources.findResource(new TextureFile("/textures/models/lowdetail_tree", Globals.COMPRESSED_RGBA_FORMAT)),
 				Resources.findResource(new TextureFile("/textures/models/viking_lowdetail_tree", Globals.COMPRESSED_RGBA_FORMAT))};
 		int[] num_trees;
-		switch (terrain_type) {
-			case Landscape.NATIVE:
+		switch (terrain) {
+			case NATIVE:
 				num_trees = new int[]{tree_positions.size(), palm_tree_positions.size(), 0, 0};
 				break;
-			case Landscape.VIKING:
+			case VIKING:
 				num_trees = new int[]{0, 0, tree_positions.size(), palm_tree_positions.size()};
 				break;
 			default:
@@ -57,7 +57,7 @@ public final strictfp class TreeLowDetail {
 
 		this.low_details = tree_low_details;
 		this.trees = trees;
-		this.terrain_type = terrain_type;
+		this.terrain = terrain;
 		current_vertex_index = 0;
 		int vertex_count = 0;
 		int index_count = 0;
@@ -88,8 +88,9 @@ public final strictfp class TreeLowDetail {
 
 	private int numTreesTotal(int[] num_trees) {
 		int count = 0;
-		for (int i = 0; i < num_trees.length; i++)
-			count += num_trees[i];
+		for (int i = 0; i < num_trees.length; i++) {
+            count += num_trees[i];
+        }
 		return count;
 	}
 
@@ -123,8 +124,9 @@ public final strictfp class TreeLowDetail {
 		short[] indices = low_detail_model.getIndices();
 		int end = start_index;
 		int start_vertex_index = current_vertex_index;
-		for (int i = 0; i < indices.length; i++)
-			end = putIndex(end, indices[i] + current_vertex_index, tree_indice_array);
+		for (int i = 0; i < indices.length; i++) {
+            end = putIndex(end, indices[i] + current_vertex_index, tree_indice_array);
+        }
 		for (int i = 0; i < vertices.length/3; i++) {
 			src.set(vertices[i*3], vertices[i*3 + 1], vertices[i*3 + 2], 1f);
 			StrictMatrix4f.transform(matrix, src, dest);
@@ -160,7 +162,7 @@ public final strictfp class TreeLowDetail {
 	}
 
 	void bindTreeTexture() {
-		GL11.glBindTexture(GL11.GL_TEXTURE_2D, lowdetail_textures[terrain_type].getHandle());
+		GL11.glBindTexture(GL11.GL_TEXTURE_2D, lowdetail_textures[terrain.ordinal()].getHandle());
 	}
 
 	void renderLowDetail(int start, int count) {

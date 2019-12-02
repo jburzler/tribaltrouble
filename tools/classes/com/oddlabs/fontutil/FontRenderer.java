@@ -8,6 +8,7 @@ import java.awt.image.BufferedImage;
 
 import com.oddlabs.procedural.*;
 import com.oddlabs.util.*;
+import java.util.Arrays;
 
 public final strictfp class FontRenderer {
 	private final static int GLYPH_X_BORDER = 4;
@@ -24,6 +25,9 @@ public final strictfp class FontRenderer {
 		   System.out.println(fontnames[i]);
 		   }
 		 */
+        if (7 != args.length) {
+            System.out.println("FontRenderer <font_name> <font_size> <max_chars> <font_info_dir> <font_tex_dir> <font_tex_classpath>");
+        }
 		new FontRenderer(args[0], Integer.parseInt(args[1]), Integer.parseInt(args[2]), Integer.parseInt(args[3]),
 				args[4], args[5], args[6]);
 		System.out.println("Conversion complete\n");
@@ -32,8 +36,10 @@ public final strictfp class FontRenderer {
 	public FontRenderer(String src_font_name, int font_size, int max_image_size, int max_chars, String font_info_dir, String font_tex_dir, String font_tex_classpath) throws Exception {
 		System.out.println("Converting first " + max_chars + " chars of " + src_font_name + " size " + font_size);
 		String dest_font_name = src_font_name.toLowerCase();
-		InputStream font_is = Utils.makeURL("/" + dest_font_name + ".ttf").openStream();
-		java.awt.Font src_font = java.awt.Font.createFont(java.awt.Font.TRUETYPE_FONT, font_is).deriveFont((float)font_size);
+        java.awt.Font src_font;
+		try (InputStream font_is = Utils.makeURL("/" + dest_font_name + ".ttf").openStream()) {
+            src_font = java.awt.Font.createFont(java.awt.Font.TRUETYPE_FONT, font_is).deriveFont((float)font_size);
+        }
 
 		char[] chars = new char[max_chars];
 		for (int i = 0; i < max_chars; i++) {

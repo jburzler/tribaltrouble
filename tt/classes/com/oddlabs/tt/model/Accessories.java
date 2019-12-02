@@ -12,12 +12,12 @@ public abstract strictfp class Accessories extends Model {
 		register();
 	}
 
-        @Override
+    @Override
 	public final SpriteKey getSpriteRenderer() {
 		return sprite_renderer;
 	}
 
-        @Override
+    @Override
 	public final float getShadowDiameter() {
 		return 0f;
 	}

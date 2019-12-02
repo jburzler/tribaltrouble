@@ -28,8 +28,9 @@ public final class Convert {
 		File infile = new File(args[0]);
 		File outfile = new File(args[args.length - 1]);
 		List args_list = new ArrayList();
-		for (int i = 1; i < args.length - 1; i++)
-			args_list.add(args[i]);
+		for (int i = 1; i < args.length - 1; i++) {
+            args_list.add(args[i]);
+        }
 		System.out.println("Converting " + infile);
 		Layer[] images = new Layer[]{loadFile(infile)};
 		images = processOperations(args_list.iterator(), images);
@@ -78,18 +79,21 @@ System.out.println("outfile = " + outfile);
 			}
 			images = (Layer[])mipmaps.toArray(new Layer[0]);
 		} else if (op.equals("-half")) {
-			for (int i = 0; i < images.length; i++)
-				images[i].scaleHalf();
+			for (int i = 0; i < images.length; i++) {
+                images[i].scaleHalf();
+            }
 		} else if (op.equals("-format")) {
 			current_ext = (String)args.next();
 		} else if (op.equals("-flip")) {
-			for (int i = 0; i < images.length; i++)
-				images[i].flipV();
+			for (int i = 0; i < images.length; i++) {
+                images[i].flipV();
+            }
 		} else if (op.equals("-gamma")) {
 			String gamma_str = (String)args.next();
 			float gamma = Float.parseFloat(gamma_str);
-			for (int i = 0; i < images.length; i++)
-				images[i].gamma(gamma);
+			for (int i = 0; i < images.length; i++) {
+                images[i].gamma(gamma);
+            }
 		} else
 			throw new IllegalArgumentException("Unknown operation: " + op);
 		return images;
@@ -101,23 +105,19 @@ System.out.println("outfile = " + outfile);
 		int width = image.getWidth();
 		int height = image.getHeight();
 //		int channels = image.getRaster().getNumBands() <= 3 ? 3 : 4;
-		assert image.getColorModel() == ColorModel.getRGBdefault();
-		int channels = image.getColorModel().getNumColorComponents();
+//		assert image.getColorModel() == ColorModel.getRGBdefault();
+		int channels = image.getColorModel().getNumComponents();
 //		final byte[] bytes = getImageData(image);
 		int[] ints = new int[width*height];
-		try {
-			boolean success = new PixelGrabber(image, 0, 0, width, height, ints, 0, width).grabPixels();
-			assert success;
-		} catch (InterruptedException e) {
-			throw new RuntimeException(e);
-		}
-		byte[] bytes = new byte[width*height*4];
+        image.getRGB(0, 0, width, height, ints, 0, width);
+		byte[] bytes = new byte[width*height* 4 * Byte.BYTES];
 		int index = 0;
 		for (int i = 0; i < ints.length; i++) {
-			byte a = (byte)((ints[i] >> 24) & 0xff);
-			byte r = (byte)((ints[i] >> 16) & 0xff);
-			byte g = (byte)((ints[i] >>  8) & 0xff);
-			byte b = (byte)((ints[i]	  ) & 0xff);
+            int argb = ints[i];
+			byte a = (byte)((argb >> 24) & 0xff);
+			byte r = (byte)((argb >> 16) & 0xff);
+			byte g = (byte)((argb >>  8) & 0xff);
+			byte b = (byte)((argb 	   ) & 0xff);
 			bytes[index++] = r;
 			bytes[index++] = g;
 			bytes[index++] = b;

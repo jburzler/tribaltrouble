@@ -23,7 +23,7 @@ import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
-import org.lwjgl.opengl.glu.GLU;
+import org.lwjgl.util.glu.GLU;
 import org.lwjgl.BufferUtils;
 
 import com.oddlabs.util.Utils;
@@ -68,13 +68,13 @@ public final strictfp class Test {
 			pixel_data.rewind();
 
 			int texture_handle = createTexture(WIDTH, HEIGHT, pixel_data);
-			
+
 		FontRenderContext frc = g2d.getFontRenderContext();
 		AttributedString att_str = new AttributedString(str);
 		att_str.addAttribute(TextAttribute.FONT, font);
 		AttributedCharacterIterator iterator = att_str.getIterator();
 		LineBreakMeasurer measurer = new LineBreakMeasurer(iterator, frc);
-		
+
 			while (!Display.isCloseRequested()) {
 long start_time = System.currentTimeMillis();
 for (int i = 0; i < 10; i++) {
@@ -86,7 +86,7 @@ pixel_data.rewind();
 updateTexture(WIDTH, HEIGHT, pixel_data);
 				GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
 				GL11.glLoadIdentity();
-				
+
 				// Background
 				/*
 				GL11.glDisable(GL11.GL_TEXTURE_2D);

@@ -88,7 +88,7 @@ public final strictfp class AudioPlayer extends AbstractAudioPlayer {
 		setGain(params.gain);
 		setPos(params.x, params.y, params.z);
 //System.out.println("source.getSource() = " + source.getSource() + " | sound.getBuffer() = " + sound.getBuffer());
-		Audio sound = (Audio)params.sound;
+		Audio sound = params.sound;
 		assert sound.getBuffer() != AL10.AL_NONE;
 		int source_state = AL10.alGetSourcei(source.getSource(), AL10.AL_SOURCE_STATE);
 		assert source_state == AL10.AL_STOPPED || source_state == AL10.AL_INITIAL;

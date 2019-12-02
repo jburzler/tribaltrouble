@@ -34,7 +34,7 @@ public abstract strictfp class File<R> implements ResourceDescriptor<R> {
     public boolean equals(Object o) {
         if (!(o instanceof File))
             return false;
-        File other = (File) o;
+        File<?> other = (File<?>) o;
         return url.equals(other.url);
     }
 }

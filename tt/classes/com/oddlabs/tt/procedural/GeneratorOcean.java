@@ -9,17 +9,17 @@ import org.lwjgl.opengl.*;
 
 public final strictfp class GeneratorOcean extends TextureGenerator {
 	private static final int TEXTURE_SIZE = 256;
-	
-	private final int terrain_type;
 
-	public GeneratorOcean(int terrain_type) {
-		this.terrain_type = terrain_type;
+	private final Landscape.TerrainType terrain;
+
+	public GeneratorOcean(Landscape.TerrainType terrain) {
+		this.terrain = terrain;
 	}
-	
+
         @Override
 	public Texture[] generate() {
 		int seed = Globals.LANDSCAPE_SEED + 1;
-		
+
 		// water1
 		Channel perlin2 = new Perlin(TEXTURE_SIZE, TEXTURE_SIZE, 4, 4, 0.5f, 1, seed, Perlin.CUBIC, Perlin.NORMAL).toChannel();
 		Channel perlin4 = new Perlin(TEXTURE_SIZE, TEXTURE_SIZE, 4, 4, 0.5f, 3, seed, Perlin.CUBIC, Perlin.NORMAL).toChannel();
@@ -32,11 +32,11 @@ public final strictfp class GeneratorOcean extends TextureGenerator {
 		water1.layerAdd(highlight.multiply(0.2f).toLayer());
 		water1.addAlpha();
 		water1.a.fill(0.5f);
-		if (terrain_type == Landscape.VIKING) {
+		if (terrain == Landscape.TerrainType.VIKING) {
 			water1.multiply(0.4f);
 			water1.a.addClip(0.1f);
 		}
-		
+
 		// water2
 		Channel voronoi12 = new Voronoi(TEXTURE_SIZE, 12, 12, 1, 1f, seed).getDistance(1f, 0f, 0f);
 		Channel voronoi24 = new Voronoi(TEXTURE_SIZE, 24, 24, 1, 1f, seed).getDistance(1f, 0f, 0f);
@@ -45,24 +45,24 @@ public final strictfp class GeneratorOcean extends TextureGenerator {
 		voronoi12.perturb(perturb, 0.025f);
 		Layer water2 = new Layer(voronoi12.copy(), voronoi12.copy(), voronoi12.copy(), voronoi12.copy().gamma(1.5f));
 		water2.bump(voronoi12, 3.5f, 0f, 0.5f, 0.5f, 0.8f, 1f, 0f, 0f, 0f);
-		
-		switch (terrain_type) {
-			case Landscape.NATIVE:
+
+		switch (terrain) {
+			case NATIVE:
 				water2.r.dynamicRange(0f, 0.4f);
 				water2.g.dynamicRange(0.6f, 1f);
 				water2.b.dynamicRange(0.9f, 1f);
 				break;
-			case Landscape.VIKING:
+			case VIKING:
 				water2.r.dynamicRange(0.5f, 1f);
 				water2.g.dynamicRange(0.7f, 1f);
 				water2.b.dynamicRange(0.8f, 1f);
 				water2.a.gamma(0.5f).dynamicRange(0f, 0.2f);
 				break;
 			default:
-				assert false : "illegal terrain_type";
+				assert false : "illegal terrain";
 				break;
 		}
-		
+
 		if (Landscape.DEBUG) new GLIntImage(water1).saveAsPNG("generator_water_1");
 		if (Landscape.DEBUG) new GLIntImage(water2).saveAsPNG("generator_water_2");
 		Texture[] textures = new Texture[2];
@@ -70,7 +70,7 @@ public final strictfp class GeneratorOcean extends TextureGenerator {
 		textures[1] = new Texture(new GLImage[]{new GLIntImage(water2)}, GL11.GL_RGBA, GL11.GL_LINEAR, GL11.GL_LINEAR, GL11.GL_REPEAT, GL11.GL_REPEAT);
 		return textures;
 	}
-	
+
         @Override
 	public int hashCode() {
 		return TEXTURE_SIZE;
@@ -78,6 +78,6 @@ public final strictfp class GeneratorOcean extends TextureGenerator {
 
         @Override
 	public boolean equals(Object o) {
-		return super.equals(o) && ((GeneratorOcean)o).terrain_type == terrain_type;
+		return super.equals(o) && ((GeneratorOcean)o).terrain == terrain;
 	}
 }

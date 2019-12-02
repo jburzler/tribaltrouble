@@ -20,8 +20,9 @@ public final strictfp class ShortCompressedFloatArray implements Serializable {
 				split_data[j][i] = array[i*channels + j];
 			}
 		}
-		for (int i = 0; i < channels; i++)
-			compress(split_data[i], i);
+		for (int i = 0; i < channels; i++) {
+            compress(split_data[i], i);
+        }
 	}
 
 	private void compress(float[] array, int channel) {
@@ -40,8 +41,9 @@ public final strictfp class ShortCompressedFloatArray implements Serializable {
 		offset[channel] = mid;
 		scale[channel] = (max - mid)/Short.MAX_VALUE;
 
-		for (int i = 0; i < array.length; i++)
-			data[channel][i] = (short)((array[i] - offset[channel])/scale[channel]);
+		for (int i = 0; i < array.length; i++) {
+            data[channel][i] = (short)((array[i] - offset[channel])/scale[channel]);
+        }
 	}
 
 	public float[] getFloatArray() {
@@ -61,8 +63,9 @@ public final strictfp class ShortCompressedFloatArray implements Serializable {
 	public String toString() {
 		float[] array = getFloatArray();
 		String result = "";
-		for (int i = 0; i < array.length; i++)
-			result += array[i] + ", ";
+		for (int i = 0; i < array.length; i++) {
+            result += array[i] + ", ";
+        }
 		return result;
 	}
 /*

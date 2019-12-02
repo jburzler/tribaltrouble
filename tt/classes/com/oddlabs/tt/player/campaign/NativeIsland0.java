@@ -33,7 +33,7 @@ public final strictfp class NativeIsland0 extends Island {
 	private final ResourceBundle bundle = ResourceBundle.getBundle(NativeIsland0.class.getName());
 
 	private int objective = 0;
-	
+
 	public NativeIsland0(Campaign campaign) {
 		super(campaign);
 	}
@@ -47,7 +47,7 @@ public final strictfp class NativeIsland0 extends Island {
 			Utils.getBundleString(bundle, "name4"),
 			Utils.getBundleString(bundle, "name5")};
 		// gametype, owner, game, meters_per_world, hills, vegetation_amount, supplies_amount, seed, speed, map_code
-		GameNetwork game_network = startNewGame(network, gui_root, 1024, Landscape.NATIVE, .75f, .65f, .85f, 25, 0, NativeCampaign.MAX_UNITS, ai_names);
+		GameNetwork game_network = startNewGame(network, gui_root, 1024, Landscape.TerrainType.NATIVE, .75f, .65f, .85f, 25, 0, NativeCampaign.MAX_UNITS, ai_names);
 		game_network.getClient().getServerInterface().setPlayerSlot(0,
 				PlayerSlot.HUMAN,
 				RacesResources.RACE_NATIVES,
@@ -292,8 +292,9 @@ public final strictfp class NativeIsland0 extends Island {
                         default:
                             throw new RuntimeException();
                     }
-                    for (int i = 0; i < num_peons; i++)
+                    for (int i = 0; i < num_peons; i++) {
                         new Unit(enemy, new_viking_start_x, new_viking_start_y, null, enemy.getRace().getUnitTemplate(Race.UNIT_PEON));
+                    }
                     // Remove natives
                     Selectable[] native_selectables = new Selectable[natives.getUnits().getSet().size()];
                     natives.getUnits().getSet().toArray(native_selectables);

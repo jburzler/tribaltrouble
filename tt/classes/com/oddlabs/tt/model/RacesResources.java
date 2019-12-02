@@ -493,11 +493,11 @@ public final strictfp class RacesResources {
 		ProgressForm.progress(1f/num_progress);
 
 		Audio[] unit_hit_sounds = new Audio[]{
-			(Audio)Resources.findResource(new AudioFile("/sfx/impact_meat1.ogg")),
-			(Audio)Resources.findResource(new AudioFile("/sfx/impact_meat2.ogg")),
-			(Audio)Resources.findResource(new AudioFile("/sfx/impact_meat3.ogg")),
-			(Audio)Resources.findResource(new AudioFile("/sfx/impact_meat4.ogg")),
-			(Audio)Resources.findResource(new AudioFile("/sfx/impact_meat5.ogg"))
+			Resources.findResource(new AudioFile("/sfx/impact_meat1.ogg")),
+			Resources.findResource(new AudioFile("/sfx/impact_meat2.ogg")),
+			Resources.findResource(new AudioFile("/sfx/impact_meat3.ogg")),
+			Resources.findResource(new AudioFile("/sfx/impact_meat4.ogg")),
+			Resources.findResource(new AudioFile("/sfx/impact_meat5.ogg"))
 		};
 		WeaponFactory viking_warrior_rock_weapon = new ThrowingFactory(RockAxeWeapon.class, 0.5f, THROW_RANGE, 29f/58f,
 																	   queues.register(viking_warrior_axe, Race.UNIT_WARRIOR_ROCK),
@@ -525,16 +525,16 @@ public final strictfp class RacesResources {
 																	   unit_hit_sounds);
 
 		Audio[] native_chieftain_hit_sounds = new Audio[]{
-			(Audio)Resources.findResource(new AudioFile("/sfx/hit3.ogg")),
-			(Audio)Resources.findResource(new AudioFile("/sfx/hit4.ogg")),
-			(Audio)Resources.findResource(new AudioFile("/sfx/hit5.ogg")),
-			(Audio)Resources.findResource(new AudioFile("/sfx/hit6.ogg"))
+			Resources.findResource(new AudioFile("/sfx/hit3.ogg")),
+			Resources.findResource(new AudioFile("/sfx/hit4.ogg")),
+			Resources.findResource(new AudioFile("/sfx/hit5.ogg")),
+			Resources.findResource(new AudioFile("/sfx/hit6.ogg"))
 		};
 		Audio[] viking_chieftain_hit_sounds = new Audio[]{
-			(Audio)Resources.findResource(new AudioFile("/sfx/hit1.ogg")),
-			(Audio)Resources.findResource(new AudioFile("/sfx/hit2.ogg")),
-			(Audio)Resources.findResource(new AudioFile("/sfx/hit6.ogg")),
-			(Audio)Resources.findResource(new AudioFile("/sfx/hit7.ogg"))
+			Resources.findResource(new AudioFile("/sfx/hit1.ogg")),
+			Resources.findResource(new AudioFile("/sfx/hit2.ogg")),
+			Resources.findResource(new AudioFile("/sfx/hit6.ogg")),
+			Resources.findResource(new AudioFile("/sfx/hit7.ogg"))
 		};
 
 		ProgressForm.progress(1f/num_progress);
@@ -742,8 +742,8 @@ public final strictfp class RacesResources {
 							Globals.NO_MIPMAP_CUTOFF,
 							true, true, true, false)),
 				icons.getNativeIcons(),
-				(Audio)Resources.findResource(new AudioFile("/sfx/attacknotify_native.ogg")),
-				(Audio)Resources.findResource(new AudioFile("/sfx/buildingnotify_native.ogg")),
+				Resources.findResource(new AudioFile("/sfx/attacknotify_native.ogg")),
+				Resources.findResource(new AudioFile("/sfx/buildingnotify_native.ogg")),
 				native_magic,
 				new NativeChieftainAI(),
 				"/music/native.ogg");
@@ -759,8 +759,8 @@ public final strictfp class RacesResources {
 							Globals.NO_MIPMAP_CUTOFF,
 							true, true, true, false)),
 				icons.getVikingIcons(),
-				(Audio)Resources.findResource(new AudioFile("/sfx/attacknotify_viking.ogg")),
-				(Audio)Resources.findResource(new AudioFile("/sfx/buildingnotify_viking.ogg")),
+				Resources.findResource(new AudioFile("/sfx/attacknotify_viking.ogg")),
+				Resources.findResource(new AudioFile("/sfx/buildingnotify_viking.ogg")),
 				viking_magic,
 				new VikingChieftainAI(),
 				"/music/viking.ogg");
